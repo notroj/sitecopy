@@ -6,7 +6,7 @@
 inmk=/usr/share/gettext/po/Makefile.in.in
 tmpmk=`mktemp /tmp/sitecopy.XXXXXX`
 pot=`mktemp /tmp/sitecopy.XXXXXX`
-trap 'rm -f $tmpmk $pot' TERM INT 0
+#trap 'rm -f $tmpmk $pot' TERM INT 0
 
 cd po
 
@@ -26,6 +26,8 @@ s/@SET_MAKE@//g;
 s/@PACKAGE@/sitecopy/g;
 s/@VERSION@/$1/g;
 /^.*VPATH.*$/d;
+1i\
+DOMAIN = sitecopy
 s/@srcdir@/./g;
 s/@top_srcdir@/../g;
 s/@CATALOGS@/$CATALOGS/g;
@@ -39,4 +41,4 @@ s/@MSGMERGE@/msgmerge/g;
 s/: Makefile.*/:/g;
 s/\$(MAKE) update-gmo/echo Done/g;" $inmk > $tmpmk
 
-exec make -f $tmpmk update-po update-gmo DOMAIN=sitecopy
+exec make -f $tmpmk update-po update-gmo
