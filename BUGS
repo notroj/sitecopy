@@ -1,4 +1,14 @@
 
+From Jan Hendrik Schreier:
+
+no display of protocol in standard banner line is confusing.
+
+---
+
+SEGTERM during a --fetch gets a SIGSEGV
+
+---
+
 Bugs in 0.11.4:
 
 - MacOS X 10.1 catchup/sitecopy not recording times properly doesn't
@@ -9,7 +19,7 @@ very slow for large sites (Dave Hollis)
 
 ---
 
-From Kobaz Mi'Daire <krobaz@yahoo.com:
+From Kobaz Mi'Daire:
 
 If there is an "&" in a directory name on the remote end and you do a
 sitecopy -f, then try to preform a sync operation on the site, either
@@ -40,7 +50,7 @@ But sitecopy didn't let me know that those excludes were being ignored.
 
 -- 
 
-From: "Pascal Ung" <pascal.ung@labri.fr>
+From: "Pascal Ung":
 
 trying not to use clear password inside .sitecopyrc
 (preferring, user and password challenge)
@@ -91,7 +101,7 @@ On Thu, Apr 25, 2002 at 06:07:02PM +0200, Dave Hollis wrote:
 
 ---
 
-iw3grw <iw3grw@ir3ip.net>
+iw3grw:
 
 fetch mode should not recurse into directories which are excluded.
 
