@@ -1,6 +1,6 @@
 /* 
    sitecopy, for managing remote web sites. File handling.
-   Copyright (C) 1998-2004, Joe Orton <joe@manyfish.co.uk>
+   Copyright (C) 1998-2005, Joe Orton <joe@manyfish.co.uk>
                                                                      
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -122,7 +122,7 @@ struct fnlist *fnlist_deep_copy(const struct fnlist *src)
 inline int fnlist_match(const char *filename, const struct fnlist *list)
 {
     const struct fnlist *item;
-    char *bname = base_name(filename);    
+    const char *bname = base_name(filename);    
 
     for (item=list; item != NULL; item=item->next) {
 	NE_DEBUG(DEBUG_FILES, "%s ", item->pattern);
