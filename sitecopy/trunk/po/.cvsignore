@@ -1,0 +1,8 @@
+Makefile.in
+Makefile
+POTFILES
+cat-id-tbl.c
+stamp-cat-id
+ChangeLog
+*.gmo
+remove-potcdate.sed
