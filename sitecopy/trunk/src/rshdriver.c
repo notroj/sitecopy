@@ -68,7 +68,7 @@ static int run_rcmd(enum rcommand rcmd,
     char *username = sess->site->server.username;
 
     va_start(params, template);
-    len = vsnprintf(sess->buf, BUFSIZ, template, params);
+    len = ne_vsnprintf(sess->buf, BUFSIZ, template, params);
     va_end(params);
 
     if (rcmd == RCP) {
