@@ -61,14 +61,6 @@ we found that it doesn't work in the following case:
 
 --- 
 
-From: Gary Benson <gary@inauspicious.org>
-
-Not sure if this is a bug or an error of omission since sitecopy does
-exactly what it says in the manpage, but permissions only work on files --
-directory permissions are ignored completely.
-
---- 
-
 Volker Kuhlmann: ftp: echo_quit never set.
 
 ---
@@ -96,15 +88,6 @@ On Thu, Apr 25, 2002 at 06:07:02PM +0200, Dave Hollis wrote:
 > After fetching and synchronizing I noticed that files which had been
 > updated by my colleague and consequently fetched, still had the date of
 > the old file after it had been overwritten.
-
----
-
-From: Kurt Hindenburg <khindenburg@cherrynebula.net>
-
-./configure --disable-webdav --disable-rsh  --disable-nls --with-ssl
-...
-src/sitestore.o: In function `site_read_stored_state_new':
-src/sitestore.o(.text+0xcc2): undefined reference to `ne_xml_create'
 
 ---
 
