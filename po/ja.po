@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sitecopy 0.10.14\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-01-03 10:24+0000\n"
+"POT-Creation-Date: 2005-02-06 21:05+0000\n"
 "PO-Revision-Date: 2001-01-16 07:32+0900\n"
 "Last-Translator: Nobuyuki Tsuchimura <tutimura@nn.iij4u.or.jp>\n"
 "Language-Team: ja\n"
@@ -917,10 +917,11 @@ msgid "Options: \n"
 msgstr "オプション： \n"
 
 #: src/console_fe.c:1420
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "  -d, --debug=KEY[,KEY] Turn debugging on for each KEY, which may be:\n"
-"     socket, files, rcfile, ftp, http, httpbody, xml, xmlparse, cleartext\n"
+"     socket, files, rcfile, ftp, http, httpbody, rsh, sftp, xml, xmlparse, "
+"cleartext\n"
 "     Warning: cleartext displays (normally hidden) passwords in plain text\n"
 "  -g, --logfile=FILE    Append debugging messages to FILE (else use stderr)\n"
 msgstr ""
@@ -1009,8 +1010,8 @@ msgstr "このサーバーは WebDAV サーバーではないようです。"
 msgid "The server does not support the executable live property."
 msgstr "このサーバーは executable live property をサポートしていません。"
 
-#: src/davdriver.c:334 src/davdriver.c:401 src/davdriver.c:438 src/ftp.c:870
-#: src/ftp.c:934
+#: src/davdriver.c:334 src/davdriver.c:401 src/davdriver.c:438 src/ftp.c:875
+#: src/ftp.c:939
 #, fuzzy
 msgid "Could not open file"
 msgstr "ファイルが読めません: "
@@ -1055,118 +1056,123 @@ msgstr "ファイルのチェックサムを計算できません。"
 msgid "The target of the symlink could not be read."
 msgstr "シンボリックリンクのリンク先ファイルが読めません。"
 
-#: src/common.c:112
+#: src/common.c:113
 msgid "Unknown system error"
 msgstr "未知のシステムエラー"
 
-#: src/ftp.c:153 lib/neon/ne_request.c:233
+#: src/ftp.c:153 lib/neon/ne_request.c:226
 #, c-format
 msgid "%s: connection was closed by server."
 msgstr "%s: 接続がサーバーに切られました。"
 
-#: src/ftp.c:157 lib/neon/ne_request.c:238
+#: src/ftp.c:157 lib/neon/ne_request.c:231
 #, c-format
 msgid "%s: connection timed out."
 msgstr "%s: 接続タイムアウトです。"
 
-#: src/ftp.c:193
+#: src/ftp.c:195
 #, fuzzy
 msgid "Could not read response line"
 msgstr "response body が読めません"
 
-#: src/ftp.c:230
+#: src/ftp.c:229
 msgid "Cannot parse MDTM response; wrong length."
 msgstr ""
 
-#: src/ftp.c:237
+#: src/ftp.c:236
 msgid "Cannot parse MDTM response."
 msgstr ""
 
-#: src/ftp.c:261
+#: src/ftp.c:260
 #, fuzzy
 msgid "Could not find address in PASV response"
 msgstr "response body が読めません"
 
-#: src/ftp.c:268
+#: src/ftp.c:267
 #, fuzzy
 msgid "Could not parse PASV response"
 msgstr "response body が読めません"
 
-#: src/ftp.c:277
+#: src/ftp.c:276
 msgid "Invalid IP address in PASV response"
 msgstr ""
 
-#: src/ftp.c:297
+#: src/ftp.c:296
 #, fuzzy
 msgid "Malformed EPSV response"
 msgstr "response body が読めません"
 
-#: src/ftp.c:305
+#: src/ftp.c:304
 #, fuzzy
 msgid "Malformed port in EPSV response"
 msgstr "response body が読めません"
 
-#: src/ftp.c:443
+#: src/ftp.c:445
 msgid "Error sending file"
 msgstr ""
 
-#: src/ftp.c:457 src/ftp.c:483
+#: src/ftp.c:459 src/ftp.c:485
 #, fuzzy
 msgid "Error reading file"
 msgstr "chunked response body が読めません"
 
-#: src/ftp.c:474
+#: src/ftp.c:476
 #, fuzzy
 msgid "Could not send file"
 msgstr "ファイルが読めません: "
 
-#: src/ftp.c:504 src/ftp.c:953
+#: src/ftp.c:506 src/ftp.c:958
 #, fuzzy
 msgid "Error writing to file"
 msgstr "ファイルが書けません: "
 
-#: src/ftp.c:510
+#: src/ftp.c:512
 msgid "Receiving file"
 msgstr ""
 
-#: src/ftp.c:526
+#: src/ftp.c:528
 #, fuzzy
 msgid "Could not connect passive data socket"
 msgstr "プロキシーサーバーに SSL 接続できません"
 
-#: src/ftp.c:641
+#: src/ftp.c:643
 msgid "Active open failed: could not determine address of control socket"
 msgstr ""
 
-#: src/ftp.c:652
+#: src/ftp.c:654
 #, fuzzy
 msgid "Active open failed: could not create socket"
 msgstr "プロキシーサーバーに SSL 接続できません"
 
-#: src/ftp.c:660
+#: src/ftp.c:662
 msgid "Active open failed: could not bind to address"
 msgstr ""
 
-#: src/ftp.c:670
+#: src/ftp.c:672
 msgid "Active open failed: could not determine address of data socket"
 msgstr ""
 
-#: src/ftp.c:713
+#: src/ftp.c:715
 msgid "Active open failed: could not accept connection"
 msgstr ""
 
-#: src/ftp.c:785
+#: src/ftp.c:788
 msgid "Error closing data socket"
 msgstr ""
 
-#: src/ftp.c:876
+#: src/ftp.c:881
 #, fuzzy
 msgid "Could not determine length of file"
 msgstr "ファイルが読めません: "
 
-#: src/ftp.c:1108
+#: src/ftp.c:1121
 #, fuzzy
 msgid "Could not read 'LIST' response."
+msgstr "response body が読めません"
+
+#: src/ftp.c:1129
+#, fuzzy
+msgid "Parse error in LIST response"
 msgstr "response body が読めません"
 
 #: gnome/init.c:51
@@ -1543,140 +1549,144 @@ msgstr ""
 msgid "Server certificate changed: connection intercepted?"
 msgstr ""
 
-#: lib/neon/ne_socket.c:475 lib/neon/ne_socket.c:523 lib/neon/ne_socket.c:626
+#: lib/neon/ne_socket.c:488 lib/neon/ne_socket.c:536 lib/neon/ne_socket.c:639
 #, fuzzy
 msgid "Connection closed"
 msgstr "%s: 接続がサーバーに切られました。"
 
-#: lib/neon/ne_socket.c:533
+#: lib/neon/ne_socket.c:546
 #, fuzzy
 msgid "Secure connection truncated"
 msgstr "接続タイムアウト。"
 
-#: lib/neon/ne_socket.c:545 lib/neon/ne_socket.c:630 lib/neon/ne_socket.c:635
+#: lib/neon/ne_socket.c:558 lib/neon/ne_socket.c:643 lib/neon/ne_socket.c:648
 #, c-format
 msgid "SSL error: %s"
 msgstr ""
 
-#: lib/neon/ne_socket.c:548
+#: lib/neon/ne_socket.c:561
 #, c-format
 msgid "SSL error code %d/%d/%lu"
 msgstr ""
 
-#: lib/neon/ne_socket.c:730
+#: lib/neon/ne_socket.c:743
 msgid "Line too long"
 msgstr ""
 
-#: lib/neon/ne_socket.c:870 lib/neon/ne_socket.c:876
+#: lib/neon/ne_socket.c:883 lib/neon/ne_socket.c:889
 msgid "Host not found"
 msgstr ""
 
-#: lib/neon/ne_socket.c:986
+#: lib/neon/ne_socket.c:999
 msgid "Socket descriptor number exceeds FD_SETSIZE"
 msgstr ""
 
-#: lib/neon/ne_socket.c:1146
+#: lib/neon/ne_socket.c:1159
 msgid "SSL disabled due to lack of entropy"
 msgstr ""
 
-#: lib/neon/ne_socket.c:1153
+#: lib/neon/ne_socket.c:1166
 msgid "SSL disabled due to library version mismatch"
 msgstr ""
 
-#: lib/neon/ne_socket.c:1159
+#: lib/neon/ne_socket.c:1172
 #, fuzzy
 msgid "Could not create SSL structure"
 msgstr "プロキシーサーバーに SSL 接続できません"
 
-#: lib/neon/ne_request.c:230
+#: lib/neon/ne_request.c:223
 #, c-format
 msgid "%s: connection was closed by proxy server."
 msgstr "%s: 接続がプロキシーサーバーに切られました。"
 
-#: lib/neon/ne_request.c:409
+#: lib/neon/ne_request.c:402
 #, fuzzy
 msgid "Error reading request body."
 msgstr "chunked response body が読めません"
 
-#: lib/neon/ne_request.c:744
+#: lib/neon/ne_request.c:759
 msgid "Could not read chunk size"
 msgstr "chunk の大きさが読めません"
 
-#: lib/neon/ne_request.c:751
+#: lib/neon/ne_request.c:766
 msgid "Could not parse chunk size"
 msgstr "chunk の大きさを解析できません"
 
-#: lib/neon/ne_request.c:788
+#: lib/neon/ne_request.c:803
 msgid "Could not read response body"
 msgstr "response body が読めません"
 
-#: lib/neon/ne_request.c:804
+#: lib/neon/ne_request.c:819
 #, fuzzy
 msgid "Could not read chunk delimiter"
 msgstr "chunk の大きさが読めません"
 
-#: lib/neon/ne_request.c:807
+#: lib/neon/ne_request.c:822
 msgid "Chunk delimiter was invalid"
 msgstr ""
 
-#: lib/neon/ne_request.c:928
+#: lib/neon/ne_request.c:943
 msgid "Could not read status line"
 msgstr ""
 
-#: lib/neon/ne_request.c:939
+#: lib/neon/ne_request.c:954
 msgid "Could not parse response status line."
 msgstr ""
 
-#: lib/neon/ne_request.c:950
+#: lib/neon/ne_request.c:965
 #, fuzzy
 msgid "Could not read interim response headers"
 msgstr "response body が読めません"
 
-#: lib/neon/ne_request.c:983
+#: lib/neon/ne_request.c:999
 msgid "Could not send request"
 msgstr ""
 
-#: lib/neon/ne_request.c:991
+#: lib/neon/ne_request.c:1007
 msgid "Could not send request body"
 msgstr ""
 
-#: lib/neon/ne_request.c:1032 lib/neon/ne_request.c:1050
-#: lib/neon/ne_request.c:1060
+#: lib/neon/ne_request.c:1048 lib/neon/ne_request.c:1066
+#: lib/neon/ne_request.c:1076
 msgid "Error reading response headers"
 msgstr ""
 
-#: lib/neon/ne_request.c:1078
+#: lib/neon/ne_request.c:1094
 msgid "Response header too long"
 msgstr ""
 
-#: lib/neon/ne_request.c:1159
+#: lib/neon/ne_request.c:1176
 msgid "Response exceeded maximum number of header fields."
 msgstr ""
 
-#: lib/neon/ne_request.c:1176
+#: lib/neon/ne_request.c:1193
 #, fuzzy, c-format
 msgid "Could not resolve hostname `%s': %s"
 msgstr "%s: エラー: サーバーのホスト名 (%s) を IP アドレスに変換できません。\n"
 
-#: lib/neon/ne_request.c:1338
+#: lib/neon/ne_request.c:1303
+msgid "Invalid Content-Length in response"
+msgstr ""
+
+#: lib/neon/ne_request.c:1365
 #, c-format
 msgid "Could not write to file: %s"
 msgstr "ファイルが書けません: %s"
 
-#: lib/neon/ne_request.c:1411
+#: lib/neon/ne_request.c:1438
 msgid "Could not create SSL connection through proxy server"
 msgstr "プロキシーサーバーに SSL 接続できません"
 
-#: lib/neon/ne_request.c:1457
+#: lib/neon/ne_request.c:1484
 #, fuzzy
 msgid "Could not create socket"
 msgstr "プロキシーサーバーに SSL 接続できません"
 
-#: lib/neon/ne_request.c:1502
+#: lib/neon/ne_request.c:1529
 msgid "Could not connect to server"
 msgstr "プロキシーサーバーに接続できません"
 
-#: lib/neon/ne_request.c:1505
+#: lib/neon/ne_request.c:1532
 msgid "Could not connect to proxy server"
 msgstr "プロキシーサーバーに接続できません"
 
@@ -1745,15 +1755,15 @@ msgstr ""
 msgid "Resource does not support ranged GETs."
 msgstr "サーバーがファイルの部分取得をサポートしていません。"
 
-#: lib/neon/ne_auth.c:127
+#: lib/neon/ne_auth.c:124
 msgid "Server was not authenticated correctly."
 msgstr ""
 
-#: lib/neon/ne_auth.c:131
+#: lib/neon/ne_auth.c:128
 msgid "Proxy server was not authenticated correctly."
 msgstr ""
 
-#: lib/neon/ne_auth.c:424
+#: lib/neon/ne_auth.c:431
 #, fuzzy, c-format
 msgid "GSSAPI authentication error (%s)"
 msgstr "%s への認証が %s で必要です '%s':\n"
@@ -1765,13 +1775,22 @@ msgid ""
 "Status line was: %s"
 msgstr ""
 
-#: lib/neon/ne_locks.c:735
+#: lib/neon/ne_locks.c:591
+msgid "LOCK response missing Lock-Token header"
+msgstr ""
+
+#: lib/neon/ne_locks.c:744
 msgid "No Lock-Token header given"
 msgstr ""
 
-#: lib/neon/ne_locks.c:763
+#: lib/neon/ne_locks.c:772
 #, c-format
 msgid "Response missing activelock for %s"
+msgstr ""
+
+#: lib/neon/ne_locks.c:816
+#, c-format
+msgid "No activelock for <%s> returned in LOCK refresh response"
 msgstr ""
 
 #: lib/rpmatch.c:79
