@@ -1,7 +1,6 @@
-#!/bin/sh
-# Script used by maintainer when rolling a release tarball.
-
-set -e
+#!/bin/sh -ex
+# Release script run before generating a release tarball.
+# Usage: ./.release.sh VERSION
 
 echo $1 > .version
 
@@ -11,3 +10,5 @@ db2html -o `pwd` xsitecopy.sgml
 # Remove generated images dir
 rm xsitecopy/stylesheet-images/*.gif
 rmdir -p xsitecopy/stylesheet-images
+
+exec ./.update-po.sh
