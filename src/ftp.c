@@ -1,6 +1,6 @@
 /* 
    sitecopy, for managing remote web sites. Generic(ish) FTP routines.
-   Copyright (C) 1998-2004, Joe Orton <joe@manyfish.co.uk>
+   Copyright (C) 1998-2005, Joe Orton <joe@manyfish.co.uk>
                                                                      
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -129,11 +129,8 @@ int _ftp_err = (x); if (_ftp_err != FTP_OK) return _ftp_err; } while (0)
 static void ftp_seterror(ftp_session *sess, const char *error);
 
 /* Opens the data connection */
-static int ftp_data_open(ftp_session *sess, const char *parm, ...) 
-#ifdef __GNUC__
-                __attribute__ ((format (printf, 2, 3)))
-#endif /* __GNUC__ */
-;
+static int ftp_data_open(ftp_session *sess, const char *command, ...) 
+    ne_attribute((format (printf, 2, 3)));
 
 static int get_modtime(ftp_session *sess, const char *root,
 		       const char *filename);
@@ -165,7 +162,10 @@ static void set_sockerr(ftp_session *sess, const ne_socket *sock,
     }
 }
 
-/* An I/O error occured with the PI socket. */
+/* set_pisockerr must be called to handle any PI socket error to
+ * ensure that the connection can be correctly re-opened later.  Pass
+ * DOING as the operation which failed, ERRNUM as the error from the
+ * ne_sock_* layer. */
 static void set_pisockerr(ftp_session *sess, const char *doing, ssize_t errnum)
 {
     set_sockerr(sess, sess->pisock, doing, errnum);
@@ -355,7 +355,9 @@ static int parse_reply(ftp_session *sess, int code, char *reply)
     }
 }
 
-/* Runs FTP command 'cmd', and reads the response. */
+/* Runs FTP command 'cmd', and reads the response.  Returns FTP_BROKEN
+ * if the PI connection broke due to timeout etc.  execute() should be
+ * used instead of this function for normal FTP commands. */
 static int run_command(ftp_session *sess, const char *cmd)
 {
     char *line = ne_concat(cmd, "\r\n", NULL);
@@ -488,8 +490,7 @@ static int send_file_binary(ftp_session *sess, FILE *f, off_t size)
 /* Dump from given socket into given file.  Returns number of bytes
  * written on success, or -1 on error (session error string is
  * set). */
-static int
-receive_file(ftp_session *sess, FILE *f)
+static int receive_file(ftp_session *sess, FILE *f)
 {
     ssize_t bytes;
     off_t count = 0;
@@ -513,7 +514,8 @@ receive_file(ftp_session *sess, FILE *f)
     return 0;
 }
 
-/* Connect DTP socket; return non-zero on success. */
+/* Passively (client-connects) open the DTP socket ; return non-zero
+ * on success. */
 static int dtp_open_passive(ftp_session *sess) 
 {
     int ret;
@@ -618,7 +620,9 @@ int ftp_rmdir(ftp_session *sess, const char *filename)
     return execute(sess, "RMD %s", filename);
 }
 
-/* FTP non-PASV mode open */
+/* Actively open the data connection, running command COMMAND; the
+ * client then listens for and accepts the connection from the server.
+ * On successful return, the DTP connection is open. */
 static int dtp_open_active(ftp_session *sess, const char *command)
 {
     char *a, *p;
@@ -728,14 +732,16 @@ int ftp_chmod(ftp_session *sess, const char *filename, const mode_t mode)
 #define ne_iaddr_typeof(ia) (ne_iaddr_ipv6)
 #endif
 
-static int ftp_data_open(ftp_session *sess, const char *template, ...) 
+/* Open the DATA connection using whichever means appropriate, running
+ * FTP command COMMAND with printf-style arguments. */
+static int ftp_data_open(ftp_session *sess, const char *command, ...) 
 {
     int ret;
     va_list params;
     char buf[BUFSIZ];
 
-    va_start(params, template);
-    ne_vsnprintf(buf, BUFSIZ, template, params);
+    va_start(params, command);
+    ne_vsnprintf(buf, BUFSIZ, command, params);
     va_end(params);
 
     if (sess->use_passive) {
