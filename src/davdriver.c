@@ -109,21 +109,7 @@ static void syserr(ne_session *sess, const char *msg, int errnum)
 
 static int get_server_port(struct site *site)
 {
-    const char *svc;
-    int port, defport;
-    if (site->http_secure) {
-	svc = "https";
-        defport = 443;
-    } else {
-	svc = "http";
-	defport = 80;
-    }
-    port = ne_service_lookup(svc);
-    if (port == 0) {
-	port = defport;
-	NE_DEBUG(NE_DBG_HTTP, "Using default port for %s: %d\n", svc, port);
-    }
-    return port;
+    return site->http_secure ? 443 : 80;
 }
 
 static int get_proxy_port(struct site *site)
