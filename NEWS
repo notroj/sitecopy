@@ -1,3 +1,9 @@
+Changes in release 0.14.4:
+* FTP: Ignore symlinks in fetch mode.
+* Correct sitecopy.1 documentation: symlinks in the local site are
+  followed not ignored, by default.
+* Add French translation of man page, by Nicolas Girard.
+
 Changes in release 0.14.3:
 * FTP: Fix fetch mode issues with some servers.
 
