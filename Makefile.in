@@ -134,12 +134,12 @@ lib/snprintf.o: lib/snprintf.c lib/snprintf.h config.h
 
 $(EXPATDIR)/xmltok/nametab.h: $(EXPATDIR)/gennmtab/gennmtab@EXEEXT@
 	rm -f $@
-	$(EXPATDIR)gennmtab/gennmtab@EXEEXT@ >$@
+	$(EXPATDIR)/gennmtab/gennmtab@EXEEXT@ >$@
 
 $(EXPATDIR)/gennmtab/gennmtab@EXEEXT@: $(top_srcdir)/$(EXPATDIR)/gennmtab/gennmtab.c
-	$(CC) $(LDFLAGS) $(ALL_CFLAGS) -o $@ $(top_srcdir)/$(EXPATDIR)gennmtab/gennmtab.c
+	$(CC) $(LDFLAGS) $(ALL_CFLAGS) -o $@ $(top_srcdir)/$(EXPATDIR)/gennmtab/gennmtab.c
 
-$(EXPATDIR)xmltok/xmltok.o: $(EXPATDIR)xmltok/xmltok.c $(EXPATDIR)xmltok/xmltok.h $(EXPATDIR)xmltok/nametab.h
+$(EXPATDIR)/xmltok/xmltok.o: $(EXPATDIR)/xmltok/xmltok.c $(EXPATDIR)/xmltok/xmltok.h $(EXPATDIR)/xmltok/nametab.h
 
 # The install goal is different for each front end, so
 # we have a separate goal for each and autoconf points the 
