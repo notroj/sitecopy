@@ -6,410 +6,13 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sitecopy 0.11.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-09-18 09:51+0100\n"
+"POT-Creation-Date: 2005-01-02 12:15+0000\n"
 "PO-Revision-Date: 2002-11-11 14:28+0000\n"
 "Last-Translator: Michael Sobolev <sitecopy@lyra.org>\n"
 "Language-Team: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=koi8-r\n"
 "Content-Transfer-Encoding: 8bit\n"
-
-#: gnome/init.c:51
-msgid "_New site..."
-msgstr ""
-
-#: gnome/init.c:51 gnome/init.c:171
-msgid "Create a new site definition"
-msgstr ""
-
-#: gnome/init.c:54
-msgid "_Open..."
-msgstr ""
-
-#: gnome/init.c:54
-msgid "Open a new rc file. (EXPERIMENTAL)."
-msgstr ""
-
-#: gnome/init.c:57
-msgid "_Save Sites"
-msgstr ""
-
-#: gnome/init.c:57 gnome/init.c:177
-msgid "Save the current site definitions"
-msgstr ""
-
-#: gnome/init.c:60
-msgid "Sav_e Sites As..."
-msgstr ""
-
-#: gnome/init.c:60
-msgid "Save the current site definitions to a file."
-msgstr ""
-
-#: gnome/init.c:63
-#, fuzzy
-msgid "_Delete this site"
-msgstr "Удалить %s"
-
-#: gnome/init.c:63
-msgid "Delete the selected site entry"
-msgstr ""
-
-#: gnome/init.c:69
-msgid "E_xit"
-msgstr ""
-
-#: gnome/init.c:69 gnome/init.c:202
-msgid "Exit the program"
-msgstr ""
-
-#: gnome/init.c:78
-msgid "_Initialise site"
-msgstr ""
-
-#: gnome/init.c:78
-msgid "All files will be uploaded if a site is initialised"
-msgstr ""
-
-#: gnome/init.c:81
-msgid "'_Catchup' site"
-msgstr ""
-
-#: gnome/init.c:81
-msgid "Records the site as already updated."
-msgstr ""
-
-#: gnome/init.c:84
-msgid "_Fetch site listing"
-msgstr ""
-
-#: gnome/init.c:84
-msgid "Figures out which files are new/changed from the actual remote site."
-msgstr ""
-
-#: gnome/init.c:88
-msgid "_Resynchronize site"
-msgstr ""
-
-#: gnome/init.c:88
-msgid "Copies newer files from the remote site to the local drive."
-msgstr ""
-
-#: gnome/init.c:91
-msgid "_Update site..."
-msgstr ""
-
-#: gnome/init.c:91
-msgid "Apply the local site's changes to the remote site."
-msgstr ""
-
-#: gnome/init.c:94
-msgid "Update _ALL sites"
-msgstr ""
-
-#: gnome/init.c:94 gnome/init.c:137
-msgid "Performs the required operations on all site definitions. (TODO)."
-msgstr ""
-
-#: gnome/init.c:98
-msgid "Rescan local directory"
-msgstr ""
-
-#: gnome/init.c:98
-#, fuzzy
-msgid "Re-reads the local directory of the selected site."
-msgstr "%s: Для сайта `%s' не указан параметр Local.\n"
-
-#: gnome/init.c:106
-msgid "_Required updates"
-msgstr ""
-
-#: gnome/init.c:106
-msgid "Displays a brief report of any required updates."
-msgstr ""
-
-#: gnome/init.c:109
-msgid "Site web-r_eport"
-msgstr ""
-
-#: gnome/init.c:109
-msgid ""
-"Generates a web page detailing the changes required on the selected site."
-msgstr ""
-
-#: gnome/init.c:112
-msgid "Prin_t site info..."
-msgstr ""
-
-#: gnome/init.c:112
-msgid "Print information about the selected site"
-msgstr ""
-
-#: gnome/init.c:119
-msgid "_Backup files status"
-msgstr ""
-
-#: gnome/init.c:119
-msgid "Save the 'state' of your local files, in case of accident."
-msgstr ""
-
-#: gnome/init.c:122
-msgid "Restore files status..."
-msgstr ""
-
-#: gnome/init.c:122 gnome/init.c:129
-msgid "If a backup has previously been made, it will be restored."
-msgstr ""
-
-#: gnome/init.c:126
-msgid "_Backup site definitions"
-msgstr ""
-
-#: gnome/init.c:126
-msgid "Backup your site definitions, in case you delete your sites."
-msgstr ""
-
-#: gnome/init.c:129
-msgid "Restore site definitions..."
-msgstr ""
-
-#: gnome/init.c:137
-msgid "Preferences..."
-msgstr ""
-
-#: gnome/init.c:146
-msgid "_About XSitecopy"
-msgstr ""
-
-#: gnome/init.c:146
-msgid "Information about XSitecopy"
-msgstr ""
-
-#: gnome/init.c:158
-msgid "_File"
-msgstr ""
-
-#: gnome/init.c:159
-#, fuzzy
-msgid "_Operations"
-msgstr "Параметры: \n"
-
-#: gnome/init.c:160
-msgid "_Reports"
-msgstr ""
-
-#: gnome/init.c:161
-msgid "_Settings"
-msgstr ""
-
-#: gnome/init.c:162
-msgid "_Backup"
-msgstr ""
-
-#: gnome/init.c:163
-msgid "_Help"
-msgstr ""
-
-#: gnome/init.c:171
-msgid "New site"
-msgstr ""
-
-#: gnome/init.c:174
-msgid "Open"
-msgstr ""
-
-#: gnome/init.c:174
-msgid "Open a new site definitions file."
-msgstr ""
-
-#: gnome/init.c:177
-msgid "Save"
-msgstr ""
-
-#: gnome/init.c:180
-#, fuzzy
-msgid "Delete site"
-msgstr "Удалить %s"
-
-#: gnome/init.c:180
-msgid "Delete the selected site"
-msgstr ""
-
-#: gnome/init.c:185
-msgid "Initialise"
-msgstr ""
-
-#: gnome/init.c:185
-msgid "Initialise the site (mark all files as needing to be updated)."
-msgstr ""
-
-#: gnome/init.c:188
-msgid "Catch-up"
-msgstr ""
-
-#: gnome/init.c:188
-msgid "Mark all of the selected site's files as updated."
-msgstr ""
-
-#: gnome/init.c:194
-#, fuzzy
-msgid "Download"
-msgstr "Загружается %s: ["
-
-#: gnome/init.c:194
-msgid "Download newer files from the remote site. (Use with care)"
-msgstr ""
-
-#: gnome/init.c:198 src/console_fe.c:126
-msgid "Update"
-msgstr ""
-
-#: gnome/init.c:198
-msgid "Updates the selected site"
-msgstr ""
-
-#: gnome/init.c:202
-msgid "Quit"
-msgstr ""
-
-#: gnome/init.c:402 src/console_fe.c:1030
-#, c-format
-msgid "%s: Error: Could not open rcfile: %s.\n"
-msgstr "%s: Ошибка: Не удалось открыть конфигурационный файл: %s.\n"
-
-#: gnome/init.c:407 src/console_fe.c:1034
-#, c-format
-msgid ""
-"%s: rcfile corrupt at line %d:\n"
-"%s\n"
-msgstr ""
-
-#: gnome/init.c:412
-#, fuzzy, c-format
-msgid "%s: Error: Could not read rcfile: %s.\n"
-msgstr "%s: Ошибка: Не удалось открыть конфигурационный файл: %s.\n"
-
-#: gnome/main.c:184
-msgid ""
-"Debugging level (sum of: 1=socket, 2=files, 4=rcfile, 8=WebDAV, 16=FTP, "
-"32=XML, 64=GNOME )"
-msgstr ""
-
-#: gnome/misc.c:579
-#, fuzzy, c-format
-msgid "Server not specified in site `%s'.\n"
-msgstr "%s: Для сайта `%s' не указан параметр Server.\n"
-
-#: gnome/misc.c:583
-#, fuzzy, c-format
-msgid "Remote directory not specified in site `%s'.\n"
-msgstr "%s: Для сайта `%s' не указан параметр Remote.\n"
-
-#: gnome/misc.c:587
-#, fuzzy, c-format
-msgid "Local directory not specified in site `%s'.\n"
-msgstr "%s: Для сайта `%s' не указан параметр Local.\n"
-
-#: gnome/misc.c:591
-#, fuzzy, c-format
-msgid ""
-"Could not read directory for `%s':\n"
-"\t%s\n"
-msgstr ""
-"%s: Не удалось прочитаь каталог для `%s':\n"
-"\t%s\n"
-
-#: gnome/misc.c:595
-#, fuzzy, c-format
-msgid "Invalid port used in site `%s'.\n"
-msgstr "%s: Для сайта `%s' указано неверное значения для параметра Port.\n"
-
-#: gnome/misc.c:599
-#, c-format
-msgid "Protocol '%s' cannot maintain symbolic links (site `%s').\n"
-msgstr ""
-
-#: gnome/misc.c:603
-#, c-format
-msgid "Cannot use a relative remote directory protocol '%s' (site `%s').\n"
-msgstr ""
-
-#: gnome/misc.c:606
-#, c-format
-msgid "%s's protocol does not currently support maintaining permissions."
-msgstr ""
-
-#: gnome/misc.c:610
-#, fuzzy, c-format
-msgid "Could not find 'relative' local directory"
-msgstr "%s: Ошибка: Не удалось открыть конфигурационный файл: %s\n"
-
-#: lib/getopt.c:664
-#, c-format
-msgid "%s: option `%s' is ambiguous\n"
-msgstr "%s: неоднозначный парметр `%s'\n"
-
-#: lib/getopt.c:688
-#, c-format
-msgid "%s: option `--%s' doesn't allow an argument\n"
-msgstr "%s: параметр `--%s' не имеет аргументов\n"
-
-#: lib/getopt.c:693
-#, c-format
-msgid "%s: option `%c%s' doesn't allow an argument\n"
-msgstr "%s: параметр `%c%s' не имеет аргументов\n"
-
-#: lib/getopt.c:710 lib/getopt.c:883
-#, c-format
-msgid "%s: option `%s' requires an argument\n"
-msgstr "%s: параметр `%s' требует использования аргумента\n"
-
-#: lib/getopt.c:739
-#, c-format
-msgid "%s: unrecognized option `--%s'\n"
-msgstr "%s: нераспознанный параметр `--%s'\n"
-
-#: lib/getopt.c:743
-#, c-format
-msgid "%s: unrecognized option `%c%s'\n"
-msgstr "%s: нераспознанный параметр `%c%s'\n"
-
-#: lib/getopt.c:769
-#, c-format
-msgid "%s: illegal option -- %c\n"
-msgstr "%s: неверный параметр -- %c\n"
-
-#: lib/getopt.c:772
-#, c-format
-msgid "%s: invalid option -- %c\n"
-msgstr "%s: недопустимый параметр -- %c\n"
-
-#: lib/getopt.c:802 lib/getopt.c:932
-#, c-format
-msgid "%s: option requires an argument -- %c\n"
-msgstr "%s: параметр требует использования аргумента -- %c\n"
-
-#: lib/getopt.c:849
-#, c-format
-msgid "%s: option `-W %s' is ambiguous\n"
-msgstr "%s: неоднозначный параметр `-W %s'\n"
-
-#: lib/getopt.c:867
-#, c-format
-msgid "%s: option `-W %s' doesn't allow an argument\n"
-msgstr "%s: параметр `-W %s' не имеет аргументов\n"
-
-#: lib/rpmatch.c:79
-msgid "^[yY]"
-msgstr ""
-
-#: lib/rpmatch.c:82
-msgid "^[nN]"
-msgstr ""
-
-#: src/common.c:112
-msgid "Unknown system error"
-msgstr "Неизвестная системная ошибка"
 
 #: src/console_fe.c:119
 msgid "Show changes to"
@@ -441,6 +44,10 @@ msgstr ""
 
 #: src/console_fe.c:125 src/console_fe.c:126 src/console_fe.c:127
 msgid "remote"
+msgstr ""
+
+#: src/console_fe.c:126 gnome/init.c:198
+msgid "Update"
 msgstr ""
 
 #: src/console_fe.c:126
@@ -976,6 +583,18 @@ msgstr ""
 msgid "Link: %s - target %s\n"
 msgstr ""
 
+#: src/console_fe.c:1030 gnome/init.c:402
+#, c-format
+msgid "%s: Error: Could not open rcfile: %s.\n"
+msgstr "%s: Ошибка: Не удалось открыть конфигурационный файл: %s.\n"
+
+#: src/console_fe.c:1034 gnome/init.c:407
+#, c-format
+msgid ""
+"%s: rcfile corrupt at line %d:\n"
+"%s\n"
+msgstr ""
+
 #: src/console_fe.c:1053
 #, c-format
 msgid ""
@@ -1317,6 +936,16 @@ msgid ""
 "Please send feature requests and bug reports to sitecopy@lyra.org\n"
 msgstr ""
 
+#: src/sitestore.c:321
+#, c-format
+msgid "Invalid checksum at line %d"
+msgstr ""
+
+#: src/sitestore.c:340
+#, c-format
+msgid "Size overflow (%s) at line %d"
+msgstr ""
+
 #: src/davdriver.c:196
 msgid "The connection timed out."
 msgstr ""
@@ -1353,12 +982,42 @@ msgstr "%s: Ошибка: Не удалось открыть конфигурационный файл: %s\n"
 msgid "Could not access resource"
 msgstr ""
 
-#: src/ftp.c:156 libneon/ne_request.c:247
+#: src/sites.c:160
+msgid "Could not set modification time of local file."
+msgstr ""
+
+#: src/sites.c:308
+msgid ""
+"Upload succeeded, but could not retrieve modification time.\n"
+"If this message persists, turn off safe mode."
+msgstr ""
+
+#: src/sites.c:515
+msgid "Remote file has been modified - not overwriting with local changes"
+msgstr ""
+
+#: src/sites.c:828
+msgid "Could not examine file."
+msgstr ""
+
+#: src/sites.c:871
+msgid "Could not checksum file"
+msgstr ""
+
+#: src/sites.c:887
+msgid "The target of the symlink could not be read."
+msgstr ""
+
+#: src/common.c:112
+msgid "Unknown system error"
+msgstr "Неизвестная системная ошибка"
+
+#: src/ftp.c:156 lib/neon/ne_request.c:233
 #, c-format
 msgid "%s: connection was closed by server."
 msgstr ""
 
-#: src/ftp.c:160 libneon/ne_request.c:252
+#: src/ftp.c:160 lib/neon/ne_request.c:238
 #, c-format
 msgid "%s: connection timed out."
 msgstr ""
@@ -1463,312 +1122,665 @@ msgstr "%s: Ошибка: Не удалось открыть конфигурационный файл: %s\n"
 msgid "Could not read 'LIST' response."
 msgstr "%s: Ошибка: Не удалось открыть конфигурационный файл: %s\n"
 
-#: src/sites.c:160
-msgid "Could not set modification time of local file."
+#: gnome/init.c:51
+msgid "_New site..."
 msgstr ""
 
-#: src/sites.c:308
+#: gnome/init.c:51 gnome/init.c:171
+msgid "Create a new site definition"
+msgstr ""
+
+#: gnome/init.c:54
+msgid "_Open..."
+msgstr ""
+
+#: gnome/init.c:54
+msgid "Open a new rc file. (EXPERIMENTAL)."
+msgstr ""
+
+#: gnome/init.c:57
+msgid "_Save Sites"
+msgstr ""
+
+#: gnome/init.c:57 gnome/init.c:177
+msgid "Save the current site definitions"
+msgstr ""
+
+#: gnome/init.c:60
+msgid "Sav_e Sites As..."
+msgstr ""
+
+#: gnome/init.c:60
+msgid "Save the current site definitions to a file."
+msgstr ""
+
+#: gnome/init.c:63
+#, fuzzy
+msgid "_Delete this site"
+msgstr "Удалить %s"
+
+#: gnome/init.c:63
+msgid "Delete the selected site entry"
+msgstr ""
+
+#: gnome/init.c:69
+msgid "E_xit"
+msgstr ""
+
+#: gnome/init.c:69 gnome/init.c:202
+msgid "Exit the program"
+msgstr ""
+
+#: gnome/init.c:78
+msgid "_Initialise site"
+msgstr ""
+
+#: gnome/init.c:78
+msgid "All files will be uploaded if a site is initialised"
+msgstr ""
+
+#: gnome/init.c:81
+msgid "'_Catchup' site"
+msgstr ""
+
+#: gnome/init.c:81
+msgid "Records the site as already updated."
+msgstr ""
+
+#: gnome/init.c:84
+msgid "_Fetch site listing"
+msgstr ""
+
+#: gnome/init.c:84
+msgid "Figures out which files are new/changed from the actual remote site."
+msgstr ""
+
+#: gnome/init.c:88
+msgid "_Resynchronize site"
+msgstr ""
+
+#: gnome/init.c:88
+msgid "Copies newer files from the remote site to the local drive."
+msgstr ""
+
+#: gnome/init.c:91
+msgid "_Update site..."
+msgstr ""
+
+#: gnome/init.c:91
+msgid "Apply the local site's changes to the remote site."
+msgstr ""
+
+#: gnome/init.c:94
+msgid "Update _ALL sites"
+msgstr ""
+
+#: gnome/init.c:94 gnome/init.c:137
+msgid "Performs the required operations on all site definitions. (TODO)."
+msgstr ""
+
+#: gnome/init.c:98
+msgid "Rescan local directory"
+msgstr ""
+
+#: gnome/init.c:98
+#, fuzzy
+msgid "Re-reads the local directory of the selected site."
+msgstr "%s: Для сайта `%s' не указан параметр Local.\n"
+
+#: gnome/init.c:106
+msgid "_Required updates"
+msgstr ""
+
+#: gnome/init.c:106
+msgid "Displays a brief report of any required updates."
+msgstr ""
+
+#: gnome/init.c:109
+msgid "Site web-r_eport"
+msgstr ""
+
+#: gnome/init.c:109
 msgid ""
-"Upload succeeded, but could not retrieve modification time.\n"
-"If this message persists, turn off safe mode."
+"Generates a web page detailing the changes required on the selected site."
 msgstr ""
 
-#: src/sites.c:515
-msgid "Remote file has been modified - not overwriting with local changes"
+#: gnome/init.c:112
+msgid "Prin_t site info..."
 msgstr ""
 
-#: src/sites.c:828
-msgid "Could not examine file."
+#: gnome/init.c:112
+msgid "Print information about the selected site"
 msgstr ""
 
-#: src/sites.c:871
-msgid "Could not checksum file"
+#: gnome/init.c:119
+msgid "_Backup files status"
 msgstr ""
 
-#: src/sites.c:887
-msgid "The target of the symlink could not be read."
+#: gnome/init.c:119
+msgid "Save the 'state' of your local files, in case of accident."
 msgstr ""
 
-#: src/sitestore.c:321
+#: gnome/init.c:122
+msgid "Restore files status..."
+msgstr ""
+
+#: gnome/init.c:122 gnome/init.c:129
+msgid "If a backup has previously been made, it will be restored."
+msgstr ""
+
+#: gnome/init.c:126
+msgid "_Backup site definitions"
+msgstr ""
+
+#: gnome/init.c:126
+msgid "Backup your site definitions, in case you delete your sites."
+msgstr ""
+
+#: gnome/init.c:129
+msgid "Restore site definitions..."
+msgstr ""
+
+#: gnome/init.c:137
+msgid "Preferences..."
+msgstr ""
+
+#: gnome/init.c:146
+msgid "_About XSitecopy"
+msgstr ""
+
+#: gnome/init.c:146
+msgid "Information about XSitecopy"
+msgstr ""
+
+#: gnome/init.c:158
+msgid "_File"
+msgstr ""
+
+#: gnome/init.c:159
+#, fuzzy
+msgid "_Operations"
+msgstr "Параметры: \n"
+
+#: gnome/init.c:160
+msgid "_Reports"
+msgstr ""
+
+#: gnome/init.c:161
+msgid "_Settings"
+msgstr ""
+
+#: gnome/init.c:162
+msgid "_Backup"
+msgstr ""
+
+#: gnome/init.c:163
+msgid "_Help"
+msgstr ""
+
+#: gnome/init.c:171
+msgid "New site"
+msgstr ""
+
+#: gnome/init.c:174
+msgid "Open"
+msgstr ""
+
+#: gnome/init.c:174
+msgid "Open a new site definitions file."
+msgstr ""
+
+#: gnome/init.c:177
+msgid "Save"
+msgstr ""
+
+#: gnome/init.c:180
+#, fuzzy
+msgid "Delete site"
+msgstr "Удалить %s"
+
+#: gnome/init.c:180
+msgid "Delete the selected site"
+msgstr ""
+
+#: gnome/init.c:185
+msgid "Initialise"
+msgstr ""
+
+#: gnome/init.c:185
+msgid "Initialise the site (mark all files as needing to be updated)."
+msgstr ""
+
+#: gnome/init.c:188
+msgid "Catch-up"
+msgstr ""
+
+#: gnome/init.c:188
+msgid "Mark all of the selected site's files as updated."
+msgstr ""
+
+#: gnome/init.c:194
+#, fuzzy
+msgid "Download"
+msgstr "Загружается %s: ["
+
+#: gnome/init.c:194
+msgid "Download newer files from the remote site. (Use with care)"
+msgstr ""
+
+#: gnome/init.c:198
+msgid "Updates the selected site"
+msgstr ""
+
+#: gnome/init.c:202
+msgid "Quit"
+msgstr ""
+
+#: gnome/init.c:412
+#, fuzzy, c-format
+msgid "%s: Error: Could not read rcfile: %s.\n"
+msgstr "%s: Ошибка: Не удалось открыть конфигурационный файл: %s.\n"
+
+#: gnome/main.c:184
+msgid ""
+"Debugging level (sum of: 1=socket, 2=files, 4=rcfile, 8=WebDAV, 16=FTP, "
+"32=XML, 64=GNOME )"
+msgstr ""
+
+#: gnome/misc.c:579
+#, fuzzy, c-format
+msgid "Server not specified in site `%s'.\n"
+msgstr "%s: Для сайта `%s' не указан параметр Server.\n"
+
+#: gnome/misc.c:583
+#, fuzzy, c-format
+msgid "Remote directory not specified in site `%s'.\n"
+msgstr "%s: Для сайта `%s' не указан параметр Remote.\n"
+
+#: gnome/misc.c:587
+#, fuzzy, c-format
+msgid "Local directory not specified in site `%s'.\n"
+msgstr "%s: Для сайта `%s' не указан параметр Local.\n"
+
+#: gnome/misc.c:591
+#, fuzzy, c-format
+msgid ""
+"Could not read directory for `%s':\n"
+"\t%s\n"
+msgstr ""
+"%s: Не удалось прочитаь каталог для `%s':\n"
+"\t%s\n"
+
+#: gnome/misc.c:595
+#, fuzzy, c-format
+msgid "Invalid port used in site `%s'.\n"
+msgstr "%s: Для сайта `%s' указано неверное значения для параметра Port.\n"
+
+#: gnome/misc.c:599
 #, c-format
-msgid "Invalid checksum at line %d"
+msgid "Protocol '%s' cannot maintain symbolic links (site `%s').\n"
 msgstr ""
 
-#: src/sitestore.c:340
+#: gnome/misc.c:603
 #, c-format
-msgid "Size overflow (%s) at line %d"
+msgid "Cannot use a relative remote directory protocol '%s' (site `%s').\n"
 msgstr ""
 
-#: libneon/ne_207.c:184
+#: gnome/misc.c:606
+#, c-format
+msgid "%s's protocol does not currently support maintaining permissions."
+msgstr ""
+
+#: gnome/misc.c:610
+#, fuzzy, c-format
+msgid "Could not find 'relative' local directory"
+msgstr "%s: Ошибка: Не удалось открыть конфигурационный файл: %s\n"
+
+#: lib/neon/ne_redirect.c:92
+#, fuzzy
+msgid "Could not parse redirect location."
+msgstr "%s: Ошибка: Не удалось открыть конфигурационный файл: %s\n"
+
+#: lib/neon/ne_gnutls.c:434 lib/neon/ne_openssl.c:364
+msgid "Server certificate was missing commonName attribute in subject name"
+msgstr ""
+
+#: lib/neon/ne_gnutls.c:471 lib/neon/ne_openssl.c:559
+#, fuzzy, c-format
+msgid "SSL negotiation failed: %s"
+msgstr "%s: Ошибка: Не удалось открыть конфигурационный файл: %s\n"
+
+#: lib/neon/ne_gnutls.c:480
+msgid "Server did not send certificate chain"
+msgstr ""
+
+#: lib/neon/ne_openssl.c:150
+msgid "certificate is not yet valid"
+msgstr ""
+
+#: lib/neon/ne_openssl.c:151
+msgid "certificate has expired"
+msgstr ""
+
+#: lib/neon/ne_openssl.c:152
+msgid "certificate issued for a different hostname"
+msgstr ""
+
+#: lib/neon/ne_openssl.c:153
+msgid "issuer is not trusted"
+msgstr ""
+
+#: lib/neon/ne_openssl.c:158
+msgid "Server certificate verification failed: "
+msgstr ""
+
+#: lib/neon/ne_openssl.c:176
+msgid "[invalid date]"
+msgstr ""
+
+#: lib/neon/ne_openssl.c:396
+#, c-format
+msgid "Certificate verification error: %s"
+msgstr ""
+
+#: lib/neon/ne_openssl.c:578
+msgid "SSL server did not present certificate"
+msgstr ""
+
+#: lib/neon/ne_openssl.c:587
+msgid "Server certificate changed: connection intercepted?"
+msgstr ""
+
+#: lib/neon/ne_socket.c:475 lib/neon/ne_socket.c:523 lib/neon/ne_socket.c:626
+msgid "Connection closed"
+msgstr ""
+
+#: lib/neon/ne_socket.c:533
+msgid "Secure connection truncated"
+msgstr ""
+
+#: lib/neon/ne_socket.c:545 lib/neon/ne_socket.c:630 lib/neon/ne_socket.c:635
+#, c-format
+msgid "SSL error: %s"
+msgstr ""
+
+#: lib/neon/ne_socket.c:548
+#, c-format
+msgid "SSL error code %d/%d/%lu"
+msgstr ""
+
+#: lib/neon/ne_socket.c:730
+msgid "Line too long"
+msgstr ""
+
+#: lib/neon/ne_socket.c:870 lib/neon/ne_socket.c:876
+msgid "Host not found"
+msgstr ""
+
+#: lib/neon/ne_socket.c:986
+msgid "Socket descriptor number exceeds FD_SETSIZE"
+msgstr ""
+
+#: lib/neon/ne_socket.c:1146
+msgid "SSL disabled due to lack of entropy"
+msgstr ""
+
+#: lib/neon/ne_socket.c:1153
+msgid "SSL disabled due to library version mismatch"
+msgstr ""
+
+#: lib/neon/ne_socket.c:1159
+msgid "Could not create SSL structure"
+msgstr ""
+
+#: lib/neon/ne_request.c:230
+#, c-format
+msgid "%s: connection was closed by proxy server."
+msgstr ""
+
+#: lib/neon/ne_request.c:409
+msgid "Error reading request body."
+msgstr ""
+
+#: lib/neon/ne_request.c:744
+msgid "Could not read chunk size"
+msgstr ""
+
+#: lib/neon/ne_request.c:751
+#, fuzzy
+msgid "Could not parse chunk size"
+msgstr "%s: Ошибка: Не удалось открыть конфигурационный файл: %s\n"
+
+#: lib/neon/ne_request.c:788
+msgid "Could not read response body"
+msgstr ""
+
+#: lib/neon/ne_request.c:804
+#, fuzzy
+msgid "Could not read chunk delimiter"
+msgstr "%s: Ошибка: Не удалось открыть конфигурационный файл: %s\n"
+
+#: lib/neon/ne_request.c:807
+msgid "Chunk delimiter was invalid"
+msgstr ""
+
+#: lib/neon/ne_request.c:928
+msgid "Could not read status line"
+msgstr ""
+
+#: lib/neon/ne_request.c:939
+#, fuzzy
+msgid "Could not parse response status line."
+msgstr "%s: Ошибка: Не удалось открыть конфигурационный файл: %s\n"
+
+#: lib/neon/ne_request.c:950
+#, fuzzy
+msgid "Could not read interim response headers"
+msgstr "%s: Ошибка: Не удалось открыть конфигурационный файл: %s\n"
+
+#: lib/neon/ne_request.c:983
+msgid "Could not send request"
+msgstr ""
+
+#: lib/neon/ne_request.c:991
+msgid "Could not send request body"
+msgstr ""
+
+#: lib/neon/ne_request.c:1032 lib/neon/ne_request.c:1050
+#: lib/neon/ne_request.c:1060
+msgid "Error reading response headers"
+msgstr ""
+
+#: lib/neon/ne_request.c:1078
+msgid "Response header too long"
+msgstr ""
+
+#: lib/neon/ne_request.c:1159
+msgid "Response exceeded maximum number of header fields."
+msgstr ""
+
+#: lib/neon/ne_request.c:1176
+#, fuzzy, c-format
+msgid "Could not resolve hostname `%s': %s"
+msgstr "%s: Ошибка: Не удалось открыть конфигурационный файл: %s.\n"
+
+#: lib/neon/ne_request.c:1338
+#, fuzzy, c-format
+msgid "Could not write to file: %s"
+msgstr "%s: Ошибка: Не удалось открыть конфигурационный файл: %s\n"
+
+#: lib/neon/ne_request.c:1411
+msgid "Could not create SSL connection through proxy server"
+msgstr ""
+
+#: lib/neon/ne_request.c:1457
+#, fuzzy
+msgid "Could not create socket"
+msgstr "%s: Ошибка: Не удалось открыть конфигурационный файл: %s\n"
+
+#: lib/neon/ne_request.c:1502
+msgid "Could not connect to server"
+msgstr ""
+
+#: lib/neon/ne_request.c:1505
+msgid "Could not connect to proxy server"
+msgstr ""
+
+#: lib/neon/ne_xml.c:267
+#, c-format
+msgid "XML parse error at line %d: invalid element name"
+msgstr ""
+
+#: lib/neon/ne_xml.c:422
+#, fuzzy
+msgid "Unknown error"
+msgstr "Неизвестная системная ошибка"
+
+#: lib/neon/ne_xml.c:506
+msgid "Invalid Byte Order Mark"
+msgstr ""
+
+#: lib/neon/ne_xml.c:592
+#, c-format
+msgid "XML parse error at line %d: %s."
+msgstr ""
+
+#: lib/neon/ne_props.c:370 lib/neon/ne_props.c:410
+msgid "Response exceeds maximum property count"
+msgstr ""
+
+#: lib/neon/ne_compress.c:175
+#, fuzzy, c-format
+msgid "%s: %s"
+msgstr "%s\n"
+
+#: lib/neon/ne_compress.c:186
+#, c-format
+msgid "%s: %s (code %d)"
+msgstr ""
+
+#: lib/neon/ne_compress.c:232
+#, fuzzy
+msgid "Could not inflate data"
+msgstr "%s: Ошибка: Не удалось открыть конфигурационный файл: %s\n"
+
+#: lib/neon/ne_compress.c:293
+#, fuzzy
+msgid "Could not initialize zlib"
+msgstr "%s: Ошибка: Не удалось открыть конфигурационный файл: %s\n"
+
+#: lib/neon/ne_basic.c:86
+#, fuzzy, c-format
+msgid "Could not determine file size: %s"
+msgstr "%s: Ошибка: Не удалось открыть конфигурационный файл: %s\n"
+
+#: lib/neon/ne_basic.c:132
+msgid "Response did not include requested range"
+msgstr ""
+
+#: lib/neon/ne_basic.c:176
+msgid "Range is not satisfiable"
+msgstr ""
+
+#: lib/neon/ne_basic.c:181
+msgid "Resource does not support ranged GETs."
+msgstr ""
+
+#: lib/neon/ne_auth.c:127
+msgid "Server was not authenticated correctly."
+msgstr ""
+
+#: lib/neon/ne_auth.c:131
+msgid "Proxy server was not authenticated correctly."
+msgstr ""
+
+#: lib/neon/ne_auth.c:424
+#, c-format
+msgid "GSSAPI authentication error (%s)"
+msgstr ""
+
+#: lib/neon/ne_207.c:188
 #, c-format
 msgid ""
 "Invalid HTTP status line in status element at line %d of response:\n"
 "Status line was: %s"
 msgstr ""
 
-#: libneon/ne_auth.c:127
-msgid "Server was not authenticated correctly."
-msgstr ""
-
-#: libneon/ne_auth.c:131
-msgid "Proxy server was not authenticated correctly."
-msgstr ""
-
-#: libneon/ne_auth.c:427
-#, c-format
-msgid "GSSAPI authentication error (%s)"
-msgstr ""
-
-#: libneon/ne_basic.c:92
-#, fuzzy, c-format
-msgid "Could not determine file size: %s"
-msgstr "%s: Ошибка: Не удалось открыть конфигурационный файл: %s\n"
-
-#: libneon/ne_basic.c:136
-#, fuzzy, c-format
-msgid "Could not write to file: %s"
-msgstr "%s: Ошибка: Не удалось открыть конфигурационный файл: %s\n"
-
-#: libneon/ne_basic.c:166
-msgid "Response not of expected length"
-msgstr ""
-
-#: libneon/ne_basic.c:233
-msgid "Range is not satisfiable"
-msgstr ""
-
-#: libneon/ne_basic.c:238
-msgid "Resource does not support ranged GETs."
-msgstr ""
-
-#: libneon/ne_compress.c:182
-#, fuzzy, c-format
-msgid "%s: %s"
-msgstr "%s\n"
-
-#: libneon/ne_compress.c:193
-#, c-format
-msgid "%s: %s (code %d)"
-msgstr ""
-
-#: libneon/ne_compress.c:240
-#, fuzzy
-msgid "Could not inflate data"
-msgstr "%s: Ошибка: Не удалось открыть конфигурационный файл: %s\n"
-
-#: libneon/ne_compress.c:280
-#, fuzzy
-msgid "Could not initialize zlib"
-msgstr "%s: Ошибка: Не удалось открыть конфигурационный файл: %s\n"
-
-#: libneon/ne_request.c:244
-#, c-format
-msgid "%s: connection was closed by proxy server."
-msgstr ""
-
-#: libneon/ne_request.c:435
-msgid "Error reading request body."
-msgstr ""
-
-#: libneon/ne_request.c:786
-msgid "Could not read chunk size"
-msgstr ""
-
-#: libneon/ne_request.c:793
-#, fuzzy
-msgid "Could not parse chunk size"
-msgstr "%s: Ошибка: Не удалось открыть конфигурационный файл: %s\n"
-
-#: libneon/ne_request.c:834
-msgid "Could not read response body"
-msgstr ""
-
-#: libneon/ne_request.c:850
-#, fuzzy
-msgid "Could not read chunk delimiter"
-msgstr "%s: Ошибка: Не удалось открыть конфигурационный файл: %s\n"
-
-#: libneon/ne_request.c:853
-msgid "Chunk delimiter was invalid"
-msgstr ""
-
-#: libneon/ne_request.c:972
-msgid "Could not read status line"
-msgstr ""
-
-#: libneon/ne_request.c:983
-#, fuzzy
-msgid "Could not parse response status line."
-msgstr "%s: Ошибка: Не удалось открыть конфигурационный файл: %s\n"
-
-#: libneon/ne_request.c:994
-#, fuzzy
-msgid "Could not read interim response headers"
-msgstr "%s: Ошибка: Не удалось открыть конфигурационный файл: %s\n"
-
-#: libneon/ne_request.c:1027
-msgid "Could not send request"
-msgstr ""
-
-#: libneon/ne_request.c:1035
-msgid "Could not send request body"
-msgstr ""
-
-#: libneon/ne_request.c:1076 libneon/ne_request.c:1094
-#: libneon/ne_request.c:1104
-msgid "Error reading response headers"
-msgstr ""
-
-#: libneon/ne_request.c:1122
-msgid "Response header too long"
-msgstr ""
-
-#: libneon/ne_request.c:1183
-msgid "Response exceeded maximum number of header fields."
-msgstr ""
-
-#: libneon/ne_request.c:1200
-#, fuzzy, c-format
-msgid "Could not resolve hostname `%s': %s"
-msgstr "%s: Ошибка: Не удалось открыть конфигурационный файл: %s.\n"
-
-#: libneon/ne_request.c:1365
-msgid "Could not create SSL connection through proxy server"
-msgstr ""
-
-#: libneon/ne_request.c:1411
-#, fuzzy
-msgid "Could not create socket"
-msgstr "%s: Ошибка: Не удалось открыть конфигурационный файл: %s\n"
-
-#: libneon/ne_request.c:1456
-msgid "Could not connect to server"
-msgstr ""
-
-#: libneon/ne_request.c:1459
-msgid "Could not connect to proxy server"
-msgstr ""
-
-#: libneon/ne_locks.c:733
+#: lib/neon/ne_locks.c:735
 msgid "No Lock-Token header given"
 msgstr ""
 
-#: libneon/ne_locks.c:761
+#: lib/neon/ne_locks.c:763
 #, c-format
 msgid "Response missing activelock for %s"
 msgstr ""
 
-#: libneon/ne_redirect.c:95
+#: lib/rpmatch.c:79
+msgid "^[yY]"
+msgstr ""
+
+#: lib/rpmatch.c:82
+msgid "^[nN]"
+msgstr ""
+
+#: lib/getopt.c:664
+#, c-format
+msgid "%s: option `%s' is ambiguous\n"
+msgstr "%s: неоднозначный парметр `%s'\n"
+
+#: lib/getopt.c:688
+#, c-format
+msgid "%s: option `--%s' doesn't allow an argument\n"
+msgstr "%s: параметр `--%s' не имеет аргументов\n"
+
+#: lib/getopt.c:693
+#, c-format
+msgid "%s: option `%c%s' doesn't allow an argument\n"
+msgstr "%s: параметр `%c%s' не имеет аргументов\n"
+
+#: lib/getopt.c:710 lib/getopt.c:883
+#, c-format
+msgid "%s: option `%s' requires an argument\n"
+msgstr "%s: параметр `%s' требует использования аргумента\n"
+
+#: lib/getopt.c:739
+#, c-format
+msgid "%s: unrecognized option `--%s'\n"
+msgstr "%s: нераспознанный параметр `--%s'\n"
+
+#: lib/getopt.c:743
+#, c-format
+msgid "%s: unrecognized option `%c%s'\n"
+msgstr "%s: нераспознанный параметр `%c%s'\n"
+
+#: lib/getopt.c:769
+#, c-format
+msgid "%s: illegal option -- %c\n"
+msgstr "%s: неверный параметр -- %c\n"
+
+#: lib/getopt.c:772
+#, c-format
+msgid "%s: invalid option -- %c\n"
+msgstr "%s: недопустимый параметр -- %c\n"
+
+#: lib/getopt.c:802 lib/getopt.c:932
+#, c-format
+msgid "%s: option requires an argument -- %c\n"
+msgstr "%s: параметр требует использования аргумента -- %c\n"
+
+#: lib/getopt.c:849
+#, c-format
+msgid "%s: option `-W %s' is ambiguous\n"
+msgstr "%s: неоднозначный параметр `-W %s'\n"
+
+#: lib/getopt.c:867
+#, c-format
+msgid "%s: option `-W %s' doesn't allow an argument\n"
+msgstr "%s: параметр `-W %s' не имеет аргументов\n"
+
 #, fuzzy
-msgid "Could not parse redirect location."
-msgstr "%s: Ошибка: Не удалось открыть конфигурационный файл: %s\n"
-
-#: libneon/ne_socket.c:453 libneon/ne_socket.c:514
-msgid "Connection closed"
-msgstr ""
-
-#: libneon/ne_socket.c:521
-msgid "Secure connection truncated"
-msgstr ""
-
-#: libneon/ne_socket.c:531 libneon/ne_socket.c:537
-#, c-format
-msgid "SSL error: %s"
-msgstr ""
-
-#: libneon/ne_socket.c:532 libneon/ne_socket.c:538
-#, fuzzy
-msgid "unknown error code"
-msgstr "Неизвестная системная ошибка"
-
-#: libneon/ne_socket.c:618
-msgid "Line too long"
-msgstr ""
-
-#: libneon/ne_socket.c:758 libneon/ne_socket.c:764
-msgid "Host not found"
-msgstr ""
-
-#: libneon/ne_socket.c:869
-msgid "Socket descriptor number exceeds FD_SETSIZE"
-msgstr ""
-
-#: libneon/ne_socket.c:1002
-msgid "SSL disabled due to lack of entropy"
-msgstr ""
-
-#: libneon/ne_socket.c:1009
-msgid "SSL disabled due to library version mismatch"
-msgstr ""
-
-#: libneon/ne_socket.c:1015
-msgid "Could not create SSL structure"
-msgstr ""
-
-#: libneon/ne_xml.c:267
-#, c-format
-msgid "XML parse error at line %d: invalid element name"
-msgstr ""
-
-#: libneon/ne_xml.c:422
-#, fuzzy
-msgid "Unknown error"
-msgstr "Неизвестная системная ошибка"
-
-#: libneon/ne_xml.c:510
-msgid "Invalid Byte Order Mark"
-msgstr ""
-
-#: libneon/ne_xml.c:596
-#, c-format
-msgid "XML parse error at line %d: %s."
-msgstr ""
-
-#: libneon/ne_openssl.c:150
-msgid "certificate is not yet valid"
-msgstr ""
-
-#: libneon/ne_openssl.c:151
-msgid "certificate has expired"
-msgstr ""
-
-#: libneon/ne_openssl.c:152
-msgid "certificate issued for a different hostname"
-msgstr ""
-
-#: libneon/ne_openssl.c:153
-msgid "issuer is not trusted"
-msgstr ""
-
-#: libneon/ne_openssl.c:158
-msgid "Server certificate verification failed: "
-msgstr ""
-
-#: libneon/ne_openssl.c:176
-msgid "[invalid date]"
-msgstr ""
-
-#: libneon/ne_openssl.c:363
-msgid "Server certificate was missing commonName attribute in subject name"
-msgstr ""
-
-#: libneon/ne_openssl.c:395
-#, c-format
-msgid "Certificate verification error: %s"
-msgstr ""
-
-#: libneon/ne_openssl.c:525
-#, fuzzy, c-format
-msgid "SSL negotiation failed: %s"
-msgstr "%s: Ошибка: Не удалось открыть конфигурационный файл: %s\n"
-
-#: libneon/ne_openssl.c:543
-msgid "SSL server did not present certificate"
-msgstr ""
-
-#: libneon/ne_openssl.c:552
-msgid "Server certificate changed: connection intercepted?"
-msgstr ""
+#~ msgid "unknown error code"
+#~ msgstr "Неизвестная системная ошибка"
 
 #, fuzzy
 #~ msgid "Deleted Items"

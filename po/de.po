@@ -5,419 +5,13 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sitecopy 0.11.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-09-18 09:51+0100\n"
+"POT-Creation-Date: 2005-01-02 12:15+0000\n"
 "PO-Revision-Date: 2002-01-13 13:37+0100\n"
 "Last-Translator: Thomas Schultz <tststs@gmx.de>\n"
 "Language-Team: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=iso-8859-1\n"
 "Content-Transfer-Encoding: 8bit\n"
-
-#: gnome/init.c:51
-msgid "_New site..."
-msgstr ""
-
-#: gnome/init.c:51 gnome/init.c:171
-msgid "Create a new site definition"
-msgstr ""
-
-#: gnome/init.c:54
-msgid "_Open..."
-msgstr ""
-
-#: gnome/init.c:54
-msgid "Open a new rc file. (EXPERIMENTAL)."
-msgstr ""
-
-#: gnome/init.c:57
-msgid "_Save Sites"
-msgstr ""
-
-#: gnome/init.c:57 gnome/init.c:177
-msgid "Save the current site definitions"
-msgstr ""
-
-#: gnome/init.c:60
-msgid "Sav_e Sites As..."
-msgstr ""
-
-#: gnome/init.c:60
-msgid "Save the current site definitions to a file."
-msgstr ""
-
-#: gnome/init.c:63
-#, fuzzy
-msgid "_Delete this site"
-msgstr "Lösche %s"
-
-#: gnome/init.c:63
-msgid "Delete the selected site entry"
-msgstr ""
-
-#: gnome/init.c:69
-msgid "E_xit"
-msgstr ""
-
-#: gnome/init.c:69 gnome/init.c:202
-msgid "Exit the program"
-msgstr ""
-
-#: gnome/init.c:78
-#, fuzzy
-msgid "_Initialise site"
-msgstr "Initialisierung"
-
-#: gnome/init.c:78
-msgid "All files will be uploaded if a site is initialised"
-msgstr ""
-
-#: gnome/init.c:81
-#, fuzzy
-msgid "'_Catchup' site"
-msgstr "Kennzeichnung als `aktualisiert'"
-
-#: gnome/init.c:81
-msgid "Records the site as already updated."
-msgstr ""
-
-#: gnome/init.c:84
-msgid "_Fetch site listing"
-msgstr ""
-
-#: gnome/init.c:84
-msgid "Figures out which files are new/changed from the actual remote site."
-msgstr ""
-
-#: gnome/init.c:88
-#, fuzzy
-msgid "_Resynchronize site"
-msgstr "Abgleichen"
-
-#: gnome/init.c:88
-msgid "Copies newer files from the remote site to the local drive."
-msgstr ""
-
-#: gnome/init.c:91
-msgid "_Update site..."
-msgstr ""
-
-#: gnome/init.c:91
-msgid "Apply the local site's changes to the remote site."
-msgstr ""
-
-#: gnome/init.c:94
-msgid "Update _ALL sites"
-msgstr ""
-
-#: gnome/init.c:94 gnome/init.c:137
-msgid "Performs the required operations on all site definitions. (TODO)."
-msgstr ""
-
-#: gnome/init.c:98
-msgid "Rescan local directory"
-msgstr ""
-
-#: gnome/init.c:98
-#, fuzzy
-msgid "Re-reads the local directory of the selected site."
-msgstr "%s: Für die Site `%s' ist kein lokales Verzeichnis angegeben.\n"
-
-#: gnome/init.c:106
-msgid "_Required updates"
-msgstr ""
-
-#: gnome/init.c:106
-msgid "Displays a brief report of any required updates."
-msgstr ""
-
-#: gnome/init.c:109
-msgid "Site web-r_eport"
-msgstr ""
-
-#: gnome/init.c:109
-msgid ""
-"Generates a web page detailing the changes required on the selected site."
-msgstr ""
-
-#: gnome/init.c:112
-msgid "Prin_t site info..."
-msgstr ""
-
-#: gnome/init.c:112
-msgid "Print information about the selected site"
-msgstr ""
-
-#: gnome/init.c:119
-msgid "_Backup files status"
-msgstr ""
-
-#: gnome/init.c:119
-msgid "Save the 'state' of your local files, in case of accident."
-msgstr ""
-
-#: gnome/init.c:122
-msgid "Restore files status..."
-msgstr ""
-
-#: gnome/init.c:122 gnome/init.c:129
-msgid "If a backup has previously been made, it will be restored."
-msgstr ""
-
-#: gnome/init.c:126
-msgid "_Backup site definitions"
-msgstr ""
-
-#: gnome/init.c:126
-msgid "Backup your site definitions, in case you delete your sites."
-msgstr ""
-
-#: gnome/init.c:129
-msgid "Restore site definitions..."
-msgstr ""
-
-#: gnome/init.c:137
-msgid "Preferences..."
-msgstr ""
-
-#: gnome/init.c:146
-msgid "_About XSitecopy"
-msgstr ""
-
-#: gnome/init.c:146
-msgid "Information about XSitecopy"
-msgstr ""
-
-#: gnome/init.c:158
-msgid "_File"
-msgstr ""
-
-#: gnome/init.c:159
-#, fuzzy
-msgid "_Operations"
-msgstr "Optionen: \n"
-
-#: gnome/init.c:160
-msgid "_Reports"
-msgstr ""
-
-#: gnome/init.c:161
-msgid "_Settings"
-msgstr ""
-
-#: gnome/init.c:162
-msgid "_Backup"
-msgstr ""
-
-#: gnome/init.c:163
-msgid "_Help"
-msgstr ""
-
-#: gnome/init.c:171
-msgid "New site"
-msgstr ""
-
-#: gnome/init.c:174
-msgid "Open"
-msgstr ""
-
-#: gnome/init.c:174
-msgid "Open a new site definitions file."
-msgstr ""
-
-#: gnome/init.c:177
-msgid "Save"
-msgstr ""
-
-#: gnome/init.c:180
-#, fuzzy
-msgid "Delete site"
-msgstr "Lösche %s"
-
-#: gnome/init.c:180
-msgid "Delete the selected site"
-msgstr ""
-
-#: gnome/init.c:185
-#, fuzzy
-msgid "Initialise"
-msgstr "Initialisierung"
-
-#: gnome/init.c:185
-msgid "Initialise the site (mark all files as needing to be updated)."
-msgstr ""
-
-#: gnome/init.c:188
-#, fuzzy
-msgid "Catch-up"
-msgstr "Kennzeichnung als `aktualisiert'"
-
-#: gnome/init.c:188
-msgid "Mark all of the selected site's files as updated."
-msgstr ""
-
-#: gnome/init.c:194
-#, fuzzy
-msgid "Download"
-msgstr "Lade %s herunter: ["
-
-#: gnome/init.c:194
-msgid "Download newer files from the remote site. (Use with care)"
-msgstr ""
-
-#: gnome/init.c:198 src/console_fe.c:126
-msgid "Update"
-msgstr "Aktualisieren"
-
-#: gnome/init.c:198
-msgid "Updates the selected site"
-msgstr ""
-
-#: gnome/init.c:202
-msgid "Quit"
-msgstr ""
-
-#: gnome/init.c:402 src/console_fe.c:1030
-#, c-format
-msgid "%s: Error: Could not open rcfile: %s.\n"
-msgstr "%s: Fehler: Konnte rc-Datei nicht öffnen: %s.\n"
-
-#: gnome/init.c:407 src/console_fe.c:1034
-#, c-format
-msgid ""
-"%s: rcfile corrupt at line %d:\n"
-"%s\n"
-msgstr ""
-"%s: rc-Datei in Zeile %d beschädigt:\n"
-"%s\n"
-
-#: gnome/init.c:412
-#, fuzzy, c-format
-msgid "%s: Error: Could not read rcfile: %s.\n"
-msgstr "%s: Fehler: Konnte rc-Datei nicht öffnen: %s.\n"
-
-#: gnome/main.c:184
-msgid ""
-"Debugging level (sum of: 1=socket, 2=files, 4=rcfile, 8=WebDAV, 16=FTP, "
-"32=XML, 64=GNOME )"
-msgstr ""
-
-#: gnome/misc.c:579
-#, fuzzy, c-format
-msgid "Server not specified in site `%s'.\n"
-msgstr "%s: Für die Site `%s' ist kein Server angegeben.\n"
-
-#: gnome/misc.c:583
-#, fuzzy, c-format
-msgid "Remote directory not specified in site `%s'.\n"
-msgstr "%s: Für die Site `%s' ist kein Verzeichnis auf dem Server angegeben.\n"
-
-#: gnome/misc.c:587
-#, fuzzy, c-format
-msgid "Local directory not specified in site `%s'.\n"
-msgstr "%s: Für die Site `%s' ist kein lokales Verzeichnis angegeben.\n"
-
-#: gnome/misc.c:591
-#, fuzzy, c-format
-msgid ""
-"Could not read directory for `%s':\n"
-"\t%s\n"
-msgstr ""
-"%s: Konnte Verzeichnis für `%s' nicht einlesen:\n"
-"\t%s\n"
-
-#: gnome/misc.c:595
-#, fuzzy, c-format
-msgid "Invalid port used in site `%s'.\n"
-msgstr "%s: Für die Site `%s' ist ein ungültiger Port angegeben.\n"
-
-#: gnome/misc.c:599
-#, fuzzy, c-format
-msgid "Protocol '%s' cannot maintain symbolic links (site `%s').\n"
-msgstr "%s: %s kann keine symbolischen Links beibehalten (Site `%s').\n"
-
-#: gnome/misc.c:603
-#, fuzzy, c-format
-msgid "Cannot use a relative remote directory protocol '%s' (site `%s').\n"
-msgstr ""
-"%s: Bei %s ist keine relative Verzeichnisangabe auf dem Server möglich (Site "
-"`%s').\n"
-
-#: gnome/misc.c:606
-#, c-format
-msgid "%s's protocol does not currently support maintaining permissions."
-msgstr ""
-
-#: gnome/misc.c:610
-#, fuzzy, c-format
-msgid "Could not find 'relative' local directory"
-msgstr "Konnte keine SSL-Sitzung herstellen"
-
-#: lib/getopt.c:664
-#, c-format
-msgid "%s: option `%s' is ambiguous\n"
-msgstr "%s: Option `%s' ist mehrdeutig\n"
-
-#: lib/getopt.c:688
-#, c-format
-msgid "%s: option `--%s' doesn't allow an argument\n"
-msgstr "%s: Option `--%s' darf kein Argument haben\n"
-
-#: lib/getopt.c:693
-#, c-format
-msgid "%s: option `%c%s' doesn't allow an argument\n"
-msgstr "%s: Option `%c%s' darf kein Argument haben\n"
-
-#: lib/getopt.c:710 lib/getopt.c:883
-#, c-format
-msgid "%s: option `%s' requires an argument\n"
-msgstr "%s: Option `%s' erfordert ein Argument\n"
-
-#: lib/getopt.c:739
-#, c-format
-msgid "%s: unrecognized option `--%s'\n"
-msgstr "%s: unbekannte Option `--%s'\n"
-
-#: lib/getopt.c:743
-#, c-format
-msgid "%s: unrecognized option `%c%s'\n"
-msgstr "%s: unbekannte Option `%c%s'\n"
-
-#: lib/getopt.c:769
-#, c-format
-msgid "%s: illegal option -- %c\n"
-msgstr "%s: unerlaubte Option -- %c\n"
-
-#: lib/getopt.c:772
-#, c-format
-msgid "%s: invalid option -- %c\n"
-msgstr "%s: ungültige Option -- %c\n"
-
-#: lib/getopt.c:802 lib/getopt.c:932
-#, c-format
-msgid "%s: option requires an argument -- %c\n"
-msgstr "%s: Option erfordert ein Argument -- %c\n"
-
-#: lib/getopt.c:849
-#, c-format
-msgid "%s: option `-W %s' is ambiguous\n"
-msgstr "%s: Option `-W %s' ist mehrdeutig\n"
-
-#: lib/getopt.c:867
-#, c-format
-msgid "%s: option `-W %s' doesn't allow an argument\n"
-msgstr "%s: Option `-W %s' darf kein Argument haben\n"
-
-#: lib/rpmatch.c:79
-msgid "^[yY]"
-msgstr "^[jJyY]"
-
-#: lib/rpmatch.c:82
-msgid "^[nN]"
-msgstr "^[nN]"
-
-#: src/common.c:112
-msgid "Unknown system error"
-msgstr "Unbekannter System-Fehler"
 
 #: src/console_fe.c:119
 msgid "Show changes to"
@@ -450,6 +44,10 @@ msgstr "Holen"
 #: src/console_fe.c:125 src/console_fe.c:126 src/console_fe.c:127
 msgid "remote"
 msgstr "des Servers"
+
+#: src/console_fe.c:126 gnome/init.c:198
+msgid "Update"
+msgstr "Aktualisieren"
 
 #: src/console_fe.c:126
 msgid "updating"
@@ -996,6 +594,20 @@ msgstr " (ASCII)"
 msgid "Link: %s - target %s\n"
 msgstr "Link: %s - zeigt auf %s\n"
 
+#: src/console_fe.c:1030 gnome/init.c:402
+#, c-format
+msgid "%s: Error: Could not open rcfile: %s.\n"
+msgstr "%s: Fehler: Konnte rc-Datei nicht öffnen: %s.\n"
+
+#: src/console_fe.c:1034 gnome/init.c:407
+#, c-format
+msgid ""
+"%s: rcfile corrupt at line %d:\n"
+"%s\n"
+msgstr ""
+"%s: rc-Datei in Zeile %d beschädigt:\n"
+"%s\n"
+
 #: src/console_fe.c:1053
 #, c-format
 msgid ""
@@ -1404,6 +1016,16 @@ msgstr ""
 "  -V, --version         Gib die Versionsnummer aus\n"
 "Wenden Sie sich bei Problemen oder Anregungen bitte an sitecopy@lyra.org\n"
 
+#: src/sitestore.c:321
+#, c-format
+msgid "Invalid checksum at line %d"
+msgstr ""
+
+#: src/sitestore.c:340
+#, c-format
+msgid "Size overflow (%s) at line %d"
+msgstr ""
+
 #: src/davdriver.c:196
 msgid "The connection timed out."
 msgstr "Verbindung wegen Zeitüberschreitung abgebrochen."
@@ -1440,12 +1062,46 @@ msgstr "Konnte nicht in diese Datei schreiben: %s"
 msgid "Could not access resource"
 msgstr "Konnte nicht auf Ressource zugreifen"
 
-#: src/ftp.c:156 libneon/ne_request.c:247
+#: src/sites.c:160
+msgid "Could not set modification time of local file."
+msgstr "Konnte den Zeitstempel der lokalen Datei nicht ändern."
+
+#: src/sites.c:308
+msgid ""
+"Upload succeeded, but could not retrieve modification time.\n"
+"If this message persists, turn off safe mode."
+msgstr ""
+"Hochladen war erfolgreich, konnte aber Zeitstempel nicht abfragen.\n"
+"Stelle den `sicheren Modus' ab, wenn diese Meldung weiter auftritt."
+
+#: src/sites.c:515
+msgid "Remote file has been modified - not overwriting with local changes"
+msgstr ""
+"Datei auf dem Server wurde geändert - überschreibe nicht mit lokalen "
+"Änderungen"
+
+#: src/sites.c:828
+msgid "Could not examine file."
+msgstr "Konnte Datei nicht untersuchen."
+
+#: src/sites.c:871
+msgid "Could not checksum file"
+msgstr "Konnte keine Prüfsumme für Datei errechnen."
+
+#: src/sites.c:887
+msgid "The target of the symlink could not be read."
+msgstr "Konnte das Ziel des symbolischen Links nicht lesen."
+
+#: src/common.c:112
+msgid "Unknown system error"
+msgstr "Unbekannter System-Fehler"
+
+#: src/ftp.c:156 lib/neon/ne_request.c:233
 #, c-format
 msgid "%s: connection was closed by server."
 msgstr "%s: Verbindung vom Server geschlossen."
 
-#: src/ftp.c:160 libneon/ne_request.c:252
+#: src/ftp.c:160 lib/neon/ne_request.c:238
 #, c-format
 msgid "%s: connection timed out."
 msgstr "%s: Verbindung wegen Zeitüberschreitung geschlossen."
@@ -1552,47 +1208,595 @@ msgstr "Konnte Länge der Datei nicht herausfinden: %s"
 msgid "Could not read 'LIST' response."
 msgstr "Konnte Rumpf der Antwort nicht lesen"
 
-#: src/sites.c:160
-msgid "Could not set modification time of local file."
-msgstr "Konnte den Zeitstempel der lokalen Datei nicht ändern."
+#: gnome/init.c:51
+msgid "_New site..."
+msgstr ""
 
-#: src/sites.c:308
+#: gnome/init.c:51 gnome/init.c:171
+msgid "Create a new site definition"
+msgstr ""
+
+#: gnome/init.c:54
+msgid "_Open..."
+msgstr ""
+
+#: gnome/init.c:54
+msgid "Open a new rc file. (EXPERIMENTAL)."
+msgstr ""
+
+#: gnome/init.c:57
+msgid "_Save Sites"
+msgstr ""
+
+#: gnome/init.c:57 gnome/init.c:177
+msgid "Save the current site definitions"
+msgstr ""
+
+#: gnome/init.c:60
+msgid "Sav_e Sites As..."
+msgstr ""
+
+#: gnome/init.c:60
+msgid "Save the current site definitions to a file."
+msgstr ""
+
+#: gnome/init.c:63
+#, fuzzy
+msgid "_Delete this site"
+msgstr "Lösche %s"
+
+#: gnome/init.c:63
+msgid "Delete the selected site entry"
+msgstr ""
+
+#: gnome/init.c:69
+msgid "E_xit"
+msgstr ""
+
+#: gnome/init.c:69 gnome/init.c:202
+msgid "Exit the program"
+msgstr ""
+
+#: gnome/init.c:78
+#, fuzzy
+msgid "_Initialise site"
+msgstr "Initialisierung"
+
+#: gnome/init.c:78
+msgid "All files will be uploaded if a site is initialised"
+msgstr ""
+
+#: gnome/init.c:81
+#, fuzzy
+msgid "'_Catchup' site"
+msgstr "Kennzeichnung als `aktualisiert'"
+
+#: gnome/init.c:81
+msgid "Records the site as already updated."
+msgstr ""
+
+#: gnome/init.c:84
+msgid "_Fetch site listing"
+msgstr ""
+
+#: gnome/init.c:84
+msgid "Figures out which files are new/changed from the actual remote site."
+msgstr ""
+
+#: gnome/init.c:88
+#, fuzzy
+msgid "_Resynchronize site"
+msgstr "Abgleichen"
+
+#: gnome/init.c:88
+msgid "Copies newer files from the remote site to the local drive."
+msgstr ""
+
+#: gnome/init.c:91
+msgid "_Update site..."
+msgstr ""
+
+#: gnome/init.c:91
+msgid "Apply the local site's changes to the remote site."
+msgstr ""
+
+#: gnome/init.c:94
+msgid "Update _ALL sites"
+msgstr ""
+
+#: gnome/init.c:94 gnome/init.c:137
+msgid "Performs the required operations on all site definitions. (TODO)."
+msgstr ""
+
+#: gnome/init.c:98
+msgid "Rescan local directory"
+msgstr ""
+
+#: gnome/init.c:98
+#, fuzzy
+msgid "Re-reads the local directory of the selected site."
+msgstr "%s: Für die Site `%s' ist kein lokales Verzeichnis angegeben.\n"
+
+#: gnome/init.c:106
+msgid "_Required updates"
+msgstr ""
+
+#: gnome/init.c:106
+msgid "Displays a brief report of any required updates."
+msgstr ""
+
+#: gnome/init.c:109
+msgid "Site web-r_eport"
+msgstr ""
+
+#: gnome/init.c:109
 msgid ""
-"Upload succeeded, but could not retrieve modification time.\n"
-"If this message persists, turn off safe mode."
+"Generates a web page detailing the changes required on the selected site."
 msgstr ""
-"Hochladen war erfolgreich, konnte aber Zeitstempel nicht abfragen.\n"
-"Stelle den `sicheren Modus' ab, wenn diese Meldung weiter auftritt."
 
-#: src/sites.c:515
-msgid "Remote file has been modified - not overwriting with local changes"
+#: gnome/init.c:112
+msgid "Prin_t site info..."
 msgstr ""
-"Datei auf dem Server wurde geändert - überschreibe nicht mit lokalen "
-"Änderungen"
 
-#: src/sites.c:828
-msgid "Could not examine file."
-msgstr "Konnte Datei nicht untersuchen."
+#: gnome/init.c:112
+msgid "Print information about the selected site"
+msgstr ""
 
-#: src/sites.c:871
-msgid "Could not checksum file"
-msgstr "Konnte keine Prüfsumme für Datei errechnen."
+#: gnome/init.c:119
+msgid "_Backup files status"
+msgstr ""
 
-#: src/sites.c:887
-msgid "The target of the symlink could not be read."
-msgstr "Konnte das Ziel des symbolischen Links nicht lesen."
+#: gnome/init.c:119
+msgid "Save the 'state' of your local files, in case of accident."
+msgstr ""
 
-#: src/sitestore.c:321
+#: gnome/init.c:122
+msgid "Restore files status..."
+msgstr ""
+
+#: gnome/init.c:122 gnome/init.c:129
+msgid "If a backup has previously been made, it will be restored."
+msgstr ""
+
+#: gnome/init.c:126
+msgid "_Backup site definitions"
+msgstr ""
+
+#: gnome/init.c:126
+msgid "Backup your site definitions, in case you delete your sites."
+msgstr ""
+
+#: gnome/init.c:129
+msgid "Restore site definitions..."
+msgstr ""
+
+#: gnome/init.c:137
+msgid "Preferences..."
+msgstr ""
+
+#: gnome/init.c:146
+msgid "_About XSitecopy"
+msgstr ""
+
+#: gnome/init.c:146
+msgid "Information about XSitecopy"
+msgstr ""
+
+#: gnome/init.c:158
+msgid "_File"
+msgstr ""
+
+#: gnome/init.c:159
+#, fuzzy
+msgid "_Operations"
+msgstr "Optionen: \n"
+
+#: gnome/init.c:160
+msgid "_Reports"
+msgstr ""
+
+#: gnome/init.c:161
+msgid "_Settings"
+msgstr ""
+
+#: gnome/init.c:162
+msgid "_Backup"
+msgstr ""
+
+#: gnome/init.c:163
+msgid "_Help"
+msgstr ""
+
+#: gnome/init.c:171
+msgid "New site"
+msgstr ""
+
+#: gnome/init.c:174
+msgid "Open"
+msgstr ""
+
+#: gnome/init.c:174
+msgid "Open a new site definitions file."
+msgstr ""
+
+#: gnome/init.c:177
+msgid "Save"
+msgstr ""
+
+#: gnome/init.c:180
+#, fuzzy
+msgid "Delete site"
+msgstr "Lösche %s"
+
+#: gnome/init.c:180
+msgid "Delete the selected site"
+msgstr ""
+
+#: gnome/init.c:185
+#, fuzzy
+msgid "Initialise"
+msgstr "Initialisierung"
+
+#: gnome/init.c:185
+msgid "Initialise the site (mark all files as needing to be updated)."
+msgstr ""
+
+#: gnome/init.c:188
+#, fuzzy
+msgid "Catch-up"
+msgstr "Kennzeichnung als `aktualisiert'"
+
+#: gnome/init.c:188
+msgid "Mark all of the selected site's files as updated."
+msgstr ""
+
+#: gnome/init.c:194
+#, fuzzy
+msgid "Download"
+msgstr "Lade %s herunter: ["
+
+#: gnome/init.c:194
+msgid "Download newer files from the remote site. (Use with care)"
+msgstr ""
+
+#: gnome/init.c:198
+msgid "Updates the selected site"
+msgstr ""
+
+#: gnome/init.c:202
+msgid "Quit"
+msgstr ""
+
+#: gnome/init.c:412
+#, fuzzy, c-format
+msgid "%s: Error: Could not read rcfile: %s.\n"
+msgstr "%s: Fehler: Konnte rc-Datei nicht öffnen: %s.\n"
+
+#: gnome/main.c:184
+msgid ""
+"Debugging level (sum of: 1=socket, 2=files, 4=rcfile, 8=WebDAV, 16=FTP, "
+"32=XML, 64=GNOME )"
+msgstr ""
+
+#: gnome/misc.c:579
+#, fuzzy, c-format
+msgid "Server not specified in site `%s'.\n"
+msgstr "%s: Für die Site `%s' ist kein Server angegeben.\n"
+
+#: gnome/misc.c:583
+#, fuzzy, c-format
+msgid "Remote directory not specified in site `%s'.\n"
+msgstr "%s: Für die Site `%s' ist kein Verzeichnis auf dem Server angegeben.\n"
+
+#: gnome/misc.c:587
+#, fuzzy, c-format
+msgid "Local directory not specified in site `%s'.\n"
+msgstr "%s: Für die Site `%s' ist kein lokales Verzeichnis angegeben.\n"
+
+#: gnome/misc.c:591
+#, fuzzy, c-format
+msgid ""
+"Could not read directory for `%s':\n"
+"\t%s\n"
+msgstr ""
+"%s: Konnte Verzeichnis für `%s' nicht einlesen:\n"
+"\t%s\n"
+
+#: gnome/misc.c:595
+#, fuzzy, c-format
+msgid "Invalid port used in site `%s'.\n"
+msgstr "%s: Für die Site `%s' ist ein ungültiger Port angegeben.\n"
+
+#: gnome/misc.c:599
+#, fuzzy, c-format
+msgid "Protocol '%s' cannot maintain symbolic links (site `%s').\n"
+msgstr "%s: %s kann keine symbolischen Links beibehalten (Site `%s').\n"
+
+#: gnome/misc.c:603
+#, fuzzy, c-format
+msgid "Cannot use a relative remote directory protocol '%s' (site `%s').\n"
+msgstr ""
+"%s: Bei %s ist keine relative Verzeichnisangabe auf dem Server möglich (Site "
+"`%s').\n"
+
+#: gnome/misc.c:606
 #, c-format
-msgid "Invalid checksum at line %d"
+msgid "%s's protocol does not currently support maintaining permissions."
 msgstr ""
 
-#: src/sitestore.c:340
+#: gnome/misc.c:610
+#, fuzzy, c-format
+msgid "Could not find 'relative' local directory"
+msgstr "Konnte keine SSL-Sitzung herstellen"
+
+#: lib/neon/ne_redirect.c:92
+#, fuzzy
+msgid "Could not parse redirect location."
+msgstr "Konnte Status-Zeile des Servers nicht interpretieren."
+
+#: lib/neon/ne_gnutls.c:434 lib/neon/ne_openssl.c:364
+msgid "Server certificate was missing commonName attribute in subject name"
+msgstr ""
+
+#: lib/neon/ne_gnutls.c:471 lib/neon/ne_openssl.c:559
+#, fuzzy, c-format
+msgid "SSL negotiation failed: %s"
+msgstr "Konnte nicht in diese Datei schreiben: %s"
+
+#: lib/neon/ne_gnutls.c:480
+msgid "Server did not send certificate chain"
+msgstr ""
+
+#: lib/neon/ne_openssl.c:150
+msgid "certificate is not yet valid"
+msgstr ""
+
+#: lib/neon/ne_openssl.c:151
+msgid "certificate has expired"
+msgstr ""
+
+#: lib/neon/ne_openssl.c:152
+msgid "certificate issued for a different hostname"
+msgstr ""
+
+#: lib/neon/ne_openssl.c:153
+msgid "issuer is not trusted"
+msgstr ""
+
+#: lib/neon/ne_openssl.c:158
+msgid "Server certificate verification failed: "
+msgstr ""
+
+#: lib/neon/ne_openssl.c:176
+msgid "[invalid date]"
+msgstr ""
+
+#: lib/neon/ne_openssl.c:396
 #, c-format
-msgid "Size overflow (%s) at line %d"
+msgid "Certificate verification error: %s"
 msgstr ""
 
-#: libneon/ne_207.c:184
+#: lib/neon/ne_openssl.c:578
+msgid "SSL server did not present certificate"
+msgstr ""
+
+#: lib/neon/ne_openssl.c:587
+msgid "Server certificate changed: connection intercepted?"
+msgstr ""
+
+#: lib/neon/ne_socket.c:475 lib/neon/ne_socket.c:523 lib/neon/ne_socket.c:626
+#, fuzzy
+msgid "Connection closed"
+msgstr "Verbindung vom Server geschlossen"
+
+#: lib/neon/ne_socket.c:533
+#, fuzzy
+msgid "Secure connection truncated"
+msgstr "Verbindung wegen Zeitüberschreitung abgebrochen."
+
+#: lib/neon/ne_socket.c:545 lib/neon/ne_socket.c:630 lib/neon/ne_socket.c:635
+#, fuzzy, c-format
+msgid "SSL error: %s"
+msgstr "%s: Fehler: %s\n"
+
+#: lib/neon/ne_socket.c:548
+#, c-format
+msgid "SSL error code %d/%d/%lu"
+msgstr ""
+
+#: lib/neon/ne_socket.c:730
+msgid "Line too long"
+msgstr "Zeile zu lang"
+
+#: lib/neon/ne_socket.c:870 lib/neon/ne_socket.c:876
+msgid "Host not found"
+msgstr "Host nicht gefunden"
+
+#: lib/neon/ne_socket.c:986
+msgid "Socket descriptor number exceeds FD_SETSIZE"
+msgstr ""
+
+#: lib/neon/ne_socket.c:1146
+msgid "SSL disabled due to lack of entropy"
+msgstr ""
+
+#: lib/neon/ne_socket.c:1153
+msgid "SSL disabled due to library version mismatch"
+msgstr ""
+
+#: lib/neon/ne_socket.c:1159
+#, fuzzy
+msgid "Could not create SSL structure"
+msgstr "Konnte keine SSL-Sitzung herstellen"
+
+#: lib/neon/ne_request.c:230
+#, c-format
+msgid "%s: connection was closed by proxy server."
+msgstr "%s: Verbindung vom Proxy-Server geschlossen."
+
+#: lib/neon/ne_request.c:409
+msgid "Error reading request body."
+msgstr "Fehler beim Lesen des Rumpfs der Anfrage"
+
+#: lib/neon/ne_request.c:744
+msgid "Could not read chunk size"
+msgstr "Lesefehler bei Ermittlung der Blockgröße"
+
+#: lib/neon/ne_request.c:751
+msgid "Could not parse chunk size"
+msgstr "Parser-Fehler bei Ermittlung der Blockgröße"
+
+#: lib/neon/ne_request.c:788
+msgid "Could not read response body"
+msgstr "Konnte Rumpf der Antwort nicht lesen"
+
+#: lib/neon/ne_request.c:804
+#, fuzzy
+msgid "Could not read chunk delimiter"
+msgstr "Lesefehler bei Ermittlung der Blockgröße"
+
+#: lib/neon/ne_request.c:807
+msgid "Chunk delimiter was invalid"
+msgstr ""
+
+#: lib/neon/ne_request.c:928
+msgid "Could not read status line"
+msgstr "Konnte Status-Zeile des Servers nicht lesen"
+
+#: lib/neon/ne_request.c:939
+msgid "Could not parse response status line."
+msgstr "Konnte Status-Zeile des Servers nicht interpretieren."
+
+#: lib/neon/ne_request.c:950
+#, fuzzy
+msgid "Could not read interim response headers"
+msgstr "Konnte Rumpf der Antwort nicht lesen"
+
+#: lib/neon/ne_request.c:983
+msgid "Could not send request"
+msgstr "Konnte keine Anfrage (request) schicken"
+
+#: lib/neon/ne_request.c:991
+msgid "Could not send request body"
+msgstr "Konnte den Rumpf der Anfrage nicht schicken"
+
+#: lib/neon/ne_request.c:1032 lib/neon/ne_request.c:1050
+#: lib/neon/ne_request.c:1060
+msgid "Error reading response headers"
+msgstr "Fehler beim Lesen der Kopfzeilen (header) der Antwort"
+
+#: lib/neon/ne_request.c:1078
+msgid "Response header too long"
+msgstr "Kopfzeilen (header) der Antwort zu lang"
+
+#: lib/neon/ne_request.c:1159
+msgid "Response exceeded maximum number of header fields."
+msgstr "Antwort hatte zu viele Header-Felder."
+
+#: lib/neon/ne_request.c:1176
+#, fuzzy, c-format
+msgid "Could not resolve hostname `%s': %s"
+msgstr "%s: Fehler: Konnte den Namen des Servers nicht auflösen (%s).\n"
+
+#: lib/neon/ne_request.c:1338
+#, c-format
+msgid "Could not write to file: %s"
+msgstr "Konnte nicht in diese Datei schreiben: %s"
+
+#: lib/neon/ne_request.c:1411
+msgid "Could not create SSL connection through proxy server"
+msgstr "Konnte durch den Proxy-Server keine SSL-Verbindung herstellen"
+
+#: lib/neon/ne_request.c:1457
+#, fuzzy
+msgid "Could not create socket"
+msgstr "Konnte keine SSL-Sitzung herstellen"
+
+#: lib/neon/ne_request.c:1502
+msgid "Could not connect to server"
+msgstr "Verbindungsaufbau zum Server gescheitert."
+
+#: lib/neon/ne_request.c:1505
+msgid "Could not connect to proxy server"
+msgstr "Verbindungsaufbau zum Proxy-Server gescheitert."
+
+#: lib/neon/ne_xml.c:267
+#, fuzzy, c-format
+msgid "XML parse error at line %d: invalid element name"
+msgstr "Fehler beim XML-Parsing in Zeile %d: %s."
+
+#: lib/neon/ne_xml.c:422
+#, fuzzy
+msgid "Unknown error"
+msgstr "Unbekannter System-Fehler"
+
+#: lib/neon/ne_xml.c:506
+msgid "Invalid Byte Order Mark"
+msgstr ""
+
+#: lib/neon/ne_xml.c:592
+#, c-format
+msgid "XML parse error at line %d: %s."
+msgstr "Fehler beim XML-Parsing in Zeile %d: %s."
+
+#: lib/neon/ne_props.c:370 lib/neon/ne_props.c:410
+#, fuzzy
+msgid "Response exceeds maximum property count"
+msgstr "Antwort hatte zu viele Header-Felder."
+
+#: lib/neon/ne_compress.c:175
+#, fuzzy, c-format
+msgid "%s: %s"
+msgstr "%s: %s\n"
+
+#: lib/neon/ne_compress.c:186
+#, c-format
+msgid "%s: %s (code %d)"
+msgstr ""
+
+#: lib/neon/ne_compress.c:232
+#, fuzzy
+msgid "Could not inflate data"
+msgstr "Konnte Datei nicht öffnen: "
+
+#: lib/neon/ne_compress.c:293
+#, fuzzy
+msgid "Could not initialize zlib"
+msgstr "Konnte Datei nicht öffnen: "
+
+#: lib/neon/ne_basic.c:86
+#, fuzzy, c-format
+msgid "Could not determine file size: %s"
+msgstr "Konnte Länge der Datei nicht herausfinden: %s"
+
+#: lib/neon/ne_basic.c:132
+msgid "Response did not include requested range"
+msgstr ""
+
+#: lib/neon/ne_basic.c:176
+#, fuzzy
+msgid "Range is not satisfiable"
+msgstr "Range is not satisfiable."
+
+#: lib/neon/ne_basic.c:181
+#, fuzzy
+msgid "Resource does not support ranged GETs."
+msgstr "Server ermöglicht keine teilweisen GETs."
+
+#: lib/neon/ne_auth.c:127
+msgid "Server was not authenticated correctly."
+msgstr ""
+
+#: lib/neon/ne_auth.c:131
+msgid "Proxy server was not authenticated correctly."
+msgstr ""
+
+#: lib/neon/ne_auth.c:424
+#, fuzzy, c-format
+msgid "GSSAPI authentication error (%s)"
+msgstr "Anmeldung wird benötigt auf %s `%s':\n"
+
+#: lib/neon/ne_207.c:188
 #, c-format
 msgid ""
 "Invalid HTTP status line in status element at line %d of response:\n"
@@ -1601,272 +1805,81 @@ msgstr ""
 "Ungültige HTTP Status-Zeile im Status-Element in Zeile %d der Antwort:\n"
 "Status-Zeile war: %s"
 
-#: libneon/ne_auth.c:127
-msgid "Server was not authenticated correctly."
-msgstr ""
-
-#: libneon/ne_auth.c:131
-msgid "Proxy server was not authenticated correctly."
-msgstr ""
-
-#: libneon/ne_auth.c:427
-#, fuzzy, c-format
-msgid "GSSAPI authentication error (%s)"
-msgstr "Anmeldung wird benötigt auf %s `%s':\n"
-
-#: libneon/ne_basic.c:92
-#, fuzzy, c-format
-msgid "Could not determine file size: %s"
-msgstr "Konnte Länge der Datei nicht herausfinden: %s"
-
-#: libneon/ne_basic.c:136
-#, c-format
-msgid "Could not write to file: %s"
-msgstr "Konnte nicht in diese Datei schreiben: %s"
-
-#: libneon/ne_basic.c:166
-msgid "Response not of expected length"
-msgstr ""
-
-#: libneon/ne_basic.c:233
-#, fuzzy
-msgid "Range is not satisfiable"
-msgstr "Range is not satisfiable."
-
-#: libneon/ne_basic.c:238
-#, fuzzy
-msgid "Resource does not support ranged GETs."
-msgstr "Server ermöglicht keine teilweisen GETs."
-
-#: libneon/ne_compress.c:182
-#, fuzzy, c-format
-msgid "%s: %s"
-msgstr "%s: %s\n"
-
-#: libneon/ne_compress.c:193
-#, c-format
-msgid "%s: %s (code %d)"
-msgstr ""
-
-#: libneon/ne_compress.c:240
-#, fuzzy
-msgid "Could not inflate data"
-msgstr "Konnte Datei nicht öffnen: "
-
-#: libneon/ne_compress.c:280
-#, fuzzy
-msgid "Could not initialize zlib"
-msgstr "Konnte Datei nicht öffnen: "
-
-#: libneon/ne_request.c:244
-#, c-format
-msgid "%s: connection was closed by proxy server."
-msgstr "%s: Verbindung vom Proxy-Server geschlossen."
-
-#: libneon/ne_request.c:435
-msgid "Error reading request body."
-msgstr "Fehler beim Lesen des Rumpfs der Anfrage"
-
-#: libneon/ne_request.c:786
-msgid "Could not read chunk size"
-msgstr "Lesefehler bei Ermittlung der Blockgröße"
-
-#: libneon/ne_request.c:793
-msgid "Could not parse chunk size"
-msgstr "Parser-Fehler bei Ermittlung der Blockgröße"
-
-#: libneon/ne_request.c:834
-msgid "Could not read response body"
-msgstr "Konnte Rumpf der Antwort nicht lesen"
-
-#: libneon/ne_request.c:850
-#, fuzzy
-msgid "Could not read chunk delimiter"
-msgstr "Lesefehler bei Ermittlung der Blockgröße"
-
-#: libneon/ne_request.c:853
-msgid "Chunk delimiter was invalid"
-msgstr ""
-
-#: libneon/ne_request.c:972
-msgid "Could not read status line"
-msgstr "Konnte Status-Zeile des Servers nicht lesen"
-
-#: libneon/ne_request.c:983
-msgid "Could not parse response status line."
-msgstr "Konnte Status-Zeile des Servers nicht interpretieren."
-
-#: libneon/ne_request.c:994
-#, fuzzy
-msgid "Could not read interim response headers"
-msgstr "Konnte Rumpf der Antwort nicht lesen"
-
-#: libneon/ne_request.c:1027
-msgid "Could not send request"
-msgstr "Konnte keine Anfrage (request) schicken"
-
-#: libneon/ne_request.c:1035
-msgid "Could not send request body"
-msgstr "Konnte den Rumpf der Anfrage nicht schicken"
-
-#: libneon/ne_request.c:1076 libneon/ne_request.c:1094
-#: libneon/ne_request.c:1104
-msgid "Error reading response headers"
-msgstr "Fehler beim Lesen der Kopfzeilen (header) der Antwort"
-
-#: libneon/ne_request.c:1122
-msgid "Response header too long"
-msgstr "Kopfzeilen (header) der Antwort zu lang"
-
-#: libneon/ne_request.c:1183
-msgid "Response exceeded maximum number of header fields."
-msgstr "Antwort hatte zu viele Header-Felder."
-
-#: libneon/ne_request.c:1200
-#, fuzzy, c-format
-msgid "Could not resolve hostname `%s': %s"
-msgstr "%s: Fehler: Konnte den Namen des Servers nicht auflösen (%s).\n"
-
-#: libneon/ne_request.c:1365
-msgid "Could not create SSL connection through proxy server"
-msgstr "Konnte durch den Proxy-Server keine SSL-Verbindung herstellen"
-
-#: libneon/ne_request.c:1411
-#, fuzzy
-msgid "Could not create socket"
-msgstr "Konnte keine SSL-Sitzung herstellen"
-
-#: libneon/ne_request.c:1456
-msgid "Could not connect to server"
-msgstr "Verbindungsaufbau zum Server gescheitert."
-
-#: libneon/ne_request.c:1459
-msgid "Could not connect to proxy server"
-msgstr "Verbindungsaufbau zum Proxy-Server gescheitert."
-
-#: libneon/ne_locks.c:733
+#: lib/neon/ne_locks.c:735
 msgid "No Lock-Token header given"
 msgstr ""
 
-#: libneon/ne_locks.c:761
+#: lib/neon/ne_locks.c:763
 #, c-format
 msgid "Response missing activelock for %s"
 msgstr ""
 
-#: libneon/ne_redirect.c:95
-#, fuzzy
-msgid "Could not parse redirect location."
-msgstr "Konnte Status-Zeile des Servers nicht interpretieren."
+#: lib/rpmatch.c:79
+msgid "^[yY]"
+msgstr "^[jJyY]"
 
-#: libneon/ne_socket.c:453 libneon/ne_socket.c:514
-#, fuzzy
-msgid "Connection closed"
-msgstr "Verbindung vom Server geschlossen"
+#: lib/rpmatch.c:82
+msgid "^[nN]"
+msgstr "^[nN]"
 
-#: libneon/ne_socket.c:521
-#, fuzzy
-msgid "Secure connection truncated"
-msgstr "Verbindung wegen Zeitüberschreitung abgebrochen."
-
-#: libneon/ne_socket.c:531 libneon/ne_socket.c:537
-#, fuzzy, c-format
-msgid "SSL error: %s"
-msgstr "%s: Fehler: %s\n"
-
-#: libneon/ne_socket.c:532 libneon/ne_socket.c:538
-#, fuzzy
-msgid "unknown error code"
-msgstr "Unbekannter System-Fehler"
-
-#: libneon/ne_socket.c:618
-msgid "Line too long"
-msgstr "Zeile zu lang"
-
-#: libneon/ne_socket.c:758 libneon/ne_socket.c:764
-msgid "Host not found"
-msgstr "Host nicht gefunden"
-
-#: libneon/ne_socket.c:869
-msgid "Socket descriptor number exceeds FD_SETSIZE"
-msgstr ""
-
-#: libneon/ne_socket.c:1002
-msgid "SSL disabled due to lack of entropy"
-msgstr ""
-
-#: libneon/ne_socket.c:1009
-msgid "SSL disabled due to library version mismatch"
-msgstr ""
-
-#: libneon/ne_socket.c:1015
-#, fuzzy
-msgid "Could not create SSL structure"
-msgstr "Konnte keine SSL-Sitzung herstellen"
-
-#: libneon/ne_xml.c:267
-#, fuzzy, c-format
-msgid "XML parse error at line %d: invalid element name"
-msgstr "Fehler beim XML-Parsing in Zeile %d: %s."
-
-#: libneon/ne_xml.c:422
-#, fuzzy
-msgid "Unknown error"
-msgstr "Unbekannter System-Fehler"
-
-#: libneon/ne_xml.c:510
-msgid "Invalid Byte Order Mark"
-msgstr ""
-
-#: libneon/ne_xml.c:596
+#: lib/getopt.c:664
 #, c-format
-msgid "XML parse error at line %d: %s."
-msgstr "Fehler beim XML-Parsing in Zeile %d: %s."
+msgid "%s: option `%s' is ambiguous\n"
+msgstr "%s: Option `%s' ist mehrdeutig\n"
 
-#: libneon/ne_openssl.c:150
-msgid "certificate is not yet valid"
-msgstr ""
-
-#: libneon/ne_openssl.c:151
-msgid "certificate has expired"
-msgstr ""
-
-#: libneon/ne_openssl.c:152
-msgid "certificate issued for a different hostname"
-msgstr ""
-
-#: libneon/ne_openssl.c:153
-msgid "issuer is not trusted"
-msgstr ""
-
-#: libneon/ne_openssl.c:158
-msgid "Server certificate verification failed: "
-msgstr ""
-
-#: libneon/ne_openssl.c:176
-msgid "[invalid date]"
-msgstr ""
-
-#: libneon/ne_openssl.c:363
-msgid "Server certificate was missing commonName attribute in subject name"
-msgstr ""
-
-#: libneon/ne_openssl.c:395
+#: lib/getopt.c:688
 #, c-format
-msgid "Certificate verification error: %s"
-msgstr ""
+msgid "%s: option `--%s' doesn't allow an argument\n"
+msgstr "%s: Option `--%s' darf kein Argument haben\n"
 
-#: libneon/ne_openssl.c:525
-#, fuzzy, c-format
-msgid "SSL negotiation failed: %s"
-msgstr "Konnte nicht in diese Datei schreiben: %s"
+#: lib/getopt.c:693
+#, c-format
+msgid "%s: option `%c%s' doesn't allow an argument\n"
+msgstr "%s: Option `%c%s' darf kein Argument haben\n"
 
-#: libneon/ne_openssl.c:543
-msgid "SSL server did not present certificate"
-msgstr ""
+#: lib/getopt.c:710 lib/getopt.c:883
+#, c-format
+msgid "%s: option `%s' requires an argument\n"
+msgstr "%s: Option `%s' erfordert ein Argument\n"
 
-#: libneon/ne_openssl.c:552
-msgid "Server certificate changed: connection intercepted?"
-msgstr ""
+#: lib/getopt.c:739
+#, c-format
+msgid "%s: unrecognized option `--%s'\n"
+msgstr "%s: unbekannte Option `--%s'\n"
+
+#: lib/getopt.c:743
+#, c-format
+msgid "%s: unrecognized option `%c%s'\n"
+msgstr "%s: unbekannte Option `%c%s'\n"
+
+#: lib/getopt.c:769
+#, c-format
+msgid "%s: illegal option -- %c\n"
+msgstr "%s: unerlaubte Option -- %c\n"
+
+#: lib/getopt.c:772
+#, c-format
+msgid "%s: invalid option -- %c\n"
+msgstr "%s: ungültige Option -- %c\n"
+
+#: lib/getopt.c:802 lib/getopt.c:932
+#, c-format
+msgid "%s: option requires an argument -- %c\n"
+msgstr "%s: Option erfordert ein Argument -- %c\n"
+
+#: lib/getopt.c:849
+#, c-format
+msgid "%s: option `-W %s' is ambiguous\n"
+msgstr "%s: Option `-W %s' ist mehrdeutig\n"
+
+#: lib/getopt.c:867
+#, c-format
+msgid "%s: option `-W %s' doesn't allow an argument\n"
+msgstr "%s: Option `-W %s' darf kein Argument haben\n"
+
+#, fuzzy
+#~ msgid "unknown error code"
+#~ msgstr "Unbekannter System-Fehler"
 
 #~ msgid "Error reading chunked response body"
 #~ msgstr "Fehler beim blockweisen Lesen des Rumpfs der Antwort"
