@@ -110,7 +110,8 @@ NEON_WITHOUT_ACL
 
 dnl Build neon
 NEON_VPATH_BUNDLED(["\$(top_srcdir)/lib/neon"], ["\$(top_builddir)/lib/neon"], [
-	NEON_XML_PARSER([\$(top_srcdir)/lib/expat])
+	NEON_XML_PARSER([\$(top_srcdir)/lib/expat],
+                        [\$(top_builddir)/lib/expat])
 	NEON_NORMAL_BUILD
 ])
 
@@ -217,6 +218,7 @@ Now run 'make' to compile ${TARGET}.
 ])
 
 # Create all the necessary directories for VPATH builds.
-for i in gnome src intl; do
+for i in gnome src intl lib/expat lib/expat/xmltok lib/expat/gennmtab \
+         lib/expat/xmlparse; do
   test -d $i || mkdir $i
 done
