@@ -207,7 +207,7 @@ install-xsitecopy: install-common
 
 clean:
 	rm -f $(ALLOBJS)
-	for d in $(SUBDIRS); do (cd $$d && $(MAKE) clean) || exit 1; done
+	for d in $(SUBDIRS) po; do (cd $$d && $(MAKE) clean) || exit 1; done
 
 again: clean
 	$(MAKE) $(TARGET)
