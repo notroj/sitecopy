@@ -1,5 +1,5 @@
 /* 
-   sitecopy noop prptocol driver module
+   sitecopy noop protocol driver module
    Copyright (C) 2004, Joe Orton <joe@manyfish.co.uk>
                                                                      
    This program is free software; you can redistribute it and/or modify
