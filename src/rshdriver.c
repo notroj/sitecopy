@@ -1,6 +1,6 @@
 /* 
    sitecopy rsh/rcp protocol driver module
-   Copyright (C) 2000, 2004, Joe Orton <joe@manyfish.co.uk>
+   Copyright (C) 2000-2005, Joe Orton <joe@manyfish.co.uk>
    Copyright (C) 2003, Nobuyuki Tsuchimura <tutimura@nn.iij4u.or.jp>
 
    This program is free software; you can redistribute it and/or modify
@@ -57,9 +57,7 @@ enum rcommand { RCP, RSH, RSH_PIPE_READ, RSH_PIPE_WRITE };
 
 static int run_rcmd(enum rcommand rcmd,
                     rsh_session *sess, const char *template, ...) 
-#ifdef __GNUC__
-    __attribute__ ((format (printf, 3, 4)));
-#endif /* __GNUC__ */
+    ne_attribute((format (printf, 3, 4)));
 
 static int run_rcmd(enum rcommand rcmd,
                     rsh_session *sess, const char *template, ...) 
