@@ -1,6 +1,6 @@
 /* 
    sitecopy WebDAV protocol driver module
-   Copyright (C) 2000-2004, Joe Orton <joe@manyfish.co.uk>
+   Copyright (C) 2000-2005, Joe Orton <joe@manyfish.co.uk>
                                                                      
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -230,6 +230,7 @@ static int init(void **session, struct site *site)
     ne_session *sess;
     ne_server_capabilities caps = {0};
     int ret;
+    char *root;
 
     sess = ne_session_create(site->http_secure?"https":"http",
 			     site->server.hostname, site->server.port);
@@ -276,7 +277,9 @@ static int init(void **session, struct site *site)
 	return SITE_OK;
     }
 
-    ret = ne_options(sess, site->remote_root, &caps);
+    root = ne_path_escape(site->remote_root);
+    ret = ne_options(sess, root, &caps);
+    ne_free(root);
     if (ret == NE_OK) {
 	if (!caps.dav_class1) {
 	    ne_set_error(sess, 
