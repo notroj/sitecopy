@@ -774,8 +774,9 @@ static int ftp_data_open(ftp_session *sess, const char *command, ...)
 }
 
 
-/* Closes the data connection */
-static int dtp_close(ftp_session *sess)
+/* Closes the data connection.  If 'discard' is non-zero any error
+ * string is discarded; otherwise the session error is set. */
+static int dtp_close(ftp_session *sess, int discard)
 {
     /* Read the response line */
     int ret;
@@ -784,7 +785,7 @@ static int dtp_close(ftp_session *sess)
     ret = ne_sock_close(sess->dtpsock);
     if (ret < 0) {
 	int errnum = errno;
-	set_syserr(sess, _("Error closing data socket"), errnum);
+	if (!discard) set_syserr(sess, _("Error closing data socket"), errnum);
 	return FTP_ERROR;
     } else {
         int code;
@@ -796,7 +797,7 @@ static int dtp_close(ftp_session *sess)
 	if (ret == FTP_OK || ret == FTP_SENT)
 	    return FTP_SENT;
 	else {
-            ftp_seterror(sess, sess->rbuf);
+            if (!discard) ftp_seterror(sess, sess->rbuf);
 	    return FTP_ERROR;
         }
     }
@@ -895,7 +896,7 @@ int ftp_put(ftp_session *sess,
 	    ret = send_file_ascii(sess, f, st.st_size);
         else
 	    ret = send_file_binary(sess, f, st.st_size);
-	if (dtp_close(sess) == FTP_SENT && ret == 0) {
+	if (dtp_close(sess, 0) == FTP_SENT && ret == 0) {
             fclose(f);
             return FTP_OK;
         }
@@ -950,7 +951,7 @@ int ftp_get(ftp_session *sess, const char *localfile, const char *remotefile,
 	clo = fclose(f);
         if (clo) errnum = errno;
 
-	if (dtp_close(sess) == FTP_SENT && ret == 0 && clo == 0) {
+	if (dtp_close(sess, 0) == FTP_SENT && ret == 0 && clo == 0) {
 	    /* Success! */
 	    return FTP_OK;
 	} else if (clo) {
@@ -977,7 +978,7 @@ ftp_read_file(ftp_session *sess, const char *remotefile,
 	while ((ret = ne_sock_read(sess->dtpsock, buffer, sizeof buffer))
 	       > 0)
 	    reader(userdata, buffer, ret);
-	if ((dtp_close(sess) == FTP_SENT) && (ret == NE_SOCK_CLOSED)) {
+	if ((dtp_close(sess, 0) == FTP_SENT) && (ret == NE_SOCK_CLOSED)) {
 	    return FTP_OK;
 	}
     }
@@ -1136,9 +1137,9 @@ int ftp_fetch(ftp_session *sess, const char *startdir, struct proto_file **list)
 
     NE_DEBUG(DEBUG_FTP, "ftp: Fetch finished with %d.\n", ret);
     if (ret == FTP_OK) {
-        return dtp_close(sess) == FTP_SENT ? FTP_OK : FTP_ERROR;
+        return dtp_close(sess, 0) == FTP_SENT ? FTP_OK : FTP_ERROR;
     } else {
-        dtp_close(sess); /* ignore retval */
+        dtp_close(sess, 1); /* ignore retval */
         return ret;
     }
 }
