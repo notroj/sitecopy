@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sitecopy 0.11.4\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-02-06 21:05+0000\n"
+"POT-Creation-Date: 2005-03-05 09:38+0000\n"
 "PO-Revision-Date: 2002-11-07 18:11+0100\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <i18n-nn@lister.ping.uio.no>\n"
@@ -1021,34 +1021,34 @@ msgstr ""
 msgid "The connection timed out."
 msgstr "Sambandet vart tidsavbrote."
 
-#: src/davdriver.c:240
+#: src/davdriver.c:241
 msgid "SSL support has not be compiled in."
 msgstr "SSL-støtte er ikkje kompilert inn."
 
-#: src/davdriver.c:248
+#: src/davdriver.c:249
 #, fuzzy, c-format
 msgid "Could not load certificate `%s'."
 msgstr "Åtvaring: Klarte ikkje lagra sertifikat"
 
-#: src/davdriver.c:283
+#: src/davdriver.c:286
 msgid "The server does not appear to be a WebDAV server."
 msgstr "Tenaren er ikkje ein WebDAV-tenar."
 
-#: src/davdriver.c:288
+#: src/davdriver.c:291
 msgid "The server does not support the executable live property."
 msgstr "Tenaren støttar ikkje kjørbar-eigenskapen."
 
-#: src/davdriver.c:334 src/davdriver.c:401 src/davdriver.c:438 src/ftp.c:875
-#: src/ftp.c:939
+#: src/davdriver.c:337 src/davdriver.c:404 src/davdriver.c:441 src/ftp.c:882
+#: src/ftp.c:946
 msgid "Could not open file"
 msgstr "Klarte ikkje opna fil"
 
-#: src/davdriver.c:369
+#: src/davdriver.c:372
 #, fuzzy, c-format
 msgid "Could not stat file: %s"
 msgstr "Klarte ikkje skriva til fil: %s"
 
-#: src/davdriver.c:622
+#: src/davdriver.c:625
 msgid "Could not access resource"
 msgstr "Fekk ikkje tilgang til ressursen"
 
@@ -1085,12 +1085,12 @@ msgstr "Klarte ikkje lesa målet til den symbolske lenkja."
 msgid "Unknown system error"
 msgstr "Ukjend systemfeil"
 
-#: src/ftp.c:153 lib/neon/ne_request.c:226
+#: src/ftp.c:153 lib/neon/ne_request.c:227
 #, c-format
 msgid "%s: connection was closed by server."
 msgstr "%s: tilkoplinga vart lukka av tenaren."
 
-#: src/ftp.c:157 lib/neon/ne_request.c:231
+#: src/ftp.c:157 lib/neon/ne_request.c:232
 #, c-format
 msgid "%s: connection timed out."
 msgstr "%s: sambandet vart tidsavbrote."
@@ -1134,67 +1134,67 @@ msgstr "Klarte ikkje lesa «LIST»-svar."
 msgid "Malformed port in EPSV response"
 msgstr "Klarte ikkje lesa «LIST»-svar."
 
-#: src/ftp.c:445
+#: src/ftp.c:452
 msgid "Error sending file"
 msgstr "Feil ved sending av fil"
 
-#: src/ftp.c:459 src/ftp.c:485
+#: src/ftp.c:466 src/ftp.c:492
 #, fuzzy
 msgid "Error reading file"
 msgstr "Feil ved sending av fil"
 
-#: src/ftp.c:476
+#: src/ftp.c:483
 #, fuzzy
 msgid "Could not send file"
 msgstr "Klarte ikkje opna fil"
 
-#: src/ftp.c:506 src/ftp.c:958
+#: src/ftp.c:513 src/ftp.c:965
 #, fuzzy
 msgid "Error writing to file"
 msgstr "Feil ved sending av fil"
 
-#: src/ftp.c:512
+#: src/ftp.c:519
 msgid "Receiving file"
 msgstr ""
 
-#: src/ftp.c:528
+#: src/ftp.c:535
 msgid "Could not connect passive data socket"
 msgstr "Klarte ikkje kopla til passiv datasokkel"
 
-#: src/ftp.c:643
+#: src/ftp.c:650
 msgid "Active open failed: could not determine address of control socket"
 msgstr ""
 
-#: src/ftp.c:654
+#: src/ftp.c:661
 #, fuzzy
 msgid "Active open failed: could not create socket"
 msgstr "Klarte ikkje forhandla SSL-økt"
 
-#: src/ftp.c:662
+#: src/ftp.c:669
 msgid "Active open failed: could not bind to address"
 msgstr ""
 
-#: src/ftp.c:672
+#: src/ftp.c:679
 msgid "Active open failed: could not determine address of data socket"
 msgstr ""
 
-#: src/ftp.c:715
+#: src/ftp.c:722
 msgid "Active open failed: could not accept connection"
 msgstr ""
 
-#: src/ftp.c:788
+#: src/ftp.c:795
 msgid "Error closing data socket"
 msgstr "Feil ved lukking av datasokkel"
 
-#: src/ftp.c:881
+#: src/ftp.c:888
 msgid "Could not determine length of file"
 msgstr "Klarte ikkje fastesetja fillengd"
 
-#: src/ftp.c:1121
+#: src/ftp.c:1128
 msgid "Could not read 'LIST' response."
 msgstr "Klarte ikkje lesa «LIST»-svar."
 
-#: src/ftp.c:1129
+#: src/ftp.c:1136
 #, fuzzy
 msgid "Parse error in LIST response"
 msgstr "Klarte ikkje lesa «LIST»-svar."
@@ -1527,11 +1527,11 @@ msgstr "Klarte ikkje forhandla SSL-økt"
 msgid "Could not parse redirect location."
 msgstr "Klarte ikkje tolka vidaresendingsadresse."
 
-#: lib/neon/ne_gnutls.c:434 lib/neon/ne_openssl.c:364
+#: lib/neon/ne_gnutls.c:434 lib/neon/ne_openssl.c:382
 msgid "Server certificate was missing commonName attribute in subject name"
 msgstr ""
 
-#: lib/neon/ne_gnutls.c:471 lib/neon/ne_openssl.c:559
+#: lib/neon/ne_gnutls.c:471 lib/neon/ne_openssl.c:577
 #, fuzzy, c-format
 msgid "SSL negotiation failed: %s"
 msgstr "Klarte ikkje skriva til fil: %s"
@@ -1540,210 +1540,206 @@ msgstr "Klarte ikkje skriva til fil: %s"
 msgid "Server did not send certificate chain"
 msgstr ""
 
-#: lib/neon/ne_openssl.c:150
+#: lib/neon/ne_openssl.c:169
 #, fuzzy
 msgid "certificate is not yet valid"
 msgstr "Sertifikatet er gyldig"
 
-#: lib/neon/ne_openssl.c:151
+#: lib/neon/ne_openssl.c:170
 #, fuzzy
 msgid "certificate has expired"
 msgstr "Tenarsertifikatet er utgått på dato."
 
-#: lib/neon/ne_openssl.c:152
+#: lib/neon/ne_openssl.c:171
 #, fuzzy
 msgid "certificate issued for a different hostname"
 msgstr "Sertifikatet er utferda av:"
 
-#: lib/neon/ne_openssl.c:153
+#: lib/neon/ne_openssl.c:172
 msgid "issuer is not trusted"
 msgstr ""
 
-#: lib/neon/ne_openssl.c:158
+#: lib/neon/ne_openssl.c:177
 #, fuzzy
 msgid "Server certificate verification failed: "
 msgstr "Tenarsertifikatet er utgått på dato."
 
-#: lib/neon/ne_openssl.c:176
+#: lib/neon/ne_openssl.c:195
 msgid "[invalid date]"
 msgstr "[ugyldig dato]"
 
-#: lib/neon/ne_openssl.c:396
+#: lib/neon/ne_openssl.c:414
 #, c-format
 msgid "Certificate verification error: %s"
 msgstr ""
 
-#: lib/neon/ne_openssl.c:578
+#: lib/neon/ne_openssl.c:596
 msgid "SSL server did not present certificate"
 msgstr ""
 
-#: lib/neon/ne_openssl.c:587
+#: lib/neon/ne_openssl.c:605
 #, fuzzy
 msgid "Server certificate changed: connection intercepted?"
 msgstr "Tenarsertifikatet er utgått på dato."
 
-#: lib/neon/ne_socket.c:488 lib/neon/ne_socket.c:536 lib/neon/ne_socket.c:639
+#: lib/neon/ne_socket.c:490 lib/neon/ne_socket.c:538 lib/neon/ne_socket.c:641
 #, fuzzy
 msgid "Connection closed"
 msgstr "Tilkoplinga vart lukka av tenaren"
 
-#: lib/neon/ne_socket.c:546
+#: lib/neon/ne_socket.c:548
 #, fuzzy
 msgid "Secure connection truncated"
 msgstr "Sambandet vart tidsavbrote."
 
-#: lib/neon/ne_socket.c:558 lib/neon/ne_socket.c:643 lib/neon/ne_socket.c:648
+#: lib/neon/ne_socket.c:560 lib/neon/ne_socket.c:645 lib/neon/ne_socket.c:650
 #, fuzzy, c-format
 msgid "SSL error: %s"
 msgstr "%s: Feil: %s\n"
 
-#: lib/neon/ne_socket.c:561
+#: lib/neon/ne_socket.c:563
 #, c-format
 msgid "SSL error code %d/%d/%lu"
 msgstr ""
 
-#: lib/neon/ne_socket.c:743
+#: lib/neon/ne_socket.c:745
 msgid "Line too long"
 msgstr "For lang linje"
 
-#: lib/neon/ne_socket.c:883 lib/neon/ne_socket.c:889
+#: lib/neon/ne_socket.c:885 lib/neon/ne_socket.c:891
 msgid "Host not found"
 msgstr "Fann ikkje vert"
 
-#: lib/neon/ne_socket.c:999
+#: lib/neon/ne_socket.c:1001
 msgid "Socket descriptor number exceeds FD_SETSIZE"
 msgstr ""
 
-#: lib/neon/ne_socket.c:1159
+#: lib/neon/ne_socket.c:1161
 #, fuzzy
 msgid "SSL disabled due to lack of entropy"
 msgstr "SSL avslått grunna mangel på entropi"
 
-#: lib/neon/ne_socket.c:1166
+#: lib/neon/ne_socket.c:1168
 #, fuzzy
 msgid "SSL disabled due to library version mismatch"
 msgstr "SSL avslått grunna mangel på entropi"
 
-#: lib/neon/ne_socket.c:1172
+#: lib/neon/ne_socket.c:1174
 #, fuzzy
 msgid "Could not create SSL structure"
 msgstr "Klarte ikkje forhandla SSL-økt"
 
-#: lib/neon/ne_request.c:223
+#: lib/neon/ne_request.c:224
 #, c-format
 msgid "%s: connection was closed by proxy server."
 msgstr "%s: tilkoplinga vart lukka av mellomtenaren."
 
-#: lib/neon/ne_request.c:402
-msgid "Error reading request body."
-msgstr "Klarte ikkje lesa svartekst"
+#: lib/neon/ne_request.c:414
+msgid "Could not send request body"
+msgstr "Klarte ikkje senda førespurnad"
 
-#: lib/neon/ne_request.c:759
+#: lib/neon/ne_request.c:756
 msgid "Could not read chunk size"
 msgstr "Klarte ikkje lesa storleik på oppdelt svar"
 
-#: lib/neon/ne_request.c:766
+#: lib/neon/ne_request.c:763
 msgid "Could not parse chunk size"
 msgstr "Klarte ikkje tolka storleik på oppdelt svar"
 
-#: lib/neon/ne_request.c:803
+#: lib/neon/ne_request.c:800
 msgid "Could not read response body"
 msgstr "Klarte ikkje lesa svar"
 
-#: lib/neon/ne_request.c:819
+#: lib/neon/ne_request.c:816
 #, fuzzy
 msgid "Could not read chunk delimiter"
 msgstr "Klarte ikkje lesa storleik på oppdelt svar"
 
-#: lib/neon/ne_request.c:822
+#: lib/neon/ne_request.c:819
 msgid "Chunk delimiter was invalid"
 msgstr ""
 
-#: lib/neon/ne_request.c:943
+#: lib/neon/ne_request.c:925
 msgid "Could not read status line"
 msgstr "Klarte ikkje lesa statuslinja"
 
-#: lib/neon/ne_request.c:954
+#: lib/neon/ne_request.c:936
 msgid "Could not parse response status line."
 msgstr "Klarte ikkje tolka statuslinja i svaret."
 
-#: lib/neon/ne_request.c:965
+#: lib/neon/ne_request.c:947
 #, fuzzy
 msgid "Could not read interim response headers"
 msgstr "Klarte ikkje lesa svarlinje"
 
-#: lib/neon/ne_request.c:999
+#: lib/neon/ne_request.c:981
 msgid "Could not send request"
 msgstr "Klarte ikkje senda førespurnad"
 
-#: lib/neon/ne_request.c:1007
-msgid "Could not send request body"
-msgstr "Klarte ikkje senda førespurnad"
-
-#: lib/neon/ne_request.c:1048 lib/neon/ne_request.c:1066
-#: lib/neon/ne_request.c:1076
+#: lib/neon/ne_request.c:1029 lib/neon/ne_request.c:1047
+#: lib/neon/ne_request.c:1057
 msgid "Error reading response headers"
 msgstr "Feil ved lesing av svarhovud"
 
-#: lib/neon/ne_request.c:1094
+#: lib/neon/ne_request.c:1075
 msgid "Response header too long"
 msgstr "For langt svarhovud"
 
-#: lib/neon/ne_request.c:1176
+#: lib/neon/ne_request.c:1157
 msgid "Response exceeded maximum number of header fields."
 msgstr "Svaret inneheld for mange header-felt."
 
-#: lib/neon/ne_request.c:1193
+#: lib/neon/ne_request.c:1174
 #, fuzzy, c-format
 msgid "Could not resolve hostname `%s': %s"
 msgstr "%s: Feil: Fann ikkje adressa til nettverksvert (%s).\n"
 
-#: lib/neon/ne_request.c:1303
+#: lib/neon/ne_request.c:1284
 msgid "Invalid Content-Length in response"
 msgstr ""
 
-#: lib/neon/ne_request.c:1365
+#: lib/neon/ne_request.c:1346
 #, c-format
 msgid "Could not write to file: %s"
 msgstr "Klarte ikkje skriva til fil: %s"
 
-#: lib/neon/ne_request.c:1438
+#: lib/neon/ne_request.c:1419
 msgid "Could not create SSL connection through proxy server"
 msgstr "Klarte ikkje oppretta SSL-tilkopling til mellomtenar"
 
-#: lib/neon/ne_request.c:1484
+#: lib/neon/ne_request.c:1465
 #, fuzzy
 msgid "Could not create socket"
 msgstr "Klarte ikkje forhandla SSL-økt"
 
-#: lib/neon/ne_request.c:1529
+#: lib/neon/ne_request.c:1510
 msgid "Could not connect to server"
 msgstr "Klarte ikkje kopla til tenaren."
 
-#: lib/neon/ne_request.c:1532
+#: lib/neon/ne_request.c:1513
 msgid "Could not connect to proxy server"
 msgstr "Klarte ikkje kopla til mellomtenar"
 
-#: lib/neon/ne_xml.c:267
+#: lib/neon/ne_xml.c:278
 #, fuzzy, c-format
 msgid "XML parse error at line %d: invalid element name"
 msgstr "XML-tolkingsfeil på linje %d: %s."
 
-#: lib/neon/ne_xml.c:422
+#: lib/neon/ne_xml.c:433
 #, fuzzy
 msgid "Unknown error"
 msgstr "Ukjend systemfeil"
 
-#: lib/neon/ne_xml.c:506
+#: lib/neon/ne_xml.c:519
 msgid "Invalid Byte Order Mark"
 msgstr ""
 
-#: lib/neon/ne_xml.c:592
+#: lib/neon/ne_xml.c:606
 #, c-format
 msgid "XML parse error at line %d: %s."
 msgstr "XML-tolkingsfeil på linje %d: %s."
 
-#: lib/neon/ne_props.c:370 lib/neon/ne_props.c:410
+#: lib/neon/ne_props.c:372 lib/neon/ne_props.c:412
 #, fuzzy
 msgid "Response exceeds maximum property count"
 msgstr "Svaret inneheld for mange header-felt."
@@ -1809,20 +1805,20 @@ msgstr ""
 "Ugyldig HTTP-statuslinje i statuselement på linje %d av svaret:\n"
 "Statuslinja var: %s"
 
-#: lib/neon/ne_locks.c:591
+#: lib/neon/ne_locks.c:593
 msgid "LOCK response missing Lock-Token header"
 msgstr ""
 
-#: lib/neon/ne_locks.c:744
+#: lib/neon/ne_locks.c:746
 msgid "No Lock-Token header given"
 msgstr ""
 
-#: lib/neon/ne_locks.c:772
+#: lib/neon/ne_locks.c:774
 #, c-format
 msgid "Response missing activelock for %s"
 msgstr ""
 
-#: lib/neon/ne_locks.c:816
+#: lib/neon/ne_locks.c:818
 #, c-format
 msgid "No activelock for <%s> returned in LOCK refresh response"
 msgstr ""
@@ -1890,6 +1886,9 @@ msgstr "%s: valet «-W %s» er tvetydig\n"
 #, c-format
 msgid "%s: option `-W %s' doesn't allow an argument\n"
 msgstr "%s: valet «-W %s» kan ikkje innehelda argument\n"
+
+#~ msgid "Error reading request body."
+#~ msgstr "Klarte ikkje lesa svartekst"
 
 #, fuzzy
 #~ msgid "unknown error code"
