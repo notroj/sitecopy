@@ -1,6 +1,6 @@
 /* 
    sitecopy FTP protocol driver module
-   Copyright (C) 2000, Joe Orton <joe@manyfish.co.uk>
+   Copyright (C) 2000-2005, Joe Orton <joe@manyfish.co.uk>
                                                                      
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -43,13 +43,7 @@ static int f2s(int errcode)
 
 static int get_server_port(struct site *site)
 {
-    int port;
-    port = ne_service_lookup("ftp");
-    if (port == 0) {
-	port = 21;
-	NE_DEBUG(DEBUG_FTP, "Using default port for FTP: %d\n", port);
-    }
-    return port;
+    return 21;
 }
 
 static int init(void **session, struct site *site) 
