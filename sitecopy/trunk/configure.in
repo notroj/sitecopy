@@ -14,7 +14,7 @@ dnl   the Free Software Foundation, Inc., 59 Temple Place - Suite 330,
 dnl   Boston, MA 02111-1307, USA.        
 
 dnl This configure script is:
-dnl  Copyright (C) 2000-2004 Joe Orton (joe@manyfish.co.uk)
+dnl  Copyright (C) 2000-2005 Joe Orton (joe@manyfish.co.uk)
 dnl Portions are:
 dnl  Copyright (C) 1994, 1995, 1996, 1997, 1998 Free Software Foundation, Inc.
 dnl  Copyright (C) 1997 Janos Farkas (chexum@shadow.banki.hu)
@@ -109,8 +109,8 @@ NEON_WITHOUT_ZLIB
 NEON_WITHOUT_ACL
 
 dnl Build neon
-NEON_VPATH_BUNDLED(["\$(top_srcdir)/libneon"], ["\$(top_builddir)/libneon"], [
-	NEON_XML_PARSER([\$(top_srcdir)/expat])
+NEON_VPATH_BUNDLED(["\$(top_srcdir)/lib/neon"], ["\$(top_builddir)/lib/neon"], [
+	NEON_XML_PARSER([\$(top_srcdir)/lib/expat])
 	NEON_NORMAL_BUILD
 ])
 
@@ -198,13 +198,11 @@ if test "$enable_gnomefe" = "yes"; then
 	AC_WARN([GNOME frontend is unfinished, use with care.])
 fi
 
-AC_CONFIG_FILES([Makefile libneon/Makefile po/Makefile.in intl/Makefile])
+AC_CONFIG_FILES([Makefile lib/neon/Makefile po/Makefile.in intl/Makefile])
 
 AC_OUTPUT
 
-cat <<EOF
-
-Configured sitecopy ${VERSION}:
+AC_MSG_NOTICE([Configured sitecopy ${VERSION}:
 
   Install prefix:        ${prefix}
   Compiler:              ${CC}
@@ -216,10 +214,9 @@ Configured sitecopy ${VERSION}:
   Internationalization:  ${nls_msg}
 
 Now run 'make' to compile ${TARGET}.
-
-EOF
+])
 
 # Create all the necessary directories for VPATH builds.
-for i in gnome lib src intl; do
+for i in gnome src intl; do
   test -d $i || mkdir $i
 done
