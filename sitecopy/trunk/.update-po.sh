@@ -27,7 +27,7 @@ s/@PACKAGE@/sitecopy/g;
 s/@VERSION@/$1/g;
 /^.*VPATH.*$/d;
 s/@srcdir@/./g;
-@top_srcdir@/../g;
+s/@top_srcdir@/../g;
 s/@CATALOGS@/$CATALOGS/g;
 s/@POFILES@/$POFILES/g;
 s/@UPDATEPOFILES@/$POFILES/g;
