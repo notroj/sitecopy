@@ -212,9 +212,6 @@ static int read_reply(ftp_session *sess, int *code, char *buf, size_t bufsiz)
 
     } while (multiline);
 
-    /* Set reply as default error string. */
-    ftp_seterror(sess, ne_shave(sess->rbuf, "\r\n\t "));
-
     return FTP_OK;
 }
 
@@ -379,7 +376,10 @@ static int run_command(ftp_session *sess, const char *cmd)
     /* Read the response. */
     ret = read_reply(sess, &code, sess->rbuf, sizeof sess->rbuf);
     if (ret != FTP_OK) return ret;
-    
+
+    /* Set reply as default error string. */
+    ftp_seterror(sess, sess->rbuf);
+
     /* Parse the reply. */
     return parse_reply(sess, code, sess->rbuf);
 }    
@@ -795,8 +795,10 @@ static int dtp_close(ftp_session *sess)
         ret = parse_reply(sess, code, sess->rbuf);
 	if (ret == FTP_OK || ret == FTP_SENT)
 	    return FTP_SENT;
-	else
+	else {
+            ftp_seterror(sess, sess->rbuf);
 	    return FTP_ERROR;
+        }
     }
 }
 
@@ -1043,7 +1045,10 @@ int ftp_open(ftp_session *sess)
     if (ret != FTP_OK) return FTP_HELLO;
 
     ret = parse_reply(sess, code, sess->rbuf);
-    if (ret != FTP_OK) return FTP_HELLO;
+    if (ret != FTP_OK) {
+        ftp_seterror(sess, sess->rbuf);
+        return FTP_HELLO;
+    }
 
     if (authenticate(sess) != FTP_OK) {
         ne_sock_close(sess->pisock);
