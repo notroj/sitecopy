@@ -31,7 +31,8 @@ LIBS = @NEON_LIBS@ @LIBINTL@ @LIBS@
 CC = @CC@
 
 # libintl must be built first.
-SUBDIRS = intl libneon
+SUBDIRS = intl lib/neon
+EXPATDIR = lib/expat
 
 INSTALL_PROGRAM = @INSTALL_PROGRAM@
 INSTALL_DATA = @INSTALL_DATA@
@@ -130,14 +131,15 @@ src/rcfile.o: src/rcfile.c src/rcfile.h src/sites.h lib/netrc.h src/common.h \
 	config.h src/protocol.h
 lib/snprintf.o: lib/snprintf.c lib/snprintf.h config.h
 
-expat/xmltok/nametab.h: expat/gennmtab/gennmtab@EXEEXT@
+
+$(EXPATDIR)/xmltok/nametab.h: $(EXPATDIR)/gennmtab/gennmtab@EXEEXT@
 	rm -f $@
-	expat/gennmtab/gennmtab@EXEEXT@ >$@
+	$(EXPATDIR)gennmtab/gennmtab@EXEEXT@ >$@
 
-expat/gennmtab/gennmtab$(EXE): expat/gennmtab/gennmtab.c
-	$(CC) $(LDFLAGS) $(ALL_CFLAGS) -o $@ expat/gennmtab/gennmtab.c
+$(EXPATDIR)/gennmtab/gennmtab@EXEEXT@: $(top_srcdir)/$(EXPATDIR)/gennmtab/gennmtab.c
+	$(CC) $(LDFLAGS) $(ALL_CFLAGS) -o $@ $(top_srcdir)/$(EXPATDIR)gennmtab/gennmtab.c
 
-expat/xmltok/xmltok.o: expat/xmltok/xmltok.c expat/xmltok/xmltok.h expat/xmltok/nametab.h
+$(EXPATDIR)xmltok/xmltok.o: $(EXPATDIR)xmltok/xmltok.c $(EXPATDIR)xmltok/xmltok.h $(EXPATDIR)xmltok/nametab.h
 
 # The install goal is different for each front end, so
 # we have a separate goal for each and autoconf points the 
@@ -201,7 +203,7 @@ again: clean
 	$(MAKE) $(TARGET)
 
 distclean: clean
-	for d in intl libneon po; do \
+	for d in intl lib/neon po; do \
 	  if [ -f $$d/Makefile ]; then (cd $$d && $(MAKE) distclean); fi; \
 	done
 	rm -f config.h config.cache config.log config.status Makefile stamp-h core
