@@ -1,0 +1,2 @@
+?package(xsitecopy):needs=X11 section=Apps/Net\
+  title="XSitecopy" command="/usr/bin/xsitecopy"
