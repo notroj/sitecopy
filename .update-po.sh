@@ -6,7 +6,7 @@
 inmk=/usr/share/gettext/po/Makefile.in.in
 tmpmk=`mktemp /tmp/sitecopy.XXXXXX`
 pot=`mktemp /tmp/sitecopy.XXXXXX`
-#trap 'rm -f $tmpmk $pot' TERM INT 0
+trap 'rm -f $tmpmk $pot' TERM INT 0
 
 cd po
 
@@ -41,4 +41,4 @@ s/@MSGMERGE@/msgmerge/g;
 s/: Makefile.*/:/g;
 s/\$(MAKE) update-gmo/echo Done/g;" $inmk > $tmpmk
 
-exec make -f $tmpmk sitecopy.pot-update ${GMOFILES}
+make -f $tmpmk sitecopy.pot-update ${GMOFILES}
