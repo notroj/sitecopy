@@ -1,0 +1,117 @@
+
+Bugs in 0.11.4:
+
+- MacOS X 10.1 catchup/sitecopy not recording times properly doesn't
+ *** possibly CPP fileset.h duplication bug
+- FTP fetch mode does MDTM for each file when 0.10.x didn't and is hence 
+very slow for large sites (Dave Hollis)
+- rm foo; --synch brings back foo with 1970-01-01 modtime (Dave Hollis)
+
+---
+
+From Kobaz Mi'Daire <krobaz@yahoo.com:
+
+If there is an "&" in a directory name on the remote end and you do a
+sitecopy -f, then try to preform a sync operation on the site, either
+using -u or -s, sitecopy thinks the directory has not been created, trys
+to create it, and fails because it already exists.
+ 
+Also if a directory on the remote end is all caps, this problem shows up
+as well.
+
+--- 
+
+From: "Jean Jordaan" <jean@upfrontsystems.co.za>
+
+Currently, it looks like there are things that sitecopy silently
+ignores if it doesn't understand. For example, I had this:
+
+    exclude     Queries/makeTSV
+    exclude     Queries/makeMatrix
+    exclude     Queries/doReduce
+
+That was wrong; missing a leading slash. It should be:
+
+    exclude     /Queries/makeTSV
+    exclude     /Queries/makeMatrix
+    exclude     /Queries/doReduce
+
+But sitecopy didn't let me know that those excludes were being ignored.
+
+-- 
+
+From: "Pascal Ung" <pascal.ung@labri.fr>
+
+trying not to use clear password inside .sitecopyrc
+(preferring, user and password challenge)
+
+we found that it doesn't work in the following case:
+
+ the .htaccess contains kind of:
+
+ <Limit PROPFIND PUT DELETE PATCH PROPPATCH MKCOL COPY MOVE LOCK UNLOCK>
+    require user webmaster enduser
+</Limit>
+<Files ~ "^\.ht">
+ Order deny,allow
+ Deny from all
+ Allow from  .userdomain.fr
+ require user webmaster
+</Files>
+
+--- 
+
+From: Gary Benson <gary@inauspicious.org>
+
+Not sure if this is a bug or an error of omission since sitecopy does
+exactly what it says in the manpage, but permissions only work on files --
+directory permissions are ignored completely.
+
+--- 
+
+Volker Kuhlmann: ftp: echo_quit never set.
+
+---
+
+On Fri, Apr 19, 2002 at 03:37:44PM -0700, Bill Houle wrote:
+> I do .bak files have special meaning to sitecopy, and if so,
+> how do I prevent it?
+>
+> I'm testing the waters on a live site and didn't want to make
+> any obvious changes. So I removed 2 harmless files (a .log and
+> a .bak). Yet here's what sitecopy now says are different:
+>
+> * These items have been deleted since the last update:
+> media.htm, unison.log
+> * These items have been moved since the last update:
+> media.bak->media.htm
+> sitecopy: The remote site needs updating (3 items to update).
+>
+> If I removed media.bak, why does it think I removed media.htm
+> and it needs to be replaced by the .bak version?
+
+---
+
+On Thu, Apr 25, 2002 at 06:07:02PM +0200, Dave Hollis wrote:
+> After fetching and synchronizing I noticed that files which had been
+> updated by my colleague and consequently fetched, still had the date of
+> the old file after it had been overwritten.
+
+---
+
+From: Kurt Hindenburg <khindenburg@cherrynebula.net>
+
+./configure --disable-webdav --disable-rsh  --disable-nls --with-ssl
+...
+src/sitestore.o: In function `site_read_stored_state_new':
+src/sitestore.o(.text+0xcc2): undefined reference to `ne_xml_create'
+
+---
+
+iw3grw <iw3grw@ir3ip.net>
+
+fetch mode should not recurse into directories which are excluded.
+
+---
+
+
