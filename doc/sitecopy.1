@@ -311,7 +311,7 @@ A site definition is made up of a series of lines:
  [ 
 .BR "state " "{ checksum | timesize } ]"
  [ 
-.BR permissions " { ignore | exec | all } ]"
+.BR permissions " { ignore | exec | all | dir } ]"
  [ 
 .BR symlinks " { ignore | follow | maintain } ]"
  [ 
@@ -505,6 +505,17 @@ are set. The option is currently ignored for WebDAV servers. For FTP
 servers, a
 .B chmod
 is performed remotely to set the permissions.
+
+To handle permissions directories, the key:
+.br
+.BR "   permissions dir"
+.br
+may be used in addition to a 
+.B permissions
+key of either 
+.B exec
+or
+.B local.
 
 .SS Symbolic Link Handling
 
