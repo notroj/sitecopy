@@ -362,7 +362,14 @@ static int run_command(ftp_session *sess, const char *cmd)
     char *line = ne_concat(cmd, "\r\n", NULL);
     int code, ret;
 
-    NE_DEBUG(DEBUG_FTP, "> %s\n", cmd);
+#ifdef NE_DEBUGGING
+    if (strncmp(cmd, "PASS ", 4) == 0
+        && (ne_debug_mask & NE_DBG_HTTPPLAIN) == 0) {
+        NE_DEBUG(DEBUG_FTP, "> PASS ...\n");
+    } else {
+        NE_DEBUG(DEBUG_FTP, "> %s\n", cmd);
+    }
+#endif
 
     /* Send the command. */
     ret = ne_sock_fullwrite(sess->pisock, line, strlen(line));
