@@ -1,6 +1,6 @@
 /* 
    sitecopy, manage remote web sites.
-   Copyright (C) 1998-2002, Joe Orton <joe@manyfish.co.uk>.
+   Copyright (C) 1998-2005, Joe Orton <joe@manyfish.co.uk>.
                                                                      
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -50,7 +50,7 @@
 typedef enum {
     fe_namelookup,
     fe_connecting,
-    fe_connected,
+    fe_connected
 } fe_status;
 
 /* Connection Status API.
