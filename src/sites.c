@@ -1,6 +1,6 @@
 /* 
    sitecopy, for managing remote web sites.
-   Copyright (C) 1998-2004, Joe Orton <joe@manyfish.co.uk>
+   Copyright (C) 1998-2005, Joe Orton <joe@manyfish.co.uk>
                                                                      
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -1055,11 +1055,19 @@ site_fetch_walk(struct site *site, struct proto_file *files)
 
 }
 
-static void
+static
+#ifdef HAVE_NEON024
+void
+#else
+int
+#endif
 site_fetch_csum_read(void *userdata, const char *s, size_t len)
 {
     struct ne_md5_ctx *md5 = userdata;
     ne_md5_process_bytes(s, len, md5);
+#ifndef HAVE_NEON024
+    return 0;
+#endif
 }
 
 /* Retrieve the remote checksum for all files */
