@@ -291,6 +291,7 @@ enum site_protocol_modes {
     siteproto_ftp,
     siteproto_dav,
     siteproto_rsh,
+    siteproto_sftp,
     siteproto_unknown
 };
 

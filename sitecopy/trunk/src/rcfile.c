@@ -80,6 +80,9 @@ extern const struct proto_driver dav_driver;
 #ifdef USE_RSH
 extern const struct proto_driver rsh_driver;
 #endif /* USE_RSH */
+#ifdef USE_SFTP
+extern const struct proto_driver sftp_driver;
+#endif /* USE_SFTP */
 
 /* rcfile_read will read the rcfile and fill given sites list.
  * This returns 0 on success, RC_OPENFILE if the rcfile could not
@@ -392,6 +395,8 @@ int rcfile_read(struct site **sites)
                         this_site->rsh_cmd = ne_strdup("ssh");
                     if (this_site->rcp_cmd == NULL) 
                         this_site->rcp_cmd = ne_strdup("scp");
+		} else if (strcasecmp(val, "sftp") == 0) {
+		    this_site->protocol = siteproto_sftp;
                 } else {
 		    this_site->protocol = siteproto_unknown;
 		}
@@ -517,6 +522,14 @@ int rcfile_verify(struct site *any_site)
 #else /* !USE_RSH */
 	return SITE_UNSUPPORTED;
 #endif /* USE_RSH */
+    case siteproto_sftp:
+#ifdef USE_SFTP
+	any_site->driver = &sftp_driver;
+	/* FIXME: sftp checks? */
+	break;
+#else /* !USE_SFTP */
+	return SITE_UNSUPPORTED;
+#endif /* USE_SFTP */
     case siteproto_unknown:
 	return SITE_UNSUPPORTED;
     }
