@@ -41,4 +41,4 @@ s/@MSGMERGE@/msgmerge/g;
 s/: Makefile.*/:/g;
 s/\$(MAKE) update-gmo/echo Done/g;" $inmk > $tmpmk
 
-exec make -f $tmpmk update-po update-gmo
+exec make -f $tmpmk sitecopy.pot-update $(GMOFILES)
