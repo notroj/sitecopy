@@ -41,7 +41,6 @@
 ./lib/neon/ne_xmlreq.c
 ./lib/neon/ne_basic.c
 ./lib/neon/ne_md5.c
-./lib/neon/ne_cookies.c
 ./lib/neon/ne_uri.c
 ./lib/neon/ne_acl.c
 ./lib/neon/ne_dates.c
