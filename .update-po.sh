@@ -1,7 +1,12 @@
-#!/bin/sh
+#!/bin/sh -ex
+# Script to run update-po and update-gmo before generating
+# a release tarball.  Run from .release.sh, *before*
+# autogen.sh. 
+
 inmk=/usr/share/gettext/po/Makefile.in.in
 tmpmk=`mktemp /tmp/sitecopy.XXXXXX`
 pot=`mktemp /tmp/sitecopy.XXXXXX`
+trap 'rm -f $tmpmk $pot' TERM INT 0
 
 cd po
 
@@ -15,20 +20,20 @@ GMOFILES="$CATALOGS"
 sed -e "/^#/d" -e "/^[ 	]*\$/d" -e "s,.*,     ../& \\\\," \
     -e "\$s/\(.*\) \\\\/\1/" < POTFILES.in > $pot
 
-sed -e "/POTFILES =/r $pot" \
-    -e "s/@SET_MAKE@//g" \
-    -e "s/@PACKAGE@/sitecopy/g" \
-    -e "s/@VERSION@/$1/g" \
-    -e "/^.*VPATH.*$/d" \
-    -e "s/@srcdir@/./g" -e "s/@top_srcdir@/../g" \
-    -e "s/@CATALOGS@/$CATALOGS/g" -e "s/@POFILES@/$POFILES/g" \
-    -e "s/@GMOFILES@/$GMOFILES/g" \
-    -e "s/@GMSGFMT@/msgfmt/g" -e "s/@MSGFMT@/msgfmt/g" \
-    -e "s/@XGETTEXT@/xgettext/g" \
-    -e "s/: Makefile/:/g" \
-    -e "s/\$(MAKE) update-gmo/echo Done/g" \
-$inmk > $tmpmk
+sed -e "
+/POTFILES =/r $pot;
+s/@SET_MAKE@//g;
+s/@PACKAGE@/sitecopy/g;
+s/@VERSION@/$1/g;
+/^.*VPATH.*$/d;
+s/@srcdir@/./g" -e "s/@top_srcdir@/../g;
+s/@CATALOGS@/$CATALOGS/g" -e "s/@POFILES@/$POFILES/g;
+s/@UPDATEPOFILES@/$POFILES/g;
+s/@GMOFILES@/$GMOFILES/g;
+s/@GMSGFMT@/msgfmt/g" -e "s/@MSGFMT@/msgfmt/g;
+s/@XGETTEXT@/xgettext/g;
+s/@MSGMERGE@/msgmerge/g;
+s/: Makefile/:/g;
+s/\$(MAKE) update-gmo/echo Done/g;" $inmk > $tmpmk
 
-make -f $tmpmk update-po update-gmo
-
-rm -f $pot $tmpmk
+exec make -f $tmpmk update-po update-gmo DOMAIN=sitecopy
