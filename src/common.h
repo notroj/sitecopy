@@ -36,6 +36,7 @@
 #define DEBUG_GNOME (1<<13)
 #define DEBUG_FILESEXTRA (1<<13)
 #define DEBUG_RSH (1<<14)
+#define DEBUG_SFTP (1<<15)
 
 /* A signal hander */
 typedef void (*sig_handler)(int);

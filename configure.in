@@ -87,6 +87,18 @@ if test "$enable_rsh" = "yes"; then
     AC_DEFINE(USE_RSH, 1, [Define to compile the rsh/rcp protocol driver])
 fi
 
+AC_ARG_ENABLE(sftp,
+ AC_HELP_STRING([--disable-sftp], [disable sftp/ssh support]),,
+ [enable_sftp=no
+  AC_CHECK_FUNCS([socketpair pipe], [enable_sftp=yes; break])
+ ])
+
+if test "$enable_sftp" = "yes"; then
+    EXTRAOBJS="$EXTRAOBJS src/sftpdriver.o"
+    proto_msg="sftp/ssh ${proto_msg}"
+    AC_DEFINE([USE_SFTP], 1, [Define to compile the sftp/ssh protocol driver])
+fi
+
 dnl Strip the binary in debug mode.
 NEON_DEBUG(,[LDFLAGS="-s $LDFLAGS"])
 

@@ -62,6 +62,7 @@ static const struct {
     { "cleartext", NE_DBG_HTTPPLAIN },
     { "ssl", NE_DBG_SSL },
     { "rsh", DEBUG_RSH },
+    { "sftp", DEBUG_SFTP },
     { NULL, 0 }
 };
 

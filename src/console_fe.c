@@ -1418,7 +1418,7 @@ static void usage(void)
 #ifdef NE_DEBUGGING
     printf(_(
 "  -d, --debug=KEY[,KEY] Turn debugging on for each KEY, which may be:\n"
-"     socket, files, rcfile, ftp, http, httpbody, xml, xmlparse, cleartext\n"
+"     socket, files, rcfile, ftp, http, httpbody, rsh, sftp, xml, xmlparse, cleartext\n"
 "     Warning: cleartext displays (normally hidden) passwords in plain text\n"
 "  -g, --logfile=FILE    Append debugging messages to FILE (else use stderr)\n"
 ));
@@ -1462,6 +1462,9 @@ static void version(void)
 #ifdef USE_RSH
     printf(" rsh/rcp");
 #endif /* USE_RSH */
+#ifdef USE_SFTP
+    printf(" sftp/ssh");
+#endif /* USE_SFTP */
 #ifdef NE_DEBUGGING
     printf(", debugging");
 #endif
