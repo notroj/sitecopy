@@ -21,10 +21,10 @@ dnl  Copyright (C) 1997 Janos Farkas (chexum@shadow.banki.hu)
 dnl
 
 dnl Extract the version (sans LF) from .version, created at release-time.
-m4_define(sc_version, [m4_translit(m4_include(.version), [
-])])
+m4_define(sc_version, m4_translit(m4_include(.version), [
+]))
 
-AC_INIT(sitecopy, sc_version, [sitecopy@lyra.org])
+AC_INIT([sitecopy], [sc_version], [sitecopy@lyra.org])
 
 AC_CONFIG_SRCDIR(src/sites.c)
 AC_CONFIG_HEADER(config.h)
