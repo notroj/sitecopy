@@ -26,14 +26,17 @@ s/@SET_MAKE@//g;
 s/@PACKAGE@/sitecopy/g;
 s/@VERSION@/$1/g;
 /^.*VPATH.*$/d;
-s/@srcdir@/./g" -e "s/@top_srcdir@/../g;
-s/@CATALOGS@/$CATALOGS/g" -e "s/@POFILES@/$POFILES/g;
+s/@srcdir@/./g;
+@top_srcdir@/../g;
+s/@CATALOGS@/$CATALOGS/g;
+s/@POFILES@/$POFILES/g;
 s/@UPDATEPOFILES@/$POFILES/g;
 s/@GMOFILES@/$GMOFILES/g;
-s/@GMSGFMT@/msgfmt/g" -e "s/@MSGFMT@/msgfmt/g;
+s/@GMSGFMT@/msgfmt/g;
+s/@MSGFMT@/msgfmt/g;
 s/@XGETTEXT@/xgettext/g;
 s/@MSGMERGE@/msgmerge/g;
-s/: Makefile/:/g;
+s/: Makefile.*/:/g;
 s/\$(MAKE) update-gmo/echo Done/g;" $inmk > $tmpmk
 
 exec make -f $tmpmk update-po update-gmo DOMAIN=sitecopy
