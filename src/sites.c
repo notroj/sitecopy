@@ -523,7 +523,7 @@ static int update_files(struct site *site, void *session)
 		    file_uploaded(current, site);
 		    break;
 		}
-	    } else if (site->tempupload && (current->diff == file_changed)) {
+	    } else if (site->tempupload) {
 		/* Do temp file upload followed by a move */
 		char *temp_remote = temp_upload_filename(full_remote, site);
 		if (CALL(file_upload)(session, full_local, temp_remote,
