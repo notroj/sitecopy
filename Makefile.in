@@ -79,7 +79,8 @@ MANLANGS = fr
 all: $(TARGET)
 
 .PHONY: all again clean distclean reminders install-common	\
-	install-sitecopy install-xsitecopy install-nls subdirs
+	install-sitecopy install-xsitecopy install-nls subdirs \
+	ChangeLog
 
 .SUFFIXES:
 .SUFFIXES: .c .o
@@ -218,4 +219,7 @@ distclean: clean
 	rm -f config.h config.cache config.log config.status Makefile stamp-h core
 	rm -f `find $(top_srcdir) \( -name '*.orig' -o -name '*.rej' \
 		-o -name '#*#' -o -name '*~' \) -print`
+
+ChangeLog:
+	svn log > $@
 
