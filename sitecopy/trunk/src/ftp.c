@@ -147,7 +147,7 @@ static void set_syserr(ftp_session *sess, const char *error, int errnum)
 static void set_sockerr(ftp_session *sess, const ne_socket *sock, 
 			const char *doing, ssize_t errnum)
 {
-    switch(errnum) {
+    switch (errnum) {
     case NE_SOCK_CLOSED:
 	ne_snprintf(sess->error, BUFSIZ, 
 		 _("%s: connection was closed by server."), doing);
@@ -160,6 +160,8 @@ static void set_sockerr(ftp_session *sess, const ne_socket *sock,
 	ne_snprintf(sess->error, BUFSIZ, "%s: %s", doing, ne_sock_error(sock));
 	break;
     }
+    NE_DEBUG(DEBUG_FTP, "ftp: Set socket error (%" NE_FMT_SSIZE_T "): %s\n",
+             errnum, sess->error);
 }
 
 /* set_pisockerr must be called to handle any PI socket error to
@@ -1087,50 +1089,52 @@ const char *ftp_get_error(ftp_session *sess)
 int ftp_fetch(ftp_session *sess, const char *startdir, struct proto_file **list)
 {
     struct proto_file *tail = NULL;
-    int ret, success = FTP_OK;
     struct ls_context *lsctx;
+    int ret;
 
     if ((ret = ftp_data_open(sess, "LIST -laR %s", startdir)) != FTP_READY) {
-	return FTP_ERROR;
+        return FTP_ERROR;
     }
 
     lsctx = ls_init(startdir);
 
-    for (;;) {
-        enum ls_result res;
+    ret = FTP_OK;
+
+    do {
+        enum ls_result lsrv;
         struct ls_file lfile;
+        ssize_t len;
 
-	ret = ne_sock_readline(sess->dtpsock, sess->rbuf, BUFSIZ);
-	if (ret == NE_SOCK_CLOSED)
-	    break;
-	if (ret < 0) {
-	    set_sockerr(sess, sess->dtpsock,
-			_("Could not read 'LIST' response."), ret);
-	    success = FTP_ERROR;
-	    break;
-	}
-
-        res = ls_parse(lsctx, sess->rbuf, &lfile);
-
-        switch (res) {
-        case ls_error:
-            NE_DEBUG(DEBUG_FTP, "Could not parse line.\n");
-            success = FTP_ERROR;
-            break;
-
-        default:
-            ls_pflist_add(list, &tail, &lfile, res);
+        len = ne_sock_readline(sess->dtpsock, sess->rbuf, BUFSIZ);
+        if (len == NE_SOCK_CLOSED) {
+            NE_DEBUG(DEBUG_FTP, "ftp: EOF from DTP connection.\n");
             break;
         }
-    }
+        if (len < 0) {
+            set_sockerr(sess, sess->dtpsock,
+                        _("Could not read 'LIST' response."), len);
+            ret = FTP_ERROR;
+            break;
+        }
+
+        lsrv = ls_parse(lsctx, sess->rbuf, &lfile);
+        if (lsrv == ls_error) {
+            NE_DEBUG(DEBUG_FTP, "ftp: ls_parse error, aborting.\n");
+            ftp_seterror(sess, _("Parse error in LIST response"));
+            ret = FTP_ERROR;
+        } else {
+            ls_pflist_add(list, &tail, &lfile, lsrv);
+        }
+    } while (ret == FTP_OK);
 
     ls_destroy(lsctx);
 
-    NE_DEBUG(DEBUG_FTP, "Fetch finished successfully.\n");
-    if (dtp_close(sess) == FTP_SENT) {
-	return success;
+    NE_DEBUG(DEBUG_FTP, "ftp: Fetch finished with %d.\n", ret);
+    if (ret == FTP_OK) {
+        return dtp_close(sess) == FTP_SENT ? FTP_OK : FTP_ERROR;
     } else {
-	return success;
+        dtp_close(sess); /* ignore retval */
+        return ret;
     }
 }
 
