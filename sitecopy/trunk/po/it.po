@@ -1,14 +1,14 @@
 # Italian translations for sitecopy package.
 # Copyright (C) 2003 Joe Orton
 # This file is distributed under the same license as the sitecopy package.
-# Cristian Rigamonti <cri@linux.it>, 2003-2004.
+# Cristian Rigamonti <cri@linux.it>, 2003, 2004, 2005.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: sitecopy 0.14.2\n"
+"Project-Id-Version: sitecopy 0.15.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-03-05 09:38+0000\n"
-"PO-Revision-Date: 2004-09-13 23:04+0200\n"
+"PO-Revision-Date: 2005-03-12 22:38+0100\n"
 "Last-Translator: Cristian Rigamonti <cri@linux.it>\n"
 "Language-Team: Italian <tp@lists.linux.it>\n"
 "MIME-Version: 1.0\n"
@@ -547,25 +547,19 @@ msgstr ""
 "%s"
 
 #: src/console_fe.c:888
-#, fuzzy, c-format
+#, c-format
 msgid "Failed to update %s:%c%s\n"
-msgstr ""
-"Aggiornamento fallito di %s:\n"
-"%s\n"
+msgstr "Aggiornamento fallito di %s:%c%s\n"
 
 #: src/console_fe.c:897
-#, fuzzy, c-format
+#, c-format
 msgid "failed:%c%s\n"
-msgstr ""
-"fallito:\n"
-"%s\n"
+msgstr "fallito:%c%s\n"
 
 #: src/console_fe.c:909
-#, fuzzy, c-format
+#, c-format
 msgid "] failed:%c%s\n"
-msgstr ""
-"] fallito:\n"
-"%s\n"
+msgstr "] fallito:%c%s\n"
 
 #: src/console_fe.c:934
 #, c-format
@@ -962,7 +956,7 @@ msgid "Options: \n"
 msgstr "Opzioni: \n"
 
 #: src/console_fe.c:1420
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "  -d, --debug=KEY[,KEY] Turn debugging on for each KEY, which may be:\n"
 "     socket, files, rcfile, ftp, http, httpbody, rsh, sftp, xml, xmlparse, "
@@ -970,9 +964,9 @@ msgid ""
 "     Warning: cleartext displays (normally hidden) passwords in plain text\n"
 "  -g, --logfile=FILE    Append debugging messages to FILE (else use stderr)\n"
 msgstr ""
-"  -d, --debug=CODICE[,CODICE] Attiva il debugging per ogni CODICE, che può "
-"essere:\n"
-"     socket, files, rcfile, ftp, http, httpbody, xml, xmlparse, cleartext\n"
+"  -d, --debug=CODICE[,CODICE] Attiva il debugging per ogni CODICE:\n"
+"     socket, files, rcfile, ftp, http, httpbody, rsh, sftp, xml, xmlparse, "
+"cleartext\n"
 "     Attenzione: cleartext mostra in chiaro le password (di solito "
 "nascoste)\n"
 "  -g, --logfile=FILE    Accoda i messaggi di debugging al FILE (altrimenti "
@@ -1152,14 +1146,12 @@ msgid "Invalid IP address in PASV response"
 msgstr "Indirizzo IP non valido nella risposta PASV"
 
 #: src/ftp.c:296
-#, fuzzy
 msgid "Malformed EPSV response"
-msgstr "Impossibile leggere la risposta PASV"
+msgstr "Risposta EPSV malformata"
 
 #: src/ftp.c:304
-#, fuzzy
 msgid "Malformed port in EPSV response"
-msgstr "Indirizzo IP non valido nella risposta PASV"
+msgstr "Porta malformata nella risposta EPSV"
 
 #: src/ftp.c:452
 msgid "Error sending file"
@@ -1221,9 +1213,8 @@ msgid "Could not read 'LIST' response."
 msgstr "Impossibile leggere la risposta \"LIST\""
 
 #: src/ftp.c:1136
-#, fuzzy
 msgid "Parse error in LIST response"
-msgstr "Indirizzo IP non valido nella risposta PASV"
+msgstr "Errore di analisi nella risposta LIST"
 
 #: gnome/init.c:51
 msgid "_New site..."
@@ -1556,9 +1547,8 @@ msgid "SSL negotiation failed: %s"
 msgstr "Errore di negoziazione SSL: %s"
 
 #: lib/neon/ne_gnutls.c:480
-#, fuzzy
 msgid "Server did not send certificate chain"
-msgstr "Il server SSL non ha offerto alcun certificato"
+msgstr "Il server non ha spedito la catena di certificazione"
 
 #: lib/neon/ne_openssl.c:169
 msgid "certificate is not yet valid"
@@ -1615,7 +1605,7 @@ msgstr "errore SSL: %s"
 #: lib/neon/ne_socket.c:563
 #, c-format
 msgid "SSL error code %d/%d/%lu"
-msgstr ""
+msgstr "Codice di errore SSL %d/%d/%lu"
 
 #: lib/neon/ne_socket.c:745
 msgid "Line too long"
@@ -1706,9 +1696,8 @@ msgid "Could not resolve hostname `%s': %s"
 msgstr "Impossibile risolvere il nome dell'host \"%s\": %s"
 
 #: lib/neon/ne_request.c:1284
-#, fuzzy
 msgid "Invalid Content-Length in response"
-msgstr "Indirizzo IP non valido nella risposta PASV"
+msgstr "Content-Length non valido nella risposta"
 
 #: lib/neon/ne_request.c:1346
 #, c-format
@@ -1750,10 +1739,8 @@ msgid "XML parse error at line %d: %s."
 msgstr "Errore di analisi XML alla riga %d: %s."
 
 #: lib/neon/ne_props.c:372 lib/neon/ne_props.c:412
-#, fuzzy
 msgid "Response exceeds maximum property count"
-msgstr ""
-"La risposta ha oltrepassato il numero massimo di campi di intestazione."
+msgstr "La risposta ha oltrepassato il numero massimo di proprietà"
 
 #: lib/neon/ne_compress.c:175
 #, c-format
@@ -1779,9 +1766,8 @@ msgid "Could not determine file size: %s"
 msgstr "Impossibile determinare la dimensione del file: %s"
 
 #: lib/neon/ne_basic.c:132
-#, fuzzy
 msgid "Response did not include requested range"
-msgstr "Risposta di lunghezza inaspettata"
+msgstr "La risposta non includeva l'intervallo richiesto"
 
 #: lib/neon/ne_basic.c:176
 msgid "Range is not satisfiable"
@@ -1816,7 +1802,7 @@ msgstr ""
 
 #: lib/neon/ne_locks.c:593
 msgid "LOCK response missing Lock-Token header"
-msgstr ""
+msgstr "Header Lock-Token mancante nella risposta LOCK"
 
 #: lib/neon/ne_locks.c:746
 msgid "No Lock-Token header given"
@@ -1830,7 +1816,7 @@ msgstr "Activelock mancante nella risposta per %s"
 #: lib/neon/ne_locks.c:818
 #, c-format
 msgid "No activelock for <%s> returned in LOCK refresh response"
-msgstr ""
+msgstr "Nessun activelock per <%s> nella risposta di refresh LOCK"
 
 #: lib/rpmatch.c:79
 msgid "^[yY]"
