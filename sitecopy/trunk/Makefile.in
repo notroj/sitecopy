@@ -74,6 +74,7 @@ ALLOBJS = $(OBJECTS) $(LIBOBJS)
 
 DATAFILES = doc/examplerc doc/changes.awk
 DOCS = README NEWS THANKS doc/update.sh
+MANLANGS = fr
 
 all: $(TARGET)
 
@@ -176,6 +177,9 @@ install-sitecopy: install-common
 	@echo "Installing man page..."
 	$(mkinstalldirs) $(DESTDIR)$(man1dir)
 	$(INSTALL_DATA) $(top_srcdir)/doc/sitecopy.1 $(DESTDIR)$(man1dir)/sitecopy.1
+	for f in $(MANLANGS); do $(mkinstalldirs) $(DESTDIR)$(mandir)/$$f/man1; \
+		$(INSTALL_DATA) $(top_srcdir)/doc/sitecopy.$$f.1 \
+			     $(DESTDIR)$(mandir)/$$f/man1/sitecopy.1; done
 	@echo
 	@echo "sitecopy installation finished."
 	@echo
