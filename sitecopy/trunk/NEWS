@@ -1,3 +1,6 @@
+Changes in release 0.14.3:
+* FTP: Fix fetch mode issues with some servers.
+
 Changes in release 0.14.2:
 * FTP: Add IPv6 support (passive mode only).
 * Fix "make install" with NLS enabled.
