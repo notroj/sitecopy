@@ -35,6 +35,7 @@ struct ls_context {
     int after_blank;
     char *topdir;
     char *curdir;
+    const char *error;
 };
 
 ls_context_t *ls_init(const char *dir)
@@ -135,6 +136,12 @@ static mode_t parse_permissions(const char *perms)
     return ret & 0777;
 }
 
+static enum ls_result fail(ls_context_t *ctx, const char *errstr)
+{
+    ctx->error = errstr;
+    return ls_error;
+}
+
 /* Parse LINE of length LEN as a "file" line, placing result in *FILE */
 static enum ls_result parse_file(ls_context_t *ctx, char *line, size_t len,
                                  struct ls_file *file)
@@ -142,25 +149,25 @@ static enum ls_result parse_file(ls_context_t *ctx, char *line, size_t len,
     char *perms, *size;
 
     perms = ne_token(&line, ' ');
-    if (!line) return ls_error;
+    if (!line) return fail(ctx, "beginning of line");
     while (*line++ == ' ') /* nullop */;
  
     /* skip inode, user and group fields */
     line = skip_field(skip_field(skip_field(line)));
-    if (*line == '\0') return ls_error;
+    if (*line == '\0') return fail(ctx, "in inode/user/group fields");
 
     size = ne_token(&line, ' ');
-    if (!line) return ls_error;
+    if (!line) return fail(ctx, "after inode/user/group fields");
     while (*line++ == ' ') /* nullop */;
 
     /* skip Month, day, time fields */
     line = skip_field(skip_field(skip_field(line)));
-    if (*line == '\0') return ls_error;
+    if (*line == '\0') return fail(ctx, "after timestamp field");
 
     /* line now points at the last field, the filename.  Reject any
      * relative filenames. */
     if (strchr(line, '/') != NULL)
-        return ls_error;
+        return fail(ctx, "relative filename disallowed");
 
     if (perms[0] == '-') {
         /* Normal file */
@@ -207,6 +214,11 @@ enum ls_result ls_parse(ls_context_t *ctx, char *line, struct ls_file *file)
     } else {
         return parse_file(ctx, line, len, file);
     }
+}
+
+const char *ls_geterror(ls_context_t *ctx)
+{
+    return ctx->error;
 }
 
 void ls_pflist_add(struct proto_file **list, struct proto_file **tail,

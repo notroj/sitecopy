@@ -1,6 +1,6 @@
 /* 
    'ls' output parser, for rsh and ftp drivers
-   Copyright (C) 1998-2004, Joe Orton <joe@manyfish.co.uk>
+   Copyright (C) 1998-2005, Joe Orton <joe@manyfish.co.uk>
                                                                      
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -50,6 +50,9 @@ enum ls_result {
 
 /* Parse LINE of ls output. */
 enum ls_result ls_parse(ls_context_t *ctx, char *line, struct ls_file *file);
+
+/* Return the error string from the context: */
+const char *ls_geterror(ls_context_t *ctx);
 
 /* Destroy an LS parser context. */
 void ls_destroy(ls_context_t *ctx);
