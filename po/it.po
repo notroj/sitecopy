@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sitecopy 0.14.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-01-02 12:15+0000\n"
+"POT-Creation-Date: 2005-01-03 10:24+0000\n"
 "PO-Revision-Date: 2004-09-13 23:04+0200\n"
 "Last-Translator: Cristian Rigamonti <cri@linux.it>\n"
 "Language-Team: Italian <tp@lists.linux.it>\n"
@@ -1067,8 +1067,8 @@ msgstr "Il server non sembra essere un server WebDAV."
 msgid "The server does not support the executable live property."
 msgstr "Il server non supporta la proprietà live executable"
 
-#: src/davdriver.c:334 src/davdriver.c:401 src/davdriver.c:438 src/ftp.c:864
-#: src/ftp.c:928
+#: src/davdriver.c:334 src/davdriver.c:401 src/davdriver.c:438 src/ftp.c:870
+#: src/ftp.c:934
 msgid "Could not open file"
 msgstr "Impossibile aprire il file"
 
@@ -1116,12 +1116,12 @@ msgstr "Impossibile leggere l'obiettivo del link simbolico."
 msgid "Unknown system error"
 msgstr "Errore di sistema sconosciuto"
 
-#: src/ftp.c:156 lib/neon/ne_request.c:233
+#: src/ftp.c:153 lib/neon/ne_request.c:233
 #, c-format
 msgid "%s: connection was closed by server."
 msgstr "%s: la connessione è stata chiusa dal server."
 
-#: src/ftp.c:160 lib/neon/ne_request.c:238
+#: src/ftp.c:157 lib/neon/ne_request.c:238
 #, c-format
 msgid "%s: connection timed out."
 msgstr "%s: tempo di connessione scaduto."
@@ -1160,62 +1160,62 @@ msgstr "Impossibile leggere la risposta PASV"
 msgid "Malformed port in EPSV response"
 msgstr "Indirizzo IP non valido nella risposta PASV"
 
-#: src/ftp.c:441
+#: src/ftp.c:443
 msgid "Error sending file"
 msgstr "Errore nell'invio del file"
 
-#: src/ftp.c:455 src/ftp.c:481
+#: src/ftp.c:457 src/ftp.c:483
 msgid "Error reading file"
 msgstr "Errore nella lettura del file"
 
-#: src/ftp.c:472
+#: src/ftp.c:474
 msgid "Could not send file"
 msgstr "Impossibile inviare il file"
 
-#: src/ftp.c:503 src/ftp.c:947
+#: src/ftp.c:504 src/ftp.c:953
 msgid "Error writing to file"
 msgstr "Errore nella scrittura del file"
 
-#: src/ftp.c:509
+#: src/ftp.c:510
 msgid "Receiving file"
 msgstr "Ricezione del file"
 
-#: src/ftp.c:524
+#: src/ftp.c:526
 msgid "Could not connect passive data socket"
 msgstr "Impossibile creare la struttura SSL"
 
-#: src/ftp.c:637
+#: src/ftp.c:641
 msgid "Active open failed: could not determine address of control socket"
 msgstr ""
 "Errore active open: impossibile determinare l'indirizzo del socket di "
 "controllo"
 
-#: src/ftp.c:648
+#: src/ftp.c:652
 msgid "Active open failed: could not create socket"
 msgstr "Errore active open: impossibile creare il socket"
 
-#: src/ftp.c:656
+#: src/ftp.c:660
 msgid "Active open failed: could not bind to address"
 msgstr "Errore active open: impossibile collegarsi all'indirizzo"
 
-#: src/ftp.c:666
+#: src/ftp.c:670
 msgid "Active open failed: could not determine address of data socket"
 msgstr ""
 "Errore active open: impossibile determinare l'indirizzo del socket dati"
 
-#: src/ftp.c:709
+#: src/ftp.c:713
 msgid "Active open failed: could not accept connection"
 msgstr "Errore active open: impossibile accettare la connessione"
 
-#: src/ftp.c:779
+#: src/ftp.c:785
 msgid "Error closing data socket"
 msgstr "Errore nella chiusura del socket dati"
 
-#: src/ftp.c:870
+#: src/ftp.c:876
 msgid "Could not determine length of file"
 msgstr "Impossibile determinare la lunghezza del file"
 
-#: src/ftp.c:1102
+#: src/ftp.c:1108
 msgid "Could not read 'LIST' response."
 msgstr "Impossibile leggere la risposta \"LIST\""
 

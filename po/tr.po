@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sitecopy-0.10.10\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-01-02 12:15+0000\n"
+"POT-Creation-Date: 2005-01-03 10:24+0000\n"
 "PO-Revision-Date: 2001-01-03 HO:MI+ZONE\n"
 "Last-Translator: A. Sinan Unur <sinan@unur.com>\n"
 "Language-Team: tr\n"
@@ -1038,8 +1038,8 @@ msgstr "Bu sunucu WebDAV sunucusu deðil."
 msgid "The server does not support the executable live property."
 msgstr "The server does not support the executable live property."
 
-#: src/davdriver.c:334 src/davdriver.c:401 src/davdriver.c:438 src/ftp.c:864
-#: src/ftp.c:928
+#: src/davdriver.c:334 src/davdriver.c:401 src/davdriver.c:438 src/ftp.c:870
+#: src/ftp.c:934
 #, fuzzy
 msgid "Could not open file"
 msgstr "Dosya açýlamadý: "
@@ -1085,12 +1085,12 @@ msgstr "Sembolik linkin hedefi okunamadý."
 msgid "Unknown system error"
 msgstr "Bilinmeyen sistem hatasý"
 
-#: src/ftp.c:156 lib/neon/ne_request.c:233
+#: src/ftp.c:153 lib/neon/ne_request.c:233
 #, c-format
 msgid "%s: connection was closed by server."
 msgstr "%s: baðlantý sunucu tarafinden kesildi."
 
-#: src/ftp.c:160 lib/neon/ne_request.c:238
+#: src/ftp.c:157 lib/neon/ne_request.c:238
 #, c-format
 msgid "%s: connection timed out."
 msgstr "%s: baðlantý bekleme sýnýrý aþýldý."
@@ -1134,65 +1134,65 @@ msgstr "Yanýt metni okunamadý"
 msgid "Malformed port in EPSV response"
 msgstr "Yanýt metni okunamadý"
 
-#: src/ftp.c:441
+#: src/ftp.c:443
 msgid "Error sending file"
 msgstr ""
 
-#: src/ftp.c:455 src/ftp.c:481
+#: src/ftp.c:457 src/ftp.c:483
 #, fuzzy
 msgid "Error reading file"
 msgstr "Ýstek metni gönderilirken hata"
 
-#: src/ftp.c:472
+#: src/ftp.c:474
 #, fuzzy
 msgid "Could not send file"
 msgstr "Dosya açýlamadý: "
 
-#: src/ftp.c:503 src/ftp.c:947
+#: src/ftp.c:504 src/ftp.c:953
 #, fuzzy
 msgid "Error writing to file"
 msgstr "Yanýt beklerken hata"
 
-#: src/ftp.c:509
+#: src/ftp.c:510
 msgid "Receiving file"
 msgstr ""
 
-#: src/ftp.c:524
+#: src/ftp.c:526
 #, fuzzy
 msgid "Could not connect passive data socket"
 msgstr "SSL baðlantýsý kurulamadý"
 
-#: src/ftp.c:637
+#: src/ftp.c:641
 msgid "Active open failed: could not determine address of control socket"
 msgstr ""
 
-#: src/ftp.c:648
+#: src/ftp.c:652
 #, fuzzy
 msgid "Active open failed: could not create socket"
 msgstr "SSL baðlantýsý kurulamadý"
 
-#: src/ftp.c:656
+#: src/ftp.c:660
 msgid "Active open failed: could not bind to address"
 msgstr ""
 
-#: src/ftp.c:666
+#: src/ftp.c:670
 msgid "Active open failed: could not determine address of data socket"
 msgstr ""
 
-#: src/ftp.c:709
+#: src/ftp.c:713
 msgid "Active open failed: could not accept connection"
 msgstr ""
 
-#: src/ftp.c:779
+#: src/ftp.c:785
 msgid "Error closing data socket"
 msgstr ""
 
-#: src/ftp.c:870
+#: src/ftp.c:876
 #, fuzzy
 msgid "Could not determine length of file"
 msgstr "Dosya açýlamadý: "
 
-#: src/ftp.c:1102
+#: src/ftp.c:1108
 #, fuzzy
 msgid "Could not read 'LIST' response."
 msgstr "Yanýt metni okunamadý"
