@@ -163,6 +163,12 @@ static enum ls_result parse_file(ls_context_t *ctx, char *line, size_t len,
     /* skip Month, day, time fields */
     line = skip_field(skip_field(skip_field(line)));
     if (*line == '\0') return fail(ctx, "after timestamp field");
+ 
+    /* Bail out if this isn't a file or directory. */
+    if (perms[0] != '-' && perms[0] != 'd') {
+        NE_DEBUG(DEBUG_FTP, "ls: ignored line\n");
+        return ls_nothing;
+    }
 
     /* line now points at the last field, the filename.  Reject any
      * relative filenames. */
@@ -174,10 +180,10 @@ static enum ls_result parse_file(ls_context_t *ctx, char *line, size_t len,
         file->mode = parse_permissions(perms);
         file->name = ne_concat(ctx->curdir, line, NULL);
         file->size = strtol(size, NULL, 10);
-        NE_DEBUG(DEBUG_FTP, "ls: file (%03o, %" NE_FMT_OFF_T "): [%s]\n", file->mode, file->size,
-                 file->name);
+        NE_DEBUG(DEBUG_FTP, "ls: file (%03o, %" NE_FMT_OFF_T "): [%s]\n",
+                 file->mode, file->size, file->name);
         return ls_file;
-    } else if (perms[0] == 'd') {
+    } else /* perms[0] == 'd' */ {
         if (strcmp(line, ".") == 0 || strcmp(line, "..") == 0) {
             return ls_nothing;
         }
@@ -185,8 +191,6 @@ static enum ls_result parse_file(ls_context_t *ctx, char *line, size_t len,
         file->name = ne_concat(ctx->curdir, line, NULL);
         NE_DEBUG(DEBUG_FTP, "ls: directory (%03o): %s\n", file->mode, file->name);
         return ls_directory;
-    } else {
-        return ls_nothing;
     }
 }
 
