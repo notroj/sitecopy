@@ -111,26 +111,31 @@ Makefile: Makefile.in
 netrc: lib/netrc.c
 	$(CC) $(ALL_CFLAGS) -DSTANDALONE -o $@ $^
 
-# Dependencies... could do with being auto-generated
+# Dependencies:
 
-src/fileset.o: src/fileset.c src/fileset.h src/sitesi.h src/common.h config.h
-src/console_fe.o: src/console_fe.c src/frontend.h src/sites.h src/common.h \
-	src/rcfile.h config.h src/protocol.h
-src/ftp.o: src/ftp.c src/ftp.h src/protocol.h src/common.h config.h
-src/davdriver.o: src/davdriver.c src/protocol.h src/frontend.h src/common.h
-src/ftpdriver.o: src/ftpdriver.c src/ftp.h src/protocol.h src/common.h
-src/nulldriver.o: src/nulldriver.c src/protocol.h
-src/sites.o: src/sites.c src/sites.h src/sitesi.h src/protocol.h	\
-	src/frontend.h lib/basename.h src/common.h config.h
-src/sitefiles.o: src/sitefiles.c src/sites.h src/sitesi.h config.h src/common.h
-src/sitestore.o: src/sitestore.c src/sites.h src/sitesi.h config.h src/common.h
-src/fileset.o: src/fileset.c src/sites.h src/sitesi.h config.h src/common.h
-src/common.o: src/common.c src/common.h config.h
+HEADERS = src/common.h src/frontend.h src/i18n.h src/protocol.h src/sites.h \
+	src/fileset.h src/ftp.h src/lsparser.h src/rcfile.h src/sitesi.h    \
+	lib/basename.h lib/dirname.h lib/fnmatch.h lib/getopt.h		    \
+	lib/netrc.h config.h
+
+src/common.o: src/common.c $(HEADERS)
+src/console_fe.o: src/console_fe.c $(HEADERS)
+src/davdriver.o: src/davdriver.c $(HEADERS)
+src/fileset.o: src/fileset.c $(HEADERS)
+src/ftp.o: src/ftp.c $(HEADERS)
+src/ftpdriver.o: src/ftpdriver.c $(HEADERS)
+src/lsparser.o: src/lsparser.c $(HEADERS)
+src/nulldriver.o: src/nulldriver.c $(HEADERS)
+src/rcfile.o: src/rcfile.c $(HEADERS)
+src/rshdriver.o: src/rshdriver.c $(HEADERS)
+src/sitefiles.o: src/sitefiles.c $(HEADERS)
+src/sites.o: src/sites.c $(HEADERS)
+src/sitestore.o: src/sitestore.c $(HEADERS)
+lib/basename.o: lib/basename.c lib/basename.h config.h
+lib/dirname.o: lib/dirname.c lib/dirname.h config.h
 lib/netrc.o: lib/netrc.c lib/netrc.h config.h
-src/rcfile.o: src/rcfile.c src/rcfile.h src/sites.h lib/netrc.h src/common.h \
-	config.h src/protocol.h
-lib/snprintf.o: lib/snprintf.c lib/snprintf.h config.h
-
+lib/rpmatch.o: lib/rpmatch.c config.h
+lib/yesno.o: lib/yesno.c config.h
 
 $(EXPATDIR)/xmltok/nametab.h: $(EXPATDIR)/gennmtab/gennmtab@EXEEXT@
 	rm -f $@
