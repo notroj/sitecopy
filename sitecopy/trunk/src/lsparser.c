@@ -1,6 +1,6 @@
 /* 
    'ls' output parser, for rsh and ftp drivers
-   Copyright (C) 1998-2004, Joe Orton <joe@manyfish.co.uk>
+   Copyright (C) 1998-2005, Joe Orton <joe@manyfish.co.uk>
                                                                      
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -95,9 +95,10 @@ static enum ls_result parse_directory(ls_context_t *ctx, char *line, size_t len)
     while (*line == '/') line++;
     
     line = ne_strdup(line);
+    len = strlen(line);
     
-    if (strlen(line) > 1) {
-        line[strlen(line)-1] = '/';  /* change ':' to '/' */
+    if (len > 1) {
+        line[len-1] = '/';  /* change ':' to '/' */
     } else {
         /* this is just the top-level directory... */
         line[0] = '\0';
@@ -156,7 +157,10 @@ static enum ls_result parse_file(ls_context_t *ctx, char *line, size_t len,
     line = skip_field(skip_field(skip_field(line)));
     if (*line == '\0') return ls_error;
 
-    /* line now points at the last field, the filename */
+    /* line now points at the last field, the filename.  Reject any
+     * relative filenames. */
+    if (strchr(line, '/') != NULL)
+        return ls_error;
 
     if (perms[0] == '-') {
         /* Normal file */
