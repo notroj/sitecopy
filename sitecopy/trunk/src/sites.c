@@ -1282,7 +1282,8 @@ void site_destroy(struct site *site)
  * with the given diff type in the given site, using the given section
  * name. */
 static void site_flatlist_items(FILE *f, struct site *site,
-				 enum file_diff diff, const char *name) {
+                                enum file_diff diff, const char *name)
+{
     struct site_file *current;
     fprintf(f, "sectstart|%s", name);
     putc('\n', f);
@@ -1291,10 +1292,11 @@ static void site_flatlist_items(FILE *f, struct site *site,
 	    fprintf(f, "item|%s%s", file_name(current),
 		    (current->type==file_dir)?"/":"");
 	    if (current->diff == file_moved) {
-		fprintf(f, "|%s\n", current->stored.filename);
-	    } else {
-		putc('\n', f);
-	    }	    
+		fprintf(f, "|%s", current->stored.filename);
+	    }
+            if (current->ignore)
+                fputs("|ignored", f);
+            putc('\n', f);
 	}
     }
     fprintf(f, "sectend|%s\n", name);
