@@ -1,5 +1,10 @@
-Changes in release 0.14.4:
-* FTP: Ignore symlinks in fetch mode.
+Changes in release 0.15.0:
+* Add SFTP support from Nobuyuki Tsuchimura using "protocol sftp".
+* FTP: Ignore symlinks in fetch mode; fix some fetch mode error handling.
+* DAV: fix use of remote root path which needed path-escaping.
+* rsh/ssh: Filename quoting fixes (Nobuyuki Tsuchimura).
+* Apply tempupload option to new files as well as changed files.
+* In "sitecopy --flatlist" output, mark ignored items with "|ignored".
 * Correct sitecopy.1 documentation: symlinks in the local site are
   followed not ignored, by default.
 * Add French translation of man page, by Nicolas Girard.
