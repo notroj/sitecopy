@@ -173,24 +173,28 @@ static int file_read(void *session, const char *remote,
     return run_finish(sess);
 }
 
-static int file_delete(void *session, const char *filename) {
+static int file_delete(void *session, const char *filename)
+{
     rsh_session *sess = session;
-    return run_rcmd(RSH, sess, "rm %s", filename);
+    return run_rcmd(RSH, sess, "rm '%s'", filename);
 }
 
-static int file_chmod(void *session, const char *fname, const mode_t mode) {
+static int file_chmod(void *session, const char *fname, const mode_t mode)
+{
     rsh_session *sess = session;
-    return run_rcmd(RSH, sess, "chmod %03o %s", mode, fname);
+    return run_rcmd(RSH, sess, "chmod %03o '%s'", mode, fname);
 }
 
-static int dir_create(void *session, const char *dirname) {
+static int dir_create(void *session, const char *dirname)
+{
     rsh_session *sess = session;
-    return run_rcmd(RSH, sess, "mkdir %s", dirname);
+    return run_rcmd(RSH, sess, "mkdir '%s'", dirname);
 }
 
-static int dir_remove(void *session, const char *dirname) {
+static int dir_remove(void *session, const char *dirname)
+{
     rsh_session *sess = session;
-    return run_rcmd(RSH, sess, "rmdir %s", dirname);
+    return run_rcmd(RSH, sess, "rmdir '%s'", dirname);
 }
 
 static const char *error(void *session) {
