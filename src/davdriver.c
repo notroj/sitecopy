@@ -347,7 +347,7 @@ static int put_if_unmodified(ne_session *sess, const char *uri, int fd,
     ne_add_request_header(req, "If-Unmodified-Since", date);
     ne_free(date);
     
-#ifdef HAVE_NEON024
+#if NE_VERSION_MINOR == 24
     ne_set_request_body_fd(req, fd);
 #else
     {

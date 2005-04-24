@@ -1056,7 +1056,7 @@ site_fetch_walk(struct site *site, struct proto_file *files)
 }
 
 static
-#ifdef HAVE_NEON024
+#if NE_VERSION_MINOR == 24
 void
 #else
 int
@@ -1065,7 +1065,7 @@ site_fetch_csum_read(void *userdata, const char *s, size_t len)
 {
     struct ne_md5_ctx *md5 = userdata;
     ne_md5_process_bytes(s, len, md5);
-#ifndef HAVE_NEON024
+#if NE_VERSION_MINOR != 24
     return 0;
 #endif
 }

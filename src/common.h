@@ -1,6 +1,6 @@
 /* 
    sitecopy, manage remote web sites.
-   Copyright (C) 1998-2004, Joe Orton <joe@manyfish.co.uk>.
+   Copyright (C) 1998-2005, Joe Orton <joe@manyfish.co.uk>.
                                                                      
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -84,7 +84,7 @@ void init_charset(void);
 int map_debug_options(const char *opts, int *mask, char *err);
 
 /* neon 0.24 compatibility */
-#ifdef HAVE_NEON024
+#if NE_VERSION_MINOR == 24
 #define ne_xml_failed(p) (!ne_xml_valid(p))
 #define NE_FEATURE_SSL 1
 #define ne_has_support(x) ne_supports_ssl()
