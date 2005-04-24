@@ -114,7 +114,7 @@ fi
 
 # neon 0.24.x is required, otherwise the bundled neon HEAD (0.25) is
 # used
-NEON_REQUIRE(0,24)
+NE_REQUIRE_VERSIONS([0], [24 25])
 
 dnl But we don't use zlib or ACL support
 NEON_WITHOUT_ZLIB
@@ -126,11 +126,6 @@ NEON_VPATH_BUNDLED(["\$(top_srcdir)/lib/neon"], ["\$(top_builddir)/lib/neon"], [
                         [\$(top_builddir)/lib/expat])
 	NEON_NORMAL_BUILD
 ])
-
-# Use compat stuff for neon 0.24.x
-if test "$neon_got_library" = "yes"; then
-   AC_DEFINE(HAVE_NEON024, 1, [Define if using neon 0.24.x])
-fi
 
 dnl Check for getopt_long
 AC_CHECK_FUNC(getopt_long,,[AC_LIBOBJ(lib/getopt)
@@ -225,7 +220,6 @@ AC_MSG_NOTICE([Configured sitecopy $PACKAGE_VERSION:
   XML Parser:            ${neon_xml_parser_message}
   SSL library:		 ${ne_SSL_message}
   Internationalization:  ${nls_msg}
-
 ])
 
 # Create all the necessary directories for VPATH builds.
