@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sitecopy 0.11.4\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-03-05 09:38+0000\n"
+"POT-Creation-Date: 2005-04-24 19:40+0100\n"
 "PO-Revision-Date: 2002-04-09 11:12+0100\n"
 "Last-Translator: Petr Prazak <prazak@grisoft.cz>\n"
 "Language-Team: cz\n"
@@ -1139,42 +1139,42 @@ msgstr ""
 msgid "Size overflow (%s) at line %d"
 msgstr ""
 
-#: src/davdriver.c:196
+#: src/davdriver.c:182
 msgid "The connection timed out."
 msgstr "Spojení vypr¹elo."
 
-#: src/davdriver.c:241
+#: src/davdriver.c:227
 msgid "SSL support has not be compiled in."
 msgstr "Podpora SSL nebyla zakompilována."
 
 # src/console_fe.c:992
-#: src/davdriver.c:249
+#: src/davdriver.c:235
 #, fuzzy, c-format
 msgid "Could not load certificate `%s'."
 msgstr "Nelze zapsat do souboru: %s"
 
-#: src/davdriver.c:286
+#: src/davdriver.c:272
 msgid "The server does not appear to be a WebDAV server."
 msgstr "Nezdá se, ¾e by server podporoval WebDAV."
 
-#: src/davdriver.c:291
+#: src/davdriver.c:277
 msgid "The server does not support the executable live property."
 msgstr "Server nepodporuje 'executable live property'."
 
 # src/console_fe.c:992
-#: src/davdriver.c:337 src/davdriver.c:404 src/davdriver.c:441 src/ftp.c:882
-#: src/ftp.c:946
+#: src/davdriver.c:323 src/davdriver.c:390 src/davdriver.c:427 src/ftp.c:876
+#: src/ftp.c:940
 #, fuzzy
 msgid "Could not open file"
 msgstr "Nelze otevøít soubor: "
 
 # src/console_fe.c:992
-#: src/davdriver.c:372
+#: src/davdriver.c:358
 #, fuzzy, c-format
 msgid "Could not stat file: %s"
 msgstr "Nelze zapsat do souboru: %s"
 
-#: src/davdriver.c:625
+#: src/davdriver.c:611
 msgid "Could not access resource"
 msgstr "Nelze pøistupovat ke zdroji"
 
@@ -1261,72 +1261,72 @@ msgstr "Nelze naèíst tìlo odpovìdi"
 msgid "Malformed port in EPSV response"
 msgstr "Nelze naèíst tìlo odpovìdi"
 
-#: src/ftp.c:452
+#: src/ftp.c:446
 msgid "Error sending file"
 msgstr ""
 
-#: src/ftp.c:466 src/ftp.c:492
+#: src/ftp.c:460 src/ftp.c:486
 #, fuzzy
 msgid "Error reading file"
 msgstr "Chyba pøi ctení tìla po¾adavku"
 
 # src/console_fe.c:992
-#: src/ftp.c:483
+#: src/ftp.c:477
 #, fuzzy
 msgid "Could not send file"
 msgstr "Nelze otevøít soubor: "
 
-#: src/ftp.c:513 src/ftp.c:965
+#: src/ftp.c:507 src/ftp.c:959
 #, fuzzy
 msgid "Error writing to file"
 msgstr "Chyba pøi èekání na odpovìd"
 
-#: src/ftp.c:519
+#: src/ftp.c:513
 msgid "Receiving file"
 msgstr ""
 
-#: src/ftp.c:535
+#: src/ftp.c:529
 #, fuzzy
 msgid "Could not connect passive data socket"
 msgstr "Nelze navázat SSL spojení"
 
-#: src/ftp.c:650
+#: src/ftp.c:644
 msgid "Active open failed: could not determine address of control socket"
 msgstr ""
 
-#: src/ftp.c:661
+#: src/ftp.c:655
 #, fuzzy
 msgid "Active open failed: could not create socket"
 msgstr "Nelze navázat SSL spojení"
 
-#: src/ftp.c:669
+#: src/ftp.c:663
 msgid "Active open failed: could not bind to address"
 msgstr ""
 
-#: src/ftp.c:679
+#: src/ftp.c:673
 msgid "Active open failed: could not determine address of data socket"
 msgstr ""
 
-#: src/ftp.c:722
+#: src/ftp.c:716
 msgid "Active open failed: could not accept connection"
 msgstr ""
 
-#: src/ftp.c:795
+#: src/ftp.c:789
 msgid "Error closing data socket"
 msgstr ""
 
 # src/console_fe.c:992
-#: src/ftp.c:888
+#: src/ftp.c:882
 #, fuzzy
 msgid "Could not determine length of file"
 msgstr "Nelze zjistit dílku souboru: %s"
 
-#: src/ftp.c:1128
+#: src/ftp.c:1122
 #, fuzzy
 msgid "Could not read 'LIST' response."
 msgstr "Nelze naèíst tìlo odpovìdi"
 
-#: src/ftp.c:1136
+#: src/ftp.c:1130
 #, fuzzy
 msgid "Parse error in LIST response"
 msgstr "Nelze naèíst tìlo odpovìdi"
@@ -1673,12 +1673,12 @@ msgstr "Nelze navázat SSL spojení"
 msgid "Could not parse redirect location."
 msgstr "Nelze zpracovat stavový øádek odpovìdi."
 
-#: lib/neon/ne_gnutls.c:434 lib/neon/ne_openssl.c:382
+#: lib/neon/ne_gnutls.c:434 lib/neon/ne_openssl.c:386
 msgid "Server certificate was missing commonName attribute in subject name"
 msgstr ""
 
 # src/console_fe.c:992
-#: lib/neon/ne_gnutls.c:471 lib/neon/ne_openssl.c:577
+#: lib/neon/ne_gnutls.c:471 lib/neon/ne_openssl.c:581
 #, fuzzy, c-format
 msgid "SSL negotiation failed: %s"
 msgstr "Nelze zapsat do souboru: %s"
@@ -1711,16 +1711,16 @@ msgstr ""
 msgid "[invalid date]"
 msgstr ""
 
-#: lib/neon/ne_openssl.c:414
+#: lib/neon/ne_openssl.c:418
 #, c-format
 msgid "Certificate verification error: %s"
 msgstr ""
 
-#: lib/neon/ne_openssl.c:596
+#: lib/neon/ne_openssl.c:600
 msgid "SSL server did not present certificate"
 msgstr ""
 
-#: lib/neon/ne_openssl.c:605
+#: lib/neon/ne_openssl.c:609
 msgid "Server certificate changed: connection intercepted?"
 msgstr ""
 
@@ -1774,93 +1774,109 @@ msgstr "Nelze navázat SSL spojení"
 msgid "%s: connection was closed by proxy server."
 msgstr "%s: proxy server ukonèil spojení."
 
-#: lib/neon/ne_request.c:414
+#: lib/neon/ne_request.c:386
+msgid "offset invalid"
+msgstr ""
+
+# src/console_fe.c:992
+#: lib/neon/ne_request.c:389
+#, fuzzy
+msgid "Could not seek to offset %"
+msgstr "Nelze zapsat do souboru: %s"
+
+# src/console_fe.c:992
+#: lib/neon/ne_request.c:390
+#, fuzzy, c-format
+msgid " of request body file: %s"
+msgstr "Nelze zapsat do souboru: %s"
+
+#: lib/neon/ne_request.c:434
 msgid "Could not send request body"
 msgstr "Nelze odeslat tìlo po¾adavku"
 
-#: lib/neon/ne_request.c:756
+#: lib/neon/ne_request.c:782
 msgid "Could not read chunk size"
 msgstr "Nelze naèíst velikost bloku"
 
-#: lib/neon/ne_request.c:763
+#: lib/neon/ne_request.c:789
 msgid "Could not parse chunk size"
 msgstr "Nelze zpracovat velikost bloku"
 
-#: lib/neon/ne_request.c:800
+#: lib/neon/ne_request.c:826
 msgid "Could not read response body"
 msgstr "Nelze naèíst tìlo odpovìdi"
 
-#: lib/neon/ne_request.c:816
+#: lib/neon/ne_request.c:842
 #, fuzzy
 msgid "Could not read chunk delimiter"
 msgstr "Nelze naèíst velikost bloku"
 
-#: lib/neon/ne_request.c:819
+#: lib/neon/ne_request.c:845
 msgid "Chunk delimiter was invalid"
 msgstr ""
 
-#: lib/neon/ne_request.c:925
+#: lib/neon/ne_request.c:955
 msgid "Could not read status line"
 msgstr "Nelze pøeèíst stavový øádek"
 
-#: lib/neon/ne_request.c:936
+#: lib/neon/ne_request.c:966
 msgid "Could not parse response status line."
 msgstr "Nelze zpracovat stavový øádek odpovìdi."
 
-#: lib/neon/ne_request.c:947
+#: lib/neon/ne_request.c:977
 #, fuzzy
 msgid "Could not read interim response headers"
 msgstr "Nelze naèíst tìlo odpovìdi"
 
-#: lib/neon/ne_request.c:981
+#: lib/neon/ne_request.c:1011
 msgid "Could not send request"
 msgstr "Nelze poslat po¾adavek"
 
-#: lib/neon/ne_request.c:1029 lib/neon/ne_request.c:1047
-#: lib/neon/ne_request.c:1057
+#: lib/neon/ne_request.c:1059 lib/neon/ne_request.c:1077
+#: lib/neon/ne_request.c:1087
 msgid "Error reading response headers"
 msgstr "Chyba pøi ètení hlavièek odpovìdi"
 
-#: lib/neon/ne_request.c:1075
+#: lib/neon/ne_request.c:1105
 msgid "Response header too long"
 msgstr "Hlavièka odpovìdi je pøíli¹ dlouhá"
 
-#: lib/neon/ne_request.c:1157
+#: lib/neon/ne_request.c:1187
 msgid "Response exceeded maximum number of header fields."
 msgstr "Odpovìï pøekrocila maximální poøet polo¾ek v hlavicce."
 
 # src/console_fe.c:956
-#: lib/neon/ne_request.c:1174
+#: lib/neon/ne_request.c:1204
 #, fuzzy, c-format
 msgid "Could not resolve hostname `%s': %s"
 msgstr "%s: Chyba: Nelze najít adresu vzdáleného poèítaèe (%s).\n"
 
-#: lib/neon/ne_request.c:1284
+#: lib/neon/ne_request.c:1314
 msgid "Invalid Content-Length in response"
 msgstr ""
 
 # src/console_fe.c:992
-#: lib/neon/ne_request.c:1346
+#: lib/neon/ne_request.c:1376
 #, c-format
 msgid "Could not write to file: %s"
 msgstr "Nelze zapsat do souboru: %s"
 
-#: lib/neon/ne_request.c:1419
+#: lib/neon/ne_request.c:1449
 msgid "Could not create SSL connection through proxy server"
 msgstr "Nelze navázat SSL spojení pøes proxy server."
 
-#: lib/neon/ne_request.c:1465
+#: lib/neon/ne_request.c:1495
 #, fuzzy
 msgid "Could not create socket"
 msgstr "Nelze navázat SSL spojení"
 
 # src/console_fe.c:961
-#: lib/neon/ne_request.c:1510
+#: lib/neon/ne_request.c:1540
 msgid "Could not connect to server"
 msgstr "Nelze se pøipojit k serveru"
 
 # src/console_fe.c:961
-#: lib/neon/ne_request.c:1513
+#: lib/neon/ne_request.c:1543
 msgid "Could not connect to proxy server"
 msgstr "Nelze se pøipojit k proxy serveru"
 
@@ -1891,27 +1907,32 @@ msgstr "Chyba zpracování XML na øádku %d: %s."
 msgid "Response exceeds maximum property count"
 msgstr "Odpovìï pøekrocila maximální poøet polo¾ek v hlavicce."
 
-#: lib/neon/ne_compress.c:175
+#: lib/neon/ne_compress.c:177
 #, fuzzy, c-format
 msgid "%s: %s"
 msgstr "%s: Chyba: %s\n"
 
-#: lib/neon/ne_compress.c:186
+#: lib/neon/ne_compress.c:188
 #, c-format
 msgid "%s: %s (code %d)"
 msgstr ""
 
 # src/console_fe.c:992
-#: lib/neon/ne_compress.c:232
+#: lib/neon/ne_compress.c:234
 #, fuzzy
 msgid "Could not inflate data"
 msgstr "Nelze otevøít soubor: "
 
 # src/console_fe.c:992
-#: lib/neon/ne_compress.c:293
+#: lib/neon/ne_compress.c:295
 #, fuzzy
 msgid "Could not initialize zlib"
 msgstr "Nelze otevøít soubor: "
+
+#: lib/neon/ne_xmlreq.c:31
+#, fuzzy, c-format
+msgid "Could not parse response: %s"
+msgstr "Nelze naèíst tìlo odpovìdi"
 
 # src/console_fe.c:992
 #: lib/neon/ne_basic.c:86
