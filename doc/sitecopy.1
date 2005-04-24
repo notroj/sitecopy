@@ -383,6 +383,14 @@ expectation, e.g. Apache 1.3.9 and later, the key
 should be used. Doing so can save some bandwidth and time in an
 update.
 
+If the WebDAV server supports access via SSL, the key
+.B http secure
+can be used.  Doing so will cause the transfers between sitecopy
+and the host to be performed using an secure, encrypted link.  The
+first time SSL is used to access the server, the user will be
+prompted to verify the SSL certificate, if it's not signed by
+a CA trusted in the system's CA root bundle.
+
 To authenticate the user with the server, the 
 .B username
 and 
