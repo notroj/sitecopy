@@ -1,6 +1,6 @@
 /*
  *      XSitecopy, for managing remote web sites with a GNOME interface.
- *      Copyright (C) 2000, Lee Mallabone <lee0@callnetuk.com
+ *      Copyright (C) 2000, 2005, Lee Mallabone <lee@fonicmonkey.net>
  *
  *      This program is free software; you can redistribute it and/or modify
  *      it under the terms of the GNU General Public License as published by
@@ -34,7 +34,7 @@ int create_about(void)
 {
    GtkWidget *about_window;
    const gchar *people[] =
-     {"Lee Mallabone <lee0@callnetuk.com>", "Joe Orton <joe@orton.demon.co.uk>", NULL};
+     {"Lee Mallabone <lee@fonicmonkey.net>", "Joe Orton <joe@manyfish.co.uk>", NULL};
    about_window = gnome_about_new("XSitecopy", PACKAGE_VERSION, "Copyright (C) 1999,2000 Lee Mallabone", people,
 				  "XSitecopy is the official GNOME front end to sitecopy.\nSitecopy is for copying locally stored websites to remote web servers.", NULL);
    gtk_widget_show(about_window);
