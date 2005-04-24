@@ -215,7 +215,7 @@ AC_CONFIG_FILES([Makefile lib/neon/Makefile po/Makefile.in intl/Makefile])
 
 AC_OUTPUT
 
-AC_MSG_NOTICE([Configured sitecopy ${VERSION}:
+AC_MSG_NOTICE([Configured sitecopy $PACKAGE_VERSION:
 
   Install prefix:        ${prefix}
   Compiler:              ${CC}
@@ -226,7 +226,6 @@ AC_MSG_NOTICE([Configured sitecopy ${VERSION}:
   SSL library:		 ${ne_SSL_message}
   Internationalization:  ${nls_msg}
 
-Now run 'make' to compile ${TARGET}.
 ])
 
 # Create all the necessary directories for VPATH builds.
