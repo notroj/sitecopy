@@ -1,6 +1,7 @@
 Changes in release 0.15.1:
 * Updated Italian translation (Cristian Rigamonti).
 * FTP: fix newline handling issues for ASCII file transfers.
+* sitecopy.1: explain use of "http secure" (Reed Snellenberger)
 * Update to neon 0.25.0:
  - fix regressions in WebDAV path-escaping
 
