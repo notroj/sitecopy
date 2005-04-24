@@ -421,33 +421,27 @@ static int execute(ftp_session *sess, const char *template, ...)
  * (in which case, session error string is set). */
 static int send_file_ascii(ftp_session *sess, FILE *f, off_t fsize)
 {
-    int ret;
-    char buffer[BUFSIZ], *pnt;
+    char buffer[BUFSIZ];
     off_t total = 0, lasttotal = 0;
 
     while (fgets(buffer, BUFSIZ - 1, f) != NULL) {
-	/* Ensure that line-ending is CRLF. */
-	pnt = strchr(buffer, '\r');
-	if (pnt == NULL) {
-	    /* We need to add the CR in */
-	    pnt = strchr(buffer, '\n');
-	    if (pnt == NULL) {
-		/* No CRLF; last line of file */
-		pnt = memchr(buffer, '\0', sizeof buffer);
-		assert(pnt != NULL);
-	    }
-	    /* Now, pnt points to the first character after the 
-	     * end of the line, i.e., where we want to put the CR.
-	     */
-	    *pnt++ = '\r';
-	    /* And lob in an LF afterwards */
-	    *pnt-- = '\n';
-	}
-	/* At this point, pnt points to the CR.
-	 * We send everything between pnt and the beginning of the buffer,
-	 * +2 for the CRLF
-	 */
-	ret = ne_sock_fullwrite(sess->dtpsock, buffer, 2 + pnt - buffer);
+        size_t buflen;
+        char *pnt;
+        int ret;
+
+        pnt = strchr(buffer, '\r');
+        if (pnt == NULL)
+            pnt = strchr(buffer, '\n');
+        if (pnt) {
+            *pnt++ = '\r';
+            *pnt++ = '\n';
+            buflen = pnt - buffer;
+        } else {
+            /* line with no CRLF. */
+            buflen = strlen(buffer);
+        }
+        
+	ret = ne_sock_fullwrite(sess->dtpsock, buffer, buflen);
 	if (ret) {
 	    set_sockerr(sess, sess->dtpsock, _("Error sending file"), ret);
 	    return -1;
