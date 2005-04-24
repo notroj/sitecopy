@@ -1,6 +1,6 @@
 /* 
  *      XSitecopy, for managing remote web sites with a GNOME interface.
- *      Copyright (C) 2000, Lee Mallabone <lee0@callnetuk.com>
+ *      Copyright (C) 2000, Lee Mallabone <lee@fonicmonkey.net>
  *                                                                        
  *      This program is free software; you can redistribute it and/or modify
  *      it under the terms of the GNU General Public License as published by
