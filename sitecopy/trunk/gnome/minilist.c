@@ -191,6 +191,7 @@ void remove_minilist_item(GtkWidget * button, gpointer data)
 	    NE_DEBUG(DEBUG_GNOME, "Removing an item from the ignores list.\n");
 	    break;
 	default:
+	    ;
 	}
 	if (the_gui->data)
 	    the_gui->data->prev = NULL;

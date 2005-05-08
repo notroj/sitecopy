@@ -310,6 +310,7 @@ void quit_please(void)
 	    return;
 	    break;
 	default:
+	    ;
 	}
     }
 }
