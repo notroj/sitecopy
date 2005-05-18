@@ -339,8 +339,10 @@ static int parse_reply(ftp_session *sess, int code, char *reply)
     case 221:
 	/* succesful QUIT reseponse. */
 	return FTP_CLOSED;
-    case 421: /* service denied */
-	return FTP_DENIED;
+    case 421: /* service denied; PI connection closure */
+        ne_sock_close(sess->pisock);
+        sess->connected = 0;
+        return FTP_BROKEN;
     case 553: /* couldn't create directory */
 	return FTP_ERROR;
     case 213: /* MDTM response, hopefully */
