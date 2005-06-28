@@ -1,6 +1,6 @@
 /* 
    sitecopy, for managing remote web sites.
-   Copyright (C) 1999-2004, Joe Orton <joe@manyfish.co.uk>
+   Copyright (C) 1999-2005, Joe Orton <joe@manyfish.co.uk>
                                                                      
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -250,7 +250,7 @@ int file_checksum(const char *fname, struct file_state *state, struct site *s);
 /* Returns whether a file of given name is exclude from the given site */
 int file_isexcluded(const char *filename, struct site *site);
 /* Returns whether a file is ASCII text or binary */
-int file_isascii(char *filename, struct site *site);
+int file_isascii(const char *filename, struct site *site);
 /* Returns whether a file is ignored or not */
 int file_isignored(const char *filename, struct site *site);
 
