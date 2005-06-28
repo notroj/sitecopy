@@ -923,8 +923,6 @@ void site_read_local_state(struct site *site)
     free(dirstack);
 }
 
-#undef DIRSTACKSIZE
-
 /* Pretend the remote site is the same as the local site. */
 void site_catchup(struct site *site)
 {
@@ -999,60 +997,46 @@ static void munge_modtime(struct site_file *file, time_t remote_mtime,
     }
 }
 
-/* This walks the files list as returned by the protocol driver,
- * and converts it into a 'real' files list. */
-static void 
-site_fetch_walk(struct site *site, struct proto_file *files)
+/* Return a site_file structure given a proto_file structure fetched
+ * by the protocol driver. */
+static struct site_file *fetch_add_file(struct site *site,
+                                        const struct proto_file *pf)
 {
-    struct proto_file *this_file, *next_file;
-
-    this_file = files;
-    while (this_file != NULL) {
-
-	if (!file_isexcluded(this_file->filename, site)) {
-	    enum file_type type = file_file; /* init to shut up gcc */
-	    struct site_file *file;
-	    struct file_state state = {0};
-
-	    switch (this_file->type) {
-	    case proto_file:
-		type = file_file;
-		break;
-	    case proto_dir:
-		type = file_dir;
-		break;
-	    case proto_link:
-		type = file_link;
-		break;
-	    }
-	    state.size = this_file->size;
-	    state.time = this_file->modtime;
-	    state.exists = true;
-	    state.filename = this_file->filename;
-	    state.mode = this_file->mode;
-	    state.ascii = file_isascii(this_file->filename, site);
-	    memcpy(state.checksum, this_file->checksum, 16);
-	    
-	    file = file_set_stored(type, &state, site);
-	    fe_fetch_found(file);
-
-	    munge_modtime(file, this_file->modtime, site);
-
-	    if (site->safemode) {
-		/* Store the server modtime. */
-		file->server.time = this_file->modtime;
-		file->server.exists = true;
-	    }
-
-	} else {
-	    free(this_file->filename);
-	}
-
-	next_file = this_file->next;
-	free(this_file);
-	this_file = next_file;
+    enum file_type type = file_file; /* init to shut up gcc */
+    struct site_file *file;
+    struct file_state state = {0};
+    
+    switch (pf->type) {
+    case proto_file:
+        type = file_file;
+        break;
+    case proto_dir:
+        type = file_dir;
+        break;
+    case proto_link:
+        type = file_link;
+        break;
     }
 
+    state.size = pf->size;
+    state.time = pf->modtime;
+    state.exists = true;
+    state.filename = pf->filename;
+    state.mode = pf->mode;
+    state.ascii = file_isascii(pf->filename, site);
+    memcpy(state.checksum, pf->checksum, 16);
+    
+    file = file_set_stored(type, &state, site);
+    
+    munge_modtime(file, pf->modtime, site);
+    
+    if (site->safemode) {
+        /* Store the server modtime. */
+        file->server.time = pf->modtime;
+        file->server.exists = true;
+    }
+
+    return file;
 }
 
 static
@@ -1071,31 +1055,25 @@ site_fetch_csum_read(void *userdata, const char *s, size_t len)
 }
 
 /* Retrieve the remote checksum for all files */
-static int 
-site_fetch_checksum(struct proto_file *files, struct site *site, void *session)
+static int fetch_checksum_file(struct proto_file *file,
+                               struct site *site, void *session)
 {
     struct ne_md5_ctx md5;
-    struct proto_file *file;
+    char *full_remote = ne_concat(site->remote_root, file->filename, NULL);
     int ret = 0;
-    
-    for (file = files; file!=NULL; file=file->next) { 
-	if (file->type == proto_file && 
-	    !file_isexcluded(file->filename, site)) {
-	    char *full_remote;
-	    full_remote = ne_concat(site->remote_root, file->filename, NULL);
-	    ne_md5_init_ctx(&md5);
-	    fe_checksumming(file->filename);
-	    if (CALL(file_read)(session, full_remote, 
-				site_fetch_csum_read, &md5) != SITE_OK) {
-		ret = 1;
-		fe_checksummed(full_remote, false, DRIVER_ERR);
-	    } else {
-		ne_md5_finish_ctx(&md5, file->checksum);
-		fe_checksummed(full_remote, true, NULL);
-	    }
-	    free(full_remote);
-	}
+
+    ne_md5_init_ctx(&md5);
+    fe_checksumming(file->filename);
+    if (CALL(file_read)(session, full_remote, 
+                        site_fetch_csum_read, &md5) != SITE_OK) {
+        ret = 1;
+        fe_checksummed(full_remote, false, DRIVER_ERR);
+    } else {
+        ne_md5_finish_ctx(&md5, file->checksum);
+        fe_checksummed(full_remote, true, NULL);
     }
+    free(full_remote);
+
     return ret;
 }
     
@@ -1104,9 +1082,11 @@ site_fetch_checksum(struct proto_file *files, struct site *site, void *session)
  */
 int site_fetch(struct site *site)
 {
-    struct proto_file *files = NULL;
-    int ret;
+    int ret, need_modtimes;
     void *session;
+    const char *dirstack[DIRSTACKSIZE];
+    size_t dirtop;
+    struct proto_file *files = NULL;
 
     ret = proto_init(site, &session);
     if (ret != SITE_OK) {
@@ -1119,24 +1099,73 @@ int site_fetch(struct site *site)
 	return SITE_UNSUPPORTED;
     }
 
-    /* we want modtimes if in safe mode, or in timesize mode. */
-    ret = CALL(fetch_list)(session, site->remote_root, site->safemode || 
-			   site->state_method == state_timesize, &files);
-    
-    if (ret == SITE_OK && site->state_method == state_checksum) {
-	site_fetch_checksum(files, site, session);
-    }
-    
-    proto_finish(site, session);
+    /* The remote modtimes are needed if timesize is used or in safe
+     * mode: */
+    need_modtimes = site->safemode || site->state_method == state_timesize;
+
+    dirtop = 1;
+    dirstack[0] = "";
+
+    do {
+        struct proto_file *newfiles = NULL, *f, *lastf = NULL;
+        const char *reldir = dirstack[--dirtop];
+        const char *slash = reldir[0] == '\0' ? "" : "/";
+        char *curdir;
+
+        curdir = ne_concat(site->remote_root, reldir, slash, NULL);
+
+        ret = CALL(fetch_list)(session, curdir, need_modtimes, &newfiles);
+        if (ret != SITE_OK) break;
+
+        for (f = newfiles; f; f = f->next) {
+            char *relfn;
+
+            relfn = ne_concat(reldir, slash, f->filename, NULL);
+            ne_free(f->filename);
+            f->filename = relfn;
+
+            if (!file_isexcluded(relfn, site)) {
+                if (f->type == proto_dir && dirtop < DIRSTACKSIZE) {
+                    dirstack[dirtop++] = relfn;
+                } else if (f->type == proto_file 
+                           && site->state_method == state_checksum) {
+                    fetch_checksum_file(f, site, session);
+                }
+            }
+
+            lastf = f;
+        }
+
+        if (lastf) {
+            lastf->next = files;
+            files = newfiles;
+        }
+
+        ne_free(curdir);
+    } while (dirtop > 0);
     
     if (ret == SITE_OK) {
-	/* Copy over the list of files */
-	site_destroy_stored(site);
-	site_fetch_walk(site, files);
-	return SITE_OK;
+        struct proto_file *f, *nextf;
+
+        /* Remove existing stored state for the site. */
+        site_destroy_stored(site);
+
+        /* And replace it with the fetched state. */
+        for (f = files; f; f = nextf) {
+            if (!file_isexcluded(f->filename, site)) {
+                struct site_file *sf = fetch_add_file(site, f);
+                fe_fetch_found(sf);
+            }
+            nextf = f->next;
+            ne_free(f);
+        }
     } else {
-	return SITE_FAILED;
+        ret = SITE_FAILED;
     }
+
+    proto_finish(site, session);
+    
+    return ret;
 }
 
 /* Compares files list with files.
@@ -1220,9 +1249,11 @@ int site_verify(struct site *site, int *numremoved)
 
     ret = CALL(fetch_list)(session, site->remote_root, 1, &files);
 
+#if 0
     if (site->state_method == state_checksum) {
 	site_fetch_checksum(files, site, session);
     }
+#endif
 
     proto_finish(site, session);
     

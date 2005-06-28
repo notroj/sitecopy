@@ -683,7 +683,7 @@ static int fetch_list(void *session, const char *dirname, int need_modtimes,
 
     ctx.root = dirname;
     ctx.files = files;
-    ph = ne_propfind_create(sess, edirname, NE_DEPTH_INFINITE);
+    ph = ne_propfind_create(sess, edirname, NE_DEPTH_ONE);
 
     /* The complex props. */
     ne_propfind_set_private(ph, create_private, NULL);
