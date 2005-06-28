@@ -244,7 +244,7 @@ static int fetch_list(void *session, const char *dirname, int need_modtimes,
     rsh_session *sess = session;
     int ret;
 
-    ret = run_rcmd(RSH_PIPE_READ, sess, "ls -laR '%s'", dirname);
+    ret = run_rcmd(RSH_PIPE_READ, sess, "ls -la '%s'", dirname);
     if (ret == SITE_OK) {
         ret = rsh_fetch(sess, dirname, files);
     }

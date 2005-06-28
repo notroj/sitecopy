@@ -379,7 +379,7 @@ static int fetch_list(void *session, const char *dirname, int need_modtimes,
     sftp_session *sess = session;
     int ret;
 
-    ret = run_ssh(sess, "ls -laR '%s'", dirname);
+    ret = run_ssh(sess, "ls -la '%s'", dirname);
     if (ret == SITE_OK) {
         ssh_fetch(sess, dirname, files);
         ret = ssh_finish(sess);

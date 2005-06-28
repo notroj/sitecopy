@@ -1094,22 +1094,13 @@ const char *ftp_get_error(ftp_session *sess)
     return sess->error;
 }    
 
-/* This does the ls -laR, and tries it's best to parse the resulting
- * list. Currently implemented only for Unix-style servers, which go:
- * dirlist
- * new/directory/name:
- * dirlist
- * another/directory/name:
- * dirlist
- * etc. where dirlist is a straight ls -al listing
- */
 int ftp_fetch(ftp_session *sess, const char *startdir, struct proto_file **list)
 {
     struct proto_file *tail = NULL;
     struct ls_context *lsctx;
     int ret;
 
-    if ((ret = ftp_data_open(sess, "LIST -laR %s", startdir)) != FTP_READY) {
+    if ((ret = ftp_data_open(sess, "LIST -la %s", startdir)) != FTP_READY) {
         return FTP_ERROR;
     }
 
