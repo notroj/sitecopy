@@ -42,16 +42,20 @@ ls_context_t *ls_init(const char *dirname);
 
 /* The result of parsing one line of LS output: */
 enum ls_result {
-    ls_directory,
-    ls_file,
-    ls_nothing,
-    ls_error
+    ls_directory, /* a subdirectory */
+    ls_file,      /* a file */
+    ls_nothing,   /* nothing interesting on this line */
+    ls_error      /* a parse error */
 };
 
-/* Parse LINE of ls output. */
+/* Parse LINE of ls output.  Modifies LINE.  Returns one of the
+ * ls_result values; fills in file->mode, file->size, file->name for
+ * ls_file; file->mode and file->name for ls_directory.  file->name is
+ * ne_malloc-allocated. */
 enum ls_result ls_parse(ls_context_t *ctx, char *line, struct ls_file *file);
 
-/* Return the error string from the context: */
+/* Return the error string from the context, if ls_error was
+ * previously called. */
 const char *ls_geterror(ls_context_t *ctx);
 
 /* Destroy an LS parser context. */
