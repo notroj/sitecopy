@@ -645,6 +645,7 @@ static int dtp_open_active(ftp_session *sess, const char *command)
 	int errnum = errno;
 	set_syserr(sess, _("Active open failed: could not determine "
 			   "address of control socket"), errnum);
+        return FTP_ERROR;
     }
 
     /* Let the kernel choose a port */
@@ -676,6 +677,13 @@ static int dtp_open_active(ftp_session *sess, const char *command)
 			   "of data socket"), errnum);
 	(void) close(listener);
 	return FTP_ERROR;
+    }
+
+    if (addr.sin_port == 0) {
+        ftp_seterror(sess, _("Could not determine bound port number for "
+                             "data socket"));
+        close(listener);
+        return FTP_ERROR;
     }
 
     if (listen(listener, 1) < 0) {
