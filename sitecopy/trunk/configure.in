@@ -202,10 +202,6 @@ AC_SUBST(SHORTCUT_LOCATION)
 AC_SUBST(EXTRAOBJS)
 AC_SUBST(TARGET)
 
-if test "$enable_gnomefe" = "yes"; then
-	AC_WARN([GNOME frontend is unfinished, use with care.])
-fi
-
 AC_CONFIG_FILES([Makefile lib/neon/Makefile po/Makefile.in intl/Makefile])
 
 AC_OUTPUT
@@ -221,6 +217,11 @@ AC_MSG_NOTICE([Configured sitecopy $PACKAGE_VERSION:
   SSL library:		 ${ne_SSL_message}
   Internationalization:  ${nls_msg}
 ])
+
+
+if test "$enable_gnomefe" = "yes"; then
+   AC_WARN([The GNOME frontend is currently unmaintained.])
+fi
 
 # Create all the necessary directories for VPATH builds.
 for i in gnome src intl lib/expat lib/expat/xmltok lib/expat/gennmtab \
