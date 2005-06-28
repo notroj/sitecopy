@@ -163,7 +163,7 @@ int file_isignored(const char *filename, struct site *site)
     return fnlist_match(filename, site->ignores);
 }
 
-int file_isascii(char *filename, struct site *site)
+int file_isascii(const char *filename, struct site *site)
 {
     NE_DEBUG(DEBUG_FILES, "Matching asciis for %s:\n", filename);
     return fnlist_match(filename, site->asciis);
