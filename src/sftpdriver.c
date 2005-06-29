@@ -147,6 +147,9 @@ static int sftp_connect(sftp_session *sess)
 static int sftp_disconnect(sftp_session *sess)
 {
 #ifndef USE_PIPES
+#ifndef SHUT_RDWR
+#define SHUT_RDWR 2
+#endif
     shutdown(sess->fd_in,  SHUT_RDWR);
     shutdown(sess->fd_out, SHUT_RDWR);
 #endif /* USE_PIPES */
