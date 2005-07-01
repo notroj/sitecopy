@@ -67,7 +67,7 @@ msgstr "Kennzeichnung als `aktualisiert'"
 
 #: src/console_fe.c:128
 msgid "catching up"
-msgstr "als `aktualisiert' Kennzeichnen"
+msgstr "als `aktualisiert' kennzeichnen"
 
 #: src/console_fe.c:128 src/console_fe.c:129
 msgid "stored"
