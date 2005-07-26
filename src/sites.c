@@ -1347,7 +1347,7 @@ void site_flatlist(FILE *f, struct site *site)
 	site_flatlist_items(f, site, file_deleted, "deleted");
     if (site->nummoved > 0)
 	site_flatlist_items(f, site, file_moved, "moved");
-    fprintf(f, "siteend|%s\n", site->local_is_different?"changed":"unchanged");
+    fprintf(f, "siteend|%s\n", site->remote_is_different?"changed":"unchanged");
 }
 
 void site_sock_progress_cb(void *userdata, off_t progress, off_t total)
