@@ -709,8 +709,8 @@ int site_update(struct site *site)
 	int (*func)(struct site *, void *session);
 	int guard;
     } handlers[] = {
-	{ update_create_directories, 1 },
 	{ update_delete_files, !site->nodelete },
+	{ update_create_directories, 1 },
 	{ update_move_files, site->checkmoved },
 	{ update_files, 1 },
 	{ update_links, site->symlinks == sitesym_maintain },
