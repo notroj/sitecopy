@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sitecopy 0.11.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-04-24 19:40+0100\n"
+"POT-Creation-Date: 2005-08-07 21:35+0100\n"
 "PO-Revision-Date: 2002-01-13 13:37+0100\n"
 "Last-Translator: Thomas Schultz <tststs@gmx.de>\n"
 "Language-Team: de\n"
@@ -1048,8 +1048,8 @@ msgstr "Der Server scheint kein WebDAV-Server zu sein."
 msgid "The server does not support the executable live property."
 msgstr "Der Server unterstützt das Zugriffsrecht `ausführbar' nicht."
 
-#: src/davdriver.c:323 src/davdriver.c:390 src/davdriver.c:427 src/ftp.c:876
-#: src/ftp.c:940
+#: src/davdriver.c:323 src/davdriver.c:390 src/davdriver.c:427 src/ftp.c:886
+#: src/ftp.c:950
 #, fuzzy
 msgid "Could not open file"
 msgstr "Konnte Datei nicht öffnen: "
@@ -1146,70 +1146,75 @@ msgstr "Konnte Rumpf der Antwort nicht lesen"
 msgid "Malformed port in EPSV response"
 msgstr "Konnte Rumpf der Antwort nicht lesen"
 
-#: src/ftp.c:446
+#: src/ftp.c:448
 msgid "Error sending file"
 msgstr ""
 
-#: src/ftp.c:460 src/ftp.c:486
+#: src/ftp.c:462 src/ftp.c:488
 #, fuzzy
 msgid "Error reading file"
 msgstr "Fehler beim Lesen des Rumpfs der Anfrage"
 
-#: src/ftp.c:477
+#: src/ftp.c:479
 #, fuzzy
 msgid "Could not send file"
 msgstr "Konnte Datei nicht öffnen: "
 
-#: src/ftp.c:507 src/ftp.c:959
+#: src/ftp.c:509 src/ftp.c:969
 #, fuzzy
 msgid "Error writing to file"
 msgstr "Fehler beim Warten auf Antwort"
 
-#: src/ftp.c:513
+#: src/ftp.c:515
 msgid "Receiving file"
 msgstr ""
 
-#: src/ftp.c:529
+#: src/ftp.c:531
 #, fuzzy
 msgid "Could not connect passive data socket"
 msgstr "Konnte keine SSL-Sitzung herstellen"
 
-#: src/ftp.c:644
+#: src/ftp.c:646
 msgid "Active open failed: could not determine address of control socket"
 msgstr ""
 
-#: src/ftp.c:655
+#: src/ftp.c:658
 #, fuzzy
 msgid "Active open failed: could not create socket"
 msgstr "Konnte keine SSL-Sitzung herstellen"
 
-#: src/ftp.c:663
+#: src/ftp.c:666
 msgid "Active open failed: could not bind to address"
 msgstr ""
 
-#: src/ftp.c:673
+#: src/ftp.c:676
 msgid "Active open failed: could not determine address of data socket"
 msgstr ""
 
-#: src/ftp.c:716
+#: src/ftp.c:683
+#, fuzzy
+msgid "Could not determine bound port number for data socket"
+msgstr "Konnte keine SSL-Sitzung herstellen"
+
+#: src/ftp.c:726
 msgid "Active open failed: could not accept connection"
 msgstr ""
 
-#: src/ftp.c:789
+#: src/ftp.c:799
 msgid "Error closing data socket"
 msgstr ""
 
-#: src/ftp.c:882
+#: src/ftp.c:892
 #, fuzzy
 msgid "Could not determine length of file"
 msgstr "Konnte Länge der Datei nicht herausfinden: %s"
 
-#: src/ftp.c:1122
+#: src/ftp.c:1123
 #, fuzzy
 msgid "Could not read 'LIST' response."
 msgstr "Konnte Rumpf der Antwort nicht lesen"
 
-#: src/ftp.c:1130
+#: src/ftp.c:1131
 #, fuzzy
 msgid "Parse error in LIST response"
 msgstr "Konnte Rumpf der Antwort nicht lesen"
@@ -1484,22 +1489,22 @@ msgid ""
 "32=XML, 64=GNOME )"
 msgstr ""
 
-#: gnome/misc.c:579
+#: gnome/misc.c:580
 #, fuzzy, c-format
 msgid "Server not specified in site `%s'.\n"
 msgstr "%s: Für die Site `%s' ist kein Server angegeben.\n"
 
-#: gnome/misc.c:583
+#: gnome/misc.c:584
 #, fuzzy, c-format
 msgid "Remote directory not specified in site `%s'.\n"
 msgstr "%s: Für die Site `%s' ist kein Verzeichnis auf dem Server angegeben.\n"
 
-#: gnome/misc.c:587
+#: gnome/misc.c:588
 #, fuzzy, c-format
 msgid "Local directory not specified in site `%s'.\n"
 msgstr "%s: Für die Site `%s' ist kein lokales Verzeichnis angegeben.\n"
 
-#: gnome/misc.c:591
+#: gnome/misc.c:592
 #, fuzzy, c-format
 msgid ""
 "Could not read directory for `%s':\n"
@@ -1508,29 +1513,29 @@ msgstr ""
 "%s: Konnte Verzeichnis für `%s' nicht einlesen:\n"
 "\t%s\n"
 
-#: gnome/misc.c:595
+#: gnome/misc.c:596
 #, fuzzy, c-format
 msgid "Invalid port used in site `%s'.\n"
 msgstr "%s: Für die Site `%s' ist ein ungültiger Port angegeben.\n"
 
-#: gnome/misc.c:599
+#: gnome/misc.c:600
 #, fuzzy, c-format
 msgid "Protocol '%s' cannot maintain symbolic links (site `%s').\n"
 msgstr "%s: %s kann keine symbolischen Links beibehalten (Site `%s').\n"
 
-#: gnome/misc.c:603
+#: gnome/misc.c:604
 #, fuzzy, c-format
 msgid "Cannot use a relative remote directory protocol '%s' (site `%s').\n"
 msgstr ""
 "%s: Bei %s ist keine relative Verzeichnisangabe auf dem Server möglich (Site "
 "`%s').\n"
 
-#: gnome/misc.c:606
+#: gnome/misc.c:607
 #, c-format
 msgid "%s's protocol does not currently support maintaining permissions."
 msgstr ""
 
-#: gnome/misc.c:610
+#: gnome/misc.c:611
 #, fuzzy, c-format
 msgid "Could not find 'relative' local directory"
 msgstr "Konnte keine SSL-Sitzung herstellen"
@@ -1740,21 +1745,21 @@ msgstr "Verbindungsaufbau zum Server gescheitert."
 msgid "Could not connect to proxy server"
 msgstr "Verbindungsaufbau zum Proxy-Server gescheitert."
 
-#: lib/neon/ne_xml.c:278
+#: lib/neon/ne_xml.c:280
 #, fuzzy, c-format
 msgid "XML parse error at line %d: invalid element name"
 msgstr "Fehler beim XML-Parsing in Zeile %d: %s."
 
-#: lib/neon/ne_xml.c:433
+#: lib/neon/ne_xml.c:436
 #, fuzzy
 msgid "Unknown error"
 msgstr "Unbekannter System-Fehler"
 
-#: lib/neon/ne_xml.c:519
+#: lib/neon/ne_xml.c:521
 msgid "Invalid Byte Order Mark"
 msgstr ""
 
-#: lib/neon/ne_xml.c:606
+#: lib/neon/ne_xml.c:609
 #, c-format
 msgid "XML parse error at line %d: %s."
 msgstr "Fehler beim XML-Parsing in Zeile %d: %s."
@@ -1764,12 +1769,12 @@ msgstr "Fehler beim XML-Parsing in Zeile %d: %s."
 msgid "Response exceeds maximum property count"
 msgstr "Antwort hatte zu viele Header-Felder."
 
-#: lib/neon/ne_compress.c:177
+#: lib/neon/ne_compress.c:175
 #, fuzzy, c-format
 msgid "%s: %s"
 msgstr "%s: %s\n"
 
-#: lib/neon/ne_compress.c:188
+#: lib/neon/ne_compress.c:186
 #, c-format
 msgid "%s: %s (code %d)"
 msgstr ""
