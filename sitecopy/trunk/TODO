@@ -1,7 +1,8 @@
 						-*- text -*-
 Bugs:
 
-- Fetch mode for FTP rarely works
+- enable large file support by default when necessary.
+
 - Synch mode won't transfer in ASCII mode, nor maintain symlinks, nor
   correctly order file deletions.
 - Filename conflicts are not handled by update or synch mode: case:
@@ -13,9 +14,6 @@ Bugs:
   Which, in renames mode, will be correctly discovered, but when we
   do an --update... bang.
 - "sitecopy --rcfile=/" should say the right thing
-- If a directory is excluded, then after doing a --fetch, the files
-  *within* the directory won't get matched by the excluded pattern
-  necessarily, (think 'exclude CVS'), so they aren't excluded.
 - The man page does not make clear what "exclude" excludes *from*.
   The point that exclude will translate into deleting existing files
   from the remote site is important and confusing.
@@ -29,11 +27,8 @@ Known Standards Compliance Problems:
 * anything with (FEAPI) after requires frontend API change, not including
   simple config options additions
 
-Slated for 0.11 release:
-
 - Move use_this out of struct site, use proper data structures in console
   frontend to represent sites passed on cmd line.
-? Have pdriver fetch_list handler call file_set_* directly?
 - Anything in the below list.
 - Do the hash table thang.
 
@@ -139,7 +134,6 @@ Evaluation of sitecopy alternatives: weex
   found (don't let trigger by --rcfile= option), or, better, by a message
   telling you to run --first-time.
   --new-user might be better...
-- Big problem is that FTP fetch mode is crap.
 
 Definitely Not-till-after-1.0 thinkings:
 
