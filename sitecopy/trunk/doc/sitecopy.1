@@ -631,10 +631,11 @@ name with no trailing slash. For example
 .br
 to exclude the 'foo/bar' and 'where/else' subdirectories of the site.
 
-Exclude patterns are consulted when scanning the local directory.  Any
-file which matches any exclude pattern is not added to the files list.
-This means that a file which has already been uploaded by sitecopy,
-and subsequently matches an exclude pattern, will be deleted from the
+Exclude patterns are consulted when scanning the local directory, and
+when scanning the remote site during a --fetch.  Any file which
+matches any exclude pattern is not added to the files list.  This
+means that a file which has already been uploaded by sitecopy, and
+subsequently matches an exclude pattern will be deleted from the
 server.
 
 .SS Ignoring Local Changes to Files
