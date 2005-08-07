@@ -220,7 +220,7 @@ AC_MSG_NOTICE([Configured sitecopy $PACKAGE_VERSION:
 
 
 if test "$enable_gnomefe" = "yes"; then
-   AC_WARN([The GNOME frontend is currently unmaintained.])
+   AC_MSG_NOTICE([The GNOME frontend is currently unmaintained.])
 fi
 
 # Create all the necessary directories for VPATH builds.
