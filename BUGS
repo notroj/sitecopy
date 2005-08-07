@@ -127,3 +127,12 @@ On Sun, Jul 17, 2005 at 11:38:35PM +0200, Dirk Pirschel wrote:
 
 ---
 
+From: "Matthew Palmer" <320586@bugs.debian.org>
+
+Sitecopy has supported scp/sftp modes of transfer for a while now, however
+the manual page has no information on how to make it all work.
+
+- Matt
+
+---
+
