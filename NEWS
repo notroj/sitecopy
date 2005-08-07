@@ -1,3 +1,14 @@
+Changes in release 0.16.0:
+* Fetch mode now fetches a single directory at a time:
+ - works with DAV servers which reject "Depth: infinity" PROPFIND
+ - works with FTP servers which reject the -R flag to LIST
+ - "exclude" and "ignore" patterns are now matched as expected
+   against remote files.
+* sftpdriver.c compile fix for older Unixes.
+* Fix for German translation (Jens Seidel)
+* In updates, delete files remotely before creating directories,
+  to allow the "replace a file with a directory" case to work.
+
 Changes in release 0.15.1:
 * Updated Italian translation (Cristian Rigamonti).
 * FTP: fix newline handling issues for ASCII file transfers.

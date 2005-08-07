@@ -101,10 +101,29 @@ On Thu, Apr 25, 2002 at 06:07:02PM +0200, Dave Hollis wrote:
 
 ---
 
-iw3grw:
+From: Luc Bastiaenssen
+To: sitecopy@lyra.org
+Subject: [sitecopy] large files
+Date: Tue, 07 Jun 2005 17:00:07 +0200
 
-fetch mode should not recurse into directories which are excluded.
+To get support for large files I've used following compile option as
+suggested in previous thread:
+
+export CFLAGS="-D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64"
+
+But I also had to tweak 'src/sitestore.c' to avoid "filezize overflow"
+message
 
 ---
 
+On Sun, Jul 17, 2005 at 11:38:35PM +0200, Dirk Pirschel wrote:
+> Yes, i am using safe mode.  We are two webmasters at this site, so that
+> safe mode is mandatory.
+...
+> The best performance would be: Fetch the directory listing via ls -laR,
+> remove files which are excluded, and perform MDTM commands only on the
+> remaining files.  sitecopy currently performs MDTM commands on every
+> (possibly excluded) file, and excludes the files later... :-(
+
+---
 
