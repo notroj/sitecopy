@@ -1,15 +1,15 @@
-# Note that this is NOT a relocatable package
-%define prefix  /usr
+# Emacs, please be in spec-file-mode: -*- rpm-spec -*-
 
 Summary: Tool for easily maintaining remote web sites
 Name: sitecopy
 Version: @VERSION@
 Release: 1
-Copyright: GPL
+License: GPL
 Group: Applications/Internet
 Source0: http://www.lyra.org/sitecopy/sitecopy-%{version}.tar.gz
 URL: http://www.lyra.org/sitecopy/
 BuildRoot: /var/tmp/sitecopy-%{version}-root
+BuildRequires: expat-devel
 
 %description
 sitecopy allows you to easily maintain remote Web sites.  The program
@@ -20,65 +20,37 @@ command. sitecopy will also optionally try to spot files you move
 locally, and move them remotely.  FTP and WebDAV servers are
 supported.
 
-%package -n xsitecopy
-Summary: GUI tool for easily maintaining remote web sites
-Group: X11/Applications/Networking
-
-%description -n xsitecopy
-XSitecopy is a GNOME frontend for sitecopy.  Currently it does not
-support "resynch" mode, but it does have the advantage of providing
-full configuration editing and creation facilities.
-
 %prep
 %setup -q
 
 %build
-# vanilla sitecopy.
-mkdir sitecopy; cd sitecopy
-
-CFLAGS="$RPM_OPT_FLAGS" LDFLAGS="-s" ../configure \
-	--prefix=%{prefix} \
-	--enable-debug
-make
-cd ..
-
-# xsitecopy.
-mkdir xsitecopy; cd xsitecopy
-CFLAGS="$RPM_OPT_FLAGS" LDFLAGS="-s" ../configure \
-	--prefix=%{prefix} \
-	--enable-gnomefe \
-	--enable-debug
-make
-cd ..
+%configure --enable-debug --with-expat
+make %{?_smp_mflags}
 
 %install
 rm -rf $RPM_BUILD_ROOT
-(cd sitecopy; make DESTDIR=$RPM_BUILD_ROOT install) || exit 1
-(cd xsitecopy; make DESTDIR=$RPM_BUILD_ROOT install) || exit 1
+make install docdir=%{_datadir}/doc/sitecopy-%{version} DESTDIR=$RPM_BUILD_ROOT 
+
+%find_lang %{name}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%files -n sitecopy
+%files -n sitecopy -f %{name}.lang
 %defattr(-, root, root)
-%{prefix}/bin/sitecopy
-%{prefix}/man/man1/*
-%{prefix}/share/sitecopy
-%{prefix}/share/locale/*/LC_MESSAGES/sitecopy.mo
-%doc ABOUT-NLS COPYING ChangeLog FAQ INSTALL NEWS README* THANKS TODO
-
-%files -n xsitecopy
-%defattr(-, root, root)
-%dir %{prefix}/share/gnome/help/xsitecopy
-%dir %{prefix}/share/gnome/help/xsitecopy/C
-%{prefix}/share/gnome/help/xsitecopy/C/*.html
-%{prefix}/share/gnome/help/xsitecopy/C/topic.dat
-%{prefix}/share/gnome/apps/Internet/*.desktop
-%{prefix}/share/pixmaps/xsitecopy/*.png
-%{prefix}/share/xsitecopy/sitecopy-dialogs.glade
-%{prefix}/bin/xsitecopy
+%{_bindir}/sitecopy
+%{_mandir}/man1/*
+%{_mandir}/*/man1/*
+%{_datadir}/sitecopy
+%doc COPYING ChangeLog INSTALL NEWS README* THANKS TODO
 
 %changelog
+* Sat Aug 13 2005 Joe Orton <joe@manyfish.co.uk>
+- remove xsitecopy subpackage
+- use find_lang
+- use %%configure
+- general clean up
+
 * Sun Jan 13 2002 Joe Orton <joe@manyfish.co.uk>
 - Use DESTDIR in make install.
 
@@ -108,4 +80,3 @@ rm -rf $RPM_BUILD_ROOT
 
 * Thu Apr 1 1999 Lee Mallabone <lee0@callnetuk.com>
 - first attempt.
-
