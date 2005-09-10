@@ -149,20 +149,26 @@ static enum ls_result parse_file(ls_context_t *ctx, char *line, size_t len,
     char *perms, *size;
 
     perms = ne_token(&line, ' ');
-    if (!line) return fail(ctx, "beginning of line");
+    if (!line) return fail(ctx, "Missing token at beginning of line");
     while (*line++ == ' ') /* nullop */;
  
     /* skip inode, user and group fields */
     line = skip_field(skip_field(skip_field(line)));
-    if (*line == '\0') return fail(ctx, "in inode/user/group fields");
+    if (*line == '\0') {
+        return fail(ctx, "Missing token in inode/user/group fields");
+    }
 
     size = ne_token(&line, ' ');
-    if (!line) return fail(ctx, "after inode/user/group fields");
+    if (!line) {
+        return fail(ctx, "Missing token after inode/user/group fields");
+    }
     while (*line++ == ' ') /* nullop */;
 
     /* skip Month, day, time fields */
     line = skip_field(skip_field(skip_field(line)));
-    if (*line == '\0') return fail(ctx, "after timestamp field");
+    if (*line == '\0') {
+        return fail(ctx, "Missing token after timestamp field");
+    }
  
     /* Bail out if this isn't a file or directory. */
     if (perms[0] != '-' && perms[0] != 'd') {
@@ -172,8 +178,9 @@ static enum ls_result parse_file(ls_context_t *ctx, char *line, size_t len,
 
     /* line now points at the last field, the filename.  Reject any
      * relative filenames. */
-    if (strchr(line, '/') != NULL)
-        return fail(ctx, "relative filename disallowed");
+    if (strchr(line, '/') != NULL) {
+        return fail(ctx, "Relative filename disallowed");
+    }
 
     if (perms[0] == '-') {
         /* Normal file */

@@ -1127,8 +1127,12 @@ int ftp_fetch(ftp_session *sess, const char *startdir, struct proto_file **list)
 
         lsrv = ls_parse(lsctx, sess->rbuf, &lfile);
         if (lsrv == ls_error) {
+            char err[512];
+
+            ne_snprintf(err, sizeof err, _("Parse error in LIST response: %s"),
+                        ls_geterror(lsctx));
             NE_DEBUG(DEBUG_FTP, "ftp: ls_parse error, aborting.\n");
-            ftp_seterror(sess, _("Parse error in LIST response"));
+            ftp_seterror(sess, err);
             ret = FTP_ERROR;
         } else {
             ls_pflist_add(list, &tail, &lfile, lsrv);
