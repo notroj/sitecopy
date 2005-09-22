@@ -341,6 +341,7 @@ static int parse_reply(ftp_session *sess, int code, char *reply)
 	return FTP_CLOSED;
     case 421: /* service denied; PI connection closure */
         ne_sock_close(sess->pisock);
+        sess->pisock = NULL;
         sess->connected = 0;
         return FTP_BROKEN;
     case 553: /* couldn't create directory */
@@ -1063,8 +1064,10 @@ int ftp_open(ftp_session *sess)
     }
 
     if (authenticate(sess) != FTP_OK) {
-        ne_sock_close(sess->pisock);
-        sess->pisock = NULL;
+        if (sess->connected) {
+            ne_sock_close(sess->pisock);
+            sess->pisock = NULL;
+        }
 	return FTP_LOGIN;
     }
 
