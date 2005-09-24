@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sitecopy 0.11.4\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-08-07 21:35+0100\n"
+"POT-Creation-Date: 2005-09-24 20:00+0100\n"
 "PO-Revision-Date: 2002-11-07 18:11+0100\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <i18n-nn@lister.ping.uio.no>\n"
@@ -1038,8 +1038,8 @@ msgstr "Tenaren er ikkje ein WebDAV-tenar."
 msgid "The server does not support the executable live property."
 msgstr "Tenaren støttar ikkje kjørbar-eigenskapen."
 
-#: src/davdriver.c:323 src/davdriver.c:390 src/davdriver.c:427 src/ftp.c:886
-#: src/ftp.c:950
+#: src/davdriver.c:323 src/davdriver.c:390 src/davdriver.c:427 src/ftp.c:887
+#: src/ftp.c:951
 msgid "Could not open file"
 msgstr "Klarte ikkje opna fil"
 
@@ -1134,74 +1134,74 @@ msgstr "Klarte ikkje lesa «LIST»-svar."
 msgid "Malformed port in EPSV response"
 msgstr "Klarte ikkje lesa «LIST»-svar."
 
-#: src/ftp.c:448
+#: src/ftp.c:449
 msgid "Error sending file"
 msgstr "Feil ved sending av fil"
 
-#: src/ftp.c:462 src/ftp.c:488
+#: src/ftp.c:463 src/ftp.c:489
 #, fuzzy
 msgid "Error reading file"
 msgstr "Feil ved sending av fil"
 
-#: src/ftp.c:479
+#: src/ftp.c:480
 #, fuzzy
 msgid "Could not send file"
 msgstr "Klarte ikkje opna fil"
 
-#: src/ftp.c:509 src/ftp.c:969
+#: src/ftp.c:510 src/ftp.c:970
 #, fuzzy
 msgid "Error writing to file"
 msgstr "Feil ved sending av fil"
 
-#: src/ftp.c:515
+#: src/ftp.c:516
 msgid "Receiving file"
 msgstr ""
 
-#: src/ftp.c:531
+#: src/ftp.c:532
 msgid "Could not connect passive data socket"
 msgstr "Klarte ikkje kopla til passiv datasokkel"
 
-#: src/ftp.c:646
+#: src/ftp.c:647
 msgid "Active open failed: could not determine address of control socket"
 msgstr ""
 
-#: src/ftp.c:658
+#: src/ftp.c:659
 #, fuzzy
 msgid "Active open failed: could not create socket"
 msgstr "Klarte ikkje forhandla SSL-økt"
 
-#: src/ftp.c:666
+#: src/ftp.c:667
 msgid "Active open failed: could not bind to address"
 msgstr ""
 
-#: src/ftp.c:676
+#: src/ftp.c:677
 msgid "Active open failed: could not determine address of data socket"
 msgstr ""
 
-#: src/ftp.c:683
+#: src/ftp.c:684
 #, fuzzy
 msgid "Could not determine bound port number for data socket"
 msgstr "Klarte ikkje kopla til passiv datasokkel"
 
-#: src/ftp.c:726
+#: src/ftp.c:727
 msgid "Active open failed: could not accept connection"
 msgstr ""
 
-#: src/ftp.c:799
+#: src/ftp.c:800
 msgid "Error closing data socket"
 msgstr "Feil ved lukking av datasokkel"
 
-#: src/ftp.c:892
+#: src/ftp.c:893
 msgid "Could not determine length of file"
 msgstr "Klarte ikkje fastesetja fillengd"
 
-#: src/ftp.c:1123
+#: src/ftp.c:1126
 msgid "Could not read 'LIST' response."
 msgstr "Klarte ikkje lesa «LIST»-svar."
 
-#: src/ftp.c:1131
-#, fuzzy
-msgid "Parse error in LIST response"
+#: src/ftp.c:1135
+#, fuzzy, c-format
+msgid "Parse error in LIST response: %s"
 msgstr "Klarte ikkje lesa «LIST»-svar."
 
 #: gnome/init.c:51
@@ -1829,20 +1829,20 @@ msgstr ""
 "Ugyldig HTTP-statuslinje i statuselement på linje %d av svaret:\n"
 "Statuslinja var: %s"
 
-#: lib/neon/ne_locks.c:593
+#: lib/neon/ne_locks.c:591
 msgid "LOCK response missing Lock-Token header"
 msgstr ""
 
-#: lib/neon/ne_locks.c:746
+#: lib/neon/ne_locks.c:744
 msgid "No Lock-Token header given"
 msgstr ""
 
-#: lib/neon/ne_locks.c:774
+#: lib/neon/ne_locks.c:772
 #, c-format
 msgid "Response missing activelock for %s"
 msgstr ""
 
-#: lib/neon/ne_locks.c:818
+#: lib/neon/ne_locks.c:816
 #, c-format
 msgid "No activelock for <%s> returned in LOCK refresh response"
 msgstr ""
