@@ -1,3 +1,7 @@
+Changes in release 0.16.1:
+* FTP: Fix crash in FTP timeout handling.
+* Improve error messages from LIST parser failure.
+
 Changes in release 0.16.0:
 * Fetch mode now fetches a single directory at a time:
  - works with DAV servers which reject "Depth: infinity" PROPFIND
