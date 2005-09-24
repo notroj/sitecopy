@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sitecopy 0.15.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-08-07 21:35+0100\n"
+"POT-Creation-Date: 2005-09-24 20:00+0100\n"
 "PO-Revision-Date: 2005-03-12 22:38+0100\n"
 "Last-Translator: Cristian Rigamonti <cri@linux.it>\n"
 "Language-Team: Italian <tp@lists.linux.it>\n"
@@ -1062,8 +1062,8 @@ msgstr "Il server non sembra essere un server WebDAV."
 msgid "The server does not support the executable live property."
 msgstr "Il server non supporta la proprietà live executable"
 
-#: src/davdriver.c:323 src/davdriver.c:390 src/davdriver.c:427 src/ftp.c:886
-#: src/ftp.c:950
+#: src/davdriver.c:323 src/davdriver.c:390 src/davdriver.c:427 src/ftp.c:887
+#: src/ftp.c:951
 msgid "Could not open file"
 msgstr "Impossibile aprire il file"
 
@@ -1153,73 +1153,74 @@ msgstr "Risposta EPSV malformata"
 msgid "Malformed port in EPSV response"
 msgstr "Porta malformata nella risposta EPSV"
 
-#: src/ftp.c:448
+#: src/ftp.c:449
 msgid "Error sending file"
 msgstr "Errore nell'invio del file"
 
-#: src/ftp.c:462 src/ftp.c:488
+#: src/ftp.c:463 src/ftp.c:489
 msgid "Error reading file"
 msgstr "Errore nella lettura del file"
 
-#: src/ftp.c:479
+#: src/ftp.c:480
 msgid "Could not send file"
 msgstr "Impossibile inviare il file"
 
-#: src/ftp.c:509 src/ftp.c:969
+#: src/ftp.c:510 src/ftp.c:970
 msgid "Error writing to file"
 msgstr "Errore nella scrittura del file"
 
-#: src/ftp.c:515
+#: src/ftp.c:516
 msgid "Receiving file"
 msgstr "Ricezione del file"
 
-#: src/ftp.c:531
+#: src/ftp.c:532
 msgid "Could not connect passive data socket"
 msgstr "Impossibile creare la struttura SSL"
 
-#: src/ftp.c:646
+#: src/ftp.c:647
 msgid "Active open failed: could not determine address of control socket"
 msgstr ""
 "Errore active open: impossibile determinare l'indirizzo del socket di "
 "controllo"
 
-#: src/ftp.c:658
+#: src/ftp.c:659
 msgid "Active open failed: could not create socket"
 msgstr "Errore active open: impossibile creare il socket"
 
-#: src/ftp.c:666
+#: src/ftp.c:667
 msgid "Active open failed: could not bind to address"
 msgstr "Errore active open: impossibile collegarsi all'indirizzo"
 
-#: src/ftp.c:676
+#: src/ftp.c:677
 msgid "Active open failed: could not determine address of data socket"
 msgstr ""
 "Errore active open: impossibile determinare l'indirizzo del socket dati"
 
-#: src/ftp.c:683
+#: src/ftp.c:684
 #, fuzzy
 msgid "Could not determine bound port number for data socket"
 msgstr ""
 "Errore active open: impossibile determinare l'indirizzo del socket dati"
 
-#: src/ftp.c:726
+#: src/ftp.c:727
 msgid "Active open failed: could not accept connection"
 msgstr "Errore active open: impossibile accettare la connessione"
 
-#: src/ftp.c:799
+#: src/ftp.c:800
 msgid "Error closing data socket"
 msgstr "Errore nella chiusura del socket dati"
 
-#: src/ftp.c:892
+#: src/ftp.c:893
 msgid "Could not determine length of file"
 msgstr "Impossibile determinare la lunghezza del file"
 
-#: src/ftp.c:1123
+#: src/ftp.c:1126
 msgid "Could not read 'LIST' response."
 msgstr "Impossibile leggere la risposta \"LIST\""
 
-#: src/ftp.c:1131
-msgid "Parse error in LIST response"
+#: src/ftp.c:1135
+#, fuzzy, c-format
+msgid "Parse error in LIST response: %s"
 msgstr "Errore di analisi nella risposta LIST"
 
 #: gnome/init.c:51
@@ -1825,20 +1826,20 @@ msgstr ""
 "risposta:\n"
 "La riga di stato era: %s"
 
-#: lib/neon/ne_locks.c:593
+#: lib/neon/ne_locks.c:591
 msgid "LOCK response missing Lock-Token header"
 msgstr "Header Lock-Token mancante nella risposta LOCK"
 
-#: lib/neon/ne_locks.c:746
+#: lib/neon/ne_locks.c:744
 msgid "No Lock-Token header given"
 msgstr "Header Lock-Token mancante"
 
-#: lib/neon/ne_locks.c:774
+#: lib/neon/ne_locks.c:772
 #, c-format
 msgid "Response missing activelock for %s"
 msgstr "Activelock mancante nella risposta per %s"
 
-#: lib/neon/ne_locks.c:818
+#: lib/neon/ne_locks.c:816
 #, c-format
 msgid "No activelock for <%s> returned in LOCK refresh response"
 msgstr "Nessun activelock per <%s> nella risposta di refresh LOCK"
