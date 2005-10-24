@@ -215,6 +215,8 @@ enum ls_result ls_parse(ls_context_t *ctx, char *line, struct ls_file *file)
         return ls_nothing;
     }
 
+    ctx->after_blank = 0;
+
     if (strncmp(line, "total ", 6) == 0) {
         /* ignore the line */
         return ls_nothing;
