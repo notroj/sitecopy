@@ -252,7 +252,6 @@ void ls_pflist_add(struct proto_file **list, struct proto_file **tail,
         break;
 
     case ls_directory:
-        pf = ne_calloc(sizeof(struct proto_file));
         pf->filename = lsf->name;
         pf->mode = lsf->mode;
         pf->type = proto_dir;
