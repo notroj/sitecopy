@@ -1,6 +1,6 @@
 /* 
    sitecopy, for managing remote web sites.
-   Copyright (C) 1998-2002, Joe Orton <joe@manyfish.co.uk>
+   Copyright (C) 1998-2002, 2005, Joe Orton <joe@manyfish.co.uk>
                                                                      
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -44,7 +44,6 @@ struct proto_file {
     time_t modtime;
     mode_t mode;
     unsigned char checksum[16];
-    int depth;
     struct proto_file *next;
 };
 
