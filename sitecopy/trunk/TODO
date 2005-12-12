@@ -1,6 +1,11 @@
 						-*- text -*-
 Bugs:
 
+- review w.r.t djb's FTP interop notes, http://cr.yp.to/ftp.html
+
+- add support for MLST, latest draft:
+  http://www.ietf.org/internet-drafts/draft-ietf-ftpext-mlst-16.txt
+
 - enable large file support by default when necessary.
 
 - Synch mode won't transfer in ASCII mode, nor maintain symlinks, nor
@@ -69,21 +74,6 @@ Required Features for one-point-oh:
 
 Possible features, which need more consideration:
 
-- When there is an error, the output can be like:
-
-Deleting foo: failed:
-423 Locked
-
-  which unnecessarily uses two lines. Choices:
-
-1) Forget about it. No big deal.
-2) Detect line-lengths (have the code in linelen.c)
-   and only separate the errors out if they are going to wrap. Might
-   be impossible because of i18n stuff.
-3) Don't separate the lines ever.
-
-- Nicer progress bars. cadaver has the fe_t_p implementation, but it will
-  mean two-line output per file, which is a shame.
 - Per-site lockfiles (FEAPI)
 - Shortcircuit parm in file_set_* used for the FIRST site state read on a 
   site, to make the file search always fail - guarantee to be true, since if we
