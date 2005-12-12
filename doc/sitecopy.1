@@ -521,9 +521,14 @@ To handle permissions directories, the key:
 may be used in addition to a 
 .B permissions
 key of either 
-.B exec
+.B exec,
+.B local
 or
-.B local.
+.B all.
+Note that 
+.B permissions all
+does not imply 
+.B permissions dir.
 
 .SS Symbolic Link Handling
 
