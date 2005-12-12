@@ -58,6 +58,7 @@
 
 struct fetch_context {
     struct proto_file **files;
+    struct proto_file *tail;
     const char *root;
 };
 
@@ -91,14 +92,6 @@ static const ne_propname props[] = {
     { "DAV:", "resourcetype" },
     { NULL }
 };
-
-static inline int get_depth(const char *href) {
-    const char *pnt;
-    int count = 0;
-    for (pnt=href; *pnt != '\0'; pnt++) /* oneliner */
-	if (*pnt == '/') count++;
-    return count;
-}
 
 /* Set session error string to 'msg: strerror(errnum)'. */
 static void syserr(ne_session *sess, const char *msg, int errnum)
@@ -537,21 +530,15 @@ static int dir_remove(void *session, const char *dirname)
 
 /* Insert the file in the list in the appropriate position (keeping it
  * sorted). */
-static void insert_file(struct proto_file **list, struct proto_file *file)
+static void insert_file(struct fetch_context *ctx, struct proto_file *file)
 {
-    struct proto_file *previous, *current;
-    previous = NULL;
-    current = *list;
-    while (current != NULL && current->depth < file->depth) {
-	previous = current;
-	current = current->next;
-    }
-    if (previous == NULL) {
-	*list = file;
+    if (ctx->tail) {
+        ctx->tail->next = file;
     } else {
-	previous->next = file;
+        (*ctx->files) = file;
     }
-    file->next = current;
+    ctx->tail = file;
+    file->next = NULL;
 }
 
 static void pfind_results(void *userdata, const char *href,
@@ -589,7 +576,7 @@ static void pfind_results(void *userdata, const char *href,
     if (!ne_path_childof(ctx->root, uhref)) {
 	/* URI not a child of the root collection...  ignore this
 	 * resource */
-	NE_DEBUG(NE_DBG_HTTP, "outside root collection!\n");
+	NE_DEBUG(NE_DBG_HTTP, "not child of root collection!\n");
 	return;
     }
    
@@ -617,7 +604,6 @@ static void pfind_results(void *userdata, const char *href,
 
     file = ne_calloc(sizeof(struct proto_file));
     file->filename = ne_strdup(uhref+strlen(ctx->root));
-    file->depth = get_depth(file->filename);
     
     if (iscoll) {
 	file->type = proto_dir;
@@ -639,8 +625,7 @@ static void pfind_results(void *userdata, const char *href,
     }
 
     /* Insert the file into the files list. */
-    insert_file(ctx->files, file);
-
+    insert_file(ctx, file);
 }
 
 static int start_element(void *userdata, int parent,
@@ -673,7 +658,7 @@ static void *create_private(void *userdata, const char *uri)
  * when we don't want it, since it forces a 404 propstat for each
  * non-collection resource if it is not defined.  */
 static int fetch_list(void *session, const char *dirname, int need_modtimes,
-		       struct proto_file **files) 
+                      struct proto_file **files) 
 {
     ne_session *sess = session;
     int ret;
@@ -683,6 +668,7 @@ static int fetch_list(void *session, const char *dirname, int need_modtimes,
 
     ctx.root = dirname;
     ctx.files = files;
+    ctx.tail = NULL;
     ph = ne_propfind_create(sess, edirname, NE_DEPTH_ONE);
 
     /* The complex props. */
