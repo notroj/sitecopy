@@ -115,9 +115,9 @@ netrc: lib/netrc.c
 
 # Dependencies:
 
-HEADERS = src/common.h src/frontend.h src/i18n.h src/protocol.h src/sites.h \
-	src/fileset.h src/ftp.h src/lsparser.h src/rcfile.h src/sitesi.h    \
-	lib/basename.h lib/dirname.h lib/fnmatch.h lib/getopt.h		    \
+HEADERS = src/common.h src/frontend.h src/i18n.h src/protocol.h		\
+	src/sites.h src/ftp.h src/lsparser.h src/rcfile.h src/sitesi.h	\
+	lib/basename.h lib/dirname.h lib/fnmatch.h lib/getopt.h		\
 	lib/netrc.h config.h
 
 src/common.o: src/common.c $(HEADERS)
