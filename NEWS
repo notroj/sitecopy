@@ -1,3 +1,10 @@
+Changes in release 0.16.2:
+* Fix over-eager move/rename algorithm when handling a
+ delete of one of a set of identical files.
+* DAV: Fix ordering issues with --fetch.
+* FTP: Retry after response timeouts for STOR commands.
+* Update to neon 0.25.4.
+
 Changes in release 0.16.1:
 * FTP: Fix crash in FTP timeout handling.
 * Improve error messages from LIST parser failure.
