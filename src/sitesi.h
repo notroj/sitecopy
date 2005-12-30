@@ -93,12 +93,6 @@ void file_set_diff(struct site_file *file, struct site *site);
 struct site_file *
 file_find(struct site *site, const char *fname, enum file_type type);
 
-/* "Critical section" handling */
-#define site_enter(site) do {\
-    if (!site->critical++) fe_disable_abort(site); } while (0)
-#define site_leave(site) do {\
-    if (!--site->critical) fe_enable_abort(site); } while (0)
-
 struct site_file *
 file_set_stored(enum file_type type, struct file_state *state,
 		struct site *site);

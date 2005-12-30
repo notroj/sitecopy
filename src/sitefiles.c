@@ -56,7 +56,6 @@ inline int fnlist_match(const char *filename, const struct fnlist *list);
 /* Deletes the given file from the given site */
 void file_delete(struct site *site, struct site_file *item) 
 {
-    site_enter(site);
     site_stats_decrease(item, site);
     site_stats_update(site);
     if (item->prev) {
@@ -73,7 +72,6 @@ void file_delete(struct site *site, struct site_file *item)
 	/* Last in list */
 	site->files_tail = item->prev;
     }
-    site_leave(site);
 
     /* Now really destroy the file */
     file_state_destroy(&item->local);
@@ -190,18 +188,15 @@ void site_stats_update(struct site *site)
 
 void file_set_diff(struct site_file *file, struct site *site) 
 {
-    site_enter(site);
     site_stats_decrease(file, site);
     file->diff = file_compare(file->type, &file->local, &file->stored, site);
     site_stats_increase(file, site);
     site_stats_update(site);
-    site_leave(site);
 }
 
 void file_state_copy(struct file_state *dest, const struct file_state *src,
                      struct site *site)
 {
-    site_enter(site);
     file_state_destroy(dest);
     memcpy(dest, src, sizeof(struct file_state));
     if (src->linktarget != NULL) {
@@ -210,7 +205,6 @@ void file_state_copy(struct file_state *dest, const struct file_state *src,
     if (src->filename != NULL) {
 	dest->filename = ne_strdup(src->filename);
     }
-    site_leave(site);
 }
 
 void file_state_destroy(struct file_state *state)
@@ -332,7 +326,6 @@ int file_perms_changed(struct site_file *file, struct site *site)
 
 void file_uploaded(struct site_file *file, struct site *site)
 {
-    site_enter(site);
     file->stored.size = file->local.size;
     if (site->state_method == state_checksum) {
 	memcpy(file->stored.checksum, file->local.checksum, 16);
@@ -347,12 +340,10 @@ void file_uploaded(struct site_file *file, struct site *site)
     file->stored.mode = file->local.mode;
     /* Update the diff */
     file_set_diff(file, site);
-    site_leave(site);
 }
     
 void file_downloaded(struct site_file *file, struct site *site)
 {
-    site_enter(site);
     file->local.size = file->stored.size;
     if (site->state_method == state_checksum) {
 	memcpy(file->local.checksum, file->stored.checksum, 16);
@@ -366,5 +357,4 @@ void file_downloaded(struct site_file *file, struct site *site)
     file->local.exists = file->stored.exists;
     file->local.mode = file->stored.mode;
     file_set_diff(file, site);
-    site_leave(site);
 }

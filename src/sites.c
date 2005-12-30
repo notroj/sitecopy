@@ -927,7 +927,6 @@ void site_read_local_state(struct site *site)
 void site_catchup(struct site *site)
 {
     struct site_file *current, *next;
-    site_enter(site);
     for (current=site->files; current!=NULL; current=next) {
 	next = current->next;
 	switch (current->diff) {
@@ -945,7 +944,6 @@ void site_catchup(struct site *site)
 	    break;
 	}
     }
-    site_leave(site);
 }
 
 /* Reinitializes the site - clears any remote files
@@ -1271,7 +1269,6 @@ int site_verify(struct site *site, int *numremoved)
 void site_destroy_stored(struct site *site)
 {
     struct site_file *current, *next;
-    site_enter(site);
     current = site->files;
     while (current != NULL) {
 	next = current->next;
@@ -1289,7 +1286,6 @@ void site_destroy_stored(struct site *site)
 	}
 	current = next;
     }
-    site_leave(site);
 }
 
 /* Called to delete all the files associated with the site */
@@ -1297,7 +1293,6 @@ void site_destroy(struct site *site)
 {
     struct site_file *current, *next;
 
-    site_enter(site);
     current = site->files;
     while (current != NULL) {
 	next = current->next;
@@ -1305,7 +1300,6 @@ void site_destroy(struct site *site)
 	current = next;
     }
 
-    site_leave(site);
 }
 
 
