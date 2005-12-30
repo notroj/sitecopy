@@ -75,25 +75,6 @@ Volker Kuhlmann: ftp: echo_quit never set.
 
 ---
 
-On Fri, Apr 19, 2002 at 03:37:44PM -0700, Bill Houle wrote:
-> I do .bak files have special meaning to sitecopy, and if so,
-> how do I prevent it?
->
-> I'm testing the waters on a live site and didn't want to make
-> any obvious changes. So I removed 2 harmless files (a .log and
-> a .bak). Yet here's what sitecopy now says are different:
->
-> * These items have been deleted since the last update:
-> media.htm, unison.log
-> * These items have been moved since the last update:
-> media.bak->media.htm
-> sitecopy: The remote site needs updating (3 items to update).
->
-> If I removed media.bak, why does it think I removed media.htm
-> and it needs to be replaced by the .bak version?
-
----
-
 On Thu, Apr 25, 2002 at 06:07:02PM +0200, Dave Hollis wrote:
 > After fetching and synchronizing I noticed that files which had been
 > updated by my colleague and consequently fetched, still had the date of
