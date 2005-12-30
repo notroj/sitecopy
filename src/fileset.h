@@ -43,6 +43,7 @@ struct site_file * FS_NAME (enum file_type type, struct file_state *state,
 	} else if (site->checkmoved && 	/* Check for moved files... */
 		   (type == file_file) && 
 		   (file->type == file_file) && 
+                   (file->diff != file_unchanged) &&
 		   (file_compare(file_file, state, &file->FS_BETA, site)
 		    == file_moved)) {
 	    /* TODO: There is a slight fuzz here - if checkrenames is true, 
