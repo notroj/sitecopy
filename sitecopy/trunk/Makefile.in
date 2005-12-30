@@ -152,9 +152,6 @@ $(EXPATDIR)/xmltok/xmltok.o: $(EXPATDIR)/xmltok/xmltok.c $(EXPATDIR)/xmltok/xmlt
 # we have a separate goal for each and autoconf points the 
 # main 'install' goal at the FE we're compiling for.
 
-# For NLS builds, NLSINSTALL expands to subdirs, which forces
-# a recurse into po/.
-
 install: $(TARGET) install-@TARGET@ install-nls
 
 install-nls:
