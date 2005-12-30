@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sitecopy 0.11.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-09-24 20:00+0100\n"
+"POT-Creation-Date: 2005-12-30 13:31+0000\n"
 "PO-Revision-Date: 2002-01-13 13:37+0100\n"
 "Last-Translator: Thomas Schultz <tststs@gmx.de>\n"
 "Language-Team: de\n"
@@ -1027,39 +1027,39 @@ msgstr ""
 msgid "Size overflow (%s) at line %d"
 msgstr ""
 
-#: src/davdriver.c:182
+#: src/davdriver.c:175
 msgid "The connection timed out."
 msgstr "Verbindung wegen Zeitüberschreitung abgebrochen."
 
-#: src/davdriver.c:227
+#: src/davdriver.c:220
 msgid "SSL support has not be compiled in."
 msgstr "Unterstützung für SSL wurde beim Compilieren nicht aktiviert."
 
-#: src/davdriver.c:235
+#: src/davdriver.c:228
 #, fuzzy, c-format
 msgid "Could not load certificate `%s'."
 msgstr "Konnte nicht in diese Datei schreiben: %s"
 
-#: src/davdriver.c:272
+#: src/davdriver.c:265
 msgid "The server does not appear to be a WebDAV server."
 msgstr "Der Server scheint kein WebDAV-Server zu sein."
 
-#: src/davdriver.c:277
+#: src/davdriver.c:270
 msgid "The server does not support the executable live property."
 msgstr "Der Server unterstützt das Zugriffsrecht `ausführbar' nicht."
 
-#: src/davdriver.c:323 src/davdriver.c:390 src/davdriver.c:427 src/ftp.c:887
-#: src/ftp.c:951
+#: src/davdriver.c:316 src/davdriver.c:383 src/davdriver.c:420 src/ftp.c:888
+#: src/ftp.c:972
 #, fuzzy
 msgid "Could not open file"
 msgstr "Konnte Datei nicht öffnen: "
 
-#: src/davdriver.c:358
+#: src/davdriver.c:351
 #, fuzzy, c-format
 msgid "Could not stat file: %s"
 msgstr "Konnte nicht in diese Datei schreiben: %s"
 
-#: src/davdriver.c:611
+#: src/davdriver.c:598
 msgid "Could not access resource"
 msgstr "Konnte nicht auf Ressource zugreifen"
 
@@ -1097,12 +1097,12 @@ msgstr "Konnte das Ziel des symbolischen Links nicht lesen."
 msgid "Unknown system error"
 msgstr "Unbekannter System-Fehler"
 
-#: src/ftp.c:153 lib/neon/ne_request.c:227
+#: src/ftp.c:153 lib/neon/ne_request.c:236
 #, c-format
 msgid "%s: connection was closed by server."
 msgstr "%s: Verbindung vom Server geschlossen."
 
-#: src/ftp.c:157 lib/neon/ne_request.c:232
+#: src/ftp.c:157 lib/neon/ne_request.c:241
 #, c-format
 msgid "%s: connection timed out."
 msgstr "%s: Verbindung wegen Zeitüberschreitung geschlossen."
@@ -1160,7 +1160,7 @@ msgstr "Fehler beim Lesen des Rumpfs der Anfrage"
 msgid "Could not send file"
 msgstr "Konnte Datei nicht öffnen: "
 
-#: src/ftp.c:510 src/ftp.c:970
+#: src/ftp.c:510 src/ftp.c:991
 #, fuzzy
 msgid "Error writing to file"
 msgstr "Fehler beim Warten auf Antwort"
@@ -1204,17 +1204,22 @@ msgstr ""
 msgid "Error closing data socket"
 msgstr ""
 
-#: src/ftp.c:893
+#: src/ftp.c:894
 #, fuzzy
 msgid "Could not determine length of file"
 msgstr "Konnte Länge der Datei nicht herausfinden: %s"
 
-#: src/ftp.c:1126
+#: src/ftp.c:905
+#, fuzzy
+msgid "Could not rewind to beginning of file"
+msgstr "Konnte Länge der Datei nicht herausfinden: %s"
+
+#: src/ftp.c:1147
 #, fuzzy
 msgid "Could not read 'LIST' response."
 msgstr "Konnte Rumpf der Antwort nicht lesen"
 
-#: src/ftp.c:1135
+#: src/ftp.c:1156
 #, fuzzy, c-format
 msgid "Parse error in LIST response: %s"
 msgstr "Konnte Rumpf der Antwort nicht lesen"
@@ -1545,11 +1550,11 @@ msgstr "Konnte keine SSL-Sitzung herstellen"
 msgid "Could not parse redirect location."
 msgstr "Konnte Status-Zeile des Servers nicht interpretieren."
 
-#: lib/neon/ne_gnutls.c:434 lib/neon/ne_openssl.c:386
+#: lib/neon/ne_gnutls.c:434 lib/neon/ne_openssl.c:393
 msgid "Server certificate was missing commonName attribute in subject name"
 msgstr ""
 
-#: lib/neon/ne_gnutls.c:471 lib/neon/ne_openssl.c:581
+#: lib/neon/ne_gnutls.c:471 lib/neon/ne_openssl.c:588
 #, fuzzy, c-format
 msgid "SSL negotiation failed: %s"
 msgstr "Konnte nicht in diese Datei schreiben: %s"
@@ -1558,40 +1563,40 @@ msgstr "Konnte nicht in diese Datei schreiben: %s"
 msgid "Server did not send certificate chain"
 msgstr ""
 
-#: lib/neon/ne_openssl.c:169
+#: lib/neon/ne_openssl.c:176
 msgid "certificate is not yet valid"
 msgstr ""
 
-#: lib/neon/ne_openssl.c:170
+#: lib/neon/ne_openssl.c:177
 msgid "certificate has expired"
 msgstr ""
 
-#: lib/neon/ne_openssl.c:171
+#: lib/neon/ne_openssl.c:178
 msgid "certificate issued for a different hostname"
 msgstr ""
 
-#: lib/neon/ne_openssl.c:172
+#: lib/neon/ne_openssl.c:179
 msgid "issuer is not trusted"
 msgstr ""
 
-#: lib/neon/ne_openssl.c:177
+#: lib/neon/ne_openssl.c:184
 msgid "Server certificate verification failed: "
 msgstr ""
 
-#: lib/neon/ne_openssl.c:195
+#: lib/neon/ne_openssl.c:202
 msgid "[invalid date]"
 msgstr ""
 
-#: lib/neon/ne_openssl.c:418
+#: lib/neon/ne_openssl.c:425
 #, c-format
 msgid "Certificate verification error: %s"
 msgstr ""
 
-#: lib/neon/ne_openssl.c:600
+#: lib/neon/ne_openssl.c:607
 msgid "SSL server did not present certificate"
 msgstr ""
 
-#: lib/neon/ne_openssl.c:609
+#: lib/neon/ne_openssl.c:616
 msgid "Server certificate changed: connection intercepted?"
 msgstr ""
 
@@ -1640,108 +1645,108 @@ msgstr ""
 msgid "Could not create SSL structure"
 msgstr "Konnte keine SSL-Sitzung herstellen"
 
-#: lib/neon/ne_request.c:224
+#: lib/neon/ne_request.c:233
 #, c-format
 msgid "%s: connection was closed by proxy server."
 msgstr "%s: Verbindung vom Proxy-Server geschlossen."
 
-#: lib/neon/ne_request.c:386
+#: lib/neon/ne_request.c:395
 msgid "offset invalid"
 msgstr ""
 
-#: lib/neon/ne_request.c:389
+#: lib/neon/ne_request.c:398
 #, fuzzy
 msgid "Could not seek to offset %"
 msgstr "Konnte nicht in diese Datei schreiben: %s"
 
-#: lib/neon/ne_request.c:390
+#: lib/neon/ne_request.c:399
 #, fuzzy, c-format
 msgid " of request body file: %s"
 msgstr "Konnte nicht in diese Datei schreiben: %s"
 
-#: lib/neon/ne_request.c:434
+#: lib/neon/ne_request.c:443
 msgid "Could not send request body"
 msgstr "Konnte den Rumpf der Anfrage nicht schicken"
 
-#: lib/neon/ne_request.c:782
+#: lib/neon/ne_request.c:791
 msgid "Could not read chunk size"
 msgstr "Lesefehler bei Ermittlung der Blockgröße"
 
-#: lib/neon/ne_request.c:789
+#: lib/neon/ne_request.c:798
 msgid "Could not parse chunk size"
 msgstr "Parser-Fehler bei Ermittlung der Blockgröße"
 
-#: lib/neon/ne_request.c:826
+#: lib/neon/ne_request.c:835
 msgid "Could not read response body"
 msgstr "Konnte Rumpf der Antwort nicht lesen"
 
-#: lib/neon/ne_request.c:842
+#: lib/neon/ne_request.c:851
 #, fuzzy
 msgid "Could not read chunk delimiter"
 msgstr "Lesefehler bei Ermittlung der Blockgröße"
 
-#: lib/neon/ne_request.c:845
+#: lib/neon/ne_request.c:854
 msgid "Chunk delimiter was invalid"
 msgstr ""
 
-#: lib/neon/ne_request.c:955
+#: lib/neon/ne_request.c:964
 msgid "Could not read status line"
 msgstr "Konnte Status-Zeile des Servers nicht lesen"
 
-#: lib/neon/ne_request.c:966
+#: lib/neon/ne_request.c:975
 msgid "Could not parse response status line."
 msgstr "Konnte Status-Zeile des Servers nicht interpretieren."
 
-#: lib/neon/ne_request.c:977
+#: lib/neon/ne_request.c:986
 #, fuzzy
 msgid "Could not read interim response headers"
 msgstr "Konnte Rumpf der Antwort nicht lesen"
 
-#: lib/neon/ne_request.c:1011
+#: lib/neon/ne_request.c:1020
 msgid "Could not send request"
 msgstr "Konnte keine Anfrage (request) schicken"
 
-#: lib/neon/ne_request.c:1059 lib/neon/ne_request.c:1077
-#: lib/neon/ne_request.c:1087
+#: lib/neon/ne_request.c:1068 lib/neon/ne_request.c:1086
+#: lib/neon/ne_request.c:1096
 msgid "Error reading response headers"
 msgstr "Fehler beim Lesen der Kopfzeilen (header) der Antwort"
 
-#: lib/neon/ne_request.c:1105
+#: lib/neon/ne_request.c:1114
 msgid "Response header too long"
 msgstr "Kopfzeilen (header) der Antwort zu lang"
 
-#: lib/neon/ne_request.c:1187
+#: lib/neon/ne_request.c:1196
 msgid "Response exceeded maximum number of header fields."
 msgstr "Antwort hatte zu viele Header-Felder."
 
-#: lib/neon/ne_request.c:1204
+#: lib/neon/ne_request.c:1213
 #, fuzzy, c-format
 msgid "Could not resolve hostname `%s': %s"
 msgstr "%s: Fehler: Konnte den Namen des Servers nicht auflösen (%s).\n"
 
-#: lib/neon/ne_request.c:1314
+#: lib/neon/ne_request.c:1323
 msgid "Invalid Content-Length in response"
 msgstr ""
 
-#: lib/neon/ne_request.c:1376
+#: lib/neon/ne_request.c:1385
 #, c-format
 msgid "Could not write to file: %s"
 msgstr "Konnte nicht in diese Datei schreiben: %s"
 
-#: lib/neon/ne_request.c:1449
+#: lib/neon/ne_request.c:1458
 msgid "Could not create SSL connection through proxy server"
 msgstr "Konnte durch den Proxy-Server keine SSL-Verbindung herstellen"
 
-#: lib/neon/ne_request.c:1495
+#: lib/neon/ne_request.c:1504
 #, fuzzy
 msgid "Could not create socket"
 msgstr "Konnte keine SSL-Sitzung herstellen"
 
-#: lib/neon/ne_request.c:1540
+#: lib/neon/ne_request.c:1549
 msgid "Could not connect to server"
 msgstr "Verbindungsaufbau zum Server gescheitert."
 
-#: lib/neon/ne_request.c:1543
+#: lib/neon/ne_request.c:1552
 msgid "Could not connect to proxy server"
 msgstr "Verbindungsaufbau zum Proxy-Server gescheitert."
 
@@ -1821,7 +1826,7 @@ msgstr ""
 msgid "Proxy server was not authenticated correctly."
 msgstr ""
 
-#: lib/neon/ne_auth.c:431
+#: lib/neon/ne_auth.c:426
 #, fuzzy, c-format
 msgid "GSSAPI authentication error (%s)"
 msgstr "Anmeldung wird benötigt auf %s `%s':\n"
