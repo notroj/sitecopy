@@ -876,6 +876,7 @@ int ftp_put(ftp_session *sess,
     int ret;
     struct stat st;
     FILE *f;
+    int tries = 0, dret;
 
     /* Set the transfer type correctly */
     if (set_mode(sess, ascii?tran_ascii:tran_binary))
@@ -896,23 +897,43 @@ int ftp_put(ftp_session *sess,
 	return FTP_ERROR;
     }
     
-    ret = maybe_chdir(sess, &remotefile);
-    if (ret != FTP_OK) {
-	fclose(f);
-	return ret;
-    }
-
-    ret = ftp_data_open(sess, "STOR %s", remotefile);
-    if (ret == FTP_READY) {
-	if (ascii)
-	    ret = send_file_ascii(sess, f, st.st_size);
-        else
-	    ret = send_file_binary(sess, f, st.st_size);
-	if (dtp_close(sess, 0) == FTP_SENT && ret == 0) {
-            fclose(f);
-            return FTP_OK;
+    do {
+        /* Rewind the file pointer for attempts other than the
+         * first: */
+        if (tries && fseek(f, 0, SEEK_SET) < 0) {
+            int errnum = errno;
+            set_syserr(sess, _("Could not rewind to beginning of file"),
+                       errnum);
+            break;
         }
-    }
+
+        ret = maybe_chdir(sess, &remotefile);
+        if (ret != FTP_OK) {
+            fclose(f);
+            return ret;
+        }
+
+        ret = ftp_data_open(sess, "STOR %s", remotefile);
+        if (ret == FTP_READY) {
+            if (ascii)
+                ret = send_file_ascii(sess, f, st.st_size);
+            else
+                ret = send_file_binary(sess, f, st.st_size);
+
+            /* Now close the DTP connection and read the response. */
+            dret = dtp_close(sess, 0);
+
+            if (dret == FTP_SENT && ret == 0) {
+                fclose(f);
+                return FTP_OK;
+            }
+        } else {
+            /* ftp_data_open() will already have retried as necessary
+             * so don't retry it again here if that was all that
+             * failed. */
+            dret = FTP_ERROR;
+        }
+    } while (dret == FTP_BROKEN && ++tries < 3);
 
     fclose(f);
     return FTP_ERROR;
