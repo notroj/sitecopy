@@ -1,6 +1,6 @@
 /* 
    sitecopy, for managing remote web sites.
-   Copyright (C) 1999-2004, Joe Orton <joe@manyfish.co.uk>
+   Copyright (C) 1999-2005, Joe Orton <joe@manyfish.co.uk>
                                                                      
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -229,8 +229,8 @@ struct file_state {
     off_t size; /* the size of the file */
     unsigned char checksum[16]; /* the MD5 checksum of the file */
     char *linktarget; /* the target of the link */
-    unsigned int exists:1; /* whether the file exists in this state or not */
-    unsigned int ascii:1; /* whether the file is 'ASCII' or not */
+    unsigned int exists; /* whether the file exists in this state or not */
+    unsigned int ascii; /* whether the file is 'ASCII' or not */
     mode_t mode; /* the protection modes & 0777 of the file */
 };
 
@@ -246,14 +246,14 @@ struct file_state {
 /* File representation */
 struct site_file {
     /* The diff between the local and stored states. */
-    enum file_diff diff:3;
+    enum file_diff diff;
 
     /* The diff between the server and live states. */
-    enum file_diff live_diff:3;
+    enum file_diff live_diff;
 
-    enum file_type type:2;
+    enum file_type type;
     
-    unsigned int ignore:1; /* whether to ignore any changes to this file */
+    unsigned int ignore; /* whether to ignore any changes to this file */
 
     /* Probably want to make the states into an array, so they can be
      * indexed and used more generically than this. e.g.:
@@ -353,10 +353,10 @@ struct site {
 
     char *remote_root; /* root directory of site on server */
     char *remote_root_user; /* what the user gave/sees as the remote root */
-    unsigned int remote_isrel:1; /* is the remote root dir relative to login dir? (~/) */
+    unsigned int remote_isrel; /* is the remote root dir relative to login dir? (~/) */
     char *local_root; /* root directory of site locally */
     char *local_root_user; /* what the user gave/sees as the remote root */
-    unsigned int local_isrel:1; /* is the local root directory relative to home dir */
+    unsigned int local_isrel; /* is the local root directory relative to home dir */
 
     char *infofile;  /* local storage file in ~/.sitecopy/  */
     char *certfile;  /* file in which cached SSL certificate is stored. */
@@ -368,29 +368,29 @@ struct site {
     enum site_symlink_modes symlinks; /* symlink handline mode */
 
     /* Protocol-driver specific options here */
-    unsigned int ftp_pasv_mode:1;
-    unsigned int ftp_echo_quit:1;
-    unsigned int ftp_forcecd:1;
-    unsigned int ftp_use_cwd:1;
-    unsigned int http_use_expect:1;
-    unsigned int http_limit:1;
-    unsigned int http_secure:1;
-    unsigned int http_tolerant:1;
+    unsigned int ftp_pasv_mode;
+    unsigned int ftp_echo_quit;
+    unsigned int ftp_forcecd;
+    unsigned int ftp_use_cwd;
+    unsigned int http_use_expect;
+    unsigned int http_limit;
+    unsigned int http_secure;
+    unsigned int http_tolerant;
     char *rsh_cmd;
     char *rcp_cmd;
 
-    unsigned int nodelete:1; /* whether to delete any files remotely */
-    unsigned int checkmoved:1; /* whether to check for moved files */
-    unsigned int checkrenames:1; /* whether to check for renamed files */
-    unsigned int nooverwrite:1; /* whether to delete changed files before overwriting */ 
+    unsigned int nodelete; /* whether to delete any files remotely */
+    unsigned int checkmoved; /* whether to check for moved files */
+    unsigned int checkrenames; /* whether to check for renamed files */
+    unsigned int nooverwrite; /* whether to delete changed files before overwriting */ 
     unsigned int safemode;  /* whether we are in safe mode or not */
-    unsigned int lowercase:1; /* whether to use all-lowercase filenames remotely */
-    unsigned int tempupload:1; /* whether to use temporary files when uploading */
+    unsigned int lowercase; /* whether to use all-lowercase filenames remotely */
+    unsigned int tempupload; /* whether to use temporary files when uploading */
 
     /* These are parameters to site_update really. */
-    unsigned int keep_going:1; /* if true, keep going past errors in updates */
+    unsigned int keep_going; /* if true, keep going past errors in updates */
 
-    unsigned int use_this:1; /* whether the site is being operated on - handy
+    unsigned int use_this; /* whether the site is being operated on - handy
 			      * for the console FE */
 
     /* We have two 'is_different' fields. This is unintuitive, since
@@ -399,9 +399,9 @@ struct site {
      * and 'nodelete': using these, a change can be made to the local
      * site which will NOT be mirrored by update mode, but WILL be
      * affected by synch mode. */
-    unsigned int local_is_different:1; /* use this if you want to know whether
+    unsigned int local_is_different; /* use this if you want to know whether
 					* site_synch will do anything */
-    unsigned int remote_is_different:1; /* use this if you want to know whether
+    unsigned int remote_is_different; /* use this if you want to know whether
 					 * site_update will do anything */
     
     enum state_method state_method; /* as dictated by rcfile */
