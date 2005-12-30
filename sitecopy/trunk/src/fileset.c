@@ -135,10 +135,6 @@ static struct site_file *file_set(enum file_type type, struct file_state *state,
 	dir_diff = default_diff;
     }
 
-    /* Enter the critical section: we are about to modify the files
-     * list. */
-    site_enter(site);
-
     /* We prefer a move to a CHANGED direct match. */
     if ((direct == NULL && moved == NULL)
         || (direct != NULL && direct->diff == file_moved
@@ -186,7 +182,6 @@ static struct site_file *file_set(enum file_type type, struct file_state *state,
     /* And update the stats */
     site_stats_increase(file, site);
     site_stats_update(site);
-    site_leave(site);
 
     return file;
 }

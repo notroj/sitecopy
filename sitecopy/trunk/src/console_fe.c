@@ -1,6 +1,6 @@
 /* 
    sitecopy, for managing remote web sites.
-   Copyright (C) 1998-2004, Joe Orton <joe@manyfish.co.uk>
+   Copyright (C) 1998-2005, Joe Orton <joe@manyfish.co.uk>
                                                                      
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -145,11 +145,6 @@ static struct site *current_site; /* this is used to save the state if we
 
 static int upload_total, upload_sofar, in_transfer;
 
-static volatile 
-int delay_abort = 0, /* non-zero when we should delay aborting */
-    aborted = 0;  /* non-zero if we were aborted while abortion was
-		   * disabled */
-
 /* User-specified options */
 static int quiet; /* How quiet do they want us to be? */
 static int allsites, /* Do they want all sites to be operated on? */
@@ -161,7 +156,6 @@ static int allsites, /* Do they want all sites to be operated on? */
 
 /* Functions prototypes */
 static void init(int, char **);
-static void init_signals(void);
 static void parse_cmdline(int, char **);
 static int act_on_site(struct site *site, enum action act);
 static int verify_sites(struct site *sites, enum action act);
@@ -242,76 +236,6 @@ int main(int argc, char *argv[])
     }
     
     return ret;
-}
-
-static void abort_now(void)
-{
-    site_write_stored_state(current_site);
-    printf(_("%s: Aborted.\n"), progname);
-    exit(15);
-}
-
-static RETSIGTYPE abort_handler(int sig) 
-{
-    /* Flush out debugging messages first */
-    fflush(stderr);
-#ifdef HAVE_STRSIGNAL
-    printf(_("\n\n%s: Caught signal: %s (%d)\n"), progname, 
-	    strsignal(sig), sig);
-#else
-    printf(_("\n\n%s: Caught signal %d\n"), progname, sig);
-#endif
-    if (action == action_update && current_site != NULL) {
-	if (sig == SIGSEGV && delay_abort) {
-	    /* If we segfault in a critical section, the files list is
-	     * doomed, so there is no chance of writing it out. */
-	    printf(
-		_("%s: Cannot recover from segmentation fault, aborting.\n"),
-		progname);
-	    exit(-1);
-	}
-	printf(_("%s: Aborting update...\n"), progname);
-	if (!delay_abort) {
-	    abort_now();
-	} else {
-	    aborted = 1;
-	}
-    } else {
-	signal(SIGSEGV, SIG_DFL);
-	printf(_("%s: Terminating.\n"), progname);
-	kill(0, SIGSEGV);
-	sleep(1);
-    }
-    return;
-}
-
-/* Enter critical section */
-void fe_disable_abort(struct site *site)
-{
-    delay_abort = 1;
-}
-
-/* Leave critical section */
-void fe_enable_abort(struct site *site)
-{
-    /* Check whether we've received the signal */
-    if (aborted) {
-	abort_now();
-    }
-    delay_abort = 0;
-}
-
-static RETSIGTYPE quit_handler(int sig) 
-{
-    fflush(stderr);
-#ifdef HAVE_STRSIGNAL
-    printf(_("\n\n%s: Caught signal: %s (%d)\n"), progname, 
-	    strsignal(sig), sig);
-#else
-    printf(_("\n\n%s: Caught signal %d\n"), progname, sig);
-#endif
-    printf(_("%s: Terminating.\n"), progname);
-    exit(15);
 }
 
 /* Produce the normal listing output for the given site.
@@ -1257,26 +1181,6 @@ static void init(int argc, char **argv)
     }
 
     init_sites();
-    init_signals();
-
-}
-
-static void init_signals(void) 
-{
-    /* Handle signals, so if we get killed in the middle of a
-     * site update, the state gets saved properly. */
-    signal(SIGINT, abort_handler);
-    signal(SIGHUP, abort_handler);
-#if 0
-    signal(SIGSEGV, abort_handler);
-#endif
-    signal(SIGTERM, abort_handler);
-    signal(SIGUSR1, abort_handler);
-    signal(SIGUSR2, abort_handler);
-    signal(SIGQUIT, quit_handler);
-    signal(SIGABRT, quit_handler);
-    /* And ignore SIGPIPE */
-    signal(SIGPIPE, SIG_IGN);
 }
 
 static int act_on_site(struct site *site, enum action act) 

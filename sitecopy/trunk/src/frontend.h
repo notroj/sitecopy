@@ -96,21 +96,6 @@ int fe_login(fe_login_context ctx, const char *realm, const char *hostname,
  * failures mask of 'failures' (NE_SSL_*), should be accepted. */
 int fe_accept_cert(const ne_ssl_certificate *cert, int failures);
 
-/* Modifications to the files list within
- *  site_update, site_fetch, and site_synch
- * are made after a call to fe_disable_abort(), and before
- * a call to fe_enable_abort.
- * Example:
- *  ...doing something...
- *  fe_disable_abort();
- *  ...update files list...
- *  fe_enable_abort();
- * If the process is killed while abortion is disabled, then
- * the files list is NOT guaranteed to be in a consistent state.
- */
-void fe_disable_abort(struct site *site);
-void fe_enable_abort(struct site *site);
-
 int fe_can_update(const struct site_file *file);
 void fe_updating(const struct site_file *file);
 void fe_updated(const struct site_file *file, int success, const char *error);
