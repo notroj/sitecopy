@@ -1,6 +1,6 @@
 /* 
    sitecopy, for managing remote web sites. file_set_* calls.
-   Copyright (C) 1999-2004, Joe Orton <joe@manyfish.co.uk>
+   Copyright (C) 1999-2005, Joe Orton <joe@manyfish.co.uk>
                                                                      
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -21,6 +21,10 @@
 
 #ifdef HAVE_STRING_H
 #include <string.h>
+#endif
+
+#ifdef HAVE_STDDEF_H
+#include <stddef.h>
 #endif
 
 #include <ne_alloc.h>
@@ -55,34 +59,157 @@ file_insert(enum file_type type, struct site *site)
     return file;
 }
 
-/* This is a Hack.
- * A Hack which makes a bad situation slightly better.
- * But, nonetheless, it is a hack.
+#define FS_ALPHA(f) ((struct file_state *) (((char *)(f)) + alpha_off))
+#define FS_BETA(f) ((struct file_state *) (((char *)(f)) + beta_off))
+
+/* file_set implementation, used to update the files list.
  *
- * Sometime in the future, we need to make state handling more generic.
- * For now, we have two functions, file_set_local and file_set_stored,
- * which are essentially the same other than a few minor details.
+ * file_set takes a file type 'type', a file state 'state', the site,
+ * two structure offsets, alpha_off and beta_off, and a default diff
+ * type, 'default_diff'.  alpha_off represents the offset into a
+ * site_file structure for the state which 'state' represents;
+ * beta_off represents the offset into the structure for the state
+ * against which this state should be compared.
  */
+static struct site_file *file_set(enum file_type type, struct file_state *state, 
+                                  struct site *site,
+                                  size_t alpha_off, size_t beta_off,
+                                  enum file_diff default_diff)
+{
+    struct site_file *file, *direct = NULL, *moved = NULL, *frename = NULL;
+    enum file_diff dir_diff;
+    char *bname = NULL; /* init to shut up gcc */
 
-#define FS_NAME file_set_local
-#define FS_UV "set_local"
-#define FS_ALPHA local
-#define FS_BETA stored
-#define FS_LONELY file_new
+    if (site->checkmoved && type == file_file) {
+	bname = base_name(state->filename);
+    }
 
-#include "fileset.h"
+    for (file = site->files; file; file = file->next) {
+        struct file_state *beta = FS_BETA(file);
 
-#undef FS_NAME
-#undef FS_UV
-#undef FS_ALPHA
-#undef FS_BETA
-#undef FS_LONELY
+	if (beta->exists && direct == NULL
+            && file->type == type
+            && strcmp(beta->filename, state->filename) == 0) {
+	    /* Direct match found! */
+	    NE_DEBUG(DEBUG_FILES, "Direct match found.\n");
+	    direct = file;
+	} 
+        /* If this is not a direct match, check for a move/rename candidate,
+         * unless the file already has a complete state and diff is unchanged. */
+        else if (site->checkmoved 
+                 && type == file_file && file->type == file_file
+                 && file->diff != file_unchanged
+                 && file_compare(file_file, state, 
+                                 beta, site) == file_moved) {
+	    /* TODO: There is a slight fuzz here - if checkrenames is true, 
+	     * we'll always match the first 'direct move' candidate as a 
+	     * 'rename move'. This shouldn't matter, since we prefer
+	     * the move to the rename in the single candidate case,
+	     * and in the multiple candidate case. */
+	    if (!moved 
+                && strcmp(bname, base_name(beta->filename)) == 0) {
+		NE_DEBUG(DEBUG_FILES, "Move candidate: %s\n", 
+                         beta->filename);
+		moved = file;
+	    } else if (site->checkrenames && frename == NULL) {
+		NE_DEBUG(DEBUG_FILES, "Rename move candidate: %s\n", 
+                         beta->filename);
+		frename = file;
+	    }
+	}
 
-#define FS_NAME file_set_stored
-#define FS_UV "set_stored"
-#define FS_ALPHA stored
-#define FS_BETA local
-#define FS_LONELY file_deleted
+        /* If all candidates are found, stop looking. */
+	if (direct && moved && frename) {
+            break;
+        }
+    }
+    NE_DEBUG(DEBUG_FILES, "Found: %s-%s-%s\n", 
+	  direct?"direct":"", moved?"moved":"", frename?"rename":"");
+    /* We prefer a direct move to a rename */
+    if (moved == NULL) moved = frename;
+    if (direct != NULL) {
+	dir_diff = file_compare(type, state, FS_BETA(direct), site);
+	NE_DEBUG(DEBUG_FILES, "Direct compare: %s\n", 
+	      DEBUG_GIVE_DIFF(dir_diff));
+    } else {
+	dir_diff = default_diff;
+    }
 
-#include "fileset.h"
+    /* Enter the critical section: we are about to modify the files
+     * list. */
+    site_enter(site);
 
+    /* We prefer a move to a CHANGED direct match. */
+    if ((direct == NULL && moved == NULL)
+        || (direct != NULL && direct->diff == file_moved
+            && moved == NULL && dir_diff != file_unchanged)) {
+	NE_DEBUG(DEBUG_FILES, "Creating new file.\n");
+	file = file_insert(type, site);
+	file->type = type;
+	file->diff = default_diff;
+	if (type == file_file) {
+	    file->ignore = file_isignored(state->filename, site);
+	}
+    } else {
+	/* Overwrite file case...
+	 * Again, we still prefer a move to a direct match */
+	if (moved != NULL && dir_diff != file_unchanged) {
+	    NE_DEBUG(DEBUG_FILES, "Using moved file.\n");
+	    file = moved;
+	    site_stats_decrease(file, site);
+	    file->diff = file_moved;
+	} else {
+	    NE_DEBUG(DEBUG_FILES, "Using direct match.\n");
+	    file = direct;
+	    site_stats_decrease(file, site);
+	    file->diff = dir_diff;
+	}
+
+	if (FS_ALPHA(file)->exists) {
+	    /* SHOVE! */
+	    struct site_file *other;
+	    NE_DEBUG(DEBUG_FILES, "Shoving file:\n");
+	    other = file_insert(file->type, site);
+	    other->type = file->type;
+	    other->diff = default_diff;
+	    other->ignore = file->ignore;
+	    /* Copy over the stored state for the moved file. */
+	    memcpy(FS_ALPHA(other), FS_ALPHA(file), sizeof(struct file_state));
+	    DEBUG_DUMP_FILE_PROPS(DEBUG_FILES, file, site);
+	    site_stats_increase(other, site);
+	}
+    }
+
+    /* Finish up - write over the new state */
+    memcpy(FS_ALPHA(file), state, sizeof(struct file_state));
+
+    /* And update the stats */
+    site_stats_increase(file, site);
+    site_stats_update(site);
+    site_leave(site);
+
+    return file;
+}
+
+
+#ifndef offsetof
+#define offsetof(t, m) ((size_t) (((char *)&(((t *)NULL)->m)) - (char *)NULL))
+#endif
+
+struct site_file *file_set_local(enum file_type type, struct file_state *state, 
+                                 struct site *site)
+{
+    return file_set(type, state, site,
+                    offsetof(struct site_file, local),
+                    offsetof(struct site_file, stored),
+                    file_new);
+}
+
+struct site_file *file_set_stored(enum file_type type, struct file_state *state, 
+                                  struct site *site)
+{
+    return file_set(type, state, site,
+                    offsetof(struct site_file, stored),
+                    offsetof(struct site_file, local),
+                    file_deleted);
+}
