@@ -1,6 +1,6 @@
 /* 
    sitecopy, for managing remote web sites.
-   Copyright (C) 1999-2005, Joe Orton <joe@manyfish.co.uk>
+   Copyright (C) 1999-2006, Joe Orton <joe@manyfish.co.uk>
                                                                      
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -361,6 +361,8 @@ struct site {
     char *infofile;  /* local storage file in ~/.sitecopy/  */
     char *certfile;  /* file in which cached SSL certificate is stored. */
     FILE *storage_file;  /* The file opened for the storage file */
+
+    char *client_cert; /* client certificate */
 
     /* Options for the site */
     enum site_perm_modes perms; /* permissions maintenance mode */

@@ -1,6 +1,6 @@
 /* 
    sitecopy, for managing remote web sites.
-   Copyright (C) 1998-2005, Joe Orton <joe@manyfish.co.uk>
+   Copyright (C) 1998-2006, Joe Orton <joe@manyfish.co.uk>
                                                                      
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -634,6 +634,23 @@ int fe_login(fe_login_context ctx, const char *realm, const char *hostname,
 	printf(_("Retrying: ["));
 	upload_sofar = 0;
     }
+    return 0;
+}
+
+int fe_decrypt_clicert(const ne_ssl_client_cert *cert, char *password)
+{
+    const char *name = ne_ssl_clicert_name(cert);
+    char *tmp;
+
+    printf(_("%s: Encrypted client certificate configured%s%s.\n"),
+           progname, name ? ": " : "", name ? name : "");
+
+    tmp = getpass(_("Password: "));
+    if (tmp == NULL) {
+        return -1;
+    }
+
+    ne_strnzcpy(password, tmp, FE_LBUFSIZ);
     return 0;
 }
 

@@ -1,6 +1,6 @@
 /* 
    sitecopy WebDAV protocol driver module
-   Copyright (C) 2000-2005, Joe Orton <joe@manyfish.co.uk>
+   Copyright (C) 2000-2006, Joe Orton <joe@manyfish.co.uk>
                                                                      
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -251,6 +251,35 @@ static int init(void **session, struct site *site)
 
     ne_set_server_auth(sess, server_auth_cb, &site->server);
     
+    if (site->http_secure && site->client_cert) {
+        ne_ssl_client_cert *cc;
+
+        cc = ne_ssl_clicert_read(site->client_cert);
+        if (!cc) {
+            ne_set_error(sess, _("Could not read SSL client certificate '%s'."),
+                         site->client_cert);
+            return SITE_FAILED;
+        }
+
+        if (ne_ssl_clicert_encrypted(cc)) {
+            char password[FE_LBUFSIZ];
+
+            if (fe_decrypt_clicert(cc, password)) {
+                return SITE_FAILED;
+            }
+
+            if (ne_ssl_clicert_decrypt(cc, password) != 0) {
+                ne_set_error(sess, _("Could not decrypt SSL client "
+                                     "certificate '%s'."), site->client_cert);
+                return SITE_FAILED;
+            }
+        }
+
+        ne_ssl_set_clicert(sess, cc);
+
+        ne_ssl_clicert_free(cc);
+    }
+
     if (site->http_tolerant) {
 	/* Skip the OPTIONS, since we ignore failure anyway. */
 	return SITE_OK;

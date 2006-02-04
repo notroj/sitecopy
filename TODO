@@ -1,6 +1,9 @@
 						-*- text -*-
 Bugs:
 
+- "sitecopy foo bar" always process foo and bar in the order they
+  are specified in the rcfile
+
 - review w.r.t djb's FTP interop notes, http://cr.yp.to/ftp.html
 
 - add support for MLST, latest draft:
