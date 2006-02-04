@@ -629,7 +629,9 @@ int fe_login(fe_login_context ctx, const char *realm, const char *hostname,
 	 * but, just to be sure... */
 	return -1;
     }
-    strcpy(password, tmp);
+
+    ne_strnzcpy(password, tmp, FE_LBUFSIZ);
+
     if (in_transfer) {
 	printf(_("Retrying: ["));
 	upload_sofar = 0;
