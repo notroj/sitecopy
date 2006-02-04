@@ -1,6 +1,6 @@
 /* 
    sitecopy, for managing remote web sites. Stored state handling routines.
-   Copyright (C) 1999-2004, Joe Orton <joe@manyfish.co.uk>
+   Copyright (C) 1999-2006, Joe Orton <joe@manyfish.co.uk>
                                                                      
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -279,6 +279,10 @@ static int start_element(void *userdata, int parent,
         doc->stored.mode = -1;
     }
 
+    if (state == SITE_ELM_ascii) {
+        doc->truth = 0;
+    }
+
     return state;
 }
 
@@ -337,10 +341,6 @@ static int end_element(void *userdata, int state,
     case SITE_ELM_size:
 	doc->stored.size = strtol(cdata, NULL, 10);
 	if (doc->stored.size == LONG_MAX) {
-            ne_snprintf(err, sizeof err, _("Size overflow (%s) at line %d"),
-                        cdata, ne_xml_currentline(doc->parser));
-            ne_xml_set_error(doc->parser, err);
-	    return -1;
         }
 	break;
     case SITE_ELM_protection:
@@ -349,13 +349,13 @@ static int end_element(void *userdata, int state,
     case SITE_ELM_server_modtime:
 	doc->server.time = strtol(cdata, NULL, 10);
 	if (doc->server.time == LONG_MIN || doc->server.time == LONG_MAX)
-	    return -1;
+            goto overflow_err;
 	doc->server.exists = true;
 	break;
     case SITE_ELM_modtime:
 	doc->stored.time = strtol(cdata, NULL, 10);
 	if (doc->stored.time == LONG_MIN || doc->stored.time == LONG_MAX)
-	    return -1;
+            goto overflow_err;
 	break;
     case SITE_ELM_true:
 	doc->truth = 1;
@@ -365,8 +365,12 @@ static int end_element(void *userdata, int state,
 	break;
     case SITE_ELM_ascii:
 	if (doc->truth) {
-	    doc->stored.ascii = (doc->truth==1);
+	    doc->stored.ascii = doc->truth == 1;
 	} else {
+            ne_snprintf(err, sizeof err, _("Boolean missing in 'ascii' "
+                                           "at line %d"),
+                        ne_xml_currentline(doc->parser));
+            ne_xml_set_error(doc->parser, err);
 	    return -1;
 	}
 	break;
@@ -387,7 +391,11 @@ static int end_element(void *userdata, int state,
     }
 
     return 0;
-
+overflow_err:
+    ne_snprintf(err, sizeof err, _("Size overflow (%s) in '%s' at line %d"),
+                cdata, name, ne_xml_currentline(doc->parser));
+    ne_xml_set_error(doc->parser, err);
+    return -1;
 }
 
 /* Read a new XML-format state storage file */
