@@ -54,8 +54,6 @@
  */
 #define SITE_STATE_FILE_VERSION "1.0"
 
-#define EOL "\r\n"
-
 /* Used in stored.mode to indicate no mode known. */
 #define INVALID_MODE ((mode_t)-1)
 
@@ -129,23 +127,23 @@ int site_write_stored_state(struct site *site)
 	return -1;
     }
 
-    fprintf(fp, "<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>" EOL);
-    fprintf(fp, "<sitestate version='" SITE_STATE_FILE_VERSION "'>" EOL);
-    fprintf(fp, "<options>" EOL);
+    fprintf(fp, "<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>\n");
+    fprintf(fp, "<sitestate version='" SITE_STATE_FILE_VERSION "'>\n");
+    fprintf(fp, "<options>\n");
     fprintf(fp, " <saved-by package='" PACKAGE_NAME "'"
-	    " version='" PACKAGE_VERSION "'/>" EOL);
+	    " version='" PACKAGE_VERSION "'/>\n");
     if (site->state_method == state_checksum) {
 	/* For forwards-compatibility */
-	fprintf(fp, " <checksum-algorithm><checksum-MD5/></checksum-algorithm>" EOL);
+	fprintf(fp, " <checksum-algorithm><checksum-MD5/></checksum-algorithm>\n");
     }
-    fprintf(fp, " <state-method><state-%s/></state-method>" EOL,
+    fprintf(fp, " <state-method><state-%s/></state-method>\n",
 	     (site->state_method==state_checksum)?"checksum":"timesize");
     if (site->safemode) {
-	fprintf(fp, " <safemode/>" EOL);
+	fprintf(fp, " <safemode/>\n");
     }
-    fprintf(fp, " <escaped-filenames/>" EOL);
-    fprintf(fp, "</options>" EOL);
-    fprintf(fp, "<items>" EOL);
+    fprintf(fp, " <escaped-filenames/>\n");
+    fprintf(fp, "</options>\n");
+    fprintf(fp, "<items>\n");
     /* Now write out the items */
     for (current = site->files; current!=NULL; current = current->next) {
 	char *fname;
@@ -191,15 +189,13 @@ int site_write_stored_state(struct site *site)
 	    /* nothing to do */
 	    break;
 	}
-	fprintf(fp, "</item>" EOL);
+	fprintf(fp, "</item>\n");
     }
-    fprintf(fp, "</items>" EOL);
-    fprintf(fp, "</sitestate>" EOL);
+    fprintf(fp, "</items>\n");
+    fprintf(fp, "</sitestate>\n");
     site->stored_state_method = site->state_method;
     return site_close_storage_file(site);
 }
-
-#undef EOL
 
 /* neon ne_xml-based XML parsing */
 
