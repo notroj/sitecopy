@@ -1,6 +1,6 @@
 /* 
    sitecopy, for managing remote web sites.
-   Copyright (C) 1998-2004, Joe Orton <joe@manyfish.co.uk>
+   Copyright (C) 1998-2006, Joe Orton <joe@manyfish.co.uk>
                                                                      
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -426,6 +426,8 @@ int rcfile_read(struct site **sites)
 		} else {		    
 		    ret = RC_CORRUPT;
 		}
+            } else if (strcmp(key, "client-cert") == 0) {
+                this_site->client_cert = ne_strdup(val);
 	    } else if (strcmp(key, "rsh") == 0) {
 		this_site->rsh_cmd = ne_strdup(val);
 	    } else if (strcmp(key, "rcp") == 0) {
@@ -599,6 +601,12 @@ int rcfile_verify(struct site *any_site)
     free(temp);
     if (ret != 0) {
 	return SITE_ACCESSLOCALDIR;
+    }
+
+    if (any_site->client_cert && strncmp(any_site->client_cert, "~/", 2) == 0) {
+        temp = ne_concat(home, any_site->client_cert + 1, NULL);
+        ne_free(any_site->client_cert);
+        any_site->client_cert = temp;
     }
 
     /* Assign default ports if they didn't bother to */

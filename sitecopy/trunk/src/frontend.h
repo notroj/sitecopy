@@ -1,6 +1,6 @@
 /* 
    sitecopy, manage remote web sites.
-   Copyright (C) 1998-2005, Joe Orton <joe@manyfish.co.uk>.
+   Copyright (C) 1998-2006, Joe Orton <joe@manyfish.co.uk>.
                                                                      
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -95,6 +95,11 @@ int fe_login(fe_login_context ctx, const char *realm, const char *hostname,
 /* Return zero if the given server certificate 'cert', which had a
  * failures mask of 'failures' (NE_SSL_*), should be accepted. */
 int fe_accept_cert(const ne_ssl_certificate *cert, int failures);
+
+/* Enter password needed to decrypt given client certificate.  Returns
+ * zero on success, non-zero on failure.  'password' is of size
+ * FE_LBUFSIZ. */
+int fe_decrypt_clicert(const ne_ssl_client_cert *cert, char *password);
 
 int fe_can_update(const struct site_file *file);
 void fe_updating(const struct site_file *file);
