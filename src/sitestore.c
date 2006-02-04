@@ -56,6 +56,9 @@
 
 #define EOL "\r\n"
 
+/* Used in stored.mode to indicate no mode known. */
+#define INVALID_MODE ((mode_t)-1)
+
 /* Opens the storage file for writing */
 FILE *site_open_storage_file(struct site *site) 
 {
@@ -155,8 +158,10 @@ int site_write_stored_state(struct site *site)
         fname = fn_escape(current->stored.filename);
 	fprintf(fp, "<filename>%s</filename>\n", fname);
         ne_free(fname);
-        fprintf(fp, "<protection>%03o</protection>", 
-                current->stored.mode); /* three-digit octal */
+        if (current->stored.mode != INVALID_MODE) {
+            fprintf(fp, "<protection>%03o</protection>", 
+                    current->stored.mode); /* three-digit octal */
+        }
 	switch (current->type) {
 	case file_link:
 	    fprintf(fp, "<linktarget>%s</linktarget>", 
@@ -276,7 +281,7 @@ static int start_element(void *userdata, int parent,
         /* Clear current stored state */
         memset(&doc->stored, 0, sizeof doc->stored);
         /* Initialize perms bits to invalid state */
-        doc->stored.mode = -1;
+        doc->stored.mode = INVALID_MODE;
     }
 
     if (state == SITE_ELM_ascii) {
