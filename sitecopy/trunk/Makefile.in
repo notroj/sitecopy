@@ -56,7 +56,7 @@ XSC_GLADE = $(top_srcdir)/gnome/share/sitecopy-dialogs.glade
 # Target is the name of the executable
 TARGET = @TARGET@@EXEEXT@
 
-OBJECTS = src/sites.o src/sitefiles.o src/fileset.o src/sitestore.o \
+OBJECTS = src/sites.o src/sitefiles.o src/sitestore.o \
 	src/rcfile.o src/common.o src/nulldriver.o src/lsparser.o \
 	@EXTRAOBJS@
 
@@ -123,7 +123,6 @@ HEADERS = src/common.h src/frontend.h src/i18n.h src/protocol.h		\
 src/common.o: src/common.c $(HEADERS)
 src/console_fe.o: src/console_fe.c $(HEADERS)
 src/davdriver.o: src/davdriver.c $(HEADERS)
-src/fileset.o: src/fileset.c $(HEADERS)
 src/ftp.o: src/ftp.c $(HEADERS)
 src/ftpdriver.o: src/ftpdriver.c $(HEADERS)
 src/lsparser.o: src/lsparser.c $(HEADERS)
