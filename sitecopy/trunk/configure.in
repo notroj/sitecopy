@@ -14,7 +14,7 @@ dnl   the Free Software Foundation, Inc., 59 Temple Place - Suite 330,
 dnl   Boston, MA 02111-1307, USA.        
 
 dnl This configure script is:
-dnl  Copyright (C) 2000-2005 Joe Orton (joe@manyfish.co.uk)
+dnl  Copyright (C) 2000-2006 Joe Orton (joe@manyfish.co.uk)
 dnl Portions are:
 dnl  Copyright (C) 1994, 1995, 1996, 1997, 1998 Free Software Foundation, Inc.
 dnl  Copyright (C) 1997 Janos Farkas (chexum@shadow.banki.hu)
@@ -112,9 +112,8 @@ if test "$sc_cv_gnu_fnmatch" = "no"; then
    AC_LIBOBJ(lib/fnmatch)
 fi
 
-# neon 0.24.x is required, otherwise the bundled neon HEAD (0.25) is
-# used
-NE_REQUIRE_VERSIONS([0], [24 25])
+# Support neon 0.24, 0.25, 0.26.
+NE_REQUIRE_VERSIONS([0], [24 25 26])
 
 dnl But we don't use zlib or ACL support
 NEON_WITHOUT_ZLIB

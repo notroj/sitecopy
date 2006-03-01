@@ -1,6 +1,6 @@
 /* 
    sitecopy, for managing remote web sites.
-   Copyright (C) 1998-2005, Joe Orton <joe@manyfish.co.uk>
+   Copyright (C) 1998-2006, Joe Orton <joe@manyfish.co.uk>
                                                                      
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -1056,21 +1056,36 @@ site_fetch_csum_read(void *userdata, const char *s, size_t len)
 static int fetch_checksum_file(struct proto_file *file,
                                struct site *site, void *session)
 {
+#if NE_VERSION_MINOR > 25
+    struct ne_md5_ctx *md5;
+#define MD5_PTR md5
+#else
     struct ne_md5_ctx md5;
+#define MD5_PTR &md5
+#endif
     char *full_remote = ne_concat(site->remote_root, file->filename, NULL);
     int ret = 0;
 
+#if NE_VERSION_MINOR > 25
+    md5 = ne_md5_create_ctx();
+#else
     ne_md5_init_ctx(&md5);
+#endif
+
     fe_checksumming(file->filename);
     if (CALL(file_read)(session, full_remote, 
-                        site_fetch_csum_read, &md5) != SITE_OK) {
+                        site_fetch_csum_read, MD5_PTR) != SITE_OK) {
         ret = 1;
         fe_checksummed(full_remote, false, DRIVER_ERR);
     } else {
-        ne_md5_finish_ctx(&md5, file->checksum);
+        ne_md5_finish_ctx(MD5_PTR, file->checksum);
         fe_checksummed(full_remote, true, NULL);
     }
     free(full_remote);
+
+#if NE_VERSION_MINOR > 25
+    ne_md5_destroy_ctx(md5);
+#endif
 
     return ret;
 }

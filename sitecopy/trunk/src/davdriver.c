@@ -237,8 +237,13 @@ static int init(void **session, struct site *site)
 
     ne_set_status(sess, notify_cb, NULL);
 
-    if (site->http_limit)
-	ne_set_persist(sess, 0);
+    if (site->http_limit) {
+#if NE_VERSION_MINOR > 25
+        ne_set_session_flag(sess, NE_SESSFLAG_PERSIST, 0);
+#else
+        ne_set_persist(sess, 0);
+#endif
+    }
 
     /* Note, this won't differentiate between xsitecopy and
      * sitecopy... maybe we should put a comment in as well. */
@@ -570,8 +575,13 @@ static void insert_file(struct fetch_context *ctx, struct proto_file *file)
     file->next = NULL;
 }
 
+#if NE_VERSION_MINOR > 25
+static void pfind_results(void *userdata, const ne_uri *uri,
+			  const ne_prop_result_set *set)
+#else
 static void pfind_results(void *userdata, const char *href,
 			  const ne_prop_result_set *set)
+#endif
 {
     struct fetch_context *ctx = userdata;
     struct private *private = ne_propset_private(set);
@@ -580,14 +590,15 @@ static void pfind_results(void *userdata, const char *href,
     int iscoll;
     char *uhref;
 
-    /* Find out whether this is a collection or not, then
-     * free the private structure so we don't have to worry 
-     * about it any more. */
     iscoll = private->iscollection;
-    free(private);
 
-    NE_DEBUG(NE_DBG_HTTP, "URI: [%s]: ", href);
-    
+#if NE_VERSION_MINOR < 26
+    /* For >= 0.26, this is handled by the destroy_private
+     * callback. */
+    ne_free(private);
+#endif
+
+#if NE_VERSION_MINOR < 26
     /* Strip down to the abspath segment */
     if (strncmp(href, "http://", 7) == 0)
 	href = strchr(href+7, '/');
@@ -601,6 +612,12 @@ static void pfind_results(void *userdata, const char *href,
     }
 
     uhref = ne_path_unescape(href);
+#else
+    uhref = ne_path_unescape(uri->path);
+    
+#endif
+
+    NE_DEBUG(NE_DBG_HTTP, "URI: [%s]: ", uhref);
 
     if (!ne_path_childof(ctx->root, uhref)) {
 	/* URI not a child of the root collection...  ignore this
@@ -677,10 +694,23 @@ static int start_element(void *userdata, int parent,
 }
 
 /* Creates the private structure. */
+#if NE_VERSION_MINOR > 25
+static void *create_private(void *userdata, const ne_uri *uri)
+#else
 static void *create_private(void *userdata, const char *uri)
+#endif
 {
     return ne_calloc(sizeof(struct private));
 }
+
+#if NE_VERSION_MINOR > 25
+static void destroy_private(void *userdata, void *private)
+{
+    struct private *priv = private;
+
+    ne_free(priv);
+}
+#endif
 
 /* TODO: optimize: only ask for lastmod + executable when we really
  * need them: it does waste bandwidth and time to ask for executable
@@ -701,7 +731,11 @@ static int fetch_list(void *session, const char *dirname, int need_modtimes,
     ph = ne_propfind_create(sess, edirname, NE_DEPTH_ONE);
 
     /* The complex props. */
-    ne_propfind_set_private(ph, create_private, NULL);
+    ne_propfind_set_private(ph, create_private,
+#if NE_VERSION_MINOR > 25
+                            destroy_private, 
+#endif
+                            NULL);
 
     /* Register the handler for the complex props. */
     ne_xml_push_handler(ne_propfind_get_parser(ph), start_element, NULL, NULL, ph);
