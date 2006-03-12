@@ -1,6 +1,6 @@
 Changes in release 0.16.3:
 * DAV: Add PKCS#12 client cert support; "client-cert /path/to/cert.p12"
-* Update to neon 0.25.5.
+* Update to neon 0.26.0 (0.24.x and 0.25.x still supported).
 
 Changes in release 0.16.2:
 * Fix over-eager move/rename algorithm when handling a
