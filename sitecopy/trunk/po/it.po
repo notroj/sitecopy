@@ -1,14 +1,14 @@
 # Italian translations for sitecopy package.
 # Copyright (C) 2003 Joe Orton
 # This file is distributed under the same license as the sitecopy package.
-# Cristian Rigamonti <cri@linux.it>, 2003, 2004, 2005.
+# Cristian Rigamonti <cri@linux.it>, 2003, 2004, 2005, 2006.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: sitecopy 0.15.0\n"
+"Project-Id-Version: sitecopy 0.16.3\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2006-03-12 10:07+0000\n"
-"PO-Revision-Date: 2005-03-12 22:38+0100\n"
+"PO-Revision-Date: 2006-03-12 16:17+0100\n"
 "Last-Translator: Cristian Rigamonti <cri@linux.it>\n"
 "Language-Team: Italian <tp@lists.linux.it>\n"
 "MIME-Version: 1.0\n"
@@ -347,7 +347,7 @@ msgstr "Riprovo: ["
 #: src/console_fe.c:647
 #, c-format
 msgid "%s: Encrypted client certificate configured%s%s.\n"
-msgstr ""
+msgstr "%s: Certificato client cifrato configurato%s%s.\n"
 
 #: src/console_fe.c:680
 #, c-format
@@ -1000,12 +1000,12 @@ msgstr "Codice di controllo non valido alla riga %d"
 #: src/sitestore.c:371
 #, c-format
 msgid "Boolean missing in 'ascii' at line %d"
-msgstr ""
+msgstr "Booleano mancante in 'ascii' alla riga %d"
 
 #: src/sitestore.c:396
-#, fuzzy, c-format
+#, c-format
 msgid "Size overflow (%s) in '%s' at line %d"
-msgstr "Dimensione eccessiva (%s) alla riga %d"
+msgstr "Dimensione eccessiva (%s) in '%s' alla riga %d"
 
 #: src/davdriver.c:175
 msgid "The connection timed out."
@@ -1021,14 +1021,14 @@ msgid "Could not load certificate `%s'."
 msgstr "Impossibile caricare il certificato \"%s\"."
 
 #: src/davdriver.c:264
-#, fuzzy, c-format
+#, c-format
 msgid "Could not read SSL client certificate '%s'."
-msgstr "Impossibile caricare il certificato \"%s\"."
+msgstr "Impossibile leggere il certificato SSL client '%s'."
 
 #: src/davdriver.c:277
-#, fuzzy, c-format
+#, c-format
 msgid "Could not decrypt SSL client certificate '%s'."
-msgstr "Impossibile caricare il certificato \"%s\"."
+msgstr "Impossibile decifrare il certificato SSL client '%s'."
 
 #: src/davdriver.c:299
 msgid "The server does not appear to be a WebDAV server."
@@ -1173,10 +1173,8 @@ msgstr ""
 "Errore active open: impossibile determinare l'indirizzo del socket dati"
 
 #: src/ftp.c:684
-#, fuzzy
 msgid "Could not determine bound port number for data socket"
-msgstr ""
-"Errore active open: impossibile determinare l'indirizzo del socket dati"
+msgstr "Impossibile determinare il numero di porta per il socket dati"
 
 #: src/ftp.c:727
 msgid "Active open failed: could not accept connection"
@@ -1191,18 +1189,17 @@ msgid "Could not determine length of file"
 msgstr "Impossibile determinare la lunghezza del file"
 
 #: src/ftp.c:905
-#, fuzzy
 msgid "Could not rewind to beginning of file"
-msgstr "Impossibile determinare la lunghezza del file"
+msgstr "Impossibile tornare all'inizio del file"
 
 #: src/ftp.c:1147
 msgid "Could not read 'LIST' response."
 msgstr "Impossibile leggere la risposta \"LIST\""
 
 #: src/ftp.c:1156
-#, fuzzy, c-format
+#, c-format
 msgid "Parse error in LIST response: %s"
-msgstr "Errore di analisi nella risposta LIST"
+msgstr "Errore di analisi nella risposta LIST: %s"
 
 #: gnome/init.c:51
 msgid "_New site..."
@@ -1596,13 +1593,13 @@ msgid "SSL error code %d/%d/%lu"
 msgstr "Codice di errore SSL %d/%d/%lu"
 
 #: lib/neon/ne_socket.c:636
-#, fuzzy, c-format
+#, c-format
 msgid "SSL alert received: %s"
-msgstr "errore SSL: %s"
+msgstr "Avviso SSL ricevuto: %s"
 
 #: lib/neon/ne_socket.c:651
 msgid "SSL socket read failed"
-msgstr ""
+msgstr "Errore di lettura socket SSL"
 
 #: lib/neon/ne_socket.c:750
 msgid "Line too long"
@@ -1617,9 +1614,8 @@ msgid "Socket descriptor number exceeds FD_SETSIZE"
 msgstr "Il numero del descrittore socket eccede FD_SETSIZE"
 
 #: lib/neon/ne_socket.c:1218
-#, fuzzy
 msgid "Client certificate verification failed"
-msgstr "Errore nella verifica del certificato del server: "
+msgstr "Errore nella verifica del certificato del client"
 
 #: lib/neon/ne_socket.c:1234
 msgid "SSL disabled due to lack of entropy"
@@ -1640,12 +1636,12 @@ msgstr "%s: la connessione è stata chiusa dal server proxy."
 
 #: lib/neon/ne_request.c:351
 msgid "offset invalid"
-msgstr ""
+msgstr "offset invalido"
 
 #: lib/neon/ne_request.c:356
-#, fuzzy, c-format
+#, c-format
 msgid "Could not seek to offset %s of request body file: %s"
-msgstr "Impossibile scrivere il file: %s"
+msgstr "Impossibile posizionarsi all'offset %s del corpo della richiesta: %s"
 
 #: lib/neon/ne_request.c:401
 msgid "Could not send request body"
@@ -1772,9 +1768,9 @@ msgid "Could not initialize zlib"
 msgstr "Impossibile inizializzare zlib"
 
 #: lib/neon/ne_xmlreq.c:31
-#, fuzzy, c-format
+#, c-format
 msgid "Could not parse response: %s"
-msgstr "Impossibile leggere la risposta PASV"
+msgstr "Impossibile leggere la risposta: %s"
 
 #: lib/neon/ne_basic.c:94
 #, c-format
@@ -1800,32 +1796,32 @@ msgstr "Errore di autenticazione GSSAPI (%s)"
 
 #: lib/neon/ne_auth.c:595
 msgid "Unknown algorithm in Digest authentication challenge"
-msgstr ""
+msgstr "Algoritmo sconosciuto nella sfida di autenticazione Digest"
 
 #: lib/neon/ne_auth.c:600
 msgid "Incompatible algorithm in Digest authentication challenge"
-msgstr ""
+msgstr "Algoritmo incompatibile nella sfida di autenticazione Digest"
 
 #: lib/neon/ne_auth.c:606
 msgid "Missing nonce or realm in Digest authentication challenge"
-msgstr ""
+msgstr "Realm o nonce mancante nella sfida di autenticazione Digest"
 
 #: lib/neon/ne_auth.c:886
 msgid "Digest mutual authentication failure: missing parameters"
-msgstr ""
+msgstr "Autenticazione mutua digest fallita: parametri mancanti"
 
 #: lib/neon/ne_auth.c:891
 msgid "Digest mutual authentication failure: client nonce mismatch"
-msgstr ""
+msgstr "Autenticazione mutua digest fallita: nonce del client non coincide"
 
 #: lib/neon/ne_auth.c:896
 #, c-format
 msgid "Digest mutual authentication failure: nonce count mismatch (%u not %u)"
-msgstr ""
+msgstr "Autenticazione mutua digest fallita: conteggio nonce non coincide (%u non %u)"
 
 #: lib/neon/ne_auth.c:936
 msgid "Digest mutual authentication failure: request-digest mismatch"
-msgstr ""
+msgstr "Autenticazione mutua digest fallita: richiesta e digest non coincidono"
 
 #: lib/neon/ne_207.c:198
 #, c-format
