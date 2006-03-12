@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sitecopy 0.11.4\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-12-30 13:31+0000\n"
+"POT-Creation-Date: 2006-03-12 10:07+0000\n"
 "PO-Revision-Date: 2002-11-07 18:11+0100\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <i18n-nn@lister.ping.uio.no>\n"
@@ -90,129 +90,87 @@ msgstr ""
 "Du skal aldri sjå denne feilmeldinga.\n"
 "Kontakt vedlikehaldaren på sitecopy@lyra.org\n"
 
-#: src/console_fe.c:202
+#: src/console_fe.c:196
 #, c-format
 msgid "%s: Error: No site called `%s' found - skipping.\n"
 msgstr "%s: Feil: Fann ikkje nettstaden «%s». Hoppar over.\n"
 
-#: src/console_fe.c:220
+#: src/console_fe.c:214
 #, c-format
 msgid "%s: No valid sites specified.\n"
 msgstr "%s: Ingen gyldige nettstader valt.\n"
 
-#: src/console_fe.c:222
+#: src/console_fe.c:216
 #, c-format
 msgid "%s: No sites specified.\n"
 msgstr "%s: Ingen nettstader valt.\n"
 
-#: src/console_fe.c:224 src/console_fe.c:445 src/console_fe.c:605
+#: src/console_fe.c:218 src/console_fe.c:369 src/console_fe.c:529
 #, c-format
 msgid "Try `%s --help' for more information.\n"
 msgstr "Prøv «%s --help» for meir informasjon.\n"
 
-#: src/console_fe.c:234
+#: src/console_fe.c:228
 #, c-format
 msgid "%s: %c%s site `%s' (on %s in %s)\n"
 msgstr "%s: %c%s nettstaden «%s» (på %s i %s)\n"
 
-#: src/console_fe.c:250
-#, c-format
-msgid "%s: Aborted.\n"
-msgstr "%s: Avbrote.\n"
-
-#: src/console_fe.c:259 src/console_fe.c:308
-#, c-format
-msgid ""
-"\n"
-"\n"
-"%s: Caught signal: %s (%d)\n"
-msgstr ""
-"\n"
-"\n"
-"%s: Fanga opp signal: %s (%d)\n"
-
-#: src/console_fe.c:262 src/console_fe.c:311
-#, c-format
-msgid ""
-"\n"
-"\n"
-"%s: Caught signal %d\n"
-msgstr ""
-"\n"
-"\n"
-"%s: Fanga opp signal %d\n"
-
-#: src/console_fe.c:269
-#, c-format
-msgid "%s: Cannot recover from segmentation fault, aborting.\n"
-msgstr "%s: Klarer ikkje å overleva segmenteringsfeil. Avsluttar.\n"
-
-#: src/console_fe.c:273
-#, c-format
-msgid "%s: Aborting update...\n"
-msgstr "%s: Avbryt oppdatering ...\n"
-
-#: src/console_fe.c:281 src/console_fe.c:313
-#, c-format
-msgid "%s: Terminating.\n"
-msgstr "%s: Avsluttar.\n"
-
-#: src/console_fe.c:325
+#: src/console_fe.c:249
 #, c-format
 msgid "* These items have been added since the last update:\n"
 msgstr "– Følgjande er lagt til etter førre oppdatering:\n"
 
-#: src/console_fe.c:330 src/console_fe.c:361
+#: src/console_fe.c:254 src/console_fe.c:285
 #, c-format
 msgid "dir:"
 msgstr "katalog:"
 
-#: src/console_fe.c:337
+#: src/console_fe.c:261
 #, c-format
 msgid "* These items have been changed since the last update:\n"
 msgstr "– Følgjande er endra etter førre oppdatering:\n"
 
-#: src/console_fe.c:339
+#: src/console_fe.c:263
 #, c-format
 msgid "  Changes to items in [brackets] are ignored during updates.\n"
 msgstr "  Endringar i [klammer] blir ignorert ved oppdateringar.\n"
 
-#: src/console_fe.c:353
+#: src/console_fe.c:277
 #, c-format
 msgid "* These items have been deleted, but will be left on the server:\n"
 msgstr "– Følgjande er sletta, men ligg igjen på tenaren:\n"
 
-#: src/console_fe.c:355
+#: src/console_fe.c:279
 #, c-format
 msgid "* These items have been deleted since the last update:\n"
 msgstr "– Følgjande er sletta etter førre oppdatering:\n"
 
-#: src/console_fe.c:368
+#: src/console_fe.c:292
 #, c-format
 msgid "* These items have been moved since the last update:\n"
 msgstr "– Følgjande er flytta etter førre oppdatering:\n"
 
-#: src/console_fe.c:386 src/console_fe.c:398
+#: src/console_fe.c:310 src/console_fe.c:322
 msgid "Ignored"
 msgstr "Ignorert"
 
-#: src/console_fe.c:388
+#: src/console_fe.c:312
 msgid "Maintained for executables"
 msgstr "Opprettheldt for kjørbare filer"
 
-#: src/console_fe.c:390
+#: src/console_fe.c:314
 msgid "Always maintained"
 msgstr "Alltid opprettheldt"
 
-#: src/console_fe.c:400
+#: src/console_fe.c:324
 msgid "Maintained"
 msgstr "Opprettheldt"
 
-#: src/console_fe.c:402
+#: src/console_fe.c:326
 msgid "Followed"
 msgstr "Følgt"
 
-#: src/console_fe.c:413
+#: src/console_fe.c:337
 #, c-format
 msgid ""
 "Site: %s\n"
@@ -221,36 +179,36 @@ msgstr ""
 "Nettstad: %s\n"
 "\tTenar: %s"
 
-#: src/console_fe.c:415
+#: src/console_fe.c:339
 #, c-format
 msgid "  Port: "
 msgstr "  Port: "
 
-#: src/console_fe.c:417
+#: src/console_fe.c:341
 #, c-format
 msgid "(default)\n"
 msgstr "(standard)\n"
 
-#: src/console_fe.c:419
+#: src/console_fe.c:343
 #, c-format
 msgid "%d\n"
 msgstr "%d\n"
 
-#: src/console_fe.c:421
+#: src/console_fe.c:345
 #, c-format
 msgid "\tProtocol: %s    Username: %s\n"
 msgstr "\tProtokoll: %s    Brukarnamn: %s\n"
 
-#: src/console_fe.c:424
+#: src/console_fe.c:348
 msgid "(unspecified)"
 msgstr "(ikkje valt)"
 
-#: src/console_fe.c:426
+#: src/console_fe.c:350
 #, c-format
 msgid "\tPassive mode FTP will not be used.\n"
 msgstr "\tPassiv FTP blir ikkje brukt.\n"
 
-#: src/console_fe.c:427
+#: src/console_fe.c:351
 #, c-format
 msgid ""
 "\tRemote directory: %s\n"
@@ -259,42 +217,42 @@ msgstr ""
 "\tFjerntliggande katalog: %s\n"
 "\tLokal katalog: %s\n"
 
-#: src/console_fe.c:429
+#: src/console_fe.c:353
 #, c-format
 msgid "\tPermissions: %s     Symlinks: %s\n"
 msgstr "\tLøyve: %s     Symbolske lenkjer: %s\n"
 
-#: src/console_fe.c:432
+#: src/console_fe.c:356
 #, c-format
 msgid "\tRemote files will not be deleted.\n"
 msgstr "\tFiler på tenaren blir ikkje sletta.\n"
 
-#: src/console_fe.c:434
+#: src/console_fe.c:358
 #, c-format
 msgid "\tFiles will be moved remotely if moved locally.\n"
 msgstr "\tFiler blir flytta på tenaren når dei blir flytta lokalt.\n"
 
-#: src/console_fe.c:443
+#: src/console_fe.c:367
 #, c-format
 msgid "%s: Error: Only specify ONE operation mode at a time.\n"
 msgstr "%s: Feil: Vel berre éin operasjonsmodus om gongen.\n"
 
-#: src/console_fe.c:565
+#: src/console_fe.c:489
 #, c-format
 msgid "%s: Error: Debug channel %s not known.\n"
 msgstr "%s: Feil: Avlusingskanalen %s er ukjend.\n"
 
-#: src/console_fe.c:573
+#: src/console_fe.c:497
 #, c-format
 msgid "%s: Warning: Could not open `%s' to use as logfile.\n"
 msgstr "%s: Åtvaring: Klarte ikkje opna «%s» for loggføring.\n"
 
-#: src/console_fe.c:616
+#: src/console_fe.c:540
 #, c-format
 msgid "%s: Error: Dry run mode is currently only supported for updates.\n"
 msgstr ""
 
-#: src/console_fe.c:632
+#: src/console_fe.c:556
 #, c-format
 msgid ""
 "%s: Warning: Only %d sites can be specified on the command line!\n"
@@ -303,106 +261,111 @@ msgstr ""
 "%s: Åtvaring: Berre %d nettstader kan veljast frå kommandolinja!\n"
 "Resten av nettstadane blir ikkje oppdaterte.\n"
 
-#: src/console_fe.c:657
+#: src/console_fe.c:581
 #, fuzzy
 msgid "WARNING: Server certificate is not trusted."
 msgstr "Tenarsertifikatet er ikkje gyldig enno"
 
-#: src/console_fe.c:660
+#: src/console_fe.c:584
 #, fuzzy, c-format
 msgid "Certificate was issued for server `%s'.\n"
 msgstr "Sertifikatet er utferda av:"
 
-#: src/console_fe.c:662
+#: src/console_fe.c:586
 msgid "WARNING: Certificate does not specify a server"
 msgstr ""
 
-#: src/console_fe.c:664
+#: src/console_fe.c:588
 #, fuzzy, c-format
 msgid "Fingerprint: %s\n"
 msgstr "Fingeravtrykk: %s"
 
-#: src/console_fe.c:667
+#: src/console_fe.c:591
 #, c-format
 msgid "Issued to: %s\n"
 msgstr ""
 
-#: src/console_fe.c:671
+#: src/console_fe.c:595
 #, c-format
 msgid "Issued by: %s\n"
 msgstr ""
 
-#: src/console_fe.c:674
+#: src/console_fe.c:598
 #, c-format
 msgid "Do you wish to accept this certificate? (y/n) "
 msgstr ""
 
-#: src/console_fe.c:683
+#: src/console_fe.c:607
 msgid "server"
 msgstr "tenar"
 
-#: src/console_fe.c:683
+#: src/console_fe.c:607
 msgid "proxy server"
 msgstr "mellomtenar"
 
-#: src/console_fe.c:689
+#: src/console_fe.c:613
 #, c-format
 msgid "Authentication required for %s on %s `%s':\n"
 msgstr "Krev autentisering for %s på %s «%s»:\n"
 
-#: src/console_fe.c:692
+#: src/console_fe.c:616
 #, c-format
 msgid "Authentication required on %s `%s':\n"
 msgstr "Krev autentisering på %s «%s»:\n"
 
-#: src/console_fe.c:695
+#: src/console_fe.c:619
 msgid "Username: "
 msgstr "Brukarnamn: "
 
-#: src/console_fe.c:700
+#: src/console_fe.c:624
 #, c-format
 msgid "Username: %s\n"
 msgstr "Brukarnamn: %s\n"
 
-#: src/console_fe.c:702
+#: src/console_fe.c:626 src/console_fe.c:650
 msgid "Password: "
 msgstr "Passord: "
 
-#: src/console_fe.c:710
+#: src/console_fe.c:636
 #, c-format
 msgid "Retrying: ["
 msgstr "Prøver på nytt: ["
 
-#: src/console_fe.c:737
+#: src/console_fe.c:647
+#, c-format
+msgid "%s: Encrypted client certificate configured%s%s.\n"
+msgstr ""
+
+#: src/console_fe.c:680
 #, c-format
 msgid "Create %s/"
 msgstr "Opprett %s/"
 
-#: src/console_fe.c:739
+#: src/console_fe.c:682
 #, c-format
 msgid "Delete %s/"
 msgstr "Slett %s/"
 
-#: src/console_fe.c:746
+#: src/console_fe.c:689
 msgid "Upload %s (%"
 msgstr "Last opp %s (%"
 
-#: src/console_fe.c:746
+#: src/console_fe.c:689
 #, c-format
 msgid " bytes)"
 msgstr " byte)"
 
-#: src/console_fe.c:748
+#: src/console_fe.c:691
 #, c-format
 msgid "Delete %s"
 msgstr "Slett %s"
 
-#: src/console_fe.c:749
+#: src/console_fe.c:692
 #, c-format
 msgid "Move %s->%s"
 msgstr "Flytt %s til %s"
 
-#: src/console_fe.c:753
+#: src/console_fe.c:696
 #, c-format
 msgid ""
 "%s: in fe_can_update/file_file\n"
@@ -411,22 +374,22 @@ msgstr ""
 "%s: i fe_can_update/file_file\n"
 "%s"
 
-#: src/console_fe.c:760
+#: src/console_fe.c:703
 #, c-format
 msgid "Change %s"
 msgstr "Endra %s"
 
-#: src/console_fe.c:761
+#: src/console_fe.c:704
 #, c-format
 msgid "Create %s"
 msgstr "Opprett %s"
 
-#: src/console_fe.c:762
+#: src/console_fe.c:705
 #, c-format
 msgid "Remove %s"
 msgstr "Fjern %s"
 
-#: src/console_fe.c:765
+#: src/console_fe.c:708
 #, c-format
 msgid ""
 "%s: in fe_can_update/file_link\n"
@@ -435,22 +398,22 @@ msgstr ""
 "%s: i fe_can_update/file_link\n"
 "%s"
 
-#: src/console_fe.c:771
+#: src/console_fe.c:714
 #, c-format
 msgid "? (y/n) "
 msgstr "? (j/n)"
 
-#: src/console_fe.c:780
+#: src/console_fe.c:723
 #, c-format
 msgid "Checksumming %s: ["
 msgstr "Reknar ut sjekksum til %s: ["
 
-#: src/console_fe.c:795 src/console_fe.c:906 src/console_fe.c:967
+#: src/console_fe.c:738 src/console_fe.c:849 src/console_fe.c:910
 #, c-format
 msgid "] done.\n"
 msgstr "] ferdig.\n"
 
-#: src/console_fe.c:797 src/console_fe.c:969
+#: src/console_fe.c:740 src/console_fe.c:912
 #, c-format
 msgid ""
 "] failed:\n"
@@ -459,17 +422,17 @@ msgstr ""
 "] mislykka:\n"
 "%s\n"
 
-#: src/console_fe.c:807
+#: src/console_fe.c:750
 #, fuzzy, c-format
 msgid "Setting permissions on %s%s: "
 msgstr "Sett løyve på %s: "
 
-#: src/console_fe.c:817 src/console_fe.c:895 src/console_fe.c:961
+#: src/console_fe.c:760 src/console_fe.c:838 src/console_fe.c:904
 #, c-format
 msgid "done.\n"
 msgstr "ferdig.\n"
 
-#: src/console_fe.c:819 src/console_fe.c:963
+#: src/console_fe.c:762 src/console_fe.c:906
 #, c-format
 msgid ""
 "failed:\n"
@@ -478,32 +441,32 @@ msgstr ""
 "mislykka:\n"
 "%s\n"
 
-#: src/console_fe.c:838 src/console_fe.c:925
+#: src/console_fe.c:781 src/console_fe.c:868
 #, c-format
 msgid "Creating %s/: "
 msgstr "Opprettar %s/:"
 
-#: src/console_fe.c:840 src/console_fe.c:927
+#: src/console_fe.c:783 src/console_fe.c:870
 #, c-format
 msgid "Deleting %s/: "
 msgstr "Slettar %s/:"
 
-#: src/console_fe.c:847
+#: src/console_fe.c:790
 #, c-format
 msgid "Uploading %s: ["
 msgstr "Lastar opp %s: ["
 
-#: src/console_fe.c:850 src/console_fe.c:869 src/console_fe.c:937
+#: src/console_fe.c:793 src/console_fe.c:812 src/console_fe.c:880
 #, c-format
 msgid "Deleting %s: "
 msgstr "Slettar %s: "
 
-#: src/console_fe.c:853 src/console_fe.c:940
+#: src/console_fe.c:796 src/console_fe.c:883
 #, c-format
 msgid "Moving %s->%s: "
 msgstr "Flyttar %s til %s: "
 
-#: src/console_fe.c:857
+#: src/console_fe.c:800
 #, c-format
 msgid ""
 "%s: in fe_updating/file_file\n"
@@ -512,17 +475,17 @@ msgstr ""
 "%s: i fe_updating/file_file\n"
 "%s"
 
-#: src/console_fe.c:865
+#: src/console_fe.c:808
 #, c-format
 msgid "Changing %s: "
 msgstr "Endrar %s: "
 
-#: src/console_fe.c:867
+#: src/console_fe.c:810
 #, c-format
 msgid "Creating %s: "
 msgstr "Opprettar %s: "
 
-#: src/console_fe.c:871
+#: src/console_fe.c:814
 #, c-format
 msgid ""
 "%s: in fe_updating/file_link\n"
@@ -531,74 +494,74 @@ msgstr ""
 "%s: i fe_updating/file_link\n"
 "%s"
 
-#: src/console_fe.c:888
+#: src/console_fe.c:831
 #, fuzzy, c-format
 msgid "Failed to update %s:%c%s\n"
 msgstr ""
 "Klarte ikkje oppdatera %s:\n"
 "%s\n"
 
-#: src/console_fe.c:897
+#: src/console_fe.c:840
 #, fuzzy, c-format
 msgid "failed:%c%s\n"
 msgstr ""
 "mislykka:\n"
 "%s\n"
 
-#: src/console_fe.c:909
+#: src/console_fe.c:852
 #, fuzzy, c-format
 msgid "] failed:%c%s\n"
 msgstr ""
 "] mislykka:\n"
 "%s\n"
 
-#: src/console_fe.c:934
+#: src/console_fe.c:877
 #, c-format
 msgid "Downloading %s: ["
 msgstr "Lastar ned %s: ["
 
-#: src/console_fe.c:979
+#: src/console_fe.c:922
 msgid "Changed on server"
 msgstr "Endra på tenaren"
 
-#: src/console_fe.c:982
+#: src/console_fe.c:925
 msgid "Added on server"
 msgstr "Lagt til på tenaren"
 
-#: src/console_fe.c:990
+#: src/console_fe.c:933
 #, c-format
 msgid "%s: %s\n"
 msgstr "%s: %s\n"
 
-#: src/console_fe.c:1008
+#: src/console_fe.c:951
 #, c-format
 msgid "Directory: %s/\n"
 msgstr "Katalog: %s/\n"
 
-#: src/console_fe.c:1012
+#: src/console_fe.c:955
 msgid "File: %s - size %"
 msgstr "Fil: %s – storleik %"
 
-#: src/console_fe.c:1012
+#: src/console_fe.c:955
 #, c-format
 msgid "%s\n"
 msgstr "%s\n"
 
-#: src/console_fe.c:1014
+#: src/console_fe.c:957
 msgid " (ASCII)"
 msgstr " (ASCII)"
 
-#: src/console_fe.c:1017
+#: src/console_fe.c:960
 #, c-format
 msgid "Link: %s - target %s\n"
 msgstr "Lenkje: %s – mål %s\n"
 
-#: src/console_fe.c:1030 gnome/init.c:402
+#: src/console_fe.c:973 gnome/init.c:402
 #, c-format
 msgid "%s: Error: Could not open rcfile: %s.\n"
 msgstr "%s: Feil: Klarte ikkje opna «rcfile»-fila: %s.\n"
 
-#: src/console_fe.c:1034 gnome/init.c:407
+#: src/console_fe.c:977 gnome/init.c:407
 #, c-format
 msgid ""
 "%s: rcfile corrupt at line %d:\n"
@@ -607,7 +570,7 @@ msgstr ""
 "%s: «rcfile»-fila er øydelagt – linje %d:\n"
 "%s\n"
 
-#: src/console_fe.c:1053
+#: src/console_fe.c:996
 #, c-format
 msgid ""
 "%s: Could not read directory for `%s':\n"
@@ -616,77 +579,77 @@ msgstr ""
 "%s: Klarte ikkje lesa katalog for «%s»:\n"
 "\t%s\n"
 
-#: src/console_fe.c:1057
+#: src/console_fe.c:1000
 #, c-format
 msgid "%s: Server not specified in site `%s'.\n"
 msgstr "%s: Ingen tenar valt for nettstaden «%s».\n"
 
-#: src/console_fe.c:1061
+#: src/console_fe.c:1004
 #, c-format
 msgid "%s: Remote directory not specified in site `%s'.\n"
 msgstr "%s: Fjerntliggande katalog ikkje valt for nettstaden «%s».\n"
 
-#: src/console_fe.c:1065
+#: src/console_fe.c:1008
 #, c-format
 msgid "%s: Local directory not specified in site `%s'.\n"
 msgstr "%s: Lokal katalog ikkje valt for nettstaden «%s».\n"
 
-#: src/console_fe.c:1069
+#: src/console_fe.c:1012
 #, c-format
 msgid "%s: Invalid port used in site `%s'.\n"
 msgstr "%s: Ugyldig port brukt for nettstaden «%s».\n"
 
-#: src/console_fe.c:1073
+#: src/console_fe.c:1016
 #, c-format
 msgid "%s: %s cannot maintain symbolic links (site `%s').\n"
 msgstr "%s: %s klarte ikkje oppretthelda symbolske lenkjer (nettstad: «%s»).\n"
 
-#: src/console_fe.c:1077
+#: src/console_fe.c:1020
 #, c-format
 msgid "%s: Cannot use a relative remote directory in %s (site `%s').\n"
 msgstr ""
 "%s: Klarte ikkje bruka ein relativ fjerntliggande katalog i %s (nettstad: «%"
 "s»).\n"
 
-#: src/console_fe.c:1080
+#: src/console_fe.c:1023
 #, c-format
 msgid "%s: File permissions are not supported in %s (site `%s').\n"
 msgstr "%s: Filløyver er ikkje støtta i %s (nettstad: «%s»).\n"
 
-#: src/console_fe.c:1083
+#: src/console_fe.c:1026
 #, c-format
 msgid ""
 "%s: Safe mode cannot be used in conjunction with nooverwrite (site `%s').\n"
 msgstr ""
 "%s: Sikkermodus kan ikkje brukast saman med «nooverwrite» (nettstad: «%s»).\n"
 
-#: src/console_fe.c:1086
+#: src/console_fe.c:1029
 #, c-format
 msgid ""
 "%s: Safe mode cannot be used in conjunction with tempupload (site `%s').\n"
 msgstr ""
 "%s: Sikkermodus kan ikkje brukast saman med «tempupload» (nettstad: «%s»).\n"
 
-#: src/console_fe.c:1089
+#: src/console_fe.c:1032
 #, c-format
 msgid "%s: Can only check for renamed files when checksumming (site `%s').\n"
 msgstr ""
 "%s: Kan berre sjå etter filer med endra namn ved bruk av sjekksum (nettstad: "
 "«%s»).\n"
 
-#: src/console_fe.c:1092
+#: src/console_fe.c:1035
 #, c-format
 msgid "%s: The protocol `%s' is unsupported (site `%s').\n"
 msgstr "%s: Støttar ikkje protokollen «%s» (nettstad: «%s»).\n"
 
-#: src/console_fe.c:1099
+#: src/console_fe.c:1042
 #, c-format
 msgid "%s: Unhandled error %d in site `%s' - please contact the maintainer.\n"
 msgstr ""
 "%s: Klarte ikkje handtera feil %d i nettstaden «%s» – kontakt "
 "vedlikehaldaren.\n"
 
-#: src/console_fe.c:1117
+#: src/console_fe.c:1060
 #, c-format
 msgid ""
 "%s: Error: Corrupt site storage file for `%s':\n"
@@ -695,7 +658,7 @@ msgstr ""
 "%s: Feil: Øydelagd lagringsfil for «%s»:\n"
 "%s: %s\n"
 
-#: src/console_fe.c:1126
+#: src/console_fe.c:1069
 #, c-format
 msgid ""
 "%s: Error: No storage file for `%s'.\n"
@@ -704,62 +667,62 @@ msgstr ""
 "%s: Feil: Det finst inga lagringsfil for «%s».\n"
 "%s: Bruk --init, --catchup eller --fetch for å laga ei lagringsfil.\n"
 
-#: src/console_fe.c:1139
+#: src/console_fe.c:1082
 #, c-format
 msgid "%s: Skipping site `%s'.\n"
 msgstr "%s: Hoppar over nettstaden «%s».\n"
 
-#: src/console_fe.c:1154
+#: src/console_fe.c:1097
 #, c-format
 msgid "%s: %s completed successfully.\n"
 msgstr "%s: %singa var vellykka.\n"
 
-#: src/console_fe.c:1160
+#: src/console_fe.c:1103
 #, c-format
 msgid "%s: %s unsupported for %s.\n"
 msgstr "%s: %s ikkje støtta for %s.\n"
 
-#: src/console_fe.c:1165
+#: src/console_fe.c:1108
 #, c-format
 msgid "%s: Errors occurred while %s the %s site.\n"
 msgstr "%s: Det oppsto feil ved %s av den %se nettstaden.\n"
 
-#: src/console_fe.c:1170
+#: src/console_fe.c:1113
 #, c-format
 msgid "%s: Error: Could not resolve remote hostname (%s).\n"
 msgstr "%s: Feil: Fann ikkje adressa til nettverksvert (%s).\n"
 
-#: src/console_fe.c:1176
+#: src/console_fe.c:1119
 #, c-format
 msgid "%s: Error: Could not resolve hostname of proxy server (%s).\n"
 msgstr "%s: Feil: Fann ikkje adressa til mellomtenar (%s).\n"
 
-#: src/console_fe.c:1182
+#: src/console_fe.c:1125
 #, c-format
 msgid "%s: Error: Could not connect to proxy server (%s port %d).\n"
 msgstr "%s: Feil: Klarte ikkje kopla til mellomtenar (%s port %d).\n"
 
-#: src/console_fe.c:1185
+#: src/console_fe.c:1128
 #, c-format
 msgid "%s: Error: Could not connect to server (%s port %d).\n"
 msgstr "%s: Feil: Klarte ikkje kopla til tenar (%s port %d).\n"
 
-#: src/console_fe.c:1191
+#: src/console_fe.c:1134
 #, c-format
 msgid "%s: Error: Could not authorise user on server.\n"
 msgstr "%s: Feil: Klarte ikkje autentisera brukar på tenar.\n"
 
-#: src/console_fe.c:1196
+#: src/console_fe.c:1139
 #, c-format
 msgid "%s: Error: %s\n"
 msgstr "%s: Feil: %s\n"
 
-#: src/console_fe.c:1200
+#: src/console_fe.c:1143
 #, c-format
 msgid "%s: Error: Could not authorise user on proxy server (%s).\n"
 msgstr "%s: Feil: Klarte ikkje autentisera brukar på mellomtenar (%s).\n"
 
-#: src/console_fe.c:1205
+#: src/console_fe.c:1148
 #, c-format
 msgid ""
 "%s: in issue_error\n"
@@ -768,53 +731,53 @@ msgstr ""
 "%s: i issue_error\n"
 "%s"
 
-#: src/console_fe.c:1219
+#: src/console_fe.c:1162
 #, c-format
 msgid "%s: Error: Environment variable HOME not set.\n"
 msgstr "%s: Feil: Miljøvariabelen «HOME» er ikkje sett.\n"
 
-#: src/console_fe.c:1227
+#: src/console_fe.c:1170
 #, c-format
 msgid "%s: Error: Could not open rcfile: %s\n"
 msgstr "%s: Feil: Klate ikkje opna «rcfile»: %s\n"
 
-#: src/console_fe.c:1230
+#: src/console_fe.c:1173
 #, c-format
 msgid "%s: Error: rcfile permissions allow other users to read your rcfile.\n"
 msgstr "%s: Feil: «rcfile»-løyva gjer at andre kan lesa «rcfile»-fila di.\n"
 
-#: src/console_fe.c:1231 src/console_fe.c:1243
+#: src/console_fe.c:1174 src/console_fe.c:1186
 #, c-format
 msgid "%s: Set the permissions to 0600.\n"
 msgstr "%s: Set løyva til 0600.\n"
 
-#: src/console_fe.c:1234
+#: src/console_fe.c:1177
 #, c-format
 msgid "%s: Error: Could not open storage directory: %s\n"
 msgstr "%s: Feil: Klarte ikkje opna lagringskatalog: %s\n"
 
-#: src/console_fe.c:1235
+#: src/console_fe.c:1178
 #, c-format
 msgid ""
 "%s: You need to create this directory and set the permissions to 0700.\n"
 msgstr "%s: Du må oppretta denne katalogen og setja løyvet til 0700.\n"
 
-#: src/console_fe.c:1238
+#: src/console_fe.c:1181
 #, c-format
 msgid "%s: Error: storage directory permissions incorrect.\n"
 msgstr "%s: Feil: løyva sett for lagringskatalogen er feil.\n"
 
-#: src/console_fe.c:1239
+#: src/console_fe.c:1182
 #, c-format
 msgid "%s: Set the permissions to 0700.\n"
 msgstr "%s: Set løyva til 0700.\n"
 
-#: src/console_fe.c:1242
+#: src/console_fe.c:1185
 #, c-format
 msgid "%s: Error: ~/.netrc permissions incorrect.\n"
 msgstr "%s: Feil: feil løyve til ~/.netrc.\n"
 
-#: src/console_fe.c:1248
+#: src/console_fe.c:1191
 #, c-format
 msgid ""
 "%s: init_paths gave %d\n"
@@ -823,17 +786,17 @@ msgstr ""
 "%s: init_paths gav %d\n"
 "%s"
 
-#: src/console_fe.c:1255
+#: src/console_fe.c:1198
 #, c-format
 msgid "%s: Error: Could not parse ~/.netrc.\n"
 msgstr "%s: Feil: Klarte ikkje tolka ~/.netrc.\n"
 
-#: src/console_fe.c:1293 src/console_fe.c:1392
+#: src/console_fe.c:1216 src/console_fe.c:1315
 #, c-format
 msgid "%s: Nothing to do - no changes found.\n"
 msgstr "%s: Fann ingen endringar.\n"
 
-#: src/console_fe.c:1302
+#: src/console_fe.c:1225
 #, c-format
 msgid ""
 "%s: Error: Could not open storage file for writing (%s)\n"
@@ -844,7 +807,7 @@ msgstr ""
 "%s: Feil: %s\n"
 "%s: Klarte ikkje oppdatera nettstaden «%s».\n"
 
-#: src/console_fe.c:1326
+#: src/console_fe.c:1249
 #, c-format
 msgid ""
 "%s: Warning: Current state method differs from stored in site `%s'.\n"
@@ -854,32 +817,32 @@ msgstr ""
 "«%s».\n"
 "%s: Alle filer vil visast som endra (bruk «gjer oppdatert»?).\n"
 
-#: src/console_fe.c:1332
+#: src/console_fe.c:1255
 #, c-format
 msgid "%s: The remote site needs updating (%d items to update).\n"
 msgstr "%s: Nettstaden må oppdaterast (%d element).\n"
 
-#: src/console_fe.c:1334
+#: src/console_fe.c:1257
 #, c-format
 msgid "%s: The remote site needs updating (1 item to update).\n"
 msgstr "%s: Nettstaden må oppdaterast (eitt element).\n"
 
-#: src/console_fe.c:1337
+#: src/console_fe.c:1260
 #, c-format
 msgid "%s: The remote site does not need updating.\n"
 msgstr "%s: Nettstaden treng ikkje oppdaterast.\n"
 
-#: src/console_fe.c:1345
+#: src/console_fe.c:1268
 #, c-format
 msgid "%s: All the files and directories are marked as NOT updated remotely.\n"
 msgstr "%s: Alle filer og katalogar er markerte som IKKJE oppdaterte.\n"
 
-#: src/console_fe.c:1350
+#: src/console_fe.c:1273
 #, c-format
 msgid "%s: All the files and and directories are marked as updated remotely.\n"
 msgstr "%s: Alle filer og katalogar er markerte som oppdaterte.\n"
 
-#: src/console_fe.c:1359
+#: src/console_fe.c:1282
 #, c-format
 msgid ""
 "%s: Failed to fetch file listing for site `%s':\n"
@@ -888,7 +851,7 @@ msgstr ""
 "%s: Klarte ikkje henta fillista for å stadfesta nettstaden «%s»:\n"
 "%s: %s\n"
 
-#: src/console_fe.c:1373
+#: src/console_fe.c:1296
 #, c-format
 msgid ""
 "%s: Failed to fetch file listing to verify site `%s':\n"
@@ -897,17 +860,17 @@ msgstr ""
 "%s: Klarte ikkje henta fillista for nettstaden «%s»:\n"
 "%s: %s\n"
 
-#: src/console_fe.c:1380
+#: src/console_fe.c:1303
 #, c-format
 msgid "%s: Verify found %d files missing from server.\n"
 msgstr "%s: Stadfesting fann %d filer som manglar frå tenaren.\n"
 
-#: src/console_fe.c:1383
+#: src/console_fe.c:1306
 #, c-format
 msgid "%s: Remote site not synchronized with stored state.\n"
 msgstr "%s: Fjerntliggande nettstad er ikkje synkronisert.\n"
 
-#: src/console_fe.c:1396
+#: src/console_fe.c:1319
 #, c-format
 msgid ""
 "%s: Refusing to delete all local files with a synchronize operation.\n"
@@ -916,7 +879,7 @@ msgstr ""
 "%s: Nektar å sletta alle filer med ein synkroniseringsoperasjon.\n"
 "%s: Bruk --update for å oppdatera nettstaden.\n"
 
-#: src/console_fe.c:1404
+#: src/console_fe.c:1327
 #, c-format
 msgid ""
 "%s: in act_on_site\n"
@@ -925,18 +888,18 @@ msgstr ""
 "%s: i act_on_site\n"
 "%s"
 
-#: src/console_fe.c:1415
+#: src/console_fe.c:1338
 #, c-format
 msgid "Usage: %s [OPTIONS] [MODE] [sitename]...\n"
 msgstr "Bruk: %s [VAL] [MODUS] [nettstad] ...\n"
 
 # Alternativ? Flagg?
-#: src/console_fe.c:1417
+#: src/console_fe.c:1340
 #, c-format
 msgid "Options: \n"
 msgstr "Val: \n"
 
-#: src/console_fe.c:1420
+#: src/console_fe.c:1343
 #, fuzzy, c-format
 msgid ""
 "  -d, --debug=KEY[,KEY] Turn debugging on for each KEY, which may be:\n"
@@ -954,7 +917,7 @@ msgstr ""
 "  -g, --logfile=FIL    Legg til avlusingsmeldingar i FIL\n"
 "                       (elles blir «stderr» brukt)\n"
 
-#: src/console_fe.c:1427
+#: src/console_fe.c:1350
 #, fuzzy, c-format
 msgid ""
 "  -r, --rcfile=FILE     Use alternate run control file\n"
@@ -1007,14 +970,19 @@ msgstr ""
 "  -V, --version        Vis versjonsinformasjon\n"
 "Rapporter feil og send forslag til sitecopy@lyra.org\n"
 
-#: src/sitestore.c:321
+#: src/sitestore.c:326
 #, c-format
 msgid "Invalid checksum at line %d"
 msgstr ""
 
-#: src/sitestore.c:340
+#: src/sitestore.c:371
 #, c-format
-msgid "Size overflow (%s) at line %d"
+msgid "Boolean missing in 'ascii' at line %d"
+msgstr ""
+
+#: src/sitestore.c:396
+#, c-format
+msgid "Size overflow (%s) in '%s' at line %d"
 msgstr ""
 
 #: src/davdriver.c:175
@@ -1030,25 +998,35 @@ msgstr "SSL-støtte er ikkje kompilert inn."
 msgid "Could not load certificate `%s'."
 msgstr "Åtvaring: Klarte ikkje lagra sertifikat"
 
-#: src/davdriver.c:265
+#: src/davdriver.c:264
+#, fuzzy, c-format
+msgid "Could not read SSL client certificate '%s'."
+msgstr "Åtvaring: Klarte ikkje lagra sertifikat"
+
+#: src/davdriver.c:277
+#, fuzzy, c-format
+msgid "Could not decrypt SSL client certificate '%s'."
+msgstr "Åtvaring: Klarte ikkje lagra sertifikat"
+
+#: src/davdriver.c:299
 msgid "The server does not appear to be a WebDAV server."
 msgstr "Tenaren er ikkje ein WebDAV-tenar."
 
-#: src/davdriver.c:270
+#: src/davdriver.c:304
 msgid "The server does not support the executable live property."
 msgstr "Tenaren støttar ikkje kjørbar-eigenskapen."
 
-#: src/davdriver.c:316 src/davdriver.c:383 src/davdriver.c:420 src/ftp.c:888
+#: src/davdriver.c:350 src/davdriver.c:417 src/davdriver.c:454 src/ftp.c:888
 #: src/ftp.c:972
 msgid "Could not open file"
 msgstr "Klarte ikkje opna fil"
 
-#: src/davdriver.c:351
+#: src/davdriver.c:385
 #, fuzzy, c-format
 msgid "Could not stat file: %s"
 msgstr "Klarte ikkje skriva til fil: %s"
 
-#: src/davdriver.c:598
+#: src/davdriver.c:644
 msgid "Could not access resource"
 msgstr "Fekk ikkje tilgang til ressursen"
 
@@ -1085,12 +1063,12 @@ msgstr "Klarte ikkje lesa målet til den symbolske lenkja."
 msgid "Unknown system error"
 msgstr "Ukjend systemfeil"
 
-#: src/ftp.c:153 lib/neon/ne_request.c:236
+#: src/ftp.c:153 lib/neon/ne_request.c:240
 #, c-format
 msgid "%s: connection was closed by server."
 msgstr "%s: tilkoplinga vart lukka av tenaren."
 
-#: src/ftp.c:157 lib/neon/ne_request.c:241
+#: src/ftp.c:157 lib/neon/ne_request.c:245
 #, c-format
 msgid "%s: connection timed out."
 msgstr "%s: sambandet vart tidsavbrote."
@@ -1537,210 +1515,219 @@ msgstr "Klarte ikkje forhandla SSL-økt"
 msgid "Could not parse redirect location."
 msgstr "Klarte ikkje tolka vidaresendingsadresse."
 
-#: lib/neon/ne_gnutls.c:434 lib/neon/ne_openssl.c:393
+#: lib/neon/ne_gnutls.c:521 lib/neon/ne_openssl.c:386
 msgid "Server certificate was missing commonName attribute in subject name"
 msgstr ""
 
-#: lib/neon/ne_gnutls.c:471 lib/neon/ne_openssl.c:588
+#: lib/neon/ne_gnutls.c:557 lib/neon/ne_openssl.c:599
 #, fuzzy, c-format
 msgid "SSL negotiation failed: %s"
 msgstr "Klarte ikkje skriva til fil: %s"
 
-#: lib/neon/ne_gnutls.c:480
+#: lib/neon/ne_gnutls.c:566
 msgid "Server did not send certificate chain"
 msgstr ""
 
-#: lib/neon/ne_openssl.c:176
-#, fuzzy
-msgid "certificate is not yet valid"
-msgstr "Sertifikatet er gyldig"
-
-#: lib/neon/ne_openssl.c:177
-#, fuzzy
-msgid "certificate has expired"
-msgstr "Tenarsertifikatet er utgått på dato."
-
-#: lib/neon/ne_openssl.c:178
-#, fuzzy
-msgid "certificate issued for a different hostname"
-msgstr "Sertifikatet er utferda av:"
-
-#: lib/neon/ne_openssl.c:179
-msgid "issuer is not trusted"
-msgstr ""
-
-#: lib/neon/ne_openssl.c:184
-#, fuzzy
-msgid "Server certificate verification failed: "
-msgstr "Tenarsertifikatet er utgått på dato."
-
-#: lib/neon/ne_openssl.c:202
-msgid "[invalid date]"
-msgstr "[ugyldig dato]"
-
-#: lib/neon/ne_openssl.c:425
+#: lib/neon/ne_openssl.c:418
 #, c-format
 msgid "Certificate verification error: %s"
 msgstr ""
 
-#: lib/neon/ne_openssl.c:607
+#: lib/neon/ne_openssl.c:618
 msgid "SSL server did not present certificate"
 msgstr ""
 
-#: lib/neon/ne_openssl.c:616
+#: lib/neon/ne_openssl.c:627
 #, fuzzy
 msgid "Server certificate changed: connection intercepted?"
 msgstr "Tenarsertifikatet er utgått på dato."
 
-#: lib/neon/ne_socket.c:490 lib/neon/ne_socket.c:538 lib/neon/ne_socket.c:641
+#: lib/neon/ne_session.c:305 lib/neon/ne_session.c:316
+msgid "[invalid date]"
+msgstr "[ugyldig dato]"
+
+#: lib/neon/ne_session.c:329
+#, fuzzy
+msgid "certificate is not yet valid"
+msgstr "Sertifikatet er gyldig"
+
+#: lib/neon/ne_session.c:330
+#, fuzzy
+msgid "certificate has expired"
+msgstr "Tenarsertifikatet er utgått på dato."
+
+#: lib/neon/ne_session.c:331
+#, fuzzy
+msgid "certificate issued for a different hostname"
+msgstr "Sertifikatet er utferda av:"
+
+#: lib/neon/ne_session.c:332
+msgid "issuer is not trusted"
+msgstr ""
+
+#: lib/neon/ne_session.c:337
+#, fuzzy
+msgid "Server certificate verification failed: "
+msgstr "Tenarsertifikatet er utgått på dato."
+
+#: lib/neon/ne_socket.c:480 lib/neon/ne_socket.c:528 lib/neon/ne_socket.c:631
 #, fuzzy
 msgid "Connection closed"
 msgstr "Tilkoplinga vart lukka av tenaren"
 
-#: lib/neon/ne_socket.c:548
+#: lib/neon/ne_socket.c:538 lib/neon/ne_socket.c:643
 #, fuzzy
 msgid "Secure connection truncated"
 msgstr "Sambandet vart tidsavbrote."
 
-#: lib/neon/ne_socket.c:560 lib/neon/ne_socket.c:645 lib/neon/ne_socket.c:650
+#: lib/neon/ne_socket.c:550 lib/neon/ne_socket.c:655
 #, fuzzy, c-format
 msgid "SSL error: %s"
 msgstr "%s: Feil: %s\n"
 
-#: lib/neon/ne_socket.c:563
+#: lib/neon/ne_socket.c:553
 #, c-format
 msgid "SSL error code %d/%d/%lu"
 msgstr ""
 
-#: lib/neon/ne_socket.c:745
+#: lib/neon/ne_socket.c:636
+#, fuzzy, c-format
+msgid "SSL alert received: %s"
+msgstr "%s: Feil: %s\n"
+
+#: lib/neon/ne_socket.c:651
+msgid "SSL socket read failed"
+msgstr ""
+
+#: lib/neon/ne_socket.c:750
 msgid "Line too long"
 msgstr "For lang linje"
 
-#: lib/neon/ne_socket.c:885 lib/neon/ne_socket.c:891
+#: lib/neon/ne_socket.c:890 lib/neon/ne_socket.c:896
 msgid "Host not found"
 msgstr "Fann ikkje vert"
 
-#: lib/neon/ne_socket.c:1001
+#: lib/neon/ne_socket.c:1006
 msgid "Socket descriptor number exceeds FD_SETSIZE"
 msgstr ""
 
-#: lib/neon/ne_socket.c:1161
+#: lib/neon/ne_socket.c:1218
+#, fuzzy
+msgid "Client certificate verification failed"
+msgstr "Tenarsertifikatet er utgått på dato."
+
+#: lib/neon/ne_socket.c:1234
 #, fuzzy
 msgid "SSL disabled due to lack of entropy"
 msgstr "SSL avslått grunna mangel på entropi"
 
-#: lib/neon/ne_socket.c:1168
+#: lib/neon/ne_socket.c:1241
 #, fuzzy
 msgid "SSL disabled due to library version mismatch"
 msgstr "SSL avslått grunna mangel på entropi"
 
-#: lib/neon/ne_socket.c:1174
+#: lib/neon/ne_socket.c:1247
 #, fuzzy
 msgid "Could not create SSL structure"
 msgstr "Klarte ikkje forhandla SSL-økt"
 
-#: lib/neon/ne_request.c:233
+#: lib/neon/ne_request.c:237
 #, c-format
 msgid "%s: connection was closed by proxy server."
 msgstr "%s: tilkoplinga vart lukka av mellomtenaren."
 
-#: lib/neon/ne_request.c:395
+#: lib/neon/ne_request.c:351
 msgid "offset invalid"
 msgstr ""
 
-#: lib/neon/ne_request.c:398
-#, fuzzy
-msgid "Could not seek to offset %"
-msgstr "Klarte ikkje skriva til fil: %s"
-
-#: lib/neon/ne_request.c:399
+#: lib/neon/ne_request.c:356
 #, fuzzy, c-format
-msgid " of request body file: %s"
+msgid "Could not seek to offset %s of request body file: %s"
 msgstr "Klarte ikkje skriva til fil: %s"
 
-#: lib/neon/ne_request.c:443
+#: lib/neon/ne_request.c:401
 msgid "Could not send request body"
 msgstr "Klarte ikkje senda førespurnad"
 
-#: lib/neon/ne_request.c:791
+#: lib/neon/ne_request.c:759
 msgid "Could not read chunk size"
 msgstr "Klarte ikkje lesa storleik på oppdelt svar"
 
-#: lib/neon/ne_request.c:798
+#: lib/neon/ne_request.c:766
 msgid "Could not parse chunk size"
 msgstr "Klarte ikkje tolka storleik på oppdelt svar"
 
-#: lib/neon/ne_request.c:835
+#: lib/neon/ne_request.c:803
 msgid "Could not read response body"
 msgstr "Klarte ikkje lesa svar"
 
-#: lib/neon/ne_request.c:851
+#: lib/neon/ne_request.c:819
 #, fuzzy
 msgid "Could not read chunk delimiter"
 msgstr "Klarte ikkje lesa storleik på oppdelt svar"
 
-#: lib/neon/ne_request.c:854
+#: lib/neon/ne_request.c:822
 msgid "Chunk delimiter was invalid"
 msgstr ""
 
-#: lib/neon/ne_request.c:964
+#: lib/neon/ne_request.c:928
 msgid "Could not read status line"
 msgstr "Klarte ikkje lesa statuslinja"
 
-#: lib/neon/ne_request.c:975
+#: lib/neon/ne_request.c:950
 msgid "Could not parse response status line."
 msgstr "Klarte ikkje tolka statuslinja i svaret."
 
-#: lib/neon/ne_request.c:986
+#: lib/neon/ne_request.c:962
 #, fuzzy
 msgid "Could not read interim response headers"
 msgstr "Klarte ikkje lesa svarlinje"
 
-#: lib/neon/ne_request.c:1020
+#: lib/neon/ne_request.c:996
 msgid "Could not send request"
 msgstr "Klarte ikkje senda førespurnad"
 
-#: lib/neon/ne_request.c:1068 lib/neon/ne_request.c:1086
-#: lib/neon/ne_request.c:1096
+#: lib/neon/ne_request.c:1044 lib/neon/ne_request.c:1062
+#: lib/neon/ne_request.c:1072
 msgid "Error reading response headers"
 msgstr "Feil ved lesing av svarhovud"
 
-#: lib/neon/ne_request.c:1114
+#: lib/neon/ne_request.c:1090
 msgid "Response header too long"
 msgstr "For langt svarhovud"
 
-#: lib/neon/ne_request.c:1196
+#: lib/neon/ne_request.c:1172
 msgid "Response exceeded maximum number of header fields."
 msgstr "Svaret inneheld for mange header-felt."
 
-#: lib/neon/ne_request.c:1213
+#: lib/neon/ne_request.c:1189
 #, fuzzy, c-format
 msgid "Could not resolve hostname `%s': %s"
 msgstr "%s: Feil: Fann ikkje adressa til nettverksvert (%s).\n"
 
-#: lib/neon/ne_request.c:1323
+#: lib/neon/ne_request.c:1309
 msgid "Invalid Content-Length in response"
 msgstr ""
 
-#: lib/neon/ne_request.c:1385
+#: lib/neon/ne_request.c:1371
 #, c-format
 msgid "Could not write to file: %s"
 msgstr "Klarte ikkje skriva til fil: %s"
 
-#: lib/neon/ne_request.c:1458
+#: lib/neon/ne_request.c:1444
 msgid "Could not create SSL connection through proxy server"
 msgstr "Klarte ikkje oppretta SSL-tilkopling til mellomtenar"
 
-#: lib/neon/ne_request.c:1504
+#: lib/neon/ne_request.c:1489
 #, fuzzy
 msgid "Could not create socket"
 msgstr "Klarte ikkje forhandla SSL-økt"
 
-#: lib/neon/ne_request.c:1549
+#: lib/neon/ne_request.c:1533
 msgid "Could not connect to server"
 msgstr "Klarte ikkje kopla til tenaren."
 
-#: lib/neon/ne_request.c:1552
+#: lib/neon/ne_request.c:1536
 msgid "Could not connect to proxy server"
 msgstr "Klarte ikkje kopla til mellomtenar"
 
@@ -1763,27 +1750,27 @@ msgstr ""
 msgid "XML parse error at line %d: %s."
 msgstr "XML-tolkingsfeil på linje %d: %s."
 
-#: lib/neon/ne_props.c:372 lib/neon/ne_props.c:412
+#: lib/neon/ne_props.c:371 lib/neon/ne_props.c:411
 #, fuzzy
 msgid "Response exceeds maximum property count"
 msgstr "Svaret inneheld for mange header-felt."
 
-#: lib/neon/ne_compress.c:175
+#: lib/neon/ne_compress.c:173
 #, fuzzy, c-format
 msgid "%s: %s"
 msgstr "%s: %s\n"
 
-#: lib/neon/ne_compress.c:186
+#: lib/neon/ne_compress.c:184
 #, c-format
 msgid "%s: %s (code %d)"
 msgstr ""
 
-#: lib/neon/ne_compress.c:234
+#: lib/neon/ne_compress.c:232
 #, fuzzy
 msgid "Could not inflate data"
 msgstr "Klarte ikkje opna fil: "
 
-#: lib/neon/ne_compress.c:295
+#: lib/neon/ne_compress.c:293
 #, fuzzy
 msgid "Could not initialize zlib"
 msgstr "Klarte ikkje opna fil: "
@@ -1793,39 +1780,60 @@ msgstr "Klarte ikkje opna fil: "
 msgid "Could not parse response: %s"
 msgstr "Klarte ikkje lesa «LIST»-svar."
 
-#: lib/neon/ne_basic.c:86
+#: lib/neon/ne_basic.c:94
 #, fuzzy, c-format
 msgid "Could not determine file size: %s"
 msgstr "Fann ikkje fillengda: %s"
 
-#: lib/neon/ne_basic.c:132
+#: lib/neon/ne_basic.c:149
 msgid "Response did not include requested range"
 msgstr ""
 
-#: lib/neon/ne_basic.c:176
+#: lib/neon/ne_basic.c:183
 #, fuzzy
 msgid "Range is not satisfiable"
 msgstr "Området finst ikkje."
 
-#: lib/neon/ne_basic.c:181
+#: lib/neon/ne_basic.c:188
 #, fuzzy
 msgid "Resource does not support ranged GETs."
 msgstr "Tenaren kan ikkje handtera kommandoar for delvis GET."
 
-#: lib/neon/ne_auth.c:124
-msgid "Server was not authenticated correctly."
-msgstr "Tenaren vart ikkje rett autentisert."
-
-#: lib/neon/ne_auth.c:128
-msgid "Proxy server was not authenticated correctly."
-msgstr "Mellomtenaren vart ikkje rett autentisert."
-
-#: lib/neon/ne_auth.c:426
+#: lib/neon/ne_auth.c:462
 #, fuzzy, c-format
 msgid "GSSAPI authentication error (%s)"
 msgstr "Krev autentisering på %s «%s»:\n"
 
-#: lib/neon/ne_207.c:188
+#: lib/neon/ne_auth.c:595
+msgid "Unknown algorithm in Digest authentication challenge"
+msgstr ""
+
+#: lib/neon/ne_auth.c:600
+msgid "Incompatible algorithm in Digest authentication challenge"
+msgstr ""
+
+#: lib/neon/ne_auth.c:606
+msgid "Missing nonce or realm in Digest authentication challenge"
+msgstr ""
+
+#: lib/neon/ne_auth.c:886
+msgid "Digest mutual authentication failure: missing parameters"
+msgstr ""
+
+#: lib/neon/ne_auth.c:891
+msgid "Digest mutual authentication failure: client nonce mismatch"
+msgstr ""
+
+#: lib/neon/ne_auth.c:896
+#, c-format
+msgid "Digest mutual authentication failure: nonce count mismatch (%u not %u)"
+msgstr ""
+
+#: lib/neon/ne_auth.c:936
+msgid "Digest mutual authentication failure: request-digest mismatch"
+msgstr ""
+
+#: lib/neon/ne_207.c:198
 #, c-format
 msgid ""
 "Invalid HTTP status line in status element at line %d of response:\n"
@@ -1834,20 +1842,20 @@ msgstr ""
 "Ugyldig HTTP-statuslinje i statuselement på linje %d av svaret:\n"
 "Statuslinja var: %s"
 
-#: lib/neon/ne_locks.c:591
+#: lib/neon/ne_locks.c:583
 msgid "LOCK response missing Lock-Token header"
 msgstr ""
 
-#: lib/neon/ne_locks.c:744
+#: lib/neon/ne_locks.c:739
 msgid "No Lock-Token header given"
 msgstr ""
 
-#: lib/neon/ne_locks.c:772
+#: lib/neon/ne_locks.c:767
 #, c-format
 msgid "Response missing activelock for %s"
 msgstr ""
 
-#: lib/neon/ne_locks.c:816
+#: lib/neon/ne_locks.c:811
 #, c-format
 msgid "No activelock for <%s> returned in LOCK refresh response"
 msgstr ""
@@ -1915,6 +1923,46 @@ msgstr "%s: valet «-W %s» er tvetydig\n"
 #, c-format
 msgid "%s: option `-W %s' doesn't allow an argument\n"
 msgstr "%s: valet «-W %s» kan ikkje innehelda argument\n"
+
+#~ msgid "%s: Aborted.\n"
+#~ msgstr "%s: Avbrote.\n"
+
+#~ msgid ""
+#~ "\n"
+#~ "\n"
+#~ "%s: Caught signal: %s (%d)\n"
+#~ msgstr ""
+#~ "\n"
+#~ "\n"
+#~ "%s: Fanga opp signal: %s (%d)\n"
+
+#~ msgid ""
+#~ "\n"
+#~ "\n"
+#~ "%s: Caught signal %d\n"
+#~ msgstr ""
+#~ "\n"
+#~ "\n"
+#~ "%s: Fanga opp signal %d\n"
+
+#~ msgid "%s: Cannot recover from segmentation fault, aborting.\n"
+#~ msgstr "%s: Klarer ikkje å overleva segmenteringsfeil. Avsluttar.\n"
+
+#~ msgid "%s: Aborting update...\n"
+#~ msgstr "%s: Avbryt oppdatering ...\n"
+
+#~ msgid "%s: Terminating.\n"
+#~ msgstr "%s: Avsluttar.\n"
+
+#, fuzzy
+#~ msgid " of request body file: %s"
+#~ msgstr "Klarte ikkje skriva til fil: %s"
+
+#~ msgid "Server was not authenticated correctly."
+#~ msgstr "Tenaren vart ikkje rett autentisert."
+
+#~ msgid "Proxy server was not authenticated correctly."
+#~ msgstr "Mellomtenaren vart ikkje rett autentisert."
 
 #~ msgid "Error reading request body."
 #~ msgstr "Klarte ikkje lesa svartekst"

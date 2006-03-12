@@ -11,7 +11,6 @@
 ./src/common.c
 ./src/ftp.c
 ./src/lsparser.c
-./src/fileset.c
 ./src/sftpdriver.c
 ./gnome/init.c
 ./gnome/changes.c
