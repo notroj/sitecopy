@@ -1,0 +1,47 @@
+Building sitecopy for OS/2 / eComStation
+========================================
+
+Building sitecopy on OS/2 is easy using the usual tools
+for building unix-like-open-source-apps and GCC Version 3.3.5
+
+You get the compiler at: ftp://ftp.netlabs.org/pub/gcc
+
+For compiling sitecopy version 0.16.3 (which was the latest
+version available at the moment I wrote these lines) I used gcc335csd1
+
+Only thing special was, that my CONFIG_SITE needed this line:
+
+ AR=G:/Dev/gcc/335csd1/usr/bin/ar.exe
+
+ ('AR=ar.exe' did not work allthough ar.exe was in my PATH)
+
+After this building was just:
+
+ sh configure --prefix=/usr
+ make
+ make install
+
+To make life easier for OS/2 users it's useful
+to include the docs also in html format.
+
+You can convert the man file to html with
+
+ man sitecopy | man2html.cmd > sitecopy.html
+
+man2thml.cmd is a copy of the standard perlscript man2hml.
+You only have to replace the first line
+
+ #!/usr/local/bin/perl
+
+with
+
+ extproc perl -S
+
+The ported sitecopy was successfully tested on eComStation / OS/2
+with FTP-sites. I have no idea whether WebDAV works or not.
+
+The compiled version of 0.16.3 is available at:
+
+ http://www.fbakan.de/sitecopy-os2.htm
+
+Franz Bakan  5. April 2006  mail: fbakan@gmx.net  web: www.fbakan.de
