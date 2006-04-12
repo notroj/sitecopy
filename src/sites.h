@@ -29,6 +29,8 @@
 
 #include <stdio.h> /* for FILE * for the storage_file... unfortuntely */
 
+#include "ne_ssl.h" /* for ne_ssl_certificate. */
+
 #include "common.h"
 #include "protocol.h"
 
@@ -363,6 +365,7 @@ struct site {
     FILE *storage_file;  /* The file opened for the storage file */
 
     char *client_cert; /* client certificate */
+    ne_ssl_certificate *server_cert; /* pre-cached server cert */
 
     /* Options for the site */
     enum site_perm_modes perms; /* permissions maintenance mode */

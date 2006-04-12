@@ -180,28 +180,32 @@ static int h2s(ne_session *sess, int errcode)
     }
 }
 
-/* Verify callback for when a trusted cert is not known. */
-static int verify_untrusted(void *userdata, int failures,
-                            const ne_ssl_certificate *cert)
+/* Callback invoked when SSL server cert verification fails. */
+static int verify_certificate(void *userdata, int failures,
+                              const ne_ssl_certificate *cert)
 {
     struct site *site = userdata;
 
-    if (fe_accept_cert(cert, failures))
+    /* If the server cert has not changed since the user accepted it,
+     * trust the cert, unless it has expired, in which case the user
+     * should get a warning. */
+    if (site->server_cert 
+        && ne_ssl_cert_cmp(cert, site->server_cert) == 0
+        && (failures & NE_SSL_EXPIRED) == 0) {
+        return 0;
+    }
+
+    if (fe_accept_cert(cert, failures)) {
+        /* Not accepted by user => fail verification. */
         return -1;
-    
-    /* TODO: how to handle a write error here? */
-    ne_ssl_cert_write(cert, site->certfile);
+    }
+
+    if (ne_ssl_cert_write(cert, site->certfile)) {
+        fe_warning(_("Could not write SSL certificate"),
+                   NULL, site->certfile);
+    }
 
     return 0;
-}
-
-/* Verify callback for when a trusted cert is known. */
-static int verify_trusted(void *userdata, int failures,
-                          const ne_ssl_certificate *cert)
-{
-    ne_ssl_certificate *expected = userdata;
-
-    return failures != NE_SSL_UNTRUSTED || ne_ssl_cert_cmp(expected, cert);
 }
 
 static int init(void **session, struct site *site)
@@ -223,16 +227,14 @@ static int init(void **session, struct site *site)
 
     if (site->http_secure) {
         if (access(site->certfile, R_OK) == 0) {
-            ne_ssl_certificate *cert = ne_ssl_cert_read(site->certfile);
-            if (cert == NULL) {
+            site->server_cert = ne_ssl_cert_read(site->certfile);
+            if (site->server_cert == NULL) {
                 ne_set_error(sess, _("Could not load certificate `%s'."),
                              site->certfile);
                 return SITE_FAILED;
             }
-            ne_ssl_set_verify(sess, verify_trusted, cert);
-        } else {
-            ne_ssl_set_verify(sess, verify_untrusted, site);
         }
+        ne_ssl_set_verify(sess, verify_certificate, site);
     }
 
     ne_set_status(sess, notify_cb, NULL);
