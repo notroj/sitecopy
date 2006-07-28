@@ -117,3 +117,9 @@ the manual page has no information on how to make it all work.
 
 ---
 
+From: Heiko Schlittermann
+
+I thing there's a bug or at least flaw: Even if 'safe' is specified in
+the config file, it deletes files on the server if the local copy is
+deleted and the server file changed meanwhile.  Should it behave the
+same way as it does for file changes (refus to overwrite?)
