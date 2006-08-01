@@ -768,7 +768,7 @@ int site_readfiles(struct site *site)
 
 /* Initial size of directory stack, and amount it grows
  * each time we fill it. */
-#define DIRSTACKSIZE 128
+#define DIRSTACKSIZE (1024)
 
 void site_read_local_state(struct site *site)
 {
