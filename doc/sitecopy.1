@@ -500,7 +500,7 @@ File permissions handling is dictated by the
 key, which may be given one of three values:
 .TP 
 .B ignore
-to ignore file permissions completely,
+to ignore file permissions completely (the default),
 .TP
 .B exec
 to mirror the permissions of executable files only,
@@ -514,7 +514,7 @@ servers, a
 .B chmod
 is performed remotely to set the permissions.
 
-To handle permissions directories, the key:
+To handle directory permissions, the key:
 .br
 .BR "   permissions dir"
 .br
