@@ -1,6 +1,6 @@
 /* 
    sitecopy WebDAV protocol driver module
-   Copyright (C) 2000-2006, Joe Orton <joe@manyfish.co.uk>
+   Copyright (C) 2000-2007, Joe Orton <joe@manyfish.co.uk>
                                                                      
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -140,6 +140,7 @@ proxy_auth_cb(void *userdata, const char *realm, int attempt,
 		       username, password);
 }
 
+#if NE_VERSION_MINOR < 27
 static void notify_cb(void *userdata, ne_conn_status status, const char *info)
 {
 
@@ -155,6 +156,25 @@ static void notify_cb(void *userdata, ne_conn_status status, const char *info)
 
 #undef MAP
 }
+#else
+static void notify_status(void *userdata, ne_session_status status,
+                          const ne_session_status_info *info)
+{
+    switch (status) {
+    case ne_status_lookup:
+        fe_connection(fe_namelookup, info->lu.hostname);
+        break;
+    case ne_status_connecting:
+        fe_connection(fe_connecting, NULL);
+        break;
+    case ne_status_connected:
+        fe_connection(fe_connected, NULL);
+        break;
+    default:
+        break;
+    }
+}
+#endif
 
 static int h2s(ne_session *sess, int errcode)
 {
@@ -237,7 +257,11 @@ static int init(void **session, struct site *site)
         ne_ssl_set_verify(sess, verify_certificate, site);
     }
 
+#if NE_VERSION_MINOR < 27
     ne_set_status(sess, notify_cb, NULL);
+#else
+    ne_set_notifier(sess, notify_status, NULL);
+#endif
 
     if (site->http_limit) {
 #if NE_VERSION_MINOR > 25
