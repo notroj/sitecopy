@@ -79,7 +79,7 @@ struct private {
 #define ELM_resourcetype (NE_PROPS_STATE_TOP + 1)
 #define ELM_collection (NE_PROPS_STATE_TOP + 2)
 
-/* The element definitinos for the complex prop handler. */
+/* The element definitions for the complex prop handler. */
 static const struct ne_xml_idmap fetch_elms[] = {
     { "DAV:", "resourcetype", ELM_resourcetype },
     { "DAV:", "collection", ELM_collection },
