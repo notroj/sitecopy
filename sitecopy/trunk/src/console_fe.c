@@ -1,6 +1,6 @@
 /* 
    sitecopy, for managing remote web sites.
-   Copyright (C) 1998-2006, Joe Orton <joe@manyfish.co.uk>
+   Copyright (C) 1998-2008, Joe Orton <joe@manyfish.co.uk>
                                                                      
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -673,6 +673,8 @@ void fe_warning(const char *descr, const char *reason, const char *err)
 
 int fe_can_update(const struct site_file *file)
 {
+    char tmp[256];
+
     if (!prompting) return true;
     switch (file->type) {
     case file_dir:
@@ -686,8 +688,9 @@ int fe_can_update(const struct site_file *file)
 	switch (file->diff) {
 	case file_changed:
 	case file_new: 
-	    printf(_("Upload %s (%" NE_FMT_OFF_T " bytes)"), file_name(file),
-		   file->local.size); break;
+            ne_snprintf(tmp, sizeof tmp, "%" NE_FMT_OFF_T, file->local.size);
+	    printf(_("Upload %s (%s bytes)"), file_name(file), tmp);
+            break;
 	case file_deleted: printf(_("Delete %s"), file_name(file)); break;
 	case file_moved: printf(_("Move %s->%s"), file->stored.filename,
 				 file_name(file)); break;
@@ -946,14 +949,17 @@ void fe_connection(fe_status status, const char *info) {}
 
 void fe_fetch_found(const struct site_file *file) 
 {
+    char tmp[80];
+
     switch (file->type)  {
     case file_dir:
 	printf(_("Directory: %s/\n"), file->stored.filename);
 	break;
     case file_file:
 	/* TODO: could put checksum or modtime in here as appropriate */
-	printf(_("File: %s - size %" NE_FMT_OFF_T "%s\n"), 
-	       file->stored.filename, file->stored.size, 
+        ne_snprintf(tmp, sizeof tmp, "%" NE_FMT_OFF_T, file->stored.size);
+	printf(_("File: %s - size %s%s\n"), 
+	       file->stored.filename, tmp, 
 	       file->stored.ascii?_(" (ASCII)"):"");
 	break;
     case file_link:
