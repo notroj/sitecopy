@@ -936,7 +936,7 @@ void fe_verified(const char *name, enum file_diff match)
     printf(_("%s: %s\n"), state, name);
 }
 
-void fe_transfer_progress(off_t num, off_t total) 
+void fe_transfer_progress(ne_off_t num, ne_off_t total) 
 {
     if (quiet == 0) {
 	putchar('.');

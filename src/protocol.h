@@ -1,6 +1,6 @@
 /* 
    sitecopy, for managing remote web sites.
-   Copyright (C) 1998-2002, 2005, Joe Orton <joe@manyfish.co.uk>
+   Copyright (C) 1998-2008, Joe Orton <joe@manyfish.co.uk>
                                                                      
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -122,6 +122,6 @@ struct proto_driver {
 };
 
 /* Callback of type 'sock_progress'. */
-void site_sock_progress_cb(void *userdata, off_t progress, off_t total);
+void site_sock_progress_cb(void *userdata, ne_off_t progress, ne_off_t total);
 
 #endif /* PROTO_H */

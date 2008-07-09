@@ -1,6 +1,6 @@
 /* 
    sitecopy, manage remote web sites.
-   Copyright (C) 1998-2006, Joe Orton <joe@manyfish.co.uk>.
+   Copyright (C) 1998-2008, Joe Orton <joe@manyfish.co.uk>.
                                                                      
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -114,7 +114,7 @@ void fe_synching(const struct site_file *file);
 void fe_synched(const struct site_file *file, int success, const char *error);
 
 /* For synch and update modes... */
-void fe_transfer_progress(off_t progress, off_t total);
+void fe_transfer_progress(ne_off_t progress, ne_off_t total);
 
 /* Called while checksumming remote files, in fetch mode.
  * Note, these are just filenames not site_file *'s, because at the
@@ -136,7 +136,7 @@ void fe_fetch_found(const struct site_file *file);
  * reason and/or reason may be NULL.
  */
 void fe_warning(const char *description, const char *subject,
-		       const char *error);
+                const char *error);
 
 /* Verified - whether the remote file matches or not... 
  match will be one of file_new, file_deleted, file_changed, file_unchanged.
