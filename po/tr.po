@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: sitecopy-0.10.10\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-03-12 10:07+0000\n"
+"Report-Msgid-Bugs-To: sitecopy@lyra.org\n"
+"POT-Creation-Date: 2008-07-16 16:31+0100\n"
 "PO-Revision-Date: 2001-01-03 HO:MI+ZONE\n"
 "Last-Translator: A. Sinan Unur <sinan@unur.com>\n"
 "Language-Team: tr\n"
@@ -340,81 +340,76 @@ msgstr "Tekrar deneniyor: ["
 msgid "%s: Encrypted client certificate configured%s%s.\n"
 msgstr ""
 
-#: src/console_fe.c:680
+#: src/console_fe.c:682
 #, c-format
 msgid "Create %s/"
 msgstr "%s/ kütüðünü yarat"
 
-#: src/console_fe.c:682
+#: src/console_fe.c:684
 #, c-format
 msgid "Delete %s/"
 msgstr "%s/ kütüðünü sil"
 
-#: src/console_fe.c:689
-#, fuzzy
-msgid "Upload %s (%"
+#: src/console_fe.c:692
+#, fuzzy, c-format
+msgid "Upload %s (%s bytes)"
 msgstr "%s dosyasýný gönder"
 
-#: src/console_fe.c:689
-#, c-format
-msgid " bytes)"
-msgstr ""
-
-#: src/console_fe.c:691
+#: src/console_fe.c:694
 #, c-format
 msgid "Delete %s"
 msgstr "%s dosyasýný sil"
 
-#: src/console_fe.c:692
+#: src/console_fe.c:695
 #, c-format
 msgid "Move %s->%s"
 msgstr "%s dosyasýný %s'ye taþý"
 
-#: src/console_fe.c:696
+#: src/console_fe.c:699
 #, c-format
 msgid ""
 "%s: in fe_can_update/file_file\n"
 "%s"
 msgstr ""
 
-#: src/console_fe.c:703
+#: src/console_fe.c:706
 #, c-format
 msgid "Change %s"
 msgstr "%s dosyasýný deðiþtir"
 
-#: src/console_fe.c:704
+#: src/console_fe.c:707
 #, c-format
 msgid "Create %s"
 msgstr "%s dosyasýný yarat"
 
-#: src/console_fe.c:705
+#: src/console_fe.c:708
 #, c-format
 msgid "Remove %s"
 msgstr "%s dosyasýný sil"
 
-#: src/console_fe.c:708
+#: src/console_fe.c:711
 #, c-format
 msgid ""
 "%s: in fe_can_update/file_link\n"
 "%s"
 msgstr ""
 
-#: src/console_fe.c:714
+#: src/console_fe.c:717
 #, c-format
 msgid "? (y/n) "
 msgstr "? (e/h) "
 
-#: src/console_fe.c:723
+#: src/console_fe.c:726
 #, c-format
 msgid "Checksumming %s: ["
 msgstr "%s dosyasýnýn kontrol toplamý hesaplanýyor: [ "
 
-#: src/console_fe.c:738 src/console_fe.c:849 src/console_fe.c:910
+#: src/console_fe.c:741 src/console_fe.c:852 src/console_fe.c:913
 #, c-format
 msgid "] done.\n"
 msgstr "] tamamlandý.\n"
 
-#: src/console_fe.c:740 src/console_fe.c:912
+#: src/console_fe.c:743 src/console_fe.c:915
 #, c-format
 msgid ""
 "] failed:\n"
@@ -423,17 +418,17 @@ msgstr ""
 "] baþarýsýz oldu:\n"
 "%s\n"
 
-#: src/console_fe.c:750
+#: src/console_fe.c:753
 #, fuzzy, c-format
 msgid "Setting permissions on %s%s: "
 msgstr "%s dosyasýnýn izinleri konuyor: "
 
-#: src/console_fe.c:760 src/console_fe.c:838 src/console_fe.c:904
+#: src/console_fe.c:763 src/console_fe.c:841 src/console_fe.c:907
 #, c-format
 msgid "done.\n"
 msgstr "tamamlandý.\n"
 
-#: src/console_fe.c:762 src/console_fe.c:906
+#: src/console_fe.c:765 src/console_fe.c:909
 #, c-format
 msgid ""
 "failed:\n"
@@ -442,125 +437,120 @@ msgstr ""
 "baþarýsýz oldu:\n"
 "%s\n"
 
-#: src/console_fe.c:781 src/console_fe.c:868
+#: src/console_fe.c:784 src/console_fe.c:871
 #, c-format
 msgid "Creating %s/: "
 msgstr "%s/ kütüðü yaratýlýyor: "
 
-#: src/console_fe.c:783 src/console_fe.c:870
+#: src/console_fe.c:786 src/console_fe.c:873
 #, c-format
 msgid "Deleting %s/: "
 msgstr "%s/ kütüðü siliniyor: "
 
-#: src/console_fe.c:790
+#: src/console_fe.c:793
 #, c-format
 msgid "Uploading %s: ["
 msgstr "%s dosyasý gönderiliyor: ["
 
-#: src/console_fe.c:793 src/console_fe.c:812 src/console_fe.c:880
+#: src/console_fe.c:796 src/console_fe.c:815 src/console_fe.c:883
 #, c-format
 msgid "Deleting %s: "
 msgstr "%s dosyasý siliniyor: "
 
-#: src/console_fe.c:796 src/console_fe.c:883
+#: src/console_fe.c:799 src/console_fe.c:886
 #, c-format
 msgid "Moving %s->%s: "
 msgstr "%s dosyasý %s'ye taþýnýyor: "
 
-#: src/console_fe.c:800
+#: src/console_fe.c:803
 #, c-format
 msgid ""
 "%s: in fe_updating/file_file\n"
 "%s"
 msgstr ""
 
-#: src/console_fe.c:808
+#: src/console_fe.c:811
 #, c-format
 msgid "Changing %s: "
 msgstr "%s dosyasý deðiþtiriliyor: "
 
-#: src/console_fe.c:810
+#: src/console_fe.c:813
 #, c-format
 msgid "Creating %s: "
 msgstr "%s dosyasý yaratýlýyor: "
 
-#: src/console_fe.c:814
+#: src/console_fe.c:817
 #, c-format
 msgid ""
 "%s: in fe_updating/file_link\n"
 "%s"
 msgstr ""
 
-#: src/console_fe.c:831
+#: src/console_fe.c:834
 #, fuzzy, c-format
 msgid "Failed to update %s:%c%s\n"
 msgstr ""
 "%s'yi güncelleþtirme baþarýsýz oldu:\n"
 "%s\n"
 
-#: src/console_fe.c:840
+#: src/console_fe.c:843
 #, fuzzy, c-format
 msgid "failed:%c%s\n"
 msgstr ""
 "baþarýsýz oldu:\n"
 "%s\n"
 
-#: src/console_fe.c:852
+#: src/console_fe.c:855
 #, fuzzy, c-format
 msgid "] failed:%c%s\n"
 msgstr ""
 "] baþarýsýz oldu:\n"
 "%s\n"
 
-#: src/console_fe.c:877
+#: src/console_fe.c:880
 #, c-format
 msgid "Downloading %s: ["
 msgstr "%s dosyasý indiriliyor: ["
 
-#: src/console_fe.c:922
+#: src/console_fe.c:925
 #, fuzzy
 msgid "Changed on server"
 msgstr "%s dosyasýný deðiþtir"
 
-#: src/console_fe.c:925
+#: src/console_fe.c:928
 msgid "Added on server"
 msgstr ""
 
-#: src/console_fe.c:933
+#: src/console_fe.c:936
 #, fuzzy, c-format
 msgid "%s: %s\n"
 msgstr "%s: Hata: %s\n"
 
-#: src/console_fe.c:951
+#: src/console_fe.c:956
 #, c-format
 msgid "Directory: %s/\n"
 msgstr "Kütük: %s/\n"
 
-#: src/console_fe.c:955
-#, fuzzy
-msgid "File: %s - size %"
+#: src/console_fe.c:961
+#, fuzzy, c-format
+msgid "File: %s - size %s%s\n"
 msgstr "Dosya: %s - boyutu %ld%s\n"
 
-#: src/console_fe.c:955
-#, fuzzy, c-format
-msgid "%s\n"
-msgstr "%d\n"
-
-#: src/console_fe.c:957
+#: src/console_fe.c:963
 msgid " (ASCII)"
 msgstr "  (ASCII)"
 
-#: src/console_fe.c:960
+#: src/console_fe.c:966
 #, c-format
 msgid "Link: %s - target %s\n"
 msgstr "Link: %s - hedefi %s\n"
 
-#: src/console_fe.c:973 gnome/init.c:402
+#: src/console_fe.c:979 gnome/init.c:402
 #, c-format
 msgid "%s: Error: Could not open rcfile: %s.\n"
 msgstr "%s: Hata: Kurulum dosyasý %s açýlamadý.\n"
 
-#: src/console_fe.c:977 gnome/init.c:407
+#: src/console_fe.c:983 gnome/init.c:407
 #, c-format
 msgid ""
 "%s: rcfile corrupt at line %d:\n"
@@ -569,7 +559,7 @@ msgstr ""
 "%s: kurulum dosyasýnda bozukluk var. satýr %d:\n"
 "%s\n"
 
-#: src/console_fe.c:996
+#: src/console_fe.c:1002
 #, c-format
 msgid ""
 "%s: Could not read directory for `%s':\n"
@@ -578,70 +568,70 @@ msgstr ""
 "%s: `%s'nin kütüðü okunamadý:\n"
 "\t%s\n"
 
-#: src/console_fe.c:1000
+#: src/console_fe.c:1006
 #, c-format
 msgid "%s: Server not specified in site `%s'.\n"
 msgstr "%s: `%s' sitesinin tanýmýnda sunucu belirtilmemiþ.\n"
 
-#: src/console_fe.c:1004
+#: src/console_fe.c:1010
 #, c-format
 msgid "%s: Remote directory not specified in site `%s'.\n"
 msgstr "%s: `%s' sitesinin tanýmýnda sunucudaki kütük belirtilmemiþ.\n"
 
-#: src/console_fe.c:1008
+#: src/console_fe.c:1014
 #, c-format
 msgid "%s: Local directory not specified in site `%s'.\n"
 msgstr "%s: `%s' sitesinin tanýmýnda yerel kütük belirtilmemiþ.\n"
 
-#: src/console_fe.c:1012
+#: src/console_fe.c:1018
 #, c-format
 msgid "%s: Invalid port used in site `%s'.\n"
 msgstr "%s: `%s' sitesinin tanýmýnda geçersiz port belirtilmiþ.\n"
 
-#: src/console_fe.c:1016
+#: src/console_fe.c:1022
 #, c-format
 msgid "%s: %s cannot maintain symbolic links (site `%s').\n"
 msgstr ""
 "%s: %s protokolü ile sembolik linklerin korunmasý mümkün deðil (`%s' "
 "sitesi).\n"
 
-#: src/console_fe.c:1020
+#: src/console_fe.c:1026
 #, c-format
 msgid "%s: Cannot use a relative remote directory in %s (site `%s').\n"
 msgstr ""
 "%s: %s protokolü ile sunucuda göreli kütüklerin kullanýlmasý mümkün deðil (`%"
 "s' sitesi).\n"
 
-#: src/console_fe.c:1023
+#: src/console_fe.c:1029
 #, c-format
 msgid "%s: File permissions are not supported in %s (site `%s').\n"
 msgstr "%s: %s protokolü dosya izinlerini desteklemiyor (`%s' sitesi).\n"
 
-#: src/console_fe.c:1026
+#: src/console_fe.c:1032
 #, c-format
 msgid ""
 "%s: Safe mode cannot be used in conjunction with nooverwrite (site `%s').\n"
 msgstr ""
 
-#: src/console_fe.c:1029
+#: src/console_fe.c:1035
 #, c-format
 msgid ""
 "%s: Safe mode cannot be used in conjunction with tempupload (site `%s').\n"
 msgstr ""
 
-#: src/console_fe.c:1032
+#: src/console_fe.c:1038
 #, c-format
 msgid "%s: Can only check for renamed files when checksumming (site `%s').\n"
 msgstr ""
 "%s: Adý deðiþen dosyalar sadece kontrol toplamlarý hesaplanarak "
 "belirlenebilir (`%s' sitesi).\n"
 
-#: src/console_fe.c:1035
+#: src/console_fe.c:1041
 #, c-format
 msgid "%s: The protocol `%s' is unsupported (site `%s').\n"
 msgstr "%s: `%s' protokolü desteklenmiyor (`%s' sitesi).\n"
 
-#: src/console_fe.c:1042
+#: src/console_fe.c:1048
 #, c-format
 msgid "%s: Unhandled error %d in site `%s' - please contact the maintainer.\n"
 msgstr ""
@@ -650,7 +640,7 @@ msgstr ""
 # msgstr ""
 # "%s: `%s' sitesinde %d sayýlý bilinmeyen bir hata ile karþilaþýldý \n"
 # "lütfen bu durumu iletin.\n"
-#: src/console_fe.c:1060
+#: src/console_fe.c:1066
 #, c-format
 msgid ""
 "%s: Error: Corrupt site storage file for `%s':\n"
@@ -659,7 +649,7 @@ msgstr ""
 "%s: Hata: Bozuk site veritabaný `%s':\n"
 "%s: %s\n"
 
-#: src/console_fe.c:1069
+#: src/console_fe.c:1075
 #, c-format
 msgid ""
 "%s: Error: No storage file for `%s'.\n"
@@ -669,62 +659,62 @@ msgstr ""
 "%s: --init, --catchup ya da --fetch seçenekelerinden birini kullanarak\n"
 "veritabanýný yaratýn.\n"
 
-#: src/console_fe.c:1082
+#: src/console_fe.c:1088
 #, c-format
 msgid "%s: Skipping site `%s'.\n"
 msgstr "%s: `%s' sitesi atlanýyor.\n"
 
-#: src/console_fe.c:1097
+#: src/console_fe.c:1103
 #, c-format
 msgid "%s: %s completed successfully.\n"
 msgstr "%s: %s baþarýyla tamamlandý.\n"
 
-#: src/console_fe.c:1103
+#: src/console_fe.c:1109
 #, c-format
 msgid "%s: %s unsupported for %s.\n"
 msgstr "%s: %s, %s sitesinde desteklenmiyor.\n"
 
-#: src/console_fe.c:1108
+#: src/console_fe.c:1114
 #, c-format
 msgid "%s: Errors occurred while %s the %s site.\n"
 msgstr "%s: %s: `%s' sitesinde hatalarla karþýlaþýldý.\n"
 
-#: src/console_fe.c:1113
+#: src/console_fe.c:1119
 #, c-format
 msgid "%s: Error: Could not resolve remote hostname (%s).\n"
 msgstr "%s: Hata: %s sunucusunun adresi bulunamadý.\n"
 
-#: src/console_fe.c:1119
+#: src/console_fe.c:1125
 #, c-format
 msgid "%s: Error: Could not resolve hostname of proxy server (%s).\n"
 msgstr "%s: Hata: %s ara sunucusunun adresi bulunamadý.\n"
 
-#: src/console_fe.c:1125
+#: src/console_fe.c:1131
 #, c-format
 msgid "%s: Error: Could not connect to proxy server (%s port %d).\n"
 msgstr "%s: Hata: %s ara sunucusu ile %d portundan baðlantý kurulamadý.\n"
 
-#: src/console_fe.c:1128
+#: src/console_fe.c:1134
 #, c-format
 msgid "%s: Error: Could not connect to server (%s port %d).\n"
 msgstr "%s: Hata: %s sunucusu ile %d portundan baðlantý kurulamadý.\n"
 
-#: src/console_fe.c:1134
+#: src/console_fe.c:1140
 #, c-format
 msgid "%s: Error: Could not authorise user on server.\n"
 msgstr "%s: Hata: Kullanýcý sunucu tarafýndan onaylanmadý.\n"
 
-#: src/console_fe.c:1139
+#: src/console_fe.c:1145
 #, c-format
 msgid "%s: Error: %s\n"
 msgstr "%s: Hata: %s\n"
 
-#: src/console_fe.c:1143
+#: src/console_fe.c:1149
 #, c-format
 msgid "%s: Error: Could not authorise user on proxy server (%s).\n"
 msgstr "%s: Hata: Kullanýcý %s ara sunucusu tarafýndan onaylanmadý.\n"
 
-#: src/console_fe.c:1148
+#: src/console_fe.c:1154
 #, c-format
 msgid ""
 "%s: in issue_error\n"
@@ -733,53 +723,53 @@ msgstr ""
 "%s: in issue_error\n"
 "%s"
 
-#: src/console_fe.c:1162
+#: src/console_fe.c:1168
 #, c-format
 msgid "%s: Error: Environment variable HOME not set.\n"
 msgstr "%s: Hata: Ortam deðiþkeni HOME belirtilmemiþ.\n"
 
-#: src/console_fe.c:1170
+#: src/console_fe.c:1176
 #, c-format
 msgid "%s: Error: Could not open rcfile: %s\n"
 msgstr "%s: Hata: %s adlý kurulum dosyasý açýlamadý.\n"
 
-#: src/console_fe.c:1173
+#: src/console_fe.c:1179
 #, c-format
 msgid "%s: Error: rcfile permissions allow other users to read your rcfile.\n"
 msgstr "%s: Hata: Kurulum dosyasý baþka kullanýcýlar tarafýndan okunabilir.\n"
 
-#: src/console_fe.c:1174 src/console_fe.c:1186
+#: src/console_fe.c:1180 src/console_fe.c:1192
 #, c-format
 msgid "%s: Set the permissions to 0600.\n"
 msgstr "%s: Dosya izinlerini 0600 olarak belirtin.\n"
 
-#: src/console_fe.c:1177
+#: src/console_fe.c:1183
 #, c-format
 msgid "%s: Error: Could not open storage directory: %s\n"
 msgstr "%s: Hata: Veritabaný kütüðü %s açýlamadý.\n"
 
-#: src/console_fe.c:1178
+#: src/console_fe.c:1184
 #, c-format
 msgid ""
 "%s: You need to create this directory and set the permissions to 0700.\n"
 msgstr "%s: Bu kütüðü yaratýn ve izinlerini 0700 olarak belirtin.\n"
 
-#: src/console_fe.c:1181
+#: src/console_fe.c:1187
 #, c-format
 msgid "%s: Error: storage directory permissions incorrect.\n"
 msgstr "%s: Hata: Veritabaný kütüðünün izinleri yanlýþ.\n"
 
-#: src/console_fe.c:1182
+#: src/console_fe.c:1188
 #, c-format
 msgid "%s: Set the permissions to 0700.\n"
 msgstr "%s: Ýzinleri 0700 olarak belirtin.\n"
 
-#: src/console_fe.c:1185
+#: src/console_fe.c:1191
 #, c-format
 msgid "%s: Error: ~/.netrc permissions incorrect.\n"
 msgstr "%s: Hata: ~/.netrc dosyasýnýn izinleri yanlýþ.\n"
 
-#: src/console_fe.c:1191
+#: src/console_fe.c:1197
 #, c-format
 msgid ""
 "%s: init_paths gave %d\n"
@@ -788,17 +778,17 @@ msgstr ""
 "%s: init_paths gave %d\n"
 "%s"
 
-#: src/console_fe.c:1198
+#: src/console_fe.c:1204
 #, c-format
 msgid "%s: Error: Could not parse ~/.netrc.\n"
 msgstr "%s: Hata ~/.netrc dosyasý anlaþýlamadý.\n"
 
-#: src/console_fe.c:1216 src/console_fe.c:1315
+#: src/console_fe.c:1222 src/console_fe.c:1321
 #, c-format
 msgid "%s: Nothing to do - no changes found.\n"
 msgstr "%s: Hiç deðiþiklik yok.\n"
 
-#: src/console_fe.c:1225
+#: src/console_fe.c:1231
 #, c-format
 msgid ""
 "%s: Error: Could not open storage file for writing (%s)\n"
@@ -809,7 +799,7 @@ msgstr ""
 "%s: Hata: %s\n"
 "%s: `%s' sitesi güncelleþtirilmeyecek.\n"
 
-#: src/console_fe.c:1249
+#: src/console_fe.c:1255
 #, fuzzy, c-format
 msgid ""
 "%s: Warning: Current state method differs from stored in site `%s'.\n"
@@ -819,35 +809,35 @@ msgstr ""
 "veritabanýndakinden farklý.\n"
 "%s: Bütün dosyalar deðiþmis görünecek (sunucudan güncellensin mi?)\n"
 
-#: src/console_fe.c:1255
+#: src/console_fe.c:1261
 #, c-format
 msgid "%s: The remote site needs updating (%d items to update).\n"
 msgstr ""
 "%s: Sunucunun güncelleþtirilmesi gerek.\n"
 "\t(Güncelleþtirilecek dosya adedi: %d)\n"
 
-#: src/console_fe.c:1257
+#: src/console_fe.c:1263
 #, c-format
 msgid "%s: The remote site needs updating (1 item to update).\n"
 msgstr "%s: Sunucudaki bir adet dosyanýn güncelleþtirilmesi gerek.\n"
 
-#: src/console_fe.c:1260
+#: src/console_fe.c:1266
 #, c-format
 msgid "%s: The remote site does not need updating.\n"
 msgstr "%s: Sunucunun güncelleþtirilmesi gerekli deðil.\n"
 
-#: src/console_fe.c:1268
+#: src/console_fe.c:1274
 #, c-format
 msgid "%s: All the files and directories are marked as NOT updated remotely.\n"
 msgstr ""
 "%s: Bütün dosya ve kütükler sunucuda güncel DEÐÝL olarak iþaretlendi.\n"
 
-#: src/console_fe.c:1273
+#: src/console_fe.c:1279
 #, c-format
 msgid "%s: All the files and and directories are marked as updated remotely.\n"
 msgstr "%s: Bütün dosya ve kütükler sunucuda güncel olarak iþaretlendi.\n"
 
-#: src/console_fe.c:1282
+#: src/console_fe.c:1288
 #, c-format
 msgid ""
 "%s: Failed to fetch file listing for site `%s':\n"
@@ -856,7 +846,7 @@ msgstr ""
 "%s: `%s' sitesinden dosya listesi indirme baþarýsýz oldu:\n"
 "%s: %s\n"
 
-#: src/console_fe.c:1296
+#: src/console_fe.c:1302
 #, fuzzy, c-format
 msgid ""
 "%s: Failed to fetch file listing to verify site `%s':\n"
@@ -865,17 +855,17 @@ msgstr ""
 "%s: `%s' sitesinden dosya listesi indirme baþarýsýz oldu:\n"
 "%s: %s\n"
 
-#: src/console_fe.c:1303
+#: src/console_fe.c:1309
 #, c-format
 msgid "%s: Verify found %d files missing from server.\n"
 msgstr ""
 
-#: src/console_fe.c:1306
+#: src/console_fe.c:1312
 #, fuzzy, c-format
 msgid "%s: Remote site not synchronized with stored state.\n"
 msgstr "%s: `%s' sitesinin tanýmýnda sunucudaki kütük belirtilmemiþ.\n"
 
-#: src/console_fe.c:1319
+#: src/console_fe.c:1325
 #, c-format
 msgid ""
 "%s: Refusing to delete all local files with a synchronize operation.\n"
@@ -884,7 +874,7 @@ msgstr ""
 "%s: Refusing to delete all local files with a synchronize operation.\n"
 "%s: Use --update to update the remote site.\n"
 
-#: src/console_fe.c:1327
+#: src/console_fe.c:1333
 #, c-format
 msgid ""
 "%s: in act_on_site\n"
@@ -893,17 +883,17 @@ msgstr ""
 "%s: in act_on_site\n"
 "%s"
 
-#: src/console_fe.c:1338
+#: src/console_fe.c:1344
 #, c-format
 msgid "Usage: %s [OPTIONS] [MODE] [sitename]...\n"
 msgstr "Kullaným biçimi: %s [SEÇENEKLER] [ÝÞLEM BÝÇÝMÝ] [site adý] ...\n"
 
-#: src/console_fe.c:1340
+#: src/console_fe.c:1346
 #, c-format
 msgid "Options: \n"
 msgstr "Seçenekler: \n"
 
-#: src/console_fe.c:1343
+#: src/console_fe.c:1349
 #, fuzzy, c-format
 msgid ""
 "  -d, --debug=KEY[,KEY] Turn debugging on for each KEY, which may be:\n"
@@ -918,7 +908,7 @@ msgstr ""
 "    Uyarý: cleartext kanalý ile, (normalde gizli) þifreler de gösterilir.\n"
 " -g, --logfile=DOSYA Hata izleme mesajlarýný (stderr yerine) DOSYA'ya ekle.\n"
 
-#: src/console_fe.c:1350
+#: src/console_fe.c:1356
 #, fuzzy, c-format
 msgid ""
 "  -r, --rcfile=FILE     Use alternate run control file\n"
@@ -986,49 +976,54 @@ msgstr ""
 msgid "Size overflow (%s) in '%s' at line %d"
 msgstr ""
 
-#: src/davdriver.c:175
+#: src/davdriver.c:195
 msgid "The connection timed out."
 msgstr "Baðlantý süre sýnýrý aþýldý."
 
-#: src/davdriver.c:220
+#: src/davdriver.c:224
+#, fuzzy
+msgid "Could not write SSL certificate"
+msgstr "%s dosyasýna yazým yapýlamadý"
+
+#: src/davdriver.c:244
 msgid "SSL support has not be compiled in."
 msgstr "SSL desteði yok."
 
-#: src/davdriver.c:228
+#: src/davdriver.c:252
 #, fuzzy, c-format
 msgid "Could not load certificate `%s'."
 msgstr "%s dosyasýna yazým yapýlamadý"
 
-#: src/davdriver.c:264
+#: src/davdriver.c:290
 #, fuzzy, c-format
 msgid "Could not read SSL client certificate '%s'."
 msgstr "%s dosyasýna yazým yapýlamadý"
 
-#: src/davdriver.c:277
+#: src/davdriver.c:303
 #, fuzzy, c-format
 msgid "Could not decrypt SSL client certificate '%s'."
 msgstr "%s dosyasýna yazým yapýlamadý"
 
-#: src/davdriver.c:299
+#: src/davdriver.c:325
 msgid "The server does not appear to be a WebDAV server."
 msgstr "Bu sunucu WebDAV sunucusu deðil."
 
-#: src/davdriver.c:304
+#: src/davdriver.c:330
 msgid "The server does not support the executable live property."
 msgstr "The server does not support the executable live property."
 
-#: src/davdriver.c:350 src/davdriver.c:417 src/davdriver.c:454 src/ftp.c:888
+#: src/davdriver.c:376 src/davdriver.c:443 src/davdriver.c:480 src/ftp.c:888
 #: src/ftp.c:972
 #, fuzzy
 msgid "Could not open file"
 msgstr "Dosya açýlamadý: "
 
-#: src/davdriver.c:385
+#: src/davdriver.c:411
 #, fuzzy, c-format
 msgid "Could not stat file: %s"
 msgstr "%s dosyasýna yazým yapýlamadý"
 
-#: src/davdriver.c:644
+#: src/davdriver.c:670
 msgid "Could not access resource"
 msgstr "Kaynaða eriþim baþarýsýz oldu"
 
@@ -1064,12 +1059,12 @@ msgstr "Sembolik linkin hedefi okunamadý."
 msgid "Unknown system error"
 msgstr "Bilinmeyen sistem hatasý"
 
-#: src/ftp.c:153 lib/neon/ne_request.c:240
+#: src/ftp.c:153
 #, c-format
 msgid "%s: connection was closed by server."
 msgstr "%s: baðlantý sunucu tarafinden kesildi."
 
-#: src/ftp.c:157 lib/neon/ne_request.c:245
+#: src/ftp.c:157
 #, c-format
 msgid "%s: connection timed out."
 msgstr "%s: baðlantý bekleme sýnýrý aþýldý."
@@ -1181,12 +1176,12 @@ msgstr "Dosya açýlamadý: "
 msgid "Could not rewind to beginning of file"
 msgstr "Dosya açýlamadý: "
 
-#: src/ftp.c:1147
+#: src/ftp.c:1152
 #, fuzzy
 msgid "Could not read 'LIST' response."
 msgstr "Yanýt metni okunamadý"
 
-#: src/ftp.c:1156
+#: src/ftp.c:1161
 #, fuzzy, c-format
 msgid "Parse error in LIST response: %s"
 msgstr "Yanýt metni okunamadý"
@@ -1516,216 +1511,250 @@ msgstr "SSL baðlantýsý kurulamadý"
 
 #: lib/neon/ne_redirect.c:92
 #, fuzzy
-msgid "Could not parse redirect location."
+msgid "Could not parse redirect destination URL"
 msgstr "Durum satýrý anlaþýlamadý."
 
-#: lib/neon/ne_gnutls.c:521 lib/neon/ne_openssl.c:386
+#: lib/neon/ne_gnutls.c:162
+#, c-format
+msgid "[unprintable:#%lu]"
+msgstr ""
+
+#: lib/neon/ne_gnutls.c:188
+msgid "[unprintable]"
+msgstr ""
+
+#: lib/neon/ne_gnutls.c:696 lib/neon/ne_openssl.c:419
 msgid "Server certificate was missing commonName attribute in subject name"
 msgstr ""
 
-#: lib/neon/ne_gnutls.c:557 lib/neon/ne_openssl.c:599
+#: lib/neon/ne_gnutls.c:736 lib/neon/ne_openssl.c:638
 #, fuzzy, c-format
 msgid "SSL negotiation failed: %s"
 msgstr "%s dosyasýna yazým yapýlamadý"
 
-#: lib/neon/ne_gnutls.c:566
+#: lib/neon/ne_gnutls.c:745
 msgid "Server did not send certificate chain"
 msgstr ""
 
-#: lib/neon/ne_openssl.c:418
+#: lib/neon/ne_openssl.c:451
 #, c-format
 msgid "Certificate verification error: %s"
 msgstr ""
 
-#: lib/neon/ne_openssl.c:618
+#: lib/neon/ne_openssl.c:657
 msgid "SSL server did not present certificate"
 msgstr ""
 
-#: lib/neon/ne_openssl.c:627
+#: lib/neon/ne_openssl.c:666
 msgid "Server certificate changed: connection intercepted?"
 msgstr ""
 
-#: lib/neon/ne_session.c:305 lib/neon/ne_session.c:316
+#: lib/neon/ne_session.c:356 lib/neon/ne_session.c:367
 msgid "[invalid date]"
 msgstr ""
 
-#: lib/neon/ne_session.c:329
+#: lib/neon/ne_session.c:380
 msgid "certificate is not yet valid"
 msgstr ""
 
-#: lib/neon/ne_session.c:330
+#: lib/neon/ne_session.c:381
 msgid "certificate has expired"
 msgstr ""
 
-#: lib/neon/ne_session.c:331
+#: lib/neon/ne_session.c:382
 msgid "certificate issued for a different hostname"
 msgstr ""
 
-#: lib/neon/ne_session.c:332
+#: lib/neon/ne_session.c:383
 msgid "issuer is not trusted"
 msgstr ""
 
-#: lib/neon/ne_session.c:337
+#: lib/neon/ne_session.c:388
 msgid "Server certificate verification failed: "
 msgstr ""
 
-#: lib/neon/ne_socket.c:480 lib/neon/ne_socket.c:528 lib/neon/ne_socket.c:631
+#: lib/neon/ne_socket.c:514 lib/neon/ne_socket.c:568 lib/neon/ne_socket.c:671
 #, fuzzy
 msgid "Connection closed"
 msgstr "Baðlantý sunucu tarafýndan kesildi"
 
-#: lib/neon/ne_socket.c:538 lib/neon/ne_socket.c:643
+#: lib/neon/ne_socket.c:578 lib/neon/ne_socket.c:683
 #, fuzzy
 msgid "Secure connection truncated"
 msgstr "Baðlantý süre sýnýrý aþýldý."
 
-#: lib/neon/ne_socket.c:550 lib/neon/ne_socket.c:655
+#: lib/neon/ne_socket.c:590 lib/neon/ne_socket.c:695
 #, fuzzy, c-format
 msgid "SSL error: %s"
 msgstr "%s: Hata: %s\n"
 
-#: lib/neon/ne_socket.c:553
+#: lib/neon/ne_socket.c:593
 #, c-format
 msgid "SSL error code %d/%d/%lu"
 msgstr ""
 
-#: lib/neon/ne_socket.c:636
+#: lib/neon/ne_socket.c:676
 #, fuzzy, c-format
 msgid "SSL alert received: %s"
 msgstr "%s: Hata: %s\n"
 
-#: lib/neon/ne_socket.c:651
+#: lib/neon/ne_socket.c:691
 msgid "SSL socket read failed"
 msgstr ""
 
-#: lib/neon/ne_socket.c:750
+#: lib/neon/ne_socket.c:790
 msgid "Line too long"
 msgstr "Satýr çok uzun"
 
-#: lib/neon/ne_socket.c:890 lib/neon/ne_socket.c:896
+#: lib/neon/ne_socket.c:935 lib/neon/ne_socket.c:941
 msgid "Host not found"
 msgstr "Sunucu bulunamadý"
 
-#: lib/neon/ne_socket.c:1006
+#: lib/neon/ne_socket.c:1048
+#, fuzzy
+msgid "Connection timed out"
+msgstr "Baðlantý süre sýnýrý aþýldý."
+
+#: lib/neon/ne_socket.c:1210
 msgid "Socket descriptor number exceeds FD_SETSIZE"
 msgstr ""
 
-#: lib/neon/ne_socket.c:1218
+#: lib/neon/ne_socket.c:1270
+msgid "Socket family not supported"
+msgstr ""
+
+#: lib/neon/ne_socket.c:1493
 msgid "Client certificate verification failed"
 msgstr ""
 
-#: lib/neon/ne_socket.c:1234
+#: lib/neon/ne_socket.c:1509
 msgid "SSL disabled due to lack of entropy"
 msgstr ""
 
-#: lib/neon/ne_socket.c:1241
+#: lib/neon/ne_socket.c:1516
 msgid "SSL disabled due to library version mismatch"
 msgstr ""
 
-#: lib/neon/ne_socket.c:1247
+#: lib/neon/ne_socket.c:1522
 #, fuzzy
 msgid "Could not create SSL structure"
 msgstr "SSL baðlantýsý kurulamadý"
 
-#: lib/neon/ne_request.c:237
-#, c-format
-msgid "%s: connection was closed by proxy server."
+#: lib/neon/ne_request.c:194
+#, fuzzy, c-format
+msgid "%s: connection was closed by proxy server"
 msgstr "%s: baðlantý ara sunucu tarafinden kesildi."
 
-#: lib/neon/ne_request.c:351
+#: lib/neon/ne_request.c:197
+#, fuzzy, c-format
+msgid "%s: connection was closed by server"
+msgstr "%s: baðlantý sunucu tarafinden kesildi."
+
+#: lib/neon/ne_request.c:202
+#, fuzzy, c-format
+msgid "%s: connection timed out"
+msgstr "%s: baðlantý bekleme sýnýrý aþýldý."
+
+#: lib/neon/ne_request.c:307
 msgid "offset invalid"
 msgstr ""
 
-#: lib/neon/ne_request.c:356
+#: lib/neon/ne_request.c:312
 #, fuzzy, c-format
 msgid "Could not seek to offset %s of request body file: %s"
 msgstr "%s dosyasýna yazým yapýlamadý"
 
-#: lib/neon/ne_request.c:401
+#: lib/neon/ne_request.c:360
 msgid "Could not send request body"
 msgstr "Ýstek metni gönderilemedi"
 
-#: lib/neon/ne_request.c:759
+#: lib/neon/ne_request.c:699
 msgid "Could not read chunk size"
 msgstr "Parça boyutu öðrenilemedi"
 
-#: lib/neon/ne_request.c:766
+#: lib/neon/ne_request.c:706
 msgid "Could not parse chunk size"
 msgstr "Parça boyutu anlaþýlamadý"
 
-#: lib/neon/ne_request.c:803
+#: lib/neon/ne_request.c:743
 msgid "Could not read response body"
 msgstr "Yanýt metni okunamadý"
 
-#: lib/neon/ne_request.c:819
+#: lib/neon/ne_request.c:759
 #, fuzzy
 msgid "Could not read chunk delimiter"
 msgstr "Parça boyutu öðrenilemedi"
 
-#: lib/neon/ne_request.c:822
+#: lib/neon/ne_request.c:762
 msgid "Chunk delimiter was invalid"
 msgstr ""
 
-#: lib/neon/ne_request.c:928
+#: lib/neon/ne_request.c:868
 msgid "Could not read status line"
 msgstr "Durum satýrý okunamadý"
 
-#: lib/neon/ne_request.c:950
-msgid "Could not parse response status line."
+#: lib/neon/ne_request.c:890
+#, fuzzy
+msgid "Could not parse response status line"
 msgstr "Durum satýrý anlaþýlamadý."
 
-#: lib/neon/ne_request.c:962
+#: lib/neon/ne_request.c:902
 #, fuzzy
 msgid "Could not read interim response headers"
 msgstr "Yanýt metni okunamadý"
 
-#: lib/neon/ne_request.c:996
+#: lib/neon/ne_request.c:936
 msgid "Could not send request"
 msgstr "Ýstek gönderilemedi"
 
-#: lib/neon/ne_request.c:1044 lib/neon/ne_request.c:1062
-#: lib/neon/ne_request.c:1072
+#: lib/neon/ne_request.c:984 lib/neon/ne_request.c:1002
+#: lib/neon/ne_request.c:1012
 msgid "Error reading response headers"
 msgstr "Yanýt baþlýklarý okunurken hata"
 
-#: lib/neon/ne_request.c:1090
+#: lib/neon/ne_request.c:1030
 msgid "Response header too long"
 msgstr "Yanýt baþlýðý çok uzun"
 
-#: lib/neon/ne_request.c:1172
-msgid "Response exceeded maximum number of header fields."
+#: lib/neon/ne_request.c:1112
+msgid "Response exceeded maximum number of header fields"
 msgstr ""
 
-#: lib/neon/ne_request.c:1189
+#: lib/neon/ne_request.c:1129
 #, fuzzy, c-format
 msgid "Could not resolve hostname `%s': %s"
 msgstr "%s: Hata: %s sunucusunun adresi bulunamadý.\n"
 
-#: lib/neon/ne_request.c:1309
+#: lib/neon/ne_request.c:1260
+msgid "Unknown transfer-coding in response"
+msgstr ""
+
+#: lib/neon/ne_request.c:1271
 msgid "Invalid Content-Length in response"
 msgstr ""
 
-#: lib/neon/ne_request.c:1371
+#: lib/neon/ne_request.c:1344
 #, c-format
 msgid "Could not write to file: %s"
 msgstr "%s dosyasýna yazým yapýlamadý"
 
-#: lib/neon/ne_request.c:1444
-msgid "Could not create SSL connection through proxy server"
+#: lib/neon/ne_request.c:1417
+#, fuzzy, c-format
+msgid "Could not create SSL connection through proxy server: %s"
 msgstr "Ara sunucu üzerinden SSL baðlantýsý kurulamadý"
 
-#: lib/neon/ne_request.c:1489
+#: lib/neon/ne_request.c:1464
 #, fuzzy
 msgid "Could not create socket"
 msgstr "SSL baðlantýsý kurulamadý"
 
-#: lib/neon/ne_request.c:1533
-msgid "Could not connect to server"
-msgstr "Sunucuyla baðlantý kurulamadý"
-
-#: lib/neon/ne_request.c:1536
+#: lib/neon/ne_request.c:1526
 msgid "Could not connect to proxy server"
 msgstr "Ara sunucuyla baðlantý kurulamadý"
+
+#: lib/neon/ne_request.c:1527
+msgid "Could not connect to server"
+msgstr "Sunucuyla baðlantý kurulamadý"
 
 #: lib/neon/ne_xml.c:280
 #, fuzzy, c-format
@@ -1734,30 +1763,25 @@ msgstr ""
 "%s: kurulum dosyasýnda bozukluk var. satýr %d:\n"
 "%s\n"
 
-#: lib/neon/ne_xml.c:436
+#: lib/neon/ne_xml.c:452
 #, fuzzy
 msgid "Unknown error"
 msgstr "Bilinmeyen sistem hatasý"
 
-#: lib/neon/ne_xml.c:521
+#: lib/neon/ne_xml.c:537
 msgid "Invalid Byte Order Mark"
 msgstr ""
 
-#: lib/neon/ne_xml.c:609
+#: lib/neon/ne_xml.c:625
 #, fuzzy, c-format
-msgid "XML parse error at line %d: %s."
+msgid "XML parse error at line %d: %s"
 msgstr ""
 "%s: kurulum dosyasýnda bozukluk var. satýr %d:\n"
 "%s\n"
 
-#: lib/neon/ne_props.c:371 lib/neon/ne_props.c:411
+#: lib/neon/ne_props.c:371 lib/neon/ne_props.c:435
 msgid "Response exceeds maximum property count"
 msgstr ""
-
-#: lib/neon/ne_compress.c:173
-#, fuzzy, c-format
-msgid "%s: %s"
-msgstr "%s: Hata: %s\n"
 
 #: lib/neon/ne_compress.c:184
 #, c-format
@@ -1774,12 +1798,12 @@ msgstr "Dosya açýlamadý: "
 msgid "Could not initialize zlib"
 msgstr "Dosyaya yazým yapýlamadý: "
 
-#: lib/neon/ne_xmlreq.c:31
+#: lib/neon/ne_xmlreq.c:36
 #, fuzzy, c-format
 msgid "Could not parse response: %s"
 msgstr "Yanýt metni okunamadý"
 
-#: lib/neon/ne_basic.c:94
+#: lib/neon/ne_basic.c:98
 #, fuzzy, c-format
 msgid "Could not determine file size: %s"
 msgstr "Dosya açýlamadý: "
@@ -1794,42 +1818,109 @@ msgstr ""
 
 #: lib/neon/ne_basic.c:188
 #, fuzzy
-msgid "Resource does not support ranged GETs."
+msgid "Resource does not support ranged GET requests"
 msgstr "Sunucu kýsmi GET iþlemini desteklemiyor."
 
-#: lib/neon/ne_auth.c:462
+#: lib/neon/ne_auth.c:130
+#, fuzzy, c-format
+msgid "Could not authenticate to server: %s"
+msgstr "Sunucuyla baðlantý kurulamadý"
+
+#: lib/neon/ne_auth.c:135
+#, fuzzy, c-format
+msgid "Could not authenticate to proxy server: %s"
+msgstr "Ara sunucuyla baðlantý kurulamadý"
+
+#: lib/neon/ne_auth.c:358
 #, c-format
-msgid "GSSAPI authentication error (%s)"
+msgid "rejected %s challenge"
 msgstr ""
 
-#: lib/neon/ne_auth.c:595
-msgid "Unknown algorithm in Digest authentication challenge"
+#: lib/neon/ne_auth.c:374
+msgid "missing realm in Basic challenge"
 msgstr ""
 
-#: lib/neon/ne_auth.c:600
-msgid "Incompatible algorithm in Digest authentication challenge"
+#: lib/neon/ne_auth.c:469
+msgid "invalid Negotiate token"
 msgstr ""
 
-#: lib/neon/ne_auth.c:606
-msgid "Missing nonce or realm in Digest authentication challenge"
+#: lib/neon/ne_auth.c:492
+msgid "GSSAPI authentication error: "
 msgstr ""
 
-#: lib/neon/ne_auth.c:886
+#: lib/neon/ne_auth.c:505
+#, c-format
+msgid "GSSAPI failure (code %u)"
+msgstr ""
+
+#: lib/neon/ne_auth.c:540
+msgid "ignoring empty Negotiate continuation"
+msgstr ""
+
+#: lib/neon/ne_auth.c:555
+msgid "Negotiate response verification failed: invalid response header token"
+msgstr ""
+
+#: lib/neon/ne_auth.c:577
+#, c-format
+msgid "Negotiate response verification failure: %s"
+msgstr ""
+
+#: lib/neon/ne_auth.c:697
+msgid "unknown algorithm in Digest challenge"
+msgstr ""
+
+#: lib/neon/ne_auth.c:701
+msgid "incompatible algorithm in Digest challenge"
+msgstr ""
+
+#: lib/neon/ne_auth.c:705
+msgid "missing parameter in Digest challenge"
+msgstr ""
+
+#: lib/neon/ne_auth.c:709
+msgid "initial Digest challenge was stale"
+msgstr ""
+
+#: lib/neon/ne_auth.c:716
+msgid "stale Digest challenge with new algorithm or realm"
+msgstr ""
+
+#: lib/neon/ne_auth.c:728
+#, fuzzy
+msgid "could not parse domain in Digest challenge"
+msgstr "Durum satýrý anlaþýlamadý."
+
+#: lib/neon/ne_auth.c:1036
 msgid "Digest mutual authentication failure: missing parameters"
 msgstr ""
 
-#: lib/neon/ne_auth.c:891
+#: lib/neon/ne_auth.c:1041
 msgid "Digest mutual authentication failure: client nonce mismatch"
 msgstr ""
 
-#: lib/neon/ne_auth.c:896
+#: lib/neon/ne_auth.c:1051
+msgid "Digest mutual authentication failure: could not parse nonce count"
+msgstr ""
+
+#: lib/neon/ne_auth.c:1056
 #, c-format
 msgid "Digest mutual authentication failure: nonce count mismatch (%u not %u)"
 msgstr ""
 
-#: lib/neon/ne_auth.c:936
+#: lib/neon/ne_auth.c:1099
 msgid "Digest mutual authentication failure: request-digest mismatch"
 msgstr ""
+
+#: lib/neon/ne_auth.c:1225
+#, c-format
+msgid "ignored %s challenge"
+msgstr ""
+
+#: lib/neon/ne_auth.c:1304
+#, fuzzy
+msgid "could not parse challenge"
+msgstr "Parça boyutu anlaþýlamadý"
 
 #: lib/neon/ne_207.c:198
 #, c-format
@@ -1840,20 +1931,16 @@ msgstr ""
 "Invalid HTTP status line in status element at line %d of response:\n"
 "Status line was: %s"
 
-#: lib/neon/ne_locks.c:583
+#: lib/neon/ne_locks.c:584
 msgid "LOCK response missing Lock-Token header"
 msgstr ""
 
-#: lib/neon/ne_locks.c:739
-msgid "No Lock-Token header given"
-msgstr ""
-
-#: lib/neon/ne_locks.c:767
+#: lib/neon/ne_locks.c:759
 #, c-format
 msgid "Response missing activelock for %s"
 msgstr ""
 
-#: lib/neon/ne_locks.c:811
+#: lib/neon/ne_locks.c:801
 #, c-format
 msgid "No activelock for <%s> returned in LOCK refresh response"
 msgstr ""
@@ -1922,6 +2009,14 @@ msgstr "%s: `%s' seçeneðini anlamý belirsiz\n"
 #, c-format
 msgid "%s: option `-W %s' doesn't allow an argument\n"
 msgstr "%s: `-W %s' seçeneði argüman almýyor\n"
+
+#, fuzzy
+#~ msgid "%s\n"
+#~ msgstr "%d\n"
+
+#, fuzzy
+#~ msgid "%s: %s"
+#~ msgstr "%s: Hata: %s\n"
 
 #~ msgid "%s: Aborted.\n"
 #~ msgstr "%s: Vazgeçildi.\n"

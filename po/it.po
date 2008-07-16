@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: sitecopy 0.16.3\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-03-12 10:07+0000\n"
+"Report-Msgid-Bugs-To: sitecopy@lyra.org\n"
+"POT-Creation-Date: 2008-07-16 16:31+0100\n"
 "PO-Revision-Date: 2006-03-12 16:17+0100\n"
 "Last-Translator: Cristian Rigamonti <cri@linux.it>\n"
 "Language-Team: Italian <tp@lists.linux.it>\n"
@@ -349,36 +349,32 @@ msgstr "Riprovo: ["
 msgid "%s: Encrypted client certificate configured%s%s.\n"
 msgstr "%s: Certificato client cifrato configurato%s%s.\n"
 
-#: src/console_fe.c:680
+#: src/console_fe.c:682
 #, c-format
 msgid "Create %s/"
 msgstr "Crea %s/"
 
-#: src/console_fe.c:682
+#: src/console_fe.c:684
 #, c-format
 msgid "Delete %s/"
 msgstr "Elimina %s/"
 
-#: src/console_fe.c:689
-msgid "Upload %s (%"
+#: src/console_fe.c:692
+#, fuzzy, c-format
+msgid "Upload %s (%s bytes)"
 msgstr "Carica %s (%"
 
-#: src/console_fe.c:689
-#, c-format
-msgid " bytes)"
-msgstr " byte)"
-
-#: src/console_fe.c:691
+#: src/console_fe.c:694
 #, c-format
 msgid "Delete %s"
 msgstr "Elimina %s"
 
-#: src/console_fe.c:692
+#: src/console_fe.c:695
 #, c-format
 msgid "Move %s->%s"
 msgstr "Sposta %s->%s"
 
-#: src/console_fe.c:696
+#: src/console_fe.c:699
 #, c-format
 msgid ""
 "%s: in fe_can_update/file_file\n"
@@ -387,22 +383,22 @@ msgstr ""
 "%s: in fe_can_update/file_file\n"
 "%s"
 
-#: src/console_fe.c:703
+#: src/console_fe.c:706
 #, c-format
 msgid "Change %s"
 msgstr "Modifica %s"
 
-#: src/console_fe.c:704
+#: src/console_fe.c:707
 #, c-format
 msgid "Create %s"
 msgstr "Crea %s"
 
-#: src/console_fe.c:705
+#: src/console_fe.c:708
 #, c-format
 msgid "Remove %s"
 msgstr "Rimuovi %s"
 
-#: src/console_fe.c:708
+#: src/console_fe.c:711
 #, c-format
 msgid ""
 "%s: in fe_can_update/file_link\n"
@@ -411,22 +407,22 @@ msgstr ""
 "%s: in fe_can_update/file_link\n"
 "%s"
 
-#: src/console_fe.c:714
+#: src/console_fe.c:717
 #, c-format
 msgid "? (y/n) "
 msgstr "? (s/n) "
 
-#: src/console_fe.c:723
+#: src/console_fe.c:726
 #, c-format
 msgid "Checksumming %s: ["
 msgstr "Calcolo del codice di controllo su %s in corso: ["
 
-#: src/console_fe.c:738 src/console_fe.c:849 src/console_fe.c:910
+#: src/console_fe.c:741 src/console_fe.c:852 src/console_fe.c:913
 #, c-format
 msgid "] done.\n"
 msgstr "] fatto.\n"
 
-#: src/console_fe.c:740 src/console_fe.c:912
+#: src/console_fe.c:743 src/console_fe.c:915
 #, c-format
 msgid ""
 "] failed:\n"
@@ -435,17 +431,17 @@ msgstr ""
 "] fallito:\n"
 "%s\n"
 
-#: src/console_fe.c:750
+#: src/console_fe.c:753
 #, c-format
 msgid "Setting permissions on %s%s: "
 msgstr "Impostazione dei permessi su %s%s: "
 
-#: src/console_fe.c:760 src/console_fe.c:838 src/console_fe.c:904
+#: src/console_fe.c:763 src/console_fe.c:841 src/console_fe.c:907
 #, c-format
 msgid "done.\n"
 msgstr "fatto.\n"
 
-#: src/console_fe.c:762 src/console_fe.c:906
+#: src/console_fe.c:765 src/console_fe.c:909
 #, c-format
 msgid ""
 "failed:\n"
@@ -454,32 +450,32 @@ msgstr ""
 "fallito:\n"
 "%s\n"
 
-#: src/console_fe.c:781 src/console_fe.c:868
+#: src/console_fe.c:784 src/console_fe.c:871
 #, c-format
 msgid "Creating %s/: "
 msgstr "Creazione di %s/: "
 
-#: src/console_fe.c:783 src/console_fe.c:870
+#: src/console_fe.c:786 src/console_fe.c:873
 #, c-format
 msgid "Deleting %s/: "
 msgstr "Eliminazione di %s/: "
 
-#: src/console_fe.c:790
+#: src/console_fe.c:793
 #, c-format
 msgid "Uploading %s: ["
 msgstr "Caricamento di %s: ["
 
-#: src/console_fe.c:793 src/console_fe.c:812 src/console_fe.c:880
+#: src/console_fe.c:796 src/console_fe.c:815 src/console_fe.c:883
 #, c-format
 msgid "Deleting %s: "
 msgstr "Eliminazione di %s: "
 
-#: src/console_fe.c:796 src/console_fe.c:883
+#: src/console_fe.c:799 src/console_fe.c:886
 #, c-format
 msgid "Moving %s->%s: "
 msgstr "Spostamento %s->%s: "
 
-#: src/console_fe.c:800
+#: src/console_fe.c:803
 #, c-format
 msgid ""
 "%s: in fe_updating/file_file\n"
@@ -488,17 +484,17 @@ msgstr ""
 "%s: in fe_updating/file_file\n"
 "%s"
 
-#: src/console_fe.c:808
+#: src/console_fe.c:811
 #, c-format
 msgid "Changing %s: "
 msgstr "Modifica di %s: "
 
-#: src/console_fe.c:810
+#: src/console_fe.c:813
 #, c-format
 msgid "Creating %s: "
 msgstr "Creazione %s: "
 
-#: src/console_fe.c:814
+#: src/console_fe.c:817
 #, c-format
 msgid ""
 "%s: in fe_updating/file_link\n"
@@ -507,68 +503,64 @@ msgstr ""
 "%s: in fe_updating/file_link\n"
 "%s"
 
-#: src/console_fe.c:831
+#: src/console_fe.c:834
 #, c-format
 msgid "Failed to update %s:%c%s\n"
 msgstr "Aggiornamento fallito di %s:%c%s\n"
 
-#: src/console_fe.c:840
+#: src/console_fe.c:843
 #, c-format
 msgid "failed:%c%s\n"
 msgstr "fallito:%c%s\n"
 
-#: src/console_fe.c:852
+#: src/console_fe.c:855
 #, c-format
 msgid "] failed:%c%s\n"
 msgstr "] fallito:%c%s\n"
 
-#: src/console_fe.c:877
+#: src/console_fe.c:880
 #, c-format
 msgid "Downloading %s: ["
 msgstr "Scaricamento di %s: ["
 
-#: src/console_fe.c:922
+#: src/console_fe.c:925
 msgid "Changed on server"
 msgstr "Modificati sul server"
 
-#: src/console_fe.c:925
+#: src/console_fe.c:928
 msgid "Added on server"
 msgstr "Aggiunti sul server"
 
-#: src/console_fe.c:933
+#: src/console_fe.c:936
 #, c-format
 msgid "%s: %s\n"
 msgstr "%s: %s\n"
 
-#: src/console_fe.c:951
+#: src/console_fe.c:956
 #, c-format
 msgid "Directory: %s/\n"
 msgstr "Directory: %s/\n"
 
-#: src/console_fe.c:955
-msgid "File: %s - size %"
+#: src/console_fe.c:961
+#, fuzzy, c-format
+msgid "File: %s - size %s%s\n"
 msgstr "File: %s - dimensione %"
 
-#: src/console_fe.c:955
-#, c-format
-msgid "%s\n"
-msgstr "%s\n"
-
-#: src/console_fe.c:957
+#: src/console_fe.c:963
 msgid " (ASCII)"
 msgstr " (ASCII)"
 
-#: src/console_fe.c:960
+#: src/console_fe.c:966
 #, c-format
 msgid "Link: %s - target %s\n"
 msgstr "Link: %s - obiettivo %s\n"
 
-#: src/console_fe.c:973 gnome/init.c:402
+#: src/console_fe.c:979 gnome/init.c:402
 #, c-format
 msgid "%s: Error: Could not open rcfile: %s.\n"
 msgstr "%s: errore: impossibile aprire il file di configurazione: %s.\n"
 
-#: src/console_fe.c:977 gnome/init.c:407
+#: src/console_fe.c:983 gnome/init.c:407
 #, c-format
 msgid ""
 "%s: rcfile corrupt at line %d:\n"
@@ -577,7 +569,7 @@ msgstr ""
 "%s: file di configurazione danneggiato alla riga %d:\n"
 "%s\n"
 
-#: src/console_fe.c:996
+#: src/console_fe.c:1002
 #, c-format
 msgid ""
 "%s: Could not read directory for `%s':\n"
@@ -586,43 +578,43 @@ msgstr ""
 "%s: impossibile leggere la directory per \"%s\":\n"
 "\t%s\n"
 
-#: src/console_fe.c:1000
+#: src/console_fe.c:1006
 #, c-format
 msgid "%s: Server not specified in site `%s'.\n"
 msgstr "%s: server non specificato nel sito \"%s\".\n"
 
-#: src/console_fe.c:1004
+#: src/console_fe.c:1010
 #, c-format
 msgid "%s: Remote directory not specified in site `%s'.\n"
 msgstr "%s: directory non specificata nel sito \"%s\".\n"
 
-#: src/console_fe.c:1008
+#: src/console_fe.c:1014
 #, c-format
 msgid "%s: Local directory not specified in site `%s'.\n"
 msgstr "%s: directory locale non specificata nel sito \"%s\".\n"
 
-#: src/console_fe.c:1012
+#: src/console_fe.c:1018
 #, c-format
 msgid "%s: Invalid port used in site `%s'.\n"
 msgstr "%s: porta non valida usata nel sito \"%s\".\n"
 
-#: src/console_fe.c:1016
+#: src/console_fe.c:1022
 #, c-format
 msgid "%s: %s cannot maintain symbolic links (site `%s').\n"
 msgstr "%s: %s impossibile mantenere i link simbolici (sito \"%s\").\n"
 
-#: src/console_fe.c:1020
+#: src/console_fe.c:1026
 #, c-format
 msgid "%s: Cannot use a relative remote directory in %s (site `%s').\n"
 msgstr ""
 "%s: impossibile usare una directory remota relativa in %s (sito \"%s\").\n"
 
-#: src/console_fe.c:1023
+#: src/console_fe.c:1029
 #, c-format
 msgid "%s: File permissions are not supported in %s (site `%s').\n"
 msgstr "%s: i permessi sui file non sono supportati in %s (sito \"%s\").\n"
 
-#: src/console_fe.c:1026
+#: src/console_fe.c:1032
 #, c-format
 msgid ""
 "%s: Safe mode cannot be used in conjunction with nooverwrite (site `%s').\n"
@@ -630,33 +622,33 @@ msgstr ""
 "%s: la modalità sicura non si può usare insieme a nooverwrite (sito \"%s"
 "\").\n"
 
-#: src/console_fe.c:1029
+#: src/console_fe.c:1035
 #, c-format
 msgid ""
 "%s: Safe mode cannot be used in conjunction with tempupload (site `%s').\n"
 msgstr ""
 "%s: la modalità sicura non si può usare insieme a tempupload (sito \"%s\").\n"
 
-#: src/console_fe.c:1032
+#: src/console_fe.c:1038
 #, c-format
 msgid "%s: Can only check for renamed files when checksumming (site `%s').\n"
 msgstr ""
 "%s: il controllo dei file rinominati è possibile solo con attivando il "
 "checksum (sito \"%s\").\n"
 
-#: src/console_fe.c:1035
+#: src/console_fe.c:1041
 #, c-format
 msgid "%s: The protocol `%s' is unsupported (site `%s').\n"
 msgstr "%s: il protocollo \"%s\" non è supportato (sito \"%s\").\n"
 
-#: src/console_fe.c:1042
+#: src/console_fe.c:1048
 #, c-format
 msgid "%s: Unhandled error %d in site `%s' - please contact the maintainer.\n"
 msgstr ""
 "%s: errore non trattato %d nel sito \"%s\" - si prega di contattare il "
 "curatore.\n"
 
-#: src/console_fe.c:1060
+#: src/console_fe.c:1066
 #, c-format
 msgid ""
 "%s: Error: Corrupt site storage file for `%s':\n"
@@ -665,7 +657,7 @@ msgstr ""
 "%s: errore: file di archivio corrotto per il sito \"%s\":\n"
 "%s: %s\n"
 
-#: src/console_fe.c:1069
+#: src/console_fe.c:1075
 #, c-format
 msgid ""
 "%s: Error: No storage file for `%s'.\n"
@@ -674,63 +666,63 @@ msgstr ""
 "%s: errore: manca il file di archivio per \"%s\".\n"
 "%s: usare --init, --catchup o --fetch per creare un file di archivio.\n"
 
-#: src/console_fe.c:1082
+#: src/console_fe.c:1088
 #, c-format
 msgid "%s: Skipping site `%s'.\n"
 msgstr "%s: ignoro il sito \"%s\".\n"
 
-#: src/console_fe.c:1097
+#: src/console_fe.c:1103
 #, c-format
 msgid "%s: %s completed successfully.\n"
 msgstr "%s: %s completato con successo.\n"
 
-#: src/console_fe.c:1103
+#: src/console_fe.c:1109
 #, c-format
 msgid "%s: %s unsupported for %s.\n"
 msgstr "%s: %s non supportato per %s.\n"
 
-#: src/console_fe.c:1108
+#: src/console_fe.c:1114
 #, c-format
 msgid "%s: Errors occurred while %s the %s site.\n"
 msgstr "%s: si sono verificati errori durante %s del sito %s.\n"
 
-#: src/console_fe.c:1113
+#: src/console_fe.c:1119
 #, c-format
 msgid "%s: Error: Could not resolve remote hostname (%s).\n"
 msgstr "%s: errore: impossibile risolvere il nome host remoto (%s).\n"
 
-#: src/console_fe.c:1119
+#: src/console_fe.c:1125
 #, c-format
 msgid "%s: Error: Could not resolve hostname of proxy server (%s).\n"
 msgstr ""
 "%s: errore: impossibile risolvere il nome host del server proxy (%s).\n"
 
-#: src/console_fe.c:1125
+#: src/console_fe.c:1131
 #, c-format
 msgid "%s: Error: Could not connect to proxy server (%s port %d).\n"
 msgstr "%s: errore: impossibile connettersi al server proxy (%s port %d).\n"
 
-#: src/console_fe.c:1128
+#: src/console_fe.c:1134
 #, c-format
 msgid "%s: Error: Could not connect to server (%s port %d).\n"
 msgstr "%s: errore: impossibile connettersi al server (%s port %d).\n"
 
-#: src/console_fe.c:1134
+#: src/console_fe.c:1140
 #, c-format
 msgid "%s: Error: Could not authorise user on server.\n"
 msgstr "%s: errore: impossibile autorizzare l'utente sul server.\n"
 
-#: src/console_fe.c:1139
+#: src/console_fe.c:1145
 #, c-format
 msgid "%s: Error: %s\n"
 msgstr "%s: errore: %s\n"
 
-#: src/console_fe.c:1143
+#: src/console_fe.c:1149
 #, c-format
 msgid "%s: Error: Could not authorise user on proxy server (%s).\n"
 msgstr "%s: errore: impossibile autorizzare l'utente sul server proxy (%s).\n"
 
-#: src/console_fe.c:1148
+#: src/console_fe.c:1154
 #, c-format
 msgid ""
 "%s: in issue_error\n"
@@ -739,56 +731,56 @@ msgstr ""
 "%s: in issue_error\n"
 "%s"
 
-#: src/console_fe.c:1162
+#: src/console_fe.c:1168
 #, c-format
 msgid "%s: Error: Environment variable HOME not set.\n"
 msgstr "%s: errore: la variabile di ambiente HOME non è impostata.\n"
 
-#: src/console_fe.c:1170
+#: src/console_fe.c:1176
 #, c-format
 msgid "%s: Error: Could not open rcfile: %s\n"
 msgstr "%s: errore: impossibile aprire il file di configurazione: %s\n"
 
-#: src/console_fe.c:1173
+#: src/console_fe.c:1179
 #, c-format
 msgid "%s: Error: rcfile permissions allow other users to read your rcfile.\n"
 msgstr ""
 "%s: errore: i permessi del file di configurazione lo rendono leggibile per "
 "gli altri utenti.\n"
 
-#: src/console_fe.c:1174 src/console_fe.c:1186
+#: src/console_fe.c:1180 src/console_fe.c:1192
 #, c-format
 msgid "%s: Set the permissions to 0600.\n"
 msgstr "%s: impostare i permessi a 0600.\n"
 
-#: src/console_fe.c:1177
+#: src/console_fe.c:1183
 #, c-format
 msgid "%s: Error: Could not open storage directory: %s\n"
 msgstr "%s: errore: impossibile aprire la directory degli archivi: %s\n"
 
-#: src/console_fe.c:1178
+#: src/console_fe.c:1184
 #, c-format
 msgid ""
 "%s: You need to create this directory and set the permissions to 0700.\n"
 msgstr ""
 "%s: è necessario creare questa directory e impostare i permessi a 0700.\n"
 
-#: src/console_fe.c:1181
+#: src/console_fe.c:1187
 #, c-format
 msgid "%s: Error: storage directory permissions incorrect.\n"
 msgstr "%s: errore: i permessi della directory degli archivi sono scorretti.\n"
 
-#: src/console_fe.c:1182
+#: src/console_fe.c:1188
 #, c-format
 msgid "%s: Set the permissions to 0700.\n"
 msgstr "%s: impostare i permessi a 0700.\n"
 
-#: src/console_fe.c:1185
+#: src/console_fe.c:1191
 #, c-format
 msgid "%s: Error: ~/.netrc permissions incorrect.\n"
 msgstr "%s: errore: i permessi di ~/.netrc sono scorretti.\n"
 
-#: src/console_fe.c:1191
+#: src/console_fe.c:1197
 #, c-format
 msgid ""
 "%s: init_paths gave %d\n"
@@ -797,17 +789,17 @@ msgstr ""
 "%s: init_paths produce %d\n"
 "%s"
 
-#: src/console_fe.c:1198
+#: src/console_fe.c:1204
 #, c-format
 msgid "%s: Error: Could not parse ~/.netrc.\n"
 msgstr "%s: errore: impossibile leggere ~/.netrc.\n"
 
-#: src/console_fe.c:1216 src/console_fe.c:1315
+#: src/console_fe.c:1222 src/console_fe.c:1321
 #, c-format
 msgid "%s: Nothing to do - no changes found.\n"
 msgstr "%s: niente da fare - nessun cambiamento trovato.\n"
 
-#: src/console_fe.c:1225
+#: src/console_fe.c:1231
 #, c-format
 msgid ""
 "%s: Error: Could not open storage file for writing (%s)\n"
@@ -818,7 +810,7 @@ msgstr ""
 "%s: errore: %s\n"
 "%s: impossibile aggiornare il sito \"%s\".\n"
 
-#: src/console_fe.c:1249
+#: src/console_fe.c:1255
 #, c-format
 msgid ""
 "%s: Warning: Current state method differs from stored in site `%s'.\n"
@@ -829,37 +821,37 @@ msgstr ""
 "%s: tutti i file esistenti appariranno modificati (suggerimento: usare "
 "catchup?).\n"
 
-#: src/console_fe.c:1255
+#: src/console_fe.c:1261
 #, c-format
 msgid "%s: The remote site needs updating (%d items to update).\n"
 msgstr ""
 "%s: il sito remoto deve essere aggiornato (%d oggetti da aggiornare).\n"
 
-#: src/console_fe.c:1257
+#: src/console_fe.c:1263
 #, c-format
 msgid "%s: The remote site needs updating (1 item to update).\n"
 msgstr "%s: il sito remoto deve essere aggiornato (1 oggetto da aggiornare).\n"
 
-#: src/console_fe.c:1260
+#: src/console_fe.c:1266
 #, c-format
 msgid "%s: The remote site does not need updating.\n"
 msgstr "%s: il sito remoto non deve essere aggiornato.\n"
 
-#: src/console_fe.c:1268
+#: src/console_fe.c:1274
 #, c-format
 msgid "%s: All the files and directories are marked as NOT updated remotely.\n"
 msgstr ""
 "%s: tutti i file e le directory sono considerati come NON aggiornati sul "
 "server.\n"
 
-#: src/console_fe.c:1273
+#: src/console_fe.c:1279
 #, c-format
 msgid "%s: All the files and and directories are marked as updated remotely.\n"
 msgstr ""
 "%s: tutti i file e le directory sono considerati come aggiornati sul "
 "server.\n"
 
-#: src/console_fe.c:1282
+#: src/console_fe.c:1288
 #, c-format
 msgid ""
 "%s: Failed to fetch file listing for site `%s':\n"
@@ -868,7 +860,7 @@ msgstr ""
 "%s: impossibile scaricare la lista dei file per il sito \"%s\":\n"
 "%s: %s\n"
 
-#: src/console_fe.c:1296
+#: src/console_fe.c:1302
 #, c-format
 msgid ""
 "%s: Failed to fetch file listing to verify site `%s':\n"
@@ -877,17 +869,17 @@ msgstr ""
 "%s: impossibile scaricare la lista dei file per verificare il sito \"%s\":\n"
 "%s: %s\n"
 
-#: src/console_fe.c:1303
+#: src/console_fe.c:1309
 #, c-format
 msgid "%s: Verify found %d files missing from server.\n"
 msgstr "%s: la verifica ha trovato %d file mancanti dal server.\n"
 
-#: src/console_fe.c:1306
+#: src/console_fe.c:1312
 #, c-format
 msgid "%s: Remote site not synchronized with stored state.\n"
 msgstr "%s: il sito remoto non è sincronizzato con l'immagine locale.\n"
 
-#: src/console_fe.c:1319
+#: src/console_fe.c:1325
 #, c-format
 msgid ""
 "%s: Refusing to delete all local files with a synchronize operation.\n"
@@ -897,7 +889,7 @@ msgstr ""
 "sincronizzazione.\n"
 "%s: usare --update per agiornare il sito remoto.\n"
 
-#: src/console_fe.c:1327
+#: src/console_fe.c:1333
 #, c-format
 msgid ""
 "%s: in act_on_site\n"
@@ -906,17 +898,17 @@ msgstr ""
 "%s: in act_on_site\n"
 "%s"
 
-#: src/console_fe.c:1338
+#: src/console_fe.c:1344
 #, c-format
 msgid "Usage: %s [OPTIONS] [MODE] [sitename]...\n"
 msgstr "Uso: %s [OPZIONI] [MODALITA] [nome del sito]...\n"
 
-#: src/console_fe.c:1340
+#: src/console_fe.c:1346
 #, c-format
 msgid "Options: \n"
 msgstr "Opzioni: \n"
 
-#: src/console_fe.c:1343
+#: src/console_fe.c:1349
 #, c-format
 msgid ""
 "  -d, --debug=KEY[,KEY] Turn debugging on for each KEY, which may be:\n"
@@ -933,7 +925,7 @@ msgstr ""
 "  -g, --logfile=FILE    Accoda i messaggi di debugging al FILE (altrimenti "
 "usa stderr)\n"
 
-#: src/console_fe.c:1350
+#: src/console_fe.c:1356
 #, c-format
 msgid ""
 "  -r, --rcfile=FILE     Use alternate run control file\n"
@@ -1007,48 +999,53 @@ msgstr "Booleano mancante in 'ascii' alla riga %d"
 msgid "Size overflow (%s) in '%s' at line %d"
 msgstr "Dimensione eccessiva (%s) in '%s' alla riga %d"
 
-#: src/davdriver.c:175
+#: src/davdriver.c:195
 msgid "The connection timed out."
 msgstr "Tempo di connessione scaduto."
 
-#: src/davdriver.c:220
+#: src/davdriver.c:224
+#, fuzzy
+msgid "Could not write SSL certificate"
+msgstr "Impossibile leggere il certificato SSL client '%s'."
+
+#: src/davdriver.c:244
 msgid "SSL support has not be compiled in."
 msgstr "Il supporto SSL non è stato compilato."
 
-#: src/davdriver.c:228
+#: src/davdriver.c:252
 #, c-format
 msgid "Could not load certificate `%s'."
 msgstr "Impossibile caricare il certificato \"%s\"."
 
-#: src/davdriver.c:264
+#: src/davdriver.c:290
 #, c-format
 msgid "Could not read SSL client certificate '%s'."
 msgstr "Impossibile leggere il certificato SSL client '%s'."
 
-#: src/davdriver.c:277
+#: src/davdriver.c:303
 #, c-format
 msgid "Could not decrypt SSL client certificate '%s'."
 msgstr "Impossibile decifrare il certificato SSL client '%s'."
 
-#: src/davdriver.c:299
+#: src/davdriver.c:325
 msgid "The server does not appear to be a WebDAV server."
 msgstr "Il server non sembra essere un server WebDAV."
 
-#: src/davdriver.c:304
+#: src/davdriver.c:330
 msgid "The server does not support the executable live property."
 msgstr "Il server non supporta la proprietà live executable"
 
-#: src/davdriver.c:350 src/davdriver.c:417 src/davdriver.c:454 src/ftp.c:888
+#: src/davdriver.c:376 src/davdriver.c:443 src/davdriver.c:480 src/ftp.c:888
 #: src/ftp.c:972
 msgid "Could not open file"
 msgstr "Impossibile aprire il file"
 
-#: src/davdriver.c:385
+#: src/davdriver.c:411
 #, c-format
 msgid "Could not stat file: %s"
 msgstr "Impossibile fare stat del file: %s"
 
-#: src/davdriver.c:644
+#: src/davdriver.c:670
 msgid "Could not access resource"
 msgstr "Impossibile accedere alla risorsa"
 
@@ -1087,12 +1084,12 @@ msgstr "Impossibile leggere l'obiettivo del link simbolico."
 msgid "Unknown system error"
 msgstr "Errore di sistema sconosciuto"
 
-#: src/ftp.c:153 lib/neon/ne_request.c:240
+#: src/ftp.c:153
 #, c-format
 msgid "%s: connection was closed by server."
 msgstr "%s: la connessione è stata chiusa dal server."
 
-#: src/ftp.c:157 lib/neon/ne_request.c:245
+#: src/ftp.c:157
 #, c-format
 msgid "%s: connection timed out."
 msgstr "%s: tempo di connessione scaduto."
@@ -1192,11 +1189,11 @@ msgstr "Impossibile determinare la lunghezza del file"
 msgid "Could not rewind to beginning of file"
 msgstr "Impossibile tornare all'inizio del file"
 
-#: src/ftp.c:1147
+#: src/ftp.c:1152
 msgid "Could not read 'LIST' response."
 msgstr "Impossibile leggere la risposta \"LIST\""
 
-#: src/ftp.c:1156
+#: src/ftp.c:1161
 #, c-format
 msgid "Parse error in LIST response: %s"
 msgstr "Errore di analisi nella risposta LIST: %s"
@@ -1517,242 +1514,273 @@ msgid "Could not find 'relative' local directory"
 msgstr "Impossibile trovare la directory locale relativa"
 
 #: lib/neon/ne_redirect.c:92
-msgid "Could not parse redirect location."
+#, fuzzy
+msgid "Could not parse redirect destination URL"
 msgstr "Impossibile analizzare l'indirizzo di redirezione"
 
-#: lib/neon/ne_gnutls.c:521 lib/neon/ne_openssl.c:386
+#: lib/neon/ne_gnutls.c:162
+#, c-format
+msgid "[unprintable:#%lu]"
+msgstr ""
+
+#: lib/neon/ne_gnutls.c:188
+msgid "[unprintable]"
+msgstr ""
+
+#: lib/neon/ne_gnutls.c:696 lib/neon/ne_openssl.c:419
 msgid "Server certificate was missing commonName attribute in subject name"
 msgstr ""
 "Il certificato del server non contiene l'attributo commonName nel nome del "
 "soggetto"
 
-#: lib/neon/ne_gnutls.c:557 lib/neon/ne_openssl.c:599
+#: lib/neon/ne_gnutls.c:736 lib/neon/ne_openssl.c:638
 #, c-format
 msgid "SSL negotiation failed: %s"
 msgstr "Errore di negoziazione SSL: %s"
 
-#: lib/neon/ne_gnutls.c:566
+#: lib/neon/ne_gnutls.c:745
 msgid "Server did not send certificate chain"
 msgstr "Il server non ha spedito la catena di certificazione"
 
-#: lib/neon/ne_openssl.c:418
+#: lib/neon/ne_openssl.c:451
 #, c-format
 msgid "Certificate verification error: %s"
 msgstr "Errore di verifica del certificato: %s"
 
-#: lib/neon/ne_openssl.c:618
+#: lib/neon/ne_openssl.c:657
 msgid "SSL server did not present certificate"
 msgstr "Il server SSL non ha offerto alcun certificato"
 
-#: lib/neon/ne_openssl.c:627
+#: lib/neon/ne_openssl.c:666
 msgid "Server certificate changed: connection intercepted?"
 msgstr ""
 "Il certificato del server è cambiato: la connessione può essere stata "
 "intercettata?"
 
-#: lib/neon/ne_session.c:305 lib/neon/ne_session.c:316
+#: lib/neon/ne_session.c:356 lib/neon/ne_session.c:367
 msgid "[invalid date]"
 msgstr "[data non valida]"
 
-#: lib/neon/ne_session.c:329
+#: lib/neon/ne_session.c:380
 msgid "certificate is not yet valid"
 msgstr "il certificato non è ancora valido"
 
-#: lib/neon/ne_session.c:330
+#: lib/neon/ne_session.c:381
 msgid "certificate has expired"
 msgstr "il certificato è scaduto"
 
-#: lib/neon/ne_session.c:331
+#: lib/neon/ne_session.c:382
 msgid "certificate issued for a different hostname"
 msgstr "il certificato è stato emesso per un altro nome host"
 
-#: lib/neon/ne_session.c:332
+#: lib/neon/ne_session.c:383
 msgid "issuer is not trusted"
 msgstr "chi ha rilasciato il certificato non è fidato"
 
-#: lib/neon/ne_session.c:337
+#: lib/neon/ne_session.c:388
 msgid "Server certificate verification failed: "
 msgstr "Errore nella verifica del certificato del server: "
 
-#: lib/neon/ne_socket.c:480 lib/neon/ne_socket.c:528 lib/neon/ne_socket.c:631
+#: lib/neon/ne_socket.c:514 lib/neon/ne_socket.c:568 lib/neon/ne_socket.c:671
 msgid "Connection closed"
 msgstr "Connessione chiusa"
 
-#: lib/neon/ne_socket.c:538 lib/neon/ne_socket.c:643
+#: lib/neon/ne_socket.c:578 lib/neon/ne_socket.c:683
 msgid "Secure connection truncated"
 msgstr "Connessione sicura interrotta"
 
-#: lib/neon/ne_socket.c:550 lib/neon/ne_socket.c:655
+#: lib/neon/ne_socket.c:590 lib/neon/ne_socket.c:695
 #, c-format
 msgid "SSL error: %s"
 msgstr "errore SSL: %s"
 
-#: lib/neon/ne_socket.c:553
+#: lib/neon/ne_socket.c:593
 #, c-format
 msgid "SSL error code %d/%d/%lu"
 msgstr "Codice di errore SSL %d/%d/%lu"
 
-#: lib/neon/ne_socket.c:636
+#: lib/neon/ne_socket.c:676
 #, c-format
 msgid "SSL alert received: %s"
 msgstr "Avviso SSL ricevuto: %s"
 
-#: lib/neon/ne_socket.c:651
+#: lib/neon/ne_socket.c:691
 msgid "SSL socket read failed"
 msgstr "Errore di lettura socket SSL"
 
-#: lib/neon/ne_socket.c:750
+#: lib/neon/ne_socket.c:790
 msgid "Line too long"
 msgstr "Linea troppo lunga"
 
-#: lib/neon/ne_socket.c:890 lib/neon/ne_socket.c:896
+#: lib/neon/ne_socket.c:935 lib/neon/ne_socket.c:941
 msgid "Host not found"
 msgstr "Host non trovato"
 
-#: lib/neon/ne_socket.c:1006
+#: lib/neon/ne_socket.c:1048
+#, fuzzy
+msgid "Connection timed out"
+msgstr "Tempo di connessione scaduto."
+
+#: lib/neon/ne_socket.c:1210
 msgid "Socket descriptor number exceeds FD_SETSIZE"
 msgstr "Il numero del descrittore socket eccede FD_SETSIZE"
 
-#: lib/neon/ne_socket.c:1218
+#: lib/neon/ne_socket.c:1270
+msgid "Socket family not supported"
+msgstr ""
+
+#: lib/neon/ne_socket.c:1493
 msgid "Client certificate verification failed"
 msgstr "Errore nella verifica del certificato del client"
 
-#: lib/neon/ne_socket.c:1234
+#: lib/neon/ne_socket.c:1509
 msgid "SSL disabled due to lack of entropy"
 msgstr "SSL disabilitato per mancanza di entropia"
 
-#: lib/neon/ne_socket.c:1241
+#: lib/neon/ne_socket.c:1516
 msgid "SSL disabled due to library version mismatch"
 msgstr "SSL disabilitato: la versione della libreria non corrisponde"
 
-#: lib/neon/ne_socket.c:1247
+#: lib/neon/ne_socket.c:1522
 msgid "Could not create SSL structure"
 msgstr "Impossibile creare la struttura SSL"
 
-#: lib/neon/ne_request.c:237
-#, c-format
-msgid "%s: connection was closed by proxy server."
+#: lib/neon/ne_request.c:194
+#, fuzzy, c-format
+msgid "%s: connection was closed by proxy server"
 msgstr "%s: la connessione è stata chiusa dal server proxy."
 
-#: lib/neon/ne_request.c:351
+#: lib/neon/ne_request.c:197
+#, fuzzy, c-format
+msgid "%s: connection was closed by server"
+msgstr "%s: la connessione è stata chiusa dal server."
+
+#: lib/neon/ne_request.c:202
+#, fuzzy, c-format
+msgid "%s: connection timed out"
+msgstr "%s: tempo di connessione scaduto."
+
+#: lib/neon/ne_request.c:307
 msgid "offset invalid"
 msgstr "offset invalido"
 
-#: lib/neon/ne_request.c:356
+#: lib/neon/ne_request.c:312
 #, c-format
 msgid "Could not seek to offset %s of request body file: %s"
 msgstr "Impossibile posizionarsi all'offset %s del corpo della richiesta: %s"
 
-#: lib/neon/ne_request.c:401
+#: lib/neon/ne_request.c:360
 msgid "Could not send request body"
 msgstr "Impossibile inviare il corpo della richiesta"
 
-#: lib/neon/ne_request.c:759
+#: lib/neon/ne_request.c:699
 msgid "Could not read chunk size"
 msgstr "Impossibile leggere la dimensione del chunk"
 
-#: lib/neon/ne_request.c:766
+#: lib/neon/ne_request.c:706
 msgid "Could not parse chunk size"
 msgstr "Impossibile analizzare la dimensione del chunk"
 
-#: lib/neon/ne_request.c:803
+#: lib/neon/ne_request.c:743
 msgid "Could not read response body"
 msgstr "Impossibile leggere il corpo della risposta"
 
-#: lib/neon/ne_request.c:819
+#: lib/neon/ne_request.c:759
 msgid "Could not read chunk delimiter"
 msgstr "Impossibile leggere il delimitatore del chunk"
 
-#: lib/neon/ne_request.c:822
+#: lib/neon/ne_request.c:762
 msgid "Chunk delimiter was invalid"
 msgstr "Delimitatore del chunk non valido"
 
-#: lib/neon/ne_request.c:928
+#: lib/neon/ne_request.c:868
 msgid "Could not read status line"
 msgstr "Impossibile leggere la riga di stato"
 
-#: lib/neon/ne_request.c:950
-msgid "Could not parse response status line."
+#: lib/neon/ne_request.c:890
+#, fuzzy
+msgid "Could not parse response status line"
 msgstr "Impossibile analizzare la riga di stato della risposta."
 
-#: lib/neon/ne_request.c:962
+#: lib/neon/ne_request.c:902
 msgid "Could not read interim response headers"
 msgstr "Impossibile leggere le intestazioni della risposta temporanea"
 
-#: lib/neon/ne_request.c:996
+#: lib/neon/ne_request.c:936
 msgid "Could not send request"
 msgstr "Impossibile inviare la richiesta"
 
-#: lib/neon/ne_request.c:1044 lib/neon/ne_request.c:1062
-#: lib/neon/ne_request.c:1072
+#: lib/neon/ne_request.c:984 lib/neon/ne_request.c:1002
+#: lib/neon/ne_request.c:1012
 msgid "Error reading response headers"
 msgstr "Errore nella lettura delle intestazioni di risposta"
 
-#: lib/neon/ne_request.c:1090
+#: lib/neon/ne_request.c:1030
 msgid "Response header too long"
 msgstr "Intestazione di risposta troppo lunga"
 
-#: lib/neon/ne_request.c:1172
-msgid "Response exceeded maximum number of header fields."
+#: lib/neon/ne_request.c:1112
+#, fuzzy
+msgid "Response exceeded maximum number of header fields"
 msgstr ""
 "La risposta ha oltrepassato il numero massimo di campi di intestazione."
 
-#: lib/neon/ne_request.c:1189
+#: lib/neon/ne_request.c:1129
 #, c-format
 msgid "Could not resolve hostname `%s': %s"
 msgstr "Impossibile risolvere il nome dell'host \"%s\": %s"
 
-#: lib/neon/ne_request.c:1309
+#: lib/neon/ne_request.c:1260
+msgid "Unknown transfer-coding in response"
+msgstr ""
+
+#: lib/neon/ne_request.c:1271
 msgid "Invalid Content-Length in response"
 msgstr "Content-Length non valido nella risposta"
 
-#: lib/neon/ne_request.c:1371
+#: lib/neon/ne_request.c:1344
 #, c-format
 msgid "Could not write to file: %s"
 msgstr "Impossibile scrivere il file: %s"
 
-#: lib/neon/ne_request.c:1444
-msgid "Could not create SSL connection through proxy server"
+#: lib/neon/ne_request.c:1417
+#, fuzzy, c-format
+msgid "Could not create SSL connection through proxy server: %s"
 msgstr "Impossibile creare una connessione SSL attraverso il server proxy"
 
-#: lib/neon/ne_request.c:1489
+#: lib/neon/ne_request.c:1464
 msgid "Could not create socket"
 msgstr "Impossibile creare il socket"
 
-#: lib/neon/ne_request.c:1533
-msgid "Could not connect to server"
-msgstr "Impossibile connettersi al server"
-
-#: lib/neon/ne_request.c:1536
+#: lib/neon/ne_request.c:1526
 msgid "Could not connect to proxy server"
 msgstr "Impossibile connettersi al server proxy"
+
+#: lib/neon/ne_request.c:1527
+msgid "Could not connect to server"
+msgstr "Impossibile connettersi al server"
 
 #: lib/neon/ne_xml.c:280
 #, c-format
 msgid "XML parse error at line %d: invalid element name"
 msgstr "Errore di analisi XML alla riga %d: nome di elemento non valido"
 
-#: lib/neon/ne_xml.c:436
+#: lib/neon/ne_xml.c:452
 msgid "Unknown error"
 msgstr "Errore sconosciuto"
 
-#: lib/neon/ne_xml.c:521
+#: lib/neon/ne_xml.c:537
 msgid "Invalid Byte Order Mark"
 msgstr "Byte Order Mark non valido"
 
-#: lib/neon/ne_xml.c:609
-#, c-format
-msgid "XML parse error at line %d: %s."
+#: lib/neon/ne_xml.c:625
+#, fuzzy, c-format
+msgid "XML parse error at line %d: %s"
 msgstr "Errore di analisi XML alla riga %d: %s."
 
-#: lib/neon/ne_props.c:371 lib/neon/ne_props.c:411
+#: lib/neon/ne_props.c:371 lib/neon/ne_props.c:435
 msgid "Response exceeds maximum property count"
 msgstr "La risposta ha oltrepassato il numero massimo di proprietà"
-
-#: lib/neon/ne_compress.c:173
-#, c-format
-msgid "%s: %s"
-msgstr "%s: %s"
 
 #: lib/neon/ne_compress.c:184
 #, c-format
@@ -1767,12 +1795,12 @@ msgstr "Impossibile decomprimere i dati"
 msgid "Could not initialize zlib"
 msgstr "Impossibile inizializzare zlib"
 
-#: lib/neon/ne_xmlreq.c:31
+#: lib/neon/ne_xmlreq.c:36
 #, c-format
 msgid "Could not parse response: %s"
 msgstr "Impossibile leggere la risposta: %s"
 
-#: lib/neon/ne_basic.c:94
+#: lib/neon/ne_basic.c:98
 #, c-format
 msgid "Could not determine file size: %s"
 msgstr "Impossibile determinare la dimensione del file: %s"
@@ -1786,42 +1814,117 @@ msgid "Range is not satisfiable"
 msgstr "Impossibile soddisfare il range"
 
 #: lib/neon/ne_basic.c:188
-msgid "Resource does not support ranged GETs."
+#, fuzzy
+msgid "Resource does not support ranged GET requests"
 msgstr "La risorsa non supporta GET con range."
 
-#: lib/neon/ne_auth.c:462
+#: lib/neon/ne_auth.c:130
+#, fuzzy, c-format
+msgid "Could not authenticate to server: %s"
+msgstr "Impossibile connettersi al server"
+
+#: lib/neon/ne_auth.c:135
+#, fuzzy, c-format
+msgid "Could not authenticate to proxy server: %s"
+msgstr "Impossibile connettersi al server proxy"
+
+#: lib/neon/ne_auth.c:358
 #, c-format
-msgid "GSSAPI authentication error (%s)"
-msgstr "Errore di autenticazione GSSAPI (%s)"
+msgid "rejected %s challenge"
+msgstr ""
 
-#: lib/neon/ne_auth.c:595
-msgid "Unknown algorithm in Digest authentication challenge"
-msgstr "Algoritmo sconosciuto nella sfida di autenticazione Digest"
-
-#: lib/neon/ne_auth.c:600
-msgid "Incompatible algorithm in Digest authentication challenge"
-msgstr "Algoritmo incompatibile nella sfida di autenticazione Digest"
-
-#: lib/neon/ne_auth.c:606
-msgid "Missing nonce or realm in Digest authentication challenge"
+#: lib/neon/ne_auth.c:374
+#, fuzzy
+msgid "missing realm in Basic challenge"
 msgstr "Realm o nonce mancante nella sfida di autenticazione Digest"
 
-#: lib/neon/ne_auth.c:886
+#: lib/neon/ne_auth.c:469
+msgid "invalid Negotiate token"
+msgstr ""
+
+#: lib/neon/ne_auth.c:492
+#, fuzzy
+msgid "GSSAPI authentication error: "
+msgstr "Errore di autenticazione GSSAPI (%s)"
+
+#: lib/neon/ne_auth.c:505
+#, c-format
+msgid "GSSAPI failure (code %u)"
+msgstr ""
+
+#: lib/neon/ne_auth.c:540
+msgid "ignoring empty Negotiate continuation"
+msgstr ""
+
+#: lib/neon/ne_auth.c:555
+msgid "Negotiate response verification failed: invalid response header token"
+msgstr ""
+
+#: lib/neon/ne_auth.c:577
+#, fuzzy, c-format
+msgid "Negotiate response verification failure: %s"
+msgstr "Errore nella verifica del certificato del server: "
+
+#: lib/neon/ne_auth.c:697
+#, fuzzy
+msgid "unknown algorithm in Digest challenge"
+msgstr "Algoritmo sconosciuto nella sfida di autenticazione Digest"
+
+#: lib/neon/ne_auth.c:701
+#, fuzzy
+msgid "incompatible algorithm in Digest challenge"
+msgstr "Algoritmo incompatibile nella sfida di autenticazione Digest"
+
+#: lib/neon/ne_auth.c:705
+#, fuzzy
+msgid "missing parameter in Digest challenge"
+msgstr "Realm o nonce mancante nella sfida di autenticazione Digest"
+
+#: lib/neon/ne_auth.c:709
+msgid "initial Digest challenge was stale"
+msgstr ""
+
+#: lib/neon/ne_auth.c:716
+msgid "stale Digest challenge with new algorithm or realm"
+msgstr ""
+
+#: lib/neon/ne_auth.c:728
+#, fuzzy
+msgid "could not parse domain in Digest challenge"
+msgstr "Impossibile analizzare la riga di stato della risposta."
+
+#: lib/neon/ne_auth.c:1036
 msgid "Digest mutual authentication failure: missing parameters"
 msgstr "Autenticazione mutua digest fallita: parametri mancanti"
 
-#: lib/neon/ne_auth.c:891
+#: lib/neon/ne_auth.c:1041
 msgid "Digest mutual authentication failure: client nonce mismatch"
 msgstr "Autenticazione mutua digest fallita: nonce del client non coincide"
 
-#: lib/neon/ne_auth.c:896
+#: lib/neon/ne_auth.c:1051
+#, fuzzy
+msgid "Digest mutual authentication failure: could not parse nonce count"
+msgstr "Autenticazione mutua digest fallita: nonce del client non coincide"
+
+#: lib/neon/ne_auth.c:1056
 #, c-format
 msgid "Digest mutual authentication failure: nonce count mismatch (%u not %u)"
-msgstr "Autenticazione mutua digest fallita: conteggio nonce non coincide (%u non %u)"
+msgstr ""
+"Autenticazione mutua digest fallita: conteggio nonce non coincide (%u non %u)"
 
-#: lib/neon/ne_auth.c:936
+#: lib/neon/ne_auth.c:1099
 msgid "Digest mutual authentication failure: request-digest mismatch"
 msgstr "Autenticazione mutua digest fallita: richiesta e digest non coincidono"
+
+#: lib/neon/ne_auth.c:1225
+#, c-format
+msgid "ignored %s challenge"
+msgstr ""
+
+#: lib/neon/ne_auth.c:1304
+#, fuzzy
+msgid "could not parse challenge"
+msgstr "Impossibile analizzare la dimensione del chunk"
 
 #: lib/neon/ne_207.c:198
 #, c-format
@@ -1833,20 +1936,16 @@ msgstr ""
 "risposta:\n"
 "La riga di stato era: %s"
 
-#: lib/neon/ne_locks.c:583
+#: lib/neon/ne_locks.c:584
 msgid "LOCK response missing Lock-Token header"
 msgstr "Header Lock-Token mancante nella risposta LOCK"
 
-#: lib/neon/ne_locks.c:739
-msgid "No Lock-Token header given"
-msgstr "Header Lock-Token mancante"
-
-#: lib/neon/ne_locks.c:767
+#: lib/neon/ne_locks.c:759
 #, c-format
 msgid "Response missing activelock for %s"
 msgstr "Activelock mancante nella risposta per %s"
 
-#: lib/neon/ne_locks.c:811
+#: lib/neon/ne_locks.c:801
 #, c-format
 msgid "No activelock for <%s> returned in LOCK refresh response"
 msgstr "Nessun activelock per <%s> nella risposta di refresh LOCK"
@@ -1913,6 +2012,18 @@ msgstr "%s: l'opzione \"-W %s\" è ambigua\n"
 #, c-format
 msgid "%s: option `-W %s' doesn't allow an argument\n"
 msgstr "%s: l'opzione \"-W %s\" non ammette argomenti\n"
+
+#~ msgid " bytes)"
+#~ msgstr " byte)"
+
+#~ msgid "%s\n"
+#~ msgstr "%s\n"
+
+#~ msgid "%s: %s"
+#~ msgstr "%s: %s"
+
+#~ msgid "No Lock-Token header given"
+#~ msgstr "Header Lock-Token mancante"
 
 #~ msgid "%s: Aborted.\n"
 #~ msgstr "%s: annullato.\n"
