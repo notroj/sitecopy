@@ -123,3 +123,13 @@ I thing there's a bug or at least flaw: Even if 'safe' is specified in
 the config file, it deletes files on the server if the local copy is
 deleted and the server file changed meanwhile.  Should it behave the
 same way as it does for file changes (refus to overwrite?)
+
+---
+
+From: Wes Groleau
+
+When it needs to create or delete directories, it does them _after_ 
+the contents. So if a tree is four levels deep, it takes four runs of
+sitecopy to update it.
+
+[occurs after a --fetch]
