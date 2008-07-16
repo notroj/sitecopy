@@ -38,7 +38,7 @@ s/@GMSGFMT@/msgfmt/g;
 s/@MSGFMT@/msgfmt/g;
 s/@XGETTEXT@/xgettext/g;
 s/@MSGMERGE@/msgmerge/g;
-s/@XGETTEXT_EXTRA_OPTIONS@/--msgid-bugs-address sitecopy@webdav.org/g;
+s/@XGETTEXT_EXTRA_OPTIONS@/--msgid-bugs-address sitecopy@lists.manyfish.co.uk/g;
 s/: Makefile.*/:/g;
 s/\$(MAKE) update-gmo/echo Done/g;" $inmk > $tmpmk
 
