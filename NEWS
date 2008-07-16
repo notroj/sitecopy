@@ -1,4 +1,4 @@
-Changes in release 0.16.4:
+Changes in release 0.16.5:
 * DAV: Fix SSL cert caching to avoid repeated prompts.
 * Update to neon 0.28.3 and support neon 0.24.x through 0.28.x.
 
