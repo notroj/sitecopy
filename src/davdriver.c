@@ -1,6 +1,6 @@
 /* 
    sitecopy WebDAV protocol driver module
-   Copyright (C) 2000-2007, Joe Orton <joe@manyfish.co.uk>
+   Copyright (C) 2000-2008, Joe Orton <joe@manyfish.co.uk>
                                                                      
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -64,7 +64,11 @@ struct fetch_context {
 
 #define ENABLE_PROGRESS do { ne_set_progress(sess, site_sock_progress_cb, NULL); } while (0)
 
+#if NE_VERSION_MAJOR == 0 && NE_VERSION_MINOR > 26
+#define DISABLE_PROGRESS do { ne_set_notifier(sess, NULL, NULL); } while (0)
+#else
 #define DISABLE_PROGRESS do { ne_set_progress(sess, NULL, NULL); } while (0)
+#endif
 
 /* TODO:
  * not really sure whether we should be using an enum here... what
