@@ -61,8 +61,7 @@ MANLANGS = fr
 all: $(TARGET)
 
 .PHONY: all again clean distclean reminders install-common	\
-	install-sitecopy install-xsitecopy install-nls subdirs \
-	ChangeLog
+	install-sitecopy install-nls subdirs ChangeLog
 
 .SUFFIXES:
 .SUFFIXES: .c .o
