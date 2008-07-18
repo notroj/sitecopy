@@ -97,8 +97,7 @@ if test "$enable_sftp" = "yes"; then
     AC_DEFINE([USE_SFTP], 1, [Define to compile the sftp/ssh protocol driver])
 fi
 
-dnl Strip the binary in debug mode.
-NEON_DEBUG(,[LDFLAGS="-s $LDFLAGS"])
+NEON_DEBUG()
 
 dnl Check for library functions
 
@@ -165,18 +164,13 @@ dnl --------------------------------
 EXTRAOBJS="$EXTRAOBJS src/console_fe.o"
 AC_LIBOBJ(lib/rpmatch)
 AC_LIBOBJ(lib/yesno)
-fe_msg="Console"
-TARGET="sitecopy"
 
 # This goes in CPPFLAGS so libneon/Makefile can pick up config.h
 CPPFLAGS="$CPPFLAGS -I\$(top_builddir)"
 
 dnl Makefile substitutions
 
-AC_SUBST(XSC_HELP)
-AC_SUBST(SHORTCUT_LOCATION)
 AC_SUBST(EXTRAOBJS)
-AC_SUBST(TARGET)
 
 AC_CONFIG_FILES([Makefile lib/neon/Makefile po/Makefile.in intl/Makefile])
 
@@ -186,7 +180,6 @@ AC_MSG_NOTICE([Configured sitecopy $PACKAGE_VERSION:
 
   Install prefix:        ${prefix}
   Compiler:              ${CC}
-  Frontend:              ${fe_msg} (executable named '${TARGET}')
   Supported protocols:   ${proto_msg}
   neon library:          ${neon_library_message}
   XML Parser:            ${neon_xml_parser_message}
