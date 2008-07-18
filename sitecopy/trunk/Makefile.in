@@ -40,31 +40,12 @@ INSTALL_DATA = @INSTALL_DATA@
 INSTALL = @INSTALL@
 mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
 
-##########################################################################
-# Install paths and misc files required for a smooth Xsitecopy experience.
-##########################################################################
-
-DESKTOP_DIR = $(prefix)/share/gnome/apps/Internet
-XSC_DESKTOP = $(top_srcdir)/gnome/share/xsitecopy.desktop
-
-GHELPDIR = $(prefix)/share/gnome/help/xsitecopy
-XSC_HELP = $(GHELPDIR)/C
-PNG_DIR = $(prefix)/share/pixmaps/xsitecopy
-
-GLADE_DIR = $(prefix)/share/xsitecopy
-XSC_GLADE = $(top_srcdir)/gnome/share/sitecopy-dialogs.glade
-
 # Target is the name of the executable
 TARGET = @TARGET@@EXEEXT@
 
 OBJECTS = src/sites.o src/sitefiles.o src/sitestore.o \
 	src/rcfile.o src/common.o src/nulldriver.o src/lsparser.o \
 	@EXTRAOBJS@
-
-GNOMEOBJS = gnome/changes.o gnome/minilist.o gnome/file_widgets.o \
-	gnome/gcommon.o gnome/init.o gnome/main.o gnome/misc.o \
-	gnome/new_site.o gnome/operations.o gnome/resynch.o \
-	gnome/site_widgets.o gnome/tree.o
 
 # The list of stuff which autoconf reckons we need to compile
 # since the native libc hasn't got it.
@@ -180,26 +161,6 @@ install-sitecopy: install-common
 			     $(DESTDIR)$(mandir)/$$f/man1/sitecopy.1; done
 	@echo
 	@echo "sitecopy installation finished."
-	@echo
-
-install-xsitecopy: install-common
-	@echo Installing additional GNOME requirements...
-	@echo Creating directories...
-	$(mkinstalldirs) $(DESTDIR)$(GHELPDIR) $(DESTDIR)$(XSC_HELP) $(DESTDIR)$(DESKTOP_DIR) $(DESTDIR)$(PNG_DIR) $(DESTDIR)$(GLADE_DIR)
-	@echo Installing help files...
-	set -e; cd $(top_srcdir)/gnome/doc && for f in *.html topic.dat; do \
-		$(INSTALL_DATA) $$f $(DESTDIR)$(XSC_HELP)/$$f; \
-	done
-	@echo Installing images...
-	set -e; cd $(top_srcdir)/gnome/share && for f in *.png; do \
-		$(INSTALL_DATA) $$f $(DESTDIR)$(PNG_DIR)/$$f; \
-	done
-	@echo Installing user-interface components...
-	$(INSTALL_DATA) $(XSC_GLADE) $(DESTDIR)$(GLADE_DIR)/sitecopy-dialogs.glade
-	@echo Adding desktop shortcut...
-	$(INSTALL_DATA) $(XSC_DESKTOP) $(DESTDIR)$(DESKTOP_DIR)/xsitecopy.desktop
-	@echo
-	@echo "XSitecopy installation finished."
 	@echo
 
 clean:
