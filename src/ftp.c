@@ -1008,9 +1008,13 @@ ftp_read_file(ftp_session *sess, const char *remotefile,
 
     if (ftp_data_open(sess, "RETR %s", remotefile) == FTP_READY) {
 	char buffer[BUFSIZ];
-	while ((ret = ne_sock_read(sess->dtpsock, buffer, sizeof buffer))
-	       > 0)
-	    reader(userdata, buffer, ret);
+        ne_off_t count = 0;
+
+        while ((ret = ne_sock_read(sess->dtpsock, buffer, 
+                                   sizeof buffer)) > 0) {
+            reader(userdata, buffer, ret);
+            fe_transfer_progress(count += ret, -1);
+        }
 	if ((dtp_close(sess, 0) == FTP_SENT) && (ret == NE_SOCK_CLOSED)) {
 	    return FTP_OK;
 	}
