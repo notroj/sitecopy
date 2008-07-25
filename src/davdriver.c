@@ -62,11 +62,21 @@ struct fetch_context {
     const char *root;
 };
 
-#define ENABLE_PROGRESS do { ne_set_progress(sess, site_sock_progress_cb, NULL); } while (0)
 
-#if NE_VERSION_MAJOR == 0 && NE_VERSION_MINOR > 26
-#define DISABLE_PROGRESS do { ne_set_notifier(sess, NULL, NULL); } while (0)
+#if NE_VERSION_MAJOR > 0 || NE_VERSION_MINOR > 26
+/* For the neon 0.27 notifier API, switch out the userdata pointer passed to the
+ * callback depending on whether upload or download progress is needed: */
+#define PROGRESS_UPLOAD_MAGIC (void *)(0x1)
+#define PROGRESS_DOWNLOAD_MAGIC (void *)(0x2)
+
+#define PROGRESS_UPLOAD ne_set_notifier(sess, notify_status, PROGRESS_UPLOAD_MAGIC)
+#define PROGRESS_DOWNLOAD ne_set_notifier(sess, notify_status, PROGRESS_DOWNLOAD_MAGIC)
+#define DISABLE_PROGRESS ne_set_notifier(sess, notify_status, NULL)
+
 #else
+
+#define PROGRESS_DOWNLOAD do { ne_set_progress(sess, site_sock_progress_cb, NULL); } while (0)
+#define PROGRESS_UPLOAD PROGRESS_DOWNLOAD
 #define DISABLE_PROGRESS do { ne_set_progress(sess, NULL, NULL); } while (0)
 #endif
 
@@ -144,7 +154,8 @@ proxy_auth_cb(void *userdata, const char *realm, int attempt,
 		       username, password);
 }
 
-#if NE_VERSION_MINOR < 27
+#ifndef PROGRESS_UPLOAD_MAGIC
+/* Pre neon-0.27 API: */
 static void notify_cb(void *userdata, ne_conn_status status, const char *info)
 {
 
@@ -161,10 +172,21 @@ static void notify_cb(void *userdata, ne_conn_status status, const char *info)
 #undef MAP
 }
 #else
+/* neon 0.27 notifier API: */
 static void notify_status(void *userdata, ne_session_status status,
                           const ne_session_status_info *info)
 {
     switch (status) {
+    case ne_status_recving:
+        if (userdata == PROGRESS_DOWNLOAD_MAGIC) {
+            fe_transfer_progress(info->sr.progress, info->sr.total);
+        }
+        break;
+    case ne_status_sending:
+        if (userdata == PROGRESS_UPLOAD_MAGIC) {
+            fe_transfer_progress(info->sr.progress, info->sr.total);
+        }
+        break;
     case ne_status_lookup:
         fe_connection(fe_namelookup, info->lu.hostname);
         break;
@@ -382,7 +404,7 @@ static int file_upload(void *session, const char *local, const char *remote,
     }
     
     eremote = ne_path_escape(remote);
-    ENABLE_PROGRESS;
+    PROGRESS_UPLOAD;
     ret = ne_put(sess, eremote, fd);
     DISABLE_PROGRESS;
     free(eremote);
@@ -449,7 +471,7 @@ file_upload_cond(void *session, const char *local, const char *remote,
     }
     
     eremote = ne_path_escape(remote);
-    ENABLE_PROGRESS;
+    PROGRESS_UPLOAD;
     ret = h2s(sess, put_if_unmodified(sess, eremote, fd, t));
     DISABLE_PROGRESS;
     free(eremote);
@@ -486,7 +508,7 @@ static int file_download(void *session, const char *local, const char *remote,
     }
 
     eremote = ne_path_escape(remote);
-    ENABLE_PROGRESS;
+    PROGRESS_DOWNLOAD;
     ret = h2s(sess, ne_get(sess, eremote, fd));
     DISABLE_PROGRESS;
     free(eremote);
@@ -509,7 +531,7 @@ static int file_read(void *session, const char *remote,
 
     eremote = ne_path_escape(remote);    
     req = ne_request_create(sess, "GET", eremote);
-    ENABLE_PROGRESS;
+    PROGRESS_DOWNLOAD;
     do {
 	char buf[BUFSIZ];
 	ret = ne_begin_request(req);
