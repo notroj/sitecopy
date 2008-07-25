@@ -140,7 +140,6 @@ AC_CHECK_HEADERS(stdarg.h string.h strings.h sys/time.h regex.h \
 
 SOCKLEN_ARG_TYPE
 
-ALL_LINGUAS="ru fr cs ja de tr nn it"
 AM_GNU_GETTEXT([no-libtool])
 
 if test "$USE_NLS" = "yes"; then
