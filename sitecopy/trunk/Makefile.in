@@ -32,7 +32,6 @@ LIBS = @NEON_LIBS@ @LIBINTL@ @LIBS@
 CC = @CC@
 
 # libintl must be built first.
-SUBDIRS = intl lib/neon
 EXPATDIR = lib/expat
 
 INSTALL_PROGRAM = @INSTALL_PROGRAM@
@@ -40,8 +39,10 @@ INSTALL_DATA = @INSTALL_DATA@
 INSTALL = @INSTALL@
 mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
 
-# Target is the name of the executable
-TARGET = @TARGET@@EXEEXT@
+TARGET = sitecopy@EXEEXT@
+TARGET_NEON = .stamp-neon-@NEON_BUILD_BUNDLED@
+TARGET_INTL = .stamp-intl-@BUILD_INCLUDED_LIBINTL@
+SUBDIRS = lib/neon intl
 
 OBJECTS = src/sites.o src/sitefiles.o src/sitestore.o \
 	src/rcfile.o src/common.o src/nulldriver.o src/lsparser.o \
@@ -58,27 +59,23 @@ DATAFILES = doc/examplerc doc/changes.awk
 DOCS = README NEWS THANKS doc/update.sh
 MANLANGS = fr
 
-all: $(TARGET)
-
-.PHONY: all again clean distclean reminders install-common	\
-	install-sitecopy install-nls subdirs ChangeLog
+.PHONY: all all-recursive again clean distclean reminders install-common	\
+	install-sitecopy install-nls ChangeLog
 
 .SUFFIXES:
 .SUFFIXES: .c .o
 
-$(TARGET): subdirs $(ALLOBJS)
+all: all-recursive $(TARGET)
+
+all-recursive:
+	@for d in $(SUBDIRS); do (cd $$d && $(MAKE) all) || exit 1; done
+
+$(TARGET): $(TARGET_NEON) $(TARGET_INTL) $(ALLOBJS)
 	$(CC) $(CFLAGS) $(LDFLAGS) -o $@ $(OBJECTS) $(LIBS) $(LIBOBJS)
 	@echo
 	@echo " Compilation complete. Run 'make install' to install sitecopy."
 	@echo " (You may need to become root to do this)"
 	@echo
-
-subdirs: $(SUBDIRS)
-	@for d in $(SUBDIRS); do \
-	echo ">>> Entering $$d"; \
-	(cd $$d && $(MAKE) all) || exit 1; \
-	echo "<<< Leaving $$d"; \
-	done
 
 .c.o:
 	$(CC) $(ALL_CFLAGS) -o $@ -c $<
@@ -89,10 +86,19 @@ Makefile: Makefile.in
 # Various tester utils which can also be built.
 #
 
+.stamp-neon-no .stamp-intl-no:
+	@echo timestamp > $@
+
+.stamp-neon-yes: lib/neon/libneon.a
+	@echo timestamp > $@
+
+.stamp-intl-yes: lib/intl/libintl.a
+	@echo timestamp > $@
+
 # RFC1123 date/time tester
 # netrc parser tester
 netrc: lib/netrc.c
-	$(CC) $(ALL_CFLAGS) -DSTANDALONE -o $@ $^
+	$(CC) $(LDFLAGS) $(ALL_CFLAGS) -DSTANDALONE -o $@ $^
 
 # Dependencies:
 
@@ -163,7 +169,7 @@ install-sitecopy: install-common
 	@echo
 
 clean:
-	rm -f $(ALLOBJS)
+	rm -f $(ALLOBJS) $(TARGET)
 	for d in $(SUBDIRS) po; do (cd $$d && $(MAKE) clean) || exit 1; done
 
 again: clean
