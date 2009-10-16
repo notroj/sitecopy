@@ -109,8 +109,8 @@ if test "$sc_cv_gnu_fnmatch" = "no"; then
    AC_LIBOBJ(lib/fnmatch)
 fi
 
-# Support neon 0.24 through 0.28
-NE_REQUIRE_VERSIONS([0], [24 25 26 27 28])
+# Support neon 0.24 through 0.29
+NE_REQUIRE_VERSIONS([0], [24 25 26 27 28 29])
 
 dnl But we don't use zlib or ACL support
 NEON_WITHOUT_ZLIB
