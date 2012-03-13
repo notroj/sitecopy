@@ -1,6 +1,6 @@
 /* 
    sitecopy, for managing remote web sites. Generic(ish) FTP routines.
-   Copyright (C) 1998-2005, Joe Orton <joe@manyfish.co.uk>
+   Copyright (C) 1998-2005, 2009, 2012, Joe Orton <joe@manyfish.co.uk>
                                                                      
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -134,6 +134,8 @@ static int ftp_data_open(ftp_session *sess, const char *command, ...)
 
 static int get_modtime(ftp_session *sess, const char *root,
 		       const char *filename);
+
+static int maybe_chdir(ftp_session *sess, const char **remotefile);
 
 /* Sets session error to system errno value 'errnum'. */
 static void set_syserr(ftp_session *sess, const char *error, int errnum)
@@ -604,6 +606,12 @@ int ftp_finish(ftp_session *sess)
  * FTP state response */
 int ftp_mkdir(ftp_session *sess, const char *dir)
 {
+    int ret;
+
+    if ((ret = maybe_chdir(sess, &dir)) != FTP_OK) {
+        return ret;
+    }
+    
     return execute(sess, "MKD %s", dir);
 }
  
@@ -1127,8 +1135,13 @@ int ftp_fetch(ftp_session *sess, const char *startdir, struct proto_file **list)
     struct proto_file *tail = NULL;
     struct ls_context *lsctx;
     int ret;
+    const char *root = startdir;
 
-    if ((ret = ftp_data_open(sess, "LIST -la %s", startdir)) != FTP_READY) {
+    if ((ret = maybe_chdir(sess, &root)) != FTP_OK) {
+        return ret;
+    }
+
+    if ((ret = ftp_data_open(sess, "LIST %s", root)) != FTP_READY) {
         return FTP_ERROR;
     }
 
