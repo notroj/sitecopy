@@ -110,18 +110,10 @@ if test "$sc_cv_gnu_fnmatch" = "no"; then
 fi
 
 # Support neon 0.24 through 0.29
-NE_REQUIRE_VERSIONS([0], [24 25 26 27 28 29])
-
-dnl But we don't use zlib or ACL support
-NEON_WITHOUT_ZLIB
-NEON_WITHOUT_ACL
+dnl NE_REQUIRE_VERSIONS([0], [30 31 32])
 
 dnl Build neon
-NEON_VPATH_BUNDLED(["\$(top_srcdir)/lib/neon"], ["\$(top_builddir)/lib/neon"], [
-	NEON_XML_PARSER([\$(top_srcdir)/lib/expat],
-                        [\$(top_builddir)/lib/expat])
-	NEON_NORMAL_BUILD
-])
+NEON_LIBRARY
 
 dnl Check for getopt_long
 AC_CHECK_FUNC(getopt_long,,[AC_LIBOBJ(lib/getopt)
@@ -140,7 +132,10 @@ AC_CHECK_HEADERS(stdarg.h string.h strings.h sys/time.h regex.h \
 
 SOCKLEN_ARG_TYPE
 
-AM_GNU_GETTEXT([no-libtool])
+AM_GNU_GETTEXT([external])
+
+BUILD_INCLUDED_LIBINTL=no
+AC_SUBST(BUILD_INCLUDED_LIBINTL)
 
 if test "$USE_NLS" = "yes"; then
     if test "$USE_INCLUDED_LIBINTL" = "yes"; then
@@ -171,7 +166,7 @@ dnl Makefile substitutions
 
 AC_SUBST(EXTRAOBJS)
 
-AC_CONFIG_FILES([Makefile lib/neon/Makefile po/Makefile.in intl/Makefile])
+AC_CONFIG_FILES([Makefile po/Makefile.in])
 
 AC_OUTPUT
 

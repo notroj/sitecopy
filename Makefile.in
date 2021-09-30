@@ -42,7 +42,7 @@ mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
 TARGET = sitecopy@EXEEXT@
 TARGET_NEON = .stamp-neon-@NEON_BUILD_BUNDLED@
 TARGET_INTL = .stamp-intl-@BUILD_INCLUDED_LIBINTL@
-SUBDIRS = lib/neon intl
+SUBDIRS = 
 
 OBJECTS = src/sites.o src/sitefiles.o src/sitestore.o \
 	src/rcfile.o src/common.o src/nulldriver.o src/lsparser.o \
