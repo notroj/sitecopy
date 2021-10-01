@@ -1,0 +1,12 @@
+/Makefile
+/sitecopy
+/configure
+/config.status
+/config.log
+/config.h*
+/autom4te.*
+/aclocal.m4
+/po/Makefile
+/po/Makefile.in
+/po/POTFILES
+/.version
