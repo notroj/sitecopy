@@ -642,7 +642,7 @@ static int dtp_open_active(ftp_session *sess, const char *command)
     char *a, *p;
     int ret;
     int listener;
-    ksize_t alen;
+    socklen_t alen;
     struct sockaddr_in addr;
 
     ret = ftp_open(sess);

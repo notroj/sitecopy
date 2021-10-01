@@ -130,7 +130,7 @@ AC_TYPE_SIGNAL
 AC_CHECK_HEADERS(stdarg.h string.h strings.h sys/time.h regex.h \
 	locale.h langinfo.h stdlib.h unistd.h limits.h sys/select.h fcntl.h)
 
-SOCKLEN_ARG_TYPE
+AX_TYPE_SOCKLEN_T
 
 AM_GNU_GETTEXT([external])
 
