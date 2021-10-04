@@ -9,9 +9,13 @@ jobs:
       fail-fast: false
       matrix:
         os: [ubuntu-18.04, ubuntu-20.04]
+        cflags: [-O2 -g, -Wall -O2 -g -Werror]
+        conf-debug: [ enable, disable ]
+        conf-warn: [ enable, disable ]
     steps:
     - uses: actions/checkout@v2
     - run: sudo apt-get update && sudo apt-get -y install libneon27-dev gettext
     - run: ./autogen.sh
-    - run: ./configure
-    - run: make
+    - run: ./configure --${{matrix.conf-debug}}-debug 
+                       --${{matrix.conf-warn}}-warnings
+    - run: make CFLAGS="${{matrix.cflags}}"
