@@ -18,4 +18,5 @@ jobs:
     - run: ./autogen.sh
     - run: ./configure --${{matrix.conf-debug}}-debug 
                        --${{matrix.conf-warn}}-warnings
-    - run: make CFLAGS="${{matrix.cflags}}"
+                       CFLAGS="${{matrix.cflags}}"
+    - run: make 
