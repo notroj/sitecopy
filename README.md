@@ -17,12 +17,9 @@ remote server, and work from that.
    on how to start using sitecopy.
  * For information on the OS/2 port, see 'README.emx'
  * For information on the GNOME interface, see 'README.gnome'
- * Send bug reports, feature requests etc to <sitecopy@lists.manyfish.co.uk>
- * Web site at http://www.manyfish.co.uk/sitecopy/
- * Discussion list: subscribe by mail to
-      <sitecopy-request@lists.manyfish.co.uk>, or
-   via the Web at http://www.manyfish.co.uk/mailman/listinfo/sitecopy/
-
+ * Web site at https://www.manyfish.co.uk/sitecopy/
+ * Github repository: https://github.com/notroj/sitecopy/
+   
 sitecopy is:
    Copyright (C) 1998-2005 Joe Orton
 The GNOME frontend is:

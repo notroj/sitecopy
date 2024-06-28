@@ -1374,7 +1374,7 @@ static void usage(void)
 "  -u, --update          Update the remote site\n"
 "  -h, --help            Display this help message\n"
 "  -V, --version         Display version information\n"
-"Please send feature requests and bug reports to sitecopy@lyra.org\n"));
+"Please send feature requests and bug reports via %s\n"), PACKAGE_BUGREPORT);
 }
 
 
