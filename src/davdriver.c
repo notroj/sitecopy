@@ -232,15 +232,6 @@ static int verify_certificate(void *userdata, int failures,
 {
     struct site *site = userdata;
 
-    /* If the server cert has not changed since the user accepted it,
-     * trust the cert, unless it has expired, in which case the user
-     * should get a warning. */
-    if (site->server_cert 
-        && ne_ssl_cert_cmp(cert, site->server_cert) == 0
-        && (failures & NE_SSL_EXPIRED) == 0) {
-        return 0;
-    }
-
     if (fe_accept_cert(cert, failures)) {
         /* Not accepted by user => fail verification. */
         return -1;
@@ -279,6 +270,9 @@ static int init(void **session, struct site *site)
                              site->certfile);
                 return SITE_FAILED;
             }
+        }
+        else {
+            ne_ssl_trust_default_ca(sess);
         }
         ne_ssl_set_verify(sess, verify_certificate, site);
     }
