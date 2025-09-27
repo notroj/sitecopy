@@ -6,7 +6,6 @@
 inmk=Makefile.in.in
 tmpmk=`mktemp /tmp/sitecopy.XXXXXX`
 pot=`mktemp /tmp/sitecopy.XXXXXX`
-trap 'rm -f $tmpmk $pot' TERM INT 0
 
 cd po
 
@@ -38,7 +37,8 @@ s/@GMSGFMT@/msgfmt/g;
 s/@MSGFMT@/msgfmt/g;
 s/@XGETTEXT@/xgettext/g;
 s/@MSGMERGE@/msgmerge/g;
-s/@XGETTEXT_EXTRA_OPTIONS@/--msgid-bugs-address sitecopy@lists.manyfish.co.uk/g;
+s/@MSGMERGE_FOR_MSGFMT_OPTION@//g;
+s|@XGETTEXT_EXTRA_OPTIONS@|--msgid-bugs-address https://github.com/notroj/sitecopy --from-code=UTF-8|g;
 s/: Makefile.*/:/g;
 s/\$(MAKE) update-gmo/echo Done/g;" $inmk > $tmpmk
 
