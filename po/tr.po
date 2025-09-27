@@ -6,11 +6,12 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: sitecopy-0.10.10\n"
-"Report-Msgid-Bugs-To: sitecopy@lyra.org\n"
-"POT-Creation-Date: 2008-07-16 16:31+0100\n"
+"Report-Msgid-Bugs-To: https://github.com/notroj/sitecopy\n"
+"POT-Creation-Date: 2025-09-27 08:28+0100\n"
 "PO-Revision-Date: 2001-01-03 HO:MI+ZONE\n"
 "Last-Translator: A. Sinan Unur <sinan@unur.com>\n"
 "Language-Team: tr\n"
+"Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=iso-8859-9\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -47,7 +48,7 @@ msgstr "inceleniyor"
 msgid "remote"
 msgstr "sunucu"
 
-#: src/console_fe.c:126 gnome/init.c:198
+#: src/console_fe.c:126
 msgid "Update"
 msgstr "Güncelleþtir"
 
@@ -545,12 +546,12 @@ msgstr "  (ASCII)"
 msgid "Link: %s - target %s\n"
 msgstr "Link: %s - hedefi %s\n"
 
-#: src/console_fe.c:979 gnome/init.c:402
+#: src/console_fe.c:979
 #, c-format
 msgid "%s: Error: Could not open rcfile: %s.\n"
 msgstr "%s: Hata: Kurulum dosyasý %s açýlamadý.\n"
 
-#: src/console_fe.c:983 gnome/init.c:407
+#: src/console_fe.c:983
 #, c-format
 msgid ""
 "%s: rcfile corrupt at line %d:\n"
@@ -599,8 +600,8 @@ msgstr ""
 #, c-format
 msgid "%s: Cannot use a relative remote directory in %s (site `%s').\n"
 msgstr ""
-"%s: %s protokolü ile sunucuda göreli kütüklerin kullanýlmasý mümkün deðil (`%"
-"s' sitesi).\n"
+"%s: %s protokolü ile sunucuda göreli kütüklerin kullanýlmasý mümkün deðil "
+"(`%s' sitesi).\n"
 
 #: src/console_fe.c:1029
 #, c-format
@@ -934,7 +935,7 @@ msgid ""
 "  -u, --update          Update the remote site\n"
 "  -h, --help            Display this help message\n"
 "  -V, --version         Display version information\n"
-"Please send feature requests and bug reports to sitecopy@lyra.org\n"
+"Please send feature requests and bug reports via %s\n"
 msgstr ""
 " -r, --rcfile=FILE     Ayrý bir kurulum dosyasý kullan.\n"
 " -p, --storepath=PATH  Ayrý bir veritabaný kütüðü kullan.\n"
@@ -961,69 +962,69 @@ msgstr ""
 "Hata raporlarý ve isteklerinizi sitecopy@lyra.org adresine.\n"
 "Ýngilizce olarak iletin.\n"
 
-#: src/sitestore.c:326
+#: src/sitestore.c:350
 #, c-format
 msgid "Invalid checksum at line %d"
 msgstr ""
 
-#: src/sitestore.c:371
+#: src/sitestore.c:395
 #, c-format
 msgid "Boolean missing in 'ascii' at line %d"
 msgstr ""
 
-#: src/sitestore.c:396
+#: src/sitestore.c:420
 #, c-format
 msgid "Size overflow (%s) in '%s' at line %d"
 msgstr ""
 
-#: src/davdriver.c:195
+#: src/davdriver.c:221
 msgid "The connection timed out."
 msgstr "Baðlantý süre sýnýrý aþýldý."
 
-#: src/davdriver.c:224
+#: src/davdriver.c:241
 #, fuzzy
 msgid "Could not write SSL certificate"
 msgstr "%s dosyasýna yazým yapýlamadý"
 
-#: src/davdriver.c:244
+#: src/davdriver.c:261
 msgid "SSL support has not be compiled in."
 msgstr "SSL desteði yok."
 
-#: src/davdriver.c:252
+#: src/davdriver.c:269
 #, fuzzy, c-format
 msgid "Could not load certificate `%s'."
 msgstr "%s dosyasýna yazým yapýlamadý"
 
-#: src/davdriver.c:290
+#: src/davdriver.c:310
 #, fuzzy, c-format
 msgid "Could not read SSL client certificate '%s'."
 msgstr "%s dosyasýna yazým yapýlamadý"
 
-#: src/davdriver.c:303
+#: src/davdriver.c:323
 #, fuzzy, c-format
 msgid "Could not decrypt SSL client certificate '%s'."
 msgstr "%s dosyasýna yazým yapýlamadý"
 
-#: src/davdriver.c:325
+#: src/davdriver.c:345
 msgid "The server does not appear to be a WebDAV server."
 msgstr "Bu sunucu WebDAV sunucusu deðil."
 
-#: src/davdriver.c:330
+#: src/davdriver.c:350
 msgid "The server does not support the executable live property."
 msgstr "The server does not support the executable live property."
 
-#: src/davdriver.c:376 src/davdriver.c:443 src/davdriver.c:480 src/ftp.c:888
-#: src/ftp.c:972
+#: src/davdriver.c:396 src/davdriver.c:463 src/davdriver.c:500 src/ftp.c:896
+#: src/ftp.c:980
 #, fuzzy
 msgid "Could not open file"
 msgstr "Dosya açýlamadý: "
 
-#: src/davdriver.c:411
+#: src/davdriver.c:431
 #, fuzzy, c-format
 msgid "Could not stat file: %s"
 msgstr "%s dosyasýna yazým yapýlamadý"
 
-#: src/davdriver.c:670
+#: src/davdriver.c:690
 msgid "Could not access resource"
 msgstr "Kaynaða eriþim baþarýsýz oldu"
 
@@ -1059,956 +1060,440 @@ msgstr "Sembolik linkin hedefi okunamadý."
 msgid "Unknown system error"
 msgstr "Bilinmeyen sistem hatasý"
 
-#: src/ftp.c:153
+#: src/ftp.c:155
 #, c-format
 msgid "%s: connection was closed by server."
 msgstr "%s: baðlantý sunucu tarafinden kesildi."
 
-#: src/ftp.c:157
+#: src/ftp.c:159
 #, c-format
 msgid "%s: connection timed out."
 msgstr "%s: baðlantý bekleme sýnýrý aþýldý."
 
-#: src/ftp.c:195
+#: src/ftp.c:197
 #, fuzzy
 msgid "Could not read response line"
 msgstr "Yanýt metni okunamadý"
 
-#: src/ftp.c:229
+#: src/ftp.c:231
 #, fuzzy
 msgid "Cannot parse MDTM response; wrong length."
 msgstr "Durum satýrý anlaþýlamadý."
 
-#: src/ftp.c:236
+#: src/ftp.c:238
 #, fuzzy
 msgid "Cannot parse MDTM response."
 msgstr "Durum satýrý anlaþýlamadý."
 
-#: src/ftp.c:260
+#: src/ftp.c:262
 #, fuzzy
 msgid "Could not find address in PASV response"
 msgstr "Yanýt metni okunamadý"
 
-#: src/ftp.c:267
+#: src/ftp.c:269
 #, fuzzy
 msgid "Could not parse PASV response"
 msgstr "Yanýt metni okunamadý"
 
-#: src/ftp.c:276
+#: src/ftp.c:278
 msgid "Invalid IP address in PASV response"
 msgstr ""
 
-#: src/ftp.c:296
+#: src/ftp.c:298
 #, fuzzy
 msgid "Malformed EPSV response"
 msgstr "Yanýt metni okunamadý"
 
-#: src/ftp.c:304
+#: src/ftp.c:306
 #, fuzzy
 msgid "Malformed port in EPSV response"
 msgstr "Yanýt metni okunamadý"
 
-#: src/ftp.c:449
+#: src/ftp.c:451
 msgid "Error sending file"
 msgstr ""
 
-#: src/ftp.c:463 src/ftp.c:489
+#: src/ftp.c:465 src/ftp.c:491
 #, fuzzy
 msgid "Error reading file"
 msgstr "Ýstek metni gönderilirken hata"
 
-#: src/ftp.c:480
+#: src/ftp.c:482
 #, fuzzy
 msgid "Could not send file"
 msgstr "Dosya açýlamadý: "
 
-#: src/ftp.c:510 src/ftp.c:991
+#: src/ftp.c:512 src/ftp.c:999
 #, fuzzy
 msgid "Error writing to file"
 msgstr "Yanýt beklerken hata"
 
-#: src/ftp.c:516
+#: src/ftp.c:518
 msgid "Receiving file"
 msgstr ""
 
-#: src/ftp.c:532
+#: src/ftp.c:534
 #, fuzzy
 msgid "Could not connect passive data socket"
 msgstr "SSL baðlantýsý kurulamadý"
 
-#: src/ftp.c:647
+#: src/ftp.c:655
 msgid "Active open failed: could not determine address of control socket"
 msgstr ""
 
-#: src/ftp.c:659
+#: src/ftp.c:667
 #, fuzzy
 msgid "Active open failed: could not create socket"
 msgstr "SSL baðlantýsý kurulamadý"
 
-#: src/ftp.c:667
+#: src/ftp.c:675
 msgid "Active open failed: could not bind to address"
 msgstr ""
 
-#: src/ftp.c:677
+#: src/ftp.c:685
 msgid "Active open failed: could not determine address of data socket"
 msgstr ""
 
-#: src/ftp.c:684
+#: src/ftp.c:692
 #, fuzzy
 msgid "Could not determine bound port number for data socket"
 msgstr "SSL baðlantýsý kurulamadý"
 
-#: src/ftp.c:727
+#: src/ftp.c:735
 msgid "Active open failed: could not accept connection"
 msgstr ""
 
-#: src/ftp.c:800
+#: src/ftp.c:808
 msgid "Error closing data socket"
 msgstr ""
 
-#: src/ftp.c:894
+#: src/ftp.c:902
 #, fuzzy
 msgid "Could not determine length of file"
 msgstr "Dosya açýlamadý: "
 
-#: src/ftp.c:905
+#: src/ftp.c:913
 #, fuzzy
 msgid "Could not rewind to beginning of file"
 msgstr "Dosya açýlamadý: "
 
-#: src/ftp.c:1152
+#: src/ftp.c:1164
 #, fuzzy
 msgid "Could not read 'LIST' response."
 msgstr "Yanýt metni okunamadý"
 
-#: src/ftp.c:1161
+#: src/ftp.c:1173
 #, fuzzy, c-format
 msgid "Parse error in LIST response: %s"
 msgstr "Yanýt metni okunamadý"
 
-#: gnome/init.c:51
-msgid "_New site..."
-msgstr ""
-
-#: gnome/init.c:51 gnome/init.c:171
-msgid "Create a new site definition"
-msgstr ""
-
-#: gnome/init.c:54
-msgid "_Open..."
-msgstr ""
-
-#: gnome/init.c:54
-msgid "Open a new rc file. (EXPERIMENTAL)."
-msgstr ""
-
-#: gnome/init.c:57
-msgid "_Save Sites"
-msgstr ""
-
-#: gnome/init.c:57 gnome/init.c:177
-msgid "Save the current site definitions"
-msgstr ""
-
-#: gnome/init.c:60
-msgid "Sav_e Sites As..."
-msgstr ""
-
-#: gnome/init.c:60
-msgid "Save the current site definitions to a file."
-msgstr ""
-
-#: gnome/init.c:63
 #, fuzzy
-msgid "_Delete this site"
-msgstr "%s dosyasýný sil"
+#~ msgid "_Delete this site"
+#~ msgstr "%s dosyasýný sil"
 
-#: gnome/init.c:63
-msgid "Delete the selected site entry"
-msgstr ""
-
-#: gnome/init.c:69
-msgid "E_xit"
-msgstr ""
-
-#: gnome/init.c:69 gnome/init.c:202
-msgid "Exit the program"
-msgstr ""
-
-#: gnome/init.c:78
 #, fuzzy
-msgid "_Initialise site"
-msgstr "Hazýrla"
+#~ msgid "_Initialise site"
+#~ msgstr "Hazýrla"
 
-#: gnome/init.c:78
-msgid "All files will be uploaded if a site is initialised"
-msgstr ""
-
-#: gnome/init.c:81
 #, fuzzy
-msgid "'_Catchup' site"
-msgstr "Güncelle"
+#~ msgid "'_Catchup' site"
+#~ msgstr "Güncelle"
 
-#: gnome/init.c:81
-msgid "Records the site as already updated."
-msgstr ""
-
-#: gnome/init.c:84
-msgid "_Fetch site listing"
-msgstr ""
-
-#: gnome/init.c:84
-msgid "Figures out which files are new/changed from the actual remote site."
-msgstr ""
-
-#: gnome/init.c:88
 #, fuzzy
-msgid "_Resynchronize site"
-msgstr "eþleþtiriliyor"
+#~ msgid "_Resynchronize site"
+#~ msgstr "eþleþtiriliyor"
 
-#: gnome/init.c:88
-msgid "Copies newer files from the remote site to the local drive."
-msgstr ""
-
-#: gnome/init.c:91
-msgid "_Update site..."
-msgstr ""
-
-#: gnome/init.c:91
-msgid "Apply the local site's changes to the remote site."
-msgstr ""
-
-#: gnome/init.c:94
-msgid "Update _ALL sites"
-msgstr ""
-
-#: gnome/init.c:94 gnome/init.c:137
-msgid "Performs the required operations on all site definitions. (TODO)."
-msgstr ""
-
-#: gnome/init.c:98
-msgid "Rescan local directory"
-msgstr ""
-
-#: gnome/init.c:98
 #, fuzzy
-msgid "Re-reads the local directory of the selected site."
-msgstr "%s: `%s' sitesinin tanýmýnda yerel kütük belirtilmemiþ.\n"
+#~ msgid "Re-reads the local directory of the selected site."
+#~ msgstr "%s: `%s' sitesinin tanýmýnda yerel kütük belirtilmemiþ.\n"
 
-#: gnome/init.c:106
-msgid "_Required updates"
-msgstr ""
-
-#: gnome/init.c:106
-msgid "Displays a brief report of any required updates."
-msgstr ""
-
-#: gnome/init.c:109
-msgid "Site web-r_eport"
-msgstr ""
-
-#: gnome/init.c:109
-msgid ""
-"Generates a web page detailing the changes required on the selected site."
-msgstr ""
-
-#: gnome/init.c:112
-msgid "Prin_t site info..."
-msgstr ""
-
-#: gnome/init.c:112
-msgid "Print information about the selected site"
-msgstr ""
-
-#: gnome/init.c:119
-msgid "_Backup files status"
-msgstr ""
-
-#: gnome/init.c:119
-msgid "Save the 'state' of your local files, in case of accident."
-msgstr ""
-
-#: gnome/init.c:122
-msgid "Restore files status..."
-msgstr ""
-
-#: gnome/init.c:122 gnome/init.c:129
-msgid "If a backup has previously been made, it will be restored."
-msgstr ""
-
-#: gnome/init.c:126
-msgid "_Backup site definitions"
-msgstr ""
-
-#: gnome/init.c:126
-msgid "Backup your site definitions, in case you delete your sites."
-msgstr ""
-
-#: gnome/init.c:129
-msgid "Restore site definitions..."
-msgstr ""
-
-#: gnome/init.c:137
-msgid "Preferences..."
-msgstr ""
-
-#: gnome/init.c:146
-msgid "_About XSitecopy"
-msgstr ""
-
-#: gnome/init.c:146
-msgid "Information about XSitecopy"
-msgstr ""
-
-#: gnome/init.c:158
-msgid "_File"
-msgstr ""
-
-#: gnome/init.c:159
 #, fuzzy
-msgid "_Operations"
-msgstr "Seçenekler: \n"
+#~ msgid "_Operations"
+#~ msgstr "Seçenekler: \n"
 
-#: gnome/init.c:160
-msgid "_Reports"
-msgstr ""
-
-#: gnome/init.c:161
-msgid "_Settings"
-msgstr ""
-
-#: gnome/init.c:162
-msgid "_Backup"
-msgstr ""
-
-#: gnome/init.c:163
-msgid "_Help"
-msgstr ""
-
-#: gnome/init.c:171
-msgid "New site"
-msgstr ""
-
-#: gnome/init.c:174
-msgid "Open"
-msgstr ""
-
-#: gnome/init.c:174
-msgid "Open a new site definitions file."
-msgstr ""
-
-#: gnome/init.c:177
-msgid "Save"
-msgstr ""
-
-#: gnome/init.c:180
 #, fuzzy
-msgid "Delete site"
-msgstr "%s dosyasýný sil"
+#~ msgid "Delete site"
+#~ msgstr "%s dosyasýný sil"
 
-#: gnome/init.c:180
-msgid "Delete the selected site"
-msgstr ""
-
-#: gnome/init.c:185
 #, fuzzy
-msgid "Initialise"
-msgstr "Hazýrla"
+#~ msgid "Initialise"
+#~ msgstr "Hazýrla"
 
-#: gnome/init.c:185
-msgid "Initialise the site (mark all files as needing to be updated)."
-msgstr ""
-
-#: gnome/init.c:188
 #, fuzzy
-msgid "Catch-up"
-msgstr "Güncelle"
+#~ msgid "Catch-up"
+#~ msgstr "Güncelle"
 
-#: gnome/init.c:188
-msgid "Mark all of the selected site's files as updated."
-msgstr ""
-
-#: gnome/init.c:194
 #, fuzzy
-msgid "Download"
-msgstr "%s dosyasý indiriliyor: ["
+#~ msgid "Download"
+#~ msgstr "%s dosyasý indiriliyor: ["
 
-#: gnome/init.c:194
-msgid "Download newer files from the remote site. (Use with care)"
-msgstr ""
-
-#: gnome/init.c:198
-msgid "Updates the selected site"
-msgstr ""
-
-#: gnome/init.c:202
-msgid "Quit"
-msgstr ""
-
-#: gnome/init.c:412
 #, fuzzy, c-format
-msgid "%s: Error: Could not read rcfile: %s.\n"
-msgstr "%s: Hata: Kurulum dosyasý %s açýlamadý.\n"
+#~ msgid "%s: Error: Could not read rcfile: %s.\n"
+#~ msgstr "%s: Hata: Kurulum dosyasý %s açýlamadý.\n"
 
-#: gnome/main.c:184
-msgid ""
-"Debugging level (sum of: 1=socket, 2=files, 4=rcfile, 8=WebDAV, 16=FTP, "
-"32=XML, 64=GNOME )"
-msgstr ""
-
-#: gnome/misc.c:580
 #, fuzzy, c-format
-msgid "Server not specified in site `%s'.\n"
-msgstr "%s: `%s' sitesinin tanýmýnda sunucu belirtilmemiþ.\n"
+#~ msgid "Server not specified in site `%s'.\n"
+#~ msgstr "%s: `%s' sitesinin tanýmýnda sunucu belirtilmemiþ.\n"
 
-#: gnome/misc.c:584
 #, fuzzy, c-format
-msgid "Remote directory not specified in site `%s'.\n"
-msgstr "%s: `%s' sitesinin tanýmýnda sunucudaki kütük belirtilmemiþ.\n"
+#~ msgid "Remote directory not specified in site `%s'.\n"
+#~ msgstr "%s: `%s' sitesinin tanýmýnda sunucudaki kütük belirtilmemiþ.\n"
 
-#: gnome/misc.c:588
 #, fuzzy, c-format
-msgid "Local directory not specified in site `%s'.\n"
-msgstr "%s: `%s' sitesinin tanýmýnda yerel kütük belirtilmemiþ.\n"
+#~ msgid "Local directory not specified in site `%s'.\n"
+#~ msgstr "%s: `%s' sitesinin tanýmýnda yerel kütük belirtilmemiþ.\n"
 
-#: gnome/misc.c:592
 #, fuzzy, c-format
-msgid ""
-"Could not read directory for `%s':\n"
-"\t%s\n"
-msgstr ""
-"%s: `%s'nin kütüðü okunamadý:\n"
-"\t%s\n"
+#~ msgid ""
+#~ "Could not read directory for `%s':\n"
+#~ "\t%s\n"
+#~ msgstr ""
+#~ "%s: `%s'nin kütüðü okunamadý:\n"
+#~ "\t%s\n"
 
-#: gnome/misc.c:596
 #, fuzzy, c-format
-msgid "Invalid port used in site `%s'.\n"
-msgstr "%s: `%s' sitesinin tanýmýnda geçersiz port belirtilmiþ.\n"
+#~ msgid "Invalid port used in site `%s'.\n"
+#~ msgstr "%s: `%s' sitesinin tanýmýnda geçersiz port belirtilmiþ.\n"
 
-#: gnome/misc.c:600
 #, fuzzy, c-format
-msgid "Protocol '%s' cannot maintain symbolic links (site `%s').\n"
-msgstr ""
-"%s: %s protokolü ile sembolik linklerin korunmasý mümkün deðil (`%s' "
-"sitesi).\n"
+#~ msgid "Protocol '%s' cannot maintain symbolic links (site `%s').\n"
+#~ msgstr ""
+#~ "%s: %s protokolü ile sembolik linklerin korunmasý mümkün deðil (`%s' "
+#~ "sitesi).\n"
 
-#: gnome/misc.c:604
 #, fuzzy, c-format
-msgid "Cannot use a relative remote directory protocol '%s' (site `%s').\n"
-msgstr ""
-"%s: %s protokolü ile sunucuda göreli kütüklerin kullanýlmasý mümkün deðil (`%"
-"s' sitesi).\n"
+#~ msgid "Cannot use a relative remote directory protocol '%s' (site `%s').\n"
+#~ msgstr ""
+#~ "%s: %s protokolü ile sunucuda göreli kütüklerin kullanýlmasý mümkün deðil "
+#~ "(`%s' sitesi).\n"
 
-#: gnome/misc.c:607
+#, fuzzy, c-format
+#~ msgid "Could not find 'relative' local directory"
+#~ msgstr "SSL baðlantýsý kurulamadý"
+
+#, fuzzy
+#~ msgid "Could not parse redirect destination URL"
+#~ msgstr "Durum satýrý anlaþýlamadý."
+
+#, fuzzy, c-format
+#~ msgid "SSL negotiation failed: %s"
+#~ msgstr "%s dosyasýna yazým yapýlamadý"
+
+#, fuzzy
+#~ msgid "Connection closed"
+#~ msgstr "Baðlantý sunucu tarafýndan kesildi"
+
+#, fuzzy
+#~ msgid "Secure connection truncated"
+#~ msgstr "Baðlantý süre sýnýrý aþýldý."
+
+#, fuzzy, c-format
+#~ msgid "SSL error: %s"
+#~ msgstr "%s: Hata: %s\n"
+
+#, fuzzy, c-format
+#~ msgid "SSL alert received: %s"
+#~ msgstr "%s: Hata: %s\n"
+
+#~ msgid "Line too long"
+#~ msgstr "Satýr çok uzun"
+
+#~ msgid "Host not found"
+#~ msgstr "Sunucu bulunamadý"
+
+#, fuzzy
+#~ msgid "Connection timed out"
+#~ msgstr "Baðlantý süre sýnýrý aþýldý."
+
+#, fuzzy
+#~ msgid "Could not create SSL structure"
+#~ msgstr "SSL baðlantýsý kurulamadý"
+
+#, fuzzy, c-format
+#~ msgid "%s: connection was closed by proxy server"
+#~ msgstr "%s: baðlantý ara sunucu tarafinden kesildi."
+
+#, fuzzy, c-format
+#~ msgid "%s: connection was closed by server"
+#~ msgstr "%s: baðlantý sunucu tarafinden kesildi."
+
+#, fuzzy, c-format
+#~ msgid "%s: connection timed out"
+#~ msgstr "%s: baðlantý bekleme sýnýrý aþýldý."
+
+#, fuzzy, c-format
+#~ msgid "Could not seek to offset %s of request body file: %s"
+#~ msgstr "%s dosyasýna yazým yapýlamadý"
+
+#~ msgid "Could not send request body"
+#~ msgstr "Ýstek metni gönderilemedi"
+
+#~ msgid "Could not read chunk size"
+#~ msgstr "Parça boyutu öðrenilemedi"
+
+#~ msgid "Could not parse chunk size"
+#~ msgstr "Parça boyutu anlaþýlamadý"
+
+#~ msgid "Could not read response body"
+#~ msgstr "Yanýt metni okunamadý"
+
+#, fuzzy
+#~ msgid "Could not read chunk delimiter"
+#~ msgstr "Parça boyutu öðrenilemedi"
+
+#~ msgid "Could not read status line"
+#~ msgstr "Durum satýrý okunamadý"
+
+#, fuzzy
+#~ msgid "Could not parse response status line"
+#~ msgstr "Durum satýrý anlaþýlamadý."
+
+#, fuzzy
+#~ msgid "Could not read interim response headers"
+#~ msgstr "Yanýt metni okunamadý"
+
+#~ msgid "Could not send request"
+#~ msgstr "Ýstek gönderilemedi"
+
+#~ msgid "Error reading response headers"
+#~ msgstr "Yanýt baþlýklarý okunurken hata"
+
+#~ msgid "Response header too long"
+#~ msgstr "Yanýt baþlýðý çok uzun"
+
+#, fuzzy, c-format
+#~ msgid "Could not resolve hostname `%s': %s"
+#~ msgstr "%s: Hata: %s sunucusunun adresi bulunamadý.\n"
+
 #, c-format
-msgid "%s's protocol does not currently support maintaining permissions."
-msgstr ""
+#~ msgid "Could not write to file: %s"
+#~ msgstr "%s dosyasýna yazým yapýlamadý"
 
-#: gnome/misc.c:611
 #, fuzzy, c-format
-msgid "Could not find 'relative' local directory"
-msgstr "SSL baðlantýsý kurulamadý"
+#~ msgid "Could not create SSL connection through proxy server: %s"
+#~ msgstr "Ara sunucu üzerinden SSL baðlantýsý kurulamadý"
 
-#: lib/neon/ne_redirect.c:92
 #, fuzzy
-msgid "Could not parse redirect destination URL"
-msgstr "Durum satýrý anlaþýlamadý."
+#~ msgid "Could not create socket"
+#~ msgstr "SSL baðlantýsý kurulamadý"
 
-#: lib/neon/ne_gnutls.c:162
-#, c-format
-msgid "[unprintable:#%lu]"
-msgstr ""
+#~ msgid "Could not connect to proxy server"
+#~ msgstr "Ara sunucuyla baðlantý kurulamadý"
 
-#: lib/neon/ne_gnutls.c:188
-msgid "[unprintable]"
-msgstr ""
+#~ msgid "Could not connect to server"
+#~ msgstr "Sunucuyla baðlantý kurulamadý"
 
-#: lib/neon/ne_gnutls.c:696 lib/neon/ne_openssl.c:419
-msgid "Server certificate was missing commonName attribute in subject name"
-msgstr ""
-
-#: lib/neon/ne_gnutls.c:736 lib/neon/ne_openssl.c:638
 #, fuzzy, c-format
-msgid "SSL negotiation failed: %s"
-msgstr "%s dosyasýna yazým yapýlamadý"
+#~ msgid "XML parse error at line %d: invalid element name"
+#~ msgstr ""
+#~ "%s: kurulum dosyasýnda bozukluk var. satýr %d:\n"
+#~ "%s\n"
 
-#: lib/neon/ne_gnutls.c:745
-msgid "Server did not send certificate chain"
-msgstr ""
-
-#: lib/neon/ne_openssl.c:451
-#, c-format
-msgid "Certificate verification error: %s"
-msgstr ""
-
-#: lib/neon/ne_openssl.c:657
-msgid "SSL server did not present certificate"
-msgstr ""
-
-#: lib/neon/ne_openssl.c:666
-msgid "Server certificate changed: connection intercepted?"
-msgstr ""
-
-#: lib/neon/ne_session.c:356 lib/neon/ne_session.c:367
-msgid "[invalid date]"
-msgstr ""
-
-#: lib/neon/ne_session.c:380
-msgid "certificate is not yet valid"
-msgstr ""
-
-#: lib/neon/ne_session.c:381
-msgid "certificate has expired"
-msgstr ""
-
-#: lib/neon/ne_session.c:382
-msgid "certificate issued for a different hostname"
-msgstr ""
-
-#: lib/neon/ne_session.c:383
-msgid "issuer is not trusted"
-msgstr ""
-
-#: lib/neon/ne_session.c:388
-msgid "Server certificate verification failed: "
-msgstr ""
-
-#: lib/neon/ne_socket.c:514 lib/neon/ne_socket.c:568 lib/neon/ne_socket.c:671
 #, fuzzy
-msgid "Connection closed"
-msgstr "Baðlantý sunucu tarafýndan kesildi"
+#~ msgid "Unknown error"
+#~ msgstr "Bilinmeyen sistem hatasý"
 
-#: lib/neon/ne_socket.c:578 lib/neon/ne_socket.c:683
+#, fuzzy, c-format
+#~ msgid "XML parse error at line %d: %s"
+#~ msgstr ""
+#~ "%s: kurulum dosyasýnda bozukluk var. satýr %d:\n"
+#~ "%s\n"
+
 #, fuzzy
-msgid "Secure connection truncated"
-msgstr "Baðlantý süre sýnýrý aþýldý."
+#~ msgid "Could not inflate data"
+#~ msgstr "Dosya açýlamadý: "
 
-#: lib/neon/ne_socket.c:590 lib/neon/ne_socket.c:695
-#, fuzzy, c-format
-msgid "SSL error: %s"
-msgstr "%s: Hata: %s\n"
-
-#: lib/neon/ne_socket.c:593
-#, c-format
-msgid "SSL error code %d/%d/%lu"
-msgstr ""
-
-#: lib/neon/ne_socket.c:676
-#, fuzzy, c-format
-msgid "SSL alert received: %s"
-msgstr "%s: Hata: %s\n"
-
-#: lib/neon/ne_socket.c:691
-msgid "SSL socket read failed"
-msgstr ""
-
-#: lib/neon/ne_socket.c:790
-msgid "Line too long"
-msgstr "Satýr çok uzun"
-
-#: lib/neon/ne_socket.c:935 lib/neon/ne_socket.c:941
-msgid "Host not found"
-msgstr "Sunucu bulunamadý"
-
-#: lib/neon/ne_socket.c:1048
 #, fuzzy
-msgid "Connection timed out"
-msgstr "Baðlantý süre sýnýrý aþýldý."
+#~ msgid "Could not initialize zlib"
+#~ msgstr "Dosyaya yazým yapýlamadý: "
 
-#: lib/neon/ne_socket.c:1210
-msgid "Socket descriptor number exceeds FD_SETSIZE"
-msgstr ""
+#, fuzzy, c-format
+#~ msgid "Could not parse response: %s"
+#~ msgstr "Yanýt metni okunamadý"
 
-#: lib/neon/ne_socket.c:1270
-msgid "Socket family not supported"
-msgstr ""
+#, fuzzy, c-format
+#~ msgid "Could not determine file size: %s"
+#~ msgstr "Dosya açýlamadý: "
 
-#: lib/neon/ne_socket.c:1493
-msgid "Client certificate verification failed"
-msgstr ""
-
-#: lib/neon/ne_socket.c:1509
-msgid "SSL disabled due to lack of entropy"
-msgstr ""
-
-#: lib/neon/ne_socket.c:1516
-msgid "SSL disabled due to library version mismatch"
-msgstr ""
-
-#: lib/neon/ne_socket.c:1522
 #, fuzzy
-msgid "Could not create SSL structure"
-msgstr "SSL baðlantýsý kurulamadý"
+#~ msgid "Resource does not support ranged GET requests"
+#~ msgstr "Sunucu kýsmi GET iþlemini desteklemiyor."
 
-#: lib/neon/ne_request.c:194
 #, fuzzy, c-format
-msgid "%s: connection was closed by proxy server"
-msgstr "%s: baðlantý ara sunucu tarafinden kesildi."
+#~ msgid "Could not authenticate to server: %s"
+#~ msgstr "Sunucuyla baðlantý kurulamadý"
 
-#: lib/neon/ne_request.c:197
 #, fuzzy, c-format
-msgid "%s: connection was closed by server"
-msgstr "%s: baðlantý sunucu tarafinden kesildi."
+#~ msgid "Could not authenticate to proxy server: %s"
+#~ msgstr "Ara sunucuyla baðlantý kurulamadý"
 
-#: lib/neon/ne_request.c:202
-#, fuzzy, c-format
-msgid "%s: connection timed out"
-msgstr "%s: baðlantý bekleme sýnýrý aþýldý."
-
-#: lib/neon/ne_request.c:307
-msgid "offset invalid"
-msgstr ""
-
-#: lib/neon/ne_request.c:312
-#, fuzzy, c-format
-msgid "Could not seek to offset %s of request body file: %s"
-msgstr "%s dosyasýna yazým yapýlamadý"
-
-#: lib/neon/ne_request.c:360
-msgid "Could not send request body"
-msgstr "Ýstek metni gönderilemedi"
-
-#: lib/neon/ne_request.c:699
-msgid "Could not read chunk size"
-msgstr "Parça boyutu öðrenilemedi"
-
-#: lib/neon/ne_request.c:706
-msgid "Could not parse chunk size"
-msgstr "Parça boyutu anlaþýlamadý"
-
-#: lib/neon/ne_request.c:743
-msgid "Could not read response body"
-msgstr "Yanýt metni okunamadý"
-
-#: lib/neon/ne_request.c:759
 #, fuzzy
-msgid "Could not read chunk delimiter"
-msgstr "Parça boyutu öðrenilemedi"
+#~ msgid "could not parse domain in Digest challenge"
+#~ msgstr "Durum satýrý anlaþýlamadý."
 
-#: lib/neon/ne_request.c:762
-msgid "Chunk delimiter was invalid"
-msgstr ""
-
-#: lib/neon/ne_request.c:868
-msgid "Could not read status line"
-msgstr "Durum satýrý okunamadý"
-
-#: lib/neon/ne_request.c:890
 #, fuzzy
-msgid "Could not parse response status line"
-msgstr "Durum satýrý anlaþýlamadý."
+#~ msgid "could not parse challenge"
+#~ msgstr "Parça boyutu anlaþýlamadý"
 
-#: lib/neon/ne_request.c:902
-#, fuzzy
-msgid "Could not read interim response headers"
-msgstr "Yanýt metni okunamadý"
+#, c-format
+#~ msgid ""
+#~ "Invalid HTTP status line in status element at line %d of response:\n"
+#~ "Status line was: %s"
+#~ msgstr ""
+#~ "Invalid HTTP status line in status element at line %d of response:\n"
+#~ "Status line was: %s"
 
-#: lib/neon/ne_request.c:936
-msgid "Could not send request"
-msgstr "Ýstek gönderilemedi"
+#~ msgid "^[yY]"
+#~ msgstr "^[eEyY]"
 
-#: lib/neon/ne_request.c:984 lib/neon/ne_request.c:1002
-#: lib/neon/ne_request.c:1012
-msgid "Error reading response headers"
-msgstr "Yanýt baþlýklarý okunurken hata"
+#~ msgid "^[nN]"
+#~ msgstr "^[hHnN]"
 
-#: lib/neon/ne_request.c:1030
-msgid "Response header too long"
-msgstr "Yanýt baþlýðý çok uzun"
+#, c-format
+#~ msgid "%s: option `%s' is ambiguous\n"
+#~ msgstr "%s: `%s' seçeneðini anlamý belirsiz\n"
 
-#: lib/neon/ne_request.c:1112
-msgid "Response exceeded maximum number of header fields"
-msgstr ""
+#, c-format
+#~ msgid "%s: option `--%s' doesn't allow an argument\n"
+#~ msgstr "%s: `--%s' seçeneði argüman almýyor\n"
 
-#: lib/neon/ne_request.c:1129
+#, c-format
+#~ msgid "%s: option `%c%s' doesn't allow an argument\n"
+#~ msgstr "%s: `%c%s' seçeneði argüman almýyor\n"
+
+#, c-format
+#~ msgid "%s: option `%s' requires an argument\n"
+#~ msgstr "%s: `%s' seçeneðine argüman gerek\n"
+
+#, c-format
+#~ msgid "%s: unrecognized option `--%s'\n"
+#~ msgstr "%s: `--%s' seçeneði bilinmiyor\n"
+
+#, c-format
+#~ msgid "%s: unrecognized option `%c%s'\n"
+#~ msgstr "%s: `%c%s' seçeneði bilinmiyor\n"
+
+#, c-format
+#~ msgid "%s: illegal option -- %c\n"
+#~ msgstr "%s: anlamsýz seçenek --%c\n"
+
+#, c-format
+#~ msgid "%s: invalid option -- %c\n"
+#~ msgstr "%s: geçersiz seçenek --%c\n"
+
+#, c-format
+#~ msgid "%s: option requires an argument -- %c\n"
+#~ msgstr "%s: %c seçeneðine argüman gerek\n"
+
 #, fuzzy, c-format
-msgid "Could not resolve hostname `%s': %s"
-msgstr "%s: Hata: %s sunucusunun adresi bulunamadý.\n"
-
-#: lib/neon/ne_request.c:1260
-msgid "Unknown transfer-coding in response"
-msgstr ""
-
-#: lib/neon/ne_request.c:1271
-msgid "Invalid Content-Length in response"
-msgstr ""
-
-#: lib/neon/ne_request.c:1344
-#, c-format
-msgid "Could not write to file: %s"
-msgstr "%s dosyasýna yazým yapýlamadý"
-
-#: lib/neon/ne_request.c:1417
-#, fuzzy, c-format
-msgid "Could not create SSL connection through proxy server: %s"
-msgstr "Ara sunucu üzerinden SSL baðlantýsý kurulamadý"
-
-#: lib/neon/ne_request.c:1464
-#, fuzzy
-msgid "Could not create socket"
-msgstr "SSL baðlantýsý kurulamadý"
-
-#: lib/neon/ne_request.c:1526
-msgid "Could not connect to proxy server"
-msgstr "Ara sunucuyla baðlantý kurulamadý"
-
-#: lib/neon/ne_request.c:1527
-msgid "Could not connect to server"
-msgstr "Sunucuyla baðlantý kurulamadý"
-
-#: lib/neon/ne_xml.c:280
-#, fuzzy, c-format
-msgid "XML parse error at line %d: invalid element name"
-msgstr ""
-"%s: kurulum dosyasýnda bozukluk var. satýr %d:\n"
-"%s\n"
-
-#: lib/neon/ne_xml.c:452
-#, fuzzy
-msgid "Unknown error"
-msgstr "Bilinmeyen sistem hatasý"
-
-#: lib/neon/ne_xml.c:537
-msgid "Invalid Byte Order Mark"
-msgstr ""
-
-#: lib/neon/ne_xml.c:625
-#, fuzzy, c-format
-msgid "XML parse error at line %d: %s"
-msgstr ""
-"%s: kurulum dosyasýnda bozukluk var. satýr %d:\n"
-"%s\n"
-
-#: lib/neon/ne_props.c:371 lib/neon/ne_props.c:435
-msgid "Response exceeds maximum property count"
-msgstr ""
-
-#: lib/neon/ne_compress.c:184
-#, c-format
-msgid "%s: %s (code %d)"
-msgstr ""
-
-#: lib/neon/ne_compress.c:232
-#, fuzzy
-msgid "Could not inflate data"
-msgstr "Dosya açýlamadý: "
-
-#: lib/neon/ne_compress.c:293
-#, fuzzy
-msgid "Could not initialize zlib"
-msgstr "Dosyaya yazým yapýlamadý: "
-
-#: lib/neon/ne_xmlreq.c:36
-#, fuzzy, c-format
-msgid "Could not parse response: %s"
-msgstr "Yanýt metni okunamadý"
-
-#: lib/neon/ne_basic.c:98
-#, fuzzy, c-format
-msgid "Could not determine file size: %s"
-msgstr "Dosya açýlamadý: "
-
-#: lib/neon/ne_basic.c:149
-msgid "Response did not include requested range"
-msgstr ""
-
-#: lib/neon/ne_basic.c:183
-msgid "Range is not satisfiable"
-msgstr ""
-
-#: lib/neon/ne_basic.c:188
-#, fuzzy
-msgid "Resource does not support ranged GET requests"
-msgstr "Sunucu kýsmi GET iþlemini desteklemiyor."
-
-#: lib/neon/ne_auth.c:130
-#, fuzzy, c-format
-msgid "Could not authenticate to server: %s"
-msgstr "Sunucuyla baðlantý kurulamadý"
-
-#: lib/neon/ne_auth.c:135
-#, fuzzy, c-format
-msgid "Could not authenticate to proxy server: %s"
-msgstr "Ara sunucuyla baðlantý kurulamadý"
-
-#: lib/neon/ne_auth.c:358
-#, c-format
-msgid "rejected %s challenge"
-msgstr ""
-
-#: lib/neon/ne_auth.c:374
-msgid "missing realm in Basic challenge"
-msgstr ""
-
-#: lib/neon/ne_auth.c:469
-msgid "invalid Negotiate token"
-msgstr ""
-
-#: lib/neon/ne_auth.c:492
-msgid "GSSAPI authentication error: "
-msgstr ""
-
-#: lib/neon/ne_auth.c:505
-#, c-format
-msgid "GSSAPI failure (code %u)"
-msgstr ""
-
-#: lib/neon/ne_auth.c:540
-msgid "ignoring empty Negotiate continuation"
-msgstr ""
-
-#: lib/neon/ne_auth.c:555
-msgid "Negotiate response verification failed: invalid response header token"
-msgstr ""
-
-#: lib/neon/ne_auth.c:577
-#, c-format
-msgid "Negotiate response verification failure: %s"
-msgstr ""
-
-#: lib/neon/ne_auth.c:697
-msgid "unknown algorithm in Digest challenge"
-msgstr ""
-
-#: lib/neon/ne_auth.c:701
-msgid "incompatible algorithm in Digest challenge"
-msgstr ""
-
-#: lib/neon/ne_auth.c:705
-msgid "missing parameter in Digest challenge"
-msgstr ""
-
-#: lib/neon/ne_auth.c:709
-msgid "initial Digest challenge was stale"
-msgstr ""
-
-#: lib/neon/ne_auth.c:716
-msgid "stale Digest challenge with new algorithm or realm"
-msgstr ""
-
-#: lib/neon/ne_auth.c:728
-#, fuzzy
-msgid "could not parse domain in Digest challenge"
-msgstr "Durum satýrý anlaþýlamadý."
-
-#: lib/neon/ne_auth.c:1036
-msgid "Digest mutual authentication failure: missing parameters"
-msgstr ""
-
-#: lib/neon/ne_auth.c:1041
-msgid "Digest mutual authentication failure: client nonce mismatch"
-msgstr ""
-
-#: lib/neon/ne_auth.c:1051
-msgid "Digest mutual authentication failure: could not parse nonce count"
-msgstr ""
-
-#: lib/neon/ne_auth.c:1056
-#, c-format
-msgid "Digest mutual authentication failure: nonce count mismatch (%u not %u)"
-msgstr ""
-
-#: lib/neon/ne_auth.c:1099
-msgid "Digest mutual authentication failure: request-digest mismatch"
-msgstr ""
-
-#: lib/neon/ne_auth.c:1225
-#, c-format
-msgid "ignored %s challenge"
-msgstr ""
-
-#: lib/neon/ne_auth.c:1304
-#, fuzzy
-msgid "could not parse challenge"
-msgstr "Parça boyutu anlaþýlamadý"
-
-#: lib/neon/ne_207.c:198
-#, c-format
-msgid ""
-"Invalid HTTP status line in status element at line %d of response:\n"
-"Status line was: %s"
-msgstr ""
-"Invalid HTTP status line in status element at line %d of response:\n"
-"Status line was: %s"
-
-#: lib/neon/ne_locks.c:584
-msgid "LOCK response missing Lock-Token header"
-msgstr ""
-
-#: lib/neon/ne_locks.c:759
-#, c-format
-msgid "Response missing activelock for %s"
-msgstr ""
-
-#: lib/neon/ne_locks.c:801
-#, c-format
-msgid "No activelock for <%s> returned in LOCK refresh response"
-msgstr ""
-
-#: lib/rpmatch.c:79
-msgid "^[yY]"
-msgstr "^[eEyY]"
-
-#: lib/rpmatch.c:82
-msgid "^[nN]"
-msgstr "^[hHnN]"
-
-#: lib/getopt.c:664
-#, c-format
-msgid "%s: option `%s' is ambiguous\n"
-msgstr "%s: `%s' seçeneðini anlamý belirsiz\n"
-
-#: lib/getopt.c:688
-#, c-format
-msgid "%s: option `--%s' doesn't allow an argument\n"
-msgstr "%s: `--%s' seçeneði argüman almýyor\n"
-
-#: lib/getopt.c:693
-#, c-format
-msgid "%s: option `%c%s' doesn't allow an argument\n"
-msgstr "%s: `%c%s' seçeneði argüman almýyor\n"
-
-#: lib/getopt.c:710 lib/getopt.c:883
-#, c-format
-msgid "%s: option `%s' requires an argument\n"
-msgstr "%s: `%s' seçeneðine argüman gerek\n"
-
-#: lib/getopt.c:739
-#, c-format
-msgid "%s: unrecognized option `--%s'\n"
-msgstr "%s: `--%s' seçeneði bilinmiyor\n"
-
-#: lib/getopt.c:743
-#, c-format
-msgid "%s: unrecognized option `%c%s'\n"
-msgstr "%s: `%c%s' seçeneði bilinmiyor\n"
-
-#: lib/getopt.c:769
-#, c-format
-msgid "%s: illegal option -- %c\n"
-msgstr "%s: anlamsýz seçenek --%c\n"
-
-#: lib/getopt.c:772
-#, c-format
-msgid "%s: invalid option -- %c\n"
-msgstr "%s: geçersiz seçenek --%c\n"
-
-#: lib/getopt.c:802 lib/getopt.c:932
-#, c-format
-msgid "%s: option requires an argument -- %c\n"
-msgstr "%s: %c seçeneðine argüman gerek\n"
-
-#: lib/getopt.c:849
-#, fuzzy, c-format
-msgid "%s: option `-W %s' is ambiguous\n"
-msgstr "%s: `%s' seçeneðini anlamý belirsiz\n"
+#~ msgid "%s: option `-W %s' is ambiguous\n"
+#~ msgstr "%s: `%s' seçeneðini anlamý belirsiz\n"
 
 # msgid "%s: option `-W %s' is ambiguous\n"
 # msgstr "`-W %s' seçeneðinin anlamý belirsiz\n"
-#: lib/getopt.c:867
 #, c-format
-msgid "%s: option `-W %s' doesn't allow an argument\n"
-msgstr "%s: `-W %s' seçeneði argüman almýyor\n"
+#~ msgid "%s: option `-W %s' doesn't allow an argument\n"
+#~ msgstr "%s: `-W %s' seçeneði argüman almýyor\n"
 
 #, fuzzy
 #~ msgid "%s\n"
