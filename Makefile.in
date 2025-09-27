@@ -40,8 +40,7 @@ INSTALL = @INSTALL@
 mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
 
 TARGET = sitecopy@EXEEXT@
-TARGET_NEON = .stamp-neon-@NEON_BUILD_BUNDLED@
-TARGET_INTL = .stamp-intl-@BUILD_INCLUDED_LIBINTL@
+TARGET_DEPS = @TARGET_DEPS@
 SUBDIRS = 
 
 OBJECTS = src/sites.o src/sitefiles.o src/sitestore.o \
@@ -70,7 +69,7 @@ all: all-recursive $(TARGET)
 all-recursive:
 	@for d in $(SUBDIRS); do (cd $$d && $(MAKE) all) || exit 1; done
 
-$(TARGET): $(TARGET_NEON) $(TARGET_INTL) $(ALLOBJS)
+$(TARGET): $(TARGET_DEPS) $(ALLOBJS)
 	$(CC) $(CFLAGS) $(LDFLAGS) -o $@ $(OBJECTS) $(LIBS) $(LIBOBJS)
 	@echo
 	@echo " Compilation complete. Run 'make install' to install sitecopy."
@@ -86,14 +85,8 @@ Makefile: Makefile.in
 # Various tester utils which can also be built.
 #
 
-.stamp-neon-no .stamp-intl-no:
-	@echo timestamp > $@
-
-.stamp-neon-yes: lib/neon/libneon.a
-	@echo timestamp > $@
-
-.stamp-intl-yes: lib/intl/libintl.a
-	@echo timestamp > $@
+neon/src/libneon.a:
+	cd neon/src && $(MAKE) libneon.a
 
 # RFC1123 date/time tester
 # netrc parser tester

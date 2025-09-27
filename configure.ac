@@ -28,6 +28,7 @@ AC_INIT([sitecopy], [sc_version], [https://github.com/notroj/sitecopy],,[https:/
 
 AC_CONFIG_SRCDIR(src/sites.c)
 AC_CONFIG_HEADER(config.h)
+AC_CONFIG_MACRO_DIRS([m4 neon/macros])
 
 EXTRAOBJS=""
 proto_msg=""
@@ -35,8 +36,6 @@ top_builddir=`pwd`
 PACKAGE=sitecopy
 
 AC_DEFINE([_GNU_SOURCE], [1], [Always defined])
-
-NEON_WITH_LIBS
 
 dnl Optional features
 
@@ -110,11 +109,25 @@ if test "$sc_cv_gnu_fnmatch" = "no"; then
    AC_LIBOBJ(lib/fnmatch)
 fi
 
-# Support neon 0.24 through 0.29
-dnl NE_REQUIRE_VERSIONS([0], [30 31 32])
+NEON_WITH_LIBS
 
-dnl Build neon
-NEON_LIBRARY
+m4_ifndef([NE_MINIMUM_VERSION],
+        [AC_FATAL([NE_MINIMUM_VERSION macro from neon>=0.34.x required to build.])])
+
+NE_MINIMUM_VERSION(0, 29)
+
+dnl Don't enable zlib or ACL support in neon
+NEON_WITHOUT_ZLIB
+NEON_WITHOUT_ACL
+
+AC_PROVIDE([NE_SNPRINTF])
+
+NEON_VPATH_BUNDLED(['$(top_srcdir)/neon/src'], [neon/src], [
+ NEON_NORMAL_BUILD
+ NEON_XML_PARSER
+ TARGET_DEPS=neon/src/libneon.a
+])
+AC_SUBST(TARGET_DEPS)
 
 dnl Check for getopt_long
 AC_CHECK_FUNC(getopt_long,,[AC_LIBOBJ(lib/getopt)
