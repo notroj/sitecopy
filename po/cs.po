@@ -5,11 +5,12 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: sitecopy 0.11.4\n"
-"Report-Msgid-Bugs-To: sitecopy@lyra.org\n"
-"POT-Creation-Date: 2008-07-16 16:31+0100\n"
+"Report-Msgid-Bugs-To: https://github.com/notroj/sitecopy\n"
+"POT-Creation-Date: 2025-09-27 08:28+0100\n"
 "PO-Revision-Date: 2002-04-09 11:12+0100\n"
 "Last-Translator: Petr Prazak <prazak@grisoft.cz>\n"
 "Language-Team: cz\n"
+"Language: cs\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=iso-8859-2\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -55,7 +56,7 @@ msgid "remote"
 msgstr "vzdálené"
 
 # src/console_fe.c:112
-#: src/console_fe.c:126 gnome/init.c:198
+#: src/console_fe.c:126
 msgid "Update"
 msgstr "Aktualizace"
 
@@ -625,13 +626,13 @@ msgid "Link: %s - target %s\n"
 msgstr "Odkaz: %s - cíl %s\n"
 
 # src/console_fe.c:817
-#: src/console_fe.c:979 gnome/init.c:402
+#: src/console_fe.c:979
 #, c-format
 msgid "%s: Error: Could not open rcfile: %s.\n"
 msgstr "%s: Chyba: Nelze otevøít øídicí soubor: %s.\n"
 
 # src/console_fe.c:821
-#: src/console_fe.c:983 gnome/init.c:407
+#: src/console_fe.c:983
 #, c-format
 msgid ""
 "%s: rcfile corrupt at line %d:\n"
@@ -1051,7 +1052,7 @@ msgid ""
 "  -u, --update          Update the remote site\n"
 "  -h, --help            Display this help message\n"
 "  -V, --version         Display version information\n"
-"Please send feature requests and bug reports to sitecopy@lyra.org\n"
+"Please send feature requests and bug reports via %s\n"
 msgstr ""
 "  -r, --rcfile=SOUBOR   Pou¾ij alternativní øídicí soubor pro bìh\n"
 "  -p, --storepath=CESTA Pou¾ij alternativní adresáø pro ulo¾ení místa\n"
@@ -1080,75 +1081,75 @@ msgstr ""
 "sitecopy@lyra.org\n"
 "Pøipomínky k pøekladu posílejte na adresu prazak@grisoft.cz\n"
 
-#: src/sitestore.c:326
+#: src/sitestore.c:350
 #, c-format
 msgid "Invalid checksum at line %d"
 msgstr ""
 
-#: src/sitestore.c:371
+#: src/sitestore.c:395
 #, c-format
 msgid "Boolean missing in 'ascii' at line %d"
 msgstr ""
 
-#: src/sitestore.c:396
+#: src/sitestore.c:420
 #, c-format
 msgid "Size overflow (%s) in '%s' at line %d"
 msgstr ""
 
-#: src/davdriver.c:195
+#: src/davdriver.c:221
 msgid "The connection timed out."
 msgstr "Spojení vypr¹elo."
 
 # src/console_fe.c:992
-#: src/davdriver.c:224
+#: src/davdriver.c:241
 #, fuzzy
 msgid "Could not write SSL certificate"
 msgstr "Nelze zapsat do souboru: %s"
 
-#: src/davdriver.c:244
+#: src/davdriver.c:261
 msgid "SSL support has not be compiled in."
 msgstr "Podpora SSL nebyla zakompilována."
 
 # src/console_fe.c:992
-#: src/davdriver.c:252
+#: src/davdriver.c:269
 #, fuzzy, c-format
 msgid "Could not load certificate `%s'."
 msgstr "Nelze zapsat do souboru: %s"
 
 # src/console_fe.c:992
-#: src/davdriver.c:290
+#: src/davdriver.c:310
 #, fuzzy, c-format
 msgid "Could not read SSL client certificate '%s'."
 msgstr "Nelze zapsat do souboru: %s"
 
 # src/console_fe.c:992
-#: src/davdriver.c:303
+#: src/davdriver.c:323
 #, fuzzy, c-format
 msgid "Could not decrypt SSL client certificate '%s'."
 msgstr "Nelze zapsat do souboru: %s"
 
-#: src/davdriver.c:325
+#: src/davdriver.c:345
 msgid "The server does not appear to be a WebDAV server."
 msgstr "Nezdá se, ¾e by server podporoval WebDAV."
 
-#: src/davdriver.c:330
+#: src/davdriver.c:350
 msgid "The server does not support the executable live property."
 msgstr "Server nepodporuje 'executable live property'."
 
 # src/console_fe.c:992
-#: src/davdriver.c:376 src/davdriver.c:443 src/davdriver.c:480 src/ftp.c:888
-#: src/ftp.c:972
+#: src/davdriver.c:396 src/davdriver.c:463 src/davdriver.c:500 src/ftp.c:896
+#: src/ftp.c:980
 #, fuzzy
 msgid "Could not open file"
 msgstr "Nelze otevøít soubor: "
 
 # src/console_fe.c:992
-#: src/davdriver.c:411
+#: src/davdriver.c:431
 #, fuzzy, c-format
 msgid "Could not stat file: %s"
 msgstr "Nelze zapsat do souboru: %s"
 
-#: src/davdriver.c:670
+#: src/davdriver.c:690
 msgid "Could not access resource"
 msgstr "Nelze pøistupovat ke zdroji"
 
@@ -1186,998 +1187,494 @@ msgstr "Nelze èíst cíl symbolického odkazu."
 msgid "Unknown system error"
 msgstr "Neznámá systémová chyba"
 
-#: src/ftp.c:153
+#: src/ftp.c:155
 #, c-format
 msgid "%s: connection was closed by server."
 msgstr "%s: server ukonèil spojení."
 
-#: src/ftp.c:157
+#: src/ftp.c:159
 #, c-format
 msgid "%s: connection timed out."
 msgstr "%s: spojení vypr¹elo."
 
-#: src/ftp.c:195
+#: src/ftp.c:197
 #, fuzzy
 msgid "Could not read response line"
 msgstr "Nelze naèíst tìlo odpovìdi"
 
-#: src/ftp.c:229
+#: src/ftp.c:231
 #, fuzzy
 msgid "Cannot parse MDTM response; wrong length."
 msgstr "Nelze zpracovat stavový øádek odpovìdi."
 
-#: src/ftp.c:236
+#: src/ftp.c:238
 #, fuzzy
 msgid "Cannot parse MDTM response."
 msgstr "Nelze zpracovat stavový øádek odpovìdi."
 
-#: src/ftp.c:260
+#: src/ftp.c:262
 #, fuzzy
 msgid "Could not find address in PASV response"
 msgstr "Nelze naèíst tìlo odpovìdi"
 
-#: src/ftp.c:267
+#: src/ftp.c:269
 #, fuzzy
 msgid "Could not parse PASV response"
 msgstr "Nelze naèíst tìlo odpovìdi"
 
-#: src/ftp.c:276
+#: src/ftp.c:278
 msgid "Invalid IP address in PASV response"
 msgstr ""
 
-#: src/ftp.c:296
+#: src/ftp.c:298
 #, fuzzy
 msgid "Malformed EPSV response"
 msgstr "Nelze naèíst tìlo odpovìdi"
 
-#: src/ftp.c:304
+#: src/ftp.c:306
 #, fuzzy
 msgid "Malformed port in EPSV response"
 msgstr "Nelze naèíst tìlo odpovìdi"
 
-#: src/ftp.c:449
+#: src/ftp.c:451
 msgid "Error sending file"
 msgstr ""
 
-#: src/ftp.c:463 src/ftp.c:489
+#: src/ftp.c:465 src/ftp.c:491
 #, fuzzy
 msgid "Error reading file"
 msgstr "Chyba pøi ctení tìla po¾adavku"
 
 # src/console_fe.c:992
-#: src/ftp.c:480
+#: src/ftp.c:482
 #, fuzzy
 msgid "Could not send file"
 msgstr "Nelze otevøít soubor: "
 
-#: src/ftp.c:510 src/ftp.c:991
+#: src/ftp.c:512 src/ftp.c:999
 #, fuzzy
 msgid "Error writing to file"
 msgstr "Chyba pøi èekání na odpovìd"
 
-#: src/ftp.c:516
+#: src/ftp.c:518
 msgid "Receiving file"
 msgstr ""
 
-#: src/ftp.c:532
+#: src/ftp.c:534
 #, fuzzy
 msgid "Could not connect passive data socket"
 msgstr "Nelze navázat SSL spojení"
 
-#: src/ftp.c:647
+#: src/ftp.c:655
 msgid "Active open failed: could not determine address of control socket"
 msgstr ""
 
-#: src/ftp.c:659
+#: src/ftp.c:667
 #, fuzzy
 msgid "Active open failed: could not create socket"
 msgstr "Nelze navázat SSL spojení"
 
-#: src/ftp.c:667
+#: src/ftp.c:675
 msgid "Active open failed: could not bind to address"
 msgstr ""
 
-#: src/ftp.c:677
+#: src/ftp.c:685
 msgid "Active open failed: could not determine address of data socket"
 msgstr ""
 
-#: src/ftp.c:684
+#: src/ftp.c:692
 #, fuzzy
 msgid "Could not determine bound port number for data socket"
 msgstr "Nelze navázat SSL spojení"
 
-#: src/ftp.c:727
+#: src/ftp.c:735
 msgid "Active open failed: could not accept connection"
 msgstr ""
 
-#: src/ftp.c:800
+#: src/ftp.c:808
 msgid "Error closing data socket"
 msgstr ""
 
 # src/console_fe.c:992
-#: src/ftp.c:894
+#: src/ftp.c:902
 #, fuzzy
 msgid "Could not determine length of file"
 msgstr "Nelze zjistit dílku souboru: %s"
 
 # src/console_fe.c:992
-#: src/ftp.c:905
+#: src/ftp.c:913
 #, fuzzy
 msgid "Could not rewind to beginning of file"
 msgstr "Nelze zjistit dílku souboru: %s"
 
-#: src/ftp.c:1152
+#: src/ftp.c:1164
 #, fuzzy
 msgid "Could not read 'LIST' response."
 msgstr "Nelze naèíst tìlo odpovìdi"
 
-#: src/ftp.c:1161
+#: src/ftp.c:1173
 #, fuzzy, c-format
 msgid "Parse error in LIST response: %s"
 msgstr "Nelze naèíst tìlo odpovìdi"
 
-#: gnome/init.c:51
-msgid "_New site..."
-msgstr ""
-
-#: gnome/init.c:51 gnome/init.c:171
-msgid "Create a new site definition"
-msgstr ""
-
-#: gnome/init.c:54
-msgid "_Open..."
-msgstr ""
-
-#: gnome/init.c:54
-msgid "Open a new rc file. (EXPERIMENTAL)."
-msgstr ""
-
-#: gnome/init.c:57
-msgid "_Save Sites"
-msgstr ""
-
-#: gnome/init.c:57 gnome/init.c:177
-msgid "Save the current site definitions"
-msgstr ""
-
-#: gnome/init.c:60
-msgid "Sav_e Sites As..."
-msgstr ""
-
-#: gnome/init.c:60
-msgid "Save the current site definitions to a file."
-msgstr ""
-
 # src/console_fe.c:582
-#: gnome/init.c:63
 #, fuzzy
-msgid "_Delete this site"
-msgstr "Smazat %s"
-
-#: gnome/init.c:63
-msgid "Delete the selected site entry"
-msgstr ""
-
-#: gnome/init.c:69
-msgid "E_xit"
-msgstr ""
-
-#: gnome/init.c:69 gnome/init.c:202
-msgid "Exit the program"
-msgstr ""
+#~ msgid "_Delete this site"
+#~ msgstr "Smazat %s"
 
 # src/console_fe.c:115
-#: gnome/init.c:78
 #, fuzzy
-msgid "_Initialise site"
-msgstr "Inicializace"
-
-#: gnome/init.c:78
-msgid "All files will be uploaded if a site is initialised"
-msgstr ""
+#~ msgid "_Initialise site"
+#~ msgstr "Inicializace"
 
 # src/console_fe.c:114
-#: gnome/init.c:81
 #, fuzzy
-msgid "'_Catchup' site"
-msgstr "Dohnání"
-
-#: gnome/init.c:81
-msgid "Records the site as already updated."
-msgstr ""
-
-#: gnome/init.c:84
-msgid "_Fetch site listing"
-msgstr ""
-
-#: gnome/init.c:84
-msgid "Figures out which files are new/changed from the actual remote site."
-msgstr ""
+#~ msgid "'_Catchup' site"
+#~ msgstr "Dohnání"
 
 # src/console_fe.c:108
-#: gnome/init.c:88
 #, fuzzy
-msgid "_Resynchronize site"
-msgstr "synchonizace"
-
-#: gnome/init.c:88
-msgid "Copies newer files from the remote site to the local drive."
-msgstr ""
-
-#: gnome/init.c:91
-msgid "_Update site..."
-msgstr ""
-
-#: gnome/init.c:91
-msgid "Apply the local site's changes to the remote site."
-msgstr ""
-
-#: gnome/init.c:94
-msgid "Update _ALL sites"
-msgstr ""
-
-#: gnome/init.c:94 gnome/init.c:137
-msgid "Performs the required operations on all site definitions. (TODO)."
-msgstr ""
-
-#: gnome/init.c:98
-msgid "Rescan local directory"
-msgstr ""
+#~ msgid "_Resynchronize site"
+#~ msgstr "synchonizace"
 
 # src/console_fe.c:860
-#: gnome/init.c:98
 #, fuzzy
-msgid "Re-reads the local directory of the selected site."
-msgstr "%s: Pro místo `%s' není specifikován místní adresáø.\n"
-
-#: gnome/init.c:106
-msgid "_Required updates"
-msgstr ""
-
-#: gnome/init.c:106
-msgid "Displays a brief report of any required updates."
-msgstr ""
-
-#: gnome/init.c:109
-msgid "Site web-r_eport"
-msgstr ""
-
-#: gnome/init.c:109
-msgid ""
-"Generates a web page detailing the changes required on the selected site."
-msgstr ""
-
-#: gnome/init.c:112
-msgid "Prin_t site info..."
-msgstr ""
-
-#: gnome/init.c:112
-msgid "Print information about the selected site"
-msgstr ""
-
-#: gnome/init.c:119
-msgid "_Backup files status"
-msgstr ""
-
-#: gnome/init.c:119
-msgid "Save the 'state' of your local files, in case of accident."
-msgstr ""
-
-#: gnome/init.c:122
-msgid "Restore files status..."
-msgstr ""
-
-#: gnome/init.c:122 gnome/init.c:129
-msgid "If a backup has previously been made, it will be restored."
-msgstr ""
-
-#: gnome/init.c:126
-msgid "_Backup site definitions"
-msgstr ""
-
-#: gnome/init.c:126
-msgid "Backup your site definitions, in case you delete your sites."
-msgstr ""
-
-#: gnome/init.c:129
-msgid "Restore site definitions..."
-msgstr ""
-
-#: gnome/init.c:137
-msgid "Preferences..."
-msgstr ""
-
-#: gnome/init.c:146
-msgid "_About XSitecopy"
-msgstr ""
-
-#: gnome/init.c:146
-msgid "Information about XSitecopy"
-msgstr ""
-
-#: gnome/init.c:158
-msgid "_File"
-msgstr ""
+#~ msgid "Re-reads the local directory of the selected site."
+#~ msgstr "%s: Pro místo `%s' není specifikován místní adresáø.\n"
 
 # src/console_fe.c:1139
-#: gnome/init.c:159
 #, fuzzy
-msgid "_Operations"
-msgstr "Volby: \n"
-
-#: gnome/init.c:160
-msgid "_Reports"
-msgstr ""
-
-#: gnome/init.c:161
-msgid "_Settings"
-msgstr ""
-
-#: gnome/init.c:162
-msgid "_Backup"
-msgstr ""
-
-#: gnome/init.c:163
-msgid "_Help"
-msgstr ""
-
-#: gnome/init.c:171
-msgid "New site"
-msgstr ""
-
-#: gnome/init.c:174
-msgid "Open"
-msgstr ""
-
-#: gnome/init.c:174
-msgid "Open a new site definitions file."
-msgstr ""
-
-#: gnome/init.c:177
-msgid "Save"
-msgstr ""
+#~ msgid "_Operations"
+#~ msgstr "Volby: \n"
 
 # src/console_fe.c:582
-#: gnome/init.c:180
 #, fuzzy
-msgid "Delete site"
-msgstr "Smazat %s"
-
-#: gnome/init.c:180
-msgid "Delete the selected site"
-msgstr ""
+#~ msgid "Delete site"
+#~ msgstr "Smazat %s"
 
 # src/console_fe.c:115
-#: gnome/init.c:185
 #, fuzzy
-msgid "Initialise"
-msgstr "Inicializace"
-
-#: gnome/init.c:185
-msgid "Initialise the site (mark all files as needing to be updated)."
-msgstr ""
+#~ msgid "Initialise"
+#~ msgstr "Inicializace"
 
 # src/console_fe.c:114
-#: gnome/init.c:188
 #, fuzzy
-msgid "Catch-up"
-msgstr "Dohnání"
-
-#: gnome/init.c:188
-msgid "Mark all of the selected site's files as updated."
-msgstr ""
+#~ msgid "Catch-up"
+#~ msgstr "Dohnání"
 
 # src/console_fe.c:747
-#: gnome/init.c:194
 #, fuzzy
-msgid "Download"
-msgstr "Stahuji %s: ["
-
-#: gnome/init.c:194
-msgid "Download newer files from the remote site. (Use with care)"
-msgstr ""
-
-#: gnome/init.c:198
-msgid "Updates the selected site"
-msgstr ""
-
-#: gnome/init.c:202
-msgid "Quit"
-msgstr ""
+#~ msgid "Download"
+#~ msgstr "Stahuji %s: ["
 
 # src/console_fe.c:817
-#: gnome/init.c:412
 #, fuzzy, c-format
-msgid "%s: Error: Could not read rcfile: %s.\n"
-msgstr "%s: Chyba: Nelze otevøít øídicí soubor: %s.\n"
-
-#: gnome/main.c:184
-msgid ""
-"Debugging level (sum of: 1=socket, 2=files, 4=rcfile, 8=WebDAV, 16=FTP, "
-"32=XML, 64=GNOME )"
-msgstr ""
+#~ msgid "%s: Error: Could not read rcfile: %s.\n"
+#~ msgstr "%s: Chyba: Nelze otevøít øídicí soubor: %s.\n"
 
 # src/console_fe.c:844
-#: gnome/misc.c:580
 #, fuzzy, c-format
-msgid "Server not specified in site `%s'.\n"
-msgstr "%s: Pro místo `%s' není specifikován server.\n"
+#~ msgid "Server not specified in site `%s'.\n"
+#~ msgstr "%s: Pro místo `%s' není specifikován server.\n"
 
 # src/console_fe.c:856
-#: gnome/misc.c:584
 #, fuzzy, c-format
-msgid "Remote directory not specified in site `%s'.\n"
-msgstr "%s: Pro místo `%s' není specifikován vzdálený adresáø.\n"
+#~ msgid "Remote directory not specified in site `%s'.\n"
+#~ msgstr "%s: Pro místo `%s' není specifikován vzdálený adresáø.\n"
 
 # src/console_fe.c:860
-#: gnome/misc.c:588
 #, fuzzy, c-format
-msgid "Local directory not specified in site `%s'.\n"
-msgstr "%s: Pro místo `%s' není specifikován místní adresáø.\n"
+#~ msgid "Local directory not specified in site `%s'.\n"
+#~ msgstr "%s: Pro místo `%s' není specifikován místní adresáø.\n"
 
 # src/console_fe.c:840
-#: gnome/misc.c:592
 #, fuzzy, c-format
-msgid ""
-"Could not read directory for `%s':\n"
-"\t%s\n"
-msgstr ""
-"%s: Nelze naèíst adresáø pro `%s':\n"
-"\t%s\n"
+#~ msgid ""
+#~ "Could not read directory for `%s':\n"
+#~ "\t%s\n"
+#~ msgstr ""
+#~ "%s: Nelze naèíst adresáø pro `%s':\n"
+#~ "\t%s\n"
 
 # src/console_fe.c:864
-#: gnome/misc.c:596
 #, fuzzy, c-format
-msgid "Invalid port used in site `%s'.\n"
-msgstr "%s: Pro místo `%s' je pou¾it neplatný port.\n"
+#~ msgid "Invalid port used in site `%s'.\n"
+#~ msgstr "%s: Pro místo `%s' je pou¾it neplatný port.\n"
 
 # src/console_fe.c:868
-#: gnome/misc.c:600
 #, fuzzy, c-format
-msgid "Protocol '%s' cannot maintain symbolic links (site `%s').\n"
-msgstr "%s: %s nemù¾e udr¾ovat symbolické odkazy (místo `%s').\n"
+#~ msgid "Protocol '%s' cannot maintain symbolic links (site `%s').\n"
+#~ msgstr "%s: %s nemù¾e udr¾ovat symbolické odkazy (místo `%s').\n"
 
 # src/console_fe.c:872
-#: gnome/misc.c:604
 #, fuzzy, c-format
-msgid "Cannot use a relative remote directory protocol '%s' (site `%s').\n"
-msgstr "%s: Nelze pou¾it relativní vzdálený adresáø v %s (místo `%s').\n"
+#~ msgid "Cannot use a relative remote directory protocol '%s' (site `%s').\n"
+#~ msgstr "%s: Nelze pou¾it relativní vzdálený adresáø v %s (místo `%s').\n"
 
-#: gnome/misc.c:607
-#, c-format
-msgid "%s's protocol does not currently support maintaining permissions."
-msgstr ""
-
-#: gnome/misc.c:611
 #, fuzzy, c-format
-msgid "Could not find 'relative' local directory"
-msgstr "Nelze navázat SSL spojení"
+#~ msgid "Could not find 'relative' local directory"
+#~ msgstr "Nelze navázat SSL spojení"
 
-#: lib/neon/ne_redirect.c:92
 #, fuzzy
-msgid "Could not parse redirect destination URL"
-msgstr "Nelze zpracovat stavový øádek odpovìdi."
-
-#: lib/neon/ne_gnutls.c:162
-#, c-format
-msgid "[unprintable:#%lu]"
-msgstr ""
-
-#: lib/neon/ne_gnutls.c:188
-msgid "[unprintable]"
-msgstr ""
-
-#: lib/neon/ne_gnutls.c:696 lib/neon/ne_openssl.c:419
-msgid "Server certificate was missing commonName attribute in subject name"
-msgstr ""
+#~ msgid "Could not parse redirect destination URL"
+#~ msgstr "Nelze zpracovat stavový øádek odpovìdi."
 
 # src/console_fe.c:992
-#: lib/neon/ne_gnutls.c:736 lib/neon/ne_openssl.c:638
 #, fuzzy, c-format
-msgid "SSL negotiation failed: %s"
-msgstr "Nelze zapsat do souboru: %s"
+#~ msgid "SSL negotiation failed: %s"
+#~ msgstr "Nelze zapsat do souboru: %s"
 
-#: lib/neon/ne_gnutls.c:745
-msgid "Server did not send certificate chain"
-msgstr ""
-
-#: lib/neon/ne_openssl.c:451
-#, c-format
-msgid "Certificate verification error: %s"
-msgstr ""
-
-#: lib/neon/ne_openssl.c:657
-msgid "SSL server did not present certificate"
-msgstr ""
-
-#: lib/neon/ne_openssl.c:666
-msgid "Server certificate changed: connection intercepted?"
-msgstr ""
-
-#: lib/neon/ne_session.c:356 lib/neon/ne_session.c:367
-msgid "[invalid date]"
-msgstr ""
-
-#: lib/neon/ne_session.c:380
-msgid "certificate is not yet valid"
-msgstr ""
-
-#: lib/neon/ne_session.c:381
-msgid "certificate has expired"
-msgstr ""
-
-#: lib/neon/ne_session.c:382
-msgid "certificate issued for a different hostname"
-msgstr ""
-
-#: lib/neon/ne_session.c:383
-msgid "issuer is not trusted"
-msgstr ""
-
-#: lib/neon/ne_session.c:388
-msgid "Server certificate verification failed: "
-msgstr ""
-
-#: lib/neon/ne_socket.c:514 lib/neon/ne_socket.c:568 lib/neon/ne_socket.c:671
 #, fuzzy
-msgid "Connection closed"
-msgstr "Server ukonèil spojení."
+#~ msgid "Connection closed"
+#~ msgstr "Server ukonèil spojení."
 
-#: lib/neon/ne_socket.c:578 lib/neon/ne_socket.c:683
 #, fuzzy
-msgid "Secure connection truncated"
-msgstr "Spojení vypr¹elo."
+#~ msgid "Secure connection truncated"
+#~ msgstr "Spojení vypr¹elo."
 
-#: lib/neon/ne_socket.c:590 lib/neon/ne_socket.c:695
 #, fuzzy, c-format
-msgid "SSL error: %s"
-msgstr "%s: Chyba: %s\n"
+#~ msgid "SSL error: %s"
+#~ msgstr "%s: Chyba: %s\n"
 
-#: lib/neon/ne_socket.c:593
-#, c-format
-msgid "SSL error code %d/%d/%lu"
-msgstr ""
-
-#: lib/neon/ne_socket.c:676
 #, fuzzy, c-format
-msgid "SSL alert received: %s"
-msgstr "%s: Chyba: %s\n"
+#~ msgid "SSL alert received: %s"
+#~ msgstr "%s: Chyba: %s\n"
 
-#: lib/neon/ne_socket.c:691
-msgid "SSL socket read failed"
-msgstr ""
+#~ msgid "Line too long"
+#~ msgstr "Øádek je pøíli¹ dlouhý"
 
-#: lib/neon/ne_socket.c:790
-msgid "Line too long"
-msgstr "Øádek je pøíli¹ dlouhý"
+#~ msgid "Host not found"
+#~ msgstr "Poèítaè nenalezen"
 
-#: lib/neon/ne_socket.c:935 lib/neon/ne_socket.c:941
-msgid "Host not found"
-msgstr "Poèítaè nenalezen"
-
-#: lib/neon/ne_socket.c:1048
 #, fuzzy
-msgid "Connection timed out"
-msgstr "Spojení vypr¹elo."
+#~ msgid "Connection timed out"
+#~ msgstr "Spojení vypr¹elo."
 
-#: lib/neon/ne_socket.c:1210
-msgid "Socket descriptor number exceeds FD_SETSIZE"
-msgstr ""
-
-#: lib/neon/ne_socket.c:1270
-msgid "Socket family not supported"
-msgstr ""
-
-#: lib/neon/ne_socket.c:1493
-msgid "Client certificate verification failed"
-msgstr ""
-
-#: lib/neon/ne_socket.c:1509
-msgid "SSL disabled due to lack of entropy"
-msgstr ""
-
-#: lib/neon/ne_socket.c:1516
-msgid "SSL disabled due to library version mismatch"
-msgstr ""
-
-#: lib/neon/ne_socket.c:1522
 #, fuzzy
-msgid "Could not create SSL structure"
-msgstr "Nelze navázat SSL spojení"
+#~ msgid "Could not create SSL structure"
+#~ msgstr "Nelze navázat SSL spojení"
 
-#: lib/neon/ne_request.c:194
 #, fuzzy, c-format
-msgid "%s: connection was closed by proxy server"
-msgstr "%s: proxy server ukonèil spojení."
+#~ msgid "%s: connection was closed by proxy server"
+#~ msgstr "%s: proxy server ukonèil spojení."
 
-#: lib/neon/ne_request.c:197
 #, fuzzy, c-format
-msgid "%s: connection was closed by server"
-msgstr "%s: server ukonèil spojení."
+#~ msgid "%s: connection was closed by server"
+#~ msgstr "%s: server ukonèil spojení."
 
-#: lib/neon/ne_request.c:202
 #, fuzzy, c-format
-msgid "%s: connection timed out"
-msgstr "%s: spojení vypr¹elo."
-
-#: lib/neon/ne_request.c:307
-msgid "offset invalid"
-msgstr ""
+#~ msgid "%s: connection timed out"
+#~ msgstr "%s: spojení vypr¹elo."
 
 # src/console_fe.c:992
-#: lib/neon/ne_request.c:312
 #, fuzzy, c-format
-msgid "Could not seek to offset %s of request body file: %s"
-msgstr "Nelze zapsat do souboru: %s"
+#~ msgid "Could not seek to offset %s of request body file: %s"
+#~ msgstr "Nelze zapsat do souboru: %s"
 
-#: lib/neon/ne_request.c:360
-msgid "Could not send request body"
-msgstr "Nelze odeslat tìlo po¾adavku"
+#~ msgid "Could not send request body"
+#~ msgstr "Nelze odeslat tìlo po¾adavku"
 
-#: lib/neon/ne_request.c:699
-msgid "Could not read chunk size"
-msgstr "Nelze naèíst velikost bloku"
+#~ msgid "Could not read chunk size"
+#~ msgstr "Nelze naèíst velikost bloku"
 
-#: lib/neon/ne_request.c:706
-msgid "Could not parse chunk size"
-msgstr "Nelze zpracovat velikost bloku"
+#~ msgid "Could not parse chunk size"
+#~ msgstr "Nelze zpracovat velikost bloku"
 
-#: lib/neon/ne_request.c:743
-msgid "Could not read response body"
-msgstr "Nelze naèíst tìlo odpovìdi"
+#~ msgid "Could not read response body"
+#~ msgstr "Nelze naèíst tìlo odpovìdi"
 
-#: lib/neon/ne_request.c:759
 #, fuzzy
-msgid "Could not read chunk delimiter"
-msgstr "Nelze naèíst velikost bloku"
+#~ msgid "Could not read chunk delimiter"
+#~ msgstr "Nelze naèíst velikost bloku"
 
-#: lib/neon/ne_request.c:762
-msgid "Chunk delimiter was invalid"
-msgstr ""
+#~ msgid "Could not read status line"
+#~ msgstr "Nelze pøeèíst stavový øádek"
 
-#: lib/neon/ne_request.c:868
-msgid "Could not read status line"
-msgstr "Nelze pøeèíst stavový øádek"
-
-#: lib/neon/ne_request.c:890
 #, fuzzy
-msgid "Could not parse response status line"
-msgstr "Nelze zpracovat stavový øádek odpovìdi."
+#~ msgid "Could not parse response status line"
+#~ msgstr "Nelze zpracovat stavový øádek odpovìdi."
 
-#: lib/neon/ne_request.c:902
 #, fuzzy
-msgid "Could not read interim response headers"
-msgstr "Nelze naèíst tìlo odpovìdi"
+#~ msgid "Could not read interim response headers"
+#~ msgstr "Nelze naèíst tìlo odpovìdi"
 
-#: lib/neon/ne_request.c:936
-msgid "Could not send request"
-msgstr "Nelze poslat po¾adavek"
+#~ msgid "Could not send request"
+#~ msgstr "Nelze poslat po¾adavek"
 
-#: lib/neon/ne_request.c:984 lib/neon/ne_request.c:1002
-#: lib/neon/ne_request.c:1012
-msgid "Error reading response headers"
-msgstr "Chyba pøi ètení hlavièek odpovìdi"
+#~ msgid "Error reading response headers"
+#~ msgstr "Chyba pøi ètení hlavièek odpovìdi"
 
-#: lib/neon/ne_request.c:1030
-msgid "Response header too long"
-msgstr "Hlavièka odpovìdi je pøíli¹ dlouhá"
+#~ msgid "Response header too long"
+#~ msgstr "Hlavièka odpovìdi je pøíli¹ dlouhá"
 
-#: lib/neon/ne_request.c:1112
 #, fuzzy
-msgid "Response exceeded maximum number of header fields"
-msgstr "Odpovìï pøekrocila maximální poøet polo¾ek v hlavicce."
+#~ msgid "Response exceeded maximum number of header fields"
+#~ msgstr "Odpovìï pøekrocila maximální poøet polo¾ek v hlavicce."
 
 # src/console_fe.c:956
-#: lib/neon/ne_request.c:1129
 #, fuzzy, c-format
-msgid "Could not resolve hostname `%s': %s"
-msgstr "%s: Chyba: Nelze najít adresu vzdáleného poèítaèe (%s).\n"
-
-#: lib/neon/ne_request.c:1260
-msgid "Unknown transfer-coding in response"
-msgstr ""
-
-#: lib/neon/ne_request.c:1271
-msgid "Invalid Content-Length in response"
-msgstr ""
+#~ msgid "Could not resolve hostname `%s': %s"
+#~ msgstr "%s: Chyba: Nelze najít adresu vzdáleného poèítaèe (%s).\n"
 
 # src/console_fe.c:992
-#: lib/neon/ne_request.c:1344
 #, c-format
-msgid "Could not write to file: %s"
-msgstr "Nelze zapsat do souboru: %s"
+#~ msgid "Could not write to file: %s"
+#~ msgstr "Nelze zapsat do souboru: %s"
 
-#: lib/neon/ne_request.c:1417
 #, fuzzy, c-format
-msgid "Could not create SSL connection through proxy server: %s"
-msgstr "Nelze navázat SSL spojení pøes proxy server."
+#~ msgid "Could not create SSL connection through proxy server: %s"
+#~ msgstr "Nelze navázat SSL spojení pøes proxy server."
 
-#: lib/neon/ne_request.c:1464
 #, fuzzy
-msgid "Could not create socket"
-msgstr "Nelze navázat SSL spojení"
+#~ msgid "Could not create socket"
+#~ msgstr "Nelze navázat SSL spojení"
 
 # src/console_fe.c:961
-#: lib/neon/ne_request.c:1526
-msgid "Could not connect to proxy server"
-msgstr "Nelze se pøipojit k proxy serveru"
+#~ msgid "Could not connect to proxy server"
+#~ msgstr "Nelze se pøipojit k proxy serveru"
 
 # src/console_fe.c:961
-#: lib/neon/ne_request.c:1527
-msgid "Could not connect to server"
-msgstr "Nelze se pøipojit k serveru"
+#~ msgid "Could not connect to server"
+#~ msgstr "Nelze se pøipojit k serveru"
 
 # src/console_fe.c:821
-#: lib/neon/ne_xml.c:280
 #, fuzzy, c-format
-msgid "XML parse error at line %d: invalid element name"
-msgstr "Chyba zpracování XML na øádku %d: %s."
+#~ msgid "XML parse error at line %d: invalid element name"
+#~ msgstr "Chyba zpracování XML na øádku %d: %s."
 
 # src/common.c:87
-#: lib/neon/ne_xml.c:452
 #, fuzzy
-msgid "Unknown error"
-msgstr "Neznámá systémová chyba"
-
-#: lib/neon/ne_xml.c:537
-msgid "Invalid Byte Order Mark"
-msgstr ""
+#~ msgid "Unknown error"
+#~ msgstr "Neznámá systémová chyba"
 
 # src/console_fe.c:821
-#: lib/neon/ne_xml.c:625
 #, fuzzy, c-format
-msgid "XML parse error at line %d: %s"
-msgstr "Chyba zpracování XML na øádku %d: %s."
+#~ msgid "XML parse error at line %d: %s"
+#~ msgstr "Chyba zpracování XML na øádku %d: %s."
 
-#: lib/neon/ne_props.c:371 lib/neon/ne_props.c:435
 #, fuzzy
-msgid "Response exceeds maximum property count"
-msgstr "Odpovìï pøekrocila maximální poøet polo¾ek v hlavicce."
-
-#: lib/neon/ne_compress.c:184
-#, c-format
-msgid "%s: %s (code %d)"
-msgstr ""
+#~ msgid "Response exceeds maximum property count"
+#~ msgstr "Odpovìï pøekrocila maximální poøet polo¾ek v hlavicce."
 
 # src/console_fe.c:992
-#: lib/neon/ne_compress.c:232
 #, fuzzy
-msgid "Could not inflate data"
-msgstr "Nelze otevøít soubor: "
+#~ msgid "Could not inflate data"
+#~ msgstr "Nelze otevøít soubor: "
 
 # src/console_fe.c:992
-#: lib/neon/ne_compress.c:293
 #, fuzzy
-msgid "Could not initialize zlib"
-msgstr "Nelze otevøít soubor: "
+#~ msgid "Could not initialize zlib"
+#~ msgstr "Nelze otevøít soubor: "
 
-#: lib/neon/ne_xmlreq.c:36
 #, fuzzy, c-format
-msgid "Could not parse response: %s"
-msgstr "Nelze naèíst tìlo odpovìdi"
+#~ msgid "Could not parse response: %s"
+#~ msgstr "Nelze naèíst tìlo odpovìdi"
 
 # src/console_fe.c:992
-#: lib/neon/ne_basic.c:98
 #, fuzzy, c-format
-msgid "Could not determine file size: %s"
-msgstr "Nelze zjistit dílku souboru: %s"
+#~ msgid "Could not determine file size: %s"
+#~ msgstr "Nelze zjistit dílku souboru: %s"
 
-#: lib/neon/ne_basic.c:149
-msgid "Response did not include requested range"
-msgstr ""
-
-#: lib/neon/ne_basic.c:183
 #, fuzzy
-msgid "Range is not satisfiable"
-msgstr "Rozsah není uspokojivý."
+#~ msgid "Range is not satisfiable"
+#~ msgstr "Rozsah není uspokojivý."
 
-#: lib/neon/ne_basic.c:188
 #, fuzzy
-msgid "Resource does not support ranged GET requests"
-msgstr "Server nedovoluje èásteèné pøíkazy GET."
+#~ msgid "Resource does not support ranged GET requests"
+#~ msgstr "Server nedovoluje èásteèné pøíkazy GET."
 
 # src/console_fe.c:961
-#: lib/neon/ne_auth.c:130
 #, fuzzy, c-format
-msgid "Could not authenticate to server: %s"
-msgstr "Nelze se pøipojit k serveru"
+#~ msgid "Could not authenticate to server: %s"
+#~ msgstr "Nelze se pøipojit k serveru"
 
 # src/console_fe.c:961
-#: lib/neon/ne_auth.c:135
 #, fuzzy, c-format
-msgid "Could not authenticate to proxy server: %s"
-msgstr "Nelze se pøipojit k proxy serveru"
+#~ msgid "Could not authenticate to proxy server: %s"
+#~ msgstr "Nelze se pøipojit k proxy serveru"
 
-#: lib/neon/ne_auth.c:358
-#, c-format
-msgid "rejected %s challenge"
-msgstr ""
-
-#: lib/neon/ne_auth.c:374
-msgid "missing realm in Basic challenge"
-msgstr ""
-
-#: lib/neon/ne_auth.c:469
-msgid "invalid Negotiate token"
-msgstr ""
-
-#: lib/neon/ne_auth.c:492
 #, fuzzy
-msgid "GSSAPI authentication error: "
-msgstr "Je vy¾adována autentizace na %s `%s':\n"
+#~ msgid "GSSAPI authentication error: "
+#~ msgstr "Je vy¾adována autentizace na %s `%s':\n"
 
-#: lib/neon/ne_auth.c:505
-#, c-format
-msgid "GSSAPI failure (code %u)"
-msgstr ""
-
-#: lib/neon/ne_auth.c:540
-msgid "ignoring empty Negotiate continuation"
-msgstr ""
-
-#: lib/neon/ne_auth.c:555
-msgid "Negotiate response verification failed: invalid response header token"
-msgstr ""
-
-#: lib/neon/ne_auth.c:577
-#, c-format
-msgid "Negotiate response verification failure: %s"
-msgstr ""
-
-#: lib/neon/ne_auth.c:697
-msgid "unknown algorithm in Digest challenge"
-msgstr ""
-
-#: lib/neon/ne_auth.c:701
-msgid "incompatible algorithm in Digest challenge"
-msgstr ""
-
-#: lib/neon/ne_auth.c:705
-msgid "missing parameter in Digest challenge"
-msgstr ""
-
-#: lib/neon/ne_auth.c:709
-msgid "initial Digest challenge was stale"
-msgstr ""
-
-#: lib/neon/ne_auth.c:716
-msgid "stale Digest challenge with new algorithm or realm"
-msgstr ""
-
-#: lib/neon/ne_auth.c:728
 #, fuzzy
-msgid "could not parse domain in Digest challenge"
-msgstr "Nelze zpracovat stavový øádek odpovìdi."
+#~ msgid "could not parse domain in Digest challenge"
+#~ msgstr "Nelze zpracovat stavový øádek odpovìdi."
 
-#: lib/neon/ne_auth.c:1036
-msgid "Digest mutual authentication failure: missing parameters"
-msgstr ""
-
-#: lib/neon/ne_auth.c:1041
-msgid "Digest mutual authentication failure: client nonce mismatch"
-msgstr ""
-
-#: lib/neon/ne_auth.c:1051
-msgid "Digest mutual authentication failure: could not parse nonce count"
-msgstr ""
-
-#: lib/neon/ne_auth.c:1056
-#, c-format
-msgid "Digest mutual authentication failure: nonce count mismatch (%u not %u)"
-msgstr ""
-
-#: lib/neon/ne_auth.c:1099
-msgid "Digest mutual authentication failure: request-digest mismatch"
-msgstr ""
-
-#: lib/neon/ne_auth.c:1225
-#, c-format
-msgid "ignored %s challenge"
-msgstr ""
-
-#: lib/neon/ne_auth.c:1304
 #, fuzzy
-msgid "could not parse challenge"
-msgstr "Nelze zpracovat velikost bloku"
+#~ msgid "could not parse challenge"
+#~ msgstr "Nelze zpracovat velikost bloku"
 
-#: lib/neon/ne_207.c:198
 #, c-format
-msgid ""
-"Invalid HTTP status line in status element at line %d of response:\n"
-"Status line was: %s"
-msgstr ""
-"Neplatná øádka HTTP stavu ve stavovém prvku na øádku %d odpovìdi:\n"
-"Stavová øádka byla: %s"
-
-#: lib/neon/ne_locks.c:584
-msgid "LOCK response missing Lock-Token header"
-msgstr ""
-
-#: lib/neon/ne_locks.c:759
-#, c-format
-msgid "Response missing activelock for %s"
-msgstr ""
-
-#: lib/neon/ne_locks.c:801
-#, c-format
-msgid "No activelock for <%s> returned in LOCK refresh response"
-msgstr ""
+#~ msgid ""
+#~ "Invalid HTTP status line in status element at line %d of response:\n"
+#~ "Status line was: %s"
+#~ msgstr ""
+#~ "Neplatná øádka HTTP stavu ve stavovém prvku na øádku %d odpovìdi:\n"
+#~ "Stavová øádka byla: %s"
 
 # lib/rpmatch.c:75
-#: lib/rpmatch.c:79
-msgid "^[yY]"
-msgstr "^[aA]"
+#~ msgid "^[yY]"
+#~ msgstr "^[aA]"
 
 # lib/rpmatch.c:78
-#: lib/rpmatch.c:82
-msgid "^[nN]"
-msgstr "^[nN]"
+#~ msgid "^[nN]"
+#~ msgstr "^[nN]"
 
 # lib/getopt.c:680
-#: lib/getopt.c:664
 #, c-format
-msgid "%s: option `%s' is ambiguous\n"
-msgstr "%s: volba `%s' není jednoznaèná\n"
+#~ msgid "%s: option `%s' is ambiguous\n"
+#~ msgstr "%s: volba `%s' není jednoznaèná\n"
 
 # lib/getopt.c:704
-#: lib/getopt.c:688
 #, c-format
-msgid "%s: option `--%s' doesn't allow an argument\n"
-msgstr "%s: volba `--%s' nedovoluje ¾ádný parametr\n"
+#~ msgid "%s: option `--%s' doesn't allow an argument\n"
+#~ msgstr "%s: volba `--%s' nedovoluje ¾ádný parametr\n"
 
 # lib/getopt.c:709
-#: lib/getopt.c:693
 #, c-format
-msgid "%s: option `%c%s' doesn't allow an argument\n"
-msgstr "%s: volba `%c%s' nedovoluje ¾ádný parametr\n"
+#~ msgid "%s: option `%c%s' doesn't allow an argument\n"
+#~ msgstr "%s: volba `%c%s' nedovoluje ¾ádný parametr\n"
 
 # lib/getopt.c:726 lib/getopt.c:899
-#: lib/getopt.c:710 lib/getopt.c:883
 #, c-format
-msgid "%s: option `%s' requires an argument\n"
-msgstr "%s: volba `%s' vy¾aduje nìjaký parametr\n"
+#~ msgid "%s: option `%s' requires an argument\n"
+#~ msgstr "%s: volba `%s' vy¾aduje nìjaký parametr\n"
 
 # lib/getopt.c:755
-#: lib/getopt.c:739
 #, c-format
-msgid "%s: unrecognized option `--%s'\n"
-msgstr "%s: neznámá volba `--%s'\n"
+#~ msgid "%s: unrecognized option `--%s'\n"
+#~ msgstr "%s: neznámá volba `--%s'\n"
 
 # lib/getopt.c:759
-#: lib/getopt.c:743
 #, c-format
-msgid "%s: unrecognized option `%c%s'\n"
-msgstr "%s: neznámá volba `%c%s'\n"
+#~ msgid "%s: unrecognized option `%c%s'\n"
+#~ msgstr "%s: neznámá volba `%c%s'\n"
 
 # lib/getopt.c:785
-#: lib/getopt.c:769
 #, c-format
-msgid "%s: illegal option -- %c\n"
-msgstr "%s: nesprávná volba -- %c\n"
+#~ msgid "%s: illegal option -- %c\n"
+#~ msgstr "%s: nesprávná volba -- %c\n"
 
 # lib/getopt.c:788
-#: lib/getopt.c:772
 #, c-format
-msgid "%s: invalid option -- %c\n"
-msgstr "%s: nesprávná volba -- %c\n"
+#~ msgid "%s: invalid option -- %c\n"
+#~ msgstr "%s: nesprávná volba -- %c\n"
 
 # lib/getopt.c:818 lib/getopt.c:948
-#: lib/getopt.c:802 lib/getopt.c:932
 #, c-format
-msgid "%s: option requires an argument -- %c\n"
-msgstr "%s: volba vy¾aduje nìjaký parametr -- %c\n"
+#~ msgid "%s: option requires an argument -- %c\n"
+#~ msgstr "%s: volba vy¾aduje nìjaký parametr -- %c\n"
 
 # lib/getopt.c:865
-#: lib/getopt.c:849
 #, c-format
-msgid "%s: option `-W %s' is ambiguous\n"
-msgstr "%s: volba `-W %s' není jednoznaèná\n"
+#~ msgid "%s: option `-W %s' is ambiguous\n"
+#~ msgstr "%s: volba `-W %s' není jednoznaèná\n"
 
 # lib/getopt.c:883
-#: lib/getopt.c:867
 #, c-format
-msgid "%s: option `-W %s' doesn't allow an argument\n"
-msgstr "%s: volba `-W %s' nedovoluje ¾ádný parametr\n"
+#~ msgid "%s: option `-W %s' doesn't allow an argument\n"
+#~ msgstr "%s: volba `-W %s' nedovoluje ¾ádný parametr\n"
 
 #~ msgid " bytes)"
 #~ msgstr " bytù)"
