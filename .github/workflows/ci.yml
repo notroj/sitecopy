@@ -1,6 +1,6 @@
 name: Build and test
 
-on: [push]
+on: [pull_request]
 
 jobs:
   build:
@@ -8,10 +8,22 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-20.04, ubuntu-22.04]
+        os: [ubuntu-latest, ubuntu-22.04, ubuntu-24.04-arm]
+        install: [true, false]
+        bundled: [true, false]
+        warnings: [true, false]
     steps:
     - uses: actions/checkout@v2
-    - run: sudo apt-get update && sudo apt-get -y install libneon27-dev gettext
+      with:
+        submodules: true
+    - run: sudo apt-get update
+    - run: sudo apt-get -y install gettext ${{ !matrix.bundled && 'libneon27-dev' || '' }}
+    - run: bash -ex ./.release.sh master
     - run: ./autogen.sh
-    - run: ./configure
-    - run: make
+    - run: ./configure --prefix=/tmp/rootdir 
+                       ${{ matrix.bundled && '--with-included-neon --with-ssl=openssl' || '--with-neon=/usr' }} 
+                       ${{ matrix.warnings && '--enable-warnings' || '' }}
+    - run: make ${{ !matrix.bundled && '-j`nproc`' || '' }}
+                ${{ matrix.warnings && 'EXTRA_CFLAGS=-Werror' || '' }}
+    - run: make install
+      if: ${{ matrix.install }}
