@@ -32,6 +32,7 @@ AC_CONFIG_HEADER(config.h)
 EXTRAOBJS=""
 proto_msg=""
 top_builddir=`pwd`
+PACKAGE=sitecopy
 
 AC_DEFINE([_GNU_SOURCE], [1], [Always defined])
 
@@ -132,6 +133,9 @@ AC_CHECK_HEADERS(stdarg.h string.h strings.h sys/time.h regex.h \
 
 AX_TYPE_SOCKLEN_T
 
+XGETTEXT_EXTRA_OPTIONS=--from-code=UTF-8
+
+AM_GNU_GETTEXT_VERSION([0.22.5])
 AM_GNU_GETTEXT([external])
 
 BUILD_INCLUDED_LIBINTL=no
