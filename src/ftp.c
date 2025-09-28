@@ -978,18 +978,17 @@ int ftp_get(ftp_session *sess, const char *localfile, const char *remotefile,
     if (f == NULL) {
 	int errnum = errno;
 	set_syserr(sess, _("Could not open file"), errnum);
-	return FTP_ERROR;
+	goto fail;
     }
 
-    if (set_mode(sess, ascii?tran_ascii:tran_binary))
-	return FTP_ERROR;
-
-    if (ftp_data_open(sess, "RETR %s", remotefile) == FTP_READY) {
+    if (set_mode(sess, ascii?tran_ascii:tran_binary) == FTP_OK
+        && ftp_data_open(sess, "RETR %s", remotefile) == FTP_READY) {
         int clo, errnum = 0;
 
 	/* Receive the file */
 	ret = receive_file(sess, f);
 	clo = fclose(f);
+        f = NULL;
         if (clo) errnum = errno;
 
 	if (dtp_close(sess, 0) == FTP_SENT && ret == 0 && clo == 0) {
@@ -998,9 +997,10 @@ int ftp_get(ftp_session *sess, const char *localfile, const char *remotefile,
 	} else if (clo) {
             set_syserr(sess, _("Error writing to file"), errnum);
         }
-            
     }
 
+fail:
+    if (f) fclose(f);
     return FTP_ERROR;
 }
 
