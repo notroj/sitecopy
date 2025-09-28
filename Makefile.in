@@ -26,7 +26,7 @@ top_builddir = .
 LDFLAGS = @LDFLAGS@
 INCLUDES = -I$(top_srcdir)/src -I$(top_srcdir)/lib
 CPPFLAGS = @CPPFLAGS@ @DEFS@ -DLOCALEDIR=\"$(localedir)\"
-CFLAGS = @CFLAGS@
+CFLAGS = @CFLAGS@ $(EXTRA_CFLAGS)
 ALL_CFLAGS = $(CPPFLAGS) $(INCLUDES) $(CFLAGS)
 LIBS = @NEON_LIBS@ @LIBINTL@ @LIBS@
 CC = @CC@
