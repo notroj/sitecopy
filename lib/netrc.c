@@ -28,7 +28,12 @@
 #include <config.h>
 #include "netrc.h"
 
-#include <ne_alloc.h>
+/* Normally defined in xstrdup.c. */
+# define xstrdup strdup
+
+/* Normally defined in xmalloc.c */
+# define xmalloc malloc
+# define xrealloc realloc
 
 #define POPBUFSIZE BUFSIZ
 
@@ -60,7 +65,7 @@ maybe_add_to_list (netrc_entry **newentry, netrc_entry **list)
 	}
 
 	/* Allocate a new netrc_entry structure. */
-	a = (netrc_entry *) ne_malloc (sizeof (netrc_entry));
+	a = (netrc_entry *) xmalloc (sizeof (netrc_entry));
     }
 
     /* Zero the structure, so that it is ready to use. */
@@ -77,8 +82,7 @@ maybe_add_to_list (netrc_entry **newentry, netrc_entry **list)
    list of entries.  NULL is returned if the file could not be
    parsed. */
 netrc_entry *
-parse_netrc (file)
-     char *file;
+parse_netrc (const char *file)
 {
     FILE *fp;
     char buf[POPBUFSIZE+1], *p, *tok;
@@ -180,7 +184,7 @@ parse_netrc (file)
 	    {
 	    case tok_login:
 		if (current)
-		    current->account = (char *) ne_strdup (tok);
+		    current->account = (char *) xstrdup (tok);
 		else
 		    premature_token = "login";
 		break;
@@ -188,12 +192,12 @@ parse_netrc (file)
 	    case tok_machine:
 		/* Start a new machine entry. */
 		maybe_add_to_list (&current, &retval);
-		current->host = (char *) ne_strdup (tok);
+		current->host = (char *) xstrdup (tok);
 		break;
 
 	    case tok_password:
 		if (current)
-		    current->password = (char *) ne_strdup (tok);
+		    current->password = (char *) xstrdup (tok);
 		else
 		    premature_token = "password";
 		break;
@@ -298,9 +302,7 @@ parse_netrc (file)
 /* Return the netrc entry from LIST corresponding to HOST.  NULL is
    returned if no such entry exists. */
 netrc_entry *
-search_netrc (list, host)
-     netrc_entry *list;
-     const char *host;
+search_netrc (netrc_entry *list, const char *host)
 {
     /* Look for the HOST in LIST. */
     while (list)
