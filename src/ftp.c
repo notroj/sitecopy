@@ -751,12 +751,6 @@ int ftp_chmod(ftp_session *sess, const char *filename, const mode_t mode)
     return execute(sess, "SITE CHMOD %03o %s", mode & 0777, filename);
 }
 
-/* default to always trying EPSV if using neon 0.24, which shouldn't
- * hurt too much since it falls back on PASV on failure anyway. */
-#if NE_VERSION_MINOR == 24
-#define ne_iaddr_typeof(ia) (ne_iaddr_ipv6)
-#endif
-
 /* Open the DATA connection using whichever means appropriate, running
  * FTP command COMMAND with printf-style arguments. */
 static int ftp_data_open(ftp_session *sess, const char *command, ...) 

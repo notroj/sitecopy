@@ -63,7 +63,6 @@ struct fetch_context {
 };
 
 
-#if NE_VERSION_MAJOR > 0 || NE_VERSION_MINOR > 26
 /* For the neon 0.27 notifier API, switch out the userdata pointer passed to the
  * callback depending on whether upload or download progress is needed: */
 #define PROGRESS_UPLOAD_MAGIC (void *)(0x1)
@@ -72,13 +71,6 @@ struct fetch_context {
 #define PROGRESS_UPLOAD ne_set_notifier(sess, notify_status, PROGRESS_UPLOAD_MAGIC)
 #define PROGRESS_DOWNLOAD ne_set_notifier(sess, notify_status, PROGRESS_DOWNLOAD_MAGIC)
 #define DISABLE_PROGRESS ne_set_notifier(sess, notify_status, NULL)
-
-#else
-
-#define PROGRESS_DOWNLOAD do { ne_set_progress(sess, site_sock_progress_cb, NULL); } while (0)
-#define PROGRESS_UPLOAD PROGRESS_DOWNLOAD
-#define DISABLE_PROGRESS do { ne_set_progress(sess, NULL, NULL); } while (0)
-#endif
 
 /* TODO:
  * not really sure whether we should be using an enum here... what
@@ -277,18 +269,10 @@ static int init(void **session, struct site *site)
         ne_ssl_set_verify(sess, verify_certificate, site);
     }
 
-#if NE_VERSION_MINOR < 27
-    ne_set_status(sess, notify_cb, NULL);
-#else
     ne_set_notifier(sess, notify_status, NULL);
-#endif
 
     if (site->http_limit) {
-#if NE_VERSION_MINOR > 25
         ne_set_session_flag(sess, NE_SESSFLAG_PERSIST, 0);
-#else
-        ne_set_persist(sess, 0);
-#endif
     }
 
     /* Note, this won't differentiate between xsitecopy and
@@ -420,9 +404,6 @@ static int put_if_unmodified(ne_session *sess, const char *uri, int fd,
     ne_add_request_header(req, "If-Unmodified-Since", date);
     ne_free(date);
     
-#if NE_VERSION_MINOR == 24
-    ne_set_request_body_fd(req, fd);
-#else
     {
         struct stat st;
 
@@ -434,7 +415,6 @@ static int put_if_unmodified(ne_session *sess, const char *uri, int fd,
         
         ne_set_request_body_fd(req, fd, 0, st.st_size);
     }
-#endif
 
     ret = ne_request_dispatch(req);
     
@@ -621,13 +601,8 @@ static void insert_file(struct fetch_context *ctx, struct proto_file *file)
     file->next = NULL;
 }
 
-#if NE_VERSION_MINOR > 25
 static void pfind_results(void *userdata, const ne_uri *uri,
 			  const ne_prop_result_set *set)
-#else
-static void pfind_results(void *userdata, const char *href,
-			  const ne_prop_result_set *set)
-#endif
 {
     struct fetch_context *ctx = userdata;
     struct private *private = ne_propset_private(set);
@@ -637,31 +612,7 @@ static void pfind_results(void *userdata, const char *href,
     char *uhref;
 
     iscoll = private->iscollection;
-
-#if NE_VERSION_MINOR < 26
-    /* For >= 0.26, this is handled by the destroy_private
-     * callback. */
-    ne_free(private);
-#endif
-
-#if NE_VERSION_MINOR < 26
-    /* Strip down to the abspath segment */
-    if (strncmp(href, "http://", 7) == 0)
-	href = strchr(href+7, '/');
-    
-    if (strncmp(href, "https://", 8) == 0)
-	href = strchr(href+8, '/');
-
-    if (href == NULL) {
-	NE_DEBUG(NE_DBG_HTTP, "invalid!\n");
-	return;
-    }
-
-    uhref = ne_path_unescape(href);
-#else
     uhref = ne_path_unescape(uri->path);
-    
-#endif
 
     NE_DEBUG(NE_DBG_HTTP, "URI: [%s]: ", uhref);
 
@@ -740,23 +691,17 @@ static int start_element(void *userdata, int parent,
 }
 
 /* Creates the private structure. */
-#if NE_VERSION_MINOR > 25
 static void *create_private(void *userdata, const ne_uri *uri)
-#else
-static void *create_private(void *userdata, const char *uri)
-#endif
 {
     return ne_calloc(sizeof(struct private));
 }
 
-#if NE_VERSION_MINOR > 25
 static void destroy_private(void *userdata, void *private)
 {
     struct private *priv = private;
 
     ne_free(priv);
 }
-#endif
 
 /* TODO: optimize: only ask for lastmod + executable when we really
  * need them: it does waste bandwidth and time to ask for executable
@@ -777,11 +722,7 @@ static int fetch_list(void *session, const char *dirname, int need_modtimes,
     ph = ne_propfind_create(sess, edirname, NE_DEPTH_ONE);
 
     /* The complex props. */
-    ne_propfind_set_private(ph, create_private,
-#if NE_VERSION_MINOR > 25
-                            destroy_private, 
-#endif
-                            NULL);
+    ne_propfind_set_private(ph, create_private, destroy_private, NULL);
 
     /* Register the handler for the complex props. */
     ne_xml_push_handler(ne_propfind_get_parser(ph), start_element, NULL, NULL, ph);
