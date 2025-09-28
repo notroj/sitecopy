@@ -184,6 +184,8 @@ dnl Makefile substitutions
 AC_SUBST(EXTRAOBJS)
 
 AC_CONFIG_FILES([Makefile po/Makefile.in])
+AC_CONFIG_COMMANDS([source-directories],
+  [for f in neon neon/src src; do test -d $f || mkdir $f; done])
 
 AC_OUTPUT
 
@@ -198,9 +200,3 @@ AC_MSG_NOTICE([Configured sitecopy $PACKAGE_VERSION:
   Internationalization:  ${nls_msg}
 ])
 
-
-# Create all the necessary directories for VPATH builds.
-for i in src intl lib/expat lib/expat/xmltok lib/expat/gennmtab \
-         lib/expat/xmlparse; do
-  test -d $i || mkdir $i
-done
