@@ -55,7 +55,7 @@ LIBOBJS = lib/netrc.o lib/basename.o lib/dirname.o @LIBOBJS@
 ALLOBJS = $(OBJECTS) $(LIBOBJS)
 
 DATAFILES = doc/examplerc doc/changes.awk
-DOCS = README NEWS THANKS doc/update.sh
+DOCS = README.md NEWS THANKS doc/update.sh
 MANLANGS = fr
 
 .PHONY: all all-recursive again clean distclean reminders install-common	\
@@ -131,7 +131,7 @@ $(EXPATDIR)/xmltok/xmltok.o: $(EXPATDIR)/xmltok/xmltok.c $(EXPATDIR)/xmltok/xmlt
 # we have a separate goal for each and autoconf points the 
 # main 'install' goal at the FE we're compiling for.
 
-install: $(TARGET) install-@TARGET@ install-nls
+install: $(TARGET) install-sitecopy install-nls
 
 install-nls:
 	@cd po && $(MAKE) install
