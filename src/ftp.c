@@ -283,6 +283,8 @@ static int parse_pasv_reply(ftp_session *sess, char *reply)
     return FTP_PASSIVE;
 }
 
+#define VALID_DELIM(ch) ((unsigned char)ch >= 33 && (unsigned char)ch <= 126)
+
 /* parse an EPSV reply */
 static int parse_epasv_reply(ftp_session *sess, char *reply)
 {
@@ -291,17 +293,19 @@ static int parse_epasv_reply(ftp_session *sess, char *reply)
 
     /* reply syntax: "229 fFOO (|||port|)" where | can be any character
      * in ASCII from 33-126, obscurely. */
-    if (ptr == NULL || ptr[1] != ptr[2] || ptr[1] != ptr[3]
+    if (ptr == NULL || !VALID_DELIM(ptr[1])
+        || ptr[1] != ptr[2] || ptr[1] != ptr[3]
         || (eptr = strchr(ptr + 4, ')')) == NULL
-        || eptr == ptr + 4 || eptr[-1] != ptr[1]) {
+        || eptr < ptr + 4 || eptr[-1] != ptr[1]) {
         ftp_seterror(sess,_("Malformed EPSV response"));
         return FTP_ERROR;
     }
 
     eptr[-1] = '\0';
 
+    errno = 0;
     port = strtol(ptr + 4, &eptr, 10);
-    if (*eptr != '\0') {
+    if (errno || *eptr != '\0' || port < 0 || port > 65535) {
         ftp_seterror(sess, _("Malformed port in EPSV response"));
         return FTP_ERROR;
     }
