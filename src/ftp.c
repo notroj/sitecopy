@@ -1121,8 +1121,7 @@ int ftp_open(ftp_session *sess)
 
 void ftp_seterror(ftp_session *sess, const char *error)
 {
-    memset(sess->error, 0, BUFSIZ);
-    strncpy(sess->error, error, BUFSIZ);
+    ne_strnzcpy(sess->error, error, sizeof sess->error);
 }
 
 const char *ftp_get_error(ftp_session *sess)
