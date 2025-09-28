@@ -132,8 +132,7 @@ static void ftp_seterror(ftp_session *sess, const char *error);
 static int ftp_data_open(ftp_session *sess, const char *command, ...) 
     ne_attribute((format (printf, 2, 3)));
 
-static int get_modtime(ftp_session *sess, const char *root,
-		       const char *filename);
+static int get_modtime(ftp_session *sess, const char *filename);
 
 static int maybe_chdir(ftp_session *sess, const char **remotefile);
 
@@ -953,7 +952,7 @@ int ftp_put_cond(ftp_session *sess, const char *localfile,
 {
     int ret;
     
-    ret = get_modtime(sess, remotefile, "");
+    ret = get_modtime(sess, remotefile);
     if (ret != FTP_OK) {
 	return ret;
     }
@@ -1190,11 +1189,14 @@ int ftp_fetch(ftp_session *sess, const char *startdir, struct proto_file **list)
     }
 }
 
-static int 
-get_modtime(ftp_session *sess, const char *root, const char *filename) 
+static int get_modtime(ftp_session *sess, const char *filename)
 {
-    NE_DEBUG(DEBUG_FTP, "Getting modtime.\n");
-    if (execute(sess, "MDTM %s%s", root, filename) == FTP_MODTIME) {
+    int ret;
+
+    if ((ret = maybe_chdir(sess, &filename)) != FTP_OK)
+        return ret;
+
+    if (execute(sess, "MDTM %s", filename) == FTP_MODTIME) {
 	NE_DEBUG(DEBUG_FTP, "Got modtime.\n");
 	return FTP_OK;
     } else {
@@ -1204,7 +1206,7 @@ get_modtime(ftp_session *sess, const char *root, const char *filename)
 
 int ftp_get_modtime(ftp_session *sess, const char *filename, time_t *modtime) 
 {
-    if (get_modtime(sess, filename, "") == FTP_OK) {
+    if (get_modtime(sess, filename) == FTP_OK) {
 	*modtime = sess->get_modtime;
 	return FTP_OK;
     } else {
@@ -1220,13 +1222,18 @@ ftp_fetch_modtimes(ftp_session *sess, const char *rootdir,
 		   struct proto_file *files) 
 {
     struct proto_file *this_file;
+    char *path;
+    int ret;
  
     for (this_file=files; this_file!=NULL; this_file=this_file->next) {
-	if (this_file->type != proto_file) {
-	    continue;
-	}
-	NE_DEBUG(DEBUG_FTP, "File: %s%s\n", rootdir, this_file->filename);
-	if (get_modtime(sess, rootdir, this_file->filename) == FTP_OK) {
+        if (this_file->type != proto_file) continue;
+
+        path = ne_concat(rootdir, this_file->filename, NULL);
+        NE_DEBUG(DEBUG_FTP, "File: %s\n", path);
+        ret = get_modtime(sess, path);
+        ne_free(path);
+
+        if (ret == FTP_OK) {
 	    this_file->modtime = sess->get_modtime;
 	} else {
 	    NE_DEBUG(DEBUG_FTP, "Didn't get modtime.\n");
