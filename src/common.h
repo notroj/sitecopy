@@ -83,15 +83,4 @@ void init_charset(void);
 
 int map_debug_options(const char *opts, int *mask, char *err);
 
-/* neon 0.24 compatibility */
-#if NE_VERSION_MAJOR == 0 && NE_VERSION_MINOR < 25
-#define ne_xml_failed(p) (!ne_xml_valid(p))
-#define NE_FEATURE_SSL 1
-#define ne_has_support(x) ne_supports_ssl()
-#endif
-
-#if NE_VERSION_MAJOR == 0 && NE_VERSION_MINOR < 27
-typedef off_t ne_off_t;
-#endif
-
 #endif /* COMMON_H */
