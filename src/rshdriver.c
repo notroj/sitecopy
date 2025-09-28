@@ -71,6 +71,8 @@ static int run_rcmd(enum rcommand rcmd,
     len = ne_vsnprintf(sess->buf, BUFSIZ, template, params);
     va_end(params);
 
+    if (len >= BUFSIZ) return SITE_FAILED;
+
     if (rcmd == RCP) {
         cmd = ne_concat(sess->rcp_cmd, "  2>/dev/null ", sess->buf, NULL);
     } else if (username) {
@@ -210,8 +212,8 @@ static int rsh_fetch(rsh_session *sess, const char *startdir,
                      struct proto_file **list)
 {
     struct proto_file *tail = NULL;
-    int success = SITE_OK;
     ls_context_t *lsctx = ls_init(startdir);
+    int ret = SITE_OK, fret;
 
     memset(sess->buf, 0, BUFSIZ);
     
@@ -224,7 +226,7 @@ static int rsh_fetch(rsh_session *sess, const char *startdir,
         switch (res) {
         case ls_error:
             NE_DEBUG(DEBUG_RSH, "Could not parse line.\n");
-            success = SITE_ERRORS;
+            ret = SITE_ERRORS;
             break;
 
         default:
@@ -236,7 +238,9 @@ static int rsh_fetch(rsh_session *sess, const char *startdir,
     ls_destroy(lsctx);
 
     NE_DEBUG(DEBUG_RSH, "Fetch finished successfully.\n");
-    return run_finish(sess);
+    fret = run_finish(sess);
+    if (ret == SITE_OK) ret = fret;
+    return ret;
 }
 
 static int fetch_list(void *session, const char *dirname, int need_modtimes,
