@@ -31,9 +31,6 @@ ALL_CFLAGS = $(CPPFLAGS) $(INCLUDES) $(CFLAGS)
 LIBS = @NEON_LIBS@ @LIBINTL@ @LIBS@
 CC = @CC@
 
-# libintl must be built first.
-EXPATDIR = lib/expat
-
 INSTALL_PROGRAM = @INSTALL_PROGRAM@
 INSTALL_DATA = @INSTALL_DATA@
 INSTALL = @INSTALL@
@@ -117,15 +114,6 @@ lib/dirname.o: lib/dirname.c lib/dirname.h config.h
 lib/netrc.o: lib/netrc.c lib/netrc.h config.h
 lib/rpmatch.o: lib/rpmatch.c config.h
 lib/yesno.o: lib/yesno.c config.h
-
-$(EXPATDIR)/xmltok/nametab.h: $(EXPATDIR)/gennmtab/gennmtab@EXEEXT@
-	rm -f $@
-	$(EXPATDIR)/gennmtab/gennmtab@EXEEXT@ >$@
-
-$(EXPATDIR)/gennmtab/gennmtab@EXEEXT@: $(top_srcdir)/$(EXPATDIR)/gennmtab/gennmtab.c
-	$(CC) $(LDFLAGS) $(ALL_CFLAGS) -o $@ $(top_srcdir)/$(EXPATDIR)/gennmtab/gennmtab.c
-
-$(EXPATDIR)/xmltok/xmltok.o: $(EXPATDIR)/xmltok/xmltok.c $(EXPATDIR)/xmltok/xmltok.h $(EXPATDIR)/xmltok/nametab.h
 
 # The install goal is different for each front end, so
 # we have a separate goal for each and autoconf points the 
