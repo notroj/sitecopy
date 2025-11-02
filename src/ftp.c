@@ -126,7 +126,10 @@ struct ftp_session_s {
 int _ftp_err = (x); if (_ftp_err != FTP_OK) return _ftp_err; } while (0)
 
 /* Sets error string */
-static void ftp_seterror(ftp_session *sess, const char *error);
+#define ftp_seterror(sess_, errstr_) do {                       \
+    ne_strnzcpy((sess_)->error, (errstr_), sizeof sess->error); \
+    } while (0)
+
 
 /* Opens the data connection */
 static int ftp_data_open(ftp_session *sess, const char *command, ...) 
@@ -1114,11 +1117,6 @@ int ftp_open(ftp_session *sess)
     }
 
     return FTP_OK;
-}
-
-void ftp_seterror(ftp_session *sess, const char *error)
-{
-    ne_strnzcpy(sess->error, error, sizeof sess->error);
 }
 
 const char *ftp_get_error(ftp_session *sess)
