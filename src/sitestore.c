@@ -61,9 +61,7 @@
 FILE *site_open_storage_file(struct site *site) 
 {
     if (site->storage_file == NULL) {
-    char *infofile_new = ne_concat(site->infofile, ".new", NULL);
-    site->storage_file = fopen(infofile_new, "w" FOPEN_BINARY_FLAGS);
-    ne_free(infofile_new);
+        site->storage_file = fopen(site->infotemp, "w" FOPEN_BINARY_FLAGS);
     }
     return site->storage_file;
 }
@@ -71,11 +69,10 @@ FILE *site_open_storage_file(struct site *site)
 int site_close_storage_file(struct site *site)
 {
     int ret = fclose(site->storage_file);
-    char *infofile_new = ne_concat(site->infofile, ".new", NULL);
-    if (!ret)
-        ret = rename(infofile_new, site->infofile);
-    ne_free(infofile_new);
-	site->storage_file = NULL;
+    if (!ret) {
+        ret = rename(site->infotemp, site->infofile);
+    }
+    site->storage_file = NULL;
     return ret;
 }
 
