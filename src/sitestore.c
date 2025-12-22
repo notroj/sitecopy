@@ -133,20 +133,19 @@ int site_write_stored_state(struct site *site)
 {
     struct site_file *current;
     struct site_file **sorted;
-    int i, num_items = 0;
+    unsigned i, num_items = 0;
     FILE *fp;
 
     /* Build the sorted copy.  */
-    for (current = site->files; current!=NULL; current = current->next)
-      num_items++;
+    for (current = site->files; current != NULL; current = current->next)
+        num_items += current->stored.exists;
 
-    sorted = calloc (num_items, sizeof (struct site_file *));
-    if (sorted == NULL)
-      return -1;
+    sorted = calloc(num_items, sizeof (struct site_file *));
 
-    for (i = 0, current = site->files; current!=NULL; current = current->next, i++)
-      sorted[i] = current;
-    qsort (sorted, num_items, sizeof (struct site_file *), site_file_cmp);
+    for (i = 0, current = site->files; current != NULL; current = current->next)
+        if (current->stored.exists)
+            sorted[i++] = current;
+    qsort(sorted, num_items, sizeof (struct site_file *), site_file_cmp);
 
     fp = site_open_storage_file(site);
     if (fp == NULL) {
@@ -174,7 +173,6 @@ int site_write_stored_state(struct site *site)
     for (i = 0; i < num_items; i++) {
 	char *fname;
 	current = sorted[i];
-	if (!current->stored.exists) continue;
 	fprintf(fp, "<item>");
 	fprintf(fp, "<type><type-%s/></type>",
 		 (current->type==file_file)?"file":(
