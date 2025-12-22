@@ -278,6 +278,7 @@ int rcfile_read(struct site **sites)
 		this_site->proto_string = ne_strdup(default_site.proto_string);
 		/* Now work out the info filename */
 		this_site->infofile = ne_concat(copypath, val, NULL);
+		this_site->infotemp = ne_concat(copypath, val, ".new", NULL);
                 this_site->certfile = ne_concat(copypath, val, ".crt", NULL);
 	    } else if (this_site == NULL) {
 		ret = RC_CORRUPT;

@@ -360,7 +360,7 @@ struct site {
     char *local_root_user; /* what the user gave/sees as the remote root */
     unsigned int local_isrel; /* is the local root directory relative to home dir */
 
-    char *infofile;  /* local storage file in ~/.sitecopy/  */
+    char *infotemp, *infofile;  /* local storage file in ~/.sitecopy/  */
     char *certfile;  /* file in which cached SSL certificate is stored. */
     FILE *storage_file;  /* The file opened for the storage file */
 
