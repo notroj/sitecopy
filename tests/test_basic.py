@@ -12,6 +12,15 @@ def assert_no_update(sitecopy_env):
     assert res.returncode == 0
     assert "The remote site does not need updating." in res.stdout
 
+def test_options(sitecopy_env):
+    res = run_sitecopy(sitecopy_env, ["--version"])
+    assert res.returncode == 0
+    assert "Unix platform" in res.stdout
+
+    res = run_sitecopy(sitecopy_env, ["--help"])
+    assert res.returncode == 255
+    assert "Usage: sitecopy" in res.stdout
+
 def test_initialization(sitecopy_env):
     # Initialize the site storage
     local = sitecopy_env["local"]
@@ -29,6 +38,10 @@ def test_initialization(sitecopy_env):
     res = run_sitecopy(sitecopy_env, ["--list", "testsite"])
     assert res.returncode == 1
     assert "The remote site needs updating (1 item to update)" in res.stdout
+
+    res = run_sitecopy(sitecopy_env, ["--dry-run", "--update", "testsite"])
+    assert res.returncode == 0
+    assert "Update completed successfully" in res.stdout
 
     res = run_sitecopy(sitecopy_env, ["--catchup", "testsite"])
     assert res.returncode == 0
