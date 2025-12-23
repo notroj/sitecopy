@@ -163,7 +163,5 @@ distclean: clean
 	rm -f config.h config.cache config.log config.status Makefile stamp-h core
 	rm -f `find $(top_srcdir) \( -name '*.orig' -o -name '*.rej' \
 		-o -name '#*#' -o -name '*~' \) -print`
-
-ChangeLog:
-	svn log > $@
-
+check:
+	pytest-3 -v tests/
