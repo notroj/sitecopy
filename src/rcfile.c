@@ -110,13 +110,23 @@ static int parse_site_name(struct site *site, const char *name)
     else if (strcasecmp(uri.scheme, "ftp") == 0) {
         site->protocol = siteproto_ftp;
     }
+    else if (strcasecmp(uri.scheme, "sftp") == 0) {
+        site->protocol = siteproto_sftp;
+    }
     else {
         ne_uri_free(&uri);
         return RC_CORRUPT;
     }
 
-    site->remote_root_user = ne_strdup(uri.path);
-    site->remote_isrel = false;
+    if ((site->protocol == siteproto_sftp || site->protocol == siteproto_ftp)
+        && strncmp(uri.path, "/~/", 3) == 0) {
+        site->remote_root_user = ne_strdup(uri.path + 3);
+        site->remote_isrel = true;
+    }
+    else {
+        site->remote_root_user = ne_strdup(uri.path);
+        site->remote_isrel = false;
+    }
 
     ne_uri_free(&uri);
 

@@ -85,3 +85,26 @@ def test_site_urls(sitecopy_env):
     assert "Port: 8081" in res.stdout
     assert "Server: example.com" in res.stdout
 
+    _write_rcfile_url(sitecopy_env, "ftp://example.com/")
+    res = run_sitecopy(sitecopy_env, ["--view", "example.com"])
+    assert res.returncode == 0
+    assert "Protocol: FTP" in res.stdout
+    assert "Remote directory: /" in res.stdout
+    assert "Port: 21" in res.stdout
+    assert "Server: example.com" in res.stdout
+
+    _write_rcfile_url(sitecopy_env, "sftp://example.com/~/foo/bar")
+    res = run_sitecopy(sitecopy_env, ["--view", "example.com"])
+    assert res.returncode == 0
+    assert "Protocol: sftp" in res.stdout
+    assert "Remote directory: foobar/" not in res.stdout
+    assert "Port: (default)" in res.stdout
+    assert "Server: example.com" in res.stdout
+
+    _write_rcfile_url(sitecopy_env, "ftp://example.com/~/foobar")
+    res = run_sitecopy(sitecopy_env, ["--view", "example.com"])
+    assert res.returncode == 0
+    assert "Protocol: FTP" in res.stdout
+    assert "Remote directory: foobar" in res.stdout
+    assert "Port: 21" in res.stdout
+    assert "Server: example.com" in res.stdout
