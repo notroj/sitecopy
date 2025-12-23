@@ -522,8 +522,8 @@ static void parse_cmdline(int argc, char *argv[])
 	case 'V': 
 	    version();
 	    puts(ne_version_string());
-	    exit(-1);
-	case 'h': usage(); exit(-1);
+	    exit(0);
+	case 'h': usage(); exit(0);
 	case '?': 
 	default:
 	    printf(_("Try `%s --help' for more information.\n"), progname);

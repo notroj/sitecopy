@@ -18,7 +18,7 @@ def test_options(sitecopy_env):
     assert "Unix platform" in res.stdout
 
     res = run_sitecopy(sitecopy_env, ["--help"])
-    assert res.returncode == 255
+    assert res.returncode == 0
     assert "Usage: sitecopy" in res.stdout
 
 def test_initialization(sitecopy_env):
