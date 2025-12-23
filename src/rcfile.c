@@ -84,6 +84,45 @@ extern const struct proto_driver rsh_driver;
 extern const struct proto_driver sftp_driver;
 #endif /* USE_SFTP */
 
+/* Parse a site name, which might be a URL. */
+static int parse_site_name(struct site *site, const char *name)
+{
+    ne_uri uri;
+
+    if (ne_uri_parse(name, &uri) != 0
+        || uri.scheme == NULL || uri.host == NULL || uri.path == NULL) {
+        site->name = ne_strdup(name);
+        return 0;
+    }
+
+    site->server.hostname = ne_strdup(uri.host);
+    site->name = ne_strdup(uri.host);
+    if ((site->server.port = uri.port) == 0)
+        site->server.port = ne_uri_defaultport(uri.scheme);
+
+    if (strcasecmp(uri.scheme, "http") == 0)  {
+        site->protocol = siteproto_dav;
+    }
+    else if (strcasecmp(uri.scheme, "https") == 0) {
+        site->protocol = siteproto_dav;
+        site->http_secure = true;
+    }
+    else if (strcasecmp(uri.scheme, "ftp") == 0) {
+        site->protocol = siteproto_ftp;
+    }
+    else {
+        ne_uri_free(&uri);
+        return RC_CORRUPT;
+    }
+
+    site->remote_root_user = ne_strdup(uri.path);
+    site->remote_isrel = false;
+
+    ne_uri_free(&uri);
+
+    return 0;
+}
+
 /* rcfile_read will read the rcfile and fill given sites list.
  * This returns 0 on success, RC_OPENFILE if the rcfile could not
  * be read, or RC_CORRUPT if the rcfile was corrupt.
@@ -272,14 +311,18 @@ int rcfile_read(struct site **sites)
 		    last_site->next = this_site;
 		} else { /* First site */
 		    *sites = this_site;
-		}		
-		this_site->name = ne_strdup(val);
-		this_site->files = NULL;
-		this_site->proto_string = ne_strdup(default_site.proto_string);
-		/* Now work out the info filename */
-		this_site->infofile = ne_concat(copypath, val, NULL);
-		this_site->infotemp = ne_concat(copypath, val, ".new", NULL);
-                this_site->certfile = ne_concat(copypath, val, ".crt", NULL);
+		}
+
+                this_site->files = NULL;
+                this_site->proto_string = ne_strdup(default_site.proto_string);
+
+                if ((ret = parse_site_name(this_site, val)) != 0)
+                    break;
+
+                /* Set storage/cert filenames. */
+                this_site->infofile = ne_concat(copypath, this_site->name, NULL);
+                this_site->infotemp = ne_concat(copypath, this_site->name, ".new", NULL);
+                this_site->certfile = ne_concat(copypath, this_site->name, ".crt", NULL);
 	    } else if (this_site == NULL) {
 		ret = RC_CORRUPT;
 	    } else if (strcmp(key, "username") == 0) {
