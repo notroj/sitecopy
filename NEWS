@@ -1,3 +1,13 @@
+Changes in release 0.17:
+* FTP: Apply usecwd for MDTM commands.
+* FTP: Stricter validation of EPSV responses.
+* Store state files in sorted order (Gary Benson)
+* Write state file to a temporary file (michel34)
+* Various compilation warning fixes.
+* Use exit status 0 for --version and --help.
+* Allow URL as site name in rcfile.
+* Update to, and require, neon 0.29+.
+
 Changes in release 0.16.6:
 * DAV: Fix crash with progress bar enabled with neon 0.27/0.28.
 
