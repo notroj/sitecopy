@@ -63,8 +63,9 @@ struct fetch_context {
 };
 
 
-/* For the neon 0.27 notifier API, switch out the userdata pointer passed to the
- * callback depending on whether upload or download progress is needed: */
+/* For the notifier API, switch out the userdata pointer passed to the
+ * callback depending on whether upload or download progress is needed
+ * in the UI: */
 #define PROGRESS_UPLOAD_MAGIC (void *)(0x1)
 #define PROGRESS_DOWNLOAD_MAGIC (void *)(0x2)
 
@@ -146,25 +147,7 @@ proxy_auth_cb(void *userdata, const char *realm, int attempt,
 		       username, password);
 }
 
-#ifndef PROGRESS_UPLOAD_MAGIC
-/* Pre neon-0.27 API: */
-static void notify_cb(void *userdata, ne_conn_status status, const char *info)
-{
-
-#define MAP(a) case ne_conn_##a: fe_connection(fe_##a, info); break
-
-    switch (status) {
-	MAP(namelookup);
-	MAP(connecting);
-	MAP(connected);
-    default:
-	break;
-    }
-
-#undef MAP
-}
-#else
-/* neon 0.27 notifier API: */
+/* neon notifier API callback: */
 static void notify_status(void *userdata, ne_session_status status,
                           const ne_session_status_info *info)
 {
@@ -192,7 +175,6 @@ static void notify_status(void *userdata, ne_session_status status,
         break;
     }
 }
-#endif
 
 static int h2s(ne_session *sess, int errcode)
 {
