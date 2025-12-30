@@ -1,16 +1,6 @@
 import subprocess
 import os
-
-def run_sitecopy(senv, args):
-    """Helper to run sitecopy with the custom config."""
-    cmd = ["./sitecopy", "--rcfile", str(senv["rcfile"]),
-           "--storepath", str(senv["store"])] + args
-    return subprocess.run(cmd, capture_output=True, text=True)
-
-def assert_no_update(sitecopy_env):
-    res = run_sitecopy(sitecopy_env, ["--list", "testsite"])
-    assert res.returncode == 0
-    assert "The remote site does not need updating." in res.stdout
+from common import *
 
 def test_options(sitecopy_env):
     res = run_sitecopy(sitecopy_env, ["--version"])
