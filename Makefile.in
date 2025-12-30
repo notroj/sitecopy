@@ -163,5 +163,12 @@ distclean: clean
 	rm -f config.h config.cache config.log config.status Makefile stamp-h core
 	rm -f `find $(top_srcdir) \( -name '*.orig' -o -name '*.rej' \
 		-o -name '#*#' -o -name '*~' \) -print`
-check: $(TARGET)
+
+check-containers: tests/httpd-container-stamp
+
+tests/httpd-container-stamp: tests/httpd-Containerfile tests/httpd.conf
+	podman build -t sitecopy-test-httpd -f tests/httpd-Containerfile $(top_srcdir)/tests
+	echo timestamp > $@
+
+check: $(TARGET) check-containers
 	pytest-3 -v tests/

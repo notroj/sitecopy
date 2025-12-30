@@ -1,15 +1,14 @@
 import pytest
 import os
 import subprocess
+import time
 
 @pytest.fixture
 def sitecopy_env(tmp_path):
     # Setup directories
     local_dir = tmp_path / "local"
-    remote_dir = tmp_path / "remote"
     store_dir = tmp_path / "storage"
     local_dir.mkdir()
-    remote_dir.mkdir()
     store_dir.mkdir()
 
     # Create a dummy config file
@@ -29,6 +28,23 @@ site testsite
     return {
         "rcfile": config_file,
         "local": local_dir,
-        "remote": remote_dir,
         "store": store_dir,
     }
+
+@pytest.fixture
+def httpd_container(tmp_path):
+    # Setup containers
+    remote_dir = tmp_path / "remote-root"
+    remote_dir.mkdir()
+
+    cmd = ["podman", "run", "-p", "8080:80", "-d", "sitecopy-test-httpd"]
+    run = subprocess.run(cmd, capture_output=True, text=True)
+    assert run.returncode == 0
+    cid = run.stdout.strip()
+
+    time.sleep(1)
+
+    yield {"port": 8080}
+
+    subprocess.run(["podman", "kill", cid], capture_output=False)
+    assert run.returncode == 0
