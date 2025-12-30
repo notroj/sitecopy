@@ -226,14 +226,14 @@ enum file_type {
 };
 
 struct file_state {
+    unsigned char checksum[16]; /* the MD5 checksum of the file */
     char *filename; /* the file name */
+    char *linktarget; /* the target of the link */
     time_t time; /* the last-modification time of the file */
     off_t size; /* the size of the file */
-    unsigned char checksum[16]; /* the MD5 checksum of the file */
-    char *linktarget; /* the target of the link */
-    unsigned int exists; /* whether the file exists in this state or not */
-    unsigned int ascii; /* whether the file is 'ASCII' or not */
     mode_t mode; /* the protection modes & 0777 of the file */
+    unsigned int exists:1; /* whether the file exists in this state or not */
+    unsigned int ascii:1; /* whether the file is 'ASCII' or not */
 };
 
 /* To Consider: 
