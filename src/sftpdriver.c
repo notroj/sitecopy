@@ -140,7 +140,6 @@ static int sftp_connect(sftp_session *sess)
     }
     close(c_in);
     close(c_out);
-    read_sftp(sess);    /* wait for prompt */
     return SITE_OK;
 }
 
