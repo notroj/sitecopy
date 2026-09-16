@@ -169,6 +169,8 @@ files on the remote server.
 .B Catchup Mode
 \- makes sitecopy think the local site is exactly the same as the
 remote copy.
+.IP "-e, --verify"
+Verify stored state of site matches real remote state
 .IP "-v, --view"
 .B View Mode
 \- displays all the site definitions from the rcfile.
@@ -182,6 +184,10 @@ Applicable in
 .B Update Mode
 only, will prompt the user for confirmation for each update
 (i.e., creating a directory, uploading a file etc.).
+.IP "-g, --logfile=FILE"
+Append debugging messages to FILE (else use stderr)
+.IP "-n, --dry-run"
+Display but do not carry out the operation
 .IP "-r RCFILE, --rcfile=RCFILE"
 Specify an alternate run control file location.
 .IP "-p PATH, --storepath=PATH"
@@ -637,7 +643,7 @@ name with no trailing slash. For example
 to exclude the 'foo/bar' and 'where/else' subdirectories of the site.
 
 Exclude patterns are consulted when scanning the local directory, and
-when scanning the remote site during a --fetch.  Any file which
+when scanning the remote site during a \-\-fetch.  Any file which
 matches any exclude pattern is not added to the files list.  This
 means that a file which has already been uploaded by sitecopy, and
 subsequently matches an exclude pattern will be deleted from the
@@ -683,13 +689,13 @@ sites are specified on the command line, the return value is in
 respect to the last site given.
 
 .SS Update Mode
- -1 ... update never even started - configuration problem
+ \-1 ... update never even started - configuration problem
   0 ... update was entirely successful.
   1 ... update went wrong somewhere
   2 ... could not connect or login to server 
 
 .SS List Mode (default mode of operation)
- -1 ... could not form list - configuration problem
+ \-1 ... could not form list - configuration problem
   0 ... the remote site does not need updating
   1 ... the remote site needs updating
 
