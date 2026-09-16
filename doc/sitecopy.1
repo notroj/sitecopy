@@ -16,7 +16,7 @@ The aim is to remove the hassle of uploading and deleting individual
 files using an FTP client.  sitecopy will also optionally try to spot
 files you move locally, and move them remotely.
 
-FTP, WebDAV and other HTTP-based authoring servers (for instance,
+FTP, SFTP, WebDAV and other HTTP-based authoring servers (for instance,
 AOLserver and Netscape Enterprise) are supported.
 
 .SH GETTING STARTED
@@ -227,6 +227,8 @@ be given. Each keyword may be one of:
 .br
   ftp       FTP driver
 .br
+  sftp      SFTP driver
+.br
   xml       XML parsing information
 .br
   xmlparse  Low-level XML parsing information
@@ -295,7 +297,7 @@ A site definition is made up of a series of lines:
 .BR "url " "siteURL ]"
 .br
  [ 
-.BR "protocol " "{ ftp | webdav } ]"
+.BR "protocol " "{ ftp | sftp | webdav } ]"
 .br
  [ 
 .BR ftp " nopasv ]"
@@ -351,12 +353,12 @@ This may be either a DNS name or IP address. A connection is made
 to the default port for the protocol used, or that given by the
 .B port
 key.
-sitecopy supports the WebDAV or FTP protocols - the 
+sitecopy supports the WebDAV or (S)FTP protocols - the
 .B protocol
 key specifies which to use, taking the value of either
 .B webdav
 or 
-.B ftp
+.B ftp/sftp
 respectively. By default, FTP will be used.
 
 The 
@@ -767,7 +769,7 @@ rather than to the author, since the mailing list is archived and can
 be a useful resource for others.
 
 .SH SEE ALSO
-rsync(1), ftp(1), mirror(1)
+rsync(1), ftp(1), sftp(1), mirror(1)
 
 .SH STANDARDS
 
