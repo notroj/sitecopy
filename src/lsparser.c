@@ -121,6 +121,20 @@ static inline char *skip_field(char *line)
     return line;
 }
 
+/* Skip the next field in LINE and a single following separator
+ * space; any further spaces are left in place, since they may be
+ * leading spaces of a filename. */
+static inline char *skip_field_sep(char *line)
+{
+    while (*line != '\0' && *line != ' ')
+        line++;
+
+    if (*line == ' ')
+        line++;
+
+    return line;
+}
+
 /* Return mode bits for permissions string PERMS */
 static mode_t parse_permissions(const char *perms)
 {
@@ -164,8 +178,11 @@ static enum ls_result parse_file(ls_context_t *ctx, char *line, size_t len,
     }
     while (*line++ == ' ') /* nullop */;
 
-    /* skip Month, day, time fields */
-    line = skip_field(skip_field(skip_field(line)));
+    /* skip Month and day fields */
+    line = skip_field(skip_field(line));
+    /* Skip the time field and a single following separator space;
+     * any further spaces are the leading spaces of the filename. */
+    line = skip_field_sep(line);
     if (*line == '\0') {
         return fail(ctx, "Missing token after timestamp field");
     }
