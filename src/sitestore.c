@@ -119,33 +119,16 @@ static char *fn_unescape(const char *filename)
     return ret;
 }
 
-static int site_file_cmp (const void *p1, const void *p2)
-{
-  struct site_file *f1 = *(struct site_file **) p1;
-  struct site_file *f2 = *(struct site_file **) p2;
-
-  return strcmp (f1->stored.filename, f2->stored.filename);
-}
-
 /* Write out the stored state for the site. 
  * Returns 0 on success, non-zero on error. */
 int site_write_stored_state(struct site *site) 
 {
-    struct site_file *current;
-    struct site_file **sorted;
-    unsigned i, num_items = 0;
+    struct site_file *current, **sorted;
+    unsigned i, num_items;
     FILE *fp;
 
-    /* Build the sorted copy.  */
-    for (current = site->files; current != NULL; current = current->next)
-        num_items += current->stored.exists;
-
-    sorted = calloc(num_items, sizeof (struct site_file *));
-
-    for (i = 0, current = site->files; current != NULL; current = current->next)
-        if (current->stored.exists)
-            sorted[i++] = current;
-    qsort(sorted, num_items, sizeof (struct site_file *), site_file_cmp);
+    sorted = site_sorted_files_list(site, site_file_is_stored,
+                                    site_file_cmp_stored, &num_items);
 
     fp = site_open_storage_file(site);
     if (fp == NULL) {

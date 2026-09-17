@@ -555,6 +555,31 @@ void site_destroy_stored(struct site *site);
  */
 void site_flatlist(FILE *f, struct site *the_site);
 
+/* Comparison function used to order the array returned by
+ * site_sorted_files_list; p1 and p2 are pointers to (struct site_file *),
+ * as passed by qsort. Returns an strcmp-style result. */
+typedef int file_cmp_fn(const void *p1, const void *p2);
+
+/* A file_cmp_fn which orders files by stored filename; only valid
+ * for files for which stored.exists is true. */
+int site_file_cmp_stored(const void *p1, const void *p2);
+
+/* Predicate used to select the files included in the array returned
+ * by site_sorted_files_list. Returns non-zero to include the file. */
+typedef int file_filter_fn(const struct site_file *file);
+
+/* A file_filter_fn which selects files for which stored state exists. */
+int site_file_is_stored(const struct site_file *file);
+
+/* Returns an array of the files in the given site for which the given
+ * filter function returns non-zero (or every file, if filter is
+ * NULL), ordered using the given comparison function; the number of
+ * files is placed in *count.  The array must be free()d by the
+ * caller; the site_file structures it points at remain owned by the
+ * site. */
+struct site_file **site_sorted_files_list(struct site *site, file_filter_fn filter,
+                                          file_cmp_fn compare, unsigned *count);
+
 /* Returns a pseudo-URL for the given site, in a statically allocated
  * memory location which will be overwritten by subsequent calls to
  * the function. (-> NOT thread-safe) */
