@@ -1338,6 +1338,42 @@ void site_flatlist(FILE *f, struct site *site)
     fprintf(f, "siteend|%s\n", site->remote_is_different?"changed":"unchanged");
 }
 
+int site_file_cmp_stored(const void *p1, const void *p2)
+{
+    struct site_file *f1 = *(struct site_file **) p1;
+    struct site_file *f2 = *(struct site_file **) p2;
+
+    return strcmp(f1->stored.filename, f2->stored.filename);
+}
+
+int site_file_is_stored(const struct site_file *file)
+{
+    return file->stored.exists;
+}
+
+struct site_file **site_sorted_files_list(struct site *site, file_filter_fn filter,
+                                          file_cmp_fn compare, unsigned *count)
+{
+    unsigned num_items = 0, i;
+    struct site_file **sorted, *current;
+
+    /* Build the sorted copy.  */
+    for (current = site->files; current; current = current->next)
+        if (!filter || filter(current))
+            num_items++;
+
+    *count = num_items;
+    sorted = ne_calloc(num_items * sizeof *sorted);
+
+    for (i = 0, current = site->files; current; current = current->next)
+        if (!filter || filter(current))
+            sorted[i++] = current;
+
+    qsort(sorted, num_items, sizeof *sorted, compare);
+
+    return sorted;
+}
+
 void site_sock_progress_cb(void *userdata, ne_off_t progress, ne_off_t total)
 {
     fe_transfer_progress(progress, total);
