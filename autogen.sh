@@ -12,15 +12,12 @@ if test ! -f .version && test -e .git; then
     echo "${branch:-unknown}" > .version
 fi
 
-INCLUDES="-I m4 -I neon/macros"
+# Install the gettext infrastructure (m4/*.m4, po/*) for the version
+# given by AM_GNU_GETTEXT_VERSION, so that the macros used by aclocal
+# and po/Makefile.in.in always come from the same gettext release.
+${AUTOPOINT:-autopoint} --force
 
-for d in /usr/share/gettext/m4; do
-    if test -d "$d"; then
-        INCLUDES="$INCLUDES -I ${d}"
-    fi
-done
-
-${ACLOCAL:-aclocal} ${INCLUDES}
+${ACLOCAL:-aclocal} -I m4 -I neon/macros
 ${AUTOHEADER:-autoheader}
 ${AUTOCONF:-autoconf}
 ${LIBTOOLIZE:-libtoolize} --copy --force >/dev/null
