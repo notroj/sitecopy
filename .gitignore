@@ -9,6 +9,7 @@
 /po/Makefile
 /po/Makefile.in
 /po/POTFILES
+/po/stamp-po
 /.version
 # Installed by autopoint
 /ABOUT-NLS

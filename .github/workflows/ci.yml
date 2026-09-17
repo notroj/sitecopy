@@ -17,7 +17,7 @@ jobs:
       with:
         submodules: true
     - run: sudo apt-get update
-    - run: sudo apt-get -y install gettext python3-pytest ${{ !matrix.bundled && 'libneon27-dev' || '' }}
+    - run: sudo apt-get -y install autopoint gettext python3-pytest ${{ !matrix.bundled && 'libneon27-dev' || '' }}
     - run: bash -ex ./.release.sh master
     - run: ./autogen.sh
     - run: ./configure --prefix=/tmp/rootdir 

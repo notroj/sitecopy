@@ -148,7 +148,9 @@ AX_TYPE_SOCKLEN_T
 
 XGETTEXT_EXTRA_OPTIONS=--from-code=UTF-8
 
-AM_GNU_GETTEXT_VERSION([0.22.5])
+dnl Keep this at the oldest gettext whose infrastructure autopoint
+dnl must install; it must be <= the gettext of every build platform.
+AM_GNU_GETTEXT_VERSION([0.21])
 AM_GNU_GETTEXT([external])
 
 BUILD_INCLUDED_LIBINTL=no
