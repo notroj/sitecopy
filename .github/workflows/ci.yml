@@ -13,7 +13,7 @@ jobs:
         bundled: [true, false]
         warnings: [true, false]
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v6
       with:
         submodules: true
     - run: sudo apt-get update
