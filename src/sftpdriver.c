@@ -66,16 +66,24 @@ static int run_sftp(sftp_session *sess, const char *template, ...)
 
 static int read_sftp(sftp_session *sess) {
     size_t pos = 0;
+    int got_prompt = 0;
 
     do {
         ssize_t ret = read(sess->fd_in, sess->buf+pos, BUFSIZ-pos);
         if (ret < 0) return SITE_FAILED;
+        /* EOF: the sftp process died or never connected. */
         if (ret == 0) break;
         pos += ret;
         sess->buf[pos] = '\0';
-    } while (strchr(sess->buf, '>') == NULL && pos < BUFSIZ);
+        if (strchr(sess->buf, '>') != NULL) {
+            got_prompt = 1;
+            break;
+        }
+    } while (pos < BUFSIZ);
     NE_DEBUG(DEBUG_SFTP, "(%s)", sess->buf);
-    return SITE_OK;
+    /* Reaching EOF before the next prompt means the command cannot
+     * have succeeded. */
+    return got_prompt ? SITE_OK : SITE_FAILED;
 }
     
 static void exec_sftp(sftp_session *sess)
@@ -167,7 +175,10 @@ static int sftp_disconnect(sftp_session *sess)
 static int run_sftp(sftp_session *sess, const char *template, ...) 
 {
     va_list params;
-    if (!sess->connected) sftp_connect(sess);
+    if (!sess->connected) {
+	int ret = sftp_connect(sess);
+	if (ret != SITE_OK) return ret;
+    }
 
     va_start(params, template);
     ne_vsnprintf(sess->buf, BUFSIZ, template, params);
@@ -183,8 +194,7 @@ static int run_sftp(sftp_session *sess, const char *template, ...)
     if (write(sess->fd_out, sess->buf, strlen(sess->buf)) == -1) {
 	return SITE_FAILED;
     }
-    read_sftp(sess);    /* wait for prompt */
-    return SITE_OK;
+    return read_sftp(sess);    /* wait for prompt */
 }
 
 
