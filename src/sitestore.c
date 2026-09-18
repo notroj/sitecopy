@@ -127,13 +127,13 @@ int site_write_stored_state(struct site *site)
     unsigned i, num_items;
     FILE *fp;
 
-    sorted = site_sorted_files_list(site, site_file_is_stored,
-                                    site_file_cmp_stored, &num_items);
-
     fp = site_open_storage_file(site);
     if (fp == NULL) {
 	return -1;
     }
+
+    sorted = site_sorted_files_list(site, site_file_is_stored,
+                                    site_file_cmp_stored, &num_items);
 
     fprintf(fp, "<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>\n");
     fprintf(fp, "<sitestate version='" SITE_STATE_FILE_VERSION "'>\n");
@@ -201,7 +201,9 @@ int site_write_stored_state(struct site *site)
     }
     fprintf(fp, "</items>\n");
     fprintf(fp, "</sitestate>\n");
+
     site->stored_state_method = site->state_method;
+    ne_free(sorted);
     return site_close_storage_file(site);
 }
 
