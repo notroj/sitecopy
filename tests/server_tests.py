@@ -10,6 +10,7 @@ import time
 import pytest
 
 from common import *
+from siteconfig import RELATIVE_ROOT
 
 @pytest.mark.axes("delete", "overwrite", "safe", "tempupload", "lowercase")
 def test_update_cycle(site):
@@ -201,6 +202,29 @@ def test_fetch(site):
                          "remote-dir/r.txt": md5(b"In a directory\n"),
                          "gone.txt": md5(b"Deleted locally\n")})
     assert remote_tree(site) == expected
+    assert_no_update(site)
+
+# -- Relative remote directory ------------------------------------------
+
+@pytest.mark.site_lines(RELATIVE_ROOT)
+def test_relative_root(site):
+    # With the site's directory given relative to the directory the
+    # user logs in to, FTP commands use relative paths, and `ftp
+    # usecwd' has no effect.  Upload, change and delete files in
+    # nested directories, then fetch the site into an empty state.
+    local = site["local"]
+    setup_site(site, FETCH_TREE)
+
+    (local / "docs/a.txt").write_text("A, changed\n")
+    write_tree(local, {"new/": None, "new/dir/": None,
+                       "new/dir/n.txt": "New\n"})
+    shutil.rmtree(local / "docs/sub")
+    (local / "gone.txt").unlink()
+    update_and_check(site)
+
+    (site["store"] / "testsite").unlink()
+    res = run_sitecopy(site, ["--fetch", "testsite"])
+    assert res.returncode == 0, res.stdout + res.stderr
     assert_no_update(site)
 
 # -- Temporary uploads ----------------------------------------------------

@@ -238,7 +238,12 @@ def site(tmp_path, site_config, containers):
     run = podman_exec(cid, "find '%s' -mindepth 1 -delete" % server.root)
     assert run.returncode == 0, run.stderr
 
-    env = make_sitecopy_env(tmp_path, server.rcfile + site_config.rcfile())
+    rcfile = server.rcfile
+    if any(line.startswith("remote ") for line in site_config.lines):
+        # The configuration gives the site's directory instead.
+        rcfile = "".join(line for line in rcfile.splitlines(True)
+                         if not line.startswith("  remote "))
+    env = make_sitecopy_env(tmp_path, rcfile + site_config.rcfile())
     if server.certfile:
         run = podman_exec(cid, "cat '%s'" % server.certfile)
         assert run.returncode == 0, run.stderr
