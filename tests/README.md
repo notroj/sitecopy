@@ -21,10 +21,11 @@ The container images are built by:
 
     make check-containers
 
-which builds `sitecopy-test-httpd` from `tests/httpd-Containerfile`
-and `sitecopy-test-vsftpd` from `tests/vsftpd-Containerfile`, and
-records each build in a stamp file, `tests/httpd-container-stamp` or
-`tests/vsftpd-container-stamp`.  An image is rebuilt when its
+which builds `sitecopy-test-httpd` from `tests/httpd-Containerfile`,
+`sitecopy-test-vsftpd` from `tests/vsftpd-Containerfile` and
+`sitecopy-test-pure-ftpd` from `tests/pure-ftpd-Containerfile`, and
+records each build in a stamp file, `tests/*-container-stamp` (e.g.
+`tests/vsftpd-container-stamp`).  An image is rebuilt when its
 Containerfile or configuration files change.  To force a rebuild,
 e.g. after the image was removed with `podman rmi`, or to pick up an
 updated base image, delete its stamp file:
@@ -83,6 +84,8 @@ output of passing tests too.
 | `test_dav.py` | `sitecopy-test-httpd` (Apache mod_dav) | 8080 |
 | `test_vsftpd.py` | `sitecopy-test-vsftpd` | 2121, passive 21100-21109 |
 | `test_vsftpd_ssl.py` | `sitecopy-test-vsftpd` with TLS required (and also the plain FTP server) | 2122, passive 21110-21119 |
+| `test_pureftpd.py` | `sitecopy-test-pure-ftpd` | 2123, passive 21200-21209 |
+| `test_pureftpd_ssl.py` | `sitecopy-test-pure-ftpd` with TLS required (and also the plain pure-ftpd server) | 2124, passive 21210-21219 |
 
 Each container is started the first time a test needs it, shared by
 all the tests of the session (the site directory on the server is
@@ -99,11 +102,16 @@ Ctrl-C), its containers may be left running and keep the ports
 busy.  The containers are started with `--rm`, so killing them also
 removes them:
 
-    podman ps --filter ancestor=sitecopy-test-vsftpd --filter ancestor=sitecopy-test-httpd
+    podman ps --filter ancestor=sitecopy-test-vsftpd --filter ancestor=sitecopy-test-httpd \
+              --filter ancestor=sitecopy-test-pure-ftpd
     podman kill <container ID>...
 
 The FTPS tests are skipped if sitecopy was built without FTP over TLS
-support, i.e. if `./sitecopy --version` doesn't list "FTPS".
+support, i.e. if `./sitecopy --version` doesn't list "FTPS".  The FTP
+over TLS servers are only tested across the rcfile options which
+change how sitecopy uses the FTP protocol (`PROTOCOL_AXES` in
+`tests/siteconfig.py`), so tests of other options are reported as
+skipped for them ("got empty parameter set").
 
 ## Expected failures
 
@@ -126,18 +134,20 @@ for the stated reason, run it with `--runxfail`:
 
 When a server test fails, pytest's report includes the last 100 lines
 of the server's log, in a section headed `server: ...`: the vsftpd
-log, which records every FTP command and reply, or the container log
-for httpd, which holds its access and error logs.  To inspect a server
+log, which records every FTP command and reply; the pure-ftpd log,
+which records each transfer; or the container log for httpd, which
+holds its access and error logs.  To inspect a server
 yourself while its container is running (e.g. while a test is stopped
 in the debugger with `--pdb`):
 
     podman ps                           # find the container ID
     podman exec <ID> tail -n 200 /var/log/vsftpd.log
+    podman exec <ID> tail -n 200 /var/log/pure-ftpd.log
     podman logs <ID>                    # httpd
     podman exec -it <ID> sh             # look around
 
-The site directory is `/home/sitecopy/site` for vsftpd and
-`/var/www/html/dav` for httpd.
+The site directory is `/home/sitecopy/site` for vsftpd and pure-ftpd,
+and `/var/www/html/dav` for httpd.
 
 ## Capturing a sitecopy debug log
 
