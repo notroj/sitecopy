@@ -17,6 +17,60 @@ Use `--with-neon=/usr` instead of `--with-included-neon` to build
 against a system neon.  Code must build cleanly with `--enable-warnings`
 and `-Werror`, as CI enforces this.
 
+## Code style
+
+New and modified C code in `src/` and `lib/` follows the style of
+recent neon code (e.g. `ne_getmodtime` in `neon/src/ne_basic.c`, or
+`neon/src/ne_request.c`), not the older sitecopy style with tabs and
+inconsistent bracing.
+
+- Function definitions put the return type and name on one line, and
+  the opening `{` on a line of its own.
+- Indent by 4 spaces; never use tab characters.
+- `if`, `for`, `while` and `switch` keep `{` on the same line as the
+  condition.  `else` and `else if` start a new line after the closing
+  `}`, never `} else {`.  Single-statement bodies may omit braces.
+- `case` labels align with their `switch`; the statements under them
+  are indented by 4 spaces.
+- A space after keywords (`if (`, `while (`) but not after function
+  names in calls; spaces around binary and assignment operators;
+  pointer declarations as `char *p`.
+- Comments use `/* ... */`, not `//`.
+- Keep lines within about 80 columns.  Wrap long argument lists with
+  continuation lines aligned after the opening parenthesis; split
+  long strings by concatenation, and put `&&`/`||` at the start of a
+  wrapped condition.
+
+Example:
+
+    static int check_file(struct site *site, const char *name,
+                          int flags)
+    {
+        int ret;
+
+        if (name == NULL) {
+            ret = SITE_ERRORS;
+        }
+        else if (flags & CHECK_REMOTE) {
+            ret = check_remote(site, name);
+        }
+        else
+            ret = SITE_OK;
+
+        return ret;
+    }
+
+When modifying an existing function, bring the whole function into
+this style; don't reformat untouched functions or whole files as part
+of an unrelated change.
+
+Prefer neon's string and memory helpers (`ne_malloc`, `ne_strdup`,
+`ne_concat`, `ne_buffer_*`, `ne_snprintf`, `ne_strnzcpy`) over manual
+length arithmetic and fixed-size buffers.  sitecopy supports neon 0.29
+and later (`NE_MINIMUM_VERSION(0, 29)` in `configure.ac`), so only use
+APIs present in 0.29; e.g. `ne_strhash()` and `ne_strparam()` need
+0.32 (see `neon/NEWS`).
+
 ## Testing
 
 The test suite is written in Python using pytest and runs the built
