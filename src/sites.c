@@ -118,86 +118,91 @@ static int synch_files(struct site *site, void *session)
     ret = 0;
 
     for_each_file(current, site) {
-	char *full_local, *full_remote;
-	if (current->type != file_file) continue;
-	switch (current->diff) {
-	case file_changed:
-	    if (!file_contents_changed(current, site)) {
-		/* Just chmod it */
-		full_local = file_full_local(&current->stored, site);
-		fe_setting_perms(current);
-		if (chmod(full_local, current->stored.mode) < 0) {
-		    fe_set_perms(current, false, strerror(errno));
-		} else {
-		    fe_set_perms(current, true, NULL);
-		}
-		free(full_local);
-		break;
-	    }
-	    /*** fall-through */
-	case file_deleted:
-	    full_local = file_full_local(&current->stored, site);
-	    full_remote = file_full_remote(&current->stored, site);
-	    fe_synching(current);
-	    if (CALL(file_download)(session, full_local, full_remote,
-				    current->stored.ascii) != SITE_OK) {
-		fe_synched(current, false, DRIVER_ERR);
-		ret = 1;
-	    } else { 
-		/* Successfull download */
-		fe_synched(current, true, NULL);
-		if (site->state_method == state_timesize) {
-		    struct utimbuf times;
-		    /* Change the modtime of the local file so it doesn't look
-		     * like it's changed already */
-		    times.actime = current->stored.time;
-		    times.modtime = current->stored.time;
-		    if (utime(full_local, &times) < 0) {
-			fe_warning(_("Could not set modification time of local file."),
-				    full_local, strerror(errno));
-		    }
-		}
-		if (file_perms_changed(current, site)) {
-		    fe_setting_perms(current);
-		    if (chmod(full_local, current->stored.mode) < 0) {
-			fe_set_perms(current, false, strerror(errno));
-		    } else {
-			fe_set_perms(current, true, NULL);
-		    }
-		}
-		/* TODO: not strictly true if the chmod failed. */
-		file_downloaded(current, site);
-	    }
-	    free(full_local);
-	    free(full_remote);
-	    break;
-	case file_new:
-	    full_local = file_full_local(&current->local, site);
-	    fe_synching(current);
-	    if (unlink(full_local) != 0) {
-		fe_synched(current, false, strerror(errno));
-		ret = 1;
-	    } else {
-		fe_synched(current, true, NULL);
-	    }
-	    free(full_local);
-	    break;
-	case file_moved: {
-	    char *old_full_local = file_full_local(&current->stored, site);
-	    full_local = file_full_local(&current->local, site);
-	    fe_synching(current);
-	    if (rename(full_local, old_full_local) == 0) {
-		fe_synched(current, true, NULL);
-	    } else {
-		fe_synched(current, false, strerror(errno));
-		ret = 1;
-	    }
-	    free(old_full_local);
-	    free(full_local);
-	}
-	default:
-	    break;	    
-	}
+        char *full_local, *full_remote;
+        if (current->type != file_file) continue;
+        switch (current->diff) {
+        case file_changed:
+            if (!file_contents_changed(current, site)) {
+                /* Just chmod it */
+                full_local = file_full_local(&current->stored, site);
+                fe_setting_perms(current);
+                if (chmod(full_local, current->stored.mode) < 0) {
+                    fe_set_perms(current, false, strerror(errno));
+                }
+                else {
+                    fe_set_perms(current, true, NULL);
+                }
+                ne_free(full_local);
+                break;
+            }
+            /*** fall-through */
+        case file_deleted:
+            full_local = file_full_local(&current->stored, site);
+            full_remote = file_full_remote(&current->stored, site);
+            fe_synching(current);
+            if (CALL(file_download)(session, full_local, full_remote,
+                                    current->stored.ascii) != SITE_OK) {
+                fe_synched(current, false, DRIVER_ERR);
+                ret = 1;
+            }
+            else {
+                /* Successfull download */
+                fe_synched(current, true, NULL);
+                if (site->state_method == state_timesize) {
+                    struct utimbuf times;
+                    /* Change the modtime of the local file so it doesn't look
+                     * like it's changed already */
+                    times.actime = current->stored.time;
+                    times.modtime = current->stored.time;
+                    if (utime(full_local, &times) < 0) {
+                        fe_warning(_("Could not set modification time of local file."),
+                                    full_local, strerror(errno));
+                    }
+                }
+                if (file_perms_changed(current, site)) {
+                    fe_setting_perms(current);
+                    if (chmod(full_local, current->stored.mode) < 0) {
+                        fe_set_perms(current, false, strerror(errno));
+                    }
+                    else {
+                        fe_set_perms(current, true, NULL);
+                    }
+                }
+                /* TODO: not strictly true if the chmod failed. */
+                file_downloaded(current, site);
+            }
+            ne_free(full_local);
+            ne_free(full_remote);
+            break;
+        case file_new:
+            full_local = file_full_local(&current->local, site);
+            fe_synching(current);
+            if (unlink(full_local) != 0) {
+                fe_synched(current, false, strerror(errno));
+                ret = 1;
+            }
+            else {
+                fe_synched(current, true, NULL);
+            }
+            ne_free(full_local);
+            break;
+        case file_moved: {
+            char *old_full_local = file_full_local(&current->stored, site);
+            full_local = file_full_local(&current->local, site);
+            fe_synching(current);
+            if (rename(full_local, old_full_local) == 0) {
+                fe_synched(current, true, NULL);
+            }
+            else {
+                fe_synched(current, false, strerror(errno));
+                ret = 1;
+            }
+            ne_free(old_full_local);
+            ne_free(full_local);
+        }
+        default:
+            break;
+        }
     }
 
     return ret;

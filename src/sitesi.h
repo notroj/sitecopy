@@ -175,62 +175,63 @@ site_stats_decrease(const struct site_file *file, struct site *site) {
  *   file_changed    if changed
  *   file_unchanged  otherwise
  */
-enum file_diff inline static
-file_compare(const enum file_type type, 
-	     const struct file_state *first, const struct file_state *second, 
-	     const struct site *site) {
+static inline enum file_diff file_compare(const enum file_type type,
+                                          const struct file_state *first,
+                                          const struct file_state *second,
+                                          const struct site *site)
+{
 
     /* Handle the special cases */
     if (!first->exists)
-	return file_deleted;
+        return file_deleted;
     if (!second->exists)
-	return file_new;
+        return file_new;
 
     /* They're both there... compare them properly */
     switch (type) {
     case file_dir:
         if (site->dirperms) {
-            return (first->mode != second->mode ?
-                    file_changed : file_unchanged);
+            return first->mode != second->mode ? file_changed : file_unchanged;
         }
-	break;
+        break;
 
     case file_link:
-	if (strcmp(first->linktarget, second->linktarget) != 0) {
-	    return file_changed;
-	}
-	break;
+        if (strcmp(first->linktarget, second->linktarget) != 0) {
+            return file_changed;
+        }
+        break;
 
     case file_file:
-	switch (site->state_method) {
-	case state_timesize:
-	    if ((first->time != second->time) 
-		|| (first->size!=second->size)) {
-		return file_changed;
-	    }
-	    break;
-	case state_checksum:
-	    if (memcmp(first->checksum, second->checksum, 16) != 0) {
-		return file_changed;
-	    }
-	    break;
-	}
-	/* Check permissions and ASCIIness.
-	 * There's a twist for permissions: if EITHER local or
-	 * remote file has an EXEC bit set, then in 'perms exec' mode,
-	 * perms are compared. */
-	if (first->ascii != second->ascii) {
-	    return file_changed;
-	} else if (((site->perms == sitep_all) ||
-		    (((first->mode & S_IXUSR) || (second->mode & S_IXUSR)) &&
-		     (site->perms == sitep_exec)))
-		   && (first->mode != second->mode)) {
-	    return file_changed;
-	}
-	if (site->checkmoved && strcmp(first->filename, second->filename)) {
-	    return file_moved;
-	}
-	break;
+        switch (site->state_method) {
+        case state_timesize:
+            if (first->time != second->time
+                || first->size != second->size) {
+                return file_changed;
+            }
+            break;
+        case state_checksum:
+            if (memcmp(first->checksum, second->checksum, 16) != 0) {
+                return file_changed;
+            }
+            break;
+        }
+        /* Check permissions and ASCIIness.
+         * There's a twist for permissions: if EITHER local or
+         * remote file has an EXEC bit set, then in 'perms exec' mode,
+         * perms are compared. */
+        if (first->ascii != second->ascii) {
+            return file_changed;
+        }
+        else if ((site->perms == sitep_all
+                  || (((first->mode & S_IXUSR) || (second->mode & S_IXUSR))
+                      && site->perms == sitep_exec))
+                 && first->mode != second->mode) {
+            return file_changed;
+        }
+        if (site->checkmoved && strcmp(first->filename, second->filename)) {
+            return file_moved;
+        }
+        break;
     }
     return file_unchanged;
 }
