@@ -489,6 +489,10 @@ static int update_files(struct site *site, void *session)
                 else {
                     fe_updated(current, true, NULL);
                     current->diff = file_changed;
+                    /* The file is no longer on the server: if the
+                     * upload fails, the next update must upload it
+                     * as a new file, rather than delete it again. */
+                    current->stored.exists = false;
                 }
             }
             fe_updating(current);
@@ -547,7 +551,7 @@ static int update_files(struct site *site, void *session)
                         file_uploaded(current, site);
                     }
                 }
-                free(temp_remote);
+                ne_free(temp_remote);
             }
             else {
                 /* Normal unconditional upload */
@@ -571,8 +575,8 @@ static int update_files(struct site *site, void *session)
         default: /* Ignore everything else */
             break;
         }
-        free(full_remote);
-        free(full_local);
+        ne_free(full_remote);
+        ne_free(full_local);
     }
 
     return ret;
