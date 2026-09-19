@@ -32,9 +32,6 @@
 /* Define if you have strsignal */
 #undef HAVE_STRSIGNAL
 
-/* Define if you have strcasecmp */
-#define HAVE_STRCASECMP 1
-
 /* Define if you have snprintf */
 #define HAVE_SNPRINTF 1
 
