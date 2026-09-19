@@ -95,7 +95,8 @@ PROTOCOL_ONLY = {
 # tests are marked as strict xfails for the matching configurations,
 # so that fixing the bug turns them into passing tests.
 KNOWN_BUGS = [
-    ("dav", "safe", {"test_update_cycle", "test_safe_unchanged_remote"},
+    ("dav", "safe", {"test_update_cycle", "test_safe_unchanged_remote",
+                     "test_fetch"},
      "safe mode uses If-Unmodified-Since, which Apache mod_dav evaluates "
      "against the current time, so a conditional upload in a later second "
      "than the last upload is refused"),
@@ -151,20 +152,23 @@ PROTOCOL_LINES = {line for name in PROTOCOL_AXES
 # over TLS servers.
 REDUCED_PROTOCOLS = {"ftps", "pureftpds"}
 
-def site_configs(protocol, axis_names, extra_lines=()):
+def site_configs(protocol, axis_names, extra_lines=(), protocol_axes=()):
     """Yield each valid SiteConfig for the given protocol, combining
     every value of each named axis which applies to the protocol,
     plus the axes which always apply, plus the given extra lines.
-    For a protocol in REDUCED_PROTOCOLS, only PROTOCOL_AXES are
-    combined, the other axes taking their default value, and nothing
-    is yielded if the extra lines aren't all in PROTOCOL_LINES."""
+    For a protocol in REDUCED_PROTOCOLS, only PROTOCOL_AXES, plus any
+    named in protocol_axes (axes which change protocol use for a
+    particular test), are combined, the other axes taking their
+    default value, and nothing is yielded if the extra lines aren't
+    all in PROTOCOL_LINES."""
     unknown = set(axis_names) - set(AXES)
     if unknown:
         raise ValueError("unknown axes: %s" % ", ".join(sorted(unknown)))
     if protocol in REDUCED_PROTOCOLS:
         if not set(extra_lines) <= PROTOCOL_LINES:
             return
-        axis_names = [name for name in axis_names if name in PROTOCOL_AXES]
+        axis_names = [name for name in axis_names
+                      if name in PROTOCOL_AXES or name in protocol_axes]
     names = [name for name, axis in AXES.items()
              if (axis.always or name in axis_names)
              and axis.applies_to(protocol)]

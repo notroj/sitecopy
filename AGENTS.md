@@ -137,7 +137,10 @@ Test layout:
   `ftp usecwd`, `tempupload`, `safe`); other axes take their default
   value, and tests adding other rcfile lines are skipped.  When adding
   an axis, include it in `PROTOCOL_AXES` only if it changes the
-  commands sent or the data connections used.
+  commands sent or the data connections used.  An axis which changes
+  protocol use only for a particular test can be named for that test
+  with `@pytest.mark.axes(..., protocol_axes=(...))`, as `test_fetch`
+  does for `state` (with checksum state, fetch downloads every file).
 - `tests/common.py` — helpers such as `run_sitecopy()`,
   `update_and_check()` (update, then compare the tree on the server,
   listed from inside the container, with `expected_remote()`, a model
