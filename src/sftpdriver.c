@@ -64,12 +64,14 @@ typedef struct {
 static int run_sftp(sftp_session *sess, const char *template, ...) 
     ne_attribute((format (printf, 2, 3)));
 
-static int read_sftp(sftp_session *sess) {
+static int read_sftp(sftp_session *sess)
+{
     size_t pos = 0;
     int got_prompt = 0;
 
+    /* Leave room in the buffer for the NUL terminator. */
     do {
-        ssize_t ret = read(sess->fd_in, sess->buf+pos, BUFSIZ-pos);
+        ssize_t ret = read(sess->fd_in, sess->buf + pos, BUFSIZ - 1 - pos);
         if (ret < 0) return SITE_FAILED;
         /* EOF: the sftp process died or never connected. */
         if (ret == 0) break;
@@ -79,13 +81,13 @@ static int read_sftp(sftp_session *sess) {
             got_prompt = 1;
             break;
         }
-    } while (pos < BUFSIZ);
+    } while (pos < BUFSIZ - 1);
     NE_DEBUG(DEBUG_SFTP, "(%s)", sess->buf);
     /* Reaching EOF before the next prompt means the command cannot
      * have succeeded. */
     return got_prompt ? SITE_OK : SITE_FAILED;
 }
-    
+
 static void exec_sftp(sftp_session *sess)
 {
     size_t len;
