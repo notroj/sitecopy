@@ -46,7 +46,7 @@ OBJECTS = src/sites.o src/sitefiles.o src/sitestore.o \
 
 # The list of stuff which autoconf reckons we need to compile
 # since the native libc hasn't got it.
-LIBOBJS = lib/netrc.o lib/basename.o lib/dirname.o @LIBOBJS@
+LIBOBJS = lib/netrc.o lib/basename.o @LIBOBJS@
 
 # Everything we want to compile into the target
 ALLOBJS = $(OBJECTS) $(LIBOBJS)
@@ -94,8 +94,8 @@ netrc: lib/netrc.c
 
 HEADERS = src/common.h src/frontend.h src/i18n.h src/protocol.h		\
 	src/sites.h src/ftp.h src/lsparser.h src/rcfile.h src/sitesi.h	\
-	lib/basename.h lib/dirname.h lib/fnmatch.h lib/getopt.h		\
-	lib/netrc.h config.h
+	lib/basename.h lib/fnmatch.h lib/getopt.h lib/netrc.h		\
+	config.h
 
 src/common.o: src/common.c $(HEADERS)
 src/console_fe.o: src/console_fe.c $(HEADERS)
@@ -110,7 +110,6 @@ src/sitefiles.o: src/sitefiles.c $(HEADERS)
 src/sites.o: src/sites.c $(HEADERS)
 src/sitestore.o: src/sitestore.c $(HEADERS)
 lib/basename.o: lib/basename.c lib/basename.h config.h
-lib/dirname.o: lib/dirname.c lib/dirname.h config.h
 lib/netrc.o: lib/netrc.c lib/netrc.h config.h
 lib/rpmatch.o: lib/rpmatch.c config.h
 lib/yesno.o: lib/yesno.c config.h
