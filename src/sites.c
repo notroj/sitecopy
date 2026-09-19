@@ -52,10 +52,6 @@
 #include <ne_md5.h>
 #include <ne_socket.h>
 
-#ifdef HAVE_SNPRINTF_H
-#include "snprintf.h"
-#endif /* !HAVE_SNPRINTF_H */
-
 #include "basename.h"
 
 #include "i18n.h"

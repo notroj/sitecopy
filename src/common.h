@@ -53,10 +53,6 @@ typedef void (*sig_handler)(int);
 #define OPEN_BINARY_FLAGS 0
 #endif
 
-#if !HAVE_STRERROR && !defined(strerror)
-char *strerror (int errnum);
-#endif
-
 extern const char *default_charset;
 void init_charset(void);
 

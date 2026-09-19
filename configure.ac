@@ -134,7 +134,7 @@ AC_CHECK_FUNC(getopt_long,,[AC_LIBOBJ(lib/getopt)
 AC_LIBOBJ(lib/getopt1)])
 
 dnl Check for stuff
-AC_CHECK_FUNCS(strdup strsignal strerror memcpy setlocale nl_langinfo)
+AC_CHECK_FUNCS(setlocale nl_langinfo)
 
 AC_TYPE_SIGNAL
 
