@@ -10,6 +10,13 @@ concurrency:
 
 jobs:
   build:
+    name: >-
+      ${{ matrix.os }},
+      ${{ matrix.bundled && 'bundled' || 'system' }} neon${{
+      matrix.warnings && ', -Werror' || '' }}${{
+      matrix.install && ', install' || '' }}${{
+      (matrix.bundled && matrix.warnings && !matrix.install)
+      && ', full tests' || '' }}
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
@@ -18,6 +25,12 @@ jobs:
         install: [true, false]
         bundled: [true, false]
         warnings: [true, false]
+    env:
+      # The full test matrix (check-full) runs in one cell per OS, since
+      # the container runtimes differ; the other cells run the minimal
+      # set of combinations of rcfile options (check).
+      CHECK: ${{ (matrix.bundled && matrix.warnings && !matrix.install)
+                 && 'check-full' || 'check' }}
     steps:
     - uses: actions/checkout@v6
       with:
@@ -32,10 +45,7 @@ jobs:
                 ${{ matrix.warnings && 'EXTRA_CFLAGS=-Werror' || '' }}
     - run: make install
       if: ${{ matrix.install }}
-    # The full test matrix (check-full) runs in one cell per OS, since
-    # the container runtimes differ; the other cells run the minimal
-    # set of combinations of rcfile options (check).
-    - run: make ${{ (matrix.bundled && matrix.warnings && !matrix.install) && 'check-full' || 'check' }}
+    - run: make ${{ env.CHECK }}
 
   # One-off builds with GCC warnings beyond --enable-warnings, as
   # errors, using the most recent Ubuntu for a recent GCC, with the C17
@@ -45,6 +55,7 @@ jobs:
   # -Wredundant-decls isn't used, since the bundled getopt.h repeats
   # the system's declarations.
   warnings:
+    name: strict warnings (${{ matrix.std }})
     runs-on: ubuntu-26.04
     strategy:
       fail-fast: false
@@ -72,6 +83,9 @@ jobs:
   # until the remaining leaks (e.g. the FTP session is never freed)
   # are fixed.
   sanitize:
+    name: >-
+      ${{ matrix.sanitizer == 'address' && 'AddressSanitizer'
+      || 'UndefinedBehaviorSanitizer' }}
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
