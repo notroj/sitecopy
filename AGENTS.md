@@ -89,6 +89,11 @@ To run a subset directly (after `make`), from the top-level directory:
     pytest-3 -v tests/test_basic.py
     pytest-3 -v tests/test_ftp.py -k leading_space
 
+`tests/README.md` describes running the tests in detail: selecting
+single tests and configurations, the containers and ports used,
+xfails, server logs, and capturing a sitecopy debug log for a test
+(`SITECOPY_DEBUG`, `SITECOPY_TEST_LOG`).
+
 Test layout:
 
 - `tests/conftest.py` — shared fixtures: `sitecopy_env` (a temporary
@@ -214,8 +219,7 @@ Rules:
 - For a small, single-file change the summary line may itself be the
   entry, e.g. `* NEWS: Update.` or
   `* src/lsparser.c (ls_init): Initialize curdir to empty string.`
-- Mention related bug numbers (e.g. "issue #123") in the
-  explanation or the relevant entry.
+- Reference bugs as described in "Referencing issues" below.
 - Commits written with an AI coding agent end with a single
   `Co-Authored-By:` trailer naming the model.  Never add any other
   trailer or link, such as a `Claude-Session:` line or a session URL,
@@ -235,3 +239,39 @@ Example:
     * src/sitestore.c (site_file_cmp): Removed; replaced by
       site_file_cmp_stored.
       (site_write_stored_state): Use site_sorted_files_list.
+
+## Referencing issues
+
+GitHub issues and pull requests of notroj/sitecopy are referenced as
+`#N`; bugs in other trackers as `Debian bug #NNNNNN` (in `NEWS`, the
+shorter `Debian #NNNNNN`), or by full URL for any other tracker.
+
+- In the commit message, describe the bug and mention the issue in
+  the explanatory paragraph.  If the commit fully resolves a GitHub
+  issue, end the paragraph with a line `Fixes #N.`: GitHub closes
+  the issue when the commit reaches master.  If it only partially
+  addresses the issue, or is merely related, write `See #N.`
+  instead, never a closing keyword (`Fixes`, `Closes`, `Resolves`),
+  so the issue stays open.  List several issues as `Fixes #12, fixes
+  #15.` (GitHub needs the keyword before each number).
+- In a pull request description, use the same keywords: `Fixes #N`
+  for each issue which merging the PR fully resolves, so that merging
+  closes it, and `See #N` for partial fixes.
+- For a user-visible change, the `NEWS` entry names the issue in
+  parentheses, alongside any credit, e.g. `(Jane Doe, #13)` or
+  `(Debian #496988)`.
+- Regression tests reference the bug in their docstring or comment,
+  as in "Guidelines" above.
+
+Example:
+
+    Fix fetch of a file with a leading space in its name.
+
+    The FTP LIST parser skipped all whitespace before the file name,
+    so " foo" was fetched as "foo" (Debian bug #496988).
+    Fixes #13.
+
+    * src/lsparser.c (ls_parse): Skip exactly one space before the
+      file name.
+
+    * tests/test_ftp.py (test_fetch_leading_space_filename): New test.

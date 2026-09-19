@@ -6,11 +6,38 @@ import time
 
 def run_sitecopy(senv, args, env=None, input=""):
     """Helper to run sitecopy with the custom config, optionally with
-    the given environment and standard input."""
+    the given environment and standard input.
+
+    For debugging (see tests/README.md): if $SITECOPY_DEBUG is set, it
+    is passed as --debug to sitecopy, and the command line and output
+    are printed, so that pytest shows them with the test's captured
+    output.  If $SITECOPY_TEST_LOG is set, the command line, debug
+    output (using --logfile, so that stderr is unchanged), stdout and
+    stderr of each invocation are appended to the file it names."""
     cmd = ["./sitecopy", "--rcfile", str(senv["rcfile"]),
-           "--storepath", str(senv["store"])] + args
-    return subprocess.run(cmd, capture_output=True, text=True, env=env,
-                          input=input)
+           "--storepath", str(senv["store"])]
+    debug = os.environ.get("SITECOPY_DEBUG")
+    log = os.environ.get("SITECOPY_TEST_LOG")
+    if debug:
+        cmd.append("--debug=" + debug)
+        if log:
+            cmd.append("--logfile=" + os.path.abspath(log))
+    cmd += args
+    header = "==== %s\n$ %s\n" % (os.environ.get("PYTEST_CURRENT_TEST", ""),
+                                 " ".join(cmd))
+    if log:
+        with open(log, "a") as fp:
+            fp.write(header)
+    res = subprocess.run(cmd, capture_output=True, text=True, env=env,
+                         input=input)
+    output = "---- exit status %d\n---- stdout:\n%s---- stderr:\n%s" % (
+        res.returncode, res.stdout, res.stderr)
+    if log:
+        with open(log, "a") as fp:
+            fp.write(output)
+    if debug:
+        print(header + output)
+    return res
 
 def assert_no_update(sitecopy_env):
     res = run_sitecopy(sitecopy_env, ["--list", "testsite"])
