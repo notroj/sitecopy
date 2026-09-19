@@ -1292,7 +1292,10 @@ int site_verify(struct site *site, int *numremoved)
         return SITE_UNSUPPORTED;
     }
 
-    ret = list_remote_files(site, session, 1, 0, &files);
+    /* With checksum state, each file must be downloaded to compare
+     * its checksum. */
+    ret = list_remote_files(site, session, 1,
+                            site->state_method == state_checksum, &files);
 
     proto_finish(site, session);
 

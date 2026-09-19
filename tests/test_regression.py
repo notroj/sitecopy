@@ -36,15 +36,18 @@ def test_verify_subdirectories(site):
     res = run_sitecopy(site, ["--verify", "testsite"])
     assert "Changed on server: dir/deeper/d.txt" in res.stdout, res.stdout
 
-@pytest.mark.xfail(strict=True, reason="--verify with checksum state "
-                   "compares the stored checksums with checksums which "
-                   "are never fetched, so reports every file as changed")
 @pytest.mark.site_lines("state checksum")
 def test_verify_checksum(site):
     setup_site(site, {"a.txt": "A\n", "b.txt": "B\n"})
     res = run_sitecopy(site, ["--verify", "testsite"])
     assert res.returncode == 0, res.stdout + res.stderr
     assert "Changed on server" not in res.stdout, res.stdout
+
+    # A change on the server which keeps the file's size is found.
+    change_remote(site, "b.txt", "C\n", 0)
+    res = run_sitecopy(site, ["--verify", "testsite"])
+    assert "Changed on server: b.txt" in res.stdout, res.stdout
+    assert "Changed on server: a.txt" not in res.stdout, res.stdout
 
 # -- --fetch --------------------------------------------------------------
 
