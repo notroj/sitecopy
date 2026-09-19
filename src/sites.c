@@ -1021,26 +1021,27 @@ static void munge_modtime(struct site_file *file, time_t remote_mtime,
     }
 }
 
+/* Returns the file type for a protocol driver's file type. */
+static enum file_type proto_file_type(enum proto_filetype type)
+{
+    switch (type) {
+    case proto_dir:
+        return file_dir;
+    case proto_link:
+        return file_link;
+    case proto_file:
+    default:
+        return file_file;
+    }
+}
+
 /* Return a site_file structure given a proto_file structure fetched
  * by the protocol driver. */
 static struct site_file *fetch_add_file(struct site *site,
                                         const struct proto_file *pf)
 {
-    enum file_type type = file_file; /* init to shut up gcc */
     struct site_file *file;
     struct file_state state = {0};
-    
-    switch (pf->type) {
-    case proto_file:
-        type = file_file;
-        break;
-    case proto_dir:
-        type = file_dir;
-        break;
-    case proto_link:
-        type = file_link;
-        break;
-    }
 
     state.size = pf->size;
     state.time = pf->modtime;
@@ -1049,11 +1050,11 @@ static struct site_file *fetch_add_file(struct site *site,
     state.mode = pf->mode;
     state.ascii = file_isascii(pf->filename, site);
     memcpy(state.checksum, pf->checksum, 16);
-    
-    file = file_set_stored(type, &state, site);
-    
+
+    file = file_set_stored(proto_file_type(pf->type), &state, site);
+
     munge_modtime(file, pf->modtime, site);
-    
+
     if (site->safemode) {
         /* Store the server modtime. */
         file->server.time = pf->modtime;
@@ -1279,7 +1280,10 @@ static int site_verify_compare(struct site *site,
                 /* Do a mini file_compare job; only files have
                  * contents to compare. */
                 diff = file_unchanged;
-                if (lfile->type != proto_file) {
+                if (file->type != proto_file_type(lfile->type)) {
+                    diff = file_changed;
+                }
+                else if (lfile->type != proto_file) {
                     /* nothing to compare */
                 }
                 else if (site->state_method == state_checksum) {
