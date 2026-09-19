@@ -2,6 +2,7 @@ import hashlib
 import os
 import shutil
 import subprocess
+import time
 
 def run_sitecopy(senv, args):
     """Helper to run sitecopy with the custom config."""
@@ -134,12 +135,20 @@ def update_and_check(site, gone=()):
     assert_no_update(site)
     return res
 
-def setup_site(site, tree):
-    """Initialize the site, then create and upload the given tree."""
+def setup_site(site, tree, expected=None):
+    """Initialize the site, then create and upload the given tree.  If
+    expected is given, it is the set of paths expected on the server
+    afterwards, rather than the whole tree."""
     res = run_sitecopy(site, ["--initialize", "testsite"])
     assert res.returncode == 0, res.stdout + res.stderr
     write_tree(site["local"], tree)
-    update_and_check(site)
+    if expected is None:
+        update_and_check(site)
+    else:
+        res = run_sitecopy(site, ["--update", "testsite"])
+        assert res.returncode == 0, res.stdout + res.stderr
+        assert set(remote_tree(site)) == expected
+        assert_no_update(site)
 
 def move_and_check(site, src, dst, moved):
     """Update the site after the local move of file src to dst, and
@@ -206,3 +215,58 @@ def check_update_cycle(site):
     update_and_check(site)
     if "nodelete" not in site["config"]:
         assert remote_tree(site) == {}
+
+def server_exec(site, script):
+    """Run the shell script inside the site's server container, and
+    return its stdout, checking that it succeeds."""
+    run = subprocess.run(["podman", "exec", site["cid"], "sh", "-c", script],
+                         capture_output=True, text=True)
+    assert run.returncode == 0, run.stderr
+    return run.stdout
+
+def change_remote(site, path, content, mtime):
+    """Replace the content of the file path on the server, as if
+    changed by someone else, setting its modification time to mtime
+    (seconds since the epoch).  The file keeps its ownership."""
+    remote = "%s/%s" % (site["root"], remote_name(site, path))
+    server_exec(site, "cp -p '%s' /tmp/owner && printf '%%s' '%s' > '%s' "
+                "&& chown --reference=/tmp/owner '%s' && touch -d @%d '%s'"
+                % (remote, content, remote, remote, mtime, remote))
+
+def change_remote_later(site, path, content):
+    """Replace the content of the file path on the server, as if
+    changed by someone else, with a modification time in a later
+    second than any earlier upload."""
+    time.sleep(2)
+    change_remote(site, path, content, int(time.time()))
+
+def remote_modes(site):
+    """Return a dict mapping each path on the server to its octal
+    permission bits, as a string (e.g. '644')."""
+    out = server_exec(site, "cd '%s' && find . -mindepth 1 -printf '%%P %%m\\n'"
+                      % site["root"])
+    return dict(line.rsplit(" ", 1) for line in out.splitlines())
+
+def server_log_lines(site, text):
+    """Return the lines of the server's log containing text: from the
+    access log for httpd, or the vsftpd log (which records each
+    upload).  The vsftpd log is searched inside the container, since
+    it grows large and older versions of podman can truncate large
+    output from podman exec."""
+    if site["config"].protocol == "dav":
+        run = subprocess.run(["podman", "logs", site["cid"]],
+                             capture_output=True, text=True)
+        assert run.returncode == 0, run.stderr
+        log = run.stdout + run.stderr
+        return [line for line in log.splitlines() if text in line]
+    run = subprocess.run(["podman", "exec", site["cid"],
+                          "grep", "-F", "--", text, "/var/log/vsftpd.log"],
+                         capture_output=True, text=True)
+    assert run.returncode in (0, 1), run.stderr
+    return run.stdout.splitlines()
+
+def add_site_lines(site, *lines):
+    """Add the given rcfile lines to the site, which is the last in
+    the rcfile."""
+    with open(site["rcfile"], "a") as fp:
+        fp.write("".join("  %s\n" % line for line in lines))
