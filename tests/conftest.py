@@ -78,6 +78,9 @@ def pytest_configure(config):
     config.addinivalue_line(
         "markers", "protocol(name): run tests using the site fixture "
         "only against the server for the given protocol")
+    config.addinivalue_line(
+        "markers", "site_lines(*lines): add the given rcfile lines to "
+        "every configuration of a test using the site fixture")
 
 def pytest_generate_tests(metafunc):
     """Parametrize each test using the site fixture over every
@@ -89,8 +92,11 @@ def pytest_generate_tests(metafunc):
     axis_names = marker.args if marker else ()
     marker = metafunc.definition.get_closest_marker("protocol")
     protocols = marker.args if marker else SERVERS.keys()
+    marker = metafunc.definition.get_closest_marker("site_lines")
+    extra_lines = marker.args if marker else ()
     configs = [config for protocol in protocols
-               for config in siteconfig.site_configs(protocol, axis_names)]
+               for config in siteconfig.site_configs(protocol, axis_names,
+                                                     extra_lines)]
     metafunc.parametrize("site_config", configs,
                          ids=[config.id for config in configs])
 
@@ -148,7 +154,8 @@ def containers():
 def site(tmp_path, site_config, containers):
     """A site configured with site_config, against an empty directory
     on the server for its protocol.  A dict with the keys of
-    make_sitecopy_env plus 'config', 'cid' and 'root'."""
+    make_sitecopy_env plus 'config', 'cid', 'root', and 'expected',
+    the tree expected on the server (see common.expected_remote)."""
     server = SERVERS[site_config.protocol]
     cid = containers(site_config.protocol)
 
@@ -156,5 +163,6 @@ def site(tmp_path, site_config, containers):
     assert run.returncode == 0, run.stderr
 
     env = make_sitecopy_env(tmp_path, server.rcfile + site_config.rcfile())
-    env.update(config=site_config, cid=cid, root=server.root)
+    env.update(config=site_config, cid=cid, root=server.root,
+               expected={})
     return env
