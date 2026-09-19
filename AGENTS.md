@@ -81,8 +81,14 @@ Guidelines:
 
 - Known bugs which aren't fixed yet get a regression test marked
   `@pytest.mark.xfail(strict=True, reason=...)` describing the bug,
-  so that the fix turns it into a passing test.  Check the xfail
-  fails for the stated reason (`pytest-3 --runxfail`).
+  so that the fix turns it into a passing test.  A bug affecting only
+  some configurations of a server test goes in `KNOWN_BUGS` in
+  `tests/siteconfig.py` instead.  Check the xfail fails for the stated
+  reason (`pytest-3 --runxfail`).
+- Server tests must not depend on timing: e.g. a test which relies on
+  a later modification time must wait for a later second (see
+  `change_remote_later()`), rather than passing only because it runs
+  fast.
 
 - Every bug fix should come with a regression test where practical.
   Prefer tests which run entirely locally (scripted servers, wrapper

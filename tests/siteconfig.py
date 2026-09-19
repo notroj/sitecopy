@@ -87,6 +87,26 @@ PROTOCOL_ONLY = {
     "permissions dir": {"ftp"},
 }
 
+# Known bugs affecting a protocol with a given rcfile line: each is
+# (protocol, line, names of the tests affected, reason).  The affected
+# tests are marked as strict xfails for the matching configurations,
+# so that fixing the bug turns them into passing tests.
+KNOWN_BUGS = [
+    ("dav", "safe", {"test_update_cycle", "test_safe_unchanged_remote"},
+     "safe mode uses If-Unmodified-Since, which Apache mod_dav evaluates "
+     "against the current time, so a conditional upload in a later second "
+     "than the last upload is refused"),
+]
+
+def known_bug(test_name, config):
+    """Return the reason for a known bug affecting the given test in
+    the given configuration, or None."""
+    for protocol, line, tests, reason in KNOWN_BUGS:
+        if (config.protocol == protocol and line in config
+                and test_name in tests):
+            return reason
+    return None
+
 class SiteConfig:
     """A protocol plus a combination of rcfile option lines."""
 
