@@ -35,6 +35,36 @@ jobs:
       if: ${{ matrix.install }}
     - run: make check
 
+  # One-off builds with GCC warnings beyond --enable-warnings, as
+  # errors, using the most recent Ubuntu for a recent GCC, with the C17
+  # (with GNU extensions) and C23 standards.  Uses the system neon, so
+  # the flags apply only to sitecopy's own code.  -Wunused-parameter is disabled, since
+  # callbacks must take the parameters of their interfaces, and
+  # -Wredundant-decls isn't used, since the bundled getopt.h repeats
+  # the system's declarations.
+  warnings:
+    runs-on: ubuntu-26.04
+    strategy:
+      fail-fast: false
+      matrix:
+        std: [gnu17, c23]
+    steps:
+    - uses: actions/checkout@v6
+      with:
+        submodules: true
+    - run: sudo apt-get update
+    - run: sudo apt-get -y install autopoint gettext libneon27-dev
+    - run: bash -ex ./.release.sh master
+    - run: ./autogen.sh
+    - run: ./configure --with-neon=/usr --enable-warnings
+    - run: make EXTRA_CFLAGS="-Werror -Wextra -Wno-unused-parameter
+                              -Wformat=2 -Wcast-align -Wwrite-strings
+                              -Wmissing-prototypes -Wold-style-definition
+                              -Wnull-dereference -Wduplicated-cond -Wlogical-op
+                              -Wjump-misses-init -Wdouble-promotion
+                              -Wnested-externs -Wunused-macros
+                              -std=${{ matrix.std }}"
+
   # One-off builds with AddressSanitizer and UndefinedBehaviorSanitizer,
   # using the bundled neon so that it is instrumented too.  Errors
   # abort sitecopy, failing the tests.  Leak detection is disabled
