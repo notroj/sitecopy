@@ -1,4 +1,5 @@
-from common import *
+import pytest
 
-def test_vsftpd(sitecopy_ftp_env, vsftpd_container):
-    check_update_cycle(sitecopy_ftp_env, vsftpd_container)
+from server_tests import *
+
+pytestmark = pytest.mark.protocol("ftp")
