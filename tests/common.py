@@ -94,6 +94,10 @@ def write_tree(root, tree):
             else:
                 path.write_text(content)
 
+def md5(data):
+    """Return the MD5 checksum of data, as in local_tree."""
+    return hashlib.md5(data).hexdigest()
+
 def local_tree(root):
     """Return a dict mapping each path under root to the MD5 checksum
     of its contents, or None for a directory (with a trailing slash)."""
@@ -266,6 +270,17 @@ def change_remote(site, path, content, mtime):
     server_exec(site, "cp -p '%s' /tmp/owner && printf '%%s' '%s' > '%s' "
                 "&& chown --reference=/tmp/owner '%s' && touch -d @%d '%s'"
                 % (remote, content, remote, remote, mtime, remote))
+
+def create_remote(site, path, content):
+    """Create the file path on the server with the given content, as
+    if by someone else, creating any parent directories, owned like
+    the site's root directory so that sitecopy can delete them."""
+    parts = remote_name(site, path).split("/")
+    top = "%s/%s" % (site["root"], parts[0])
+    remote = "%s/%s" % (site["root"], "/".join(parts))
+    server_exec(site, "mkdir -p \"$(dirname '%s')\" && printf '%%s' '%s' > '%s' "
+                "&& chown -R --reference='%s' '%s'"
+                % (remote, content, remote, site["root"], top))
 
 def change_remote_later(site, path, content):
     """Replace the content of the file path on the server, as if

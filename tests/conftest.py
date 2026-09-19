@@ -135,9 +135,11 @@ def sitecopy_features():
 
 def pytest_configure(config):
     config.addinivalue_line(
-        "markers", "axes(*names): run a test using the site fixture once "
-        "for each valid combination of the named rcfile option axes "
-        "(see siteconfig.py)")
+        "markers", "axes(*names, protocol_axes=()): run a test using the "
+        "site fixture once for each valid combination of the named rcfile "
+        "option axes (see siteconfig.py); protocol_axes names axes which "
+        "change protocol use for the test, so are also combined for "
+        "REDUCED_PROTOCOLS")
     config.addinivalue_line(
         "markers", "protocol(name): run tests using the site fixture "
         "only against the server for the given protocol")
@@ -153,13 +155,15 @@ def pytest_generate_tests(metafunc):
         return
     marker = metafunc.definition.get_closest_marker("axes")
     axis_names = marker.args if marker else ()
+    protocol_axes = marker.kwargs.get("protocol_axes", ()) if marker else ()
     marker = metafunc.definition.get_closest_marker("protocol")
     protocols = marker.args if marker else SERVERS.keys()
     marker = metafunc.definition.get_closest_marker("site_lines")
     extra_lines = marker.args if marker else ()
     configs = [config for protocol in protocols
                for config in siteconfig.site_configs(protocol, axis_names,
-                                                     extra_lines)]
+                                                     extra_lines,
+                                                     protocol_axes)]
     params = []
     for config in configs:
         reason = siteconfig.known_bug(metafunc.function.__name__, config)

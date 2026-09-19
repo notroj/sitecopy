@@ -130,6 +130,79 @@ def test_safe_enabled_later(site):
     (site["local"] / "b.txt").write_text("B, changed\n")
     update_and_check(site)
 
+# -- Fetch --------------------------------------------------------------
+
+FETCH_TREE = {
+    "index.html": "<html>Home</html>\n",
+    "name with spaces.txt": "Spaces\n",
+    "image.bin": bytes(range(256)) * 4,
+    "grow.txt": "Grows\n",
+    "same.txt": "Same size\n",
+    "gone.txt": "Deleted locally\n",
+    "docs/": None,
+    "docs/a.txt": "A\n",
+    "docs/sub/": None,
+    "docs/sub/deep.txt": "Deep\n",
+    "empty/": None,
+}
+
+@pytest.mark.axes("state", "safe", "delete", protocol_axes=("state",))
+def test_fetch(site):
+    # The stored state is fetched from the server: with checksum
+    # state, each file is downloaded to checksum it; with timesize
+    # state, the stored times are those of the local files.
+    local = site["local"]
+    config = site["config"]
+    setup_site(site, FETCH_TREE)
+
+    # With the site in sync, fetching into an empty state leaves
+    # nothing to update.
+    (site["store"] / "testsite").unlink()
+    res = run_sitecopy(site, ["--fetch", "testsite"])
+    assert res.returncode == 0, res.stdout + res.stderr
+    assert_no_update(site)
+
+    # Changes on the server by someone else: a new file and directory,
+    # a file grown, and a file changed without changing its size.
+    create_remote(site, "remote-only.txt", "Only on the server\n")
+    create_remote(site, "remote-dir/r.txt", "In a directory\n")
+    if "safe" in config:
+        # A later modification time is needed for safe mode.
+        change_remote_later(site, "grow.txt", "Grows, on the server\n")
+    else:
+        change_remote(site, "grow.txt", "Grows, on the server\n",
+                      int(time.time()))
+    change_remote(site, "same.txt", "Same SIZE\n", int(time.time()))
+    # Local changes: a new file, and a file deleted.
+    write_tree(local, {"local-only.txt": "Only local\n"})
+    (local / "gone.txt").unlink()
+
+    res = run_sitecopy(site, ["--fetch", "testsite"])
+    assert res.returncode == 0, res.stdout + res.stderr
+    if "safe" in config:
+        # Let time pass before the conditional uploads.
+        time.sleep(2)
+    res = run_sitecopy(site, ["--update", "testsite"])
+    assert res.returncode == 0, res.stdout + res.stderr
+    assert "Update completed successfully" in res.stdout, res.stdout
+
+    # The server has the local files, except that the file changed
+    # without changing its size is only detected with checksum state,
+    # or in safe mode, since its modification time on the server has
+    # changed since the last fetch: otherwise the server's version is
+    # kept.
+    expected = local_tree(local)
+    if "state checksum" not in config and "safe" not in config:
+        expected["same.txt"] = md5(b"Same SIZE\n")
+    # Files not present locally are deleted, unless nodelete.
+    if "nodelete" in config:
+        expected.update({"remote-only.txt": md5(b"Only on the server\n"),
+                         "remote-dir/": None,
+                         "remote-dir/r.txt": md5(b"In a directory\n"),
+                         "gone.txt": md5(b"Deleted locally\n")})
+    assert remote_tree(site) == expected
+    assert_no_update(site)
+
 # -- Temporary uploads ----------------------------------------------------
 
 @pytest.mark.axes("tempupload")
