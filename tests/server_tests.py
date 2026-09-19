@@ -5,6 +5,7 @@ the rcfile option axes named by its axes marker (see siteconfig.py).
 """
 
 import shutil
+import time
 
 import pytest
 
@@ -102,6 +103,15 @@ def test_remote_change(site):
     else:
         assert res.returncode == 0, res.stdout + res.stderr
         assert_trees_match(site)
+
+@pytest.mark.site_lines("safe")
+def test_safe_unchanged_remote(site):
+    # A file changed only locally is uploaded in safe mode, however
+    # long after the last update.
+    setup_site(site, {"page.txt": "Original\n"})
+    time.sleep(2)
+    (site["local"] / "page.txt").write_text("Changed locally\n")
+    update_and_check(site)
 
 @pytest.mark.xfail(strict=True, reason="the stored state reader carries "
                    "the server modification time of one file over to the "
