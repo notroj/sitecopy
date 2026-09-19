@@ -95,15 +95,25 @@ Test layout:
   rcfile, local directory and storage directory for a WebDAV site named
   `testsite`, with no server), and `site` (the same, configured for a
   server running in a container, whose site directory is emptied
-  before each test).  `SERVERS` describes the servers: the WebDAV
-  server on port 8080, the FTP server on port 2121 with passive
-  ports 21100-21109, and the same vsftpd image requiring FTP over TLS
-  (`ftps`) on port 2122 with passive ports 21110-21119, whose
-  self-signed certificate is saved as the site's certificate so that
-  it is trusted.  Each container is started once per session.  The
-  `ftps` tests are skipped if `sitecopy --version` doesn't list
-  "FTPS", i.e. if sitecopy was built without FTP over TLS support
-  (which needs neon 0.37 or later with SSL support).
+  before each test).  `SERVERS` describes the servers, each run from
+  a Fedora image built from `tests/*-Containerfile`:
+  - `dav`: Apache httpd with mod_dav, on port 8080;
+  - `ftp`: vsftpd, on port 2121 with passive ports 21100-21109;
+  - `ftps`: the vsftpd image requiring FTP over TLS, on port 2122
+    with passive ports 21110-21119;
+  - `pureftpd`: pure-ftpd, on port 2123 with passive ports
+    21200-21209.  pure-ftpd needs capabilities which podman doesn't
+    grant by default (`PURE_FTPD_RUN_ARGS`);
+  - `pureftpds`: the pure-ftpd image requiring FTP over TLS, on port
+    2124 with passive ports 21210-21219.
+
+  Each container is started once per session.  For the TLS servers
+  the server's self-signed certificate is saved as the site's
+  certificate so that it is trusted; their tests are skipped if
+  `sitecopy --version` doesn't list "FTPS", i.e. if sitecopy was
+  built without FTP over TLS support (which needs neon 0.37 or later
+  with SSL support).  A server's `logfile` is searched by
+  `server_log_lines()` and included in failing test reports.
 - `tests/siteconfig.py` — rcfile option axes (`AXES`) for the server
   tests, e.g. `state`, `moves`, `delete`, `overwrite`, `safe`,
   `tempupload`, `lowercase`, `symlinks` and `permissions`, plus the
@@ -126,12 +136,14 @@ Test layout:
   server as if someone else did) and `check_update_cycle()`.  When a
   server test fails, its report includes the recent server logs.
 - `tests/server_tests.py` — the tests run against each server.  It is
-  not collected directly: `test_dav.py`, `test_vsftpd.py` and
-  `test_vsftpd_ssl.py` import it and select their server with
-  `pytestmark = pytest.mark.protocol(...)`, so the servers can be tested
+  not collected directly: `test_dav.py`, `test_vsftpd.py`,
+  `test_vsftpd_ssl.py`, `test_pureftpd.py` and `test_pureftpd_ssl.py`
+  import it and select their server with `pytestmark =
+  pytest.mark.protocol(...)`, so the servers can be tested
   separately, e.g. `pytest-3 tests/test_dav.py`.  Test IDs name the
   protocol and configuration, e.g. `[ftp-usecwd-checksum-renames]`,
-  so `-k` can select configurations.
+  so `-k` can select configurations.  Likewise `tests/ftps_tests.py`
+  holds the tests run against each server requiring FTP over TLS.
 - `test_basic.py` — option handling and local state, no server needed.
 - `test_ftp.py` — FTP against a scripted in-process FTP server.
 - `test_false_success.py` — SFTP failure handling, using a wrapper

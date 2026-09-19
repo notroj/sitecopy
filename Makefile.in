@@ -163,7 +163,8 @@ distclean: clean
 	rm -f `find $(top_srcdir) \( -name '*.orig' -o -name '*.rej' \
 		-o -name '#*#' -o -name '*~' \) -print`
 
-check-containers: tests/httpd-container-stamp tests/vsftpd-container-stamp
+check-containers: tests/httpd-container-stamp tests/vsftpd-container-stamp \
+		tests/pure-ftpd-container-stamp
 
 tests/httpd-container-stamp: tests/httpd-Containerfile tests/httpd.conf
 	podman build -t sitecopy-test-httpd -f tests/httpd-Containerfile $(top_srcdir)/tests
@@ -172,6 +173,10 @@ tests/httpd-container-stamp: tests/httpd-Containerfile tests/httpd.conf
 tests/vsftpd-container-stamp: tests/vsftpd-Containerfile tests/vsftpd.conf \
 		tests/vsftpd-ssl.conf
 	podman build -t sitecopy-test-vsftpd -f tests/vsftpd-Containerfile $(top_srcdir)/tests
+	echo timestamp > $@
+
+tests/pure-ftpd-container-stamp: tests/pure-ftpd-Containerfile
+	podman build -t sitecopy-test-pure-ftpd -f tests/pure-ftpd-Containerfile $(top_srcdir)/tests
 	echo timestamp > $@
 
 check: $(TARGET) check-containers

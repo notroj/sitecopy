@@ -42,7 +42,7 @@ class Server:
     """A server run in a container for the tests of one protocol."""
 
     def __init__(self, image, ports, port, root, rcfile, command=(),
-                 certfile=None, requires=None):
+                 certfile=None, requires=None, run_args=(), logfile=None):
         self.image = image
         # Port specs published from the container.
         self.ports = ports
@@ -60,6 +60,15 @@ class Server:
         # Feature which `sitecopy --version' must list for the tests
         # to run.
         self.requires = requires
+        # Additional arguments for `podman run'.
+        self.run_args = list(run_args)
+        # Server's log file in the container, or None for the
+        # container's own output.
+        self.logfile = logfile
+
+# pure-ftpd refuses to start ("421 Unable to switch capabilities")
+# without these capabilities, which podman doesn't grant by default.
+PURE_FTPD_RUN_ARGS = ["--cap-add", "DAC_READ_SEARCH,SYS_NICE,AUDIT_WRITE"]
 
 SERVERS = {
     "dav": Server("sitecopy-test-httpd", ["8080:80"], 8080,
@@ -76,7 +85,7 @@ SERVERS = {
   protocol ftp
   username sitecopy
   password sitecopy
-"""),
+""", logfile="/var/log/vsftpd.log"),
     # FTP over TLS: the same image, with TLS required.
     "ftps": Server("sitecopy-test-vsftpd",
                    ["2122:21", "21110-21119:21110-21119"], 2122,
@@ -88,7 +97,34 @@ SERVERS = {
   password sitecopy
   ftp secure
 """, command=["/etc/vsftpd/vsftpd-tls.conf"],
-                   certfile="/etc/vsftpd/cert.pem", requires="FTPS"),
+                   certfile="/etc/vsftpd/cert.pem", requires="FTPS",
+                   logfile="/var/log/vsftpd.log"),
+    # pure-ftpd, which needs capabilities beyond podman's defaults.
+    "pureftpd": Server("sitecopy-test-pure-ftpd",
+                       ["2123:21", "21200-21209:21200-21209"], 2123,
+                       "/home/sitecopy/site", """\
+  port 2123
+  remote /home/sitecopy/site/
+  protocol ftp
+  username sitecopy
+  password sitecopy
+""", command=["-p", "21200:21209"], run_args=PURE_FTPD_RUN_ARGS,
+                       logfile="/var/log/pure-ftpd.log"),
+    # pure-ftpd with TLS required for the control and data connections.
+    "pureftpds": Server("sitecopy-test-pure-ftpd",
+                        ["2124:21", "21210-21219:21210-21219"], 2124,
+                        "/home/sitecopy/site", """\
+  port 2124
+  remote /home/sitecopy/site/
+  protocol ftp
+  username sitecopy
+  password sitecopy
+  ftp secure
+""", command=["-p", "21210:21219", "-Y", "3",
+              "-2", "/etc/pure-ftpd/cert.pem,/etc/pure-ftpd/key.pem"],
+                        certfile="/etc/pure-ftpd/cert.pem", requires="FTPS",
+                        run_args=PURE_FTPD_RUN_ARGS,
+                        logfile="/var/log/pure-ftpd.log"),
 }
 
 def sitecopy_features():
@@ -131,12 +167,12 @@ def pytest_generate_tests(metafunc):
         params.append(pytest.param(config, id=config.id, marks=marks))
     metafunc.parametrize("site_config", params)
 
-def run_container(image, ports, wait_port, command=()):
+def run_container(image, ports, wait_port, command=(), run_args=()):
     """Run the given container image detached, publishing the given
     list of port specs, with the given arguments for its entrypoint if
-    any, and wait until wait_port accepts connections.  Returns the
-    container ID."""
-    cmd = ["podman", "run", "--rm", "-d"]
+    any, and additional arguments for podman run, and wait until
+    wait_port accepts connections.  Returns the container ID."""
+    cmd = ["podman", "run", "--rm", "-d"] + list(run_args)
     for port in ports:
         cmd += ["-p", port]
     run = subprocess.run(cmd + [image] + list(command),
@@ -175,7 +211,8 @@ def containers():
         if protocol not in running:
             server = SERVERS[protocol]
             running[protocol] = run_container(server.image, server.ports,
-                                              server.port, server.command)
+                                              server.port, server.command,
+                                              server.run_args)
         return running[protocol]
 
     yield get
@@ -203,17 +240,8 @@ def site(tmp_path, site_config, containers):
         assert run.returncode == 0, run.stderr
         (env["store"] / "testsite.crt").write_text(run.stdout)
     env.update(config=site_config, cid=cid, root=server.root,
-               expected={})
+               logfile=server.logfile, expected={})
     return env
-
-# Server logs added to the report of a failing test using the site
-# fixture, for each protocol: shell commands run in the container, or
-# None for the container's own output.
-SERVER_LOGS = {
-    "dav": [None],
-    "ftp": ["tail -n 100 /var/log/vsftpd.log"],
-    "ftps": ["tail -n 100 /var/log/vsftpd.log"],
-}
 
 @pytest.hookimpl(hookwrapper=True)
 def pytest_runtest_makereport(item, call):
@@ -224,12 +252,12 @@ def pytest_runtest_makereport(item, call):
     site = getattr(item, "funcargs", {}).get("site")
     if report.when != "call" or not report.failed or site is None:
         return
-    for command in SERVER_LOGS[site["config"].protocol]:
-        if command is None:
-            cmd = ["podman", "logs", "--tail", "100", site["cid"]]
-            title = "container log"
-        else:
-            cmd = ["podman", "exec", site["cid"], "sh", "-c", command]
-            title = command
-        run = subprocess.run(cmd, capture_output=True, text=True)
-        report.sections.append(("server: " + title, run.stdout + run.stderr))
+    if site["logfile"] is None:
+        cmd = ["podman", "logs", "--tail", "100", site["cid"]]
+        title = "container log"
+    else:
+        cmd = ["podman", "exec", site["cid"],
+               "tail", "-n", "100", site["logfile"]]
+        title = site["logfile"]
+    run = subprocess.run(cmd, capture_output=True, text=True)
+    report.sections.append(("server: " + title, run.stdout + run.stderr))

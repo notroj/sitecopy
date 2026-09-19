@@ -255,19 +255,19 @@ def remote_modes(site):
     return dict(line.rsplit(" ", 1) for line in out.splitlines())
 
 def server_log_lines(site, text):
-    """Return the lines of the server's log containing text: from the
-    access log for httpd, or the vsftpd log (which records each
-    upload).  The vsftpd log is searched inside the container, since
-    it grows large and older versions of podman can truncate large
-    output from podman exec."""
-    if site["config"].protocol == "dav":
+    """Return the lines of the server's log containing text: its log
+    file (e.g. the vsftpd log, which records each upload), searched
+    inside the container, since it grows large and older versions of
+    podman can truncate large output from podman exec; or the
+    container's output (e.g. the httpd access log)."""
+    if site["logfile"] is None:
         run = subprocess.run(["podman", "logs", site["cid"]],
                              capture_output=True, text=True)
         assert run.returncode == 0, run.stderr
         log = run.stdout + run.stderr
         return [line for line in log.splitlines() if text in line]
     run = subprocess.run(["podman", "exec", site["cid"],
-                          "grep", "-F", "--", text, "/var/log/vsftpd.log"],
+                          "grep", "-F", "--", text, site["logfile"]],
                          capture_output=True, text=True)
     assert run.returncode in (0, 1), run.stderr
     return run.stdout.splitlines()
