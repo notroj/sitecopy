@@ -873,16 +873,20 @@ void site_read_local_state(struct site *site)
 		type = file_file;
 	    }
 #ifndef __EMX__
-	    else if (S_ISLNK(item.st_mode)) {
-		char tmp[BUFSIZ] = {0};
-		type = file_link;
-		NE_DEBUG(DEBUG_FILES, "symlink being maintained.\n");
-		if (readlink(full, tmp, BUFSIZ) == -1) {
-		    fe_warning(_("The target of the symlink could not be read."), full, strerror(errno));
-		    continue;
-		}
-		local.linktarget = ne_strdup(tmp);
-	    }
+            else if (S_ISLNK(item.st_mode)) {
+                char tmp[BUFSIZ];
+                ssize_t len;
+
+                type = file_link;
+                NE_DEBUG(DEBUG_FILES, "symlink being maintained.\n");
+                len = readlink(full, tmp, sizeof tmp);
+                if (len == -1) {
+                    fe_warning(_("The target of the symlink could not be read."),
+                               full, strerror(errno));
+                    continue;
+                }
+                local.linktarget = ne_strndup(tmp, len);
+            }
 #endif /* __EMX__ */
 	    else if (S_ISDIR(item.st_mode)) {
 		type = file_dir;
