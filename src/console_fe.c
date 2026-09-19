@@ -349,6 +349,8 @@ static int list_site_definitions(struct site *sites)
                 _("(unspecified)"));
         if (! current->ftp_pasv_mode)
             printf(_("\tPassive mode FTP will not be used.\n"));
+        if (current->ftp_secure)
+            printf(_("\tFTP over TLS will be used.\n"));
         printf(_("\tRemote directory: %s\n\tLocal directory: %s\n"),
                 current->remote_root_user, current->local_root_user);
         printf(_("\tPermissions: %s     Symlinks: %s\n"),
@@ -1034,6 +1036,11 @@ static int verify_sites(struct site *sites, enum action act)
         case SITE_NORENAMES:
             printf(_("%s: Can only check for renamed files when checksumming (site `%s').\n"), progname, current->name);
             break;
+        case SITE_NOFTPSSL:
+            printf(_("%s: FTP over TLS requires sitecopy built with neon "
+                     "0.37 or later with SSL support (site `%s').\n"),
+                   progname, current->name);
+            break;
         case SITE_UNSUPPORTED:
             printf(_("%s: The protocol `%s' is unsupported (site `%s').\n"),
                     progname, current->proto_string, current->name);
@@ -1384,6 +1391,9 @@ static void version(void)
     printf(PACKAGE_NAME " " PACKAGE_VERSION ":");
 #ifdef USE_FTP
     printf(" FTP");
+#ifdef SC_FTP_SSL
+    printf(" FTPS");
+#endif
 #endif /* FTP */
 #ifdef USE_DAV
     printf(" WebDAV");

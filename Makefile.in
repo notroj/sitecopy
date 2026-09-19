@@ -169,7 +169,8 @@ tests/httpd-container-stamp: tests/httpd-Containerfile tests/httpd.conf
 	podman build -t sitecopy-test-httpd -f tests/httpd-Containerfile $(top_srcdir)/tests
 	echo timestamp > $@
 
-tests/vsftpd-container-stamp: tests/vsftpd-Containerfile tests/vsftpd.conf
+tests/vsftpd-container-stamp: tests/vsftpd-Containerfile tests/vsftpd.conf \
+		tests/vsftpd-ssl.conf
 	podman build -t sitecopy-test-vsftpd -f tests/vsftpd-Containerfile $(top_srcdir)/tests
 	echo timestamp > $@
 

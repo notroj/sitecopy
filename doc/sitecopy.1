@@ -309,6 +309,9 @@ A site definition is made up of a series of lines:
 .BR ftp " { usecwd | nousecwd } ]"
 .br
  [ 
+.BR ftp " { secure | nosecure } ]"
+.br
+ [ 
 .BR http " expect ]"
 .br
  [ 
@@ -386,6 +389,20 @@ Note that the remote-directory (keyword
 must be an absolute path (starting with '/'), or
 .B usecwd
 will be ignored.
+
+If the FTP server supports FTP over TLS (also known as FTPS or
+FTPES, as specified by RFC 4217), the key
+.B ftp secure
+can be used.  sitecopy then negotiates TLS with the AUTH TLS command
+before logging in, and uses TLS for every data connection.  If the
+server does not support TLS, the connection fails, rather than
+sitecopy sending the username and password unencrypted.  The
+certificate of the server is verified as described for
+.B http secure
+below.  This requires sitecopy to be built using neon 0.37 or later
+with SSL support; if so,
+.B sitecopy \-\-version
+lists "FTPS".
 
 If the WebDAV server correctly supports the 100-continue
 expectation, e.g. Apache 1.3.9 and later, the key

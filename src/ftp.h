@@ -22,6 +22,8 @@
 
 #include <netinet/in.h>
 
+#include <ne_session.h> /* for ne_ssl_verify_fn */
+
 #include "protocol.h"
 
 /* Reply codes - these are returned by internal functions,
@@ -45,6 +47,7 @@
 #define FTP_DENIED 996
 #define FTP_UNSUPPORTED 997
 #define FTP_NOPASSIVE 998
+#define FTP_SSL 990
 #define FTP_ERROR 999
 
 /* This module contains an FTP client implementation.
@@ -62,6 +65,7 @@ ftp_session *ftp_init(void);
  *   FTP_CONNECT on failed socket connect
  *   FTP_HELLO if the greeting message couldn't be read
  *   FTP_LOGIN on failed login
+ *   FTP_SSL if FTP over TLS is used and TLS could not be negotiated
  */
 int ftp_open(ftp_session *sess); /* Performs the login procedure */
 
@@ -69,7 +73,20 @@ int ftp_set_server(ftp_session *sess, struct site_host *server);
 void ftp_set_passive(ftp_session *sess, int use_passive);
 void ftp_set_usecwd(ftp_session *sess, int use_cwd);
 
+#ifdef SC_FTP_SSL
+/* Use FTP over TLS (RFC 4217) for the session: TLS is negotiated with
+ * AUTH TLS before logging in, and used for every data connection.
+ * If 'trusted' is non-NULL, that certificate is trusted, otherwise
+ * the system's default CA certificates are trusted.  'verify' is
+ * called if verification of the server's certificate fails, as for
+ * ne_ssl_set_verify. */
+void ftp_set_secure(ftp_session *sess, const ne_ssl_certificate *trusted,
+                    ne_ssl_verify_fn verify, void *userdata);
+#endif
+
 const char *ftp_get_error(ftp_session *sess);
+/* Sets the session error string. */
+void ftp_set_error(ftp_session *sess, const char *error);
 int ftp_finish(ftp_session *sess);
 
 /* The commands available */

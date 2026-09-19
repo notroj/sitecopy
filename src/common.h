@@ -29,6 +29,14 @@
 
 #include <ne_utils.h>
 
+/* FTP over TLS support requires neon 0.37 or later, for
+ * ne_sock_handshake(), built with SSL support. */
+#if defined(NE_HAVE_SSL) && defined(NE_MINIMUM_VERSION)
+#if NE_MINIMUM_VERSION(0, 37)
+#define SC_FTP_SSL 1
+#endif
+#endif
+
 /* our own DEBUG_ channels */
 #define DEBUG_FILES (1<<10)
 #define DEBUG_RCFILE (1<<11)

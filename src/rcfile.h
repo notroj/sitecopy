@@ -88,6 +88,7 @@ int init_netrc(void);
  *  SITE_NOSAFEOVER   if they used nooverwrite mode and safe mode
  *  SITE_NOSAFETEMPUP if they used tempupload and safe mode
  *  SITE_NORENAMES    if they want renames + not using state checksum
+ *  SITE_NOFTPSSL     if FTP over TLS is not supported by this build
  */
 int rcfile_verify(struct site *any_site);
 
@@ -125,5 +126,6 @@ int rcfile_write (char *filename, struct site *list_of_sites);
 #define SITE_NORENAMES 933
 #define SITE_NOSAFETEMPUP 934
 #define SITE_NOSERVERCERT 935
+#define SITE_NOFTPSSL 936
 
 #endif /* RCFILE_H */

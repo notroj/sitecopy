@@ -559,6 +559,12 @@ int rcfile_read(struct site **sites)
                 else if (strcmp(val, "nousecwd") == 0) {
                     this_site->ftp_use_cwd = false;
                 }
+                else if (strcmp(val, "secure") == 0) {
+                    this_site->ftp_secure = true;
+                }
+                else if (strcmp(val, "nosecure") == 0) {
+                    this_site->ftp_secure = false;
+                }
                 else {
                     ret = RC_CORRUPT;
                 }
@@ -662,6 +668,11 @@ int rcfile_verify(struct site *any_site)
         if (any_site->symlinks == sitesym_maintain) {
             return SITE_NOMAINTAIN;
         }
+#ifndef SC_FTP_SSL
+        if (any_site->ftp_secure) {
+            return SITE_NOFTPSSL;
+        }
+#endif
         break;
 #else /* !USE_FTP */
         return SITE_UNSUPPORTED;
@@ -957,6 +968,7 @@ int rcfile_write (char *filename, struct site *list_of_sites)
 	
 	RCWRITEBOOL(!current->ftp_pasv_mode, "ftp nopasv");
 	RCWRITEBOOL(current->ftp_echo_quit, "ftp showquit");
+	RCWRITEBOOL(current->ftp_secure, "ftp secure");
 	RCWRITEBOOL(current->ftp_use_cwd, "ftp usecwd");
 	RCWRITEBOOL(current->http_limit, "http limit");
 	RCWRITEBOOL(current->http_use_expect, "http expect");

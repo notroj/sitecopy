@@ -20,6 +20,7 @@
 
 #include <ne_socket.h>
 
+#include "i18n.h"
 #include "protocol.h"
 #include "ftp.h"
 
@@ -46,25 +47,36 @@ static int get_server_port(struct site *site)
     return 21;
 }
 
-static int init(void **session, struct site *site) 
+static int init(void **session, struct site *site)
 {
-    int ret;
     ftp_session *sess = ftp_init();
+    int ret;
+
+    *session = sess;
     ret = ftp_set_server(sess, &site->server);
     if (ret == FTP_OK) {
-	if (site->ftp_pasv_mode) {
-	    ftp_set_passive(sess, 1);
-	}
-	if (site->ftp_use_cwd) {
-	    ftp_set_usecwd(sess, 1);
-	}
-	ret = ftp_open(sess);
+        if (site->ftp_pasv_mode)
+            ftp_set_passive(sess, 1);
+        if (site->ftp_use_cwd)
+            ftp_set_usecwd(sess, 1);
+#ifdef SC_FTP_SSL
+        if (site->ftp_secure) {
+            if (site_load_certificate(site)) {
+                ftp_set_error(sess, _("Could not load saved server "
+                                      "certificate"));
+                return SITE_FAILED;
+            }
+            ftp_set_secure(sess, site->server_cert,
+                           site_verify_certificate, site);
+        }
+#endif
+        ret = ftp_open(sess);
     }
-    *session = sess;
+
     /* map it to a SITE_* code. */
     ret = f2s(ret);
     if (ret == SITE_ERRORS)
-	ret = SITE_FAILED;
+        ret = SITE_FAILED;
     return ret;
 }
 

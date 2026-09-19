@@ -377,6 +377,7 @@ struct site {
     unsigned int ftp_echo_quit;
     unsigned int ftp_forcecd;
     unsigned int ftp_use_cwd;
+    unsigned int ftp_secure; /* FTP over TLS */
     unsigned int http_use_expect;
     unsigned int http_limit;
     unsigned int http_secure;

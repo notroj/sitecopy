@@ -41,7 +41,8 @@ def sitecopy_env(tmp_path):
 class Server:
     """A server run in a container for the tests of one protocol."""
 
-    def __init__(self, image, ports, port, root, rcfile):
+    def __init__(self, image, ports, port, root, rcfile, command=(),
+                 certfile=None, requires=None):
         self.image = image
         # Port specs published from the container.
         self.ports = ports
@@ -51,6 +52,14 @@ class Server:
         self.root = root
         # rcfile lines configuring the site for this server.
         self.rcfile = rcfile
+        # Arguments for the container's entrypoint, if not the default.
+        self.command = list(command)
+        # Server certificate in the container, which is saved as the
+        # site's certificate so that it is trusted.
+        self.certfile = certfile
+        # Feature which `sitecopy --version' must list for the tests
+        # to run.
+        self.requires = requires
 
 SERVERS = {
     "dav": Server("sitecopy-test-httpd", ["8080:80"], 8080,
@@ -68,7 +77,25 @@ SERVERS = {
   username sitecopy
   password sitecopy
 """),
+    # FTP over TLS: the same image, with TLS required.
+    "ftps": Server("sitecopy-test-vsftpd",
+                   ["2122:21", "21110-21119:21110-21119"], 2122,
+                   "/home/sitecopy/site", """\
+  port 2122
+  remote /home/sitecopy/site/
+  protocol ftp
+  username sitecopy
+  password sitecopy
+  ftp secure
+""", command=["/etc/vsftpd/vsftpd-tls.conf"],
+                   certfile="/etc/vsftpd/cert.pem", requires="FTPS"),
 }
+
+def sitecopy_features():
+    """Return the features listed by `sitecopy --version'."""
+    run = subprocess.run(["./sitecopy", "--version"],
+                         capture_output=True, text=True)
+    return run.stdout.split(":", 1)[1].replace(",", " ").split()
 
 def pytest_configure(config):
     config.addinivalue_line(
@@ -104,14 +131,16 @@ def pytest_generate_tests(metafunc):
         params.append(pytest.param(config, id=config.id, marks=marks))
     metafunc.parametrize("site_config", params)
 
-def run_container(image, ports, wait_port):
+def run_container(image, ports, wait_port, command=()):
     """Run the given container image detached, publishing the given
-    list of port specs, and wait until wait_port accepts connections.
-    Returns the container ID."""
+    list of port specs, with the given arguments for its entrypoint if
+    any, and wait until wait_port accepts connections.  Returns the
+    container ID."""
     cmd = ["podman", "run", "--rm", "-d"]
     for port in ports:
         cmd += ["-p", port]
-    run = subprocess.run(cmd + [image], capture_output=True, text=True)
+    run = subprocess.run(cmd + [image] + list(command),
+                         capture_output=True, text=True)
     assert run.returncode == 0, run.stderr
     cid = run.stdout.strip()
     assert len(cid) > 0
@@ -146,7 +175,7 @@ def containers():
         if protocol not in running:
             server = SERVERS[protocol]
             running[protocol] = run_container(server.image, server.ports,
-                                              server.port)
+                                              server.port, server.command)
         return running[protocol]
 
     yield get
@@ -161,12 +190,18 @@ def site(tmp_path, site_config, containers):
     make_sitecopy_env plus 'config', 'cid', 'root', and 'expected',
     the tree expected on the server (see common.expected_remote)."""
     server = SERVERS[site_config.protocol]
+    if server.requires and server.requires not in sitecopy_features():
+        pytest.skip("sitecopy built without %s support" % server.requires)
     cid = containers(site_config.protocol)
 
     run = podman_exec(cid, "find '%s' -mindepth 1 -delete" % server.root)
     assert run.returncode == 0, run.stderr
 
     env = make_sitecopy_env(tmp_path, server.rcfile + site_config.rcfile())
+    if server.certfile:
+        run = podman_exec(cid, "cat '%s'" % server.certfile)
+        assert run.returncode == 0, run.stderr
+        (env["store"] / "testsite.crt").write_text(run.stdout)
     env.update(config=site_config, cid=cid, root=server.root,
                expected={})
     return env
@@ -177,6 +212,7 @@ def site(tmp_path, site_config, containers):
 SERVER_LOGS = {
     "dav": [None],
     "ftp": ["tail -n 100 /var/log/vsftpd.log"],
+    "ftps": ["tail -n 100 /var/log/vsftpd.log"],
 }
 
 @pytest.hookimpl(hookwrapper=True)

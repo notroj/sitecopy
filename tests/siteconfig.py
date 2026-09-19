@@ -27,7 +27,7 @@ AXES = {
     "ftp": Axis({
         "pasv": (),
         "usecwd": ("ftp usecwd",),
-    }, protocols={"ftp"}, always=True),
+    }, protocols={"ftp", "ftps"}, always=True),
     "state": Axis({
         "timesize": (),
         "checksum": ("state checksum",),
@@ -83,8 +83,8 @@ CONFLICTS = [
 
 # rcfile lines which are only valid for some protocols.
 PROTOCOL_ONLY = {
-    "permissions all": {"ftp"},
-    "permissions dir": {"ftp"},
+    "permissions all": {"ftp", "ftps"},
+    "permissions dir": {"ftp", "ftps"},
 }
 
 # Known bugs affecting a protocol with a given rcfile line: each is

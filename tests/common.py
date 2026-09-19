@@ -4,12 +4,13 @@ import shutil
 import subprocess
 import time
 
-def run_sitecopy(senv, args, env=None):
+def run_sitecopy(senv, args, env=None, input=""):
     """Helper to run sitecopy with the custom config, optionally with
-    the given environment."""
+    the given environment and standard input."""
     cmd = ["./sitecopy", "--rcfile", str(senv["rcfile"]),
            "--storepath", str(senv["store"])] + args
-    return subprocess.run(cmd, capture_output=True, text=True, env=env)
+    return subprocess.run(cmd, capture_output=True, text=True, env=env,
+                          input=input)
 
 def assert_no_update(sitecopy_env):
     res = run_sitecopy(sitecopy_env, ["--list", "testsite"])

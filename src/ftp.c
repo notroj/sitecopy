@@ -115,6 +115,15 @@ struct ftp_session_s {
 
     /* Error string */
     char error[BUFSIZ];
+
+#ifdef SC_FTP_SSL
+    /* FTP over TLS: */
+    unsigned int use_ssl;
+    ne_ssl_context *ssl_context;
+    ne_ssl_certificate *server_cert; /* certificate of the PI connection */
+    ne_ssl_verify_fn verify;
+    void *verify_userdata;
+#endif
 };
 
 #define FTP_ERR(x) do { \
@@ -132,6 +141,8 @@ static int ftp_data_open(ftp_session *sess, const char *verb,
                          const char *arg);
 
 static int get_modtime(ftp_session *sess, const char *filename);
+
+static int dtp_close(ftp_session *sess, int discard);
 
 static int maybe_chdir(ftp_session *sess, const char **remotefile);
 
@@ -324,6 +335,7 @@ static int parse_reply(ftp_session *sess, int code, char *reply)
     switch (code) {
     case 200: /* misc OK codes */
     case 220:
+    case 234: /* AUTH accepted */
     case 230:
     case 250: /* completed file action */
     case 253: /* delete successful */
@@ -529,6 +541,129 @@ static int receive_file(ftp_session *sess, FILE *f)
 
     return 0;
 }
+
+#ifdef SC_FTP_SSL
+void ftp_set_secure(ftp_session *sess, const ne_ssl_certificate *trusted,
+                    ne_ssl_verify_fn verify, void *userdata)
+{
+    sess->use_ssl = 1;
+    sess->ssl_context = ne_ssl_context_create(NE_SSL_CTX_CLIENT);
+    /* Servers commonly require each data connection to resume the
+     * TLS session of the control connection.  With TLS 1.3, sessions
+     * are resumed using single-use tickets, and a new ticket sent on
+     * a data connection used only for an upload is never read, so
+     * the next data connection cannot resume the session.  Use at
+     * most TLS 1.2, where the session ID can be reused. */
+    ne_ssl_context_set_versions(sess->ssl_context, NE_SSL_PROTO_UNSPEC,
+                                NE_SSL_PROTO_TLS_1_2);
+    if (trusted)
+        ne_ssl_context_trustcert(sess->ssl_context, trusted);
+    else
+        ne_ssl_context_trustdefca(sess->ssl_context);
+    sess->verify = verify;
+    sess->verify_userdata = userdata;
+}
+
+/* Returns the address of the server if its hostname is an IP address
+ * literal, which must be freed with ne_iaddr_free, or else NULL. */
+static ne_inet_addr *literal_address(ftp_session *sess)
+{
+    ne_inet_addr *ia = ne_iaddr_parse(sess->hostname, ne_iaddr_ipv4);
+
+    if (ia == NULL)
+        ia = ne_iaddr_parse(sess->hostname, ne_iaddr_ipv6);
+    return ia;
+}
+
+/* Negotiate TLS on the PI connection after AUTH TLS, and verify the
+ * server's certificate.  Returns FTP_OK on success, or FTP_SSL with
+ * the session error string set. */
+static int pi_handshake(ftp_session *sess)
+{
+    ne_inet_addr *literal = literal_address(sess);
+    const char *hostname = literal ? NULL : sess->hostname;
+    ne_ssl_certificate *cert;
+    int ret, failures = 0;
+
+    ret = ne_sock_handshake(sess->pisock, sess->ssl_context, hostname, 0);
+    if (ret) {
+        set_sockerr(sess, sess->pisock, _("TLS handshake failed"), ret);
+        ret = FTP_SSL;
+    }
+    else if ((cert = ne_sock_getcert(sess->pisock,
+                                     sess->ssl_context)) == NULL) {
+        ne_snprintf(sess->error, sizeof sess->error,
+                    _("No server certificate: %s"),
+                    ne_sock_error(sess->pisock));
+        ret = FTP_SSL;
+    }
+    else if (sess->server_cert
+             && ne_ssl_cert_cmp(cert, sess->server_cert) == 0) {
+        /* Same certificate as when last connected. */
+        ne_ssl_cert_free(cert);
+        ret = FTP_OK;
+    }
+    else if (ne_ssl_check_certificate(sess->ssl_context, sess->pisock,
+                                      hostname, literal, cert, 0,
+                                      &failures)
+             && (!failures || !sess->verify
+                 || sess->verify(sess->verify_userdata, failures, cert))) {
+        ne_snprintf(sess->error, sizeof sess->error,
+                    _("Server certificate verification failed: %s"),
+                    ne_sock_error(sess->pisock));
+        ne_ssl_cert_free(cert);
+        ret = FTP_SSL;
+    }
+    else {
+        if (sess->server_cert)
+            ne_ssl_cert_free(sess->server_cert);
+        sess->server_cert = cert;
+        ret = FTP_OK;
+    }
+
+    if (literal)
+        ne_iaddr_free(literal);
+    return ret;
+}
+
+/* Negotiate TLS on the DTP connection, once the server is ready for
+ * the transfer.  All connections share the SSL context, so the TLS
+ * session of the PI connection is resumed, as many servers require.
+ * If the server presents a certificate it must be the same as for the
+ * PI connection; a resumed session may present none, but resumption
+ * only succeeds for the verified PI session.  Returns FTP_OK on
+ * success, or FTP_SSL with the session error string set. */
+static int dtp_handshake(ftp_session *sess)
+{
+    ne_inet_addr *literal = literal_address(sess);
+    ne_ssl_certificate *cert;
+    int ret;
+
+    ret = ne_sock_handshake(sess->dtpsock, sess->ssl_context,
+                            literal ? NULL : sess->hostname, 0);
+    if (literal)
+        ne_iaddr_free(literal);
+    if (ret) {
+        set_sockerr(sess, sess->dtpsock,
+                    _("TLS handshake failed on data connection"), ret);
+        return FTP_SSL;
+    }
+
+    cert = ne_sock_getcert(sess->dtpsock, sess->ssl_context);
+    if (cert) {
+        ret = sess->server_cert == NULL
+            || ne_ssl_cert_cmp(cert, sess->server_cert) != 0;
+        ne_ssl_cert_free(cert);
+        if (ret) {
+            ftp_seterror(sess, _("Server certificate for data connection "
+                                 "does not match the control connection"));
+            return FTP_SSL;
+        }
+    }
+
+    return FTP_OK;
+}
+#endif /* SC_FTP_SSL */
 
 /* Passively (client-connects) open the DTP socket ; return non-zero
  * on success. */
@@ -768,26 +903,42 @@ static int ftp_data_open(ftp_session *sess, const char *verb,
 {
     int ret;
 
-    if (!sess->use_passive)
-        return dtp_open_active(sess, verb, arg);
-
-    ret = FTP_ERROR;
-
-    if (sess->rfc2428 != rfc2428_bad
-        && ne_iaddr_typeof(sess->pi_curaddr) == ne_iaddr_ipv6) {
-        ret = execute(sess, "EPSV", NULL);
-        if (ret == FTP_PASSIVE) sess->rfc2428 = rfc2428_ok;
+    if (!sess->use_passive) {
+        ret = dtp_open_active(sess, verb, arg);
     }
-    if ((sess->rfc2428 == rfc2428_unknown && ret != FTP_PASSIVE)
-        || sess->rfc2428 == rfc2428_bad) {
-        ret = execute(sess, "PASV", NULL);
+    else {
+        ret = FTP_ERROR;
+
+        if (sess->rfc2428 != rfc2428_bad
+            && ne_iaddr_typeof(sess->pi_curaddr) == ne_iaddr_ipv6) {
+            ret = execute(sess, "EPSV", NULL);
+            if (ret == FTP_PASSIVE)
+                sess->rfc2428 = rfc2428_ok;
+        }
+        if ((sess->rfc2428 == rfc2428_unknown && ret != FTP_PASSIVE)
+            || sess->rfc2428 == rfc2428_bad) {
+            ret = execute(sess, "PASV", NULL);
+        }
+
+        if (ret != FTP_PASSIVE)
+            return FTP_NOPASSIVE;
+        if (!dtp_open_passive(sess))
+            return FTP_ERROR;
+        ret = execute(sess, verb, arg);
     }
 
-    if (ret != FTP_PASSIVE)
-        return FTP_NOPASSIVE;
-    if (!dtp_open_passive(sess))
-        return FTP_ERROR;
-    return execute(sess, verb, arg);
+#ifdef SC_FTP_SSL
+    /* The server starts TLS on the data connection once it is ready
+     * for the transfer. */
+    if (ret == FTP_READY && sess->use_ssl && dtp_handshake(sess) != FTP_OK) {
+        /* Close the data connection, and read the server's response
+         * to the failed transfer, keeping the handshake error. */
+        dtp_close(sess, 1);
+        return FTP_SSL;
+    }
+#endif
+
+    return ret;
 }
 
 
@@ -1070,12 +1221,64 @@ static int authenticate(ftp_session *sess)
     return ret;
 }
 
-int ftp_open(ftp_session *sess) 
+/* Closes the PI connection after a failure to open it, returning
+ * 'ret'. */
+static int pi_abort(ftp_session *sess, int ret)
+{
+    if (sess->pisock) {
+        ne_sock_close(sess->pisock);
+        sess->pisock = NULL;
+    }
+    return ret;
+}
+
+#ifdef SC_FTP_SSL
+/* Negotiate TLS on the PI connection using AUTH TLS, before logging
+ * in.  Returns FTP_OK on success, else FTP_SSL. */
+static int pi_secure(ftp_session *sess)
+{
+    int ret = run_command(sess, "AUTH TLS");
+
+    /* Only a 234 reply indicates the server will negotiate TLS. */
+    if (ret == FTP_OK && strncmp(sess->rbuf, "234", 3) != 0)
+        ret = FTP_ERROR;
+
+    if (ret != FTP_OK) {
+        /* If the PI connection broke, keep the socket error. */
+        if (sess->pisock)
+            ne_snprintf(sess->error, sizeof sess->error,
+                        _("Server does not support FTP over TLS: %s"),
+                        sess->rbuf);
+        return FTP_SSL;
+    }
+
+    return pi_handshake(sess);
+}
+
+/* Enable protection of the data connections using TLS, after
+ * logging in.  Returns FTP_OK on success, else FTP_SSL. */
+static int pi_protect(ftp_session *sess)
+{
+    if (run_command(sess, "PBSZ 0") != FTP_OK
+        || run_command(sess, "PROT P") != FTP_OK) {
+        if (sess->pisock)
+            ne_snprintf(sess->error, sizeof sess->error,
+                        _("Could not enable TLS for data connections: %s"),
+                        sess->rbuf);
+        return FTP_SSL;
+    }
+
+    return FTP_OK;
+}
+#endif
+
+int ftp_open(ftp_session *sess)
 {
     int ret, code, success;
     const ne_inet_addr *ia;
 
-    if (sess->connected) return FTP_OK;
+    if (sess->connected)
+        return FTP_OK;
     NE_DEBUG(DEBUG_FTP, "Opening socket to port %d\n", sess->pi_port);
 
     /* Invalidate cwd, so a CWD is always used if needed. */
@@ -1083,41 +1286,45 @@ int ftp_open(ftp_session *sess)
         ne_free(sess->cwd);
         sess->cwd = NULL;
     }
-    
+
     /* Open TCP connection */
     fe_connection(fe_connecting, NULL);
     sess->pisock = ne_sock_create();
     for (ia = ne_addr_first(sess->pi_addr), success = 0;
-	 !success && ia != NULL; 
-	 ia = ne_addr_next(sess->pi_addr)) {
-	success = ne_sock_connect(sess->pisock, ia, sess->pi_port) == 0;
+         !success && ia != NULL;
+         ia = ne_addr_next(sess->pi_addr)) {
+        success = ne_sock_connect(sess->pisock, ia, sess->pi_port) == 0;
         sess->pi_curaddr = ia;
     }
 
-    if (!success) {
-        ne_sock_close(sess->pisock);
-	return FTP_CONNECT;
-    }
+    if (!success)
+        return pi_abort(sess, FTP_CONNECT);
 
     fe_connection(fe_connected, NULL);
 
     /* Read the hello message */
     ret = read_reply(sess, &code, sess->rbuf, sizeof sess->rbuf);
-    if (ret != FTP_OK) return FTP_HELLO;
+    if (ret != FTP_OK)
+        return FTP_HELLO;
 
     ret = parse_reply(sess, code, sess->rbuf);
     if (ret != FTP_OK) {
         ftp_seterror(sess, sess->rbuf);
-        return FTP_HELLO;
+        return pi_abort(sess, FTP_HELLO);
     }
 
-    if (authenticate(sess) != FTP_OK) {
-        if (sess->connected) {
-            ne_sock_close(sess->pisock);
-            sess->pisock = NULL;
-        }
-	return FTP_LOGIN;
-    }
+#ifdef SC_FTP_SSL
+    if (sess->use_ssl && pi_secure(sess) != FTP_OK)
+        return pi_abort(sess, FTP_SSL);
+#endif
+
+    if (authenticate(sess) != FTP_OK)
+        return pi_abort(sess, FTP_LOGIN);
+
+#ifdef SC_FTP_SSL
+    if (sess->use_ssl && pi_protect(sess) != FTP_OK)
+        return pi_abort(sess, FTP_SSL);
+#endif
 
     /* PI connection OK. */
     sess->connected = 1;
@@ -1126,12 +1333,18 @@ int ftp_open(ftp_session *sess)
      * duration to avoid infinite recusion (since set_mode calls
      * execute_command calls ftp_open) . */
     if (sess->mode != tran_unknown) {
-	enum tran_mode mode = sess->mode;
-	sess->mode = tran_unknown;
-	return set_mode(sess, mode);
+        enum tran_mode mode = sess->mode;
+
+        sess->mode = tran_unknown;
+        return set_mode(sess, mode);
     }
 
     return FTP_OK;
+}
+
+void ftp_set_error(ftp_session *sess, const char *error)
+{
+    ftp_seterror(sess, error);
 }
 
 const char *ftp_get_error(ftp_session *sess)
