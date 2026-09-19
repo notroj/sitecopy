@@ -22,9 +22,6 @@ def stored_items(site):
 
 # -- --verify -------------------------------------------------------------
 
-@pytest.mark.xfail(strict=True, reason="--verify lists only the site's "
-                   "top directory, so reports every file in a "
-                   "subdirectory as missing from the server")
 def test_verify_subdirectories(site):
     setup_site(site, {"top.txt": "Top\n", "dir/": None,
                       "dir/sub.txt": "Sub\n", "dir/deeper/": None,
@@ -32,6 +29,12 @@ def test_verify_subdirectories(site):
     res = run_sitecopy(site, ["--verify", "testsite"])
     assert res.returncode == 0, res.stdout + res.stderr
     assert "Verify completed successfully" in res.stdout, res.stdout
+    assert "on server" not in res.stdout, res.stdout
+
+    # A file changed on the server in a subdirectory is found.
+    change_remote(site, "dir/deeper/d.txt", "Changed, longer\n", 0)
+    res = run_sitecopy(site, ["--verify", "testsite"])
+    assert "Changed on server: dir/deeper/d.txt" in res.stdout, res.stdout
 
 @pytest.mark.xfail(strict=True, reason="--verify with checksum state "
                    "compares the stored checksums with checksums which "
