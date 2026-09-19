@@ -44,6 +44,9 @@
 #include <strings.h>
 #endif
 #include <time.h>
+#ifdef HAVE_LIMITS_H
+#include <limits.h>
+#endif
 #include <utime.h>
 
 /* neon */
@@ -320,67 +323,68 @@ static int update_create_directories(struct site *site, void *session)
     int ret = 0;
 
     for_each_file(current, site) {
-	if ((current->type == file_dir) 
-            && (current->diff == file_new || current->diff == file_changed)) {
-	    /* New or changed directory! */
-	    char *full_remote;
-            int oret;
+        char *full_remote;
+        int oret = SITE_OK;
 
-	    if (!fe_can_update(current)) continue;
+        /* New or changed directories only. */
+        if (current->type != file_dir
+            || (current->diff != file_new && current->diff != file_changed)
+            || !fe_can_update(current))
+            continue;
 
-	    full_remote = file_full_remote(&current->local, site);
+        full_remote = file_full_remote(&current->local, site);
 
-            if (current->diff == file_new) {
-                fe_updating(current);
-                oret = CALL(dir_create)(session, full_remote);
-                if (oret != SITE_OK) {
-                    fe_updated(current, false, DRIVER_ERR);
-                } else {
-                    fe_updated(current, true, NULL);
-                }
-            } else {
-                oret = SITE_OK;
-            }
+        if (current->diff == file_new) {
+            fe_updating(current);
+            oret = CALL(dir_create)(session, full_remote);
+            fe_updated(current, oret == SITE_OK,
+                       oret == SITE_OK ? NULL : DRIVER_ERR);
+        }
 
-            if (site->dirperms && oret == SITE_OK) {
-                fe_setting_perms(current);
-                oret = CALL(file_chmod)(session, full_remote,
-                                        current->local.mode);
-                if (oret == SITE_OK) {
-                    fe_set_perms(current, true, NULL);
-                } else {
-                    fe_set_perms(current, false, DRIVER_ERR);
-                }
-            }
+        if (site->dirperms && oret == SITE_OK) {
+            fe_setting_perms(current);
+            oret = CALL(file_chmod)(session, full_remote, current->local.mode);
+            fe_set_perms(current, oret == SITE_OK,
+                         oret == SITE_OK ? NULL : DRIVER_ERR);
+        }
 
-            if (oret != SITE_OK) {
-                ret = 1;
-            } else {
-                file_uploaded(current, site);
-            }
-	    free(full_remote);
-	}
+        if (oret == SITE_OK)
+            file_uploaded(current, site);
+        else
+            ret = 1;
+
+        ne_free(full_remote);
     }
 
     return ret;
 }
 
 /* Returns the filename to use for tempupload mode, ne_malloc-allocated:
- * FILENAME with a ".in." prefix inserted after any directories.
- * (pass the site since we may have different tempupload modes in the
- * future.) */
+ * FILENAME with a ".in." prefix inserted after any directories, and a
+ * random suffix, so that it isn't the name of another file on the
+ * server; or NULL if the filename is too long.  (pass the site since
+ * we may have different tempupload modes in the future.) */
 static char *temp_upload_filename(const char *filename, struct site *site)
 {
+    static int seeded = 0;
     const char *base = strrchr(filename, '/');
-    ne_buffer *buf = ne_buffer_create();
+    char buf[PATH_MAX];
+
+    if (!seeded) {
+        srandom(time(NULL) ^ getpid());
+        seeded = 1;
+    }
 
     base = base ? base + 1 : filename;
-    ne_buffer_append(buf, filename, base - filename);
-    ne_buffer_concat(buf, ".in.", base, NULL);
+    if (ne_snprintf(buf, sizeof buf, "%.*s.in.%s.%08lx",
+                    (int)(base - filename), filename, base,
+                    (unsigned long)random()) >= sizeof buf - 1) {
+        /* Truncated. */
+        return NULL;
+    }
 
-    return ne_buffer_finish(buf);
+    return ne_strdup(buf);
 }
-
 static int update_delete_files(struct site *site, void *session)
 {
     struct site_file *current, *next;
@@ -416,25 +420,27 @@ static int update_move_files(struct site *site, void *session)
     int ret = 0;
     struct site_file *current;
     char *old_full_remote, *full_remote;
+
     for_each_file(current, site) {
-	if (current->diff != file_moved) 
-	    continue;
-	full_remote = file_full_remote(&current->local, site);
-	/* The file has been moved */
-	if (!fe_can_update(current)) continue;
-	fe_updating(current);
-	old_full_remote = file_full_remote(&current->stored, site);
-	if (CALL(file_move)(session, old_full_remote, full_remote) != SITE_OK) {
-	    ret = 1;
-	    fe_updated(current, false, DRIVER_ERR);
-	} else {
-	    /* Successful update - file was moved */
-	    fe_updated(current, true, NULL);
-	    file_uploaded(current, site);
-	}
-	free(old_full_remote);
-	free(full_remote);
-    }   
+        if (current->diff != file_moved || !fe_can_update(current))
+            continue;
+
+        /* The file has been moved */
+        full_remote = file_full_remote(&current->local, site);
+        fe_updating(current);
+        old_full_remote = file_full_remote(&current->stored, site);
+        if (CALL(file_move)(session, old_full_remote, full_remote) != SITE_OK) {
+            ret = 1;
+            fe_updated(current, false, DRIVER_ERR);
+        }
+        else {
+            /* Successful update - file was moved */
+            fe_updated(current, true, NULL);
+            file_uploaded(current, site);
+        }
+        ne_free(old_full_remote);
+        ne_free(full_remote);
+    }
 
     return ret;
 }
@@ -472,8 +478,9 @@ static int update_files(struct site *site, void *session)
             }
             /* fall through */
         case file_new: /* File is new, upload it */
-            if (!fe_can_update(current)) continue;
-            if ((current->diff == file_changed) && site->nooverwrite) {
+            if (!fe_can_update(current))
+                break;
+            if (current->diff == file_changed && site->nooverwrite) {
                 /* Must delete remote file before uploading new copy.
                  * FIXME: Icky hack to convince the FE we are about to
                  * delete the file */
@@ -489,6 +496,10 @@ static int update_files(struct site *site, void *session)
                 else {
                     fe_updated(current, true, NULL);
                     current->diff = file_changed;
+                    /* The file is no longer on the server: if the
+                     * upload fails, the next update must upload it
+                     * as a new file, rather than delete it again. */
+                    current->stored.exists = false;
                 }
             }
             fe_updating(current);
@@ -521,8 +532,13 @@ static int update_files(struct site *site, void *session)
             else if (site->tempupload) {
                 /* Do temp file upload followed by a move */
                 char *temp_remote = temp_upload_filename(full_remote, site);
-                if (CALL(file_upload)(session, full_local, temp_remote,
-                                      current->local.ascii) != SITE_OK) {
+                if (temp_remote == NULL) {
+                    fe_updated(current, false,
+                               _("Filename too long for a temporary upload"));
+                    ret = 1;
+                }
+                else if (CALL(file_upload)(session, full_local, temp_remote,
+                                           current->local.ascii) != SITE_OK) {
                     fe_updated(current, false, DRIVER_ERR);
                     ret = 1;
                 }
@@ -547,7 +563,7 @@ static int update_files(struct site *site, void *session)
                         file_uploaded(current, site);
                     }
                 }
-                free(temp_remote);
+                ne_free(temp_remote);
             }
             else {
                 /* Normal unconditional upload */
@@ -571,8 +587,8 @@ static int update_files(struct site *site, void *session)
         default: /* Ignore everything else */
             break;
         }
-        free(full_remote);
-        free(full_local);
+        ne_free(full_remote);
+        ne_free(full_local);
     }
 
     return ret;
@@ -666,6 +682,8 @@ static void proto_finish(struct site *site, void *session)
 
 static void proto_seterror(struct site *site, void *session)
 {
+    if (site->last_error)
+        ne_free(site->last_error);
     site->last_error = ne_strdup(DRIVER_ERR);
 }
 
@@ -682,8 +700,8 @@ static int proto_init(struct site *site, void **session)
     int ret;
     
     if (site->last_error) {
-	free(site->last_error);
-	site->last_error = NULL;
+        ne_free(site->last_error);
+        site->last_error = NULL;
     }
 
     ret = CALL(init)(session, site);
@@ -773,110 +791,112 @@ void site_read_local_state(struct site *site)
 {
     char **dirstack, *this, *full = NULL;
     int dirtop = 0, /* points to item above top stack item */
-	dirmax = DIRSTACKSIZE; /* size of stack */
+        dirmax = DIRSTACKSIZE; /* size of stack */
 
     dirstack = ne_malloc(sizeof(char *) * DIRSTACKSIZE);
     /* Push the root directory on to the stack */
     dirstack[dirtop++] = ne_strdup(site->local_root);
-    
+
     /* Now, for all items in the stack, process all the files, and
      * add the dirs to the stack. Everything we put on the stack is
      * temporary and gets freed eventually. */
 
     while (dirtop > 0) {
-	DIR *curdir;
-	struct dirent *ent;
-	/* Pop the stack */
-	this = dirstack[--dirtop];
-	
-	NE_DEBUG(DEBUG_FILES, "Scanning: %s\n", this);
-	curdir = opendir(this);
-	if (curdir == NULL) {
-	    fe_warning("Could not read directory", this, strerror(errno));
-	    free(this);
-	    continue;
-	}
-	
-	/* Now read all the directory entries */
-	while ((ent = readdir(curdir)) != NULL) {
-	    char *fname;
-	    struct stat item;
-	    struct site_file *current;
-	    struct file_state local = {0};
-	    enum file_type type;
-	    size_t dnlen = strlen(ent->d_name);
+        DIR *curdir;
+        struct dirent *ent;
+        /* Pop the stack */
+        this = dirstack[--dirtop];
 
-	    /* Exclude the special directory entries. This test comes
-	     * high since it kills two stat calls per directory. */
-	    if (ent->d_name[0] == '.' && 
-		(dnlen == 1 || (ent->d_name[1] == '.' && dnlen==2))) {
-		continue;
-	    }
-	    
-	    if (full != NULL) free(full);
+        NE_DEBUG(DEBUG_FILES, "Scanning: %s\n", this);
+        curdir = opendir(this);
+        if (curdir == NULL) {
+            fe_warning("Could not read directory", this, strerror(errno));
+            ne_free(this);
+            continue;
+        }
 
-	    full = ne_concat(this, ent->d_name, NULL);
+        /* Now read all the directory entries */
+        while ((ent = readdir(curdir)) != NULL) {
+            char *fname;
+            struct stat item;
+            struct site_file *current;
+            struct file_state local = {0};
+            enum file_type type;
+            size_t dnlen = strlen(ent->d_name);
+
+            /* Exclude the special directory entries. This test comes
+             * high since it kills two stat calls per directory. */
+            if (ent->d_name[0] == '.'
+                && (dnlen == 1 || (ent->d_name[1] == '.' && dnlen == 2))) {
+                continue;
+            }
+
+            if (full != NULL) ne_free(full);
+
+            full = ne_concat(this, ent->d_name, NULL);
 
 #ifdef __EMX__
 /* There are no symlinks under OS/2, use stat() instead */
 #define USE_STAT stat
-#else 
+#else
 #define USE_STAT lstat
 #endif
- 	    if (USE_STAT(full, &item) == -1) {
-		fe_warning(_("Could not examine file."), full, strerror(errno));
-		continue;
-	    }
+            if (USE_STAT(full, &item) == -1) {
+                fe_warning(_("Could not examine file."), full, strerror(errno));
+                continue;
+            }
 #undef USE_STAT
 
 #ifndef __EMX__
-	    /* Is this a symlink? */
-	    if (S_ISLNK(item.st_mode)) {
-		NE_DEBUG(DEBUG_FILES, "symlink - ");
-		if (site->symlinks == sitesym_ignore) {
-		    /* Just skip it */
-		    NE_DEBUG(DEBUG_FILES, "ignoring.\n");
-		    continue;
-		} else if (site->symlinks == sitesym_follow) {
-		    NE_DEBUG(DEBUG_FILES, "followed - ");
-		    /* Else, carry on as normal, stat the real file */
-		    if (stat(full, &item) == -1) {
-			/* It's probably a broken link */
-			NE_DEBUG(DEBUG_FILES, "broken.\n");
-			continue;
-		    }
-		} else {
-		    NE_DEBUG(DEBUG_FILES, "maintained:\n");
-		}
-	    }
+            /* Is this a symlink? */
+            if (S_ISLNK(item.st_mode)) {
+                NE_DEBUG(DEBUG_FILES, "symlink - ");
+                if (site->symlinks == sitesym_ignore) {
+                    /* Just skip it */
+                    NE_DEBUG(DEBUG_FILES, "ignoring.\n");
+                    continue;
+                }
+                else if (site->symlinks == sitesym_follow) {
+                    NE_DEBUG(DEBUG_FILES, "followed - ");
+                    /* Else, carry on as normal, stat the real file */
+                    if (stat(full, &item) == -1) {
+                        /* It's probably a broken link */
+                        NE_DEBUG(DEBUG_FILES, "broken.\n");
+                        continue;
+                    }
+                }
+                else {
+                    NE_DEBUG(DEBUG_FILES, "maintained:\n");
+                }
+            }
 #endif /* __EMX__ */
-	    /* Now process it */
-	    
-	    /* This is the filename of this file - i.e., everything
-	     * apart from the local root */
-	    fname = (char *)full+strlen(site->local_root);
-	    
-	    /* Check for excludes */
-	    if (file_isexcluded(fname, site))
-		continue;
-	    
-	    if (S_ISREG(item.st_mode)) {
-		switch (site->state_method) {
-		case state_timesize:
-		    local.time = item.st_mtime;
-		    break;
-		case state_checksum:
-		    if (file_checksum(full, &local, site) != 0) {
-			fe_warning(_("Could not checksum file"), full,
-				    strerror(errno));
-			continue;
-		    }
-		    break;
-		}
-		local.size = item.st_size;
-		local.ascii = file_isascii(fname, site);
-		type = file_file;
-	    }
+            /* Now process it */
+
+            /* This is the filename of this file - i.e., everything
+             * apart from the local root */
+            fname = (char *)full+strlen(site->local_root);
+
+            /* Check for excludes */
+            if (file_isexcluded(fname, site))
+                continue;
+
+            if (S_ISREG(item.st_mode)) {
+                switch (site->state_method) {
+                case state_timesize:
+                    local.time = item.st_mtime;
+                    break;
+                case state_checksum:
+                    if (file_checksum(full, &local, site) != 0) {
+                        fe_warning(_("Could not checksum file"), full,
+                                    strerror(errno));
+                        continue;
+                    }
+                    break;
+                }
+                local.size = item.st_size;
+                local.ascii = file_isascii(fname, site);
+                type = file_file;
+            }
 #ifndef __EMX__
             else if (S_ISLNK(item.st_mode)) {
                 char tmp[BUFSIZ];
@@ -893,37 +913,40 @@ void site_read_local_state(struct site *site)
                 local.linktarget = ne_strndup(tmp, len);
             }
 #endif /* __EMX__ */
-	    else if (S_ISDIR(item.st_mode)) {
-		type = file_dir;
-		if (dirtop == dirmax) {
-		    /* Grow the stack */
-		    dirmax += DIRSTACKSIZE;
-		    dirstack = realloc(dirstack, sizeof(char *) * dirmax);
-		}
-		/* Add it to the search stack */
-		dirstack[dirtop] = ne_concat(full, "/", NULL);
-		dirtop++;
-	    } else {
-		NE_DEBUG(DEBUG_FILES, "something else.\n");
-		continue;
-	    }
-	    
-	    /* Set up rest of the local state */
-	    local.mode = item.st_mode & 0777;
-	    local.exists = true;
-	    local.filename = ne_strdup(fname);
+            else if (S_ISDIR(item.st_mode)) {
+                type = file_dir;
+                if (dirtop == dirmax) {
+                    /* Grow the stack */
+                    dirmax += DIRSTACKSIZE;
+                    dirstack = ne_realloc(dirstack, sizeof(char *) * dirmax);
+                }
+                /* Add it to the search stack */
+                dirstack[dirtop] = ne_concat(full, "/", NULL);
+                dirtop++;
+            }
+            else {
+                NE_DEBUG(DEBUG_FILES, "something else.\n");
+                continue;
+            }
 
-	    current = file_set_local(type, &local, site);
-	    DEBUG_DUMP_FILE_PROPS(DEBUG_FILES, current, site);
+            /* Set up rest of the local state */
+            local.mode = item.st_mode & 0777;
+            local.exists = true;
+            local.filename = ne_strdup(fname);
 
-	}
-	/* Close the open directory */
-	closedir(curdir);
-	/* And we're finished with this */
-	free(this);
+            current = file_set_local(type, &local, site);
+            DEBUG_DUMP_FILE_PROPS(DEBUG_FILES, current, site);
+
+        }
+        /* Close the open directory */
+        closedir(curdir);
+        /* And we're finished with this */
+        ne_free(this);
     }
 
-    free(dirstack);
+    if (full)
+        ne_free(full);
+    ne_free(dirstack);
 }
 
 /* Pretend the remote site is the same as the local site. */
@@ -1075,29 +1098,37 @@ static int fetch_checksum_file(struct proto_file *file,
 /* Updates the remote file list... site_fetch_callback is called for
  * every remote file found.
  */
-int site_fetch(struct site *site)
+/* Frees a list of proto_file structures, and their filenames. */
+static void proto_files_free(struct proto_file *files)
 {
-    int ret, need_modtimes;
-    void *session;
-    const char *dirstack[DIRSTACKSIZE];
-    size_t dirtop;
+    struct proto_file *f, *next;
+
+    for (f = files; f; f = next) {
+        next = f->next;
+        ne_free(f->filename);
+        ne_free(f);
+    }
+}
+
+/* Lists the remote site, walking its directories, and places the
+ * files found in *list, with filenames relative to the site root.
+ * Excluded directories are not listed.  If 'checksums' is non-zero,
+ * each file which isn't excluded is downloaded to calculate its
+ * checksum.  Returns SITE_OK on success, SITE_FAILED if a directory
+ * could not be listed, or SITE_ERRORS if a file could not be
+ * checksummed. */
+static int list_remote_files(struct site *site, void *session,
+                             int need_modtimes, int checksums,
+                             struct proto_file **list)
+{
+    const char **dirstack;
+    size_t dirtop, dirmax = DIRSTACKSIZE;
     struct proto_file *files = NULL;
+    int ret = SITE_OK, csum_failed = 0;
 
-    ret = proto_init(site, &session);
-    if (ret != SITE_OK) {
-	proto_finish(site, session);
-	return ret;
-    }
-
-    if (CALL(fetch_list) == NULL) {
-	proto_finish(site, session);
-	return SITE_UNSUPPORTED;
-    }
-
-    /* The remote modtimes are needed if timesize is used or in safe
-     * mode: */
-    need_modtimes = site->safemode || site->state_method == state_timesize;
-
+    /* The stack of directories still to list, which grows as
+     * needed. */
+    dirstack = ne_malloc(dirmax * sizeof *dirstack);
     dirtop = 1;
     dirstack[0] = "";
 
@@ -1110,7 +1141,11 @@ int site_fetch(struct site *site)
         curdir = ne_concat(site->remote_root, reldir, slash, NULL);
 
         ret = CALL(fetch_list)(session, curdir, need_modtimes, &newfiles);
-        if (ret != SITE_OK) break;
+        if (ret != SITE_OK) {
+            ne_free(curdir);
+            ret = SITE_FAILED;
+            break;
+        }
 
         for (f = newfiles; f; f = f->next) {
             char *relfn;
@@ -1120,11 +1155,17 @@ int site_fetch(struct site *site)
             f->filename = relfn;
 
             if (!file_isexcluded(relfn, site)) {
-                if (f->type == proto_dir && dirtop < DIRSTACKSIZE) {
+                if (f->type == proto_dir) {
+                    if (dirtop == dirmax) {
+                        dirmax += DIRSTACKSIZE;
+                        dirstack = ne_realloc(dirstack,
+                                              dirmax * sizeof *dirstack);
+                    }
                     dirstack[dirtop++] = relfn;
-                } else if (f->type == proto_file 
-                           && site->state_method == state_checksum) {
-                    fetch_checksum_file(f, site, session);
+                }
+                else if (f->type == proto_file && checksums
+                         && !csum_failed) {
+                    csum_failed = fetch_checksum_file(f, site, session);
                 }
             }
 
@@ -1137,29 +1178,69 @@ int site_fetch(struct site *site)
         }
 
         ne_free(curdir);
-    } while (dirtop > 0);
-    
+    } while (dirtop > 0 && !csum_failed);
+
+    ne_free(dirstack);
+
+    /* Without the checksum of every file, the listing is no use. */
+    if (csum_failed)
+        ret = SITE_ERRORS;
+
+    *list = files;
+    return ret;
+}
+
+int site_fetch(struct site *site)
+{
+    int ret, need_modtimes;
+    void *session;
+    struct proto_file *files = NULL;
+
+    ret = proto_init(site, &session);
+    if (ret != SITE_OK) {
+        proto_finish(site, session);
+        return ret;
+    }
+
+    if (CALL(fetch_list) == NULL) {
+        proto_finish(site, session);
+        return SITE_UNSUPPORTED;
+    }
+
+    /* The remote modtimes are needed if timesize is used or in safe
+     * mode: */
+    need_modtimes = site->safemode || site->state_method == state_timesize;
+
+    ret = list_remote_files(site, session, need_modtimes,
+                            site->state_method == state_checksum, &files);
+
     if (ret == SITE_OK) {
         struct proto_file *f, *nextf;
 
         /* Remove existing stored state for the site. */
         site_destroy_stored(site);
 
-        /* And replace it with the fetched state. */
+        /* And replace it with the fetched state, which takes the
+         * filenames. */
         for (f = files; f; f = nextf) {
             if (!file_isexcluded(f->filename, site)) {
                 struct site_file *sf = fetch_add_file(site, f);
                 fe_fetch_found(sf);
             }
+            else {
+                ne_free(f->filename);
+            }
             nextf = f->next;
             ne_free(f);
         }
-    } else {
+    }
+    else {
+        proto_files_free(files);
         ret = SITE_FAILED;
     }
 
     proto_finish(site, session);
-    
+
     return ret;
 }
 
@@ -1170,59 +1251,65 @@ int site_fetch(struct site *site)
  * If we had a generic file_set this would be easy and clean and spot
  * moved files too. We need a generic file_set.
  */
-static int site_verify_compare(struct site *site, 
-			       const struct proto_file *files,
-			       int *numremoved)
+static int site_verify_compare(struct site *site,
+                               const struct proto_file *files,
+                               int *numremoved)
 {
     struct site_file *file;
     const struct proto_file *lfile;
     int numremote = 0;
 
-    /* Clear live state */
+    /* Count the files expected on the server. */
     for_each_file(file, site) {
-	if (file->stored.exists) {
-	    numremote++;
-	}
+        numremote += file->stored.exists;
     }
 
     for (lfile = files; lfile != NULL; lfile = lfile->next) {
-	enum file_diff diff = file_new;
+        enum file_diff diff = file_new;
 
-	numremote--;
-	for_each_file(file, site) {
-	    if (file->stored.exists &&
-		(strcmp(file->stored.filename, lfile->filename) == 0)) {
-		/* Do a mini file_compare job */
-		diff = file_unchanged;
-		if (site->state_method == state_checksum) {
-		    if (memcmp(file->stored.checksum, lfile->checksum, 16))
-			diff = file_changed;
-		} else {
-		    if ((file->stored.size != lfile->size) ||
-			(site->safemode && 
-			 (file->server.time != lfile->modtime))) {
-			diff = file_changed;
-		    }
-		}
-		break;
-	    }
-	}
-	
-	/* If new files were added, adjust the count */
-	if (diff == file_new)
-	    numremote++;
+        if (file_isexcluded(lfile->filename, site))
+            continue;
 
-	fe_verified(lfile->filename, diff);	
+        numremote--;
+        for_each_file(file, site) {
+            if (file->stored.exists
+                && strcmp(file->stored.filename, lfile->filename) == 0) {
+                /* Do a mini file_compare job; only files have
+                 * contents to compare. */
+                diff = file_unchanged;
+                if (lfile->type != proto_file) {
+                    /* nothing to compare */
+                }
+                else if (site->state_method == state_checksum) {
+                    if (memcmp(file->stored.checksum, lfile->checksum, 16))
+                        diff = file_changed;
+                }
+                else {
+                    if (file->stored.size != lfile->size
+                        || (site->safemode
+                            && file->server.time != lfile->modtime)) {
+                        diff = file_changed;
+                    }
+                }
+                break;
+            }
+        }
+
+        /* If new files were added, adjust the count */
+        if (diff == file_new)
+            numremote++;
+
+        fe_verified(lfile->filename, diff);
     }
 
     *numremoved = numremote;
 
     if (numremote != 0) {
-	return SITE_ERRORS;
-    } else {
-	return SITE_OK;
-    }	   
-
+        return SITE_ERRORS;
+    }
+    else {
+        return SITE_OK;
+    }
 }
 
 /* Compares what's on the server with what we THINK is on the server.
@@ -1235,30 +1322,33 @@ int site_verify(struct site *site, int *numremoved)
     int ret;
 
     ret = proto_init(site, &session);
-    if (ret != SITE_OK)
-	return ret;
+    if (ret != SITE_OK) {
+        proto_finish(site, session);
+        return ret;
+    }
 
     if (CALL(fetch_list) == NULL) {
-	return SITE_UNSUPPORTED;
+        proto_finish(site, session);
+        return SITE_UNSUPPORTED;
     }
 
-    ret = CALL(fetch_list)(session, site->remote_root, 1, &files);
-
-#if 0
-    if (site->state_method == state_checksum) {
-	site_fetch_checksum(files, site, session);
-    }
-#endif
+    /* With checksum state, each file must be downloaded to compare
+     * its checksum. */
+    ret = list_remote_files(site, session, 1,
+                            site->state_method == state_checksum, &files);
 
     proto_finish(site, session);
-    
+
     if (ret == SITE_OK) {
-	/* Return whether they matched or not */
-	return site_verify_compare(site, files, numremoved);
-    } else {
-	return SITE_FAILED;
+        /* Return whether they matched or not */
+        ret = site_verify_compare(site, files, numremoved);
+    }
+    else {
+        ret = SITE_FAILED;
     }
 
+    proto_files_free(files);
+    return ret;
 }
 
 /* Destroys the stored state of files in the files list for the given

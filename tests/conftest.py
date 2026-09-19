@@ -146,6 +146,10 @@ def pytest_configure(config):
     config.addinivalue_line(
         "markers", "site_lines(*lines): add the given rcfile lines to "
         "every configuration of a test using the site fixture")
+    config.addinivalue_line(
+        "markers", "default_config: run a test using the site fixture "
+        "only in the default configuration, with the default value of "
+        "each axis, for each protocol")
 
 def pytest_generate_tests(metafunc):
     """Parametrize each test using the site fixture over every
@@ -160,10 +164,14 @@ def pytest_generate_tests(metafunc):
     protocols = marker.args if marker else SERVERS.keys()
     marker = metafunc.definition.get_closest_marker("site_lines")
     extra_lines = marker.args if marker else ()
-    configs = [config for protocol in protocols
-               for config in siteconfig.site_configs(protocol, axis_names,
-                                                     extra_lines,
-                                                     protocol_axes)]
+    configs = []
+    for protocol in protocols:
+        protocol_configs = list(siteconfig.site_configs(
+            protocol, axis_names, extra_lines, protocol_axes))
+        if metafunc.definition.get_closest_marker("default_config"):
+            # Only the first, with the default value of each axis.
+            protocol_configs = protocol_configs[:1]
+        configs += protocol_configs
     params = []
     for config in configs:
         reason = siteconfig.known_bug(metafunc.function.__name__, config)

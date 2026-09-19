@@ -69,12 +69,14 @@ Example:
     }
 
 When modifying an existing function, bring the whole function into
-this style; don't reformat untouched functions or whole files as part
-of an unrelated change.
+this style, including using `ne_free()` rather than `free()`; don't
+reformat untouched functions or whole files as part of an unrelated
+change.
 
 Prefer neon's string and memory helpers (`ne_malloc`, `ne_strdup`,
 `ne_concat`, `ne_buffer_*`, `ne_snprintf`, `ne_strnzcpy`) over manual
-length arithmetic and fixed-size buffers.  sitecopy supports neon 0.29
+length arithmetic and fixed-size buffers, and free memory with
+`ne_free()`, not `free()`.  sitecopy supports neon 0.29
 and later (`NE_MINIMUM_VERSION(0, 29)` in `configure.ac`), so only use
 APIs present in 0.29; e.g. `ne_strhash()` and `ne_strparam()` need
 0.32 (see `neon/NEWS`).
@@ -170,6 +172,11 @@ Test layout:
   so `-k` can select configurations.  Likewise `tests/ftps_tests.py`
   holds the tests run against each server requiring FTP over TLS.
 - `test_basic.py` — option handling and local state, no server needed.
+- `test_regression.py` — regression tests for specific bugs, run once
+  against vsftpd in its default configuration (the `default_config`
+  marker) rather than across every combination of rcfile options.
+  Add a test here for a bug which doesn't depend on the options being
+  varied; unfixed bugs are strict xfails.
 - `test_ftp.py` — FTP against a scripted in-process FTP server.
 - `test_false_success.py` — SFTP failure handling, using a wrapper
   script in place of ssh/sftp; no network access needed.
@@ -233,6 +240,11 @@ Rules:
 - For a small, single-file change the summary line may itself be the
   entry, e.g. `* NEWS: Update.` or
   `* src/lsparser.c (ls_init): Initialize curdir to empty string.`
+- For a change with no functional effect (a simplification, or
+  converting code to the code style), don't add an explanatory
+  paragraph; describe it in the entry and end it with `(no functional
+  change).`, e.g.
+  `* src/sites.c (update_create_directories): Simplify (no functional change).`
 - Reference bugs as described in "Referencing issues" below.
 - Commits written with an AI coding agent end with a single
   `Co-Authored-By:` trailer naming the model.  Never add any other
