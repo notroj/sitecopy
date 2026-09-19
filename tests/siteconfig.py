@@ -23,11 +23,14 @@ class Axis:
     def applies_to(self, protocol):
         return self.protocols is None or protocol in self.protocols
 
+# The protocols of the servers using FTP.
+FTP_PROTOCOLS = {"ftp", "ftps", "pureftpd", "pureftpds"}
+
 AXES = {
     "ftp": Axis({
         "pasv": (),
         "usecwd": ("ftp usecwd",),
-    }, protocols={"ftp", "ftps"}, always=True),
+    }, protocols=FTP_PROTOCOLS, always=True),
     "state": Axis({
         "timesize": (),
         "checksum": ("state checksum",),
@@ -83,8 +86,8 @@ CONFLICTS = [
 
 # rcfile lines which are only valid for some protocols.
 PROTOCOL_ONLY = {
-    "permissions all": {"ftp", "ftps"},
-    "permissions dir": {"ftp", "ftps"},
+    "permissions all": FTP_PROTOCOLS,
+    "permissions dir": FTP_PROTOCOLS,
 }
 
 # Known bugs affecting a protocol with a given rcfile line: each is
