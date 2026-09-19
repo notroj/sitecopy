@@ -154,9 +154,21 @@ def pytest_configure(config):
         "markers", "site_lines(*lines): add the given rcfile lines to "
         "every configuration of a test using the site fixture")
     config.addinivalue_line(
+        "markers", "full_only: run a test only with --full "
+        "(make check-full)")
+    config.addinivalue_line(
         "markers", "default_config: run a test using the site fixture "
         "only in the default configuration, with the default value of "
         "each axis, for each protocol")
+
+def pytest_collection_modifyitems(config, items):
+    """Skip tests marked full_only unless --full is given."""
+    if config.getoption("full"):
+        return
+    skip = pytest.mark.skip(reason="full testing only (--full, make check-full)")
+    for item in items:
+        if item.get_closest_marker("full_only"):
+            item.add_marker(skip)
 
 def pytest_generate_tests(metafunc):
     """Parametrize each test using the site fixture over every
