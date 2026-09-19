@@ -90,22 +90,18 @@ static int read_sftp(sftp_session *sess)
 
 static void exec_sftp(sftp_session *sess)
 {
-    size_t len;
-    char *username;
+    const char *username = sess->site->server.username;
+    char *dest;
 
-    username = sess->site->server.username;
-    len = ne_snprintf(sess->buf, BUFSIZ, "%s%s%s",
-                      (username != NULL ? username : ""),
-                      (username != NULL ? "@" : ""),
-                      sess->site->server.hostname);
-    if (len + 1 >= BUFSIZ) {
-        NE_DEBUG(DEBUG_SFTP, "sftp: user/host name too long.\n");
-        return;
-    }
+    if (username)
+        dest = ne_concat(username, "@", sess->site->server.hostname, NULL);
+    else
+        dest = ne_strdup(sess->site->server.hostname);
 
-    execlp(sess->sftp_cmd, sess->sftp_cmd, sess->buf, NULL);
+    execlp(sess->sftp_cmd, sess->sftp_cmd, dest, NULL);
     NE_DEBUG(DEBUG_SFTP, "sftp exec: %s %s: %s\n",
-             sess->sftp_cmd, sess->buf, strerror(errno));
+             sess->sftp_cmd, dest, strerror(errno));
+    ne_free(dest);
 }
 
 static int sftp_connect(sftp_session *sess)
