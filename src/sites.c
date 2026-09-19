@@ -1075,28 +1075,21 @@ static int fetch_checksum_file(struct proto_file *file,
 /* Updates the remote file list... site_fetch_callback is called for
  * every remote file found.
  */
-int site_fetch(struct site *site)
+/* Lists the remote site, walking its directories, and places the
+ * files found in *list, with filenames relative to the site root.
+ * Excluded directories are not listed.  If 'checksums' is non-zero,
+ * each file which isn't excluded is downloaded to calculate its
+ * checksum.  Returns SITE_OK on success, SITE_FAILED if a directory
+ * could not be listed, or SITE_ERRORS if a file could not be
+ * checksummed. */
+static int list_remote_files(struct site *site, void *session,
+                             int need_modtimes, int checksums,
+                             struct proto_file **list)
 {
-    int ret, need_modtimes, csum_failed = 0;
-    void *session;
     const char **dirstack;
     size_t dirtop, dirmax = DIRSTACKSIZE;
     struct proto_file *files = NULL;
-
-    ret = proto_init(site, &session);
-    if (ret != SITE_OK) {
-        proto_finish(site, session);
-        return ret;
-    }
-
-    if (CALL(fetch_list) == NULL) {
-        proto_finish(site, session);
-        return SITE_UNSUPPORTED;
-    }
-
-    /* The remote modtimes are needed if timesize is used or in safe
-     * mode: */
-    need_modtimes = site->safemode || site->state_method == state_timesize;
+    int ret = SITE_OK, csum_failed = 0;
 
     /* The stack of directories still to list, which grows as
      * needed. */
@@ -1113,8 +1106,11 @@ int site_fetch(struct site *site)
         curdir = ne_concat(site->remote_root, reldir, slash, NULL);
 
         ret = CALL(fetch_list)(session, curdir, need_modtimes, &newfiles);
-        if (ret != SITE_OK)
+        if (ret != SITE_OK) {
+            ne_free(curdir);
+            ret = SITE_FAILED;
             break;
+        }
 
         for (f = newfiles; f; f = f->next) {
             char *relfn;
@@ -1132,8 +1128,7 @@ int site_fetch(struct site *site)
                     }
                     dirstack[dirtop++] = relfn;
                 }
-                else if (f->type == proto_file
-                         && site->state_method == state_checksum
+                else if (f->type == proto_file && checksums
                          && !csum_failed) {
                     csum_failed = fetch_checksum_file(f, site, session);
                 }
@@ -1152,10 +1147,37 @@ int site_fetch(struct site *site)
 
     ne_free(dirstack);
 
-    /* Without the checksum of every file, the fetched state would be
-     * wrong. */
+    /* Without the checksum of every file, the listing is no use. */
     if (csum_failed)
         ret = SITE_ERRORS;
+
+    *list = files;
+    return ret;
+}
+
+int site_fetch(struct site *site)
+{
+    int ret, need_modtimes;
+    void *session;
+    struct proto_file *files = NULL;
+
+    ret = proto_init(site, &session);
+    if (ret != SITE_OK) {
+        proto_finish(site, session);
+        return ret;
+    }
+
+    if (CALL(fetch_list) == NULL) {
+        proto_finish(site, session);
+        return SITE_UNSUPPORTED;
+    }
+
+    /* The remote modtimes are needed if timesize is used or in safe
+     * mode: */
+    need_modtimes = site->safemode || site->state_method == state_timesize;
+
+    ret = list_remote_files(site, session, need_modtimes,
+                            site->state_method == state_checksum, &files);
 
     if (ret == SITE_OK) {
         struct proto_file *f, *nextf;
@@ -1189,59 +1211,65 @@ int site_fetch(struct site *site)
  * If we had a generic file_set this would be easy and clean and spot
  * moved files too. We need a generic file_set.
  */
-static int site_verify_compare(struct site *site, 
-			       const struct proto_file *files,
-			       int *numremoved)
+static int site_verify_compare(struct site *site,
+                               const struct proto_file *files,
+                               int *numremoved)
 {
     struct site_file *file;
     const struct proto_file *lfile;
     int numremote = 0;
 
-    /* Clear live state */
+    /* Count the files expected on the server. */
     for_each_file(file, site) {
-	if (file->stored.exists) {
-	    numremote++;
-	}
+        numremote += file->stored.exists;
     }
 
     for (lfile = files; lfile != NULL; lfile = lfile->next) {
-	enum file_diff diff = file_new;
+        enum file_diff diff = file_new;
 
-	numremote--;
-	for_each_file(file, site) {
-	    if (file->stored.exists &&
-		(strcmp(file->stored.filename, lfile->filename) == 0)) {
-		/* Do a mini file_compare job */
-		diff = file_unchanged;
-		if (site->state_method == state_checksum) {
-		    if (memcmp(file->stored.checksum, lfile->checksum, 16))
-			diff = file_changed;
-		} else {
-		    if ((file->stored.size != lfile->size) ||
-			(site->safemode && 
-			 (file->server.time != lfile->modtime))) {
-			diff = file_changed;
-		    }
-		}
-		break;
-	    }
-	}
-	
-	/* If new files were added, adjust the count */
-	if (diff == file_new)
-	    numremote++;
+        if (file_isexcluded(lfile->filename, site))
+            continue;
 
-	fe_verified(lfile->filename, diff);	
+        numremote--;
+        for_each_file(file, site) {
+            if (file->stored.exists
+                && strcmp(file->stored.filename, lfile->filename) == 0) {
+                /* Do a mini file_compare job; only files have
+                 * contents to compare. */
+                diff = file_unchanged;
+                if (lfile->type != proto_file) {
+                    /* nothing to compare */
+                }
+                else if (site->state_method == state_checksum) {
+                    if (memcmp(file->stored.checksum, lfile->checksum, 16))
+                        diff = file_changed;
+                }
+                else {
+                    if (file->stored.size != lfile->size
+                        || (site->safemode
+                            && file->server.time != lfile->modtime)) {
+                        diff = file_changed;
+                    }
+                }
+                break;
+            }
+        }
+
+        /* If new files were added, adjust the count */
+        if (diff == file_new)
+            numremote++;
+
+        fe_verified(lfile->filename, diff);
     }
 
     *numremoved = numremote;
 
     if (numremote != 0) {
-	return SITE_ERRORS;
-    } else {
-	return SITE_OK;
-    }	   
-
+        return SITE_ERRORS;
+    }
+    else {
+        return SITE_OK;
+    }
 }
 
 /* Compares what's on the server with what we THINK is on the server.
@@ -1254,30 +1282,27 @@ int site_verify(struct site *site, int *numremoved)
     int ret;
 
     ret = proto_init(site, &session);
-    if (ret != SITE_OK)
-	return ret;
+    if (ret != SITE_OK) {
+        proto_finish(site, session);
+        return ret;
+    }
 
     if (CALL(fetch_list) == NULL) {
-	return SITE_UNSUPPORTED;
+        proto_finish(site, session);
+        return SITE_UNSUPPORTED;
     }
 
-    ret = CALL(fetch_list)(session, site->remote_root, 1, &files);
-
-#if 0
-    if (site->state_method == state_checksum) {
-	site_fetch_checksum(files, site, session);
-    }
-#endif
+    ret = list_remote_files(site, session, 1, 0, &files);
 
     proto_finish(site, session);
-    
-    if (ret == SITE_OK) {
-	/* Return whether they matched or not */
-	return site_verify_compare(site, files, numremoved);
-    } else {
-	return SITE_FAILED;
-    }
 
+    if (ret == SITE_OK) {
+        /* Return whether they matched or not */
+        return site_verify_compare(site, files, numremoved);
+    }
+    else {
+        return SITE_FAILED;
+    }
 }
 
 /* Destroys the stored state of files in the files list for the given
