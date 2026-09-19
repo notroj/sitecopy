@@ -4,7 +4,7 @@ import os
 import pytest
 
 from common import *
-from conftest import make_sitecopy_env
+from conftest import make_sitecopy_env, sitecopy_features
 
 def test_options(sitecopy_env):
     res = run_sitecopy(sitecopy_env, ["--version"])
@@ -86,6 +86,17 @@ def test_site_urls(sitecopy_env):
     assert "Remote directory: /" in res.stdout
     assert "Port: 21" in res.stdout
     assert "Server: example.com" in res.stdout
+
+    _write_rcfile_url(sitecopy_env, "ftps://example.com/site/")
+    res = run_sitecopy(sitecopy_env, ["--view", "example.com"])
+    if "FTPS" in sitecopy_features():
+        assert res.returncode == 0, res.stdout + res.stderr
+        assert "Protocol: FTP" in res.stdout
+        assert "FTP over TLS will be used" in res.stdout
+        assert "Remote directory: /site/" in res.stdout
+        assert "Server: example.com" in res.stdout
+    else:
+        assert "FTP over TLS requires" in res.stdout
 
     _write_rcfile_url(sitecopy_env, "sftp://example.com/~/foo/bar")
     res = run_sitecopy(sitecopy_env, ["--view", "example.com"])

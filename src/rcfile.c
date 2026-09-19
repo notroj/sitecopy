@@ -110,6 +110,10 @@ static int parse_site_name(struct site *site, const char *name)
     else if (ne_strcasecmp(uri.scheme, "ftp") == 0) {
         site->protocol = siteproto_ftp;
     }
+    else if (ne_strcasecmp(uri.scheme, "ftps") == 0) {
+        site->protocol = siteproto_ftp;
+        site->ftp_secure = true;
+    }
     else if (ne_strcasecmp(uri.scheme, "sftp") == 0) {
         site->protocol = siteproto_sftp;
     }

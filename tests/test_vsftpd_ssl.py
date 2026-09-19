@@ -83,3 +83,25 @@ def test_server_without_tls(tmp_path, containers):
                 if "FTP command:" in line]
     assert not any('"USER ' in line or '"PASS ' in line
                    for line in commands), commands
+
+def test_ftps_url(site):
+    # A site named by an ftps:// URL uses FTP over TLS, as with
+    # "ftp secure".
+    server = SERVERS["ftps"]
+    rcfile = site["rcfile"]
+    rcfile.write_text("""
+site ftps://localhost:%d%s/
+  local %s
+  username sitecopy
+  password sitecopy
+""" % (server.port, server.root, site["local"]))
+    certfile = site["store"] / "testsite.crt"
+    certfile.rename(site["store"] / "localhost.crt")
+
+    res = run_sitecopy(site, ["--initialize", "localhost"])
+    assert res.returncode == 0, res.stdout + res.stderr
+    write_tree(site["local"], {"a.txt": "A\n", "dir/": None,
+                               "dir/b.txt": "B\n"})
+    res = run_sitecopy(site, ["--update", "localhost"])
+    assert res.returncode == 0, res.stdout + res.stderr
+    assert_trees_match(site)
