@@ -477,7 +477,7 @@ static int update_files(struct site *site, void *session)
             /* fall through */
         case file_new: /* File is new, upload it */
             if (!fe_can_update(current)) continue;
-            if ((current->diff == file_changed) && site->nooverwrite) {
+            if (current->diff == file_changed && site->nooverwrite) {
                 /* Must delete remote file before uploading new copy.
                  * FIXME: Icky hack to convince the FE we are about to
                  * delete the file */
@@ -1245,8 +1245,8 @@ static int site_verify_compare(struct site *site,
 
         numremote--;
         for_each_file(file, site) {
-            if (file->stored.exists &&
-                (strcmp(file->stored.filename, lfile->filename) == 0)) {
+            if (file->stored.exists
+                && strcmp(file->stored.filename, lfile->filename) == 0) {
                 /* Do a mini file_compare job; only files have
                  * contents to compare. */
                 diff = file_unchanged;
@@ -1258,9 +1258,9 @@ static int site_verify_compare(struct site *site,
                         diff = file_changed;
                 }
                 else {
-                    if ((file->stored.size != lfile->size) ||
-                        (site->safemode &&
-                         (file->server.time != lfile->modtime))) {
+                    if (file->stored.size != lfile->size
+                        || (site->safemode
+                            && file->server.time != lfile->modtime)) {
                         diff = file_changed;
                     }
                 }
