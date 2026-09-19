@@ -37,21 +37,33 @@ To run a subset directly (after `make`), from the top-level directory:
 
 Test layout:
 
-- `tests/conftest.py` — shared fixtures: `sitecopy_env` and
-  `sitecopy_ftp_env` (a temporary rcfile, local directory and storage
-  directory for a WebDAV or FTP site named `testsite`), and
-  `httpd_container` and `vsftpd_container` (run the WebDAV server on
-  port 8080, and the FTP server on port 2121 with passive ports
-  21100-21109).
+- `tests/conftest.py` — shared fixtures: `sitecopy_env` (a temporary
+  rcfile, local directory and storage directory for a WebDAV site named
+  `testsite`, with no server), and `site` (the same, configured for a
+  server running in a container, whose site directory is emptied
+  before each test).  `SERVERS` describes the servers: the WebDAV
+  server on port 8080, and the FTP server on port 2121 with passive
+  ports 21100-21109.  Each container is started once per session.
+- `tests/siteconfig.py` — rcfile option axes (`AXES`) for the server
+  tests, e.g. `state` (timesize/checksum) and `moves` (none,
+  `checkmoved`, `checkmoved renames`), and `REQUIRES`, listing
+  options only valid with another.  A test marked
+  `@pytest.mark.axes("state", "moves")` runs once per valid
+  combination of those axes; axes marked `always`, such as `ftp`
+  (with and without `ftp usecwd`), apply to every test for their
+  protocol.  Add new rcfile variations as axes or axis values here.
 - `tests/common.py` — helpers such as `run_sitecopy()`,
-  `assert_no_update()`, `assert_update_success()` and
+  `update_and_check()` (update, then compare the remote tree with the
+  local tree from inside the container), `assert_moved()` and
   `check_update_cycle()`.
+- `tests/server_tests.py` — the tests run against each server.  It is
+  not collected directly: `test_dav.py` and `test_vsftpd.py` import
+  it and select their server with `pytestmark =
+  pytest.mark.protocol(...)`, so the servers can be tested
+  separately, e.g. `pytest-3 tests/test_dav.py`.  Test IDs name the
+  protocol and configuration, e.g. `[ftp-usecwd-checksum-renames]`,
+  so `-k` can select configurations.
 - `test_basic.py` — option handling and local state, no server needed.
-- `test_dav.py` — WebDAV against the httpd container (needs podman).
-- `test_vsftpd.py` — FTP against the vsftpd container (needs podman).
-  The `sitecopy_ftp_env` fixture is parametrized over `FTP_MODES` in
-  `conftest.py`, so each FTP test runs once per mode (e.g. with and
-  without `ftp usecwd`); add new rcfile variations there.
 - `test_ftp.py` — FTP against a scripted in-process FTP server.
 - `test_false_success.py` — SFTP failure handling, using a wrapper
   script in place of ssh/sftp; no network access needed.

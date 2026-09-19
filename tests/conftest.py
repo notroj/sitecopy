@@ -4,6 +4,8 @@ import socket
 import subprocess
 import time
 
+import siteconfig
+
 def make_sitecopy_env(tmp_path, site_config):
     """Create the local and storage directories and an rcfile defining
     the site 'testsite' with the given configuration lines."""
@@ -36,22 +38,61 @@ def sitecopy_env(tmp_path):
   protocol dav
 """)
 
-# Modes in which the FTP tests are run: each maps a test ID to extra
-# rcfile lines for the site.
-FTP_MODES = {
-    "default": "",
-    "usecwd": "  ftp usecwd\n",
-}
+class Server:
+    """A server run in a container for the tests of one protocol."""
 
-@pytest.fixture(params=FTP_MODES.values(), ids=FTP_MODES.keys())
-def sitecopy_ftp_env(tmp_path, request):
-    return make_sitecopy_env(tmp_path, """\
+    def __init__(self, image, ports, port, root, rcfile):
+        self.image = image
+        # Port specs published from the container.
+        self.ports = ports
+        # Port on which the server accepts connections.
+        self.port = port
+        # Directory holding the site on the server.
+        self.root = root
+        # rcfile lines configuring the site for this server.
+        self.rcfile = rcfile
+
+SERVERS = {
+    "dav": Server("sitecopy-test-httpd", ["8080:80"], 8080,
+                  "/var/www/html/dav", """\
+  port 8080
+  remote /dav/
+  protocol dav
+"""),
+    "ftp": Server("sitecopy-test-vsftpd",
+                  ["2121:21", "21100-21109:21100-21109"], 2121,
+                  "/home/sitecopy/site", """\
   port 2121
   remote /home/sitecopy/site/
   protocol ftp
   username sitecopy
   password sitecopy
-""" + request.param)
+"""),
+}
+
+def pytest_configure(config):
+    config.addinivalue_line(
+        "markers", "axes(*names): run a test using the site fixture once "
+        "for each valid combination of the named rcfile option axes "
+        "(see siteconfig.py)")
+    config.addinivalue_line(
+        "markers", "protocol(name): run tests using the site fixture "
+        "only against the server for the given protocol")
+
+def pytest_generate_tests(metafunc):
+    """Parametrize each test using the site fixture over every
+    combination of the rcfile option axes it names, for the server
+    named by its protocol marker (or every server, if none)."""
+    if "site_config" not in metafunc.fixturenames:
+        return
+    marker = metafunc.definition.get_closest_marker("axes")
+    axis_names = marker.args if marker else ()
+    marker = metafunc.definition.get_closest_marker("protocol")
+    protocols = marker.args if marker else SERVERS.keys()
+    configs = [config for protocol in protocols
+               for config in siteconfig.site_configs(protocol, axis_names)]
+    metafunc.parametrize("site_config", configs,
+                         ids=[config.id for config in configs])
 
 def run_container(image, ports, wait_port):
     """Run the given container image detached, publishing the given
@@ -78,19 +119,42 @@ def run_container(image, ports, wait_port):
 
     return cid
 
+def podman_exec(cid, script):
+    """Run the shell script inside the given container, returning the
+    CompletedProcess."""
+    return subprocess.run(["podman", "exec", cid, "sh", "-c", script],
+                          capture_output=True, text=True)
+
+@pytest.fixture(scope="session")
+def containers():
+    """Returns a function which gives the container ID of the server
+    for a protocol, starting the container on first use.  Containers
+    are shared by all the tests in the session."""
+    running = {}
+
+    def get(protocol):
+        if protocol not in running:
+            server = SERVERS[protocol]
+            running[protocol] = run_container(server.image, server.ports,
+                                              server.port)
+        return running[protocol]
+
+    yield get
+
+    for cid in running.values():
+        subprocess.run(["podman", "kill", cid], capture_output=True)
+
 @pytest.fixture
-def httpd_container(tmp_path):
-    cid = run_container("sitecopy-test-httpd", ["8080:80"], 8080)
+def site(tmp_path, site_config, containers):
+    """A site configured with site_config, against an empty directory
+    on the server for its protocol.  A dict with the keys of
+    make_sitecopy_env plus 'config', 'cid' and 'root'."""
+    server = SERVERS[site_config.protocol]
+    cid = containers(site_config.protocol)
 
-    yield {"port": 8080, "cid": cid, "root": "/var/www/html/dav"}
+    run = podman_exec(cid, "find '%s' -mindepth 1 -delete" % server.root)
+    assert run.returncode == 0, run.stderr
 
-    subprocess.run(["podman", "kill", cid], capture_output=True)
-
-@pytest.fixture
-def vsftpd_container(tmp_path):
-    cid = run_container("sitecopy-test-vsftpd",
-                        ["2121:21", "21100-21109:21100-21109"], 2121)
-
-    yield {"port": 2121, "cid": cid, "root": "/home/sitecopy/site"}
-
-    subprocess.run(["podman", "kill", cid], capture_output=True)
+    env = make_sitecopy_env(tmp_path, server.rcfile + site_config.rcfile())
+    env.update(config=site_config, cid=cid, root=server.root)
+    return env
