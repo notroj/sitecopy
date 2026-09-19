@@ -133,21 +133,39 @@ static int parse_site_name(struct site *site, const char *name)
     return 0;
 }
 
+/* Read a line of any length from FP into BUF, replacing its
+ * contents; the newline is included if present.  Returns non-zero at
+ * end of file. */
+static int read_line(FILE *fp, ne_buffer *buf)
+{
+    char chunk[BUFSIZ];
+
+    ne_buffer_clear(buf);
+
+    while (fgets(chunk, sizeof chunk, fp) != NULL) {
+        ne_buffer_zappend(buf, chunk);
+        if (strchr(chunk, '\n') != NULL)
+            break;
+    }
+
+    return ne_buffer_size(buf) == 0;
+}
+
 /* rcfile_read will read the rcfile and fill given sites list.
  * This returns 0 on success, RC_OPENFILE if the rcfile could not
  * be read, or RC_CORRUPT if the rcfile was corrupt.
  * If it is corrupt, rcfile_linenum and rcfile_line are set to the
  * the corrupt line.
  */
-#define LINESIZE 128
 int rcfile_read(struct site **sites) 
 {
     FILE *fp;
     int state, last_state=8, ret=0;
     int alpha, hash;
-    char buf[LINESIZE];
+    ne_buffer *line;
     char *ch;
-    char *ptr, key[LINESIZE], val[LINESIZE], val2[LINESIZE];
+    char *ptr, *key = NULL, *val = NULL, *val2 = NULL;
+    size_t fieldsize = 0;
     /* Holders for the site info, and default site settings */
     struct site *this_site, *last_site, default_site = {0};
     
@@ -167,20 +185,29 @@ int rcfile_read(struct site **sites)
     last_site = this_site = NULL;
     rcfile_linenum = 0;
     rcfile_err = NULL;
+    line = ne_buffer_create();
 
-    while ((ret==0) && (fgets(buf, sizeof(buf), fp) != NULL)) {
-	rcfile_linenum++;
-	/* Put the line without the LF into the error buffer */
-	if (rcfile_err != NULL) free(rcfile_err);
-	rcfile_err = ne_strdup(buf);
-	ptr = strchr(rcfile_err, '\n');
-	if (ptr != NULL) *ptr = '\0';
-	state = 0;
-	ptr = key;
-	memset(key, 0, LINESIZE);
-	memset(val, 0, LINESIZE);
-	memset(val2, 0, LINESIZE);
-	for (ch=buf; *ch!='\0'; ch++) {
+    while (ret == 0 && read_line(fp, line) == 0) {
+        rcfile_linenum++;
+        /* Put the line without the LF into the error buffer */
+        if (rcfile_err != NULL) free(rcfile_err);
+        rcfile_err = ne_strdup(line->data);
+        ptr = strchr(rcfile_err, '\n');
+        if (ptr != NULL) *ptr = '\0';
+        /* Each field is at most as long as the line, plus room for
+         * a trailing slash appended to a directory name. */
+        if (line->used + 1 > fieldsize) {
+            fieldsize = line->used + 1;
+            key = ne_realloc(key, fieldsize);
+            val = ne_realloc(val, fieldsize);
+            val2 = ne_realloc(val2, fieldsize);
+        }
+        state = 0;
+        ptr = key;
+        memset(key, 0, fieldsize);
+        memset(val, 0, fieldsize);
+        memset(val2, 0, fieldsize);
+        for (ch = line->data; *ch != '\0'; ch++) {
 	    alpha = !isspace((unsigned)*ch); /* well, alphaish */
 	    hash = (*ch == '#');
 	    switch (state) {
@@ -515,9 +542,12 @@ int rcfile_read(struct site **sites)
     }
 
     fclose(fp);
+    ne_buffer_destroy(line);
+    ne_free(key);
+    ne_free(val);
+    ne_free(val2);
     return ret;
 }
-#undef LINESIZE
 
 const char *rc_get_netrc_password(const char *server, const char *username) {
     netrc_entry *found;
