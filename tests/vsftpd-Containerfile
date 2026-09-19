@@ -1,0 +1,6 @@
+FROM quay.io/fedora/fedora
+RUN dnf -y install vsftpd && dnf -y clean all
+COPY vsftpd.conf /etc/vsftpd/vsftpd.conf
+RUN useradd -m sitecopy && echo sitecopy:sitecopy | chpasswd
+RUN mkdir /home/sitecopy/site && chown sitecopy:sitecopy /home/sitecopy/site
+ENTRYPOINT ["/usr/sbin/vsftpd", "/etc/vsftpd/vsftpd.conf"]
