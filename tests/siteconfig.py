@@ -136,16 +136,38 @@ def is_valid(protocol, lines):
             and all(protocol in PROTOCOL_ONLY[line]
                     for line in lines if line in PROTOCOL_ONLY))
 
+# The axes whose options change how sitecopy uses the FTP protocol:
+# the commands sent, or the data connections opened.  The other axes
+# change only local state, or which files are sent.
+PROTOCOL_AXES = {"ftp", "overwrite", "safe", "tempupload", "permissions"}
+
+# The rcfile lines of the values of PROTOCOL_AXES.
+PROTOCOL_LINES = {line for name in PROTOCOL_AXES
+                  for lines in AXES[name].values.values()
+                  for line in lines}
+
+# Protocols tested only across PROTOCOL_AXES, where varying the other
+# options would repeat tests of sitecopy's local behaviour: the FTP
+# over TLS servers.
+REDUCED_PROTOCOLS = {"ftps", "pureftpds"}
+
 def site_configs(protocol, axis_names, extra_lines=()):
     """Yield each valid SiteConfig for the given protocol, combining
     every value of each named axis which applies to the protocol,
-    plus the axes which always apply, plus the given extra lines."""
-    names = [name for name, axis in AXES.items()
-             if (axis.always or name in axis_names)
-             and axis.applies_to(protocol)]
+    plus the axes which always apply, plus the given extra lines.
+    For a protocol in REDUCED_PROTOCOLS, only PROTOCOL_AXES are
+    combined, the other axes taking their default value, and nothing
+    is yielded if the extra lines aren't all in PROTOCOL_LINES."""
     unknown = set(axis_names) - set(AXES)
     if unknown:
         raise ValueError("unknown axes: %s" % ", ".join(sorted(unknown)))
+    if protocol in REDUCED_PROTOCOLS:
+        if not set(extra_lines) <= PROTOCOL_LINES:
+            return
+        axis_names = [name for name in axis_names if name in PROTOCOL_AXES]
+    names = [name for name, axis in AXES.items()
+             if (axis.always or name in axis_names)
+             and axis.applies_to(protocol)]
 
     for combo in itertools.product(*(AXES[name].values.items()
                                      for name in names)):
