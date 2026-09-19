@@ -1079,25 +1079,28 @@ int site_fetch(struct site *site)
 {
     int ret, need_modtimes;
     void *session;
-    const char *dirstack[DIRSTACKSIZE];
-    size_t dirtop;
+    const char **dirstack;
+    size_t dirtop, dirmax = DIRSTACKSIZE;
     struct proto_file *files = NULL;
 
     ret = proto_init(site, &session);
     if (ret != SITE_OK) {
-	proto_finish(site, session);
-	return ret;
+        proto_finish(site, session);
+        return ret;
     }
 
     if (CALL(fetch_list) == NULL) {
-	proto_finish(site, session);
-	return SITE_UNSUPPORTED;
+        proto_finish(site, session);
+        return SITE_UNSUPPORTED;
     }
 
     /* The remote modtimes are needed if timesize is used or in safe
      * mode: */
     need_modtimes = site->safemode || site->state_method == state_timesize;
 
+    /* The stack of directories still to list, which grows as
+     * needed. */
+    dirstack = ne_malloc(dirmax * sizeof *dirstack);
     dirtop = 1;
     dirstack[0] = "";
 
@@ -1110,7 +1113,8 @@ int site_fetch(struct site *site)
         curdir = ne_concat(site->remote_root, reldir, slash, NULL);
 
         ret = CALL(fetch_list)(session, curdir, need_modtimes, &newfiles);
-        if (ret != SITE_OK) break;
+        if (ret != SITE_OK)
+            break;
 
         for (f = newfiles; f; f = f->next) {
             char *relfn;
@@ -1120,10 +1124,16 @@ int site_fetch(struct site *site)
             f->filename = relfn;
 
             if (!file_isexcluded(relfn, site)) {
-                if (f->type == proto_dir && dirtop < DIRSTACKSIZE) {
+                if (f->type == proto_dir) {
+                    if (dirtop == dirmax) {
+                        dirmax += DIRSTACKSIZE;
+                        dirstack = ne_realloc(dirstack,
+                                              dirmax * sizeof *dirstack);
+                    }
                     dirstack[dirtop++] = relfn;
-                } else if (f->type == proto_file 
-                           && site->state_method == state_checksum) {
+                }
+                else if (f->type == proto_file
+                         && site->state_method == state_checksum) {
                     fetch_checksum_file(f, site, session);
                 }
             }
@@ -1138,7 +1148,9 @@ int site_fetch(struct site *site)
 
         ne_free(curdir);
     } while (dirtop > 0);
-    
+
+    ne_free(dirstack);
+
     if (ret == SITE_OK) {
         struct proto_file *f, *nextf;
 
@@ -1154,12 +1166,13 @@ int site_fetch(struct site *site)
             nextf = f->next;
             ne_free(f);
         }
-    } else {
+    }
+    else {
         ret = SITE_FAILED;
     }
 
     proto_finish(site, session);
-    
+
     return ret;
 }
 
