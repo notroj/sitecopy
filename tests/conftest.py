@@ -36,15 +36,22 @@ def sitecopy_env(tmp_path):
   protocol dav
 """)
 
-@pytest.fixture
-def sitecopy_ftp_env(tmp_path):
+# Modes in which the FTP tests are run: each maps a test ID to extra
+# rcfile lines for the site.
+FTP_MODES = {
+    "default": "",
+    "usecwd": "  ftp usecwd\n",
+}
+
+@pytest.fixture(params=FTP_MODES.values(), ids=FTP_MODES.keys())
+def sitecopy_ftp_env(tmp_path, request):
     return make_sitecopy_env(tmp_path, """\
   port 2121
   remote /home/sitecopy/site/
   protocol ftp
   username sitecopy
   password sitecopy
-""")
+""" + request.param)
 
 def run_container(image, ports, wait_port):
     """Run the given container image detached, publishing the given
