@@ -36,9 +36,6 @@
 #include <fcntl.h>
 #include <stdio.h>
 #include <time.h>
-#ifdef HAVE_LIMITS_H
-#include <limits.h> 	/* for PATH_MAX */
-#endif
 #ifdef HAVE_STRING_H
 #include <string.h>
 #endif
@@ -100,12 +97,10 @@ struct ftp_session_s {
         rfc2428_ok, /* RFC2428 is supported */
         rfc2428_bad  /* RFC2428 is not supported */
     } rfc2428;
-	
-#ifndef PATH_MAX
-#define PATH_MAX 2048
-#endif
-    /* Stores the current working dir on the remote server */
-    char cwd[PATH_MAX];
+
+    /* The current working dir on the remote server, or NULL if
+     * unknown. */
+    char *cwd;
 
     /* time from MDTM response... bit crap having this here. */
     time_t get_modtime;
@@ -852,30 +847,32 @@ static int set_mode(ftp_session *sess, enum tran_mode mode)
  * 5, 7 Apr 2002, Volker Kuhlmann <VolkerKuhlmann@GMX.de> */
 static int maybe_chdir(ftp_session *sess, const char **remotefile)
 {
-    int ret;
     const char *slash, *fn = *remotefile;
-    char dir[PATH_MAX];
+    char *dir;
+    int ret = FTP_OK;
 
-    if (!sess->use_cwd || fn[0] != '/' || strlen(fn) > PATH_MAX)
+    if (!sess->use_cwd || fn[0] != '/')
         return FTP_OK;
 
     slash = strrchr(fn, '/'); /* can't be NULL since fn[0] == '/'. */
     *remotefile = slash + 1;
 
-    ne_strnzcpy(dir, fn, 1 + slash - fn);
+    dir = ne_strndup(fn, slash - fn);
 
-    if (strcmp(dir, sess->cwd)) {
+    if (sess->cwd == NULL || strcmp(dir, sess->cwd) != 0) {
         ret = execute(sess, "CWD", dir);
         if (ret == FTP_OK) {
             NE_DEBUG(DEBUG_FTP, "Stored new CWD as %s\n", dir);
-            strcpy(sess->cwd, dir);
+            if (sess->cwd) ne_free(sess->cwd);
+            sess->cwd = dir;
+            dir = NULL;
         }
     }
     else {
         NE_DEBUG(DEBUG_FTP, "CWD not needed.\n");
-        ret = FTP_OK;
     }
 
+    if (dir) ne_free(dir);
     return ret;
 }
 
@@ -1081,9 +1078,11 @@ int ftp_open(ftp_session *sess)
     if (sess->connected) return FTP_OK;
     NE_DEBUG(DEBUG_FTP, "Opening socket to port %d\n", sess->pi_port);
 
-    /* Invalidate cwd, so a CWD is always used if needed (valid cwds
-     * must begin with a slash. */
-    strcpy(sess->cwd, "x");
+    /* Invalidate cwd, so a CWD is always used if needed. */
+    if (sess->cwd) {
+        ne_free(sess->cwd);
+        sess->cwd = NULL;
+    }
     
     /* Open TCP connection */
     fe_connection(fe_connecting, NULL);
