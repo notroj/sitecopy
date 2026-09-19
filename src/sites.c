@@ -1257,7 +1257,7 @@ static int site_verify_compare(struct site *site,
 {
     struct site_file *file;
     const struct proto_file *lfile;
-    int numremote = 0;
+    int numremote = 0, mismatch = 0;
 
     /* Count the files expected on the server. */
     for_each_file(file, site) {
@@ -1299,12 +1299,15 @@ static int site_verify_compare(struct site *site,
         if (diff == file_new)
             numremote++;
 
+        if (diff != file_unchanged)
+            mismatch = 1;
+
         fe_verified(lfile->filename, diff);
     }
 
     *numremoved = numremote;
 
-    if (numremote != 0) {
+    if (numremote != 0 || mismatch) {
         return SITE_ERRORS;
     }
     else {

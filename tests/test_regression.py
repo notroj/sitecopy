@@ -49,8 +49,6 @@ def test_verify_checksum(site):
     assert "Changed on server: b.txt" in res.stdout, res.stdout
     assert "Changed on server: a.txt" not in res.stdout, res.stdout
 
-@pytest.mark.xfail(strict=True, reason="--verify succeeds when a file "
-                   "is changed on the server")
 def test_verify_changed_status(site):
     setup_site(site, {"a.txt": "A\n", "b.txt": "B\n"})
     change_remote(site, "b.txt", "Changed, longer\n", 0)
@@ -58,8 +56,6 @@ def test_verify_changed_status(site):
     assert "Changed on server: b.txt" in res.stdout, res.stdout
     assert res.returncode != 0, res.stdout + res.stderr
 
-@pytest.mark.xfail(strict=True, reason="--verify succeeds when a file "
-                   "is added on the server")
 def test_verify_added_status(site):
     setup_site(site, {"a.txt": "A\n"})
     create_remote(site, "new.txt", "New\n")
