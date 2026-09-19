@@ -44,6 +44,11 @@ CORPUS = {
     "deep/a/b/c/": None,
     "deep/a/b/c/leaf.txt": "A leaf\n",
     "empty/": None,
+    "README.Html": "<html>Read me</html>\n",
+    "Mixed/": None,
+    "Mixed/Case.TXT": "Mixed case\n",
+    "Mixed/Sub/": None,
+    "Mixed/Sub/lower.txt": "Lower case in a mixed case directory\n",
 }
 
 def write_tree(root, tree):
@@ -90,16 +95,42 @@ def remote_tree(site):
             tree[name.removeprefix("./")] = csum
     return tree
 
-def assert_trees_match(site):
-    assert remote_tree(site) == local_tree(site["local"])
+def remote_name(site, path):
+    """Return the name on the server of the given site-relative path,
+    which is lowercased in its entirety with `lowercase'
+    (file_full_remote in src/sitefiles.c)."""
+    return path.lower() if "lowercase" in site["config"] else path
 
-def update_and_check(site):
-    """Update the site, check the update succeeded and that the remote
-    tree matches the local tree, and return the CompletedProcess."""
+def expected_remote(site, gone=()):
+    """Update and return site["expected"], the tree expected on the
+    server after an update of the current local tree.  With `nodelete'
+    files and directories deleted locally stay on the server, unless
+    they are in gone, the local paths known to have been removed from
+    the server by the update (e.g. by a move)."""
+    mapped = {remote_name(site, path): csum
+              for path, csum in local_tree(site["local"]).items()}
+    if "nodelete" in site["config"]:
+        expected = {path: csum for path, csum in site["expected"].items()
+                    if path not in {remote_name(site, g) for g in gone}}
+        expected.update(mapped)
+    else:
+        expected = mapped
+    site["expected"] = expected
+    return expected
+
+def assert_trees_match(site, gone=()):
+    assert remote_tree(site) == expected_remote(site, gone)
+
+def update_and_check(site, gone=()):
+    """Update the site, check the update succeeded, that the remote
+    tree is as expected (see expected_remote) and that no further
+    update is needed, and return the CompletedProcess."""
     res = run_sitecopy(site, ["--update", "testsite"])
     assert res.returncode == 0, res.stdout + res.stderr
-    assert "Update completed successfully" in res.stdout
-    assert_trees_match(site)
+    # With `nodelete', an update with only deletions does nothing.
+    assert ("Update completed successfully" in res.stdout
+            or "Nothing to do - no changes found" in res.stdout), res.stdout
+    assert_trees_match(site, gone)
     assert_no_update(site)
     return res
 
@@ -110,16 +141,20 @@ def setup_site(site, tree):
     write_tree(site["local"], tree)
     update_and_check(site)
 
-def assert_moved(res, src, dst, moved):
-    """Check that the update in res moved the file src to dst if moved
-    is true, or otherwise deleted src and uploaded dst."""
+def move_and_check(site, src, dst, moved):
+    """Update the site after the local move of file src to dst, and
+    check the update moved src to dst on the server if moved is true,
+    or otherwise uploaded dst and deleted src (unless `nodelete')."""
+    res = update_and_check(site, gone=[src] if moved else [])
     if moved:
         assert "Moving %s->%s" % (src, dst) in res.stdout, res.stdout
         assert "Uploading %s" % dst not in res.stdout, res.stdout
     else:
         assert "Moving" not in res.stdout, res.stdout
-        assert "Deleting %s" % src in res.stdout, res.stdout
         assert "Uploading %s" % dst in res.stdout, res.stdout
+        deleted = "Deleting %s" % src in res.stdout
+        assert deleted != ("nodelete" in site["config"]), res.stdout
+    return res
 
 def moves_detected(site):
     return "checkmoved" in site["config"] or renames_detected(site)
@@ -130,8 +165,8 @@ def renames_detected(site):
 def check_update_cycle(site):
     """Initialize the site against an empty remote directory, then run
     a series of updates which add, change and delete files and nested
-    directories, checking after each that the remote tree matches the
-    local tree."""
+    directories, checking after each that the remote tree is as
+    expected."""
     local = site["local"]
 
     res = run_sitecopy(site, ["--initialize", "testsite"])
@@ -168,6 +203,6 @@ def check_update_cycle(site):
             shutil.rmtree(path)
         else:
             path.unlink()
-    res = run_sitecopy(site, ["--update", "testsite"])
-    assert res.returncode == 0, res.stdout + res.stderr
-    assert remote_tree(site) == {}
+    update_and_check(site)
+    if "nodelete" not in site["config"]:
+        assert remote_tree(site) == {}
