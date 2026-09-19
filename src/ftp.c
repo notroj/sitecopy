@@ -543,8 +543,8 @@ static int receive_file(ftp_session *sess, FILE *f)
 }
 
 #ifdef SC_FTP_SSL
-void ftp_set_secure(ftp_session *sess, const ne_ssl_certificate *trusted,
-                    ne_ssl_verify_fn verify, void *userdata)
+void ftp_set_secure(ftp_session *sess, ne_ssl_verify_fn verify,
+                    void *userdata)
 {
     sess->use_ssl = 1;
     sess->ssl_context = ne_ssl_context_create(NE_SSL_CTX_CLIENT);
@@ -556,10 +556,7 @@ void ftp_set_secure(ftp_session *sess, const ne_ssl_certificate *trusted,
      * most TLS 1.2, where the session ID can be reused. */
     ne_ssl_context_set_versions(sess->ssl_context, NE_SSL_PROTO_UNSPEC,
                                 NE_SSL_PROTO_TLS_1_2);
-    if (trusted)
-        ne_ssl_context_trustcert(sess->ssl_context, trusted);
-    else
-        ne_ssl_context_trustdefca(sess->ssl_context);
+    ne_ssl_context_trustdefca(sess->ssl_context);
     sess->verify = verify;
     sess->verify_userdata = userdata;
 }
@@ -608,9 +605,7 @@ static int pi_handshake(ftp_session *sess)
                                       &failures)
              && (!failures || !sess->verify
                  || sess->verify(sess->verify_userdata, failures, cert))) {
-        ne_snprintf(sess->error, sizeof sess->error,
-                    _("Server certificate verification failed: %s"),
-                    ne_sock_error(sess->pisock));
+        ftp_seterror(sess, ne_sock_error(sess->pisock));
         ne_ssl_cert_free(cert);
         ret = FTP_SSL;
     }

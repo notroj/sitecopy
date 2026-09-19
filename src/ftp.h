@@ -76,12 +76,11 @@ void ftp_set_usecwd(ftp_session *sess, int use_cwd);
 #ifdef SC_FTP_SSL
 /* Use FTP over TLS (RFC 4217) for the session: TLS is negotiated with
  * AUTH TLS before logging in, and used for every data connection.
- * If 'trusted' is non-NULL, that certificate is trusted, otherwise
- * the system's default CA certificates are trusted.  'verify' is
+ * The system's default CA certificates are trusted, and 'verify' is
  * called if verification of the server's certificate fails, as for
  * ne_ssl_set_verify. */
-void ftp_set_secure(ftp_session *sess, const ne_ssl_certificate *trusted,
-                    ne_ssl_verify_fn verify, void *userdata);
+void ftp_set_secure(ftp_session *sess, ne_ssl_verify_fn verify,
+                    void *userdata);
 #endif
 
 const char *ftp_get_error(ftp_session *sess);

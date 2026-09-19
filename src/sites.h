@@ -582,9 +582,11 @@ struct site_file **site_sorted_files_list(struct site *site, file_filter_fn filt
                                           file_cmp_fn compare, unsigned *count);
 
 /* Callback invoked when verification of the server's SSL certificate
- * fails, with the site as 'userdata'; matches ne_ssl_verify_fn.  Asks
- * the user whether to accept the certificate, saving it to the site's
- * certificate file if so.  Returns zero if accepted, else non-zero. */
+ * fails, with the site as 'userdata'; matches ne_ssl_verify_fn.  The
+ * certificate is accepted if it is the one previously accepted and
+ * loaded by site_load_certificate; otherwise, asks the user whether
+ * to accept the certificate, saving it to the site's certificate
+ * file if so.  Returns zero if accepted, else non-zero. */
 int site_verify_certificate(void *userdata, int failures,
                             const ne_ssl_certificate *cert);
 

@@ -1377,6 +1377,13 @@ int site_verify_certificate(void *userdata, int failures,
 {
     struct site *site = userdata;
 
+    /* A certificate the user accepted before is saved, and accepted
+     * again.  Comparing the certificate, rather than trusting the
+     * saved certificate as a CA, works for a certificate which is
+     * not self-signed too. */
+    if (site->server_cert && ne_ssl_cert_cmp(cert, site->server_cert) == 0)
+        return 0;
+
     if (fe_accept_cert(cert, failures)) {
         /* Not accepted by user => fail verification. */
         return -1;
