@@ -32,4 +32,5 @@
 /m4/libtool.m4
 /ltmain.sh
 /tests/httpd-container-stamp
+/tests/vsftpd-container-stamp
 /clog
