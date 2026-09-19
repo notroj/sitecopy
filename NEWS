@@ -4,6 +4,11 @@ Changes in release 0.17:
 * Various compilation warning fixes.
 * Use exit status 0 for --version and --help.
 * Allow URL as site name in rcfile.
+* exclude, ignore and ascii patterns which contain a slash, but do
+  not begin with one (e.g. "exclude stats/*"), are now matched against
+  the filename relative to the site root, and so match files; before,
+  they were matched against the base name, and so never matched
+  (Debian bug #167277).
 * Fix --verify for sites with subdirectories, which reported every
   file in a subdirectory as missing from the server, and with
   checksum state, which reported every file as changed.  --verify now
