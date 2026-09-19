@@ -129,3 +129,14 @@ def test_rejected_config(tmp_path, protocol, lines, message):
     if message:
         assert message in output
     assert "Skipping site `testsite'" in output
+
+def test_long_rcfile_lines(sitecopy_env):
+    # rcfile lines were read into a 128-byte buffer, so a longer line
+    # was split, and the remainder parsed as a separate line.
+    remote = "/" + "d" * 300 + "/"
+    exclude = "x" * 300
+    with open(sitecopy_env["rcfile"], "a") as fp:
+        fp.write(f"  remote {remote}\n  exclude \"{exclude}\"\n")
+    res = run_sitecopy(sitecopy_env, ["--view", "testsite"])
+    assert res.returncode == 0, res.stdout + res.stderr
+    assert "Remote directory: " + remote in res.stdout
