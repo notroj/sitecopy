@@ -179,5 +179,10 @@ tests/pure-ftpd-container-stamp: tests/pure-ftpd-Containerfile
 	podman build -t sitecopy-test-pure-ftpd -f tests/pure-ftpd-Containerfile $(top_srcdir)/tests
 	echo timestamp > $@
 
+# check runs the server tests across a minimal set of rcfile option
+# combinations; check-full runs them across every valid combination.
 check: $(TARGET) check-containers
 	pytest-3 -v tests/
+
+check-full: $(TARGET) check-containers
+	pytest-3 -v --full tests/
