@@ -133,9 +133,6 @@ dnl Check for getopt_long
 AC_CHECK_FUNC(getopt_long,,[AC_LIBOBJ(lib/getopt)
 AC_LIBOBJ(lib/getopt1)])
 
-dnl Check for strcasecmp
-AC_CHECK_FUNC(strcasecmp,,[AC_LIBOBJ(lib/strcasecmp)])
-
 dnl Check for stuff
 AC_CHECK_FUNCS(strdup strsignal strerror memcpy setlocale nl_langinfo)
 

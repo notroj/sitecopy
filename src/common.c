@@ -80,7 +80,7 @@ int map_debug_options(const char *opts, int *mask, char *errbuf)
 	mapped = 0;
         
 	for (n = 0; debug_map[n].name != NULL; n++) {
-	    if (strcasecmp(token, debug_map[n].name) == 0) {
+	    if (ne_strcasecmp(token, debug_map[n].name) == 0) {
 		ret |= debug_map[n].val;
 		mapped = 1;
 		break;

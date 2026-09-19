@@ -45,6 +45,7 @@
 #include <ne_basic.h>
 #include <ne_basic.h>
 #include <ne_props.h>
+#include <ne_string.h>
 #include <ne_alloc.h>
 #include <ne_uri.h>
 #include <ne_auth.h>
@@ -642,7 +643,7 @@ static void pfind_results(void *userdata, const ne_uri *uri,
 	file->type = proto_file;
 	file->size = atoi(clength);
 	file->modtime = modtime?ne_httpdate_parse(modtime):0;
-	if (isexec && strcasecmp(isexec, "T") == 0) {
+	if (isexec && ne_strcasecmp(isexec, "T") == 0) {
 	    file->mode = 0755;
 	} else {
 	    file->mode = 0644;
