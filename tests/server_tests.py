@@ -4,6 +4,8 @@ test takes the site fixture and is run once per valid combination of
 the rcfile option axes named by its axes marker (see siteconfig.py).
 """
 
+import shutil
+
 import pytest
 
 from common import *
@@ -73,3 +75,211 @@ def test_move_out_of_removed_dir(site):
     (local / "old/c.txt").rename(local / "c.txt")
     (local / "old").rmdir()
     move_and_check(site, "old/c.txt", "c.txt", moves_detected(site))
+
+# -- Safe mode ------------------------------------------------------------
+
+@pytest.mark.axes("safe")
+def test_remote_change(site):
+    # A file changed on the server by someone else since it was
+    # uploaded is not overwritten in safe mode, and is otherwise.
+    setup_site(site, {"page.txt": "Original\n"})
+    remote_before = remote_tree(site)["page.txt"]
+    change_remote_later(site, "page.txt", "Changed on the server\n")
+    changed = remote_tree(site)["page.txt"]
+    assert changed != remote_before
+    (site["local"] / "page.txt").write_text("Changed locally, again\n")
+
+    res = run_sitecopy(site, ["--update", "testsite"])
+    if "safe" in site["config"]:
+        for _ in range(2):
+            assert res.returncode == 1, res.stdout + res.stderr
+            assert ("Remote file has been modified - not overwriting"
+                    in res.stdout), res.stdout
+            assert remote_tree(site)["page.txt"] == changed
+            # The file is not marked as updated, so a later update
+            # fails in the same way.
+            res = run_sitecopy(site, ["--update", "testsite"])
+    else:
+        assert res.returncode == 0, res.stdout + res.stderr
+        assert_trees_match(site)
+
+@pytest.mark.xfail(strict=True, reason="the stored state reader carries "
+                   "the server modification time of one file over to the "
+                   "next file which has none")
+def test_safe_enabled_later(site):
+    # Files uploaded before safe mode was enabled have no recorded
+    # server modification time, so are uploaded unconditionally.
+    setup_site(site, {"a.txt": "A\n", "b.txt": "B\n"})
+    add_site_lines(site, "safe")
+    # Records the server time of a.txt, but not b.txt.
+    (site["local"] / "a.txt").write_text("A, changed\n")
+    update_and_check(site)
+
+    # Make b.txt's time on the server later than a.txt's.
+    change_remote_later(site, "b.txt", "B\n")
+    (site["local"] / "b.txt").write_text("B, changed\n")
+    update_and_check(site)
+
+# -- Temporary uploads ----------------------------------------------------
+
+@pytest.mark.axes("tempupload")
+def test_tempupload(site):
+    # With tempupload, files are uploaded under a temporary ".in."
+    # name and then moved into place.  The names are unique to each
+    # test, since the server log is shared by every test.
+    token = site["config"].id
+    setup_site(site, {"top-%s.txt" % token: "Top\n",
+                      "dir/": None,
+                      "dir/nested-%s.txt" % token: "Nested\n"})
+    for name in ("top-%s.txt" % token, "nested-%s.txt" % token):
+        lines = server_log_lines(site, name)
+        assert lines
+        temp = any(".in." + name in line for line in lines)
+        assert temp == ("tempupload" in site["config"]), lines
+
+# -- Deletes and overwrites ----------------------------------------------
+
+@pytest.mark.site_lines("nodelete")
+def test_nodelete(site):
+    setup_site(site, {"a.txt": "A\n", "dir/": None, "dir/b.txt": "B\n",
+                      "c.txt": "C\n"})
+    local = site["local"]
+    (local / "a.txt").unlink()
+    shutil.rmtree(local / "dir")
+
+    res = run_sitecopy(site, ["--list", "testsite"])
+    assert res.returncode == 0, res.stdout + res.stderr
+    assert ("These items have been deleted, but will be left on the server"
+            in res.stdout), res.stdout
+
+    res = update_and_check(site)
+    assert "Nothing to do - no changes found" in res.stdout
+    assert "a.txt" in remote_tree(site)
+    assert "dir/b.txt" in remote_tree(site)
+
+    # Other changes are made, and the deleted items still kept.
+    (local / "c.txt").write_text("C, changed\n")
+    res = update_and_check(site)
+    assert "Uploading c.txt" in res.stdout
+    assert "Deleting" not in res.stdout
+    assert "a.txt" in remote_tree(site)
+
+@pytest.mark.xfail(strict=True, reason="--list counts the deleted items "
+                   "which nodelete leaves on the server as items to update")
+@pytest.mark.site_lines("nodelete")
+def test_nodelete_list_count(site):
+    setup_site(site, {"a.txt": "A\n", "b.txt": "B\n"})
+    (site["local"] / "a.txt").unlink()
+    (site["local"] / "b.txt").write_text("B, changed\n")
+    res = run_sitecopy(site, ["--list", "testsite"])
+    assert "(1 item to update)" in res.stdout, res.stdout
+
+@pytest.mark.site_lines("nooverwrite")
+def test_nooverwrite(site):
+    # With nooverwrite, a changed file is deleted from the server
+    # before the new version is uploaded.
+    setup_site(site, {"a.txt": "A\n"})
+    (site["local"] / "a.txt").write_text("A, changed\n")
+    res = update_and_check(site)
+    deleting = res.stdout.find("Deleting a.txt")
+    uploading = res.stdout.find("Uploading a.txt")
+    assert 0 <= deleting < uploading, res.stdout
+
+# -- Lowercase ----------------------------------------------------------------
+
+@pytest.mark.site_lines("lowercase")
+def test_lowercase(site):
+    setup_site(site, {"Dir/": None, "Dir/File.TXT": "Mixed\n",
+                      "UPPER.HTML": "Upper\n"})
+    remote = remote_tree(site)
+    assert set(remote) == {"dir/", "dir/file.txt", "upper.html"}
+
+    # The output uses the local names.
+    (site["local"] / "Dir/File.TXT").write_text("Mixed, changed\n")
+    res = update_and_check(site)
+    assert "Uploading Dir/File.TXT" in res.stdout
+
+@pytest.mark.xfail(strict=True, reason="after --fetch, the update tries "
+                   "to create the mixed-case directory again, which fails, "
+                   "and deletes the file fetched from the server")
+@pytest.mark.site_lines("lowercase")
+def test_lowercase_after_fetch(site):
+    setup_site(site, {"Dir/": None, "Dir/File.TXT": "Mixed\n"})
+    res = run_sitecopy(site, ["--fetch", "testsite"])
+    assert res.returncode == 0, res.stdout + res.stderr
+    write_tree(site["local"], {"Dir/New.txt": "New\n"})
+    update_and_check(site)
+
+# -- Excluded and ignored files -------------------------------------------
+
+@pytest.mark.site_lines("exclude *.bak", "exclude /private")
+def test_exclude(site):
+    setup_site(site, {"a.txt": "A\n", "a.txt.bak": "Backup\n",
+                      "dir/": None, "dir/b.bak": "Backup\n",
+                      "private/": None, "private/secret.txt": "Secret\n",
+                      "dir/private/": None, "dir/private/c.txt": "C\n"},
+               expected={"a.txt", "dir/", "dir/private/",
+                         "dir/private/c.txt"})
+
+@pytest.mark.site_lines("ignore *.cfg")
+def test_ignore(site):
+    # Local changes to ignored files are not uploaded.
+    setup_site(site, {"a.txt": "A\n", "site.cfg": "Config\n"})
+    uploaded = remote_tree(site)["site.cfg"]
+    (site["local"] / "site.cfg").write_text("Config, changed locally\n")
+    res = run_sitecopy(site, ["--update", "testsite"])
+    assert res.returncode == 0, res.stdout + res.stderr
+    assert remote_tree(site)["site.cfg"] == uploaded
+
+# -- Symbolic links ---------------------------------------------------------
+
+@pytest.mark.axes("symlinks")
+def test_symlinks(site):
+    # By default the target of a link is uploaded; with `symlinks
+    # ignore' links are skipped.
+    local = site["local"]
+    res = run_sitecopy(site, ["--initialize", "testsite"])
+    assert res.returncode == 0, res.stdout + res.stderr
+    write_tree(local, {"target.txt": "Target\n"})
+    (local / "link.txt").symlink_to("target.txt")
+    res = run_sitecopy(site, ["--update", "testsite"])
+    assert res.returncode == 0, res.stdout + res.stderr
+
+    remote = remote_tree(site)
+    if "symlinks ignore" in site["config"]:
+        assert set(remote) == {"target.txt"}
+    else:
+        assert remote["link.txt"] == remote["target.txt"]
+
+# -- Permissions --------------------------------------------------------------
+
+@pytest.mark.axes("permissions")
+def test_permissions(site):
+    local = site["local"]
+    res = run_sitecopy(site, ["--initialize", "testsite"])
+    assert res.returncode == 0, res.stdout + res.stderr
+    write_tree(local, {"plain.txt": "Plain\n", "script.sh": "#!/bin/sh\n",
+                       "private.txt": "Private\n", "dir/": None,
+                       "dir/f.txt": "F\n"})
+    (local / "script.sh").chmod(0o755)
+    (local / "private.txt").chmod(0o600)
+    (local / "dir").chmod(0o711)
+    res = run_sitecopy(site, ["--update", "testsite"])
+    assert res.returncode == 0, res.stdout + res.stderr
+
+    modes = remote_modes(site)
+    config = site["config"]
+    if "permissions all" in config:
+        assert modes["plain.txt"] == "644"
+        assert modes["script.sh"] == "755"
+        assert modes["private.txt"] == "600"
+    elif "permissions exec" in config:
+        # With WebDAV, only the executable live property can be set,
+        # which mod_dav_fs maps to the owner's execute bit.
+        expected = "744" if config.protocol == "dav" else "755"
+        assert modes["script.sh"] == expected
+        assert modes["private.txt"] == "644"
+    else:
+        assert modes["script.sh"] == "644"
+    if "permissions dir" in config:
+        assert modes["dir"] == "711"

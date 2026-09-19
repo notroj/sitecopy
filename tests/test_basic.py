@@ -1,6 +1,10 @@
 import subprocess
 import os
+
+import pytest
+
 from common import *
+from conftest import make_sitecopy_env
 
 def test_options(sitecopy_env):
     res = run_sitecopy(sitecopy_env, ["--version"])
@@ -98,3 +102,30 @@ def test_site_urls(sitecopy_env):
     assert "Remote directory: foobar" in res.stdout
     assert "Port: 21" in res.stdout
     assert "Server: example.com" in res.stdout
+
+REJECTED_CONFIGS = [
+    ("dav", ["safe", "nooverwrite"],
+     "Safe mode cannot be used in conjunction with nooverwrite"),
+    ("ftp", ["safe", "tempupload"],
+     "Safe mode cannot be used in conjunction with tempupload"),
+    ("dav", ["symlinks maintain"], "WebDAV cannot maintain symbolic links"),
+    ("ftp", ["symlinks maintain"], "FTP cannot maintain symbolic links"),
+    ("dav", ["permissions all"], "File permissions are not supported in WebDAV"),
+    ("dav", ["checkmoved renames"], None),
+]
+
+@pytest.mark.parametrize("protocol, lines, message", REJECTED_CONFIGS,
+                         ids=["-".join([p] + l).replace(" ", "_")
+                              for p, l, _ in REJECTED_CONFIGS])
+def test_rejected_config(tmp_path, protocol, lines, message):
+    # Invalid combinations of options are rejected before connecting
+    # to the server.
+    senv = make_sitecopy_env(tmp_path, "  remote /site/\n  protocol %s\n%s"
+                             % (protocol,
+                                "".join("  %s\n" % l for l in lines)))
+    res = run_sitecopy(senv, ["--update", "testsite"])
+    output = res.stdout + res.stderr
+    assert res.returncode == 255, output
+    if message:
+        assert message in output
+    assert "Skipping site `testsite'" in output
