@@ -121,7 +121,7 @@ static char *fn_unescape(const char *filename)
 
 /* Write out the stored state for the site. 
  * Returns 0 on success, non-zero on error. */
-int site_write_stored_state(struct site *site) 
+int site_write_stored_state(struct site *site)
 {
     struct site_file *current, **sorted;
     unsigned i, num_items;
@@ -129,7 +129,7 @@ int site_write_stored_state(struct site *site)
 
     fp = site_open_storage_file(site);
     if (fp == NULL) {
-	return -1;
+        return -1;
     }
 
     sorted = site_sorted_files_list(site, site_file_is_stored,
@@ -139,65 +139,70 @@ int site_write_stored_state(struct site *site)
     fprintf(fp, "<sitestate version='" SITE_STATE_FILE_VERSION "'>\n");
     fprintf(fp, "<options>\n");
     fprintf(fp, " <saved-by package='" PACKAGE_NAME "'"
-	    " version='" PACKAGE_VERSION "'/>\n");
+            " version='" PACKAGE_VERSION "'/>\n");
     if (site->state_method == state_checksum) {
-	/* For forwards-compatibility */
-	fprintf(fp, " <checksum-algorithm><checksum-MD5/></checksum-algorithm>\n");
+        /* For forwards-compatibility */
+        fprintf(fp, " <checksum-algorithm><checksum-MD5/></checksum-algorithm>\n");
     }
     fprintf(fp, " <state-method><state-%s/></state-method>\n",
-	     (site->state_method==state_checksum)?"checksum":"timesize");
+             (site->state_method==state_checksum)?"checksum":"timesize");
     if (site->safemode) {
-	fprintf(fp, " <safemode/>\n");
+        fprintf(fp, " <safemode/>\n");
     }
     fprintf(fp, " <escaped-filenames/>\n");
     fprintf(fp, "</options>\n");
     fprintf(fp, "<items>\n");
     /* Now write out the items */
     for (i = 0; i < num_items; i++) {
-	char *fname;
-	current = sorted[i];
-	fprintf(fp, "<item>");
-	fprintf(fp, "<type><type-%s/></type>",
-		 (current->type==file_file)?"file":(
-		     (current->type==file_dir)?"directory":"link"));
+        char *fname;
+        current = sorted[i];
+        fprintf(fp, "<item>");
+        fprintf(fp, "<type><type-%s/></type>",
+                 (current->type==file_file)?"file":(
+                     (current->type==file_dir)?"directory":"link"));
         /* escape filenames correctly for XML. */
         fname = fn_escape(current->stored.filename);
-	fprintf(fp, "<filename>%s</filename>\n", fname);
+        fprintf(fp, "<filename>%s</filename>\n", fname);
         ne_free(fname);
         if (current->stored.mode != INVALID_MODE) {
-            fprintf(fp, "<protection>%03o</protection>", 
+            fprintf(fp, "<protection>%03o</protection>",
                     current->stored.mode); /* three-digit octal */
         }
-	switch (current->type) {
-	case file_link:
-	    fprintf(fp, "<linktarget>%s</linktarget>", 
-		     current->stored.linktarget);
-	    break;
-	case file_file:
-	    fprintf(fp, "<size>%" NE_FMT_OFF_T "</size>", 
-		    current->stored.size);
-	    switch (site->state_method) {
-	    case state_checksum: {
-		char csum[33];
-		ne_md5_to_ascii(current->stored.checksum, csum);
-		fprintf(fp, "<checksum>%s</checksum>", csum);
-	    } break;
-	    case state_timesize:
-		fprintf(fp, "<modtime>%ld</modtime>", current->stored.time);
-		break;
-	    }
-	    fprintf(fp, "<ascii>%s</ascii>",
-		     current->stored.ascii?"<true/>":"<false/>");
-	    if (current->server.exists) {
-		fprintf(fp, "<server-modtime>%ld</server-modtime>", 
-			 current->server.time);
-	    }
-	    break;
-	case file_dir:
-	    /* nothing to do */
-	    break;
-	}
-	fprintf(fp, "</item>\n");
+        switch (current->type) {
+        case file_link:
+            fprintf(fp, "<linktarget>%s</linktarget>",
+                     current->stored.linktarget);
+            break;
+        case file_file:
+            fprintf(fp, "<size>%" NE_FMT_OFF_T "</size>",
+                    current->stored.size);
+            switch (site->state_method) {
+            case state_checksum: {
+                char csum[33];
+                ne_md5_to_ascii(current->stored.checksum, csum);
+                fprintf(fp, "<checksum>%s</checksum>", csum);
+            } break;
+            case state_timesize:
+                fprintf(fp, "<modtime>%ld</modtime>", current->stored.time);
+                break;
+            }
+            fprintf(fp, "<ascii>%s</ascii>",
+                     current->stored.ascii?"<true/>":"<false/>");
+            if (current->server.exists) {
+                fprintf(fp, "<server-modtime>%ld</server-modtime>",
+                         current->server.time);
+                if (current->server.etag && *current->server.etag) {
+                    char *etag = fn_escape(current->server.etag);
+                    fprintf(fp, "<server-etag>%s</server-etag>", etag);
+                    ne_free(etag);
+                }
+            }
+            break;
+        case file_dir:
+            /* nothing to do */
+            break;
+        }
+        fprintf(fp, "</item>\n");
     }
     fprintf(fp, "</items>\n");
     fprintf(fp, "</sitestate>\n");
@@ -234,6 +239,7 @@ int site_write_stored_state(struct site *site)
 #define SITE_ELM_server_modtime (ELM_BASE + 22)
 #define SITE_ELM_true (ELM_BASE + 23)
 #define SITE_ELM_false (ELM_BASE + 24)
+#define SITE_ELM_server_etag (ELM_BASE + 25)
 
 static const struct ne_xml_idmap elmmap[] = {
     { "", "sitestate", SITE_ELM_sitestate },
@@ -259,7 +265,8 @@ static const struct ne_xml_idmap elmmap[] = {
     { "", "protection", SITE_ELM_protection },
     { "", "server-modtime", SITE_ELM_server_modtime },
     { "", "true", SITE_ELM_true },
-    { "", "false", SITE_ELM_false }
+    { "", "false", SITE_ELM_false },
+    { "", "server-etag", SITE_ELM_server_etag }
 };
 
 struct site_xmldoc {
@@ -288,6 +295,9 @@ static int start_element(void *userdata, int parent,
         memset(&doc->stored, 0, sizeof doc->stored);
         /* Initialize perms bits to invalid state */
         doc->stored.mode = INVALID_MODE;
+        /* Clear server state, which the item may not have. */
+        file_state_destroy(&doc->server);
+        memset(&doc->server, 0, sizeof doc->server);
     }
 
     if (state == SITE_ELM_ascii) {
@@ -305,7 +315,7 @@ static int char_data(void *userdata, int state, const char *cdata, size_t len)
 }
 
 static int end_element(void *userdata, int state,
-                       const char *nspace, const char *name) 
+                       const char *nspace, const char *name)
 {
     struct site_xmldoc *doc = userdata;
     const char *cdata = doc->cdata->data;
@@ -314,91 +324,98 @@ static int end_element(void *userdata, int state,
     /* Dispatch Ajax */
     switch (state) {
     case SITE_ELM_opt_state_method_timesize:
-	doc->site->stored_state_method = state_timesize;
-	break;
+        doc->site->stored_state_method = state_timesize;
+        break;
     case SITE_ELM_opt_state_method_checksum:
-	doc->site->stored_state_method = state_checksum;
-	break;
+        doc->site->stored_state_method = state_checksum;
+        break;
     case SITE_ELM_type_file:
-	doc->type = file_file;
-	break;
+        doc->type = file_file;
+        break;
     case SITE_ELM_type_directory:
-	doc->type = file_dir;
-	break;
+        doc->type = file_dir;
+        break;
     case SITE_ELM_type_link:
-	doc->type = file_link;
-	break;
+        doc->type = file_link;
+        break;
     case SITE_ELM_filename:
-	doc->stored.filename = fn_unescape(cdata);
-	break;
+        doc->stored.filename = fn_unescape(cdata);
+        break;
     case SITE_ELM_checksum:
-	if (strlen(cdata) > 32) {
+        if (strlen(cdata) > 32) {
             ne_snprintf(err, sizeof err, _("Invalid checksum at line %d"),
                         ne_xml_currentline(doc->parser));
             ne_xml_set_error(doc->parser, err);
-	    return -1;
-	} else {
-	    /* FIXME: validate */
-	    ne_ascii_to_md5(cdata, doc->stored.checksum);
-#ifdef DEBUGGING
-	    {
-		char tmp[33];
-		ne_md5_to_ascii(doc->stored.checksum, tmp);
-		NE_DEBUG(DEBUG_FILES, "Checksum recoded: [%32s]\n", tmp);
-	    }
-#endif /* DEBUGGING */
-	}
-	break;
-    case SITE_ELM_size:
-	doc->stored.size = strtol(cdata, NULL, 10);
-	if (doc->stored.size == LONG_MAX) {
+            return -1;
         }
-	break;
+        else {
+            /* FIXME: validate */
+            ne_ascii_to_md5(cdata, doc->stored.checksum);
+#ifdef DEBUGGING
+            {
+                char tmp[33];
+                ne_md5_to_ascii(doc->stored.checksum, tmp);
+                NE_DEBUG(DEBUG_FILES, "Checksum recoded: [%32s]\n", tmp);
+            }
+#endif /* DEBUGGING */
+        }
+        break;
+    case SITE_ELM_size:
+        doc->stored.size = strtol(cdata, NULL, 10);
+        if (doc->stored.size == LONG_MAX) {
+        }
+        break;
     case SITE_ELM_protection:
-	doc->stored.mode = strtoul(cdata, NULL, 8);
-	break;
+        doc->stored.mode = strtoul(cdata, NULL, 8);
+        break;
     case SITE_ELM_server_modtime:
-	doc->server.time = strtol(cdata, NULL, 10);
-	if (doc->server.time == LONG_MIN || doc->server.time == LONG_MAX)
+        doc->server.time = strtol(cdata, NULL, 10);
+        if (doc->server.time == LONG_MIN || doc->server.time == LONG_MAX)
             goto overflow_err;
-	doc->server.exists = true;
-	break;
+        doc->server.exists = true;
+        break;
+    case SITE_ELM_server_etag:
+        if (doc->server.etag)
+            ne_free(doc->server.etag);
+        doc->server.etag = *cdata ? fn_unescape(cdata) : NULL;
+        break;
     case SITE_ELM_modtime:
-	doc->stored.time = strtol(cdata, NULL, 10);
-	if (doc->stored.time == LONG_MIN || doc->stored.time == LONG_MAX)
+        doc->stored.time = strtol(cdata, NULL, 10);
+        if (doc->stored.time == LONG_MIN || doc->stored.time == LONG_MAX)
             goto overflow_err;
-	break;
+        break;
     case SITE_ELM_true:
-	doc->truth = 1;
-	break;
+        doc->truth = 1;
+        break;
     case SITE_ELM_false:
-	doc->truth = 2;
-	break;
+        doc->truth = 2;
+        break;
     case SITE_ELM_ascii:
-	if (doc->truth) {
-	    doc->stored.ascii = doc->truth == 1;
-	} else {
+        if (doc->truth) {
+            doc->stored.ascii = doc->truth == 1;
+        }
+        else {
             ne_snprintf(err, sizeof err, _("Boolean missing in 'ascii' "
                                            "at line %d"),
                         ne_xml_currentline(doc->parser));
             ne_xml_set_error(doc->parser, err);
-	    return -1;
-	}
-	break;
+            return -1;
+        }
+        break;
     case SITE_ELM_linktarget:
-	doc->stored.linktarget = ne_strdup(cdata);
-	break;
+        doc->stored.linktarget = ne_strdup(cdata);
+        break;
     case SITE_ELM_item: {
-	struct site_file *file;
-	doc->stored.exists = true;
-	file = file_set_stored(doc->type, &doc->stored, doc->site);
-	if (doc->server.exists) {
-	    file_state_copy(&file->server, &doc->server, doc->site);
-	}
-	DEBUG_DUMP_FILE_PROPS(DEBUG_FILES, file, doc->site);
-    }	break;
+        struct site_file *file;
+        doc->stored.exists = true;
+        file = file_set_stored(doc->type, &doc->stored, doc->site);
+        if (doc->server.exists) {
+            file_state_copy(&file->server, &doc->server, doc->site);
+        }
+        DEBUG_DUMP_FILE_PROPS(DEBUG_FILES, file, doc->site);
+    }   break;
     default:
-	break;
+        break;
     }
 
     return 0;
@@ -415,43 +432,46 @@ static int parse_storage_file(struct site *site, FILE *fp)
     ne_xml_parser *p;
     struct site_xmldoc doc = {0};
     int ret;
-    
+
     doc.site = site;
     doc.cdata = ne_buffer_create();
 
     doc.parser = p = ne_xml_create();
     ne_xml_push_handler(p, start_element, char_data, end_element, &doc);
-    
+
     ret = 0;
     do {
-	char buffer[BUFSIZ];
-	int len;	
-	len = fread(buffer, 1, BUFSIZ, fp);
-	if (len < BUFSIZ) {
-	    if (feof(fp)) {
-		ret = 1;
-	    } else if (ferror(fp)) {
-		ret = -1;
-		/* And don't parse anything else... */
-		break;
-	    }
-	}
-	ne_xml_parse(p, buffer, len);
+        char buffer[BUFSIZ];
+        int len;
+        len = fread(buffer, 1, BUFSIZ, fp);
+        if (len < BUFSIZ) {
+            if (feof(fp)) {
+                ret = 1;
+            }
+            else if (ferror(fp)) {
+                ret = -1;
+                /* And don't parse anything else... */
+                break;
+            }
+        }
+        ne_xml_parse(p, buffer, len);
     } while (ret == 0 && !ne_xml_failed(p));
 
     if (!ne_xml_failed(p)) ne_xml_parse(p, "", 0);
 
     if (ne_xml_failed(p)) {
-	site->last_error = ne_strdup(ne_xml_get_error(p));
-	ret = SITE_ERRORS;
-    } else if (ret < 0) {
-	site->last_error = ne_strdup(strerror(errno));
-	ret = SITE_ERRORS;
+        site->last_error = ne_strdup(ne_xml_get_error(p));
+        ret = SITE_ERRORS;
+    }
+    else if (ret < 0) {
+        site->last_error = ne_strdup(strerror(errno));
+        ret = SITE_ERRORS;
     }
 
     ne_xml_destroy(p);
-    
-    return ret;    
+    file_state_destroy(&doc.server);
+
+    return ret;
 }
 
 int site_read_stored_state(struct site *site)

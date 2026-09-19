@@ -41,15 +41,17 @@ static int null_move(void *session, const char *from, const char *to)
     return SITE_OK;
 }
 
-static int null_upload_cond(void *session, const char *local, 
-                            const char *remote, int ascii, time_t t)
+static int null_upload_cond(void *session, const char *local,
+                            const char *remote, int ascii,
+                            const struct file_state *server)
 {
     return SITE_OK;
 }
 
-static int null_get_modtime(void *session, const char *remote, time_t *modtime)
+static int null_get_server_state(void *session, const char *remote,
+                                 struct file_state *server)
 {
-    time(modtime);
+    time(&server->time);
     return SITE_OK;
 }
     
@@ -110,7 +112,7 @@ const struct proto_driver null_driver = {
     null_move,
     null_updownload,
     null_upload_cond,
-    null_get_modtime,
+    null_get_server_state,
     null_updownload,
     null_read,
     null_onearg,

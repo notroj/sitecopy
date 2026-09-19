@@ -48,6 +48,7 @@ struct proto_file {
 };
 
 struct site;
+struct file_state;
 
 struct proto_driver {
 
@@ -71,17 +72,22 @@ struct proto_driver {
 		       int ascii);
     
     /* Conditional file upload: upload given file under the
-     * condition that the remote file has the given time and size
+     * condition that the remote file is unchanged from the given
+     * server state, as previously returned by file_get_server_state.
      * Returns:
-     *   PROTO_OK      if upload was okay
-     *   PROTO_ERROR   if upload failed
-     *   PROTO_FAILED  if condition is not met.
+     *   SITE_OK      if upload was okay
+     *   SITE_ERRORS  if upload failed
+     *   SITE_FAILED  if condition is not met.
      */
-    int (*file_upload_cond)(void *session,
-	const char *local, const char *remote,
-	int ascii, time_t t);
-    /* Retrieve the remote file modification time and file size */
-    int (*file_get_modtime)(void *sess, const char *remote, time_t *modtime);
+    int (*file_upload_cond)(void *session, const char *local,
+                            const char *remote, int ascii,
+                            const struct file_state *server);
+    /* Retrieve the state of the remote file used by file_upload_cond:
+     * sets server->time to the modification time and, if the
+     * protocol supports entity tags, server->etag to a malloc-allocated
+     * entity tag (server->etag is NULL on entry). */
+    int (*file_get_server_state)(void *sess, const char *remote,
+                                 struct file_state *server);
     int (*file_download)(void *sess, const char *local, const char *remote,
 			 int ascii);
     int (*file_read)(void *sess, const char *remote, 

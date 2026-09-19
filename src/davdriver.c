@@ -375,38 +375,78 @@ static int file_upload(void *session, const char *local, const char *remote,
     return h2s(sess, ret);
 }
 
-/* conditional PUT using If-Unmodified-Since. */
-static int put_if_unmodified(ne_session *sess, const char *uri, int fd,
-                             time_t since)
+/* Returns non-zero if the entity tag is a weak entity tag. */
+#define ETAG_IS_WEAK(e) ((e)[0] == 'W' && (e)[1] == '/')
+
+/* Returns the opaque-tag of an entity tag, without any weakness
+ * indicator. */
+#define ETAG_OPAQUE(e) (ETAG_IS_WEAK(e) ? (e) + 2 : (e))
+
+/* Retrieve the modification time and entity tag of the resource with
+ * a HEAD request.  *modtime is set to -1 if the server gives no
+ * Last-Modified header; *etag is set to a malloc-allocated string, or
+ * NULL if the server gives no ETag header.  Returns NE_FAILED if the
+ * resource does not exist. */
+static int head_state(ne_session *sess, const char *uri,
+                      time_t *modtime, char **etag)
 {
-    ne_request *req = ne_request_create(sess, "PUT", uri);
-    char *date = ne_rfc1123_date(since);
-    int ret;
+    ne_request *req = ne_request_create(sess, "HEAD", uri);
+    int ret = ne_request_dispatch(req);
 
-    /* Add in the conditional header */
-    ne_add_request_header(req, "If-Unmodified-Since", date);
-    ne_free(date);
-    
-    {
-        struct stat st;
+    *modtime = -1;
+    *etag = NULL;
 
-        if (fstat(fd, &st) < 0) {
-            int errnum = errno;
-            ne_set_error(sess, _("Could not stat file: %s"), strerror(errnum));
-            return NE_ERROR;
-        }
-        
-        ne_set_request_body_fd(req, fd, 0, st.st_size);
+    if (ret == NE_OK && ne_get_status(req)->code == 404) {
+        ret = NE_FAILED;
+    }
+    else if (ret == NE_OK && ne_get_status(req)->klass != 2) {
+        ret = NE_ERROR;
+    }
+    else if (ret == NE_OK) {
+        const char *value;
+
+        value = ne_get_response_header(req, "Last-Modified");
+        if (value)
+            *modtime = ne_httpdate_parse(value);
+
+        value = ne_get_response_header(req, "ETag");
+        if (value && *value)
+            *etag = ne_strdup(value);
     }
 
+    ne_request_destroy(req);
+    return ret;
+}
+
+/* PUT, conditional on the resource having the entity tag 'etag' if
+ * that is non-NULL; 412 Precondition Failed gives NE_FAILED. */
+static int put_if_match(ne_session *sess, const char *uri, int fd,
+                        const char *etag)
+{
+    ne_request *req;
+    struct stat st;
+    int ret;
+
+    if (fstat(fd, &st) < 0) {
+        int errnum = errno;
+        ne_set_error(sess, _("Could not stat file: %s"), strerror(errnum));
+        return NE_ERROR;
+    }
+
+    req = ne_request_create(sess, "PUT", uri);
+    if (etag)
+        ne_add_request_header(req, "If-Match", etag);
+    ne_set_request_body_fd(req, fd, 0, st.st_size);
+
     ret = ne_request_dispatch(req);
-    
+
     if (ret == NE_OK) {
-	if (ne_get_status(req)->code == 412) {
-	    ret = NE_FAILED;
-	} else if (ne_get_status(req)->klass != 2) {
-	    ret = NE_ERROR;
-	}
+        if (ne_get_status(req)->code == 412) {
+            ret = NE_FAILED;
+        }
+        else if (ne_get_status(req)->klass != 2) {
+            ret = NE_ERROR;
+        }
     }
 
     ne_request_destroy(req);
@@ -414,43 +454,101 @@ static int put_if_unmodified(ne_session *sess, const char *uri, int fd,
     return ret;
 }
 
-static int 
-file_upload_cond(void *session, const char *local, const char *remote,
-		 int ascii, time_t t)
+/* Conditional PUT.  If a strong entity tag of the resource was
+ * stored, use If-Match with it.  Otherwise, check with a HEAD request
+ * that the resource is unchanged: that its entity tag matches the
+ * stored weak entity tag (using the weak comparison function), or, if
+ * none was stored, that its modification time matches the stored
+ * time.  Then use If-Match with the entity tag returned by HEAD if it
+ * is strong, to catch any change made since; if it is not, the PUT
+ * is unconditional.
+ *
+ * If-Unmodified-Since is not used, since some servers (notably
+ * Apache httpd mod_dav) compare it with the current time for a PUT,
+ * so the condition fails whenever the resource was stored in an
+ * earlier second. */
+static int put_cond(ne_session *sess, const char *uri, int fd,
+                    const struct file_state *server)
+{
+    time_t modtime;
+    char *etag;
+    int ret;
+
+    if (server->etag && !ETAG_IS_WEAK(server->etag))
+        return put_if_match(sess, uri, fd, server->etag);
+
+    /* NE_FAILED here if the resource has been deleted. */
+    ret = head_state(sess, uri, &modtime, &etag);
+    if (ret != NE_OK)
+        return ret;
+
+    if (server->etag && etag) {
+        if (strcmp(ETAG_OPAQUE(etag), ETAG_OPAQUE(server->etag)) != 0)
+            ret = NE_FAILED;
+    }
+    else if (modtime == -1 || server->time == -1) {
+        ne_set_error(sess, _("Could not determine whether the remote "
+                             "file has changed"));
+        ret = NE_ERROR;
+    }
+    else if (modtime != server->time) {
+        ret = NE_FAILED;
+    }
+
+    if (ret == NE_OK) {
+        ret = put_if_match(sess, uri, fd,
+                           etag && !ETAG_IS_WEAK(etag) ? etag : NULL);
+    }
+
+    if (etag)
+        ne_free(etag);
+    return ret;
+}
+
+static int file_upload_cond(void *session, const char *local,
+                            const char *remote, int ascii,
+                            const struct file_state *server)
 {
     ne_session *sess = session;
     int ret, fd = open(local, O_RDONLY | OPEN_BINARY_FLAGS);
     char *eremote;
 
     if (fd < 0) {
-	syserr(sess, _("Could not open file"), errno);
-	return SITE_ERRORS;
+        syserr(sess, _("Could not open file"), errno);
+        return SITE_ERRORS;
     }
-    
+
     eremote = ne_path_escape(remote);
     PROGRESS_UPLOAD;
-    ret = h2s(sess, put_if_unmodified(sess, eremote, fd, t));
+    ret = h2s(sess, put_cond(sess, eremote, fd, server));
     DISABLE_PROGRESS;
     free(eremote);
-    
+
     (void) close(fd);
 
     return ret;
 }
 
-static int file_get_modtime(void *session, const char *remote, time_t *modtime)
+static int file_get_server_state(void *session, const char *remote,
+                                 struct file_state *server)
 {
     ne_session *sess = session;
     int ret;
     char *eremote;
- 
+
     eremote = ne_path_escape(remote);
-    ret = ne_getmodtime(sess,eremote,modtime);
+    ret = head_state(sess, eremote, &server->time, &server->etag);
     free(eremote);
+
+    if (ret == NE_OK && server->time == -1 && server->etag == NULL) {
+        ne_set_error(sess, _("Server did not give a modification time "
+                             "or entity tag"));
+        ret = NE_ERROR;
+    }
 
     return h2s(sess, ret);
 }
-    
+
 static int file_download(void *session, const char *local, const char *remote,
 			 int ascii) 
 {
@@ -745,7 +843,7 @@ const struct proto_driver dav_driver = {
     file_move,
     file_upload,
     file_upload_cond,
-    file_get_modtime,
+    file_get_server_state,
     file_download,
     file_read,
     file_delete,

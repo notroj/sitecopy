@@ -86,18 +86,19 @@ static int file_upload(void *session, const char *local, const char *remote, int
     return f2s(ftp_put(sess, local, remote, ascii));
 }
 
-static int file_upload_cond(void *session,
-			    const char *local, const char *remote,
-			    int ascii, time_t t)
+static int file_upload_cond(void *session, const char *local,
+                            const char *remote, int ascii,
+                            const struct file_state *server)
 {
     ftp_session *sess = session;
-    return f2s(ftp_put_cond(sess, local, remote, ascii, t));
+    return f2s(ftp_put_cond(sess, local, remote, ascii, server->time));
 }
 
-static int file_get_modtime(void *session, const char *remote, time_t *modtime)
+static int file_get_server_state(void *session, const char *remote,
+                                 struct file_state *server)
 {
     ftp_session *sess = session;
-    return f2s(ftp_get_modtime(sess, remote, modtime));
+    return f2s(ftp_get_modtime(sess, remote, &server->time));
 }
     
 static int file_download(void *session, const char *local, const char *remote,
@@ -166,7 +167,7 @@ const struct proto_driver ftp_driver = {
     file_move,
     file_upload,
     file_upload_cond,
-    file_get_modtime,
+    file_get_server_state,
     file_download,
     file_read,
     file_delete,

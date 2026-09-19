@@ -92,10 +92,6 @@ PROTOCOL_ONLY = {
 # tests are marked as strict xfails for the matching configurations,
 # so that fixing the bug turns them into passing tests.
 KNOWN_BUGS = [
-    ("dav", "safe", {"test_update_cycle", "test_safe_unchanged_remote"},
-     "safe mode uses If-Unmodified-Since, which Apache mod_dav evaluates "
-     "against the current time, so a conditional upload in a later second "
-     "than the last upload is refused"),
 ]
 
 def known_bug(test_name, config):

@@ -282,14 +282,15 @@ static int file_upload(void *session, const char *local, const char *remote,
     return run_sftp(sess, "put %s %s", local, remote);
 }
 
-static int file_upload_cond(void *session,
-			    const char *local, const char *remote,
-			    int ascii, time_t t)
+static int file_upload_cond(void *session, const char *local,
+                            const char *remote, int ascii,
+                            const struct file_state *server)
 {
     return SITE_UNSUPPORTED;
 }
 
-static int file_get_modtime(void *sess, const char *remote, time_t *modtime)
+static int file_get_server_state(void *sess, const char *remote,
+                                 struct file_state *server)
 {
     return SITE_UNSUPPORTED;
 }
@@ -413,7 +414,7 @@ const struct proto_driver sftp_driver = {
     file_move,
     file_upload,
     file_upload_cond,
-    file_get_modtime,
+    file_get_server_state,
     file_download,
     file_read,
     file_delete,

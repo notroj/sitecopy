@@ -232,6 +232,8 @@ struct file_state {
     time_t time; /* the last-modification time of the file */
     off_t size; /* the size of the file */
     mode_t mode; /* the protection modes & 0777 of the file */
+    char *etag; /* the entity tag of the file on the server, or NULL
+                 * if unknown; only used for the server state */
     unsigned int exists:1; /* whether the file exists in this state or not */
     unsigned int ascii:1; /* whether the file is 'ASCII' or not */
 };

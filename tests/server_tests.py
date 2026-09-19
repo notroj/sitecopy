@@ -112,10 +112,10 @@ def test_safe_unchanged_remote(site):
     time.sleep(2)
     (site["local"] / "page.txt").write_text("Changed locally\n")
     update_and_check(site)
+    # Again, straight after the last upload.
+    (site["local"] / "page.txt").write_text("Changed locally, again\n")
+    update_and_check(site)
 
-@pytest.mark.xfail(strict=True, reason="the stored state reader carries "
-                   "the server modification time of one file over to the "
-                   "next file which has none")
 def test_safe_enabled_later(site):
     # Files uploaded before safe mode was enabled have no recorded
     # server modification time, so are uploaded unconditionally.

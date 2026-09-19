@@ -189,8 +189,15 @@ static int file_get_modtime(void *session, const char *remote, time_t *modtime)
     return ret;
 }
 
-static int file_upload_cond(void *session, const char *local, 
-			    const char *remote, int ascii, time_t time)
+static int file_get_server_state(void *session, const char *remote,
+                                 struct file_state *server)
+{
+    return file_get_modtime(session, remote, &server->time);
+}
+
+static int file_upload_cond(void *session, const char *local,
+                            const char *remote, int ascii,
+                            const struct file_state *server)
 {
     /* get modtime */
     time_t mtime;
@@ -200,9 +207,11 @@ static int file_upload_cond(void *session, const char *local,
 
     if (ret != SITE_OK) {
         ret = SITE_FAILED;
-    } else if (mtime != time) {
+    }
+    else if (mtime != server->time) {
         ret = SITE_FAILED;
-    } else {
+    }
+    else {
         ret = file_upload(session, local, remote, ascii);
     }
 
@@ -485,7 +494,7 @@ const struct proto_driver vfs_driver = {
     file_move,
     file_upload,
     file_upload_cond,
-    file_get_modtime,
+    file_get_server_state,
     file_download,
     file_read,
     file_delete,

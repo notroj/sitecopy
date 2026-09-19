@@ -374,22 +374,29 @@ void file_state_copy(struct file_state *dest, const struct file_state *src,
     file_state_destroy(dest);
     memcpy(dest, src, sizeof(struct file_state));
     if (src->linktarget != NULL) {
-	dest->linktarget = ne_strdup(src->linktarget);
+        dest->linktarget = ne_strdup(src->linktarget);
     }
     if (src->filename != NULL) {
-	dest->filename = ne_strdup(src->filename);
+        dest->filename = ne_strdup(src->filename);
+    }
+    if (src->etag != NULL) {
+        dest->etag = ne_strdup(src->etag);
     }
 }
 
 void file_state_destroy(struct file_state *state)
 {
     if (state->linktarget != NULL) {
-	free(state->linktarget);
-	state->linktarget = NULL;
+        free(state->linktarget);
+        state->linktarget = NULL;
     }
     if (state->filename != NULL) {
-	free(state->filename);
-	state->filename = NULL;
+        free(state->filename);
+        state->filename = NULL;
+    }
+    if (state->etag != NULL) {
+        free(state->etag);
+        state->etag = NULL;
     }
 }
 
