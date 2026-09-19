@@ -2,6 +2,12 @@ name: Build and test
 
 on: [pull_request]
 
+# Cancel any run still in progress for the same pull request when a
+# new one starts.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   build:
     runs-on: ${{ matrix.os }}
@@ -27,4 +33,32 @@ jobs:
                 ${{ matrix.warnings && 'EXTRA_CFLAGS=-Werror' || '' }}
     - run: make install
       if: ${{ matrix.install }}
+    - run: make check
+
+  # One-off builds with AddressSanitizer and UndefinedBehaviorSanitizer,
+  # using the bundled neon so that it is instrumented too.  Errors
+  # abort sitecopy, failing the tests.  Leak detection is disabled
+  # until the remaining leaks (e.g. the FTP session is never freed)
+  # are fixed.
+  sanitize:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        sanitizer: [address, undefined]
+    env:
+      ASAN_OPTIONS: detect_leaks=0:abort_on_error=1
+      UBSAN_OPTIONS: print_stacktrace=1:halt_on_error=1
+    steps:
+    - uses: actions/checkout@v6
+      with:
+        submodules: true
+    - run: sudo apt-get update
+    - run: sudo apt-get -y install autopoint gettext python3-pytest
+    - run: bash -ex ./.release.sh master
+    - run: ./autogen.sh
+    - run: ./configure --with-included-neon --with-ssl=openssl
+                       CFLAGS="-g -O1 -fno-omit-frame-pointer -fsanitize=${{ matrix.sanitizer }} -fno-sanitize-recover=all"
+                       LDFLAGS="-fsanitize=${{ matrix.sanitizer }}"
+    - run: make
     - run: make check
