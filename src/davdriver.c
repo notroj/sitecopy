@@ -386,27 +386,29 @@ static int put_if_unmodified(ne_session *sess, const char *uri, int fd,
     /* Add in the conditional header */
     ne_add_request_header(req, "If-Unmodified-Since", date);
     ne_free(date);
-    
+
     {
         struct stat st;
 
         if (fstat(fd, &st) < 0) {
             int errnum = errno;
             ne_set_error(sess, _("Could not stat file: %s"), strerror(errnum));
+            ne_request_destroy(req);
             return NE_ERROR;
         }
-        
+
         ne_set_request_body_fd(req, fd, 0, st.st_size);
     }
 
     ret = ne_request_dispatch(req);
-    
+
     if (ret == NE_OK) {
-	if (ne_get_status(req)->code == 412) {
-	    ret = NE_FAILED;
-	} else if (ne_get_status(req)->klass != 2) {
-	    ret = NE_ERROR;
-	}
+        if (ne_get_status(req)->code == 412) {
+            ret = NE_FAILED;
+        }
+        else if (ne_get_status(req)->klass != 2) {
+            ret = NE_ERROR;
+        }
     }
 
     ne_request_destroy(req);
