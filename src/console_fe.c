@@ -382,48 +382,48 @@ static void parse_cmdline(int argc, char *argv[])
     int firstlist = false;
     extern char *optarg;
     extern int optind;
-    const static char *shortopts = 
+    const static char *shortopts =
 #ifdef NE_DEBUGGING
-	"d:g:"
+        "d:g:"
 #endif
-	"acefhiklonp:qr:suvVyZ"; /* available: bgjmntwx */
+        "acefhiklonp:qr:suvVyZ"; /* available: bgjmntwx */
     const static struct option longopts[] = {
-	/* Operation modes */
-	{ "update", no_argument, NULL, 'u' },
-	{ "verify", no_argument, NULL, 'e' },
-	{ "initialize", no_argument, NULL, 'i' },
-	{ "fetch", no_argument, NULL, 'f' },
-	{ "synchronize", no_argument, NULL, 's' },
-	{ "list", no_argument, NULL, 'l' },
-	{ "flatlist", no_argument, NULL, 'Z' },
-	{ "keep-going", no_argument, NULL, 'k' },
+        /* Operation modes */
+        { "update", no_argument, NULL, 'u' },
+        { "verify", no_argument, NULL, 'e' },
+        { "initialize", no_argument, NULL, 'i' },
+        { "fetch", no_argument, NULL, 'f' },
+        { "synchronize", no_argument, NULL, 's' },
+        { "list", no_argument, NULL, 'l' },
+        { "flatlist", no_argument, NULL, 'Z' },
+        { "keep-going", no_argument, NULL, 'k' },
         { "dry-run", no_argument, NULL, 'n' },
-	{ "show-progress", no_argument, NULL, 'o' },
-/*	{ "force-overwrite", no_argument, NULL, 't' }, */
-	{ "help", no_argument, NULL, 'h' },
-	{ "catchup", no_argument, NULL, 'c' },
-	{ "view", no_argument, NULL, 'v' },
-	/* Options */
-	{ "quiet", no_argument, &quiet, 1 },
-	{ "silent", no_argument, &quiet, 2 },
-	{ "rcfile", required_argument, NULL, 'r' },
-	{ "storepath", required_argument, NULL, 'p' },
+        { "show-progress", no_argument, NULL, 'o' },
+/*      { "force-overwrite", no_argument, NULL, 't' }, */
+        { "help", no_argument, NULL, 'h' },
+        { "catchup", no_argument, NULL, 'c' },
+        { "view", no_argument, NULL, 'v' },
+        /* Options */
+        { "quiet", no_argument, &quiet, 1 },
+        { "silent", no_argument, &quiet, 2 },
+        { "rcfile", required_argument, NULL, 'r' },
+        { "storepath", required_argument, NULL, 'p' },
 #ifdef NE_DEBUGGING
-	{ "debug", required_argument, NULL, 'd' },
-	{ "logfile", required_argument, NULL, 'g' },
+        { "debug", required_argument, NULL, 'd' },
+        { "logfile", required_argument, NULL, 'g' },
 #endif
-	{ "prompting", no_argument, NULL, 'y' },
-	{ "allsites", no_argument, NULL, 'a' },
-	{ "version", no_argument, NULL, 'V' },
-	{ 0, 0, 0, 0 }
+        { "prompting", no_argument, NULL, 'y' },
+        { "allsites", no_argument, NULL, 'a' },
+        { "version", no_argument, NULL, 'V' },
+        { 0, 0, 0, 0 }
     };
-	
+
 #ifdef NE_DEBUGGING
     /* Debugging defaults to off and stderr */
     int use_debug_mask = 0;
     FILE *use_debug_stream = stderr;
 #endif
-    
+
     /* Defaults */
     allsites = prompting = false;
     show_progress = false;
@@ -431,44 +431,46 @@ static void parse_cmdline(int argc, char *argv[])
     progname = base_name(argv[0]);
 
     /* Read the cmdline args */
-    while ((optc = getopt_long(argc, argv, 
-			       shortopts, longopts, NULL)) != -1) {
-	switch (optc) {
-	case 0:
-	    /* Make the action list mode if they gave --flatlist */
-	    if (listflat == true)
-		action = action_list;
-	    break;
-	case 'Z':
-	    listflat = true;
-	    set_action(action_list);
-	    break;
-	case 'l':
-	    if (firstlist == false) {
-		set_action(action_list);
-		firstlist = true;
-	    } else {
-		listflat = true;
-	    }
-	    break;
-	case 's': set_action(action_synch); break;
-	case 'e': set_action(action_verify); break;
-	case 'f': set_action(action_fetch); break;
-	case 'i': set_action(action_init); break;
-	case 'c': set_action(action_catchup); break;
-	case 'u': set_action(action_update); break;
-	case 'v': 
-	    set_action(action_view);
-	    break;
-	case 'q': quiet++; break;
-	case 'r': 
-	    if (strlen(optarg) != 0) {
-		rcfile = ne_strdup(optarg);
-	    } else {
-		usage();
-		exit(-1);
-	    }
-	    break;
+    while ((optc = getopt_long(argc, argv,
+                               shortopts, longopts, NULL)) != -1) {
+        switch (optc) {
+        case 0:
+            /* Make the action list mode if they gave --flatlist */
+            if (listflat == true)
+                action = action_list;
+            break;
+        case 'Z':
+            listflat = true;
+            set_action(action_list);
+            break;
+        case 'l':
+            if (firstlist == false) {
+                set_action(action_list);
+                firstlist = true;
+            }
+            else {
+                listflat = true;
+            }
+            break;
+        case 's': set_action(action_synch); break;
+        case 'e': set_action(action_verify); break;
+        case 'f': set_action(action_fetch); break;
+        case 'i': set_action(action_init); break;
+        case 'c': set_action(action_catchup); break;
+        case 'u': set_action(action_update); break;
+        case 'v':
+            set_action(action_view);
+            break;
+        case 'q': quiet++; break;
+        case 'r':
+            if (strlen(optarg) != 0) {
+                rcfile = ne_strdup(optarg);
+            }
+            else {
+                usage();
+                exit(-1);
+            }
+            break;
         case 'p':
             if (optarg[0] == '\0') {
                 usage();
@@ -480,59 +482,60 @@ static void parse_cmdline(int argc, char *argv[])
                 copypath = ne_strdup(optarg);
             break;
 #ifdef NE_DEBUGGING
-	case 'd': {
-	    char errbuf[20];
-	    /* set debugging level */
-	    
-	    if (map_debug_options(optarg, &use_debug_mask, errbuf)) {
-		printf(_("%s: Error: Debug channel %s not known.\n"),
-		       progname, errbuf );
-		exit(-1);
-	    }
-	} break;
-	case 'g': {
-	    FILE *f = fopen(optarg, "a+");
-	    if (f == NULL) {
-		printf(_("%s: Warning: Could not open `%s' to use as logfile.\n"),
-		       progname, optarg);
-		f = stderr;
-	    } else {
-		use_debug_stream = f;
-		/* TODO: Close this stream when we exit?... welll...
-		 * we *could* do. */
-	    }
-	} break;
+        case 'd': {
+            char errbuf[20];
+            /* set debugging level */
+
+            if (map_debug_options(optarg, &use_debug_mask, errbuf)) {
+                printf(_("%s: Error: Debug channel %s not known.\n"),
+                       progname, errbuf );
+                exit(-1);
+            }
+        } break;
+        case 'g': {
+            FILE *f = fopen(optarg, "a+");
+            if (f == NULL) {
+                printf(_("%s: Warning: Could not open `%s' to use as logfile.\n"),
+                       progname, optarg);
+                f = stderr;
+            }
+            else {
+                use_debug_stream = f;
+                /* TODO: Close this stream when we exit?... welll...
+                 * we *could* do. */
+            }
+        } break;
 #endif
-	case 'y':
-	    prompting = true;
-	    break;
-	case 'k':
-	    keepgoing = true;
-	    break;
-	case 'a':
-	    allsites = true;
-	    break;
+        case 'y':
+            prompting = true;
+            break;
+        case 'k':
+            keepgoing = true;
+            break;
+        case 'a':
+            allsites = true;
+            break;
         case 'n':
             dry_run = true;
             break;
-	case 'o':
-	    show_progress = true;
-	    break;
-	case 'V': 
-	    version();
-	    puts(ne_version_string());
-	    exit(0);
-	case 'h': usage(); exit(0);
-	case '?': 
-	default:
-	    printf(_("Try `%s --help' for more information.\n"), progname);
-	    exit(1);
-	}
+        case 'o':
+            show_progress = true;
+            break;
+        case 'V':
+            version();
+            puts(ne_version_string());
+            exit(0);
+        case 'h': usage(); exit(0);
+        case '?':
+        default:
+            printf(_("Try `%s --help' for more information.\n"), progname);
+            exit(1);
+        }
     }
 
     /* Set the default action mode */
     if (action == action_none)
-	action = action_list;
+        action = action_list;
 
     /* Dry-run mode is only currently supported for --update */
     if (dry_run && action != action_update) {
@@ -550,11 +553,11 @@ static void parse_cmdline(int argc, char *argv[])
 
     /* Get those site names off the end of the cmdline */
     for (numsites = 0 ; optind < argc; optind++) {
-	sitenames[numsites++] = argv[optind];
-	if (numsites == MAXSITES) {
-	    printf(_("%s: Warning: Only %d sites can be specified on the command line!\nExtra entries are being skipped.\n"), progname, MAXSITES);
-	    break;
-	}
+        sitenames[numsites++] = argv[optind];
+        if (numsites == MAXSITES) {
+            printf(_("%s: Warning: Only %d sites can be specified on the command line!\nExtra entries are being skipped.\n"), progname, MAXSITES);
+            break;
+        }
     }
 
 }
@@ -829,30 +832,34 @@ void fe_updated(const struct site_file *file, int success, const char *error)
     upload_sofar += file->local.size;
 
     if (quiet > 0) {
-	if (! success) {
-	    printf(_("Failed to update %s:%c%s\n"), file_name(file), wrap, error);
-	}
-	return;
+        if (! success) {
+            printf(_("Failed to update %s:%c%s\n"), file_name(file), wrap, error);
+        }
+        return;
     }
-    if ((file->type == file_dir) || 
-	(file->diff!=file_changed && file->diff!=file_new)) {
-	if (success) {
-	    printf(_("done.\n"));
-	} else {
-	    printf(_("failed:%c%s\n"), wrap, error);
-	}
-    } else {
-	if (success) {
-	    if (show_progress) {
-		float prog = (100 * (float)upload_sofar) / (float)upload_total;
-		if (upload_total == 0) prog = 0;
-		printf(("] done. (%.0f%% finished)\n"), prog);
-	    } else {
-		printf(_("] done.\n"));
-	    }
-	} else {
-	    printf(_("] failed:%c%s\n"), wrap, error);
-	}
+    if (file->type == file_dir
+        || (file->diff != file_changed && file->diff != file_new)) {
+        if (success) {
+            printf(_("done.\n"));
+        }
+        else {
+            printf(_("failed:%c%s\n"), wrap, error);
+        }
+    }
+    else {
+        if (success) {
+            if (show_progress) {
+                float prog = (100 * (float)upload_sofar) / (float)upload_total;
+                if (upload_total == 0) prog = 0;
+                printf("] done. (%.0f%% finished)\n", prog);
+            }
+            else {
+                printf(_("] done.\n"));
+            }
+        }
+        else {
+            printf(_("] failed:%c%s\n"), wrap, error);
+        }
     }
 }
 
@@ -1215,7 +1222,7 @@ static void init(int argc, char **argv)
     init_sites();
 }
 
-static int act_on_site(struct site *site, enum action act) 
+static int act_on_site(struct site *site, enum action act)
 {
     int ret = 0, verify_removed;
 
@@ -1224,122 +1231,130 @@ static int act_on_site(struct site *site, enum action act)
 
     switch (act) {
     case action_update:
-	if (!site->remote_is_different) {
-	    if (quiet == 0) {
-		printf(_("%s: Nothing to do - no changes found.\n"), 
-		       progname);
-	    }
-	} else if (dry_run) {
+        if (!site->remote_is_different) {
+            if (quiet == 0) {
+                printf(_("%s: Nothing to do - no changes found.\n"),
+                       progname);
+            }
+        }
+        else if (dry_run) {
             extern const struct proto_driver null_driver;
             site->driver = &null_driver;
             ret = issue_error(site, act, site_update(site));
-        } else {
-	    if (site_open_storage_file(site) == NULL) {
-		printf(_("%s: Error: Could not open storage file for writing (%s)\n"
-			  "%s: Error: %s\n"
-			  "%s: Will not update site `%s'.\n"), 
-			progname, site->infofile,
-			progname, strerror(errno),
-			progname, site->name);
-		ret = -1;
-	    } else {
-		current_site = site;
-		upload_total = site->totalchanged + site->totalnew;
-		upload_sofar = 0;
-		ret = issue_error(site, act, site_update(site));
-		/* hope we don't get signalled here */
-		current_site = NULL;
-		site_write_stored_state(site);
-	    }
-	}
-	break;
+        }
+        else {
+            if (site_open_storage_file(site) == NULL) {
+                printf(_("%s: Error: Could not open storage file for writing (%s)\n"
+                          "%s: Error: %s\n"
+                          "%s: Will not update site `%s'.\n"),
+                        progname, site->infofile,
+                        progname, strerror(errno),
+                        progname, site->name);
+                ret = -1;
+            }
+            else {
+                current_site = site;
+                upload_total = site->totalchanged + site->totalnew;
+                upload_sofar = 0;
+                ret = issue_error(site, act, site_update(site));
+                /* hope we don't get signalled here */
+                current_site = NULL;
+                site_write_stored_state(site);
+            }
+        }
+        break;
     case action_list:
-	if (listflat) {
-	    site_flatlist(stdout, site);
-	} else {
-	    list_site_changes(site);
-	    if (site->state_method != site->stored_state_method) {
-		printf(_("%s: Warning: Current state method differs from stored in site `%s'.\n%s: All existing files will appear changed (use catchup?).\n"), progname, site->name, progname);
-	    }
-	    if (site->remote_is_different) {
-		int count = site->numchanged + site->numdeleted + 
-		    site->nummoved + site->numnew;
-		if (count > 1) {
-		    printf(_("%s: The remote site needs updating (%d items to update).\n"), progname, count);
-		} else {
-		    printf(_("%s: The remote site needs updating (1 item to update).\n"), progname);
-		}
-	    } else {
-		printf(_("%s: The remote site does not need updating.\n"), progname);
-	    }
-	}
-	ret = site->remote_is_different?1:0;
-	break;
+        if (listflat) {
+            site_flatlist(stdout, site);
+        }
+        else {
+            list_site_changes(site);
+            if (site->state_method != site->stored_state_method) {
+                printf(_("%s: Warning: Current state method differs from stored in site `%s'.\n%s: All existing files will appear changed (use catchup?).\n"), progname, site->name, progname);
+            }
+            if (site->remote_is_different) {
+                int count = site->numchanged + site->numdeleted
+                    + site->nummoved + site->numnew;
+                if (count > 1) {
+                    printf(_("%s: The remote site needs updating (%d items to update).\n"), progname, count);
+                }
+                else {
+                    printf(_("%s: The remote site needs updating (1 item to update).\n"), progname);
+                }
+            }
+            else {
+                printf(_("%s: The remote site does not need updating.\n"), progname);
+            }
+        }
+        ret = site->remote_is_different?1:0;
+        break;
     case action_init:
-	site_initialize(site);
-	site_write_stored_state(site);
-	printf(_("%s: All the files and directories are marked as NOT updated remotely.\n"), progname);
-	break;
+        site_initialize(site);
+        site_write_stored_state(site);
+        printf(_("%s: All the files and directories are marked as NOT updated remotely.\n"), progname);
+        break;
     case action_catchup:
-	site_catchup(site);
-	site_write_stored_state(site);
-	printf(_("%s: All the files and and directories are marked as updated remotely.\n"), progname);
-	break;
+        site_catchup(site);
+        site_write_stored_state(site);
+        printf(_("%s: All the files and and directories are marked as updated remotely.\n"), progname);
+        break;
     case action_fetch:
-	ret = site_fetch(site);
-	if (ret == SITE_OK) {
-	    site_write_stored_state(site);
-	}	    
-	switch (ret) {
-	case SITE_FAILED:
-	    printf(_("%s: Failed to fetch file listing for site `%s':\n"
-		     "%s: %s\n"), progname, site->name,
-		   progname, site->last_error);
-	    ret = -1;
-	    break;
-	default:
-	    ret = issue_error(site, act, ret);
-	    break;
-	} 
-	break;
+        ret = site_fetch(site);
+        if (ret == SITE_OK) {
+            site_write_stored_state(site);
+        }
+        switch (ret) {
+        case SITE_FAILED:
+            printf(_("%s: Failed to fetch file listing for site `%s':\n"
+                     "%s: %s\n"), progname, site->name,
+                   progname, site->last_error);
+            ret = -1;
+            break;
+        default:
+            ret = issue_error(site, act, ret);
+            break;
+        }
+        break;
     case action_verify:
-	ret = site_verify(site, &verify_removed);
-	switch (ret) {
-	case SITE_FAILED:
-	    printf(_("%s: Failed to fetch file listing to verify site `%s':\n"
-		     "%s: %s\n"), progname, site->name, 
-		   progname, site->last_error);
-	    ret = -1;
-	    break;
-	case SITE_ERRORS:
-	    if (verify_removed > 0) {
-		printf(_("%s: Verify found %d files missing from server.\n"),
-		       progname, verify_removed);
-	    }
-	    printf(_("%s: Remote site not synchronized with stored state.\n"), progname);
-	    break;
-	default:
-	    ret = issue_error(site, act, ret);
-	    break;
-	} 
-	break;
+        ret = site_verify(site, &verify_removed);
+        switch (ret) {
+        case SITE_FAILED:
+            printf(_("%s: Failed to fetch file listing to verify site `%s':\n"
+                     "%s: %s\n"), progname, site->name,
+                   progname, site->last_error);
+            ret = -1;
+            break;
+        case SITE_ERRORS:
+            if (verify_removed > 0) {
+                printf(_("%s: Verify found %d files missing from server.\n"),
+                       progname, verify_removed);
+            }
+            printf(_("%s: Remote site not synchronized with stored state.\n"), progname);
+            break;
+        default:
+            ret = issue_error(site, act, ret);
+            break;
+        }
+        break;
     case action_synch:
-	if (!site->local_is_different) {
-	    printf(_("%s: Nothing to do - no changes found.\n"), progname);
-	} else if (site->numunchanged == 0 && site->numdeleted == 0 &&
-		   site->nummoved == 0 && site->numchanged == 0 && 
-		   site->numignored == 0) {
-	    printf(_("%s: Refusing to delete all local files with a synchronize operation.\n"
-		      "%s: Use --update to update the remote site.\n"),
-		    progname, progname);
-	} else {
-	    ret = issue_error(site, act, site_synch(site));
-	}
-	break;
+        if (!site->local_is_different) {
+            printf(_("%s: Nothing to do - no changes found.\n"), progname);
+        }
+        else if (site->numunchanged == 0 && site->numdeleted == 0
+                 && site->nummoved == 0 && site->numchanged == 0
+                 && site->numignored == 0) {
+            printf(_("%s: Refusing to delete all local files with a synchronize operation.\n"
+                      "%s: Use --update to update the remote site.\n"),
+                    progname, progname);
+        }
+        else {
+            ret = issue_error(site, act, site_synch(site));
+        }
+        break;
     default:
-	printf(_("%s: in act_on_site\n%s"), progname, contact_mntr);
-	ret = -1;
-	break;
+        printf(_("%s: in act_on_site\n%s"), progname, contact_mntr);
+        ret = -1;
+        break;
     }
     return ret;
 }
