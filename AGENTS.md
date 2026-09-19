@@ -210,6 +210,11 @@ Rules:
   `* src/lsparser.c (ls_init): Initialize curdir to empty string.`
 - Mention related bug numbers (e.g. "issue #123") in the
   explanation or the relevant entry.
+- Commits written with an AI coding agent end with a single
+  `Co-Authored-By:` trailer naming the model.  Never add any other
+  trailer or link, such as a `Claude-Session:` line or a session URL,
+  to commit messages; nor add session URLs to pull request
+  descriptions.
 
 Example:
 
