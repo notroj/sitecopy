@@ -60,38 +60,46 @@ static int run_rcmd(enum rcommand rcmd,
     ne_attribute((format (printf, 3, 4)));
 
 static int run_rcmd(enum rcommand rcmd,
-                    rsh_session *sess, const char *template, ...) 
+                    rsh_session *sess, const char *template, ...)
 {
     va_list params;
     char *cmd;
     size_t len;
-    char *username = sess->site->server.username;
+    const char *username = sess->site->server.username;
+    int ret;
 
     va_start(params, template);
     len = ne_vsnprintf(sess->buf, BUFSIZ, template, params);
     va_end(params);
 
-    if (len >= BUFSIZ) return SITE_FAILED;
+    /* ne_vsnprintf returns the length of the (possibly truncated)
+     * string written, so a full buffer means truncation. */
+    if (len >= BUFSIZ - 1) return SITE_FAILED;
 
     if (rcmd == RCP) {
         cmd = ne_concat(sess->rcp_cmd, "  2>/dev/null ", sess->buf, NULL);
-    } else if (username) {
-        cmd = ne_concat(sess->rsh_cmd, " -l ", username, "  2>/dev/null ", 
+    }
+    else if (username) {
+        cmd = ne_concat(sess->rsh_cmd, " -l ", username, "  2>/dev/null ",
                         sess->site->server.hostname, " ", sess->buf, NULL);
-    } else {
-        cmd = ne_concat(sess->rsh_cmd, " 2>/dev/null ", sess->site->server.hostname, 
-                        " ", sess->buf, NULL);
+    }
+    else {
+        cmd = ne_concat(sess->rsh_cmd, " 2>/dev/null ",
+                        sess->site->server.hostname, " ", sess->buf, NULL);
     }
 
     NE_DEBUG(DEBUG_RSH, "rcmd: %s\n", cmd);
-    
+
     if (rcmd == RSH_PIPE_READ || rcmd == RSH_PIPE_WRITE) {
         sess->fp = popen(cmd, rcmd == RSH_PIPE_READ ? "r" : "w");
-        return sess->fp != NULL ? SITE_OK : SITE_FAILED;
-    } else {
-        return system(cmd) == 0 ? SITE_OK : SITE_FAILED;
+        ret = sess->fp != NULL ? SITE_OK : SITE_FAILED;
     }
-    
+    else {
+        ret = system(cmd) == 0 ? SITE_OK : SITE_FAILED;
+    }
+
+    ne_free(cmd);
+    return ret;
 }
 
 static int run_finish(rsh_session *sess)
