@@ -111,7 +111,7 @@ struct ftp_session_s {
     time_t get_modtime;
     
     /* remember these... we may have to log in more than once. */
-    char username[FE_LBUFSIZ], password[FE_LBUFSIZ];
+    char *username, *password;
 
     unsigned int echo_response:1;
 
@@ -569,22 +569,21 @@ void ftp_set_usecwd(ftp_session *sess, int use_cwd)
 
 int ftp_set_server(ftp_session *sess, struct site_host *server)
 {
-    if (server->username) {
-	strcpy(sess->username, server->username);
-    }
-    if (server->password) {
-	strcpy(sess->password, server->password);
-    }
+    if (server->username)
+        sess->username = ne_strdup(server->username);
+    if (server->password)
+        sess->password = ne_strdup(server->password);
     sess->hostname = server->hostname;
     sess->pi_port = server->port;
     fe_connection(fe_namelookup, server->hostname);
     sess->pi_addr = ne_addr_resolve(server->hostname, 0);
     if (ne_addr_result(sess->pi_addr)) {
-	char buf[256];
-	ne_snprintf(sess->error, sizeof sess->error,
-		    "Could not resolve server `%s': %s", server->hostname,
-		    ne_addr_error(sess->pi_addr, buf, sizeof buf));
-	return FTP_LOOKUP;
+        char buf[256];
+
+        ne_snprintf(sess->error, sizeof sess->error,
+                    "Could not resolve server `%s': %s", server->hostname,
+                    ne_addr_error(sess->pi_addr, buf, sizeof buf));
+        return FTP_LOOKUP;
     }
     return FTP_OK;
 }
@@ -1035,23 +1034,36 @@ ftp_read_file(ftp_session *sess, const char *remotefile,
  * authentication then that is a fatal error. */
 static int authenticate(ftp_session *sess)
 {
+    char *cmd;
     int ret;
-    char buf[1024];
-    
-    /* Fetch creds from user if necessary. */
-    if (strlen(sess->username) == 0 || strlen(sess->password) == 0) {
-	if (fe_login(fe_login_server, NULL, sess->hostname,
-		     sess->username, sess->password))
-	    return FTP_ERROR;
-    }
-    NE_DEBUG(DEBUG_FTP,  "FTP: Sending 'USER %s':\n", sess->username);
 
-    ne_snprintf(buf, sizeof buf, "USER %s", sess->username);
-    ret = run_command(sess, buf);
+    /* Fetch creds from user if necessary. */
+    if (sess->username == NULL || sess->username[0] == '\0'
+        || sess->password == NULL || sess->password[0] == '\0') {
+        char username[FE_LBUFSIZ], password[FE_LBUFSIZ];
+
+        ne_strnzcpy(username, sess->username ? sess->username : "",
+                    sizeof username);
+        if (fe_login(fe_login_server, NULL, sess->hostname,
+                     username, password))
+            return FTP_ERROR;
+
+        if (sess->username) ne_free(sess->username);
+        if (sess->password) ne_free(sess->password);
+        sess->username = ne_strdup(username);
+        sess->password = ne_strdup(password);
+    }
+
+    NE_DEBUG(DEBUG_FTP, "FTP: Sending 'USER %s':\n", sess->username);
+    cmd = ne_concat("USER ", sess->username, NULL);
+    ret = run_command(sess, cmd);
+    ne_free(cmd);
+
     if (ret == FTP_NEEDPASSWORD) {
-	NE_DEBUG(DEBUG_FTP,  "FTP: Sending PASS command...\n");
-        ne_snprintf(buf, sizeof buf, "PASS %s", sess->password);
-	ret = run_command(sess, buf);
+        NE_DEBUG(DEBUG_FTP, "FTP: Sending PASS command...\n");
+        cmd = ne_concat("PASS ", sess->password, NULL);
+        ret = run_command(sess, cmd);
+        ne_free(cmd);
     }
 
     return ret;
