@@ -126,9 +126,6 @@ struct ftp_session_s {
 #endif
 };
 
-#define FTP_ERR(x) do { \
-int _ftp_err = (x); if (_ftp_err != FTP_OK) return _ftp_err; } while (0)
-
 /* Sets error string */
 #define ftp_seterror(sess_, errstr_) do {                       \
     ne_strnzcpy((sess_)->error, (errstr_), sizeof sess->error); \

@@ -33,7 +33,6 @@
 
 /* Normally defined in xmalloc.c */
 # define xmalloc malloc
-# define xrealloc realloc
 
 #define POPBUFSIZE BUFSIZ
 

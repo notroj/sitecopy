@@ -145,6 +145,9 @@ static struct site *current_site; /* this is used to save the state if we
 
 static int upload_total, upload_sofar, in_transfer;
 
+/* Driver used for --dry-run. */
+extern const struct proto_driver null_driver;
+
 /* User-specified options */
 static int quiet; /* How quiet do they want us to be? */
 static int allsites, /* Do they want all sites to be operated on? */
@@ -380,14 +383,12 @@ static void parse_cmdline(int argc, char *argv[])
 {
     int optc;
     int firstlist = false;
-    extern char *optarg;
-    extern int optind;
-    const static char *shortopts =
+    static const char *shortopts =
 #ifdef NE_DEBUGGING
         "d:g:"
 #endif
         "acefhiklonp:qr:suvVyZ"; /* available: bgjmntwx */
-    const static struct option longopts[] = {
+    static const struct option longopts[] = {
         /* Operation modes */
         { "update", no_argument, NULL, 'u' },
         { "verify", no_argument, NULL, 'e' },
@@ -849,7 +850,7 @@ void fe_updated(const struct site_file *file, int success, const char *error)
     else {
         if (success) {
             if (show_progress) {
-                float prog = (100 * (float)upload_sofar) / (float)upload_total;
+                double prog = (100 * (double)upload_sofar) / (double)upload_total;
                 if (upload_total == 0) prog = 0;
                 printf("] done. (%.0f%% finished)\n", prog);
             }
@@ -1238,7 +1239,6 @@ static int act_on_site(struct site *site, enum action act)
             }
         }
         else if (dry_run) {
-            extern const struct proto_driver null_driver;
             site->driver = &null_driver;
             ret = issue_error(site, act, site_update(site));
         }
