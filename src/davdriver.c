@@ -548,9 +548,12 @@ static int file_chmod(void *session, const char *remote, mode_t mode)
 static char *coll_escape(const char *dirname)
 {
     char *ret = ne_path_escape(dirname);
+
     if (!ne_path_has_trailing_slash(ret)) {
-	ret = ne_realloc(ret, strlen(ret) + 2);
-	strcat(ret, "/");
+        char *slashed = ne_concat(ret, "/", NULL);
+
+        ne_free(ret);
+        ret = slashed;
     }
     return ret;
 }
