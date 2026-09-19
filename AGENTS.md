@@ -24,9 +24,11 @@ The test suite is written in Python using pytest and runs the built
 
     make check
 
-`make check` builds `sitecopy`, builds the podman container image used
-by the WebDAV tests (`tests/httpd-Containerfile`, stamped by
-`tests/httpd-container-stamp`), then runs `pytest-3 -v tests/`.
+`make check` builds `sitecopy`, builds the podman container images
+used by the WebDAV and FTP tests (`tests/httpd-Containerfile` and
+`tests/vsftpd-Containerfile`, stamped by `tests/*-container-stamp`),
+then runs `pytest-3 -v tests/`.  If an image has been removed but its
+stamp file remains, delete the stamp to force a rebuild.
 
 To run a subset directly (after `make`), from the top-level directory:
 
@@ -35,14 +37,18 @@ To run a subset directly (after `make`), from the top-level directory:
 
 Test layout:
 
-- `tests/conftest.py` — shared fixtures: `sitecopy_env` (a temporary
-  rcfile, local directory and storage directory for a site named
-  `testsite`) and `httpd_container` (runs the WebDAV server container
-  on port 8080).
+- `tests/conftest.py` — shared fixtures: `sitecopy_env` and
+  `sitecopy_ftp_env` (a temporary rcfile, local directory and storage
+  directory for a WebDAV or FTP site named `testsite`), and
+  `httpd_container` and `vsftpd_container` (run the WebDAV server on
+  port 8080, and the FTP server on port 2121 with passive ports
+  21100-21109).
 - `tests/common.py` — helpers such as `run_sitecopy()`,
-  `assert_no_update()` and `assert_update_success()`.
+  `assert_no_update()`, `assert_update_success()` and
+  `check_update_cycle()`.
 - `test_basic.py` — option handling and local state, no server needed.
 - `test_dav.py` — WebDAV against the httpd container (needs podman).
+- `test_vsftpd.py` — FTP against the vsftpd container (needs podman).
 - `test_ftp.py` — FTP against a scripted in-process FTP server.
 - `test_false_success.py` — SFTP failure handling, using a wrapper
   script in place of ssh/sftp; no network access needed.
