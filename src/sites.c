@@ -1372,6 +1372,33 @@ struct site_file **site_sorted_files_list(struct site *site, file_filter_fn filt
     return sorted;
 }
 
+int site_verify_certificate(void *userdata, int failures,
+                            const ne_ssl_certificate *cert)
+{
+    struct site *site = userdata;
+
+    if (fe_accept_cert(cert, failures)) {
+        /* Not accepted by user => fail verification. */
+        return -1;
+    }
+
+    if (ne_ssl_cert_write(cert, site->certfile)) {
+        fe_warning(_("Could not write SSL certificate"),
+                   NULL, site->certfile);
+    }
+
+    return 0;
+}
+
+int site_load_certificate(struct site *site)
+{
+    if (access(site->certfile, R_OK) != 0)
+        return 0;
+
+    site->server_cert = ne_ssl_cert_read(site->certfile);
+    return site->server_cert == NULL;
+}
+
 void site_sock_progress_cb(void *userdata, ne_off_t progress, ne_off_t total)
 {
     fe_transfer_progress(progress, total);

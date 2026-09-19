@@ -202,25 +202,6 @@ static int h2s(ne_session *sess, int errcode)
     }
 }
 
-/* Callback invoked when SSL server cert verification fails. */
-static int verify_certificate(void *userdata, int failures,
-                              const ne_ssl_certificate *cert)
-{
-    struct site *site = userdata;
-
-    if (fe_accept_cert(cert, failures)) {
-        /* Not accepted by user => fail verification. */
-        return -1;
-    }
-
-    if (ne_ssl_cert_write(cert, site->certfile)) {
-        fe_warning(_("Could not write SSL certificate"),
-                   NULL, site->certfile);
-    }
-
-    return 0;
-}
-
 static int init(void **session, struct site *site)
 {
     ne_session *sess;
@@ -229,28 +210,26 @@ static int init(void **session, struct site *site)
     char *root;
 
     sess = ne_session_create(site->http_secure?"https":"http",
-			     site->server.hostname, site->server.port);
+                             site->server.hostname, site->server.port);
 
     *session = sess;
 
     if (site->http_secure && !ne_has_support(NE_FEATURE_SSL)) {
-	ne_set_error(sess, _("SSL support has not be compiled in."));
-	return SITE_FAILED;
+        ne_set_error(sess, _("SSL support has not be compiled in."));
+        return SITE_FAILED;
     }
 
     if (site->http_secure) {
-        if (access(site->certfile, R_OK) == 0) {
-            site->server_cert = ne_ssl_cert_read(site->certfile);
-            if (site->server_cert == NULL) {
-                ne_set_error(sess, _("Could not load certificate `%s'."),
-                             site->certfile);
-                return SITE_FAILED;
-            }
+        if (site_load_certificate(site)) {
+            ne_set_error(sess, _("Could not load certificate `%s'."),
+                         site->certfile);
+            return SITE_FAILED;
         }
-        else {
+        if (site->server_cert)
+            ne_ssl_trust_cert(sess, site->server_cert);
+        else
             ne_ssl_trust_default_ca(sess);
-        }
-        ne_ssl_set_verify(sess, verify_certificate, site);
+        ne_ssl_set_verify(sess, site_verify_certificate, site);
     }
 
     ne_set_notifier(sess, notify_status, NULL);
@@ -264,12 +243,12 @@ static int init(void **session, struct site *site)
     ne_set_useragent(sess, PACKAGE_NAME "/" PACKAGE_VERSION);
 
     if (site->proxy.hostname) {
-	ne_set_proxy_auth(sess, proxy_auth_cb, &site->proxy);
-	ne_session_proxy(sess, site->proxy.hostname, site->proxy.port);
+        ne_set_proxy_auth(sess, proxy_auth_cb, &site->proxy);
+        ne_session_proxy(sess, site->proxy.hostname, site->proxy.port);
     }
 
     ne_set_server_auth(sess, server_auth_cb, &site->server);
-    
+
     if (site->http_secure && site->client_cert) {
         ne_ssl_client_cert *cc;
 
@@ -300,25 +279,27 @@ static int init(void **session, struct site *site)
     }
 
     if (site->http_tolerant) {
-	/* Skip the OPTIONS, since we ignore failure anyway. */
-	return SITE_OK;
+        /* Skip the OPTIONS, since we ignore failure anyway. */
+        return SITE_OK;
     }
 
     root = ne_path_escape(site->remote_root);
     ret = ne_options(sess, root, &caps);
     ne_free(root);
     if (ret == NE_OK) {
-	if (!caps.dav_class1) {
-	    ne_set_error(sess, 
-			    _("The server does not appear to be a WebDAV server."));
-	    return SITE_FAILED;
-	} else if (site->perms != sitep_ignore && !caps.dav_executable) {
-	    /* Need to set permissions, but the server can't do that */
-	    ne_set_error(sess, 
-			    _("The server does not support the executable live property."));
-	    return SITE_FAILED;
-	}
-    } else {
+        if (!caps.dav_class1) {
+            ne_set_error(sess,
+                            _("The server does not appear to be a WebDAV server."));
+            return SITE_FAILED;
+        }
+        else if (site->perms != sitep_ignore && !caps.dav_executable) {
+            /* Need to set permissions, but the server can't do that */
+            ne_set_error(sess,
+                            _("The server does not support the executable live property."));
+            return SITE_FAILED;
+        }
+    }
+    else {
         ret = h2s(sess, ret);
         if (ret == SITE_ERRORS)
             ret = SITE_FAILED;

@@ -8,6 +8,7 @@ Changes in release 0.17:
  - Apply usecwd for MDTM commands.
  - Stricter validation of EPSV responses.
  - Improve LIST parsing (Haolin Xue, Debian #496988)
+* DAV: Trust the saved server certificate for "http secure" sites.
 * SFTP:
  - Fix hang on connect against OpenSSH 4.2 and later
    (Agustin Martin Domingo, Debian #337122, #447598)

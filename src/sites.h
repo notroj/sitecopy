@@ -580,6 +580,19 @@ int site_file_is_stored(const struct site_file *file);
 struct site_file **site_sorted_files_list(struct site *site, file_filter_fn filter,
                                           file_cmp_fn compare, unsigned *count);
 
+/* Callback invoked when verification of the server's SSL certificate
+ * fails, with the site as 'userdata'; matches ne_ssl_verify_fn.  Asks
+ * the user whether to accept the certificate, saving it to the site's
+ * certificate file if so.  Returns zero if accepted, else non-zero. */
+int site_verify_certificate(void *userdata, int failures,
+                            const ne_ssl_certificate *cert);
+
+/* Loads the server certificate previously accepted for the site, if
+ * any, into site->server_cert.  Returns zero on success, including
+ * if there is no saved certificate, or non-zero if the saved
+ * certificate could not be read. */
+int site_load_certificate(struct site *site);
+
 /* Returns a pseudo-URL for the given site, in a statically allocated
  * memory location which will be overwritten by subsequent calls to
  * the function. (-> NOT thread-safe) */
