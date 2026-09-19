@@ -323,46 +323,37 @@ static int update_create_directories(struct site *site, void *session)
     int ret = 0;
 
     for_each_file(current, site) {
-	if ((current->type == file_dir) 
-            && (current->diff == file_new || current->diff == file_changed)) {
-	    /* New or changed directory! */
-	    char *full_remote;
-            int oret;
+        char *full_remote;
+        int oret = SITE_OK;
 
-	    if (!fe_can_update(current)) continue;
+        /* New or changed directories only. */
+        if (current->type != file_dir
+            || (current->diff != file_new && current->diff != file_changed)
+            || !fe_can_update(current))
+            continue;
 
-	    full_remote = file_full_remote(&current->local, site);
+        full_remote = file_full_remote(&current->local, site);
 
-            if (current->diff == file_new) {
-                fe_updating(current);
-                oret = CALL(dir_create)(session, full_remote);
-                if (oret != SITE_OK) {
-                    fe_updated(current, false, DRIVER_ERR);
-                } else {
-                    fe_updated(current, true, NULL);
-                }
-            } else {
-                oret = SITE_OK;
-            }
+        if (current->diff == file_new) {
+            fe_updating(current);
+            oret = CALL(dir_create)(session, full_remote);
+            fe_updated(current, oret == SITE_OK,
+                       oret == SITE_OK ? NULL : DRIVER_ERR);
+        }
 
-            if (site->dirperms && oret == SITE_OK) {
-                fe_setting_perms(current);
-                oret = CALL(file_chmod)(session, full_remote,
-                                        current->local.mode);
-                if (oret == SITE_OK) {
-                    fe_set_perms(current, true, NULL);
-                } else {
-                    fe_set_perms(current, false, DRIVER_ERR);
-                }
-            }
+        if (site->dirperms && oret == SITE_OK) {
+            fe_setting_perms(current);
+            oret = CALL(file_chmod)(session, full_remote, current->local.mode);
+            fe_set_perms(current, oret == SITE_OK,
+                         oret == SITE_OK ? NULL : DRIVER_ERR);
+        }
 
-            if (oret != SITE_OK) {
-                ret = 1;
-            } else {
-                file_uploaded(current, site);
-            }
-	    free(full_remote);
-	}
+        if (oret == SITE_OK)
+            file_uploaded(current, site);
+        else
+            ret = 1;
+
+        ne_free(full_remote);
     }
 
     return ret;
