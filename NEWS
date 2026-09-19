@@ -11,8 +11,7 @@ Changes in release 0.17:
 * SFTP:
  - Fix hang on connect against OpenSSH 4.2 and later
    (Agustin Martin Domingo, Debian #337122, #447598)
- - Fix error handling (Haolin Xue, Debian #515217,
-   #564462, #742661)
+ - Fix error handling (Haolin Xue, Debian #515217, #564462, #742661)
  - Document in the man page (Kartik Mistry, Christian Kujau,
     Debian #320586, #405483, #439594)
 * Update to neon 0.37.1; require neon 0.29+.
