@@ -59,51 +59,61 @@ def _bind_port():
 
 
 class ScriptedFTPServer:
-    """Minimal single-connection FTP server with a canned listing."""
+    """Minimal FTP server with a canned listing, serving one connection
+    at a time.  Commands starting with a key of the failing dict get
+    its value as their reply."""
 
     def __init__(self):
         self.commands = []
+        self.failing = {}
         self.listener, self.port = _bind_port()
         self.listener.listen(1)
         self.thread = threading.Thread(target=self._serve, daemon=True)
         self.thread.start()
 
     def _serve(self):
-        try:
-            conn, _ = self.listener.accept()
-        except OSError:
-            return
-        with conn:
-            f = conn.makefile("rwb", buffering=0)
-            self._reply(f, "220 scripted FTP server ready")
-            while True:
-                line = f.readline()
-                if not line:
-                    break
-                cmd = line.decode("utf-8", "replace").strip()
-                self.commands.append(cmd)
-                upper = cmd.upper()
-                if upper.startswith("USER"):
-                    self._reply(f, "331 password required")
-                elif upper.startswith("PASS"):
-                    self._reply(f, "230 logged in")
-                elif upper.startswith("PASV"):
-                    self._pasv(f)
-                elif upper.startswith("EPSV"):
-                    self._epsv(f)
-                elif upper.startswith("PORT"):
-                    self._port(f, cmd)
-                elif upper.startswith("LIST"):
-                    self._list(f)
-                elif upper.startswith("MDTM"):
-                    self._mdtm(f, cmd)
-                elif upper.startswith("QUIT"):
-                    self._reply(f, "221 goodbye")
-                    break
-                else:
-                    # SYST, TYPE, PWD, CWD, FEAT, NOOP, ...
-                    self._reply(f, "200 OK")
-        self.listener.close()
+        while True:
+            try:
+                conn, _ = self.listener.accept()
+            except OSError:
+                return
+            with conn:
+                self._session(conn)
+
+    def _session(self, conn):
+        f = conn.makefile("rwb", buffering=0)
+        self._reply(f, "220 scripted FTP server ready")
+        while True:
+            line = f.readline()
+            if not line:
+                break
+            cmd = line.decode("utf-8", "replace").strip()
+            self.commands.append(cmd)
+            upper = cmd.upper()
+            failure = [reply for prefix, reply in self.failing.items()
+                       if upper.startswith(prefix)]
+            if failure:
+                self._reply(f, failure[0])
+            elif upper.startswith("USER"):
+                self._reply(f, "331 password required")
+            elif upper.startswith("PASS"):
+                self._reply(f, "230 logged in")
+            elif upper.startswith("PASV"):
+                self._pasv(f)
+            elif upper.startswith("EPSV"):
+                self._epsv(f)
+            elif upper.startswith("PORT"):
+                self._port(f, cmd)
+            elif upper.startswith("LIST"):
+                self._list(f)
+            elif upper.startswith("MDTM"):
+                self._mdtm(f, cmd)
+            elif upper.startswith("QUIT"):
+                self._reply(f, "221 goodbye")
+                break
+            else:
+                # SYST, TYPE, PWD, CWD, FEAT, NOOP, ...
+                self._reply(f, "200 OK")
 
     @staticmethod
     def _reply(f, text):
@@ -156,6 +166,11 @@ class ScriptedFTPServer:
             ScriptedFTPServer._reply(f, "550 File not found")
 
     def stop(self):
+        # Shutting down the listener wakes the thread from accept().
+        try:
+            self.listener.shutdown(socket.SHUT_RDWR)
+        except OSError:
+            pass
         self.listener.close()
         self.thread.join(timeout=5)
 
@@ -254,3 +269,27 @@ def test_fetch_long_filename(ftp_site):
         assert "MDTM /" + name in ftp_site["server"].commands
     finally:
         del REMOTE_FILES[name]
+
+
+@pytest.mark.xfail(strict=True, reason="a directory whose permissions "
+                   "can't be set is created again by each update")
+def test_dirperms_failure(ftp_site):
+    # A directory is created, but setting its permissions fails.  The
+    # next update sets its permissions, and doesn't create it again.
+    with open(ftp_site["rcfile"], "a") as fp:
+        fp.write("  permissions dir\n")
+    (ftp_site["local"] / "dir").mkdir()
+    res = run_sitecopy(ftp_site, ["--init", "testsite"])
+    assert res.returncode == 0, res.stdout + res.stderr
+    server = ftp_site["server"]
+    server.failing["SITE CHMOD"] = "550 Permission denied"
+    res = run_sitecopy(ftp_site, ["--update", "testsite"])
+    assert res.returncode != 0, res.stdout + res.stderr
+    assert "MKD /dir" in server.commands
+
+    del server.failing["SITE CHMOD"]
+    server.commands.clear()
+    res = run_sitecopy(ftp_site, ["--update", "testsite"])
+    assert res.returncode == 0, res.stdout + res.stderr
+    assert not any(cmd.startswith("MKD") for cmd in server.commands)
+    assert any(cmd.startswith("SITE CHMOD") for cmd in server.commands)
