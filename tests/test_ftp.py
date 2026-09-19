@@ -271,8 +271,6 @@ def test_fetch_long_filename(ftp_site):
         del REMOTE_FILES[name]
 
 
-@pytest.mark.xfail(strict=True, reason="a directory whose permissions "
-                   "can't be set is created again by each update")
 def test_dirperms_failure(ftp_site):
     # A directory is created, but setting its permissions fails.  The
     # next update sets its permissions, and doesn't create it again.
