@@ -100,16 +100,3 @@ int map_debug_options(const char *opts, int *mask, char *errbuf)
 }
 #endif /* DEBUGGING */
 
-/* Snagged from fetchmail */
-# if !HAVE_STRERROR && !defined(strerror)
-char *strerror (errnum)
-     int errnum;
-{
-  extern char *sys_errlist[];
-  extern int sys_nerr;
-
-  if (errnum > 0 && errnum <= sys_nerr)
-    return sys_errlist[errnum];
-  return _("Unknown system error");
-}
-# endif /* HAVE_STRERROR */
