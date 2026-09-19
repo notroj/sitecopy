@@ -45,9 +45,6 @@ def test_verify_checksum(site):
 
 # -- --fetch --------------------------------------------------------------
 
-@pytest.mark.xfail(strict=True, reason="--fetch ignores a failure to "
-                   "download a file for its checksum, and records an "
-                   "empty checksum for it")
 @pytest.mark.site_lines("state checksum")
 def test_fetch_checksum_download_failure(site):
     setup_site(site, {"a.txt": "A\n", "unreadable.txt": "U\n"})
@@ -57,6 +54,9 @@ def test_fetch_checksum_download_failure(site):
         (site["store"] / "testsite").unlink()
         res = run_sitecopy(site, ["--fetch", "testsite"])
         assert res.returncode != 0, res.stdout + res.stderr
+        assert "Failed to fetch" in res.stdout, res.stdout
+        # The stored state isn't written.
+        assert not (site["store"] / "testsite").exists()
     finally:
         server_exec(site, "chmod 644 '%s/unreadable.txt'" % site["root"])
 
