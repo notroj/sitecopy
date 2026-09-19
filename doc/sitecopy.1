@@ -331,6 +331,8 @@ A site definition is made up of a series of lines:
  [
 .BR tempupload " ]"
  [ 
+.BR lowercase " ]"
+ [ 
 .BR exclude " pattern ]..."
  [ 
 .BR ignore " pattern ]..."
@@ -426,6 +428,14 @@ If the
 .B tempupload
 option is given, new or changed files are upload with a ".in." prefix,
 then moved to the true filename when the upload is complete.
+
+If the
+.B lowercase
+option is given, the names of files and directories are converted to
+lower case on the server; for instance, the local file
+Docs/Index.HTML is uploaded as docs/index.html.  The local names are
+not changed, and are the names displayed by sitecopy.  Local names
+which differ only in case are uploaded to the same remote file.
 
 .SS File State
 
@@ -542,8 +552,9 @@ does not imply
 
 Symlinks found in the local site can be either ignored, followed, or
 maintained. In 'follow' mode, the files references by the symlinks
-will be uploaded in their place. In 'maintain' mode, the link will be
-created remotely as well, see below for more information. The mode
+will be uploaded in their place. In 'maintain' mode, the link would be
+created remotely as well, but this is not currently supported; see
+below. The mode
 used for each site is specified with the
 .B symlinks
 rcfile key, which may take the value of
@@ -559,16 +570,10 @@ i.e. symbolic links found in the local site are followed.
 
 .SS Symbolic link Maintain Mode
 
-This mode is currently only supported by the WebDAV driver, and will
-work only with servers which implement WebDAV Advanced Collections,
-which is a work-in-progress. The target of the link on the server is
-literally copied from the target of the symlink. Hint: you can use
-URL's if you like:
-.br
-.B "	ln -s" """http://www.somewhere.org/""" somewherehome
-
-In this way, a "302 Redirect" can be easily set up from the client,
-without having to alter the server configuration.
+This mode is not currently supported by any of the protocol drivers:
+a site using the FTP or WebDAV protocol is rejected if
+.B symlinks maintain
+is given.
 
 .SS Deleting and Moving Remote Files
 The 
