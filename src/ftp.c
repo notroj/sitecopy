@@ -131,9 +131,10 @@ int _ftp_err = (x); if (_ftp_err != FTP_OK) return _ftp_err; } while (0)
     } while (0)
 
 
-/* Opens the data connection */
-static int ftp_data_open(ftp_session *sess, const char *command, ...) 
-    ne_attribute((format (printf, 2, 3)));
+/* Opens the data connection, running command VERB with argument
+ * ARG. */
+static int ftp_data_open(ftp_session *sess, const char *verb,
+                         const char *arg);
 
 static int get_modtime(ftp_session *sess, const char *filename);
 
@@ -402,28 +403,34 @@ static int run_command(ftp_session *sess, const char *cmd)
     return parse_reply(sess, code, sess->rbuf);
 }    
 
-/* Wrapper for run_command: runs an FTP command using printf template
- * and arguments, handling PI connection timeouts as necessary. */
-static int execute(ftp_session *sess, const char *template, ...) 
+/* Wrapper for run_command: runs FTP command VERB, followed by
+ * argument ARG if non-NULL, handling PI connection timeouts as
+ * necessary. */
+static int execute(ftp_session *sess, const char *verb, const char *arg)
 {
-    va_list params;
     int tries = 0, ret;
-    char buf[1024];
+    char *cmd;
 
-    va_start(params, template);
-    ne_vsnprintf(buf, sizeof buf, template, params);
-    va_end(params);
+    if (arg)
+        cmd = ne_concat(verb, " ", arg, NULL);
+    else
+        cmd = ne_strdup(verb);
 
     do {
         ret = ftp_open(sess);
-        if (ret != FTP_OK) return ret;
+        if (ret != FTP_OK) {
+            ne_free(cmd);
+            return ret;
+        }
 
-        ret = run_command(sess, buf);
+        ret = run_command(sess, cmd);
     } while (ret == FTP_BROKEN && ++tries < 3);
 
+    ne_free(cmd);
+
     /* Don't let FTP_BROKEN get out */
-    if (ret == FTP_BROKEN) 
-	ret = FTP_ERROR;
+    if (ret == FTP_BROKEN)
+        ret = FTP_ERROR;
     return ret;
 }
 
@@ -616,35 +623,36 @@ int ftp_mkdir(ftp_session *sess, const char *dir)
     if ((ret = maybe_chdir(sess, &dir)) != FTP_OK) {
         return ret;
     }
-    
-    return execute(sess, "MKD %s", dir);
+
+    return execute(sess, "MKD", dir);
 }
  
 /* Renames or moves a file */
 int ftp_move(ftp_session *sess, const char *from, const char *to)
 {
-    if (execute(sess, "RNFR %s", from) == FTP_FILEMORE) {
-	return execute(sess, "RNTO %s", to);
-    }
+    if (execute(sess, "RNFR", from) == FTP_FILEMORE)
+        return execute(sess, "RNTO", to);
     return FTP_ERROR;
 }
 
 int ftp_delete(ftp_session *sess, const char *filename)
 {
-    return execute(sess, "DELE %s", filename);
+    return execute(sess, "DELE", filename);
 }
 
 int ftp_rmdir(ftp_session *sess, const char *filename)
 {
-    return execute(sess, "RMD %s", filename);
+    return execute(sess, "RMD", filename);
 }
 
-/* Actively open the data connection, running command COMMAND; the
- * client then listens for and accepts the connection from the server.
- * On successful return, the DTP connection is open. */
-static int dtp_open_active(ftp_session *sess, const char *command)
+/* Actively open the data connection, running command VERB with
+ * argument ARG; the client then listens for and accepts the
+ * connection from the server.  On successful return, the DTP
+ * connection is open. */
+static int dtp_open_active(ftp_session *sess, const char *verb,
+                           const char *arg)
 {
-    char *a, *p;
+    char *a, *p, port[24];
     int ret;
     int listener;
     socklen_t alen;
@@ -652,45 +660,45 @@ static int dtp_open_active(ftp_session *sess, const char *command)
 
     ret = ftp_open(sess);
     if (ret != FTP_OK) return ret;
-    
+
     alen = sizeof(addr);
-    if (getsockname(ne_sock_fd(sess->pisock), 
-		    (struct sockaddr *)&addr, &alen) < 0) {
-	int errnum = errno;
-	set_syserr(sess, _("Active open failed: could not determine "
-			   "address of control socket"), errnum);
+    if (getsockname(ne_sock_fd(sess->pisock),
+                    (struct sockaddr *)&addr, &alen) < 0) {
+        int errnum = errno;
+        set_syserr(sess, _("Active open failed: could not determine "
+                           "address of control socket"), errnum);
         return FTP_ERROR;
     }
 
     /* Let the kernel choose a port */
     addr.sin_port = 0;
- 
+
     /* Create a local socket to accept the connection on */
     listener = socket(AF_INET, SOCK_STREAM, 0);
     if (listener < 0) {
-	int errnum = errno;
-	set_syserr(sess, _("Active open failed: could not create socket"),
-		   errnum);
-	return FTP_ERROR;
+        int errnum = errno;
+        set_syserr(sess, _("Active open failed: could not create socket"),
+                   errnum);
+        return FTP_ERROR;
     }
 
     /* Bind it to an address. */
     if (bind(listener, (struct sockaddr *)&addr, sizeof(addr)) < 0) {
-	int errnum = errno;
-	set_syserr(sess, _("Active open failed: could not bind to address"),
-		   errnum);
-	(void) close(listener);
-	return FTP_ERROR;
+        int errnum = errno;
+        set_syserr(sess, _("Active open failed: could not bind to address"),
+                   errnum);
+        (void) close(listener);
+        return FTP_ERROR;
     }
 
     /* Retrieve the address again; determine which port was chosen. */
     alen = sizeof(addr);
     if (getsockname(listener, (struct sockaddr *)&addr, &alen) < 0) {
-	int errnum = errno;
-	set_syserr(sess, _("Active open failed: could not determine address "
-			   "of data socket"), errnum);
-	(void) close(listener);
-	return FTP_ERROR;
+        int errnum = errno;
+        set_syserr(sess, _("Active open failed: could not determine address "
+                           "of data socket"), errnum);
+        (void) close(listener);
+        return FTP_ERROR;
     }
 
     if (addr.sin_port == 0) {
@@ -701,47 +709,49 @@ static int dtp_open_active(ftp_session *sess, const char *command)
     }
 
     if (listen(listener, 1) < 0) {
-	int errnum = errno;
-	set_syserr(sess, ("Active open failed: could not listen for "
-			  "connection"), errnum);
-	(void) close(listener);
-	return FTP_ERROR;
+        int errnum = errno;
+        set_syserr(sess, ("Active open failed: could not listen for "
+                          "connection"), errnum);
+        (void) close(listener);
+        return FTP_ERROR;
     }
 
-#define	UC(b)	(((int)b)&0xff)
+#define UC(b)   (((int)b)&0xff)
     a = (char *)&addr.sin_addr.s_addr;
     p = (char *)&addr.sin_port;
 
     /* Execute the PORT command */
-    ret = execute(sess, "PORT %d,%d,%d,%d,%d,%d",
-		    UC(a[0]), UC(a[1]), UC(a[2]), UC(a[3]),
-		    UC(p[0]), UC(p[1]));
+    ne_snprintf(port, sizeof port, "%d,%d,%d,%d,%d,%d",
+                UC(a[0]), UC(a[1]), UC(a[2]), UC(a[3]),
+                UC(p[0]), UC(p[1]));
+    ret = execute(sess, "PORT", port);
     if (ret != FTP_OK) {
-	/* Failed to execute the PORT command - close the socket */
-	NE_DEBUG(DEBUG_FTP, "PORT command failed.\n");
-	close(listener);
-	return ret;
+        /* Failed to execute the PORT command - close the socket */
+        NE_DEBUG(DEBUG_FTP, "PORT command failed.\n");
+        close(listener);
+        return ret;
     }
 
     /* Send the command.  This will make the remote end
      * initiate the connection.
      */
-    ret = execute(sess, "%s", command);
-    
+    ret = execute(sess, verb, arg);
+
     /* Do they want it? */
     if (ret != FTP_READY) {
-	NE_DEBUG(DEBUG_FTP, "Command failed.\n");
-    } else {
-	/* Now wait for a connection from the remote end. */
-	sess->dtpsock = ne_sock_create();
-	if (ne_sock_accept(sess->dtpsock, listener)) {
-	    int errnum = errno;
-	    set_syserr(sess,
-		       _("Active open failed: could not accept connection"),
-		       errnum);
+        NE_DEBUG(DEBUG_FTP, "Command failed.\n");
+    }
+    else {
+        /* Now wait for a connection from the remote end. */
+        sess->dtpsock = ne_sock_create();
+        if (ne_sock_accept(sess->dtpsock, listener)) {
+            int errnum = errno;
+            set_syserr(sess,
+                       _("Active open failed: could not accept connection"),
+                       errnum);
             ne_sock_close(sess->dtpsock);
-	    ret = FTP_ERROR;
-	}
+            ret = FTP_ERROR;
+        }
     }
 
     (void) close(listener);
@@ -750,46 +760,39 @@ static int dtp_open_active(ftp_session *sess, const char *command)
 
 int ftp_chmod(ftp_session *sess, const char *filename, const mode_t mode)
 {
-    return execute(sess, "SITE CHMOD %03o %s", mode & 0777, filename);
+    char cmd[24];
+
+    ne_snprintf(cmd, sizeof cmd, "SITE CHMOD %03o", (unsigned)(mode & 0777));
+    return execute(sess, cmd, filename);
 }
 
 /* Open the DATA connection using whichever means appropriate, running
- * FTP command COMMAND with printf-style arguments. */
-static int ftp_data_open(ftp_session *sess, const char *command, ...) 
+ * FTP command VERB with argument ARG. */
+static int ftp_data_open(ftp_session *sess, const char *verb,
+                         const char *arg)
 {
     int ret;
-    va_list params;
-    char buf[BUFSIZ];
 
-    va_start(params, command);
-    ne_vsnprintf(buf, BUFSIZ, command, params);
-    va_end(params);
+    if (!sess->use_passive)
+        return dtp_open_active(sess, verb, arg);
 
-    if (sess->use_passive) {
-        ret = FTP_ERROR;
+    ret = FTP_ERROR;
 
-        if (sess->rfc2428 != rfc2428_bad
-            && ne_iaddr_typeof(sess->pi_curaddr) == ne_iaddr_ipv6) {
-            ret = execute(sess, "EPSV");
-            if (ret == FTP_PASSIVE) sess->rfc2428 = rfc2428_ok;
-        }
-        if ((sess->rfc2428 == rfc2428_unknown && ret != FTP_PASSIVE)
-            || sess->rfc2428 == rfc2428_bad) {
-            ret = execute(sess, "PASV");
-        }
-	if (ret == FTP_PASSIVE) {
-	    if (dtp_open_passive(sess)) {
-		return execute(sess, "%s", buf);
-	    } else {
-		return FTP_ERROR;
-	    }
-	} else {
-	    return FTP_NOPASSIVE;
-	}
-    } else {
-	/* we are not using passive mode. */
-	return dtp_open_active(sess, buf);
+    if (sess->rfc2428 != rfc2428_bad
+        && ne_iaddr_typeof(sess->pi_curaddr) == ne_iaddr_ipv6) {
+        ret = execute(sess, "EPSV", NULL);
+        if (ret == FTP_PASSIVE) sess->rfc2428 = rfc2428_ok;
     }
+    if ((sess->rfc2428 == rfc2428_unknown && ret != FTP_PASSIVE)
+        || sess->rfc2428 == rfc2428_bad) {
+        ret = execute(sess, "PASV", NULL);
+    }
+
+    if (ret != FTP_PASSIVE)
+        return FTP_NOPASSIVE;
+    if (!dtp_open_passive(sess))
+        return FTP_ERROR;
+    return execute(sess, verb, arg);
 }
 
 
@@ -830,13 +833,13 @@ static int set_mode(ftp_session *sess, enum tran_mode mode)
     int ret;
 
     if (sess->mode == mode)
-	return FTP_OK;
+        return FTP_OK;
 
-    ret = execute(sess, mode==tran_ascii?"TYPE A":"TYPE I");
+    ret = execute(sess, mode == tran_ascii ? "TYPE A" : "TYPE I", NULL);
     if (ret == FTP_OK)
-	sess->mode = mode;
+        sess->mode = mode;
     else
-	sess->mode = tran_unknown;
+        sess->mode = tran_unknown;
 
     return ret;
 }
@@ -854,7 +857,7 @@ static int maybe_chdir(ftp_session *sess, const char **remotefile)
     char dir[PATH_MAX];
 
     if (!sess->use_cwd || fn[0] != '/' || strlen(fn) > PATH_MAX)
-	return FTP_OK;
+        return FTP_OK;
 
     slash = strrchr(fn, '/'); /* can't be NULL since fn[0] == '/'. */
     *remotefile = slash + 1;
@@ -862,14 +865,15 @@ static int maybe_chdir(ftp_session *sess, const char **remotefile)
     ne_strnzcpy(dir, fn, 1 + slash - fn);
 
     if (strcmp(dir, sess->cwd)) {
-	ret = execute(sess, "CWD %s", dir);
-	if (ret == FTP_OK) {
-	    NE_DEBUG(DEBUG_FTP, "Stored new CWD as %s\n", dir);
-	    strcpy(sess->cwd, dir);
-	}
-    } else {
-	NE_DEBUG(DEBUG_FTP, "CWD not needed.\n");
-	ret = FTP_OK;
+        ret = execute(sess, "CWD", dir);
+        if (ret == FTP_OK) {
+            NE_DEBUG(DEBUG_FTP, "Stored new CWD as %s\n", dir);
+            strcpy(sess->cwd, dir);
+        }
+    }
+    else {
+        NE_DEBUG(DEBUG_FTP, "CWD not needed.\n");
+        ret = FTP_OK;
     }
 
     return ret;
@@ -920,7 +924,7 @@ int ftp_put(ftp_session *sess,
             return ret;
         }
 
-        ret = ftp_data_open(sess, "STOR %s", remotefile);
+        ret = ftp_data_open(sess, "STOR", remotefile);
         if (ret == FTP_READY) {
             if (ascii)
                 ret = send_file_ascii(sess, f, st.st_size);
@@ -981,7 +985,7 @@ int ftp_get(ftp_session *sess, const char *localfile, const char *remotefile,
     }
 
     if (set_mode(sess, ascii?tran_ascii:tran_binary) == FTP_OK
-        && ftp_data_open(sess, "RETR %s", remotefile) == FTP_READY) {
+        && ftp_data_open(sess, "RETR", remotefile) == FTP_READY) {
         int clo, errnum = 0;
 
 	/* Receive the file */
@@ -1013,7 +1017,7 @@ ftp_read_file(ftp_session *sess, const char *remotefile,
     if (set_mode(sess, tran_binary))
 	return FTP_ERROR;
 
-    if (ftp_data_open(sess, "RETR %s", remotefile) == FTP_READY) {
+    if (ftp_data_open(sess, "RETR", remotefile) == FTP_READY) {
 	char buffer[BUFSIZ];
         ne_off_t count = 0;
 
@@ -1147,7 +1151,7 @@ int ftp_fetch(ftp_session *sess, const char *startdir, struct proto_file **list)
         return ret;
     }
 
-    if ((ret = ftp_data_open(sess, "LIST %s", root)) != FTP_READY) {
+    if ((ret = ftp_data_open(sess, "LIST", root)) != FTP_READY) {
         return FTP_ERROR;
     }
 
@@ -1204,12 +1208,11 @@ static int get_modtime(ftp_session *sess, const char *filename)
     if ((ret = maybe_chdir(sess, &filename)) != FTP_OK)
         return ret;
 
-    if (execute(sess, "MDTM %s", filename) == FTP_MODTIME) {
-	NE_DEBUG(DEBUG_FTP, "Got modtime.\n");
-	return FTP_OK;
-    } else {
-	return FTP_ERROR;
-    }
+    if (execute(sess, "MDTM", filename) != FTP_MODTIME)
+        return FTP_ERROR;
+
+    NE_DEBUG(DEBUG_FTP, "Got modtime.\n");
+    return FTP_OK;
 }
 
 int ftp_get_modtime(ftp_session *sess, const char *filename, time_t *modtime) 

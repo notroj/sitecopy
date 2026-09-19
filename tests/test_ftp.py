@@ -91,6 +91,8 @@ class ScriptedFTPServer:
                     self._pasv(f)
                 elif upper.startswith("EPSV"):
                     self._epsv(f)
+                elif upper.startswith("PORT"):
+                    self._port(f, cmd)
                 elif upper.startswith("LIST"):
                     self._list(f)
                 elif upper.startswith("MDTM"):
@@ -120,10 +122,25 @@ class ScriptedFTPServer:
         self._reply(f, "229 Entering Extended Passive Mode (|||%d|)" % data_port)
         self._data_listener = data_sock
 
-    def _list(self, f):
+    def _port(self, f, cmd):
+        # Active mode: connect to the address given in the PORT
+        # command once a transfer command is received.
+        h1, h2, h3, h4, p1, p2 = cmd[5:].split(",")
+        self._data_listener = None
+        self._data_address = ("%s.%s.%s.%s" % (h1, h2, h3, h4),
+                              int(p1) * 256 + int(p2))
+        self._reply(f, "200 PORT command successful")
+
+    def _data_connection(self):
+        if self._data_listener is None:
+            return socket.create_connection(self._data_address)
         data_conn, _ = self._data_listener.accept()
         self._data_listener.close()
+        return data_conn
+
+    def _list(self, f):
         self._reply(f, "150 Opening data connection")
+        data_conn = self._data_connection()
         with data_conn:
             data_conn.sendall(_listing().encode("ascii"))
         self._reply(f, "226 Transfer complete")
@@ -211,3 +228,29 @@ def test_long_netrc_password(ftp_site, tmp_path):
     res = run_sitecopy(ftp_site, ["--fetch", "testsite"], env=env)
     assert res.returncode == 0, res.stdout + res.stderr
     assert "PASS " + password in ftp_site["server"].commands
+
+
+def test_fetch_active_mode(ftp_site):
+    # A fetch using an active mode (PORT) data connection.
+    with open(ftp_site["rcfile"], "a") as fp:
+        fp.write("  ftp nopasv\n")
+    res = run_sitecopy(ftp_site, ["--fetch", "testsite"])
+    assert res.returncode == 0, res.stdout + res.stderr
+    assert "File: index.html - size 15360" in res.stdout
+    assert any(cmd.startswith("PORT 127,0,0,1,")
+               for cmd in ftp_site["server"].commands)
+
+
+def test_fetch_long_filename(ftp_site):
+    # FTP commands were formatted into a 1024-byte buffer, so a
+    # command for a long filename was silently truncated, naming a
+    # different file.
+    name = "long" * 300
+    REMOTE_FILES[name] = {"size": 42, "mtime": "20030828220517"}
+    try:
+        res = run_sitecopy(ftp_site, ["--fetch", "testsite"])
+        assert res.returncode == 0, res.stdout + res.stderr
+        assert "File: %s - size 42" % name in res.stdout
+        assert "MDTM /" + name in ftp_site["server"].commands
+    finally:
+        del REMOTE_FILES[name]
