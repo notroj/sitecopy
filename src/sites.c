@@ -456,128 +456,134 @@ static int update_files(struct site *site, void *session)
 
     for_each_file(current, site) {
 
-	/* This loop only handles changed and new files, so
-	 * skip everything else. */
+        /* This loop only handles changed and new files, so
+         * skip everything else. */
 
-	if (current->type != file_file
-	    || current->diff == file_deleted
-	    || current->diff == file_moved
-	    || current->diff == file_unchanged) continue;
+        if (current->type != file_file
+            || current->diff == file_deleted
+            || current->diff == file_moved
+            || current->diff == file_unchanged) continue;
 
-	full_local = file_full_local(&current->local, site);
-	full_remote = file_full_remote(&current->local, site);
+        full_local = file_full_local(&current->local, site);
+        full_remote = file_full_remote(&current->local, site);
 
-	switch (current->diff) {
-	case file_changed: /* File has changed, upload it */
-	    if (current->ignore) break;
-	    if (!file_contents_changed(current, site)) {
-		/* If the file contents haven't changed, then we can
-		 * just chmod it */
-		if (file_chmod(current, site, session))
-		    ret = 1;
-		break;
-	    }
-	    /*** fall-through ***/
-	case file_new: /* File is new, upload it */
-	    if (!fe_can_update(current)) continue;
-	    if ((current->diff == file_changed) && site->nooverwrite) {
-		/* Must delete remote file before uploading new copy.
-		 * FIXME: Icky hack to convince the FE we are about to
-		 * delete the file */
-		current->diff = file_deleted;
-		fe_updating(current);
-		if (CALL(file_delete)(session, full_remote) != SITE_OK) {
-		    fe_updated(current, false, DRIVER_ERR);
-		    ret = 1;
-		    current->diff = file_changed;
-		    /* Don't upload it! */
-		    break;
-		} else {
-		    fe_updated(current, true, NULL);
-		    current->diff = file_changed;
-		}
-	    }
-	    fe_updating(current);
-	    /* Now, upload it */
-	    if (site->safemode && current->server.exists) {
-		/* Only do this for files we do know the remote modtime for */
-		int cret;
-		cret = CALL(file_upload_cond)(session,
-		    full_local, full_remote, current->local.ascii,
-		    current->server.time);
-		switch (cret) {
-		case SITE_ERRORS:
-		    fe_updated(current, false, DRIVER_ERR);
-		    ret = 1;
-		    break;
-		case SITE_FAILED:
-		    fe_updated(current, false, 
-				_("Remote file has been modified - not overwriting with local changes"));
-		    ret = 1;
-		    break;
-		default:
-		    /* Success case */
-		    fe_updated(current, true, NULL);
-		    file_retrieve_server(current, site, session);
-		    if (file_chmod(current, site, session)) ret = 1;
-		    file_uploaded(current, site);
-		    break;
-		}
-	    } else if (site->tempupload) {
-		/* Do temp file upload followed by a move */
-		char *temp_remote = temp_upload_filename(full_remote, site);
-		if (CALL(file_upload)(session, full_local, temp_remote,
-				       current->local.ascii != SITE_OK)) {
-		    fe_updated(current, false, DRIVER_ERR);
-		    ret = 1;
-		} else {
-		    /* Successful upload... now move it */
-		    if (CALL(file_move)(session, temp_remote, 
-					 full_remote) != SITE_OK) {
-			fe_updated(current, false, DRIVER_ERR);
-			/* Originally coded to delete the temporary file
-			 * here, but, on second thoughts... if something
-			 * is broken, let's not try to be too clever, else
-			 * we might make it worse. */
-			ret = 1;
-		    } else {
-			/* Successful move */
-			fe_updated(current, true, NULL);
-			if (site->safemode) {
-			    file_retrieve_server(current, site, session);
-			}
-			if (file_chmod(current, site, session)) ret = 1;
-			file_uploaded(current, site);
-		    }
-		}
-		free(temp_remote);
-	    } else {
-		/* Normal unconditional upload */
-		if (CALL(file_upload)(session, full_local, full_remote, 
-				       current->local.ascii) != SITE_OK) {
-		    fe_updated(current, false, DRIVER_ERR);
-		    ret = 1;
-		} else {
-		    /* Successful upload. */
-		    fe_updated(current, true, NULL);
-		    if (site->safemode) {
-			file_retrieve_server(current, site, session);
-		    }
-		    if (file_chmod(current, site, session)) ret = 1;
-		    file_uploaded(current, site);
-		}
-	    }
-	    break;
-		
-	default: /* Ignore everything else */
-	    break;
-	}
-	free(full_remote);
-	free(full_local);
+        switch (current->diff) {
+        case file_changed: /* File has changed, upload it */
+            if (current->ignore) break;
+            if (!file_contents_changed(current, site)) {
+                /* If the file contents haven't changed, then we can
+                 * just chmod it */
+                if (file_chmod(current, site, session))
+                    ret = 1;
+                break;
+            }
+            /*** fall-through ***/
+        case file_new: /* File is new, upload it */
+            if (!fe_can_update(current)) continue;
+            if ((current->diff == file_changed) && site->nooverwrite) {
+                /* Must delete remote file before uploading new copy.
+                 * FIXME: Icky hack to convince the FE we are about to
+                 * delete the file */
+                current->diff = file_deleted;
+                fe_updating(current);
+                if (CALL(file_delete)(session, full_remote) != SITE_OK) {
+                    fe_updated(current, false, DRIVER_ERR);
+                    ret = 1;
+                    current->diff = file_changed;
+                    /* Don't upload it! */
+                    break;
+                }
+                else {
+                    fe_updated(current, true, NULL);
+                    current->diff = file_changed;
+                }
+            }
+            fe_updating(current);
+            /* Now, upload it */
+            if (site->safemode && current->server.exists) {
+                /* Only do this for files we do know the remote modtime for */
+                int cret;
+                cret = CALL(file_upload_cond)(session,
+                    full_local, full_remote, current->local.ascii,
+                    current->server.time);
+                switch (cret) {
+                case SITE_ERRORS:
+                    fe_updated(current, false, DRIVER_ERR);
+                    ret = 1;
+                    break;
+                case SITE_FAILED:
+                    fe_updated(current, false,
+                                _("Remote file has been modified - not overwriting with local changes"));
+                    ret = 1;
+                    break;
+                default:
+                    /* Success case */
+                    fe_updated(current, true, NULL);
+                    file_retrieve_server(current, site, session);
+                    if (file_chmod(current, site, session)) ret = 1;
+                    file_uploaded(current, site);
+                    break;
+                }
+            }
+            else if (site->tempupload) {
+                /* Do temp file upload followed by a move */
+                char *temp_remote = temp_upload_filename(full_remote, site);
+                if (CALL(file_upload)(session, full_local, temp_remote,
+                                      current->local.ascii) != SITE_OK) {
+                    fe_updated(current, false, DRIVER_ERR);
+                    ret = 1;
+                }
+                else {
+                    /* Successful upload... now move it */
+                    if (CALL(file_move)(session, temp_remote,
+                                         full_remote) != SITE_OK) {
+                        fe_updated(current, false, DRIVER_ERR);
+                        /* Originally coded to delete the temporary file
+                         * here, but, on second thoughts... if something
+                         * is broken, let's not try to be too clever, else
+                         * we might make it worse. */
+                        ret = 1;
+                    }
+                    else {
+                        /* Successful move */
+                        fe_updated(current, true, NULL);
+                        if (site->safemode) {
+                            file_retrieve_server(current, site, session);
+                        }
+                        if (file_chmod(current, site, session)) ret = 1;
+                        file_uploaded(current, site);
+                    }
+                }
+                free(temp_remote);
+            }
+            else {
+                /* Normal unconditional upload */
+                if (CALL(file_upload)(session, full_local, full_remote,
+                                       current->local.ascii) != SITE_OK) {
+                    fe_updated(current, false, DRIVER_ERR);
+                    ret = 1;
+                }
+                else {
+                    /* Successful upload. */
+                    fe_updated(current, true, NULL);
+                    if (site->safemode) {
+                        file_retrieve_server(current, site, session);
+                    }
+                    if (file_chmod(current, site, session)) ret = 1;
+                    file_uploaded(current, site);
+                }
+            }
+            break;
+
+        default: /* Ignore everything else */
+            break;
+        }
+        free(full_remote);
+        free(full_local);
     }
 
     return ret;
-    
+
 }
 
 static int update_delete_directories(struct site *site, void *session)
