@@ -94,6 +94,13 @@ used by the WebDAV and FTP tests (`tests/httpd-Containerfile` and
 then runs `pytest-3 -v tests/`.  If an image has been removed but its
 stamp file remains, delete the stamp to force a rebuild.
 
+`make check` runs each server test across a minimal set of
+combinations of rcfile options: for each test and server, the
+configuration with the default value of each axis, plus as few others
+as needed for every value of every axis to appear at least once
+(`minimal_configs()` in `tests/siteconfig.py`).  `make check-full`
+(`pytest-3 --full`) runs every valid combination.
+
 To run a subset directly (after `make`), from the top-level directory:
 
     pytest-3 -v tests/test_basic.py
@@ -201,10 +208,11 @@ Guidelines:
   (e.g. "Debian bug #496988").
 - Confirm a new regression test fails without the fix and passes with
   it.
-- Run the full `make check` before considering a change done, and
-  report any failures faithfully.  CI (`.github/workflows/ci.yml`)
-  runs the build and `make check` on Ubuntu with bundled and system
-  neon, with and without `-Werror`.
+- Before considering a change done, run the tests relevant to it (or
+  `make check`), and report any failures faithfully; rely on CI for
+  the rest.  CI (`.github/workflows/ci.yml`) runs the build and `make
+  check` on Ubuntu with bundled and system neon, with and without
+  `-Werror`, and `make check-full` in one cell per OS.
 
 ## Changelog: GNU-style commit messages
 

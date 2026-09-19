@@ -32,7 +32,10 @@ jobs:
                 ${{ matrix.warnings && 'EXTRA_CFLAGS=-Werror' || '' }}
     - run: make install
       if: ${{ matrix.install }}
-    - run: make check
+    # The full test matrix (check-full) runs in one cell per OS, since
+    # the container runtimes differ; the other cells run the minimal
+    # set of combinations of rcfile options (check).
+    - run: make ${{ (matrix.bundled && matrix.warnings && !matrix.install) && 'check-full' || 'check' }}
 
   # One-off builds with GCC warnings beyond --enable-warnings, as
   # errors, using the most recent Ubuntu for a recent GCC, with the C17
