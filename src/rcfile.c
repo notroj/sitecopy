@@ -100,17 +100,17 @@ static int parse_site_name(struct site *site, const char *name)
     if ((site->server.port = uri.port) == 0)
         site->server.port = ne_uri_defaultport(uri.scheme);
 
-    if (strcasecmp(uri.scheme, "http") == 0)  {
+    if (ne_strcasecmp(uri.scheme, "http") == 0)  {
         site->protocol = siteproto_dav;
     }
-    else if (strcasecmp(uri.scheme, "https") == 0) {
+    else if (ne_strcasecmp(uri.scheme, "https") == 0) {
         site->protocol = siteproto_dav;
         site->http_secure = true;
     }
-    else if (strcasecmp(uri.scheme, "ftp") == 0) {
+    else if (ne_strcasecmp(uri.scheme, "ftp") == 0) {
         site->protocol = siteproto_ftp;
     }
-    else if (strcasecmp(uri.scheme, "sftp") == 0) {
+    else if (ne_strcasecmp(uri.scheme, "sftp") == 0) {
         site->protocol = siteproto_sftp;
     }
     else {
@@ -435,21 +435,21 @@ int rcfile_read(struct site **sites)
 		    f->haspath = false;
 		}
 	    } else if (strcmp(key, "protocol") == 0) {
-		if (strcasecmp(val, "ftp") == 0) {
+		if (ne_strcasecmp(val, "ftp") == 0) {
 		    this_site->protocol = siteproto_ftp;
-		} else if (strcasecmp(val, "http") == 0 || 
-			   strcasecmp(val, "dav") == 0 ||
-			   strcasecmp(val, "webdav") == 0) {
+		} else if (ne_strcasecmp(val, "http") == 0 || 
+			   ne_strcasecmp(val, "dav") == 0 ||
+			   ne_strcasecmp(val, "webdav") == 0) {
 		    this_site->protocol = siteproto_dav;
-		} else if (strcasecmp(val, "rsh") == 0) {
+		} else if (ne_strcasecmp(val, "rsh") == 0) {
 		    this_site->protocol = siteproto_rsh;
-		} else if (strcasecmp(val, "ssh") == 0) {
+		} else if (ne_strcasecmp(val, "ssh") == 0) {
                     this_site->protocol = siteproto_rsh;
                     if (this_site->rsh_cmd == NULL) 
                         this_site->rsh_cmd = ne_strdup("ssh");
                     if (this_site->rcp_cmd == NULL) 
                         this_site->rcp_cmd = ne_strdup("scp");
-		} else if (strcasecmp(val, "sftp") == 0) {
+		} else if (ne_strcasecmp(val, "sftp") == 0) {
 		    this_site->protocol = siteproto_sftp;
                 } else {
 		    this_site->protocol = siteproto_unknown;
