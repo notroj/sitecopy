@@ -62,6 +62,7 @@ class ScriptedFTPServer:
     """Minimal single-connection FTP server with a canned listing."""
 
     def __init__(self):
+        self.commands = []
         self.listener, self.port = _bind_port()
         self.listener.listen(1)
         self.thread = threading.Thread(target=self._serve, daemon=True)
@@ -80,6 +81,7 @@ class ScriptedFTPServer:
                 if not line:
                     break
                 cmd = line.decode("utf-8", "replace").strip()
+                self.commands.append(cmd)
                 upper = cmd.upper()
                 if upper.startswith("USER"):
                     self._reply(f, "331 password required")
@@ -169,6 +171,7 @@ site testsite
         "local": local_dir,
         "store": store_dir,
         "port": server.port,
+        "server": server,
     }
 
     server.stop()
@@ -192,3 +195,19 @@ def test_fetch_normal_filename(ftp_site):
         assert "File: index.html - size 15360" in res.stdout
     finally:
         REMOTE_FILES[" 2003.doc"] = {"size": 2048, "mtime": "20030828220517"}
+
+
+def test_long_netrc_password(ftp_site, tmp_path):
+    # A password from ~/.netrc longer than the FE_LBUFSIZ (256 byte)
+    # buffer used to be strcpy'd into it, overflowing the buffer and
+    # corrupting the password sent.
+    rcfile = ftp_site["rcfile"]
+    rcfile.write_text(rcfile.read_text().replace("  password test\n", ""))
+    password = "p" * 300
+    netrc = tmp_path / ".netrc"
+    netrc.write_text(f"machine {HOST} login test password {password}\n")
+    os.chmod(netrc, 0o600)
+    env = dict(os.environ, HOME=str(tmp_path))
+    res = run_sitecopy(ftp_site, ["--fetch", "testsite"], env=env)
+    assert res.returncode == 0, res.stdout + res.stderr
+    assert "PASS " + password in ftp_site["server"].commands
