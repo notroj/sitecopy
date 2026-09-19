@@ -49,6 +49,45 @@ def test_verify_checksum(site):
     assert "Changed on server: b.txt" in res.stdout, res.stdout
     assert "Changed on server: a.txt" not in res.stdout, res.stdout
 
+@pytest.mark.xfail(strict=True, reason="--verify succeeds when a file "
+                   "is changed on the server")
+def test_verify_changed_status(site):
+    setup_site(site, {"a.txt": "A\n", "b.txt": "B\n"})
+    change_remote(site, "b.txt", "Changed, longer\n", 0)
+    res = run_sitecopy(site, ["--verify", "testsite"])
+    assert "Changed on server: b.txt" in res.stdout, res.stdout
+    assert res.returncode != 0, res.stdout + res.stderr
+
+@pytest.mark.xfail(strict=True, reason="--verify succeeds when a file "
+                   "is added on the server")
+def test_verify_added_status(site):
+    setup_site(site, {"a.txt": "A\n"})
+    create_remote(site, "new.txt", "New\n")
+    res = run_sitecopy(site, ["--verify", "testsite"])
+    assert "Added on server: new.txt" in res.stdout, res.stdout
+    assert res.returncode != 0, res.stdout + res.stderr
+
+@pytest.mark.xfail(strict=True, reason="--verify reports excluded files "
+                   "as missing from the server")
+def test_verify_excluded(site):
+    # A file uploaded before it came to be excluded is still on the
+    # server until the next update, and isn't missing.
+    setup_site(site, {"a.txt": "A\n", "b.log": "Log\n"})
+    add_site_lines(site, "exclude *.log")
+    res = run_sitecopy(site, ["--verify", "testsite"])
+    assert res.returncode == 0, res.stdout + res.stderr
+    assert "missing from server" not in res.stdout, res.stdout
+
+@pytest.mark.xfail(strict=True, reason="--verify doesn't notice a file "
+                   "replaced by a directory on the server")
+def test_verify_file_became_directory(site):
+    setup_site(site, {"a.txt": "A\n", "x": "X\n"})
+    server_exec(site, "cd '%s' && rm x && mkdir x && chown --reference=. x"
+                % site["root"])
+    res = run_sitecopy(site, ["--verify", "testsite"])
+    assert "Changed on server: x" in res.stdout, res.stdout
+    assert res.returncode != 0, res.stdout + res.stderr
+
 # -- --fetch --------------------------------------------------------------
 
 @pytest.mark.site_lines("state checksum")
