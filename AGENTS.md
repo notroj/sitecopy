@@ -49,6 +49,9 @@ Test layout:
 - `test_basic.py` — option handling and local state, no server needed.
 - `test_dav.py` — WebDAV against the httpd container (needs podman).
 - `test_vsftpd.py` — FTP against the vsftpd container (needs podman).
+  The `sitecopy_ftp_env` fixture is parametrized over `FTP_MODES` in
+  `conftest.py`, so each FTP test runs once per mode (e.g. with and
+  without `ftp usecwd`); add new rcfile variations there.
 - `test_ftp.py` — FTP against a scripted in-process FTP server.
 - `test_false_success.py` — SFTP failure handling, using a wrapper
   script in place of ssh/sftp; no network access needed.
