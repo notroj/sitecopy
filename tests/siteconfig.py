@@ -57,6 +57,16 @@ AXES = {
         "case": (),
         "lowercase": ("lowercase",),
     }),
+    "symlinks": Axis({
+        "follow": (),
+        "ignore": ("symlinks ignore",),
+    }),
+    "permissions": Axis({
+        "noperms": (),
+        "exec": ("permissions exec",),
+        "all": ("permissions all",),
+        "alldir": ("permissions all", "permissions dir"),
+    }),
 }
 
 # rcfile lines which are only valid in combination with another.

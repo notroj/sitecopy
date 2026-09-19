@@ -45,17 +45,26 @@ Test layout:
   server on port 8080, and the FTP server on port 2121 with passive
   ports 21100-21109.  Each container is started once per session.
 - `tests/siteconfig.py` — rcfile option axes (`AXES`) for the server
-  tests, e.g. `state` (timesize/checksum) and `moves` (none,
-  `checkmoved`, `checkmoved renames`), and `REQUIRES`, listing
-  options only valid with another.  A test marked
-  `@pytest.mark.axes("state", "moves")` runs once per valid
-  combination of those axes; axes marked `always`, such as `ftp`
-  (with and without `ftp usecwd`), apply to every test for their
-  protocol.  Add new rcfile variations as axes or axis values here.
+  tests, e.g. `state`, `moves`, `delete`, `overwrite`, `safe`,
+  `tempupload`, `lowercase`, `symlinks` and `permissions`, plus the
+  rules for valid combinations: `REQUIRES` (options only valid with
+  another), `CONFLICTS` (options rejected together) and
+  `PROTOCOL_ONLY`.  A test marked `@pytest.mark.axes("state",
+  "moves")` runs once per valid combination of those axes; axes
+  marked `always`, such as `ftp` (with and without `ftp usecwd`),
+  apply to every test for their protocol.  `@pytest.mark.site_lines(
+  "nodelete")` adds rcfile lines to every configuration of a test.
+  Add new rcfile variations as axes or axis values here, and
+  combinations sitecopy rejects to the tables (and to
+  `REJECTED_CONFIGS` in `test_basic.py`).
 - `tests/common.py` — helpers such as `run_sitecopy()`,
-  `update_and_check()` (update, then compare the remote tree with the
-  local tree from inside the container), `assert_moved()` and
-  `check_update_cycle()`.
+  `update_and_check()` (update, then compare the tree on the server,
+  listed from inside the container, with `expected_remote()`, a model
+  of what should be there given the configuration, e.g. `nodelete`
+  keeps deleted files and `lowercase` lowercases names),
+  `move_and_check()`, `change_remote_later()` (change a file on the
+  server as if someone else did) and `check_update_cycle()`.  When a
+  server test fails, its report includes the recent server logs.
 - `tests/server_tests.py` — the tests run against each server.  It is
   not collected directly: `test_dav.py` and `test_vsftpd.py` import
   it and select their server with `pytestmark =
@@ -69,6 +78,11 @@ Test layout:
   script in place of ssh/sftp; no network access needed.
 
 Guidelines:
+
+- Known bugs which aren't fixed yet get a regression test marked
+  `@pytest.mark.xfail(strict=True, reason=...)` describing the bug,
+  so that the fix turns it into a passing test.  Check the xfail
+  fails for the stated reason (`pytest-3 --runxfail`).
 
 - Every bug fix should come with a regression test where practical.
   Prefer tests which run entirely locally (scripted servers, wrapper
