@@ -1,5 +1,5 @@
 FROM quay.io/fedora/fedora
-RUN dnf -y install vsftpd openssl && dnf -y clean all
+RUN dnf -y install vsftpd sscg && dnf -y clean all
 COPY vsftpd.conf vsftpd-ssl.conf /etc/vsftpd/
 RUN useradd -m sitecopy && echo sitecopy:sitecopy | chpasswd
 # Fedora's /etc/shadow has mode 0000, so PAM can only read it as root
@@ -7,12 +7,13 @@ RUN useradd -m sitecopy && echo sitecopy:sitecopy | chpasswd
 # 24.04 hosts) don't grant.  Let its owner read it.
 RUN chmod 0400 /etc/shadow
 RUN mkdir /home/sitecopy/site && chown sitecopy:sitecopy /home/sitecopy/site
-# For FTP over TLS: a self-signed certificate for localhost, and a
-# configuration requiring TLS using a separate range of passive ports.
-RUN openssl req -x509 -newkey rsa:2048 -nodes -days 3650 \
-        -subj /CN=localhost \
-        -addext "subjectAltName=DNS:localhost,IP:127.0.0.1,IP:::1" \
-        -keyout /etc/vsftpd/key.pem -out /etc/vsftpd/cert.pem
+# For FTP over TLS: a certificate for localhost signed by a CA
+# created by sscg, and a configuration requiring TLS using a separate
+# range of passive ports.
+RUN sscg --hostname localhost --lifetime 3650 \
+        --ca-file /etc/vsftpd/ca.pem --ca-key-file /etc/vsftpd/ca-key.pem \
+        --cert-file /etc/vsftpd/cert.pem --cert-key-file /etc/vsftpd/key.pem \
+        --dhparams-file /tmp/dhparams.pem
 RUN sed -e 's/^pasv_min_port=.*/pasv_min_port=21110/' \
         -e 's/^pasv_max_port=.*/pasv_max_port=21119/' \
         /etc/vsftpd/vsftpd.conf > /etc/vsftpd/vsftpd-tls.conf \

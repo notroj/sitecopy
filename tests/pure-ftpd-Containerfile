@@ -1,16 +1,17 @@
 FROM quay.io/fedora/fedora
-RUN dnf -y install pure-ftpd openssl && dnf -y clean all
+RUN dnf -y install pure-ftpd sscg && dnf -y clean all
 # A system user owning the site, and a virtual pure-ftpd user of the
 # same name mapped to it, not chrooted (-D), so no PAM is needed.
 RUN useradd -m sitecopy \
     && mkdir /home/sitecopy/site && chown sitecopy:sitecopy /home/sitecopy/site \
     && printf 'sitecopy\nsitecopy\n' \
        | pure-pw useradd sitecopy -u sitecopy -D /home/sitecopy -m
-# For FTP over TLS: a self-signed certificate for localhost.
-RUN openssl req -x509 -newkey rsa:2048 -nodes -days 3650 \
-        -subj /CN=localhost \
-        -addext "subjectAltName=DNS:localhost,IP:127.0.0.1,IP:::1" \
-        -keyout /etc/pure-ftpd/key.pem -out /etc/pure-ftpd/cert.pem
+# For FTP over TLS: a certificate for localhost signed by a CA
+# created by sscg.
+RUN sscg --hostname localhost --lifetime 3650 \
+        --ca-file /etc/pure-ftpd/ca.pem --ca-key-file /etc/pure-ftpd/ca-key.pem \
+        --cert-file /etc/pure-ftpd/cert.pem --cert-key-file /etc/pure-ftpd/key.pem \
+        --dhparams-file /tmp/dhparams.pem
 # Common options: virtual users only, no anonymous logins, uploads
 # logged to a file, forced passive address.  The passive port range
 # and TLS options are given as arguments.
