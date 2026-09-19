@@ -120,9 +120,11 @@ def known_bug(test_name, config):
 class SiteConfig:
     """A protocol plus a combination of rcfile option lines."""
 
-    def __init__(self, protocol, value_ids, lines):
+    def __init__(self, protocol, values, lines):
         self.protocol = protocol
-        self.id = "-".join((protocol,) + value_ids)
+        # The (axis name, value ID) of each axis combined.
+        self.values = values
+        self.id = "-".join((protocol,) + tuple(v for _, v in values))
         self.lines = lines
 
     def __contains__(self, line):
@@ -182,8 +184,28 @@ def site_configs(protocol, axis_names, extra_lines=(), protocol_axes=()):
 
     for combo in itertools.product(*(AXES[name].values.items()
                                      for name in names)):
-        ids = tuple(value_id for value_id, _ in combo)
+        values = tuple((name, value_id)
+                       for name, (value_id, _) in zip(names, combo))
         lines = tuple(line for _, value_lines in combo
                       for line in value_lines) + tuple(extra_lines)
         if is_valid(protocol, lines):
-            yield SiteConfig(protocol, ids, lines)
+            yield SiteConfig(protocol, values, lines)
+
+def minimal_configs(configs):
+    """Return a subset of the given configurations in which each value
+    of each axis still appears at least once: the first configuration,
+    with the default value of each axis, plus as few others as can be
+    found greedily."""
+    configs = list(configs)
+    if not configs:
+        return []
+    wanted = {value for config in configs for value in config.values}
+    chosen = [configs[0]]
+    covered = set(configs[0].values)
+    remaining = configs[1:]
+    while covered != wanted:
+        best = max(remaining, key=lambda c: len(set(c.values) - covered))
+        chosen.append(best)
+        covered |= set(best.values)
+        remaining.remove(best)
+    return chosen

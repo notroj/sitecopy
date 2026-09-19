@@ -133,6 +133,13 @@ def sitecopy_features():
                          capture_output=True, text=True)
     return run.stdout.split(":", 1)[1].replace(",", " ").split()
 
+def pytest_addoption(parser):
+    parser.addoption("--full", action="store_true",
+                     help="run the server tests across every valid "
+                     "combination of rcfile options (make check-full), "
+                     "rather than a minimal set covering each option "
+                     "value at least once")
+
 def pytest_configure(config):
     config.addinivalue_line(
         "markers", "axes(*names, protocol_axes=()): run a test using the "
@@ -147,14 +154,28 @@ def pytest_configure(config):
         "markers", "site_lines(*lines): add the given rcfile lines to "
         "every configuration of a test using the site fixture")
     config.addinivalue_line(
+        "markers", "full_only: run a test only with --full "
+        "(make check-full)")
+    config.addinivalue_line(
         "markers", "default_config: run a test using the site fixture "
         "only in the default configuration, with the default value of "
         "each axis, for each protocol")
 
+def pytest_collection_modifyitems(config, items):
+    """Skip tests marked full_only unless --full is given."""
+    if config.getoption("full"):
+        return
+    skip = pytest.mark.skip(reason="full testing only (--full, make check-full)")
+    for item in items:
+        if item.get_closest_marker("full_only"):
+            item.add_marker(skip)
+
 def pytest_generate_tests(metafunc):
     """Parametrize each test using the site fixture over every
-    combination of the rcfile option axes it names, for the server
-    named by its protocol marker (or every server, if none)."""
+    combination of the rcfile option axes it names (with --full), or a
+    minimal set of combinations covering each value of each axis, for
+    the server named by its protocol marker (or every server, if
+    none)."""
     if "site_config" not in metafunc.fixturenames:
         return
     marker = metafunc.definition.get_closest_marker("axes")
@@ -171,6 +192,8 @@ def pytest_generate_tests(metafunc):
         if metafunc.definition.get_closest_marker("default_config"):
             # Only the first, with the default value of each axis.
             protocol_configs = protocol_configs[:1]
+        elif not metafunc.config.getoption("full"):
+            protocol_configs = siteconfig.minimal_configs(protocol_configs)
         configs += protocol_configs
     params = []
     for config in configs:

@@ -47,8 +47,17 @@ check-containers`:
     pytest-3 -v tests/test_ftp.py::test_fetch_active_mode   # one test
     pytest-3 -v tests/test_ftp.py -k leading_space    # by name
 
-Server tests are parametrized: each runs once per valid combination
-of the rcfile option axes it names (see `tests/siteconfig.py`).  The
+Server tests are parametrized over the rcfile option axes they name
+(see `tests/siteconfig.py`).  By default (`make check`), each runs in
+a minimal set of combinations of the axes' values: the configuration
+with the default value of each axis, plus as few others as needed for
+every value of every axis to appear at least once.  With `--full`
+(`make check-full`), each runs once per valid combination:
+
+    make check-full
+    pytest-3 -v --full tests/test_vsftpd.py
+
+The
 test ID in brackets is the protocol followed by the ID of the value of
 each axis used, in the order of `AXES`, e.g.:
 
