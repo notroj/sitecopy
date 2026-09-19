@@ -75,7 +75,7 @@ def run_container(image, ports, wait_port):
 def httpd_container(tmp_path):
     cid = run_container("sitecopy-test-httpd", ["8080:80"], 8080)
 
-    yield {"port": 8080}
+    yield {"port": 8080, "cid": cid, "root": "/var/www/html/dav"}
 
     subprocess.run(["podman", "kill", cid], capture_output=True)
 
@@ -84,6 +84,6 @@ def vsftpd_container(tmp_path):
     cid = run_container("sitecopy-test-vsftpd",
                         ["2121:21", "21100-21109:21100-21109"], 2121)
 
-    yield {"port": 2121}
+    yield {"port": 2121, "cid": cid, "root": "/home/sitecopy/site"}
 
     subprocess.run(["podman", "kill", cid], capture_output=True)
