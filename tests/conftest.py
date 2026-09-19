@@ -166,3 +166,30 @@ def site(tmp_path, site_config, containers):
     env.update(config=site_config, cid=cid, root=server.root,
                expected={})
     return env
+
+# Server logs added to the report of a failing test using the site
+# fixture, for each protocol: shell commands run in the container, or
+# None for the container's own output.
+SERVER_LOGS = {
+    "dav": [None],
+    "ftp": ["tail -n 100 /var/log/vsftpd.log"],
+}
+
+@pytest.hookimpl(hookwrapper=True)
+def pytest_runtest_makereport(item, call):
+    """Add the recent server logs to the report of a failed test using
+    the site fixture."""
+    outcome = yield
+    report = outcome.get_result()
+    site = getattr(item, "funcargs", {}).get("site")
+    if report.when != "call" or not report.failed or site is None:
+        return
+    for command in SERVER_LOGS[site["config"].protocol]:
+        if command is None:
+            cmd = ["podman", "logs", "--tail", "100", site["cid"]]
+            title = "container log"
+        else:
+            cmd = ["podman", "exec", site["cid"], "sh", "-c", command]
+            title = command
+        run = subprocess.run(cmd, capture_output=True, text=True)
+        report.sections.append(("server: " + title, run.stdout + run.stderr))
