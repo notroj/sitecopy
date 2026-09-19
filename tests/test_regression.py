@@ -60,12 +60,10 @@ def test_fetch_checksum_download_failure(site):
     finally:
         server_exec(site, "chmod 644 '%s/unreadable.txt'" % site["root"])
 
-@pytest.mark.xfail(strict=True, reason="--fetch silently skips "
-                   "directories beyond a fixed limit of 1024 pending "
-                   "directories")
 def test_fetch_many_directories(site):
-    # A directory on the server holding more subdirectories than the
-    # fetch's directory stack can hold, each with a file.
+    # A directory on the server holding more subdirectories, each with
+    # a file, than the fetch's directory stack initially holds (it
+    # used to be a fixed size, silently skipping the rest).
     count = 1030
     res = run_sitecopy(site, ["--initialize", "testsite"])
     assert res.returncode == 0, res.stdout + res.stderr
