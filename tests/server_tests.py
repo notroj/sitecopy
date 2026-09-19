@@ -206,15 +206,40 @@ def test_fetch(site):
 
 # -- Relative remote directory ------------------------------------------
 
+# FTP commands with a path argument, which must be relative for a site
+# with a relative directory.
+PATH_COMMANDS = {"STOR", "RETR", "DELE", "MKD", "RMD", "RNFR", "RNTO",
+                 "MDTM", "LIST", "SITE"}
+
+def logged_ftp_commands(lines):
+    """Return (verb, argument) for each FTP command in the given vsftpd
+    log lines, which record commands as: ... "FTP command: Client
+    "ADDRESS", "VERB ARGUMENT"."""
+    commands = []
+    for line in lines:
+        if "FTP command:" not in line:
+            continue
+        command = line.rsplit(', "', 1)[1].rstrip('"')
+        verb, _, arg = command.partition(" ")
+        commands.append((verb.upper(), arg))
+    return commands
+
 @pytest.mark.site_lines(RELATIVE_ROOT)
 def test_relative_root(site):
     # With the site's directory given relative to the directory the
     # user logs in to, FTP commands use relative paths, and `ftp
     # usecwd' has no effect.  Upload, change and delete files in
-    # nested directories, then fetch the site into an empty state.
+    # nested directories (the changes using temporary uploads, and
+    # setting permissions), move a file between directories, then
+    # fetch the site into an empty state, with timesize and checksum
+    # state (which downloads each file).
     local = site["local"]
+    vsftpd = site["logfile"] == "/var/log/vsftpd.log"
+    if vsftpd:
+        mark = server_log_mark(site)
     setup_site(site, FETCH_TREE)
 
+    add_site_lines(site, "tempupload", "permissions all")
     (local / "docs/a.txt").write_text("A, changed\n")
     write_tree(local, {"new/": None, "new/dir/": None,
                        "new/dir/n.txt": "New\n"})
@@ -222,10 +247,32 @@ def test_relative_root(site):
     (local / "gone.txt").unlink()
     update_and_check(site)
 
-    (site["store"] / "testsite").unlink()
-    res = run_sitecopy(site, ["--fetch", "testsite"])
-    assert res.returncode == 0, res.stdout + res.stderr
-    assert_no_update(site)
+    # A move between directories, with RNFR and RNTO.
+    add_site_lines(site, "checkmoved")
+    (local / "new/dir/n.txt").rename(local / "docs/n.txt")
+    move_and_check(site, "new/dir/n.txt", "docs/n.txt", True)
+
+    for state in ("timesize", "checksum"):
+        add_site_lines(site, "state " + state)
+        (site["store"] / "testsite").unlink()
+        res = run_sitecopy(site, ["--fetch", "testsite"])
+        assert res.returncode == 0, res.stdout + res.stderr
+        assert_no_update(site)
+
+    if vsftpd:
+        # vsftpd logs each command: check the paths are relative.
+        commands = logged_ftp_commands(server_log_since(site, mark))
+        sent = {verb for verb, _ in commands}
+        assert PATH_COMMANDS <= sent, sorted(PATH_COMMANDS - sent)
+        assert "CWD" not in sent
+        assert ("RNFR", "site/new/dir/n.txt") in commands
+        assert ("RNTO", "site/docs/n.txt") in commands
+        for verb, arg in commands:
+            if verb == "SITE":
+                # SITE CHMOD MODE PATH
+                arg = arg.split(" ", 2)[2]
+            if verb in PATH_COMMANDS:
+                assert arg.startswith("site/"), (verb, arg)
 
 # -- Temporary uploads ----------------------------------------------------
 
