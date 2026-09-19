@@ -812,74 +812,80 @@ int rcfile_verify(struct site *any_site)
     return 0;
 }
 
-int init_netrc() {
+int init_netrc(void)
+{
     if (!havenetrc) return 0;
     netrc_list = parse_netrc(netrcfile);
     if (netrc_list == NULL) {
-	/* Couldn't parse it */
-	return 1;
-    } else {
-	/* Could parse it */
-	return 0;
+        /* Couldn't parse it */
+        return 1;
+    }
+    else {
+        /* Could parse it */
+        return 0;
     }
 }
 
 /* Checks the perms of the rcfile and site storage directory. */
-int init_paths()
+int init_paths(void)
 {
     struct stat st;
     if (stat(rcfile, &st) < 0) {
-	NE_DEBUG(DEBUG_RCFILE, "stat failed on %s: %s\n", 
-	       rcfile, strerror(errno));
-	return RC_OPENFILE;
+        NE_DEBUG(DEBUG_RCFILE, "stat failed on %s: %s\n",
+               rcfile, strerror(errno));
+        return RC_OPENFILE;
     }
 #if !defined (__EMX__) && !defined(__CYGWIN__)
     if (!S_ISREG(st.st_mode)) {
         return RC_OPENFILE;
     }
     if ((st.st_mode & ~(S_IFREG | S_IREAD | S_IWRITE)) > 0) {
-	return RC_PERMS;
+        return RC_PERMS;
     }
 #endif
-    if ((netrcfile == 0) || (stat(netrcfile, &st) < 0)) {
-	havenetrc = false;
+    if (netrcfile == 0 || stat(netrcfile, &st) < 0) {
+        havenetrc = false;
 #if !defined (__EMX__) && !defined(__CYGWIN__)
-    } else if ((st.st_mode & ~(S_IFREG | S_IREAD | S_IWRITE)) > 0) {
-	return RC_NETRCPERMS;
+    }
+    else if ((st.st_mode & ~(S_IFREG | S_IREAD | S_IWRITE)) > 0) {
+        return RC_NETRCPERMS;
 #endif
-    } else {
-	havenetrc = true;
+    }
+    else {
+        havenetrc = true;
     }
     if (stat(copypath, &st) < 0) {
-	NE_DEBUG(DEBUG_RCFILE, "stat failed on %s: %s\n", 
-	       copypath, strerror(errno));
-	return RC_DIROPEN;
+        NE_DEBUG(DEBUG_RCFILE, "stat failed on %s: %s\n",
+               copypath, strerror(errno));
+        return RC_DIROPEN;
     }
 #if !defined (__EMX__) && !defined(__CYGWIN__)
     if (st.st_mode & (S_IRWXG | S_IRWXO)) {
-	return RC_DIRPERMS;
+        return RC_DIRPERMS;
     }
 #endif
     return 0;
 }
 
-int init_env() {
+int init_env(void)
+{
     /* Assign default filenames if they didn't give us any */
     home = getenv("HOME");
     if (home == NULL) {
-	if ((rcfile == NULL) || (copypath == NULL)) {
-	    /* We need a $HOME or both rcfile and info dir path */
-	    return 1;
-	} else {
-	    /* No $HOME, but we've got the rcfile and info dir path */
-	    return 0;
-	}
+        if (rcfile == NULL || copypath == NULL) {
+            /* We need a $HOME or both rcfile and info dir path */
+            return 1;
+        }
+        else {
+            /* No $HOME, but we've got the rcfile and info dir path */
+            return 0;
+        }
     }
     if (rcfile == NULL) {
-	rcfile = ne_concat(home, RCNAME, NULL);
+        rcfile = ne_concat(home, RCNAME, NULL);
     }
     if (copypath == NULL) {
-	copypath = ne_concat(home, COPYNAME, NULL);
+        copypath = ne_concat(home, COPYNAME, NULL);
     }
     netrcfile = ne_concat(home, NETRCNAME, NULL);
     return 0;

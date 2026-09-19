@@ -135,7 +135,7 @@ static int synch_files(struct site *site, void *session)
                 ne_free(full_local);
                 break;
             }
-            /*** fall-through */
+            /* fall through */
         case file_deleted:
             full_local = file_full_local(&current->stored, site);
             full_remote = file_full_remote(&current->stored, site);
@@ -470,7 +470,7 @@ static int update_files(struct site *site, void *session)
                     ret = 1;
                 break;
             }
-            /*** fall-through ***/
+            /* fall through */
         case file_new: /* File is new, upload it */
             if (!fe_can_update(current)) continue;
             if ((current->diff == file_changed) && site->nooverwrite) {
