@@ -385,6 +385,123 @@ def test_ignore(site):
     assert res.returncode == 0, res.stdout + res.stderr
     assert remote_tree(site)["site.cfg"] == uploaded
 
+@pytest.mark.full_only
+@pytest.mark.site_lines("exclude *.tmp", "exclude cache", "exclude /docs/*.m4")
+def test_exclude_patterns(site):
+    # A pattern without a slash matches the base name of files and
+    # directories at any depth, and an excluded directory's contents
+    # are excluded too; a pattern with a leading slash matches the
+    # path from the site's root.
+    setup_site(site, {"a.txt": "A\n", "b.tmp": "Temp\n",
+                      "sub/": None, "sub/c.tmp": "Temp\n",
+                      "sub/d.txt": "D\n",
+                      "cache/": None, "cache/x.txt": "Cached\n",
+                      "sub/cache/": None, "sub/cache/y.txt": "Cached\n",
+                      "docs/": None, "docs/g.m4": "M4\n",
+                      "docs/h.txt": "H\n",
+                      "other/": None, "other/g.m4": "M4\n"},
+               expected={"a.txt", "sub/", "sub/d.txt", "docs/",
+                         "docs/h.txt", "other/", "other/g.m4"})
+
+@pytest.mark.full_only
+@pytest.mark.site_lines("exclude /only-root.txt", "exclude anywhere.txt")
+def test_exclude_leading_slash(site):
+    # With a leading slash, a pattern matches the path from the site's
+    # root; without, the base name at any depth.
+    setup_site(site, {"only-root.txt": "R\n", "anywhere.txt": "A\n",
+                      "sub/": None, "sub/only-root.txt": "R\n",
+                      "sub/anywhere.txt": "A\n"},
+               expected={"sub/", "sub/only-root.txt"})
+
+@pytest.mark.full_only
+def test_exclude_added_later(site):
+    # A file already uploaded which comes to match an exclude pattern
+    # is deleted from the server.
+    setup_site(site, {"a.txt": "A\n", "b.log": "Log\n"})
+    add_site_lines(site, "exclude *.log")
+    res = run_sitecopy(site, ["--update", "testsite"])
+    assert res.returncode == 0, res.stdout + res.stderr
+    assert "Deleting b.log" in res.stdout, res.stdout
+    assert set(remote_tree(site)) == {"a.txt"}
+    assert_no_update(site)
+
+@pytest.mark.full_only
+@pytest.mark.site_lines("exclude *.bak")
+def test_exclude_fetch(site):
+    # Excluded files on the server are ignored by --fetch, so aren't
+    # deleted by a later update.
+    setup_site(site, {"a.txt": "A\n"})
+    create_remote(site, "b.bak", "Backup\n")
+    (site["store"] / "testsite").unlink()
+    res = run_sitecopy(site, ["--fetch", "testsite"])
+    assert res.returncode == 0, res.stdout + res.stderr
+    assert "b.bak" not in res.stdout, res.stdout
+    assert_no_update(site)
+    write_tree(site["local"], {"c.txt": "C\n"})
+    res = run_sitecopy(site, ["--update", "testsite"])
+    assert res.returncode == 0, res.stdout + res.stderr
+    assert set(remote_tree(site)) == {"a.txt", "b.bak", "c.txt"}
+
+@pytest.mark.full_only
+@pytest.mark.site_lines("ignore *.cfg")
+def test_ignore_updates(site):
+    # Changes to ignored files are not uploaded, but ignored files are
+    # created and deleted as normal.
+    local = site["local"]
+    setup_site(site, {"a.cfg": "A\n", "sub/": None, "sub/b.cfg": "B\n",
+                      "c.txt": "C\n"})
+    uploaded = remote_tree(site)["a.cfg"]
+
+    (local / "a.cfg").write_text("A, changed locally\n")
+    res = run_sitecopy(site, ["--list", "testsite"])
+    assert "[a.cfg]" in res.stdout, res.stdout
+    assert "are ignored during updates" in res.stdout, res.stdout
+    res = run_sitecopy(site, ["--update", "testsite"])
+    assert res.returncode == 0, res.stdout + res.stderr
+    assert remote_tree(site)["a.cfg"] == uploaded
+
+    # A new ignored file is uploaded, and a deleted one deleted.
+    write_tree(local, {"n.cfg": "New\n"})
+    (local / "sub/b.cfg").unlink()
+    res = run_sitecopy(site, ["--update", "testsite"])
+    assert res.returncode == 0, res.stdout + res.stderr
+    remote = remote_tree(site)
+    assert remote["n.cfg"] == md5(b"New\n")
+    assert "sub/b.cfg" not in remote
+    assert remote["a.cfg"] == uploaded
+
+@pytest.mark.full_only
+@pytest.mark.site_lines("ignore /conf/*.cfg", "ignore local.ini")
+def test_ignore_leading_slash(site):
+    # With a leading slash, a pattern matches the path from the site's
+    # root; without, the base name at any depth.
+    local = site["local"]
+    tree = {"conf/": None, "conf/a.cfg": "A\n", "other/": None,
+            "other/a.cfg": "A\n", "local.ini": "L\n",
+            "sub/": None, "sub/local.ini": "L\n"}
+    setup_site(site, tree)
+    uploaded = remote_tree(site)
+    for name in ("conf/a.cfg", "other/a.cfg", "local.ini", "sub/local.ini"):
+        (local / name).write_text("Changed locally\n")
+    res = run_sitecopy(site, ["--update", "testsite"])
+    assert res.returncode == 0, res.stdout + res.stderr
+    remote = remote_tree(site)
+    assert remote["other/a.cfg"] == md5(b"Changed locally\n")
+    for name in ("conf/a.cfg", "local.ini", "sub/local.ini"):
+        assert remote[name] == uploaded[name], name
+
+@pytest.mark.full_only
+@pytest.mark.site_lines("ignore *.cfg")
+def test_ignore_synchronize(site):
+    # Synchronize mode overwrites local changes to ignored files with
+    # the files on the server.
+    local = site["local"]
+    setup_site(site, {"a.cfg": "A\n", "c.txt": "C\n"})
+    (local / "a.cfg").write_text("A, changed locally\n")
+    res = run_sitecopy(site, ["--synchronize", "testsite"])
+    assert res.returncode == 0, res.stdout + res.stderr
+    assert (local / "a.cfg").read_text() == "A\n"
+
 # -- Symbolic links ---------------------------------------------------------
 
 @pytest.mark.axes("symlinks")
