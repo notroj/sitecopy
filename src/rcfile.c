@@ -436,31 +436,19 @@ int rcfile_read(struct site **sites)
 		}
 	    } else if (strcmp(key, "exclude") == 0) {
 		struct fnlist *f = fnlist_prepend(&this_site->excludes);
-		if (val[0] == '/') {
-		    f->pattern = ne_strdup(val+1);
-		    f->haspath = true;
-		} else {
-		    f->pattern = ne_strdup(val);
-		    f->haspath = false;
-		}
+		/* A pattern embedding a slash is matched against the
+		 * site-relative filename, a pattern without a slash
+		 * against the base name only. */
+		f->pattern = ne_strdup(val[0] == '/' ? val + 1 : val);
+		f->haspath = strchr(val, '/') != NULL;
 	    } else if (strcmp(key, "ignore") == 0) {
 		struct fnlist *f = fnlist_prepend(&this_site->ignores);
-		if (val[0] == '/') {
-		    f->pattern = ne_strdup(val+1);
-		    f->haspath = true;
-		} else {
-		    f->pattern = ne_strdup(val);
-		    f->haspath = false;
-		}
+		f->pattern = ne_strdup(val[0] == '/' ? val + 1 : val);
+		f->haspath = strchr(val, '/') != NULL;
 	    } else if (strcmp(key, "ascii") == 0) {
 		struct fnlist *f = fnlist_prepend(&this_site->asciis);
-		if (val[0] == '/') {
-		    f->pattern = ne_strdup(val+1);
-		    f->haspath = true;
-		} else {
-		    f->pattern = ne_strdup(val);
-		    f->haspath = false;
-		}
+		f->pattern = ne_strdup(val[0] == '/' ? val + 1 : val);
+		f->haspath = strchr(val, '/') != NULL;
 	    } else if (strcmp(key, "protocol") == 0) {
 		if (ne_strcasecmp(val, "ftp") == 0) {
 		    this_site->protocol = siteproto_ftp;

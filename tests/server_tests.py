@@ -241,6 +241,39 @@ def test_ignore(site):
     assert res.returncode == 0, res.stdout + res.stderr
     assert remote_tree(site)["site.cfg"] == uploaded
 
+@pytest.mark.site_lines("exclude stats/*")
+def test_exclude_directory_contents(site):
+    # Debian bug #167277: a pattern embedding a slash was classified
+    # as a base-name pattern and matched nothing, so `exclude
+    # stats/*' did not keep the contents of the directory off the
+    # server.
+    setup_site(site, {"index.html": "Root\n", "stats/": None,
+                      "stats/ctry.html": "Ctry\n",
+                      "stats/usage.html": "Usage\n"},
+               expected={"index.html", "stats/"})
+
+@pytest.mark.site_lines("exclude stats/index.html")
+def test_exclude_file_within_directory(site):
+    # Debian bug #167277: `exclude stats/index.html' matched nothing,
+    # so the file could not be excluded without also excluding the
+    # root index.html sharing its base name.
+    setup_site(site, {"index.html": "Root\n", "stats/": None,
+                      "stats/index.html": "Stats\n",
+                      "stats/ctry.html": "Ctry\n"},
+               expected={"index.html", "stats/", "stats/ctry.html"})
+
+@pytest.mark.site_lines("exclude stats/*")
+def test_exclude_fetch(site):
+    # Files on the server which match an exclude pattern are left out
+    # of the fetched file list (Debian bug #167277).
+    server_exec(site, "mkdir -p '%s/stats' && printf 'Usage\\n' > "
+                "'%s/stats/usage.html'" % (site["root"], site["root"]))
+    res = run_sitecopy(site, ["--initialize", "testsite"])
+    assert res.returncode == 0, res.stdout + res.stderr
+    res = run_sitecopy(site, ["--fetch", "testsite"])
+    assert res.returncode == 0, res.stdout + res.stderr
+    assert "usage.html" not in res.stdout
+
 # -- Symbolic links ---------------------------------------------------------
 
 @pytest.mark.axes("symlinks")

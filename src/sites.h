@@ -63,14 +63,14 @@
    third state is the SERVER STATE, which is only used for sites in
    'safe mode'.  This is a copy of the the state of the file *on the
    server*, as at the last update.
- 
+
    It might help to think of the stored state as a snapshot of the
    file taken at the time of the last update.
- 
+
    The server state IS different from the stored state, since, e.g.
    the last-modification time of an uploaded file on the server is
    different to that locally.  Try it with an FTP client.
- 
+
    pre-0.9.0, we used to call the 'stored state' remotetime and
    remotesize.  But they were misnomers, because they were nothing to
    do with the real remote modtime and the real remote size.
@@ -129,11 +129,11 @@
 
 /* The different methods of defining the state of a file at a given
    moment in time are:
- 
+
     - modification time and size
     - checksum of contents
     - link target 
- 
+
   The method chosen dictates when we need to update the remote copy of
   the site. For a given file, exactly ONE method is used to define
   state.  The same method is used for all files of the same type in
@@ -143,35 +143,35 @@
   
   For 'link' files, the 'link target' determines the state - only when
   the link target changes, does the remote site need updating.
- 
+
   Checksumming allows you to do random things to the modification
   time, which is what RCS users want. But, it's a muuuch slower than
   time/size. Also, moved files can be spotted more accurately using
   checksums.
- 
+
 */
 
 /*  Filename handling
     -----------------
- 
+
   The filename of a state is relative to the site root. It has no
   leading slash, and directories do not have a trailing slash.  If a
   state "does not exist" (i.e. state.exists == false), then the
   filename is undefined.  If it does exist (i.e. exists == true), then
   the filename is guaranteed to be defined.
- 
+
   This makes filename handling in the frontend slightly awkward, since
   for any given file, determining its filename entails checking it's
   diff.  Consequently, the "file_name" function is provided, which,
   given a file, returns the stored filename of a deleted file (since
   file->local.filename is undefined), and otherwise the local
   filename.
- 
+
   To operate on the local filesystem and on the remote site via the
   protocol driver, the file_full_remote and file_full_local functions
   are used. Given a file state, these functions return the filename
   that should be used to manipulate that file remotely and locally.
- 
+
   These functions must only be used for states which exist (i.e., have
   a filename); otherwise they will dereference NULL pointers. For this
   reason, the use of these functions in the frontend is not
@@ -301,28 +301,35 @@ enum site_protocol_modes {
 
  fnlist - lists of fnmatch() patterns
  ------------------------------------
- 
+
  There are two types of pattern - patterns with paths, and patterns
  without paths. The rcfile entry
-     exclude "/backup/back*"
+      exclude "/backup/back*"
  excludes files matching back* in the asda/ directory of the site. Whereas,
  the entry
-     exclude *~
- excludes ALL files matching *~ throughout the site.
+      exclude *~
+ excludes ALL files matching *~ throughout the site.  A pattern is
+ treated as a path pattern whenever it embeds a slash, whether or
+ not the slash is leading, so
+      exclude stats/data*
+ also matches against the site-relative filenames (and thus excludes
+ matching contents of the stats/ directory).
 
- Internally, the leading slash of with-path patterns must be stripped,
+ Internally, the leading slash of with-path patterns is stripped,
  since they are used match against filenames, which don't have a
- leading slash.  If the pattern *did* have a leading slash, then the
- 'haspath' field must be set to 'true'.
+ leading slash.  If the pattern embeds a slash, then the 'haspath'
+ field must be set to 'true'.
 
  e.g.
     exclude *.txt
     exclude /asda/back*
+    exclude stats/data*
 
  ->  fnlist list:
-	{ "*.txt", false, ... } ,
-	{ "asda/back*", true, ... }  
-	
+	{ "stats/data*", true, ... } ,
+	{ "asda/back*", true, ... } ,
+	{ "*.txt", false, ... }
+
 */
 	   
 struct fnlist {
