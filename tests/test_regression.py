@@ -83,10 +83,6 @@ def test_fetch_many_directories(site):
 
 # -- Updates ---------------------------------------------------------------
 
-@pytest.mark.xfail(strict=True, reason="with nooverwrite, if the upload "
-                   "fails after the remote file was deleted, later "
-                   "updates try to delete it again, fail, and never "
-                   "upload it")
 @pytest.mark.site_lines("nooverwrite")
 def test_nooverwrite_failed_upload(site):
     setup_site(site, {"a.txt": "A\n"})
