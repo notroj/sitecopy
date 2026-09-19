@@ -63,8 +63,6 @@ def test_verify_added_status(site):
     assert "Added on server: new.txt" in res.stdout, res.stdout
     assert res.returncode != 0, res.stdout + res.stderr
 
-@pytest.mark.xfail(strict=True, reason="--verify reports excluded files "
-                   "as missing from the server")
 def test_verify_excluded(site):
     # A file uploaded before it came to be excluded is still on the
     # server until the next update, and isn't missing.

@@ -1259,9 +1259,11 @@ static int site_verify_compare(struct site *site,
     const struct proto_file *lfile;
     int numremote = 0, mismatch = 0;
 
-    /* Count the files expected on the server. */
+    /* Count the files expected on the server; excluded files are
+     * skipped in the listing, so are not expected. */
     for_each_file(file, site) {
-        numremote += file->stored.exists;
+        numremote += file->stored.exists
+            && !file_isexcluded(file->stored.filename, site);
     }
 
     for (lfile = files; lfile != NULL; lfile = lfile->next) {
