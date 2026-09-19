@@ -466,20 +466,16 @@ static void parse_cmdline(int argc, char *argv[])
 		exit(-1);
 	    }
 	    break;
-	case 'p':
-	    if (strlen(optarg) != 0) {
-		if (optarg[strlen(optarg)] != '/') {
-		    copypath = ne_malloc(strlen(optarg) + 2);
-		    strcpy(copypath, optarg);
-		    strcat(copypath, "/");
-		} else {
-		    copypath = ne_strdup(optarg);
-		}
-	    } else {
-		usage();
-		exit(-1);
-	    }
-	    break;
+        case 'p':
+            if (optarg[0] == '\0') {
+                usage();
+                exit(-1);
+            }
+            if (optarg[strlen(optarg) - 1] != '/')
+                copypath = ne_concat(optarg, "/", NULL);
+            else
+                copypath = ne_strdup(optarg);
+            break;
 #ifdef NE_DEBUGGING
 	case 'd': {
 	    char errbuf[20];

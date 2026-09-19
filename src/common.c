@@ -77,23 +77,22 @@ int map_debug_options(const char *opts, int *mask, char *errbuf)
         token = ne_token(&ptr, ',');
         token = ne_shave(token, " ");
 
-	mapped = 0;
-        
-	for (n = 0; debug_map[n].name != NULL; n++) {
-	    if (ne_strcasecmp(token, debug_map[n].name) == 0) {
-		ret |= debug_map[n].val;
-		mapped = 1;
-		break;
-	    }
-	}
-	if (!mapped) {
-	    memset(errbuf, 0, 20);
-	    strncpy(errbuf, token, 19);
+        mapped = 0;
+
+        for (n = 0; debug_map[n].name != NULL; n++) {
+            if (ne_strcasecmp(token, debug_map[n].name) == 0) {
+                ret |= debug_map[n].val;
+                mapped = 1;
+                break;
+            }
+        }
+        if (!mapped) {
+            ne_strnzcpy(errbuf, token, 20);
             ne_free(orig);
-	    return -1;
-	}
+            return -1;
+        }
     } while (ptr);
-    
+
     *mask = ret;
     ne_free(orig);
     return 0;
