@@ -423,20 +423,16 @@ int file_checksum(const char *fname, struct file_state *state, struct site *s)
 
 char *file_full_remote(struct file_state *state, struct site *site)
 {
-    char *ret;
-    ret = ne_malloc(strlen(site->remote_root) + strlen(state->filename) + 1);
-    strcpy(ret, site->remote_root);
+    char *ret = ne_concat(site->remote_root, state->filename, NULL);
+
     if (site->lowercase) {
-	int n, off, len;
-	/* Write the remote filename in lower case */
-	off = strlen(site->remote_root);
-	len = strlen(state->filename) + 1; /* +1 for \0 */
-	for (n = 0; n < len; n++) {
-	    ret[off+n] = tolower(state->filename[n]);
-	}
-    } else {
-	strcat(ret, state->filename);
+        char *p;
+
+        /* Lower-case the filename, but not the remote root. */
+        for (p = ret + strlen(site->remote_root); *p; p++)
+            *p = tolower((unsigned char)*p);
     }
+
     return ret;
 }
 

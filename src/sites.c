@@ -360,30 +360,22 @@ static int update_create_directories(struct site *site, void *session)
     return ret;
 }
 
-/* Returns the filename to use for tempupload mode, ne_malloc-allocated.
+/* Returns the filename to use for tempupload mode, ne_malloc-allocated:
+ * FILENAME with a ".in." prefix inserted after any directories.
  * (pass the site since we may have different tempupload modes in the
- * future.)
- * FIXME: implement it efficiently */
+ * future.) */
 static char *temp_upload_filename(const char *filename, struct site *site)
 {
-    char *pnt, *ret;
-    /* Insert a '.in.' prefix into the filename, AFTER
-     * any directories */
-    ret = ne_malloc(strlen(filename) + 4 + 1);
-    strcpy(ret, filename);
-    pnt = strrchr(ret, '/');
-    if (pnt == NULL) {
-	pnt = ret;
-    } else {
-	pnt++;
-    }
-    /* Shove the name segment along four bytes so we can insert
-     * the '.in.' */
-    memmove(pnt+4, pnt, strlen(pnt) + 1);
-    memcpy(pnt, ".in.", 4);
-    return ret;
+    const char *base = strrchr(filename, '/');
+    ne_buffer *buf = ne_buffer_create();
+
+    base = base ? base + 1 : filename;
+    ne_buffer_append(buf, filename, base - filename);
+    ne_buffer_concat(buf, ".in.", base, NULL);
+
+    return ne_buffer_finish(buf);
 }
-		
+
 static int update_delete_files(struct site *site, void *session)
 {
     struct site_file *current, *next;
