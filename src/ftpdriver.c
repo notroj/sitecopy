@@ -66,8 +66,7 @@ static int init(void **session, struct site *site)
                                       "certificate"));
                 return SITE_FAILED;
             }
-            ftp_set_secure(sess, site->server_cert,
-                           site_verify_certificate, site);
+            ftp_set_secure(sess, site_verify_certificate, site);
         }
 #endif
         ret = ftp_open(sess);

@@ -225,10 +225,7 @@ static int init(void **session, struct site *site)
                          site->certfile);
             return SITE_FAILED;
         }
-        if (site->server_cert)
-            ne_ssl_trust_cert(sess, site->server_cert);
-        else
-            ne_ssl_trust_default_ca(sess);
+        ne_ssl_trust_default_ca(sess);
         ne_ssl_set_verify(sess, site_verify_certificate, site);
     }
 
