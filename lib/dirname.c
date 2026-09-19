@@ -48,7 +48,7 @@ char *
 dir_name (const char *path)
 {
   char *newpath;
-  char *slash;
+  const char *slash;
   int length;			/* Length of result, not including NUL.  */
 
   slash = strrchr (path, '/');
@@ -60,9 +60,9 @@ dir_name (const char *path)
     }
   else
     {
-      /* Remove any trailing slashes from the result.
+      /* Remove any trailing slashes from the result. */
       while (slash > path && *slash == '/')
-      --slash; */
+        --slash;
 
       length = slash - path + 1;
     }
