@@ -1,4 +1,5 @@
-from common import *
+import pytest
 
-def test_dav(sitecopy_env, httpd_container):
-    check_update_cycle(sitecopy_env, httpd_container)
+from server_tests import *
+
+pytestmark = pytest.mark.protocol("dav")

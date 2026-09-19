@@ -73,12 +73,12 @@ def local_tree(root):
                 tree[prefix + f] = hashlib.md5(fp.read()).hexdigest()
     return tree
 
-def remote_tree(server):
+def remote_tree(site):
     """Return the tree on the server in the same form as local_tree,
     listed from inside the server's container."""
     script = ("cd '%s' && find . -mindepth 1 -type d -printf '%%P/\\n' "
-              "&& find . -type f -exec md5sum {} +") % server["root"]
-    run = subprocess.run(["podman", "exec", server["cid"], "sh", "-c", script],
+              "&& find . -type f -exec md5sum {} +") % site["root"]
+    run = subprocess.run(["podman", "exec", site["cid"], "sh", "-c", script],
                          capture_output=True, text=True)
     assert run.returncode == 0, run.stderr
     tree = {}
@@ -90,26 +90,58 @@ def remote_tree(server):
             tree[name.removeprefix("./")] = csum
     return tree
 
-def assert_trees_match(sitecopy_env, server):
-    assert remote_tree(server) == local_tree(sitecopy_env["local"])
+def assert_trees_match(site):
+    assert remote_tree(site) == local_tree(site["local"])
 
-def check_update_cycle(sitecopy_env, server):
+def update_and_check(site):
+    """Update the site, check the update succeeded and that the remote
+    tree matches the local tree, and return the CompletedProcess."""
+    res = run_sitecopy(site, ["--update", "testsite"])
+    assert res.returncode == 0, res.stdout + res.stderr
+    assert "Update completed successfully" in res.stdout
+    assert_trees_match(site)
+    assert_no_update(site)
+    return res
+
+def setup_site(site, tree):
+    """Initialize the site, then create and upload the given tree."""
+    res = run_sitecopy(site, ["--initialize", "testsite"])
+    assert res.returncode == 0, res.stdout + res.stderr
+    write_tree(site["local"], tree)
+    update_and_check(site)
+
+def assert_moved(res, src, dst, moved):
+    """Check that the update in res moved the file src to dst if moved
+    is true, or otherwise deleted src and uploaded dst."""
+    if moved:
+        assert "Moving %s->%s" % (src, dst) in res.stdout, res.stdout
+        assert "Uploading %s" % dst not in res.stdout, res.stdout
+    else:
+        assert "Moving" not in res.stdout, res.stdout
+        assert "Deleting %s" % src in res.stdout, res.stdout
+        assert "Uploading %s" % dst in res.stdout, res.stdout
+
+def moves_detected(site):
+    return "checkmoved" in site["config"] or renames_detected(site)
+
+def renames_detected(site):
+    return "checkmoved renames" in site["config"]
+
+def check_update_cycle(site):
     """Initialize the site against an empty remote directory, then run
     a series of updates which add, change and delete files and nested
     directories, checking after each that the remote tree matches the
     local tree."""
-    local = sitecopy_env["local"]
+    local = site["local"]
 
-    res = run_sitecopy(sitecopy_env, ["--initialize", "testsite"])
+    res = run_sitecopy(site, ["--initialize", "testsite"])
     assert res.returncode == 0, res.stdout + res.stderr
 
-    assert_no_update(sitecopy_env)
+    assert_no_update(site)
 
     # Upload the whole corpus.
     write_tree(local, CORPUS)
-    assert_update_success(sitecopy_env)
-    assert_trees_match(sitecopy_env, server)
-    assert_no_update(sitecopy_env)
+    update_and_check(site)
 
     # Change files at several depths, add new files to new and
     # existing directories, and delete a single file.
@@ -123,16 +155,12 @@ def check_update_cycle(sitecopy_env, server):
         "assets/fonts/font.bin": bytes(range(255, -1, -1)),
     })
     (local / "about.txt").unlink()
-    assert_update_success(sitecopy_env)
-    assert_trees_match(sitecopy_env, server)
-    assert_no_update(sitecopy_env)
+    update_and_check(site)
 
     # Delete whole nested subtrees.
     shutil.rmtree(local / "docs/guide")
     shutil.rmtree(local / "deep")
-    assert_update_success(sitecopy_env)
-    assert_trees_match(sitecopy_env, server)
-    assert_no_update(sitecopy_env)
+    update_and_check(site)
 
     # Delete everything.
     for path in local.iterdir():
@@ -140,5 +168,6 @@ def check_update_cycle(sitecopy_env, server):
             shutil.rmtree(path)
         else:
             path.unlink()
-    assert_update_success(sitecopy_env)
-    assert remote_tree(server) == {}
+    res = run_sitecopy(site, ["--update", "testsite"])
+    assert res.returncode == 0, res.stdout + res.stderr
+    assert remote_tree(site) == {}
