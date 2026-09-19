@@ -314,6 +314,17 @@ def server_log_lines(site, text):
     assert run.returncode in (0, 1), run.stderr
     return run.stdout.splitlines()
 
+def server_log_mark(site):
+    """Return a mark for the current end of the server's log file, for
+    server_log_since."""
+    return int(server_exec(site, "wc -l < '%s'" % site["logfile"]))
+
+def server_log_since(site, mark):
+    """Return the lines of the server's log file written since the
+    given mark from server_log_mark."""
+    return server_exec(site, "tail -n +%d '%s'"
+                       % (mark + 1, site["logfile"])).splitlines()
+
 def add_site_lines(site, *lines):
     """Add the given rcfile lines to the site, which is the last in
     the rcfile."""
