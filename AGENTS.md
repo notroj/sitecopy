@@ -35,11 +35,19 @@ inconsistent bracing.
 - A space after keywords (`if (`, `while (`) but not after function
   names in calls; spaces around binary and assignment operators;
   pointer declarations as `char *p`.
+- Don't use unnecessary parentheses in conditions: write
+  `if (a == b && c != d)`, not `if ((a == b) && (c != d))`.  (Keep
+  those GCC's `-Wparentheses` asks for, around `&&` within `||`, and
+  those around bitwise operations.)
 - Comments use `/* ... */`, not `//`.
 - Keep lines within about 80 columns.  Wrap long argument lists with
-  continuation lines aligned after the opening parenthesis; split
-  long strings by concatenation, and put `&&`/`||` at the start of a
-  wrapped condition.
+  continuation lines aligned after the opening parenthesis, and split
+  long strings by concatenation.  When wrapping an expression, put the
+  operator (`&&`, `||`, `+`, `?`, ...) at the start of the
+  continuation line, never at the end of the wrapped line:
+
+      if (file->type == file_dir
+          || (file->diff != file_changed && file->diff != file_new)) {
 
 Example:
 
