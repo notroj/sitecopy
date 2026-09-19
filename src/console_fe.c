@@ -330,32 +330,33 @@ static const char *get_symlinks_mode(struct site *site)
 static int list_site_definitions(struct site *sites)
 {
     struct site *current;
-    for (current=sites; current!=NULL; current=current->next) {
-	/* FIXME: Possibly, make sure we have the actual port number first
-	 * so we don't have to mess around printing out the port */
-	if (!current->use_this && !allsites) continue;
-	printf(_("Site: %s\n\tServer: %s"), current->name, 
-		current->server.hostname);
-	printf(_("  Port: "));
-	if (current->server.port == 0) {
-	    printf(_("(default)\n"));
-	} else {
-	    printf(_("%d\n"), current->server.port);
-	}
-	printf(_("\tProtocol: %s    Username: %s\n"),
-		site_get_protoname(current), 
-		current->server.username?current->server.username:
-		_("(unspecified)"));
-	if (! current->ftp_pasv_mode)
-	    printf(_("\tPassive mode FTP will not be used.\n"));
-	printf(_("\tRemote directory: %s\n\tLocal directory: %s\n"),
-		current->remote_root_user, current->local_root_user);
-	printf(_("\tPermissions: %s     Symlinks: %s\n"),
-		get_perms_mode(current), get_symlinks_mode(current));
-	if (current->nodelete) 
-	    printf(_("\tRemote files will not be deleted.\n"));
-	if (current->checkmoved) 
-	    printf(_("\tFiles will be moved remotely if moved locally.\n"));
+    for (current = sites; current != NULL; current = current->next) {
+        /* FIXME: Possibly, make sure we have the actual port number first
+         * so we don't have to mess around printing out the port */
+        if (!current->use_this && !allsites) continue;
+        printf(_("Site: %s\n\tServer: %s"), current->name,
+                current->server.hostname);
+        printf(_("  Port: "));
+        if (current->server.port == 0) {
+            printf(_("(default)\n"));
+        }
+        else {
+            printf(_("%d\n"), current->server.port);
+        }
+        printf(_("\tProtocol: %s    Username: %s\n"),
+                site_get_protoname(current),
+                current->server.username?current->server.username:
+                _("(unspecified)"));
+        if (! current->ftp_pasv_mode)
+            printf(_("\tPassive mode FTP will not be used.\n"));
+        printf(_("\tRemote directory: %s\n\tLocal directory: %s\n"),
+                current->remote_root_user, current->local_root_user);
+        printf(_("\tPermissions: %s     Symlinks: %s\n"),
+                get_perms_mode(current), get_symlinks_mode(current));
+        if (current->nodelete)
+            printf(_("\tRemote files will not be deleted.\n"));
+        if (current->checkmoved)
+            printf(_("\tFiles will be moved remotely if moved locally.\n"));
     }
     return 0;
 }
@@ -983,107 +984,110 @@ static void init_sites(void)
 }
 
 /* Verify sites list. */
-static int verify_sites(struct site *sites, enum action act) 
+static int verify_sites(struct site *sites, enum action act)
 {
     int count = 0, ret;
     struct site *current;
     int isokay;
 
-    for (current = sites; current!=NULL; current=current->next) {
-	if (!current->use_this && !allsites) continue;
-	/* Check the site rcfile entry is okay */
-	ret = rcfile_verify(current);
-	switch (ret) {
-	case SITE_ACCESSLOCALDIR:
-	    printf(_("%s: Could not read directory for `%s':\n\t%s\n"), 
-		    progname, current->name, current->local_root);
-	    break;
-	case SITE_NOSERVER:
-	    printf(_("%s: Server not specified in site `%s'.\n"), 
-		    progname, current->name);
-	    break;
-	case SITE_NOREMOTEDIR:
-	    printf(_("%s: Remote directory not specified in site `%s'.\n"), 
-		    progname, current->name);
-	    break;
-	case SITE_NOLOCALDIR:
-	    printf(_("%s: Local directory not specified in site `%s'.\n"), 
-		    progname, current->name);
-	    break;
-	case SITE_INVALIDPORT:
-	    printf(_("%s: Invalid port used in site `%s'.\n"),
-		    progname, current->name);
-	    break;
-	case SITE_NOMAINTAIN:
-	    printf(_("%s: %s cannot maintain symbolic links (site `%s').\n"),
-		    progname, site_get_protoname(current), current->name);
-	    break;
-	case SITE_NOREMOTEREL:
-	    printf(_("%s: Cannot use a relative remote directory in %s (site `%s').\n"), progname, site_get_protoname(current), current->name);
-	    break;
-	case SITE_NOPERMS:
-	    printf(_("%s: File permissions are not supported in %s (site `%s').\n"), progname, site_get_protoname(current), current->name);
-	    break;
-	case SITE_NOSAFEOVER:
-	    printf(_("%s: Safe mode cannot be used in conjunction with nooverwrite (site `%s').\n"), progname, current->name);
-	    break;
-	case SITE_NOSAFETEMPUP:
-	    printf(_("%s: Safe mode cannot be used in conjunction with tempupload (site `%s').\n"), progname, current->name);
-	    break;
-	case SITE_NORENAMES:
-	    printf(_("%s: Can only check for renamed files when checksumming (site `%s').\n"), progname, current->name);
-	    break;
-	case SITE_UNSUPPORTED:
-	    printf(_("%s: The protocol `%s' is unsupported (site `%s').\n"),
-		    progname, current->proto_string, current->name);
-	    break;
-	case 0:
-	    /* Success */
-	    break;
-	default:
-	    printf(_("%s: Unhandled error %d in site `%s' - please contact the maintainer.\n"), progname, ret, current->name);
-	    break;
-	}
+    for (current = sites; current != NULL; current = current->next) {
+        if (!current->use_this && !allsites) continue;
+        /* Check the site rcfile entry is okay */
+        ret = rcfile_verify(current);
+        switch (ret) {
+        case SITE_ACCESSLOCALDIR:
+            printf(_("%s: Could not read directory for `%s':\n\t%s\n"),
+                    progname, current->name, current->local_root);
+            break;
+        case SITE_NOSERVER:
+            printf(_("%s: Server not specified in site `%s'.\n"),
+                    progname, current->name);
+            break;
+        case SITE_NOREMOTEDIR:
+            printf(_("%s: Remote directory not specified in site `%s'.\n"),
+                    progname, current->name);
+            break;
+        case SITE_NOLOCALDIR:
+            printf(_("%s: Local directory not specified in site `%s'.\n"),
+                    progname, current->name);
+            break;
+        case SITE_INVALIDPORT:
+            printf(_("%s: Invalid port used in site `%s'.\n"),
+                    progname, current->name);
+            break;
+        case SITE_NOMAINTAIN:
+            printf(_("%s: %s cannot maintain symbolic links (site `%s').\n"),
+                    progname, site_get_protoname(current), current->name);
+            break;
+        case SITE_NOREMOTEREL:
+            printf(_("%s: Cannot use a relative remote directory in %s (site `%s').\n"), progname, site_get_protoname(current), current->name);
+            break;
+        case SITE_NOPERMS:
+            printf(_("%s: File permissions are not supported in %s (site `%s').\n"), progname, site_get_protoname(current), current->name);
+            break;
+        case SITE_NOSAFEOVER:
+            printf(_("%s: Safe mode cannot be used in conjunction with nooverwrite (site `%s').\n"), progname, current->name);
+            break;
+        case SITE_NOSAFETEMPUP:
+            printf(_("%s: Safe mode cannot be used in conjunction with tempupload (site `%s').\n"), progname, current->name);
+            break;
+        case SITE_NORENAMES:
+            printf(_("%s: Can only check for renamed files when checksumming (site `%s').\n"), progname, current->name);
+            break;
+        case SITE_UNSUPPORTED:
+            printf(_("%s: The protocol `%s' is unsupported (site `%s').\n"),
+                    progname, current->proto_string, current->name);
+            break;
+        case 0:
+            /* Success */
+            break;
+        default:
+            printf(_("%s: Unhandled error %d in site `%s' - please contact the maintainer.\n"), progname, ret, current->name);
+            break;
+        }
 
-	if (ret != 0) { 
-	    isokay = false;
-	} else {
-	    isokay = true;
-	}
+        if (ret != 0) {
+            isokay = false;
+        }
+        else {
+            isokay = true;
+        }
 
-	if (isokay && (actions[act].flags & A_LOCAL)) {
-	    site_read_local_state(current);
-	}
+        if (isokay && (actions[act].flags & A_LOCAL)) {
+            site_read_local_state(current);
+        }
 
-	if (isokay && (actions[act].flags & A_STORED)) {
-	    ret = site_read_stored_state(current);
-	    switch (ret) {
-	    case SITE_ERRORS: 
-		printf(_("%s: Error: Corrupt site storage file for `%s':\n%s: %s\n"),
-			progname, current->name, progname, current->last_error);
-		isokay = false;
-		break;
-	    case SITE_FAILED:
-		if ((actions[act].flags & A_COND_STORED) == A_COND_STORED) {
-		    break;
-		} else {
-		    printf(_(
-			"%s: Error: No storage file for `%s'.\n"
-			"%s: Use --init, --catchup or --fetch to create a storage file.\n"),
-			   progname, current->name, progname);
-		}
-		isokay = false;
-	    default:
-		break;
-	    }
-	}
+        if (isokay && (actions[act].flags & A_STORED)) {
+            ret = site_read_stored_state(current);
+            switch (ret) {
+            case SITE_ERRORS:
+                printf(_("%s: Error: Corrupt site storage file for `%s':\n%s: %s\n"),
+                        progname, current->name, progname, current->last_error);
+                isokay = false;
+                break;
+            case SITE_FAILED:
+                if ((actions[act].flags & A_COND_STORED) == A_COND_STORED) {
+                    break;
+                }
+                else {
+                    printf(_(
+                        "%s: Error: No storage file for `%s'.\n"
+                        "%s: Use --init, --catchup or --fetch to create a storage file.\n"),
+                           progname, current->name, progname);
+                }
+                isokay = false;
+            default:
+                break;
+            }
+        }
 
-	if (isokay) {
-	    count++;
-	} else {
-	    printf(_("%s: Skipping site `%s'.\n"), progname, current->name);
-	    current->use_this = false;
-	}
+        if (isokay) {
+            count++;
+        }
+        else {
+            printf(_("%s: Skipping site `%s'.\n"), progname, current->name);
+            current->use_this = false;
+        }
 
     }
     return count;

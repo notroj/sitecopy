@@ -157,10 +157,10 @@ static int read_line(FILE *fp, ne_buffer *buf)
  * If it is corrupt, rcfile_linenum and rcfile_line are set to the
  * the corrupt line.
  */
-int rcfile_read(struct site **sites) 
+int rcfile_read(struct site **sites)
 {
     FILE *fp;
-    int state, last_state=8, ret=0;
+    int state, last_state = 8, ret = 0;
     int alpha, hash;
     ne_buffer *line;
     char *ch;
@@ -168,12 +168,12 @@ int rcfile_read(struct site **sites)
     size_t fieldsize = 0;
     /* Holders for the site info, and default site settings */
     struct site *this_site, *last_site, default_site = {0};
-    
+
     if ((fp = fopen(rcfile, "r")) == NULL) {
-	rcfile_err = strerror(errno);
-	return RC_OPENFILE;
-    } 
-    
+        rcfile_err = strerror(errno);
+        return RC_OPENFILE;
+    }
+
     default_site.perms = sitep_ignore;
     default_site.symlinks = sitesym_follow;
     default_site.protocol = siteproto_ftp;
@@ -181,7 +181,7 @@ int rcfile_read(struct site **sites)
 
     default_site.ftp_pasv_mode = true;
     default_site.ftp_use_cwd = false;
-    
+
     last_site = this_site = NULL;
     rcfile_linenum = 0;
     rcfile_err = NULL;
@@ -208,147 +208,172 @@ int rcfile_read(struct site **sites)
         memset(val, 0, fieldsize);
         memset(val2, 0, fieldsize);
         for (ch = line->data; *ch != '\0'; ch++) {
-	    alpha = !isspace((unsigned)*ch); /* well, alphaish */
-	    hash = (*ch == '#');
-	    switch (state) {
-	    case 0: /* whitespace at beginning of line */
-		if (hash) {
-		    state = 8;
-		} else if (alpha) {
-		    *(ptr++) = *ch;
-		    state = 1;
-		}
-		break;
-	    case 1: /* key */
-		if (hash) {
-		    state = 8;
-		} else if (!alpha) {
-		    ptr = val;
-		    state = 2;
-		} else {
-		    *(ptr++) = *ch;
-		}
-		break;
-	    case 2: /* whitespace after key */
-		if (hash) {
-		    state = 8;
-		} else if (*ch == '"') {
-		    state = 4; /* begin quoted value */
-		} else if (alpha) {
-		    *(ptr++) = *ch;
-		    state = 3;
-		} 
-		break;
-	    case 3: /* unquoted value 1 */
-		if (hash) {
-		    state = 8;
-		} else if (!alpha) {
-		    ptr = val2;
-		    state = 5;
-		} else {
-		    *(ptr++) = *ch;
-		}
-		break;
-	    case 4: /* quoted value 1 */
-		if (*ch == '"') {
-		    ptr = val2;
-		    state = 5;
-		} else if (*ch == '\\') {
-		    last_state = 4;
-		    state = 9;
-		} else {
-		    *(ptr++) = *ch;
-		}
-		break;
-	    case 5: /* whitespace after value 1 */
-		if (hash) {
-		    state = 8;
-		} else if (*ch == '"') {
-		    state = 6; /* begin quoted value 2 */
-		} else if (alpha) {
-		    *(ptr++) = *ch;
-		    state = 7; /* begin unquoted value 2 */
-		} 
-		break;
-	    case 6: /* quoted value 2 */
-		if (*ch == '"') {
-		    state = 8;
-		} else if (*ch == '\\') {
-		    last_state = 4;
-		    state = 9;
-		} else {
-		    *(ptr++) = *ch;
-		}
-		break;
-	    case 7: /* unquoted value 2 */
-		if (hash) {
-		    state = 8;
-		} else if (!alpha) {
-		    state = 8;
-		} else {
-		    *(ptr++) = *ch;
-		}
-		break;
-	    case 8: /* ignore till end of line */
-		break;
-	    case 9: /* a literal (\-slashed) in a value */
-		*(ptr++) = *ch;
-		state = last_state;
-		break;
-	    }
-	}
-	
-	NE_DEBUG(DEBUG_RCFILE, "Key [%s] Value: [%s] Value2: [%s]\n", key, val, val2);
-	
-	if (strlen(key) == 0) {
-	    continue;
-	}
-	if (strlen(val) == 0) {
-	    /* A key with no value. */
-	    if (this_site == NULL) {
-		if (strcmp(key, "default") == 0) {
-		    /* Setting up the default site */
-		    NE_DEBUG(DEBUG_RCFILE, "Default site entry:\n");
-		    this_site = &default_site;
-		} else {
-		    /* Need to be in a site! */
-		    ret = RC_CORRUPT;
-		}
-	    } else if (strcmp(key, "nodelete") == 0) {
-		this_site->nodelete = true;
-	    } else if (strcmp(key, "checkmoved") == 0) {
-		this_site->checkmoved = true;
-	    } else if (strcmp(key, "nooverwrite") == 0) {
-		this_site->nooverwrite = true;
-	    } else if (strcmp(key, "lowercase") == 0) {
-		this_site->lowercase = true;
-	    } else if (strcmp(key, "safe") == 0) {
-		this_site->safemode = true;
-	    } else if (strcmp(key, "tempupload") == 0) {
-		this_site->tempupload = true;
-	    } else {
-		ret = RC_CORRUPT;
-	    }
-	} else if (strlen(val2) == 0) {
-	    /* A key with a single value. */
-	    if (strcmp(key, "site") == 0) {
-		/* Beginning of a new Site */
-		if (this_site != &default_site)
-		    last_site = this_site;
-		/* Allocate new item */
-		this_site = ne_malloc(sizeof(struct site));
-		/* Copy over the defaults */
-		memcpy(this_site, &default_site, sizeof(struct site));
-		/* Deep-copy the string lists */
-		this_site->excludes = fnlist_deep_copy(default_site.excludes);
-		this_site->ignores = fnlist_deep_copy(default_site.ignores);
-		this_site->asciis = fnlist_deep_copy(default_site.asciis);
-		this_site->prev = last_site;
-		if (last_site != NULL) { /* next site */
-		    last_site->next = this_site;
-		} else { /* First site */
-		    *sites = this_site;
-		}
+            alpha = !isspace((unsigned)*ch); /* well, alphaish */
+            hash = (*ch == '#');
+            switch (state) {
+            case 0: /* whitespace at beginning of line */
+                if (hash) {
+                    state = 8;
+                }
+                else if (alpha) {
+                    *(ptr++) = *ch;
+                    state = 1;
+                }
+                break;
+            case 1: /* key */
+                if (hash) {
+                    state = 8;
+                }
+                else if (!alpha) {
+                    ptr = val;
+                    state = 2;
+                }
+                else {
+                    *(ptr++) = *ch;
+                }
+                break;
+            case 2: /* whitespace after key */
+                if (hash) {
+                    state = 8;
+                }
+                else if (*ch == '"') {
+                    state = 4; /* begin quoted value */
+                }
+                else if (alpha) {
+                    *(ptr++) = *ch;
+                    state = 3;
+                }
+                break;
+            case 3: /* unquoted value 1 */
+                if (hash) {
+                    state = 8;
+                }
+                else if (!alpha) {
+                    ptr = val2;
+                    state = 5;
+                }
+                else {
+                    *(ptr++) = *ch;
+                }
+                break;
+            case 4: /* quoted value 1 */
+                if (*ch == '"') {
+                    ptr = val2;
+                    state = 5;
+                }
+                else if (*ch == '\\') {
+                    last_state = 4;
+                    state = 9;
+                }
+                else {
+                    *(ptr++) = *ch;
+                }
+                break;
+            case 5: /* whitespace after value 1 */
+                if (hash) {
+                    state = 8;
+                }
+                else if (*ch == '"') {
+                    state = 6; /* begin quoted value 2 */
+                }
+                else if (alpha) {
+                    *(ptr++) = *ch;
+                    state = 7; /* begin unquoted value 2 */
+                }
+                break;
+            case 6: /* quoted value 2 */
+                if (*ch == '"') {
+                    state = 8;
+                }
+                else if (*ch == '\\') {
+                    last_state = 4;
+                    state = 9;
+                }
+                else {
+                    *(ptr++) = *ch;
+                }
+                break;
+            case 7: /* unquoted value 2 */
+                if (hash) {
+                    state = 8;
+                }
+                else if (!alpha) {
+                    state = 8;
+                }
+                else {
+                    *(ptr++) = *ch;
+                }
+                break;
+            case 8: /* ignore till end of line */
+                break;
+            case 9: /* a literal (\-slashed) in a value */
+                *(ptr++) = *ch;
+                state = last_state;
+                break;
+            }
+        }
+
+        NE_DEBUG(DEBUG_RCFILE, "Key [%s] Value: [%s] Value2: [%s]\n", key, val, val2);
+
+        if (strlen(key) == 0) {
+            continue;
+        }
+        if (strlen(val) == 0) {
+            /* A key with no value. */
+            if (this_site == NULL) {
+                if (strcmp(key, "default") == 0) {
+                    /* Setting up the default site */
+                    NE_DEBUG(DEBUG_RCFILE, "Default site entry:\n");
+                    this_site = &default_site;
+                }
+                else {
+                    /* Need to be in a site! */
+                    ret = RC_CORRUPT;
+                }
+            }
+            else if (strcmp(key, "nodelete") == 0) {
+                this_site->nodelete = true;
+            }
+            else if (strcmp(key, "checkmoved") == 0) {
+                this_site->checkmoved = true;
+            }
+            else if (strcmp(key, "nooverwrite") == 0) {
+                this_site->nooverwrite = true;
+            }
+            else if (strcmp(key, "lowercase") == 0) {
+                this_site->lowercase = true;
+            }
+            else if (strcmp(key, "safe") == 0) {
+                this_site->safemode = true;
+            }
+            else if (strcmp(key, "tempupload") == 0) {
+                this_site->tempupload = true;
+            }
+            else {
+                ret = RC_CORRUPT;
+            }
+        }
+        else if (strlen(val2) == 0) {
+            /* A key with a single value. */
+            if (strcmp(key, "site") == 0) {
+                /* Beginning of a new Site */
+                if (this_site != &default_site)
+                    last_site = this_site;
+                /* Allocate new item */
+                this_site = ne_malloc(sizeof(struct site));
+                /* Copy over the defaults */
+                memcpy(this_site, &default_site, sizeof(struct site));
+                /* Deep-copy the string lists */
+                this_site->excludes = fnlist_deep_copy(default_site.excludes);
+                this_site->ignores = fnlist_deep_copy(default_site.ignores);
+                this_site->asciis = fnlist_deep_copy(default_site.asciis);
+                this_site->prev = last_site;
+                if (last_site != NULL) { /* next site */
+                    last_site->next = this_site;
+                }
+                else { /* First site */
+                    *sites = this_site;
+                }
 
                 this_site->files = NULL;
                 this_site->proto_string = ne_strdup(default_site.proto_string);
@@ -360,185 +385,243 @@ int rcfile_read(struct site **sites)
                 this_site->infofile = ne_concat(copypath, this_site->name, NULL);
                 this_site->infotemp = ne_concat(copypath, this_site->name, ".new", NULL);
                 this_site->certfile = ne_concat(copypath, this_site->name, ".crt", NULL);
-	    } else if (this_site == NULL) {
-		ret = RC_CORRUPT;
-	    } else if (strcmp(key, "username") == 0) {
-		/* username */
-		this_site->server.username = ne_strdup(val);
-	    } else if (strcmp(key, "server") == 0) {
-		this_site->server.hostname = ne_strdup(val);
-	    } else if (strcmp(key, "port") == 0) {
-		this_site->server.port = atoi(val);
-	    } else if (strcmp(key, "proxy-server") == 0) {
-		this_site->proxy.hostname = ne_strdup(val);
-	    } else if (strcmp(key, "proxy-port") == 0) {
-		this_site->proxy.port = atoi(val);
-	    } else if (strcmp(key, "proxy-password") == 0) {
-		this_site->proxy.password = ne_strdup(val);
-	    } else if (strcmp(key, "proxy-username") == 0) {
-		this_site->proxy.username = ne_strdup(val);
-	    } else if (strcmp(key, "password") == 0) {
-		this_site->server.password = ne_strdup(val);
-	    } else if (strcmp(key, "url") == 0) {
-	        this_site->url = ne_strdup(val);
-	    } else if (strcmp(key, "remote") == 0) {
-		/* Relative filenames must start with "~/" */
-		if (val[0] == '~') {
-		    if (val[1] == '/') {
-			this_site->remote_isrel = true;
-		    } else {
-			ret = RC_CORRUPT;
-		    }
-		} else {
-		    /* Dirname doesn't begin with "~/" */
-		    this_site->remote_isrel = false;
-		}
-		if (val[strlen(val)-1] != '/')
-		    strcat(val, "/");
-		this_site->remote_root_user = ne_strdup(val);
-	    } else if (strcmp(key, "local") == 0) {
-		/* Relative filenames must start with "~/" */
-		if (val[0] == '~') {
-		    if (val[1] == '/') {
-			this_site->local_isrel = true;
-		    } else {
-			ret = RC_CORRUPT;
-		    }
-		} else { 
-		    /* Dirname doesn't begin with a "~/" */
-		    this_site->local_isrel = false;
-		}
-		if (val[strlen(val)-1] != '/')
-		    strcat(val, "/");
-		this_site->local_root_user = ne_strdup(val);
-	    } else if (strcmp(key, "permissions") == 0) {
-		if (strcmp(val, "ignore") == 0) {
-		    this_site->perms = sitep_ignore;
+            }
+            else if (this_site == NULL) {
+                ret = RC_CORRUPT;
+            }
+            else if (strcmp(key, "username") == 0) {
+                /* username */
+                this_site->server.username = ne_strdup(val);
+            }
+            else if (strcmp(key, "server") == 0) {
+                this_site->server.hostname = ne_strdup(val);
+            }
+            else if (strcmp(key, "port") == 0) {
+                this_site->server.port = atoi(val);
+            }
+            else if (strcmp(key, "proxy-server") == 0) {
+                this_site->proxy.hostname = ne_strdup(val);
+            }
+            else if (strcmp(key, "proxy-port") == 0) {
+                this_site->proxy.port = atoi(val);
+            }
+            else if (strcmp(key, "proxy-password") == 0) {
+                this_site->proxy.password = ne_strdup(val);
+            }
+            else if (strcmp(key, "proxy-username") == 0) {
+                this_site->proxy.username = ne_strdup(val);
+            }
+            else if (strcmp(key, "password") == 0) {
+                this_site->server.password = ne_strdup(val);
+            }
+            else if (strcmp(key, "url") == 0) {
+                this_site->url = ne_strdup(val);
+            }
+            else if (strcmp(key, "remote") == 0) {
+                /* Relative filenames must start with "~/" */
+                if (val[0] == '~') {
+                    if (val[1] == '/') {
+                        this_site->remote_isrel = true;
+                    }
+                    else {
+                        ret = RC_CORRUPT;
+                    }
+                }
+                else {
+                    /* Dirname doesn't begin with "~/" */
+                    this_site->remote_isrel = false;
+                }
+                if (val[strlen(val)-1] != '/')
+                    strcat(val, "/");
+                this_site->remote_root_user = ne_strdup(val);
+            }
+            else if (strcmp(key, "local") == 0) {
+                /* Relative filenames must start with "~/" */
+                if (val[0] == '~') {
+                    if (val[1] == '/') {
+                        this_site->local_isrel = true;
+                    }
+                    else {
+                        ret = RC_CORRUPT;
+                    }
+                }
+                else {
+                    /* Dirname doesn't begin with a "~/" */
+                    this_site->local_isrel = false;
+                }
+                if (val[strlen(val)-1] != '/')
+                    strcat(val, "/");
+                this_site->local_root_user = ne_strdup(val);
+            }
+            else if (strcmp(key, "permissions") == 0) {
+                if (strcmp(val, "ignore") == 0) {
+                    this_site->perms = sitep_ignore;
                     this_site->dirperms = 0;
-		} else if (strcmp(val, "exec") == 0) {
-		    this_site->perms = sitep_exec;
-		} else if (strcmp(val, "all") == 0) {
-		    this_site->perms = sitep_all;
-                } else if (strcmp(val, "dir") == 0) {
+                }
+                else if (strcmp(val, "exec") == 0) {
+                    this_site->perms = sitep_exec;
+                }
+                else if (strcmp(val, "all") == 0) {
+                    this_site->perms = sitep_all;
+                }
+                else if (strcmp(val, "dir") == 0) {
                     this_site->dirperms = 1;
-		} else {
-		    ret = RC_CORRUPT;
-		}
-	    } else if (strcmp(key, "symlinks") == 0) {
-		if (strcmp(val, "follow") == 0) {
-		    this_site->symlinks = sitesym_follow;
-		} else if (strcmp(val, "maintain") == 0) {
-		    this_site->symlinks = sitesym_maintain;
-		} else if (strcmp(val, "ignore") == 0) {
-		    this_site->symlinks = sitesym_ignore;
-		} else {
-		    ret = RC_CORRUPT;
-		}
-	    } else if (strcmp(key, "exclude") == 0) {
-		struct fnlist *f = fnlist_prepend(&this_site->excludes);
-		if (val[0] == '/') {
-		    f->pattern = ne_strdup(val+1);
-		    f->haspath = true;
-		} else {
-		    f->pattern = ne_strdup(val);
-		    f->haspath = false;
-		}
-	    } else if (strcmp(key, "ignore") == 0) {
-		struct fnlist *f = fnlist_prepend(&this_site->ignores);
-		if (val[0] == '/') {
-		    f->pattern = ne_strdup(val+1);
-		    f->haspath = true;
-		} else {
-		    f->pattern = ne_strdup(val);
-		    f->haspath = false;
-		}
-	    } else if (strcmp(key, "ascii") == 0) {
-		struct fnlist *f = fnlist_prepend(&this_site->asciis);
-		if (val[0] == '/') {
-		    f->pattern = ne_strdup(val+1);
-		    f->haspath = true;
-		} else {
-		    f->pattern = ne_strdup(val);
-		    f->haspath = false;
-		}
-	    } else if (strcmp(key, "protocol") == 0) {
-		if (ne_strcasecmp(val, "ftp") == 0) {
-		    this_site->protocol = siteproto_ftp;
-		} else if (ne_strcasecmp(val, "http") == 0 || 
-			   ne_strcasecmp(val, "dav") == 0 ||
-			   ne_strcasecmp(val, "webdav") == 0) {
-		    this_site->protocol = siteproto_dav;
-		} else if (ne_strcasecmp(val, "rsh") == 0) {
-		    this_site->protocol = siteproto_rsh;
-		} else if (ne_strcasecmp(val, "ssh") == 0) {
+                }
+                else {
+                    ret = RC_CORRUPT;
+                }
+            }
+            else if (strcmp(key, "symlinks") == 0) {
+                if (strcmp(val, "follow") == 0) {
+                    this_site->symlinks = sitesym_follow;
+                }
+                else if (strcmp(val, "maintain") == 0) {
+                    this_site->symlinks = sitesym_maintain;
+                }
+                else if (strcmp(val, "ignore") == 0) {
+                    this_site->symlinks = sitesym_ignore;
+                }
+                else {
+                    ret = RC_CORRUPT;
+                }
+            }
+            else if (strcmp(key, "exclude") == 0) {
+                struct fnlist *f = fnlist_prepend(&this_site->excludes);
+                if (val[0] == '/') {
+                    f->pattern = ne_strdup(val+1);
+                    f->haspath = true;
+                }
+                else {
+                    f->pattern = ne_strdup(val);
+                    f->haspath = false;
+                }
+            }
+            else if (strcmp(key, "ignore") == 0) {
+                struct fnlist *f = fnlist_prepend(&this_site->ignores);
+                if (val[0] == '/') {
+                    f->pattern = ne_strdup(val+1);
+                    f->haspath = true;
+                }
+                else {
+                    f->pattern = ne_strdup(val);
+                    f->haspath = false;
+                }
+            }
+            else if (strcmp(key, "ascii") == 0) {
+                struct fnlist *f = fnlist_prepend(&this_site->asciis);
+                if (val[0] == '/') {
+                    f->pattern = ne_strdup(val+1);
+                    f->haspath = true;
+                }
+                else {
+                    f->pattern = ne_strdup(val);
+                    f->haspath = false;
+                }
+            }
+            else if (strcmp(key, "protocol") == 0) {
+                if (ne_strcasecmp(val, "ftp") == 0) {
+                    this_site->protocol = siteproto_ftp;
+                }
+                else if (ne_strcasecmp(val, "http") == 0 ||
+                           ne_strcasecmp(val, "dav") == 0 ||
+                           ne_strcasecmp(val, "webdav") == 0) {
+                    this_site->protocol = siteproto_dav;
+                }
+                else if (ne_strcasecmp(val, "rsh") == 0) {
                     this_site->protocol = siteproto_rsh;
-                    if (this_site->rsh_cmd == NULL) 
+                }
+                else if (ne_strcasecmp(val, "ssh") == 0) {
+                    this_site->protocol = siteproto_rsh;
+                    if (this_site->rsh_cmd == NULL)
                         this_site->rsh_cmd = ne_strdup("ssh");
-                    if (this_site->rcp_cmd == NULL) 
+                    if (this_site->rcp_cmd == NULL)
                         this_site->rcp_cmd = ne_strdup("scp");
-		} else if (ne_strcasecmp(val, "sftp") == 0) {
-		    this_site->protocol = siteproto_sftp;
-                } else {
-		    this_site->protocol = siteproto_unknown;
-		}
-		free(this_site->proto_string);
-		this_site->proto_string = ne_strdup(val);
-	    } else if (strcmp(key, "ftp") == 0) {
-		if (strcmp(val, "nopasv") == 0) {
-		    this_site->ftp_pasv_mode = false;
-		} else if (strcmp(val, "showquit") == 0) {
-		    this_site->ftp_echo_quit = true;		    
-		} else if (strcmp(val, "usecwd") == 0) {
-		    this_site->ftp_use_cwd = true;		    
-		} else if (strcmp(val, "nousecwd") == 0) {
-		    this_site->ftp_use_cwd = false;		    
-		} else {
-		    ret = RC_CORRUPT;
-		}
-	    } else if (strcmp(key, "http") == 0) {
-		if (strcmp(val, "expect") == 0) {
-		    this_site->http_use_expect = true;
-		} else if (strcmp(val, "limit") == 0) {
-		    this_site->http_limit = true;
-		} else if (strcmp(val, "secure") == 0) {
-		    this_site->http_secure = true;
-		} else if (strcmp(val, "tolerant") == 0) {
-		    this_site->http_tolerant = true;
-		} else {		    
-		    ret = RC_CORRUPT;
-		}
-            } else if (strcmp(key, "client-cert") == 0) {
+                }
+                else if (ne_strcasecmp(val, "sftp") == 0) {
+                    this_site->protocol = siteproto_sftp;
+                }
+                else {
+                    this_site->protocol = siteproto_unknown;
+                }
+                free(this_site->proto_string);
+                this_site->proto_string = ne_strdup(val);
+            }
+            else if (strcmp(key, "ftp") == 0) {
+                if (strcmp(val, "nopasv") == 0) {
+                    this_site->ftp_pasv_mode = false;
+                }
+                else if (strcmp(val, "showquit") == 0) {
+                    this_site->ftp_echo_quit = true;
+                }
+                else if (strcmp(val, "usecwd") == 0) {
+                    this_site->ftp_use_cwd = true;
+                }
+                else if (strcmp(val, "nousecwd") == 0) {
+                    this_site->ftp_use_cwd = false;
+                }
+                else {
+                    ret = RC_CORRUPT;
+                }
+            }
+            else if (strcmp(key, "http") == 0) {
+                if (strcmp(val, "expect") == 0) {
+                    this_site->http_use_expect = true;
+                }
+                else if (strcmp(val, "limit") == 0) {
+                    this_site->http_limit = true;
+                }
+                else if (strcmp(val, "secure") == 0) {
+                    this_site->http_secure = true;
+                }
+                else if (strcmp(val, "tolerant") == 0) {
+                    this_site->http_tolerant = true;
+                }
+                else {
+                    ret = RC_CORRUPT;
+                }
+            }
+            else if (strcmp(key, "client-cert") == 0) {
                 this_site->client_cert = ne_strdup(val);
-	    } else if (strcmp(key, "rsh") == 0) {
-		this_site->rsh_cmd = ne_strdup(val);
-	    } else if (strcmp(key, "rcp") == 0) {
-		this_site->rcp_cmd = ne_strdup(val);
-	    } else if (strcmp(key, "state") == 0) {
-		if (strcmp(val, "checksum") == 0) {
-		    this_site->state_method = state_checksum;
-		} else if (strcmp(val, "timesize") == 0) {
-		    this_site->state_method = state_timesize;
-		} else {
-		    ret = RC_CORRUPT;
-		}
-	    } else if (strcmp(key, "checkmoved") == 0) {
-		if (strcmp(val, "renames") == 0) {
-		    this_site->checkrenames = true;
-		    this_site->checkmoved = true;
-		} else {
-		    ret = RC_CORRUPT;
-		}
-	    } else if (strcmp(key, "charset") == 0) {
+            }
+            else if (strcmp(key, "rsh") == 0) {
+                this_site->rsh_cmd = ne_strdup(val);
+            }
+            else if (strcmp(key, "rcp") == 0) {
+                this_site->rcp_cmd = ne_strdup(val);
+            }
+            else if (strcmp(key, "state") == 0) {
+                if (strcmp(val, "checksum") == 0) {
+                    this_site->state_method = state_checksum;
+                }
+                else if (strcmp(val, "timesize") == 0) {
+                    this_site->state_method = state_timesize;
+                }
+                else {
+                    ret = RC_CORRUPT;
+                }
+            }
+            else if (strcmp(key, "checkmoved") == 0) {
+                if (strcmp(val, "renames") == 0) {
+                    this_site->checkrenames = true;
+                    this_site->checkmoved = true;
+                }
+                else {
+                    ret = RC_CORRUPT;
+                }
+            }
+            else if (strcmp(key, "charset") == 0) {
                 NE_DEBUG(DEBUG_RCFILE, "Ignored key %s\n", key);
-            } else {
-		/* Unknown key! */
-		ret = RC_CORRUPT;
-	    }
-	} else {
-	    {
-		ret = RC_CORRUPT;
-	    }
-	}
+            }
+            else {
+                /* Unknown key! */
+                ret = RC_CORRUPT;
+            }
+        }
+        else {
+            {
+                ret = RC_CORRUPT;
+            }
+        }
     }
 
     fclose(fp);
@@ -563,7 +646,7 @@ const char *rc_get_netrc_password(const char *server, const char *username) {
 }
 
 /* Returns zero if site is properly defined, else non-zero */
-int rcfile_verify(struct site *any_site) 
+int rcfile_verify(struct site *any_site)
 {
     struct stat localst;
     char *temp;
@@ -574,107 +657,111 @@ int rcfile_verify(struct site *any_site)
     switch (any_site->protocol) {
     case siteproto_ftp:
 #ifdef USE_FTP
-	any_site->driver = &ftp_driver;
-	/* FTP checks */
-	if (any_site->symlinks == sitesym_maintain) {
-	    return SITE_NOMAINTAIN;
-	}
-	break;
+        any_site->driver = &ftp_driver;
+        /* FTP checks */
+        if (any_site->symlinks == sitesym_maintain) {
+            return SITE_NOMAINTAIN;
+        }
+        break;
 #else /* !USE_FTP */
-	return SITE_UNSUPPORTED;
+        return SITE_UNSUPPORTED;
 #endif /* USE_FTP */
     case siteproto_dav:
 #ifdef USE_DAV
-	any_site->driver = &dav_driver;
-	/* HTTP checks */
-	if (any_site->remote_isrel) { 
-	    return SITE_NOREMOTEREL;
-	}
-	if (any_site->perms == sitep_all || any_site->dirperms) {
-	    return SITE_NOPERMS;
-	}
-	if (any_site->symlinks == sitesym_maintain) {
-	    return SITE_NOMAINTAIN;
-	}
-	break;
+        any_site->driver = &dav_driver;
+        /* HTTP checks */
+        if (any_site->remote_isrel) {
+            return SITE_NOREMOTEREL;
+        }
+        if (any_site->perms == sitep_all || any_site->dirperms) {
+            return SITE_NOPERMS;
+        }
+        if (any_site->symlinks == sitesym_maintain) {
+            return SITE_NOMAINTAIN;
+        }
+        break;
 #else /* !USE_DAV */
-	return SITE_UNSUPPORTED;
+        return SITE_UNSUPPORTED;
 #endif /* USE_DAV */
     case siteproto_rsh:
 #ifdef USE_RSH
-	any_site->driver = &rsh_driver;
-	/* FIXME: rsh checks? */
-	break;
+        any_site->driver = &rsh_driver;
+        /* FIXME: rsh checks? */
+        break;
 #else /* !USE_RSH */
-	return SITE_UNSUPPORTED;
+        return SITE_UNSUPPORTED;
 #endif /* USE_RSH */
     case siteproto_sftp:
 #ifdef USE_SFTP
-	any_site->driver = &sftp_driver;
-	/* FIXME: sftp checks? */
-	break;
+        any_site->driver = &sftp_driver;
+        /* FIXME: sftp checks? */
+        break;
 #else /* !USE_SFTP */
-	return SITE_UNSUPPORTED;
+        return SITE_UNSUPPORTED;
 #endif /* USE_SFTP */
     case siteproto_unknown:
-	return SITE_UNSUPPORTED;
+        return SITE_UNSUPPORTED;
     }
 
     /* Valid options check */
     if (any_site->checkrenames && (any_site->state_method != state_checksum)) {
-	return SITE_NORENAMES;
+        return SITE_NORENAMES;
     }
 
     /* Check they specified everything in the rcfile */
     if (any_site->server.hostname == NULL) {
-	return SITE_NOSERVER;
-    } 
+        return SITE_NOSERVER;
+    }
 
     if (any_site->server.username != NULL && any_site->server.password == NULL) {
-	if (havenetrc) {
-	    const char *pass;
-	    NE_DEBUG(DEBUG_RCFILE, "Checking netrc for password for %s@%s...",
-		   any_site->server.username, any_site->server.hostname);
-	    pass = rc_get_netrc_password(any_site->server.hostname, 
-					  any_site->server.username);
-	    if (pass != NULL) {
-		NE_DEBUG(DEBUG_RCFILE, "found!\n");
-		any_site->server.password = (char *) pass;
-	    } else {
-		NE_DEBUG(DEBUG_RCFILE, "none found.\n");
-	    }
-	}
+        if (havenetrc) {
+            const char *pass;
+            NE_DEBUG(DEBUG_RCFILE, "Checking netrc for password for %s@%s...",
+                   any_site->server.username, any_site->server.hostname);
+            pass = rc_get_netrc_password(any_site->server.hostname,
+                                          any_site->server.username);
+            if (pass != NULL) {
+                NE_DEBUG(DEBUG_RCFILE, "found!\n");
+                any_site->server.password = (char *) pass;
+            }
+            else {
+                NE_DEBUG(DEBUG_RCFILE, "none found.\n");
+            }
+        }
     }
     /* TODO: lookup proxy username/password in netrc too */
 
     if (any_site->remote_root_user == NULL) {
-	return SITE_NOREMOTEDIR;
-    } else if (any_site->local_root_user == NULL) {
-	return SITE_NOLOCALDIR;
+        return SITE_NOREMOTEDIR;
     }
-    
+    else if (any_site->local_root_user == NULL) {
+        return SITE_NOLOCALDIR;
+    }
+
     /* Need a home directory if we're using relative local root */
     if (home == NULL && any_site->local_root)
-	return SITE_NOLOCALREL;
+        return SITE_NOLOCALREL;
 
     /* Can't use safe mode and nooverwrite mode */
     if (any_site->safemode && any_site->nooverwrite)
-	return SITE_NOSAFEOVER;
+        return SITE_NOSAFEOVER;
 
     if (any_site->safemode && any_site->tempupload)
-	return SITE_NOSAFETEMPUP;
+        return SITE_NOSAFETEMPUP;
 
     if (any_site->remote_isrel) {
-	any_site->remote_root = ne_strdup(any_site->remote_root_user + 2);
-    } else {
-	any_site->remote_root = ne_strdup(any_site->remote_root_user);
+        any_site->remote_root = ne_strdup(any_site->remote_root_user + 2);
+    }
+    else {
+        any_site->remote_root = ne_strdup(any_site->remote_root_user);
     }
     if (any_site->local_isrel) {
-	/* We skip the first char ('~') of l_r_u */
-	any_site->local_root = ne_concat(home, any_site->local_root_user + 1,
-					 NULL);
-    } else {
-	any_site->local_root = any_site->local_root_user;
+        /* We skip the first char ('~') of l_r_u */
+        any_site->local_root = ne_concat(home, any_site->local_root_user + 1,
+                                         NULL);
+    }
+    else {
+        any_site->local_root = any_site->local_root_user;
     }
 
     /* Now check the local directory actually exists.
@@ -684,7 +771,7 @@ int rcfile_verify(struct site *any_site)
     ret = stat(temp, &localst);
     free(temp);
     if (ret != 0) {
-	return SITE_ACCESSLOCALDIR;
+        return SITE_ACCESSLOCALDIR;
     }
 
     if (any_site->client_cert && strncmp(any_site->client_cert, "~/", 2) == 0) {
@@ -695,15 +782,15 @@ int rcfile_verify(struct site *any_site)
 
     /* Assign default ports if they didn't bother to */
     if (any_site->server.port == 0) {
-	NE_DEBUG(DEBUG_RCFILE, "Lookup up default port:\n");
-	any_site->server.port = (*any_site->driver->get_server_port)(any_site);
-	NE_DEBUG(DEBUG_RCFILE, "Using port: %d\n", any_site->server.port);
+        NE_DEBUG(DEBUG_RCFILE, "Lookup up default port:\n");
+        any_site->server.port = (*any_site->driver->get_server_port)(any_site);
+        NE_DEBUG(DEBUG_RCFILE, "Using port: %d\n", any_site->server.port);
     }
 
     if (any_site->proxy.port == 0) {
-	NE_DEBUG(DEBUG_RCFILE, "Lookup default proxy port...\n");
-	any_site->proxy.port = (*any_site->driver->get_proxy_port)(any_site);
-	NE_DEBUG(DEBUG_RCFILE, "Using port %d\n", any_site->proxy.port);
+        NE_DEBUG(DEBUG_RCFILE, "Lookup default proxy port...\n");
+        any_site->proxy.port = (*any_site->driver->get_proxy_port)(any_site);
+        NE_DEBUG(DEBUG_RCFILE, "Using port %d\n", any_site->proxy.port);
     }
 
     /* TODO: ditto for proxy server */
