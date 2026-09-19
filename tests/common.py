@@ -187,6 +187,11 @@ def check_update_cycle(site):
     write_tree(local, CORPUS)
     update_and_check(site)
 
+    # In safe mode, changed files are only uploaded if unchanged on
+    # the server since the last update; let time pass, as it would.
+    if "safe" in site["config"]:
+        time.sleep(2)
+
     # Change files at several depths, add new files to new and
     # existing directories, and delete a single file.
     (local / "index.html").write_text("<html>Home, changed</html>\n")

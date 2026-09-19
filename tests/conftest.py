@@ -97,8 +97,12 @@ def pytest_generate_tests(metafunc):
     configs = [config for protocol in protocols
                for config in siteconfig.site_configs(protocol, axis_names,
                                                      extra_lines)]
-    metafunc.parametrize("site_config", configs,
-                         ids=[config.id for config in configs])
+    params = []
+    for config in configs:
+        reason = siteconfig.known_bug(metafunc.function.__name__, config)
+        marks = [pytest.mark.xfail(strict=True, reason=reason)] if reason else []
+        params.append(pytest.param(config, id=config.id, marks=marks))
+    metafunc.parametrize("site_config", params)
 
 def run_container(image, ports, wait_port):
     """Run the given container image detached, publishing the given
