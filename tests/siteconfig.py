@@ -37,11 +37,44 @@ AXES = {
         "checkmoved": ("checkmoved",),
         "renames": ("checkmoved renames",),
     }),
+    "delete": Axis({
+        "delete": (),
+        "nodelete": ("nodelete",),
+    }),
+    "overwrite": Axis({
+        "overwrite": (),
+        "nooverwrite": ("nooverwrite",),
+    }),
+    "safe": Axis({
+        "nosafe": (),
+        "safe": ("safe",),
+    }),
+    "tempupload": Axis({
+        "direct": (),
+        "tempupload": ("tempupload",),
+    }),
+    "lowercase": Axis({
+        "case": (),
+        "lowercase": ("lowercase",),
+    }),
 }
 
 # rcfile lines which are only valid in combination with another.
 REQUIRES = {
     "checkmoved renames": "state checksum",
+}
+
+# Pairs of rcfile lines which are rejected in combination
+# (rcfile_verify in src/rcfile.c).
+CONFLICTS = [
+    ("safe", "nooverwrite"),
+    ("safe", "tempupload"),
+]
+
+# rcfile lines which are only valid for some protocols.
+PROTOCOL_ONLY = {
+    "permissions all": {"ftp"},
+    "permissions dir": {"ftp"},
 }
 
 class SiteConfig:
@@ -61,13 +94,19 @@ class SiteConfig:
     def __repr__(self):
         return "SiteConfig(%s)" % self.id
 
-def is_valid(lines):
-    return all(REQUIRES[line] in lines for line in lines if line in REQUIRES)
+def is_valid(protocol, lines):
+    """Returns whether the given combination of rcfile lines is
+    accepted by sitecopy for a site using the given protocol."""
+    return (all(REQUIRES[line] in lines
+                for line in lines if line in REQUIRES)
+            and not any(a in lines and b in lines for a, b in CONFLICTS)
+            and all(protocol in PROTOCOL_ONLY[line]
+                    for line in lines if line in PROTOCOL_ONLY))
 
-def site_configs(protocol, axis_names):
+def site_configs(protocol, axis_names, extra_lines=()):
     """Yield each valid SiteConfig for the given protocol, combining
     every value of each named axis which applies to the protocol,
-    plus the axes which always apply."""
+    plus the axes which always apply, plus the given extra lines."""
     names = [name for name, axis in AXES.items()
              if (axis.always or name in axis_names)
              and axis.applies_to(protocol)]
@@ -79,6 +118,6 @@ def site_configs(protocol, axis_names):
                                      for name in names)):
         ids = tuple(value_id for value_id, _ in combo)
         lines = tuple(line for _, value_lines in combo
-                      for line in value_lines)
-        if is_valid(lines):
+                      for line in value_lines) + tuple(extra_lines)
+        if is_valid(protocol, lines):
             yield SiteConfig(protocol, ids, lines)
