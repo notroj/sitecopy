@@ -1077,7 +1077,7 @@ static int fetch_checksum_file(struct proto_file *file,
  */
 int site_fetch(struct site *site)
 {
-    int ret, need_modtimes;
+    int ret, need_modtimes, csum_failed = 0;
     void *session;
     const char **dirstack;
     size_t dirtop, dirmax = DIRSTACKSIZE;
@@ -1133,8 +1133,9 @@ int site_fetch(struct site *site)
                     dirstack[dirtop++] = relfn;
                 }
                 else if (f->type == proto_file
-                         && site->state_method == state_checksum) {
-                    fetch_checksum_file(f, site, session);
+                         && site->state_method == state_checksum
+                         && !csum_failed) {
+                    csum_failed = fetch_checksum_file(f, site, session);
                 }
             }
 
@@ -1147,9 +1148,14 @@ int site_fetch(struct site *site)
         }
 
         ne_free(curdir);
-    } while (dirtop > 0);
+    } while (dirtop > 0 && !csum_failed);
 
     ne_free(dirstack);
+
+    /* Without the checksum of every file, the fetched state would be
+     * wrong. */
+    if (csum_failed)
+        ret = SITE_ERRORS;
 
     if (ret == SITE_OK) {
         struct proto_file *f, *nextf;
