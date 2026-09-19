@@ -339,6 +339,14 @@ static int update_create_directories(struct site *site, void *session)
             oret = CALL(dir_create)(session, full_remote);
             fe_updated(current, oret == SITE_OK,
                        oret == SITE_OK ? NULL : DRIVER_ERR);
+            if (oret == SITE_OK && site->dirperms) {
+                /* Record the directory as created, with its
+                 * permissions not yet set, so that if setting them
+                 * fails, the next update retries only that. */
+                file_uploaded(current, site);
+                current->stored.mode = 0;
+                file_set_diff(current, site);
+            }
         }
 
         if (site->dirperms && oret == SITE_OK) {
