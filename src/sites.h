@@ -308,20 +308,26 @@ enum site_protocol_modes {
  excludes files matching back* in the asda/ directory of the site. Whereas,
  the entry
      exclude *~
- excludes ALL files matching *~ throughout the site.
+ excludes ALL files matching *~ throughout the site.  A pattern is a
+ pattern with a path whenever it embeds a slash, whether or not the
+ slash is leading, so
+     exclude stats/data*
+ excludes files matching data* in the stats/ directory of the site.
 
  Internally, the leading slash of with-path patterns must be stripped,
  since they are used match against filenames, which don't have a
- leading slash.  If the pattern *did* have a leading slash, then the
- 'haspath' field must be set to 'true'.
+ leading slash.  If the pattern embeds a slash, then the 'haspath'
+ field must be set to 'true'.
 
  e.g.
     exclude *.txt
     exclude /asda/back*
+    exclude stats/data*
 
  ->  fnlist list:
 	{ "*.txt", false, ... } ,
-	{ "asda/back*", true, ... }  
+	{ "asda/back*", true, ... } ,
+	{ "stats/data*", true, ... }
 	
 */
 	   

@@ -658,6 +658,15 @@ which will exclude all files with the .m4 extension in the 'docs'
 subdirectory of the site, and all files with the .gz extension in the
 files subdirectory.
 
+Any pattern which contains a slash is matched against the name of the
+file relative to the site root, so the leading slash may be left out:
+.br
+.BR "	exclude " "docs/*.m4"
+.br
+has the same effect as the example above.  A pattern which contains no
+slash is matched against the base name of the file, in any directory
+of the site.
+
 An entire directory can also be excluded - simply use the directory
 name with no trailing slash. For example
 .br
