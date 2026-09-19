@@ -24,7 +24,6 @@ jobs:
         submodules: true
     - run: sudo apt-get update
     - run: sudo apt-get -y install autopoint gettext python3-pytest ${{ !matrix.bundled && 'libneon27-dev' || '' }}
-    - run: bash -ex ./.release.sh master
     - run: ./autogen.sh
     - run: ./configure --prefix=/tmp/rootdir 
                        ${{ matrix.bundled && '--with-included-neon --with-ssl=openssl' || '--with-neon=/usr' }} 
@@ -54,7 +53,6 @@ jobs:
         submodules: true
     - run: sudo apt-get update
     - run: sudo apt-get -y install autopoint gettext libneon27-dev
-    - run: bash -ex ./.release.sh master
     - run: ./autogen.sh
     - run: ./configure --with-neon=/usr --enable-warnings
     - run: make EXTRA_CFLAGS="-Werror -Wextra -Wno-unused-parameter
@@ -85,7 +83,6 @@ jobs:
         submodules: true
     - run: sudo apt-get update
     - run: sudo apt-get -y install autopoint gettext python3-pytest
-    - run: bash -ex ./.release.sh master
     - run: ./autogen.sh
     - run: ./configure --with-included-neon --with-ssl=openssl
                        CFLAGS="-g -O1 -fno-omit-frame-pointer -fsanitize=${{ matrix.sanitizer }} -fno-sanitize-recover=all"
