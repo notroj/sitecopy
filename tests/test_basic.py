@@ -102,7 +102,7 @@ def test_site_urls(sitecopy_env):
     res = run_sitecopy(sitecopy_env, ["--view", "example.com"])
     assert res.returncode == 0
     assert "Protocol: sftp" in res.stdout
-    assert "Remote directory: foobar/" not in res.stdout
+    assert "Remote directory: foo/bar\n" in res.stdout
     assert "Port: (default)" in res.stdout
     assert "Server: example.com" in res.stdout
 
@@ -123,6 +123,9 @@ REJECTED_CONFIGS = [
     ("ftp", ["symlinks maintain"], "FTP cannot maintain symbolic links"),
     ("dav", ["permissions all"], "File permissions are not supported in WebDAV"),
     ("dav", ["checkmoved renames"], None),
+    # WebDAV has no login directory for a directory to be relative to.
+    ("dav", ["remote ~/site/"],
+     "Cannot use a relative remote directory in WebDAV"),
 ]
 
 @pytest.mark.parametrize("protocol, lines, message", REJECTED_CONFIGS,
@@ -151,3 +154,17 @@ def test_long_rcfile_lines(sitecopy_env):
     res = run_sitecopy(sitecopy_env, ["--view", "testsite"])
     assert res.returncode == 0, res.stdout + res.stderr
     assert "Remote directory: " + remote in res.stdout
+
+def test_relative_remote(tmp_path):
+    # A remote directory relative to the login directory, for FTP,
+    # starts with "~/".
+    senv = make_sitecopy_env(tmp_path, "  protocol ftp\n  remote ~/site\n")
+    res = run_sitecopy(senv, ["--view", "testsite"])
+    assert res.returncode == 0, res.stdout + res.stderr
+    assert "Remote directory: ~/site/\n" in res.stdout
+
+    senv["rcfile"].write_text(senv["rcfile"].read_text()
+                              .replace("remote ~/site", "remote ~site"))
+    res = run_sitecopy(senv, ["--view", "testsite"])
+    assert res.returncode != 0, res.stdout + res.stderr
+    assert "rcfile corrupt" in res.stdout + res.stderr

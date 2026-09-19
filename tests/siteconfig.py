@@ -84,10 +84,16 @@ CONFLICTS = [
     ("safe", "tempupload"),
 ]
 
+# The site's directory on the FTP servers, relative to the directory
+# the user logs in to, /home/sitecopy.
+RELATIVE_ROOT = "remote ~/site/"
+
 # rcfile lines which are only valid for some protocols.
 PROTOCOL_ONLY = {
     "permissions all": FTP_PROTOCOLS,
     "permissions dir": FTP_PROTOCOLS,
+    # WebDAV has no login directory, so rejects a relative root.
+    RELATIVE_ROOT: FTP_PROTOCOLS,
 }
 
 # Known bugs affecting a protocol with a given rcfile line: each is
@@ -142,10 +148,11 @@ def is_valid(protocol, lines):
 # change only local state, or which files are sent.
 PROTOCOL_AXES = {"ftp", "overwrite", "safe", "tempupload", "permissions"}
 
-# The rcfile lines of the values of PROTOCOL_AXES.
+# The rcfile lines of the values of PROTOCOL_AXES, plus a relative
+# root, which changes the paths used in FTP commands.
 PROTOCOL_LINES = {line for name in PROTOCOL_AXES
                   for lines in AXES[name].values.values()
-                  for line in lines}
+                  for line in lines} | {RELATIVE_ROOT}
 
 # Protocols tested only across PROTOCOL_AXES, where varying the other
 # options would repeat tests of sitecopy's local behaviour: the FTP

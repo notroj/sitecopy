@@ -141,6 +141,9 @@ Test layout:
   protocol use only for a particular test can be named for that test
   with `@pytest.mark.axes(..., protocol_axes=(...))`, as `test_fetch`
   does for `state` (with checksum state, fetch downloads every file).
+  A configuration giving its own `remote` line (e.g. `RELATIVE_ROOT`,
+  `remote ~/site/`, relative to the FTP servers' login directory)
+  replaces the server's absolute one.
 - `tests/common.py` — helpers such as `run_sitecopy()`,
   `update_and_check()` (update, then compare the tree on the server,
   listed from inside the container, with `expected_remote()`, a model
