@@ -119,17 +119,18 @@ static int get_proxy_port(struct site *site)
 }
 
 static int auth_common(void *userdata, fe_login_context ctx,
-		       const char *realm, int attempt,
-		       char *username, char *password)
+                       const char *realm, int attempt,
+                       char *username, char *password)
 {
     struct site_host *host = userdata;
+
     if (host->username && host->password) {
-	strcpy(username, host->username);
-	strcpy(password, host->password);
-	return attempt;
-    } else {
-	return fe_login(ctx, realm, host->hostname, username, password);
+        ne_strnzcpy(username, host->username, FE_LBUFSIZ);
+        ne_strnzcpy(password, host->password, FE_LBUFSIZ);
+        return attempt;
     }
+
+    return fe_login(ctx, realm, host->hostname, username, password);
 }
 
 static int 
