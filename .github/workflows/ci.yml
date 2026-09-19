@@ -14,23 +14,20 @@ jobs:
       ${{ matrix.os }},
       ${{ matrix.bundled && 'bundled' || 'system' }} neon${{
       matrix.warnings && ', -Werror' || '' }}${{
-      matrix.install && ', install' || '' }}${{
-      (matrix.bundled && matrix.warnings && !matrix.install)
-      && ', full tests' || '' }}
+      (matrix.bundled && matrix.warnings) && ', full tests' || '' }}
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
       matrix:
         os: [ubuntu-latest, ubuntu-22.04, ubuntu-24.04-arm]
-        install: [true, false]
         bundled: [true, false]
         warnings: [true, false]
     env:
       # The full test matrix (check-full) runs in one cell per OS, since
       # the container runtimes differ; the other cells run the minimal
       # set of combinations of rcfile options (check).
-      CHECK: ${{ (matrix.bundled && matrix.warnings && !matrix.install)
-                 && 'check-full' || 'check' }}
+      CHECK: ${{ (matrix.bundled && matrix.warnings) && 'check-full'
+                 || 'check' }}
     steps:
     - uses: actions/checkout@v6
       with:
@@ -43,9 +40,8 @@ jobs:
                        ${{ matrix.warnings && '--enable-warnings' || '' }}
     - run: make ${{ !matrix.bundled && '-j`nproc`' || '' }}
                 ${{ matrix.warnings && 'EXTRA_CFLAGS=-Werror' || '' }}
-    - run: make install
-      if: ${{ matrix.install }}
     - run: make ${{ env.CHECK }}
+    - run: make install
 
   # One-off builds with GCC warnings beyond --enable-warnings, as
   # errors, using the most recent Ubuntu for a recent GCC, with the C17
