@@ -44,6 +44,9 @@
 #include <strings.h>
 #endif
 #include <time.h>
+#ifdef HAVE_LIMITS_H
+#include <limits.h>
+#endif
 #include <utime.h>
 
 /* neon */
@@ -366,21 +369,31 @@ static int update_create_directories(struct site *site, void *session)
 }
 
 /* Returns the filename to use for tempupload mode, ne_malloc-allocated:
- * FILENAME with a ".in." prefix inserted after any directories.
- * (pass the site since we may have different tempupload modes in the
- * future.) */
+ * FILENAME with a ".in." prefix inserted after any directories, and a
+ * random suffix, so that it isn't the name of another file on the
+ * server; or NULL if the filename is too long.  (pass the site since
+ * we may have different tempupload modes in the future.) */
 static char *temp_upload_filename(const char *filename, struct site *site)
 {
+    static int seeded = 0;
     const char *base = strrchr(filename, '/');
-    ne_buffer *buf = ne_buffer_create();
+    char buf[PATH_MAX];
+
+    if (!seeded) {
+        srandom(time(NULL) ^ getpid());
+        seeded = 1;
+    }
 
     base = base ? base + 1 : filename;
-    ne_buffer_append(buf, filename, base - filename);
-    ne_buffer_concat(buf, ".in.", base, NULL);
+    if (ne_snprintf(buf, sizeof buf, "%.*s.in.%s.%08lx",
+                    (int)(base - filename), filename, base,
+                    (unsigned long)random()) >= sizeof buf - 1) {
+        /* Truncated. */
+        return NULL;
+    }
 
-    return ne_buffer_finish(buf);
+    return ne_strdup(buf);
 }
-
 static int update_delete_files(struct site *site, void *session)
 {
     struct site_file *current, *next;
@@ -525,8 +538,13 @@ static int update_files(struct site *site, void *session)
             else if (site->tempupload) {
                 /* Do temp file upload followed by a move */
                 char *temp_remote = temp_upload_filename(full_remote, site);
-                if (CALL(file_upload)(session, full_local, temp_remote,
-                                      current->local.ascii) != SITE_OK) {
+                if (temp_remote == NULL) {
+                    fe_updated(current, false,
+                               _("Filename too long for a temporary upload"));
+                    ret = 1;
+                }
+                else if (CALL(file_upload)(session, full_local, temp_remote,
+                                           current->local.ascii) != SITE_OK) {
                     fe_updated(current, false, DRIVER_ERR);
                     ret = 1;
                 }
