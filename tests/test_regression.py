@@ -103,9 +103,6 @@ def test_nooverwrite_failed_upload(site):
     assert res.returncode == 0, res.stdout + res.stderr
     assert remote_tree(site)["a.txt"] == md5(b"A, changed\n")
 
-@pytest.mark.xfail(strict=True, reason="with tempupload, a file is "
-                   "uploaded to a temporary \".in.\" name, overwriting a "
-                   "file of that name on the server")
 @pytest.mark.site_lines("tempupload")
 def test_tempupload_name_clash(site):
     setup_site(site, {".in.page.txt": "A real file\n"})
