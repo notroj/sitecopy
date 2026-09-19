@@ -170,6 +170,11 @@ Test layout:
   so `-k` can select configurations.  Likewise `tests/ftps_tests.py`
   holds the tests run against each server requiring FTP over TLS.
 - `test_basic.py` — option handling and local state, no server needed.
+- `test_regression.py` — regression tests for specific bugs, run once
+  against vsftpd in its default configuration (the `default_config`
+  marker) rather than across every combination of rcfile options.
+  Add a test here for a bug which doesn't depend on the options being
+  varied; unfixed bugs are strict xfails.
 - `test_ftp.py` — FTP against a scripted in-process FTP server.
 - `test_false_success.py` — SFTP failure handling, using a wrapper
   script in place of ssh/sftp; no network access needed.

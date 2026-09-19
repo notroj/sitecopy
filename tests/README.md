@@ -83,6 +83,7 @@ output of passing tests too.
 | `test_ftp.py` | scripted FTP server in the test process | a free port in 22070-22079 |
 | `test_dav.py` | `sitecopy-test-httpd` (Apache mod_dav) | 8080 |
 | `test_vsftpd.py` | `sitecopy-test-vsftpd` | 2121, passive 21100-21109 |
+| `test_regression.py` | `sitecopy-test-vsftpd` | 2121, passive 21100-21109 |
 | `test_vsftpd_ssl.py` | `sitecopy-test-vsftpd` with TLS required (and also the plain FTP server) | 2122, passive 21110-21119 |
 | `test_pureftpd.py` | `sitecopy-test-pure-ftpd` | 2123, passive 21200-21209 |
 | `test_pureftpd_ssl.py` | `sitecopy-test-pure-ftpd` with TLS required (and also the plain pure-ftpd server) | 2124, passive 21210-21219 |
@@ -121,7 +122,10 @@ Because it is strict, the test failing is required: once the bug is
 fixed, the test passing is reported as a failure (`XPASS(strict)`),
 and the xfail marker must be removed.  A bug affecting only some
 configurations of a server test is listed in `KNOWN_BUGS` in
-`tests/siteconfig.py`, which marks just those configurations.
+`tests/siteconfig.py`, which marks just those configurations.  Tests
+for specific bugs which don't depend on the rcfile options being
+varied are in `tests/test_regression.py`, which runs each test once
+against vsftpd in its default configuration.
 
 To see how an xfail test actually fails, e.g. to check that it fails
 for the stated reason, run it with `--runxfail`:
