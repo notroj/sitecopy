@@ -126,7 +126,13 @@ Test layout:
   "nodelete")` adds rcfile lines to every configuration of a test.
   Add new rcfile variations as axes or axis values here, and
   combinations sitecopy rejects to the tables (and to
-  `REJECTED_CONFIGS` in `test_basic.py`).
+  `REJECTED_CONFIGS` in `test_basic.py`).  The FTP over TLS servers
+  (`REDUCED_PROTOCOLS`) are only tested across `PROTOCOL_AXES`, the
+  options which change how sitecopy uses the FTP protocol (e.g.
+  `ftp usecwd`, `tempupload`, `safe`); other axes take their default
+  value, and tests adding other rcfile lines are skipped.  When adding
+  an axis, include it in `PROTOCOL_AXES` only if it changes the
+  commands sent or the data connections used.
 - `tests/common.py` — helpers such as `run_sitecopy()`,
   `update_and_check()` (update, then compare the tree on the server,
   listed from inside the container, with `expected_remote()`, a model
