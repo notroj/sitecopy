@@ -72,8 +72,6 @@ def test_verify_excluded(site):
     assert res.returncode == 0, res.stdout + res.stderr
     assert "missing from server" not in res.stdout, res.stdout
 
-@pytest.mark.xfail(strict=True, reason="--verify doesn't notice a file "
-                   "replaced by a directory on the server")
 def test_verify_file_became_directory(site):
     setup_site(site, {"a.txt": "A\n", "x": "X\n"})
     server_exec(site, "cd '%s' && rm x && mkdir x && chown --reference=. x"

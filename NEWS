@@ -7,8 +7,9 @@ Changes in release 0.17:
 * Fix --verify for sites with subdirectories, which reported every
   file in a subdirectory as missing from the server, and with
   checksum state, which reported every file as changed.  --verify now
-  fails if a file is changed or added on the server, and no longer
-  reports excluded files as missing from the server.
+  fails if a file is changed or added on the server, or replaced by a
+  directory or link, and no longer reports excluded files as missing
+  from the server.
 * --fetch no longer skips directories beyond 1024, and fails if a file
   can't be downloaded for its checksum.
 * nooverwrite: an upload failing after the remote file was deleted no
