@@ -64,7 +64,6 @@
 struct ftp_session_s {
     /* User options */
     unsigned int use_passive;
-    unsigned int echo_quit;
     unsigned int use_cwd; /* CWD before STOR */
 
     int connected; /* true when open */
@@ -107,8 +106,6 @@ struct ftp_session_s {
     
     /* remember these... we may have to log in more than once. */
     char *username, *password;
-
-    unsigned int echo_response:1;
 
     /* Reply buffer */
     char rbuf[BUFSIZ];
@@ -740,15 +737,13 @@ int ftp_set_server(ftp_session *sess, struct site_host *server)
 int ftp_finish(ftp_session *sess)
 {
     int ret = FTP_OK;
-    int old_er = sess->echo_response;
+
     if (sess->connected) {
-	sess->echo_response = sess->echo_quit;
 	if (run_command(sess, "QUIT") != FTP_CLOSED) {
 	    ret = FTP_ERROR;
 	}
         if (sess->pisock) ne_sock_close(sess->pisock);
         sess->connected = 0;
-	sess->echo_response = old_er;
     }
     return ret;
 }

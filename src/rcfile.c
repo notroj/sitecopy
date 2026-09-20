@@ -545,7 +545,8 @@ int rcfile_read(struct site **sites)
                     this_site->ftp_pasv_mode = false;
                 }
                 else if (strcmp(val, "showquit") == 0) {
-                    this_site->ftp_echo_quit = true;
+                    /* Accepted and ignored: the option never had any
+                     * effect, and is gone. */
                 }
                 else if (strcmp(val, "usecwd") == 0) {
                     this_site->ftp_use_cwd = true;
@@ -967,7 +968,6 @@ int rcfile_write (char *filename, struct site *list_of_sites)
 	RCWRITEBOOL(current->tempupload, "tempupload");
 	
 	RCWRITEBOOL(!current->ftp_pasv_mode, "ftp nopasv");
-	RCWRITEBOOL(current->ftp_echo_quit, "ftp showquit");
 	RCWRITEBOOL(current->ftp_secure, "ftp secure");
 	RCWRITEBOOL(current->ftp_use_cwd, "ftp usecwd");
 	RCWRITEBOOL(current->http_limit, "http limit");
