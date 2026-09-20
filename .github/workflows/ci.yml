@@ -1,6 +1,18 @@
 name: Build and test
 
-on: [pull_request]
+on:
+  pull_request:
+    # Changes which only touch the documentation in the top-level
+    # directory cannot affect the build or the tests.
+    paths-ignore:
+      - '*.md'
+      - ABOUT-NLS
+      - BUGS
+      - COPYING
+      - INSTALL
+      - NEWS
+      - THANKS
+      - TODO
 
 # Cancel any run still in progress for the same pull request when a
 # new one starts.
