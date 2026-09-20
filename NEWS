@@ -11,18 +11,29 @@ Changes in release 0.17:
 * Use exit status 0 for --version and --help.
 * Allow URL as site name in rcfile.
 * Various options improvements and cleanups:
- - unimplemented the "ftp showquit" and "http expect" are removed
+ - The "ftp showquit" and "http expect" options are removed; neither
+   was ever implemented.  Both are still accepted, and ignored, so
+   that existing rcfiles continue to work.
  - nooverwrite: an upload failing after the remote file was deleted no
    longer stops later updates uploading it.
  - "permissions dir": if setting the permissions of a new directory
-   fails, later updates set them, rather than re-creating the directory
+   fails, later updates set them, rather than re-creating the
+   directory.
  - 'tempupload' use a random suffix for the temporary filename, so as
    not to overwrite another file on the server.
  - exclude, ignore and ascii patterns which contain a slash, but do
-  not begin with one (e.g. "exclude stats/*"), are now matched against
-  the filename relative to the site root, and so match files; before,
-  they were matched against the base name, and so never matched
-  (Debian bug #167277).
+   not begin with one (e.g. "exclude stats/*"), are now matched
+   against the filename relative to the site root, and so match
+   files; before, they were matched against the base name, and so
+   never matched (Debian bug #167277).
+
+   WARNING: such patterns did nothing before, so files they match may
+   already have been uploaded, and an excluded file which is on the
+   server is DELETED from it by the next update.  If any exclude
+   pattern in your rcfile contains a slash without a leading slash,
+   check what the first update will do before running it, with
+   "sitecopy --list sitename" or "sitecopy --dry-run --update
+   sitename".
 * Enable large file support, so that files of 2GB or more are handled
   on 32-bit systems; file sizes are stored and parsed as 64-bit values.
 * Fix --verify for sites with subdirectories, which reported every
