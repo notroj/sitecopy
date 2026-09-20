@@ -1,26 +1,30 @@
 Changes in release 0.17:
-* Store state files in sorted order (Gary Benson)
-* Write state file to a temporary file (michel34)
+* Update to neon 0.37.1; require neon 0.29+.
+* Bundled expat, GNOME frontend removed.
+* State file handling improvements:
+ - Store state files in sorted order (Gary Benson)
+ - Write state file to a temporary file (michel34)
+ - Interrupted runs now write updated progress state.
+ - A lock file is used to prevent concurrent runs (Debian #129330, #41).
+ - Write failures now reported rather than being silently ignored (#47).
 * Various compilation warning fixes.
 * Use exit status 0 for --version and --help.
 * Allow URL as site name in rcfile.
-* The storage file of a site is locked while it is updated, so that
-  two sitecopy processes cannot lose each other's record of what was
-  uploaded (Debian #129330, #41).
-* An interrupted operation now stops cleanly, recording what was done
-  so far, rather than losing it.
-* Failure to write the storage file is now reported, and gives a
-  non-zero exit status, rather than being silently ignored (#47).
-* The "ftp showquit" and "http expect" options are removed: neither
-  ever had any effect.  Both are still accepted, and ignored, so that
-  existing rcfiles continue to work.
-* Enable large file support, so that files of 2GB or more are handled
-  on 32-bit systems; file sizes are stored and parsed as 64-bit values.
-* exclude, ignore and ascii patterns which contain a slash, but do
+* Various options improvements and cleanups:
+ - unimplemented the "ftp showquit" and "http expect" are removed
+ - nooverwrite: an upload failing after the remote file was deleted no
+   longer stops later updates uploading it.
+ - "permissions dir": if setting the permissions of a new directory
+   fails, later updates set them, rather than re-creating the directory
+ - 'tempupload' use a random suffix for the temporary filename, so as
+   not to overwrite another file on the server.
+ - exclude, ignore and ascii patterns which contain a slash, but do
   not begin with one (e.g. "exclude stats/*"), are now matched against
   the filename relative to the site root, and so match files; before,
   they were matched against the base name, and so never matched
   (Debian bug #167277).
+* Enable large file support, so that files of 2GB or more are handled
+  on 32-bit systems; file sizes are stored and parsed as 64-bit values.
 * Fix --verify for sites with subdirectories, which reported every
   file in a subdirectory as missing from the server, and with
   checksum state, which reported every file as changed.  --verify now
@@ -29,13 +33,6 @@ Changes in release 0.17:
   from the server.
 * --fetch no longer skips directories beyond 1024, and fails if a file
   can't be downloaded for its checksum.
-* nooverwrite: an upload failing after the remote file was deleted no
-  longer stops later updates uploading it.
-* "permissions dir": if setting the permissions of a new directory
-  fails, later updates set them, rather than creating the directory
-  again.
-* tempupload: use a random suffix for the temporary filename, so as
-  not to overwrite another file on the server.
 * FTP:
  - Add support for FTP over TLS (RFC 4217) with "ftp secure",
    requiring neon 0.37 or later built with SSL support.
@@ -49,7 +46,6 @@ Changes in release 0.17:
  - Fix error handling (Haolin Xue, Debian #515217, #564462, #742661)
  - Document in the man page (Kartik Mistry, Christian Kujau,
     Debian #320586, #405483, #439594)
-* Update to neon 0.37.1; require neon 0.29+.
 
 Changes in release 0.16.6:
 * DAV: Fix crash with progress bar enabled with neon 0.27/0.28.
