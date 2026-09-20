@@ -27,7 +27,7 @@ m4_define(sc_version, m4_translit(m4_include(.version), [
 AC_INIT([sitecopy], [sc_version], [https://github.com/notroj/sitecopy],,[https://www.manyfish.uk/sitecopy/])
 
 AC_CONFIG_SRCDIR(src/sites.c)
-AC_CONFIG_HEADER(config.h)
+AC_CONFIG_HEADERS(config.h)
 AC_CONFIG_MACRO_DIRS([m4 neon/macros])
 
 EXTRAOBJS=""
@@ -35,34 +35,30 @@ proto_msg=""
 top_builddir=`pwd`
 PACKAGE=sitecopy
 
-AC_DEFINE([_GNU_SOURCE], [1], [Always defined])
-
 dnl Optional features
 
 AC_ARG_ENABLE(ftp,
- AC_HELP_STRING([--disable-ftp], [disable FTP support]),,
+ AS_HELP_STRING([--disable-ftp], [disable FTP support]),,
  [enable_ftp=yes])
 AC_ARG_ENABLE(webdav,
- AC_HELP_STRING([--disable-webdav], [disable WebDAV support]),,
+ AS_HELP_STRING([--disable-webdav], [disable WebDAV support]),,
  [enable_webdav=yes])
 AC_ARG_ENABLE(rsh,
- AC_HELP_STRING([--disable-rsh], [disable rsh/rcp support]),,
+ AS_HELP_STRING([--disable-rsh], [disable rsh/rcp support]),,
  [enable_rsh=yes])
 
 dnl Check for programs
 
 AC_PROG_CC
-dnl Must come before any check using off_t, so that the whole package
-dnl is built with a 64-bit off_t where the platform needs to be asked.
+dnl Must come before any check, so that the whole package is built
+dnl with the same feature test macros and a 64-bit off_t where the
+dnl platform needs to be asked for one.
+AC_USE_SYSTEM_EXTENSIONS
 AC_SYS_LARGEFILE
 AC_PROG_MAKE_SET
-AC_ISC_POSIX
 AC_PROG_INSTALL
-AC_LANG_C
 AC_C_INLINE
 AC_C_CONST
-
-AC_HEADER_STDC
 
 AC_EXEEXT
 
@@ -89,7 +85,7 @@ if test "$enable_rsh" = "yes"; then
 fi
 
 AC_ARG_ENABLE(sftp,
- AC_HELP_STRING([--disable-sftp], [disable sftp/ssh support]),,
+ AS_HELP_STRING([--disable-sftp], [disable sftp/ssh support]),,
  [enable_sftp=no
   AC_CHECK_FUNCS([socketpair pipe], [enable_sftp=yes; break])
  ])
@@ -145,12 +141,15 @@ AC_LIBOBJ(lib/getopt1)])
 dnl Check for stuff
 AC_CHECK_FUNCS(setlocale nl_langinfo)
 
-AC_TYPE_SIGNAL
-
 AC_CHECK_HEADERS(stdarg.h string.h strings.h sys/time.h regex.h \
 	locale.h langinfo.h stdlib.h unistd.h limits.h sys/select.h fcntl.h)
 
-AX_TYPE_SOCKLEN_T
+dnl Used for the length argument of getsockname and friends.
+AC_CHECK_TYPES([socklen_t],,
+ [AC_DEFINE([socklen_t], [int],
+            [Define to the type of the length argument of getsockname])],
+ [#include <sys/types.h>
+#include <sys/socket.h>])
 
 XGETTEXT_EXTRA_OPTIONS=--from-code=UTF-8
 
