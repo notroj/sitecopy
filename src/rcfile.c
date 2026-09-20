@@ -566,7 +566,9 @@ int rcfile_read(struct site **sites)
             }
             else if (strcmp(key, "http") == 0) {
                 if (strcmp(val, "expect") == 0) {
-                    this_site->http_use_expect = true;
+                    /* Accepted and ignored: the option never had any
+                     * effect, and neon handles the 100-continue
+                     * expectation itself. */
                 }
                 else if (strcmp(val, "limit") == 0) {
                     this_site->http_limit = true;
@@ -971,7 +973,6 @@ int rcfile_write (char *filename, struct site *list_of_sites)
 	RCWRITEBOOL(current->ftp_secure, "ftp secure");
 	RCWRITEBOOL(current->ftp_use_cwd, "ftp usecwd");
 	RCWRITEBOOL(current->http_limit, "http limit");
-	RCWRITEBOOL(current->http_use_expect, "http expect");
 	
 #undef RCWRITEBOOL
 	
