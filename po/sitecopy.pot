@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: @PACKAGE@ @VERSION@\n"
 "Report-Msgid-Bugs-To: https://github.com/notroj/sitecopy\n"
-"POT-Creation-Date: 2025-09-27 08:28+0100\n"
+"POT-Creation-Date: 2026-09-20 19:55+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,734 +17,722 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: src/console_fe.c:119
+#: src/ftpdriver.c:67
+msgid "Could not load saved server certificate"
+msgstr ""
+
+#: src/console_fe.c:123
 msgid "Show changes to"
 msgstr ""
 
-#: src/console_fe.c:119
+#: src/console_fe.c:123
 msgid "showing changes to"
 msgstr ""
 
-#: src/console_fe.c:119 src/console_fe.c:120
+#: src/console_fe.c:123 src/console_fe.c:124
 msgid "local"
 msgstr ""
 
-#: src/console_fe.c:120
+#: src/console_fe.c:124
 msgid "Synchronize"
 msgstr ""
 
-#: src/console_fe.c:120
+#: src/console_fe.c:124
 msgid "synchronizing"
 msgstr ""
 
-#: src/console_fe.c:125
+#: src/console_fe.c:129
 msgid "Fetch"
 msgstr ""
 
-#: src/console_fe.c:125
+#: src/console_fe.c:129
 msgid "fetching"
 msgstr ""
 
-#: src/console_fe.c:125 src/console_fe.c:126 src/console_fe.c:127
+#: src/console_fe.c:129 src/console_fe.c:131 src/console_fe.c:133
 msgid "remote"
 msgstr ""
 
-#: src/console_fe.c:126
+#: src/console_fe.c:131
 msgid "Update"
 msgstr ""
 
-#: src/console_fe.c:126
+#: src/console_fe.c:131
 msgid "updating"
 msgstr ""
 
-#: src/console_fe.c:127
+#: src/console_fe.c:133
 msgid "Verify"
 msgstr ""
 
-#: src/console_fe.c:127
+#: src/console_fe.c:133
 msgid "verifying"
 msgstr ""
 
-#: src/console_fe.c:128
+#: src/console_fe.c:134
 msgid "Catch up"
 msgstr ""
 
-#: src/console_fe.c:128
+#: src/console_fe.c:134
 msgid "catching up"
 msgstr ""
 
-#: src/console_fe.c:128 src/console_fe.c:129
+#: src/console_fe.c:134 src/console_fe.c:135
 msgid "stored"
 msgstr ""
 
-#: src/console_fe.c:129
+#: src/console_fe.c:135
 msgid "Initialize"
 msgstr ""
 
-#: src/console_fe.c:129
+#: src/console_fe.c:135
 msgid "initializing"
 msgstr ""
 
-#: src/console_fe.c:134
-msgid ""
-"You should never see this message.\n"
-"Please contact the maintainer at sitecopy@lyra.org\n"
-msgstr ""
-
-#: src/console_fe.c:196
+#: src/console_fe.c:205
 #, c-format
 msgid "%s: Error: No site called `%s' found - skipping.\n"
 msgstr ""
 
-#: src/console_fe.c:214
+#: src/console_fe.c:223
 #, c-format
 msgid "%s: No valid sites specified.\n"
 msgstr ""
 
-#: src/console_fe.c:216
+#: src/console_fe.c:225
 #, c-format
 msgid "%s: No sites specified.\n"
 msgstr ""
 
-#: src/console_fe.c:218 src/console_fe.c:369 src/console_fe.c:529
+#: src/console_fe.c:227 src/console_fe.c:383 src/console_fe.c:540
 #, c-format
 msgid "Try `%s --help' for more information.\n"
 msgstr ""
 
-#: src/console_fe.c:228
+#: src/console_fe.c:237
 #, c-format
 msgid "%s: %c%s site `%s' (on %s in %s)\n"
 msgstr ""
 
-#: src/console_fe.c:249
+#: src/console_fe.c:260
 #, c-format
 msgid "* These items have been added since the last update:\n"
 msgstr ""
 
-#: src/console_fe.c:254 src/console_fe.c:285
+#: src/console_fe.c:265 src/console_fe.c:296
 #, c-format
 msgid "dir:"
 msgstr ""
 
-#: src/console_fe.c:261
+#: src/console_fe.c:272
 #, c-format
 msgid "* These items have been changed since the last update:\n"
 msgstr ""
 
-#: src/console_fe.c:263
+#: src/console_fe.c:274
 #, c-format
 msgid "  Changes to items in [brackets] are ignored during updates.\n"
 msgstr ""
 
-#: src/console_fe.c:277
+#: src/console_fe.c:288
 #, c-format
 msgid "* These items have been deleted, but will be left on the server:\n"
 msgstr ""
 
-#: src/console_fe.c:279
+#: src/console_fe.c:290
 #, c-format
 msgid "* These items have been deleted since the last update:\n"
 msgstr ""
 
-#: src/console_fe.c:292
+#: src/console_fe.c:303
 #, c-format
 msgid "* These items have been moved since the last update:\n"
 msgstr ""
 
-#: src/console_fe.c:310 src/console_fe.c:322
+#: src/console_fe.c:321 src/console_fe.c:333
 msgid "Ignored"
 msgstr ""
 
-#: src/console_fe.c:312
+#: src/console_fe.c:323
 msgid "Maintained for executables"
 msgstr ""
 
-#: src/console_fe.c:314
+#: src/console_fe.c:325
 msgid "Always maintained"
 msgstr ""
 
-#: src/console_fe.c:324
+#: src/console_fe.c:335
 msgid "Maintained"
 msgstr ""
 
-#: src/console_fe.c:326
+#: src/console_fe.c:337
 msgid "Followed"
 msgstr ""
 
-#: src/console_fe.c:337
+#: src/console_fe.c:348
 #, c-format
 msgid ""
 "Site: %s\n"
 "\tServer: %s"
 msgstr ""
 
-#: src/console_fe.c:339
+#: src/console_fe.c:350
 #, c-format
 msgid "  Port: "
 msgstr ""
 
-#: src/console_fe.c:341
+#: src/console_fe.c:352
 #, c-format
 msgid "(default)\n"
 msgstr ""
 
-#: src/console_fe.c:343
+#: src/console_fe.c:355
 #, c-format
 msgid "%d\n"
 msgstr ""
 
-#: src/console_fe.c:345
+#: src/console_fe.c:357
 #, c-format
 msgid "\tProtocol: %s    Username: %s\n"
 msgstr ""
 
-#: src/console_fe.c:348
+#: src/console_fe.c:360
 msgid "(unspecified)"
 msgstr ""
 
-#: src/console_fe.c:350
+#: src/console_fe.c:362
 #, c-format
 msgid "\tPassive mode FTP will not be used.\n"
 msgstr ""
 
-#: src/console_fe.c:351
+#: src/console_fe.c:364
+#, c-format
+msgid "\tFTP over TLS will be used.\n"
+msgstr ""
+
+#: src/console_fe.c:365
 #, c-format
 msgid ""
 "\tRemote directory: %s\n"
 "\tLocal directory: %s\n"
 msgstr ""
 
-#: src/console_fe.c:353
+#: src/console_fe.c:367
 #, c-format
 msgid "\tPermissions: %s     Symlinks: %s\n"
 msgstr ""
 
-#: src/console_fe.c:356
+#: src/console_fe.c:370
 #, c-format
 msgid "\tRemote files will not be deleted.\n"
 msgstr ""
 
-#: src/console_fe.c:358
+#: src/console_fe.c:372
 #, c-format
 msgid "\tFiles will be moved remotely if moved locally.\n"
 msgstr ""
 
-#: src/console_fe.c:367
+#: src/console_fe.c:381
 #, c-format
 msgid "%s: Error: Only specify ONE operation mode at a time.\n"
 msgstr ""
 
-#: src/console_fe.c:489
+#: src/console_fe.c:499
 #, c-format
 msgid "%s: Error: Debug channel %s not known.\n"
 msgstr ""
 
-#: src/console_fe.c:497
+#: src/console_fe.c:507
 #, c-format
 msgid "%s: Warning: Could not open `%s' to use as logfile.\n"
 msgstr ""
 
-#: src/console_fe.c:540
+#: src/console_fe.c:551
 #, c-format
 msgid "%s: Error: Dry run mode is currently only supported for updates.\n"
 msgstr ""
 
-#: src/console_fe.c:556
+#: src/console_fe.c:567
 #, c-format
 msgid ""
 "%s: Warning: Only %d sites can be specified on the command line!\n"
 "Extra entries are being skipped.\n"
 msgstr ""
 
-#: src/console_fe.c:581
+#: src/console_fe.c:593
 msgid "WARNING: Server certificate is not trusted."
 msgstr ""
 
-#: src/console_fe.c:584
+#: src/console_fe.c:596
 #, c-format
 msgid "Certificate was issued for server `%s'.\n"
 msgstr ""
 
-#: src/console_fe.c:586
+#: src/console_fe.c:598
 msgid "WARNING: Certificate does not specify a server"
 msgstr ""
 
-#: src/console_fe.c:588
+#: src/console_fe.c:600
 #, c-format
 msgid "Fingerprint: %s\n"
 msgstr ""
 
-#: src/console_fe.c:591
+#: src/console_fe.c:603
 #, c-format
 msgid "Issued to: %s\n"
 msgstr ""
 
-#: src/console_fe.c:595
+#: src/console_fe.c:607
 #, c-format
 msgid "Issued by: %s\n"
 msgstr ""
 
-#: src/console_fe.c:598
+#: src/console_fe.c:610
 #, c-format
 msgid "Do you wish to accept this certificate? (y/n) "
 msgstr ""
 
-#: src/console_fe.c:607
+#: src/console_fe.c:620
 msgid "server"
 msgstr ""
 
-#: src/console_fe.c:607
+#: src/console_fe.c:620
 msgid "proxy server"
 msgstr ""
 
-#: src/console_fe.c:613
+#: src/console_fe.c:626
 #, c-format
 msgid "Authentication required for %s on %s `%s':\n"
 msgstr ""
 
-#: src/console_fe.c:616
+#: src/console_fe.c:629
 #, c-format
 msgid "Authentication required on %s `%s':\n"
 msgstr ""
 
-#: src/console_fe.c:619
+#: src/console_fe.c:632
 msgid "Username: "
 msgstr ""
 
-#: src/console_fe.c:624
+#: src/console_fe.c:637
 #, c-format
 msgid "Username: %s\n"
 msgstr ""
 
-#: src/console_fe.c:626 src/console_fe.c:650
+#: src/console_fe.c:639 src/console_fe.c:663
 msgid "Password: "
 msgstr ""
 
-#: src/console_fe.c:636
+#: src/console_fe.c:649
 #, c-format
 msgid "Retrying: ["
 msgstr ""
 
-#: src/console_fe.c:647
+#: src/console_fe.c:660
 #, c-format
 msgid "%s: Encrypted client certificate configured%s%s.\n"
 msgstr ""
 
-#: src/console_fe.c:682
+#: src/console_fe.c:728
 #, c-format
 msgid "Create %s/"
 msgstr ""
 
-#: src/console_fe.c:684
+#: src/console_fe.c:730
 #, c-format
 msgid "Delete %s/"
 msgstr ""
 
-#: src/console_fe.c:692
+#: src/console_fe.c:738
 #, c-format
 msgid "Upload %s (%s bytes)"
 msgstr ""
 
-#: src/console_fe.c:694
+#: src/console_fe.c:740
 #, c-format
 msgid "Delete %s"
 msgstr ""
 
-#: src/console_fe.c:695
+#: src/console_fe.c:741
 #, c-format
 msgid "Move %s->%s"
 msgstr ""
 
-#: src/console_fe.c:699
-#, c-format
-msgid ""
-"%s: in fe_can_update/file_file\n"
-"%s"
-msgstr ""
-
-#: src/console_fe.c:706
+#: src/console_fe.c:750
 #, c-format
 msgid "Change %s"
 msgstr ""
 
-#: src/console_fe.c:707
+#: src/console_fe.c:751
 #, c-format
 msgid "Create %s"
 msgstr ""
 
-#: src/console_fe.c:708
+#: src/console_fe.c:752
 #, c-format
 msgid "Remove %s"
 msgstr ""
 
-#: src/console_fe.c:711
-#, c-format
-msgid ""
-"%s: in fe_can_update/file_link\n"
-"%s"
-msgstr ""
-
-#: src/console_fe.c:717
+#: src/console_fe.c:759
 #, c-format
 msgid "? (y/n) "
 msgstr ""
 
-#: src/console_fe.c:726
+#: src/console_fe.c:769
 #, c-format
 msgid "Checksumming %s: ["
 msgstr ""
 
-#: src/console_fe.c:741 src/console_fe.c:852 src/console_fe.c:913
+#: src/console_fe.c:784 src/console_fe.c:896 src/console_fe.c:958
 #, c-format
 msgid "] done.\n"
 msgstr ""
 
-#: src/console_fe.c:743 src/console_fe.c:915
+#: src/console_fe.c:786 src/console_fe.c:960
 #, c-format
 msgid ""
 "] failed:\n"
 "%s\n"
 msgstr ""
 
-#: src/console_fe.c:753
+#: src/console_fe.c:796
 #, c-format
 msgid "Setting permissions on %s%s: "
 msgstr ""
 
-#: src/console_fe.c:763 src/console_fe.c:841 src/console_fe.c:907
+#: src/console_fe.c:806 src/console_fe.c:882 src/console_fe.c:952
 #, c-format
 msgid "done.\n"
 msgstr ""
 
-#: src/console_fe.c:765 src/console_fe.c:909
+#: src/console_fe.c:808 src/console_fe.c:954
 #, c-format
 msgid ""
 "failed:\n"
 "%s\n"
 msgstr ""
 
-#: src/console_fe.c:784 src/console_fe.c:871
+#: src/console_fe.c:827 src/console_fe.c:916
 #, c-format
 msgid "Creating %s/: "
 msgstr ""
 
-#: src/console_fe.c:786 src/console_fe.c:873
+#: src/console_fe.c:829 src/console_fe.c:918
 #, c-format
 msgid "Deleting %s/: "
 msgstr ""
 
-#: src/console_fe.c:793
+#: src/console_fe.c:836
 #, c-format
 msgid "Uploading %s: ["
 msgstr ""
 
-#: src/console_fe.c:796 src/console_fe.c:815 src/console_fe.c:883
+#: src/console_fe.c:839 src/console_fe.c:857 src/console_fe.c:928
 #, c-format
 msgid "Deleting %s: "
 msgstr ""
 
-#: src/console_fe.c:799 src/console_fe.c:886
+#: src/console_fe.c:842 src/console_fe.c:931
 #, c-format
 msgid "Moving %s->%s: "
 msgstr ""
 
-#: src/console_fe.c:803
-#, c-format
-msgid ""
-"%s: in fe_updating/file_file\n"
-"%s"
-msgstr ""
-
-#: src/console_fe.c:811
+#: src/console_fe.c:853
 #, c-format
 msgid "Changing %s: "
 msgstr ""
 
-#: src/console_fe.c:813
+#: src/console_fe.c:855
 #, c-format
 msgid "Creating %s: "
 msgstr ""
 
-#: src/console_fe.c:817
-#, c-format
-msgid ""
-"%s: in fe_updating/file_link\n"
-"%s"
-msgstr ""
-
-#: src/console_fe.c:834
+#: src/console_fe.c:875
 #, c-format
 msgid "Failed to update %s:%c%s\n"
 msgstr ""
 
-#: src/console_fe.c:843
+#: src/console_fe.c:885
 #, c-format
 msgid "failed:%c%s\n"
 msgstr ""
 
-#: src/console_fe.c:855
+#: src/console_fe.c:900
 #, c-format
 msgid "] failed:%c%s\n"
 msgstr ""
 
-#: src/console_fe.c:880
+#: src/console_fe.c:925
 #, c-format
 msgid "Downloading %s: ["
 msgstr ""
 
-#: src/console_fe.c:925
+#: src/console_fe.c:970
 msgid "Changed on server"
 msgstr ""
 
-#: src/console_fe.c:928
+#: src/console_fe.c:973
 msgid "Added on server"
 msgstr ""
 
-#: src/console_fe.c:936
+#: src/console_fe.c:981
 #, c-format
 msgid "%s: %s\n"
 msgstr ""
 
-#: src/console_fe.c:956
+#: src/console_fe.c:1001
 #, c-format
 msgid "Directory: %s/\n"
 msgstr ""
 
-#: src/console_fe.c:961
+#: src/console_fe.c:1006
 #, c-format
 msgid "File: %s - size %s%s\n"
 msgstr ""
 
-#: src/console_fe.c:963
+#: src/console_fe.c:1008
 msgid " (ASCII)"
 msgstr ""
 
-#: src/console_fe.c:966
+#: src/console_fe.c:1011
 #, c-format
 msgid "Link: %s - target %s\n"
 msgstr ""
 
-#: src/console_fe.c:979
+#: src/console_fe.c:1024
 #, c-format
 msgid "%s: Error: Could not open rcfile: %s.\n"
 msgstr ""
 
-#: src/console_fe.c:983
+#: src/console_fe.c:1028
 #, c-format
 msgid ""
 "%s: rcfile corrupt at line %d:\n"
 "%s\n"
 msgstr ""
 
-#: src/console_fe.c:1002
+#: src/console_fe.c:1047
 #, c-format
 msgid ""
 "%s: Could not read directory for `%s':\n"
 "\t%s\n"
 msgstr ""
 
-#: src/console_fe.c:1006
+#: src/console_fe.c:1051
 #, c-format
 msgid "%s: Server not specified in site `%s'.\n"
 msgstr ""
 
-#: src/console_fe.c:1010
+#: src/console_fe.c:1055
 #, c-format
 msgid "%s: Remote directory not specified in site `%s'.\n"
 msgstr ""
 
-#: src/console_fe.c:1014
+#: src/console_fe.c:1059
 #, c-format
 msgid "%s: Local directory not specified in site `%s'.\n"
 msgstr ""
 
-#: src/console_fe.c:1018
+#: src/console_fe.c:1063
 #, c-format
 msgid "%s: Invalid port used in site `%s'.\n"
 msgstr ""
 
-#: src/console_fe.c:1022
+#: src/console_fe.c:1067
 #, c-format
 msgid "%s: %s cannot maintain symbolic links (site `%s').\n"
 msgstr ""
 
-#: src/console_fe.c:1026
+#: src/console_fe.c:1071
 #, c-format
 msgid "%s: Cannot use a relative remote directory in %s (site `%s').\n"
 msgstr ""
 
-#: src/console_fe.c:1029
+#: src/console_fe.c:1074
 #, c-format
 msgid "%s: File permissions are not supported in %s (site `%s').\n"
 msgstr ""
 
-#: src/console_fe.c:1032
+#: src/console_fe.c:1077
 #, c-format
 msgid ""
 "%s: Safe mode cannot be used in conjunction with nooverwrite (site `%s').\n"
 msgstr ""
 
-#: src/console_fe.c:1035
+#: src/console_fe.c:1080
 #, c-format
 msgid ""
 "%s: Safe mode cannot be used in conjunction with tempupload (site `%s').\n"
 msgstr ""
 
-#: src/console_fe.c:1038
+#: src/console_fe.c:1083
 #, c-format
 msgid "%s: Can only check for renamed files when checksumming (site `%s').\n"
 msgstr ""
 
-#: src/console_fe.c:1041
+#: src/console_fe.c:1086
+#, c-format
+msgid ""
+"%s: FTP over TLS requires sitecopy built with neon 0.37 or later with SSL "
+"support (site `%s').\n"
+msgstr ""
+
+#: src/console_fe.c:1091
 #, c-format
 msgid "%s: The protocol `%s' is unsupported (site `%s').\n"
 msgstr ""
 
-#: src/console_fe.c:1048
+#: src/console_fe.c:1098
 #, c-format
 msgid "%s: Unhandled error %d in site `%s' - please contact the maintainer.\n"
 msgstr ""
 
-#: src/console_fe.c:1066
+#: src/console_fe.c:1115
+#, c-format
+msgid ""
+"%s: Error: Could not lock storage file for `%s':\n"
+"%s: Error: %s\n"
+msgstr ""
+
+#: src/console_fe.c:1130
 #, c-format
 msgid ""
 "%s: Error: Corrupt site storage file for `%s':\n"
 "%s: %s\n"
 msgstr ""
 
-#: src/console_fe.c:1075
+#: src/console_fe.c:1140
 #, c-format
 msgid ""
 "%s: Error: No storage file for `%s'.\n"
 "%s: Use --init, --catchup or --fetch to create a storage file.\n"
 msgstr ""
 
-#: src/console_fe.c:1088
+#: src/console_fe.c:1154
 #, c-format
 msgid "%s: Skipping site `%s'.\n"
 msgstr ""
 
-#: src/console_fe.c:1103
+#: src/console_fe.c:1173
+#, c-format
+msgid ""
+"%s: Error: Could not write storage file for site `%s' (%s):\n"
+"%s: Error: %s\n"
+"%s: Error: The changes made have not been recorded.\n"
+msgstr ""
+
+#: src/console_fe.c:1189
 #, c-format
 msgid "%s: %s completed successfully.\n"
 msgstr ""
 
-#: src/console_fe.c:1109
+#: src/console_fe.c:1195
 #, c-format
 msgid "%s: %s unsupported for %s.\n"
 msgstr ""
 
-#: src/console_fe.c:1114
+#: src/console_fe.c:1200
 #, c-format
 msgid "%s: Errors occurred while %s the %s site.\n"
 msgstr ""
 
-#: src/console_fe.c:1119
+#: src/console_fe.c:1207
+#, c-format
+msgid "%s: Interrupted while %s the %s site `%s'.\n"
+msgstr ""
+
+#: src/console_fe.c:1212
 #, c-format
 msgid "%s: Error: Could not resolve remote hostname (%s).\n"
 msgstr ""
 
-#: src/console_fe.c:1125
+#: src/console_fe.c:1218
 #, c-format
 msgid "%s: Error: Could not resolve hostname of proxy server (%s).\n"
 msgstr ""
 
-#: src/console_fe.c:1131
+#: src/console_fe.c:1224
 #, c-format
 msgid "%s: Error: Could not connect to proxy server (%s port %d).\n"
 msgstr ""
 
-#: src/console_fe.c:1134
+#: src/console_fe.c:1227
 #, c-format
 msgid "%s: Error: Could not connect to server (%s port %d).\n"
 msgstr ""
 
-#: src/console_fe.c:1140
+#: src/console_fe.c:1233
 #, c-format
 msgid "%s: Error: Could not authorise user on server.\n"
 msgstr ""
 
-#: src/console_fe.c:1145
+#: src/console_fe.c:1238
 #, c-format
 msgid "%s: Error: %s\n"
 msgstr ""
 
-#: src/console_fe.c:1149
+#: src/console_fe.c:1242
 #, c-format
 msgid "%s: Error: Could not authorise user on proxy server (%s).\n"
 msgstr ""
 
-#: src/console_fe.c:1154
-#, c-format
-msgid ""
-"%s: in issue_error\n"
-"%s"
-msgstr ""
-
-#: src/console_fe.c:1168
+#: src/console_fe.c:1263
 #, c-format
 msgid "%s: Error: Environment variable HOME not set.\n"
 msgstr ""
 
-#: src/console_fe.c:1176
+#: src/console_fe.c:1271
 #, c-format
 msgid "%s: Error: Could not open rcfile: %s\n"
 msgstr ""
 
-#: src/console_fe.c:1179
+#: src/console_fe.c:1274
 #, c-format
 msgid "%s: Error: rcfile permissions allow other users to read your rcfile.\n"
 msgstr ""
 
-#: src/console_fe.c:1180 src/console_fe.c:1192
+#: src/console_fe.c:1275 src/console_fe.c:1287
 #, c-format
 msgid "%s: Set the permissions to 0600.\n"
 msgstr ""
 
-#: src/console_fe.c:1183
+#: src/console_fe.c:1278
 #, c-format
 msgid "%s: Error: Could not open storage directory: %s\n"
 msgstr ""
 
-#: src/console_fe.c:1184
+#: src/console_fe.c:1279
 #, c-format
 msgid ""
 "%s: You need to create this directory and set the permissions to 0700.\n"
 msgstr ""
 
-#: src/console_fe.c:1187
+#: src/console_fe.c:1282
 #, c-format
 msgid "%s: Error: storage directory permissions incorrect.\n"
 msgstr ""
 
-#: src/console_fe.c:1188
+#: src/console_fe.c:1283
 #, c-format
 msgid "%s: Set the permissions to 0700.\n"
 msgstr ""
 
-#: src/console_fe.c:1191
+#: src/console_fe.c:1286
 #, c-format
 msgid "%s: Error: ~/.netrc permissions incorrect.\n"
 msgstr ""
 
-#: src/console_fe.c:1197
-#, c-format
-msgid ""
-"%s: init_paths gave %d\n"
-"%s"
-msgstr ""
-
-#: src/console_fe.c:1204
+#: src/console_fe.c:1298
 #, c-format
 msgid "%s: Error: Could not parse ~/.netrc.\n"
 msgstr ""
 
-#: src/console_fe.c:1222 src/console_fe.c:1321
+#: src/console_fe.c:1316 src/console_fe.c:1426
 #, c-format
 msgid "%s: Nothing to do - no changes found.\n"
 msgstr ""
 
-#: src/console_fe.c:1231
+#: src/console_fe.c:1326
 #, c-format
 msgid ""
 "%s: Error: Could not open storage file for writing (%s)\n"
@@ -752,87 +740,80 @@ msgid ""
 "%s: Will not update site `%s'.\n"
 msgstr ""
 
-#: src/console_fe.c:1255
+#: src/console_fe.c:1353
 #, c-format
 msgid ""
 "%s: Warning: Current state method differs from stored in site `%s'.\n"
 "%s: All existing files will appear changed (use catchup?).\n"
 msgstr ""
 
-#: src/console_fe.c:1261
+#: src/console_fe.c:1359
 #, c-format
 msgid "%s: The remote site needs updating (%d items to update).\n"
 msgstr ""
 
-#: src/console_fe.c:1263
+#: src/console_fe.c:1362
 #, c-format
 msgid "%s: The remote site needs updating (1 item to update).\n"
 msgstr ""
 
-#: src/console_fe.c:1266
+#: src/console_fe.c:1366
 #, c-format
 msgid "%s: The remote site does not need updating.\n"
 msgstr ""
 
-#: src/console_fe.c:1274
+#: src/console_fe.c:1376
 #, c-format
 msgid "%s: All the files and directories are marked as NOT updated remotely.\n"
 msgstr ""
 
-#: src/console_fe.c:1279
+#: src/console_fe.c:1383
 #, c-format
 msgid "%s: All the files and and directories are marked as updated remotely.\n"
 msgstr ""
 
-#: src/console_fe.c:1288
+#: src/console_fe.c:1391
 #, c-format
 msgid ""
 "%s: Failed to fetch file listing for site `%s':\n"
 "%s: %s\n"
 msgstr ""
 
-#: src/console_fe.c:1302
+#: src/console_fe.c:1407
 #, c-format
 msgid ""
 "%s: Failed to fetch file listing to verify site `%s':\n"
 "%s: %s\n"
 msgstr ""
 
-#: src/console_fe.c:1309
+#: src/console_fe.c:1414
 #, c-format
 msgid "%s: Verify found %d files missing from server.\n"
 msgstr ""
 
-#: src/console_fe.c:1312
+#: src/console_fe.c:1417
 #, c-format
 msgid "%s: Remote site not synchronized with stored state.\n"
 msgstr ""
 
-#: src/console_fe.c:1325
+#: src/console_fe.c:1431
 #, c-format
 msgid ""
 "%s: Refusing to delete all local files with a synchronize operation.\n"
 "%s: Use --update to update the remote site.\n"
 msgstr ""
 
-#: src/console_fe.c:1333
-#, c-format
-msgid ""
-"%s: in act_on_site\n"
-"%s"
-msgstr ""
-
-#: src/console_fe.c:1344
+#: src/console_fe.c:1451
 #, c-format
 msgid "Usage: %s [OPTIONS] [MODE] [sitename]...\n"
 msgstr ""
 
-#: src/console_fe.c:1346
+#: src/console_fe.c:1453
 #, c-format
 msgid "Options: \n"
 msgstr ""
 
-#: src/console_fe.c:1349
+#: src/console_fe.c:1456
 #, c-format
 msgid ""
 "  -d, --debug=KEY[,KEY] Turn debugging on for each KEY, which may be:\n"
@@ -842,7 +823,7 @@ msgid ""
 "  -g, --logfile=FILE    Append debugging messages to FILE (else use stderr)\n"
 msgstr ""
 
-#: src/console_fe.c:1356
+#: src/console_fe.c:1463
 #, c-format
 msgid ""
 "  -r, --rcfile=FILE     Use alternate run control file\n"
@@ -871,207 +852,254 @@ msgid ""
 "Please send feature requests and bug reports via %s\n"
 msgstr ""
 
-#: src/sitestore.c:350
+#: src/sitestore.c:127
+#, c-format
+msgid "Locked by process %s; if it is no longer running, remove `%s'."
+msgstr ""
+
+#: src/sitestore.c:133
+#, c-format
+msgid "Locked; if no other sitecopy is running, remove `%s'."
+msgstr ""
+
+#: src/sitestore.c:140
+#, c-format
+msgid "Could not create lock file `%s': %s"
+msgstr ""
+
+#: src/sitestore.c:448
 #, c-format
 msgid "Invalid checksum at line %d"
 msgstr ""
 
-#: src/sitestore.c:395
+#: src/sitestore.c:494
 #, c-format
 msgid "Boolean missing in 'ascii' at line %d"
 msgstr ""
 
-#: src/sitestore.c:420
+#: src/sitestore.c:519
 #, c-format
 msgid "Size overflow (%s) in '%s' at line %d"
 msgstr ""
 
-#: src/davdriver.c:221
+#: src/davdriver.c:197
 msgid "The connection timed out."
 msgstr ""
 
-#: src/davdriver.c:241
-msgid "Could not write SSL certificate"
-msgstr ""
-
-#: src/davdriver.c:261
+#: src/davdriver.c:218
 msgid "SSL support has not be compiled in."
 msgstr ""
 
-#: src/davdriver.c:269
+#: src/davdriver.c:224
 #, c-format
 msgid "Could not load certificate `%s'."
 msgstr ""
 
-#: src/davdriver.c:310
+#: src/davdriver.c:254
 #, c-format
 msgid "Could not read SSL client certificate '%s'."
 msgstr ""
 
-#: src/davdriver.c:323
+#: src/davdriver.c:267
 #, c-format
 msgid "Could not decrypt SSL client certificate '%s'."
 msgstr ""
 
-#: src/davdriver.c:345
+#: src/davdriver.c:289
 msgid "The server does not appear to be a WebDAV server."
 msgstr ""
 
-#: src/davdriver.c:350
+#: src/davdriver.c:295
 msgid "The server does not support the executable live property."
 msgstr ""
 
-#: src/davdriver.c:396 src/davdriver.c:463 src/davdriver.c:500 src/ftp.c:896
-#: src/ftp.c:980
+#: src/davdriver.c:342 src/davdriver.c:407 src/davdriver.c:444 src/ftp.c:1051
+#: src/ftp.c:1135
 msgid "Could not open file"
 msgstr ""
 
-#: src/davdriver.c:431
+#: src/davdriver.c:374
 #, c-format
 msgid "Could not stat file: %s"
 msgstr ""
 
-#: src/davdriver.c:690
+#: src/davdriver.c:608
 msgid "Could not access resource"
 msgstr ""
 
-#: src/sites.c:160
+#: src/sites.c:164
 msgid "Could not set modification time of local file."
 msgstr ""
 
-#: src/sites.c:308
+#: src/sites.c:319
 msgid ""
 "Upload succeeded, but could not retrieve modification time.\n"
 "If this message persists, turn off safe mode."
 msgstr ""
 
-#: src/sites.c:515
+#: src/sites.c:547
 msgid "Remote file has been modified - not overwriting with local changes"
 msgstr ""
 
-#: src/sites.c:828
-msgid "Could not examine file."
+#: src/sites.c:564
+msgid "Filename too long for a temporary upload"
 msgstr ""
 
 #: src/sites.c:871
+msgid "Could not examine file."
+msgstr ""
+
+#: src/sites.c:914
 msgid "Could not checksum file"
 msgstr ""
 
-#: src/sites.c:887
+#: src/sites.c:932
 msgid "The target of the symlink could not be read."
 msgstr ""
 
-#: src/common.c:113
-msgid "Unknown system error"
+#: src/sites.c:1526
+msgid "Could not write SSL certificate"
 msgstr ""
 
-#: src/ftp.c:155
+#: src/ftp.c:158
 #, c-format
 msgid "%s: connection was closed by server."
 msgstr ""
 
-#: src/ftp.c:159
+#: src/ftp.c:162
 #, c-format
 msgid "%s: connection timed out."
 msgstr ""
 
-#: src/ftp.c:197
+#: src/ftp.c:200
 msgid "Could not read response line"
 msgstr ""
 
-#: src/ftp.c:231
+#: src/ftp.c:234
 msgid "Cannot parse MDTM response; wrong length."
 msgstr ""
 
-#: src/ftp.c:238
+#: src/ftp.c:241
 msgid "Cannot parse MDTM response."
 msgstr ""
 
-#: src/ftp.c:262
+#: src/ftp.c:265
 msgid "Could not find address in PASV response"
 msgstr ""
 
-#: src/ftp.c:269
+#: src/ftp.c:272
 msgid "Could not parse PASV response"
 msgstr ""
 
-#: src/ftp.c:278
+#: src/ftp.c:281
 msgid "Invalid IP address in PASV response"
 msgstr ""
 
-#: src/ftp.c:298
+#: src/ftp.c:304
 msgid "Malformed EPSV response"
 msgstr ""
 
-#: src/ftp.c:306
+#: src/ftp.c:313
 msgid "Malformed port in EPSV response"
 msgstr ""
 
-#: src/ftp.c:451
+#: src/ftp.c:452 src/ftp.c:502 src/ftp.c:535
+msgid "Interrupted"
+msgstr ""
+
+#: src/ftp.c:470
 msgid "Error sending file"
 msgstr ""
 
-#: src/ftp.c:465 src/ftp.c:491
+#: src/ftp.c:484 src/ftp.c:517
 msgid "Error reading file"
 msgstr ""
 
-#: src/ftp.c:482
+#: src/ftp.c:508
 msgid "Could not send file"
 msgstr ""
 
-#: src/ftp.c:512 src/ftp.c:999
+#: src/ftp.c:543 src/ftp.c:1153
 msgid "Error writing to file"
 msgstr ""
 
-#: src/ftp.c:518
+#: src/ftp.c:549
 msgid "Receiving file"
 msgstr ""
 
-#: src/ftp.c:534
+#: src/ftp.c:598
+msgid "TLS handshake failed"
+msgstr ""
+
+#: src/ftp.c:604
+#, c-format
+msgid "No server certificate: %s"
+msgstr ""
+
+#: src/ftp.c:654
+msgid "TLS handshake failed on data connection"
+msgstr ""
+
+#: src/ftp.c:664
+msgid ""
+"Server certificate for data connection does not match the control connection"
+msgstr ""
+
+#: src/ftp.c:683
 msgid "Could not connect passive data socket"
 msgstr ""
 
-#: src/ftp.c:655
+#: src/ftp.c:802
 msgid "Active open failed: could not determine address of control socket"
 msgstr ""
 
-#: src/ftp.c:667
+#: src/ftp.c:814
 msgid "Active open failed: could not create socket"
 msgstr ""
 
-#: src/ftp.c:675
+#: src/ftp.c:822
 msgid "Active open failed: could not bind to address"
 msgstr ""
 
-#: src/ftp.c:685
+#: src/ftp.c:832
 msgid "Active open failed: could not determine address of data socket"
 msgstr ""
 
-#: src/ftp.c:692
+#: src/ftp.c:839
 msgid "Could not determine bound port number for data socket"
 msgstr ""
 
-#: src/ftp.c:735
+#: src/ftp.c:884
 msgid "Active open failed: could not accept connection"
 msgstr ""
 
-#: src/ftp.c:808
+#: src/ftp.c:960
 msgid "Error closing data socket"
 msgstr ""
 
-#: src/ftp.c:902
+#: src/ftp.c:1057
 msgid "Could not determine length of file"
 msgstr ""
 
-#: src/ftp.c:913
+#: src/ftp.c:1068
 msgid "Could not rewind to beginning of file"
 msgstr ""
 
-#: src/ftp.c:1164
+#: src/ftp.c:1254
+#, c-format
+msgid "Server does not support FTP over TLS: %s"
+msgstr ""
+
+#: src/ftp.c:1270
+#, c-format
+msgid "Could not enable TLS for data connections: %s"
+msgstr ""
+
+#: src/ftp.c:1390
 msgid "Could not read 'LIST' response."
 msgstr ""
 
-#: src/ftp.c:1173
+#: src/ftp.c:1399
 #, c-format
 msgid "Parse error in LIST response: %s"
 msgstr ""

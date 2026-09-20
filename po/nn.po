@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sitecopy 0.11.4\n"
 "Report-Msgid-Bugs-To: https://github.com/notroj/sitecopy\n"
-"POT-Creation-Date: 2025-09-27 08:28+0100\n"
+"POT-Creation-Date: 2026-09-20 19:55+0100\n"
 "PO-Revision-Date: 2002-11-07 18:11+0100\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <i18n-nn@lister.ping.uio.no>\n"
@@ -15,163 +15,160 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: src/console_fe.c:119
+#: src/ftpdriver.c:67
+#, fuzzy
+msgid "Could not load saved server certificate"
+msgstr "Åtvaring: Klarte ikkje lagra sertifikat"
+
+#: src/console_fe.c:123
 msgid "Show changes to"
 msgstr "Vis endringar i"
 
-#: src/console_fe.c:119
+#: src/console_fe.c:123
 msgid "showing changes to"
 msgstr "viser endringar i"
 
-#: src/console_fe.c:119 src/console_fe.c:120
+#: src/console_fe.c:123 src/console_fe.c:124
 msgid "local"
 msgstr "lokal"
 
-#: src/console_fe.c:120
+#: src/console_fe.c:124
 msgid "Synchronize"
 msgstr "Synkroniser"
 
-#: src/console_fe.c:120
+#: src/console_fe.c:124
 msgid "synchronizing"
 msgstr "synkroniserer"
 
-#: src/console_fe.c:125
+#: src/console_fe.c:129
 msgid "Fetch"
 msgstr "Hent"
 
-#: src/console_fe.c:125
+#: src/console_fe.c:129
 msgid "fetching"
 msgstr "hentar"
 
-#: src/console_fe.c:125 src/console_fe.c:126 src/console_fe.c:127
+#: src/console_fe.c:129 src/console_fe.c:131 src/console_fe.c:133
 msgid "remote"
 msgstr "fjerntliggande"
 
-#: src/console_fe.c:126
+#: src/console_fe.c:131
 msgid "Update"
 msgstr "Oppdater"
 
-#: src/console_fe.c:126
+#: src/console_fe.c:131
 msgid "updating"
 msgstr "oppdaterer"
 
-#: src/console_fe.c:127
+#: src/console_fe.c:133
 msgid "Verify"
 msgstr "Stadfest"
 
-#: src/console_fe.c:127
+#: src/console_fe.c:133
 msgid "verifying"
 msgstr "Stadfestar"
 
-#: src/console_fe.c:128
+#: src/console_fe.c:134
 msgid "Catch up"
 msgstr "Gjer oppdatert"
 
-#: src/console_fe.c:128
+#: src/console_fe.c:134
 msgid "catching up"
 msgstr "gjer oppdatert"
 
-#: src/console_fe.c:128 src/console_fe.c:129
+#: src/console_fe.c:134 src/console_fe.c:135
 msgid "stored"
 msgstr "lagra"
 
-#: src/console_fe.c:129
+#: src/console_fe.c:135
 msgid "Initialize"
 msgstr "Initier"
 
-#: src/console_fe.c:129
+#: src/console_fe.c:135
 msgid "initializing"
 msgstr "initierer"
 
-#: src/console_fe.c:134
-msgid ""
-"You should never see this message.\n"
-"Please contact the maintainer at sitecopy@lyra.org\n"
-msgstr ""
-"Du skal aldri sjå denne feilmeldinga.\n"
-"Kontakt vedlikehaldaren på sitecopy@lyra.org\n"
-
-#: src/console_fe.c:196
+#: src/console_fe.c:205
 #, c-format
 msgid "%s: Error: No site called `%s' found - skipping.\n"
 msgstr "%s: Feil: Fann ikkje nettstaden «%s». Hoppar over.\n"
 
-#: src/console_fe.c:214
+#: src/console_fe.c:223
 #, c-format
 msgid "%s: No valid sites specified.\n"
 msgstr "%s: Ingen gyldige nettstader valt.\n"
 
-#: src/console_fe.c:216
+#: src/console_fe.c:225
 #, c-format
 msgid "%s: No sites specified.\n"
 msgstr "%s: Ingen nettstader valt.\n"
 
-#: src/console_fe.c:218 src/console_fe.c:369 src/console_fe.c:529
+#: src/console_fe.c:227 src/console_fe.c:383 src/console_fe.c:540
 #, c-format
 msgid "Try `%s --help' for more information.\n"
 msgstr "Prøv «%s --help» for meir informasjon.\n"
 
-#: src/console_fe.c:228
+#: src/console_fe.c:237
 #, c-format
 msgid "%s: %c%s site `%s' (on %s in %s)\n"
 msgstr "%s: %c%s nettstaden «%s» (på %s i %s)\n"
 
-#: src/console_fe.c:249
+#: src/console_fe.c:260
 #, c-format
 msgid "* These items have been added since the last update:\n"
 msgstr "– Følgjande er lagt til etter førre oppdatering:\n"
 
-#: src/console_fe.c:254 src/console_fe.c:285
+#: src/console_fe.c:265 src/console_fe.c:296
 #, c-format
 msgid "dir:"
 msgstr "katalog:"
 
-#: src/console_fe.c:261
+#: src/console_fe.c:272
 #, c-format
 msgid "* These items have been changed since the last update:\n"
 msgstr "– Følgjande er endra etter førre oppdatering:\n"
 
-#: src/console_fe.c:263
+#: src/console_fe.c:274
 #, c-format
 msgid "  Changes to items in [brackets] are ignored during updates.\n"
 msgstr "  Endringar i [klammer] blir ignorert ved oppdateringar.\n"
 
-#: src/console_fe.c:277
+#: src/console_fe.c:288
 #, c-format
 msgid "* These items have been deleted, but will be left on the server:\n"
 msgstr "– Følgjande er sletta, men ligg igjen på tenaren:\n"
 
-#: src/console_fe.c:279
+#: src/console_fe.c:290
 #, c-format
 msgid "* These items have been deleted since the last update:\n"
 msgstr "– Følgjande er sletta etter førre oppdatering:\n"
 
-#: src/console_fe.c:292
+#: src/console_fe.c:303
 #, c-format
 msgid "* These items have been moved since the last update:\n"
 msgstr "– Følgjande er flytta etter førre oppdatering:\n"
 
-#: src/console_fe.c:310 src/console_fe.c:322
+#: src/console_fe.c:321 src/console_fe.c:333
 msgid "Ignored"
 msgstr "Ignorert"
 
-#: src/console_fe.c:312
+#: src/console_fe.c:323
 msgid "Maintained for executables"
 msgstr "Opprettheldt for kjørbare filer"
 
-#: src/console_fe.c:314
+#: src/console_fe.c:325
 msgid "Always maintained"
 msgstr "Alltid opprettheldt"
 
-#: src/console_fe.c:324
+#: src/console_fe.c:335
 msgid "Maintained"
 msgstr "Opprettheldt"
 
-#: src/console_fe.c:326
+#: src/console_fe.c:337
 msgid "Followed"
 msgstr "Følgt"
 
-#: src/console_fe.c:337
+#: src/console_fe.c:348
 #, c-format
 msgid ""
 "Site: %s\n"
@@ -180,36 +177,42 @@ msgstr ""
 "Nettstad: %s\n"
 "\tTenar: %s"
 
-#: src/console_fe.c:339
+#: src/console_fe.c:350
 #, c-format
 msgid "  Port: "
 msgstr "  Port: "
 
-#: src/console_fe.c:341
+#: src/console_fe.c:352
 #, c-format
 msgid "(default)\n"
 msgstr "(standard)\n"
 
-#: src/console_fe.c:343
+#: src/console_fe.c:355
 #, c-format
 msgid "%d\n"
 msgstr "%d\n"
 
-#: src/console_fe.c:345
+#: src/console_fe.c:357
 #, c-format
 msgid "\tProtocol: %s    Username: %s\n"
 msgstr "\tProtokoll: %s    Brukarnamn: %s\n"
 
-#: src/console_fe.c:348
+#: src/console_fe.c:360
 msgid "(unspecified)"
 msgstr "(ikkje valt)"
 
-#: src/console_fe.c:350
+#: src/console_fe.c:362
 #, c-format
 msgid "\tPassive mode FTP will not be used.\n"
 msgstr "\tPassiv FTP blir ikkje brukt.\n"
 
-#: src/console_fe.c:351
+#: src/console_fe.c:364
+#, fuzzy, c-format
+#| msgid "\tPassive mode FTP will not be used.\n"
+msgid "\tFTP over TLS will be used.\n"
+msgstr "\tPassiv FTP blir ikkje brukt.\n"
+
+#: src/console_fe.c:365
 #, c-format
 msgid ""
 "\tRemote directory: %s\n"
@@ -218,42 +221,42 @@ msgstr ""
 "\tFjerntliggande katalog: %s\n"
 "\tLokal katalog: %s\n"
 
-#: src/console_fe.c:353
+#: src/console_fe.c:367
 #, c-format
 msgid "\tPermissions: %s     Symlinks: %s\n"
 msgstr "\tLøyve: %s     Symbolske lenkjer: %s\n"
 
-#: src/console_fe.c:356
+#: src/console_fe.c:370
 #, c-format
 msgid "\tRemote files will not be deleted.\n"
 msgstr "\tFiler på tenaren blir ikkje sletta.\n"
 
-#: src/console_fe.c:358
+#: src/console_fe.c:372
 #, c-format
 msgid "\tFiles will be moved remotely if moved locally.\n"
 msgstr "\tFiler blir flytta på tenaren når dei blir flytta lokalt.\n"
 
-#: src/console_fe.c:367
+#: src/console_fe.c:381
 #, c-format
 msgid "%s: Error: Only specify ONE operation mode at a time.\n"
 msgstr "%s: Feil: Vel berre éin operasjonsmodus om gongen.\n"
 
-#: src/console_fe.c:489
+#: src/console_fe.c:499
 #, c-format
 msgid "%s: Error: Debug channel %s not known.\n"
 msgstr "%s: Feil: Avlusingskanalen %s er ukjend.\n"
 
-#: src/console_fe.c:497
+#: src/console_fe.c:507
 #, c-format
 msgid "%s: Warning: Could not open `%s' to use as logfile.\n"
 msgstr "%s: Åtvaring: Klarte ikkje opna «%s» for loggføring.\n"
 
-#: src/console_fe.c:540
+#: src/console_fe.c:551
 #, c-format
 msgid "%s: Error: Dry run mode is currently only supported for updates.\n"
 msgstr ""
 
-#: src/console_fe.c:556
+#: src/console_fe.c:567
 #, c-format
 msgid ""
 "%s: Warning: Only %d sites can be specified on the command line!\n"
@@ -262,155 +265,137 @@ msgstr ""
 "%s: Åtvaring: Berre %d nettstader kan veljast frå kommandolinja!\n"
 "Resten av nettstadane blir ikkje oppdaterte.\n"
 
-#: src/console_fe.c:581
+#: src/console_fe.c:593
 #, fuzzy
 msgid "WARNING: Server certificate is not trusted."
 msgstr "Tenarsertifikatet er ikkje gyldig enno"
 
-#: src/console_fe.c:584
+#: src/console_fe.c:596
 #, fuzzy, c-format
 msgid "Certificate was issued for server `%s'.\n"
 msgstr "Sertifikatet er utferda av:"
 
-#: src/console_fe.c:586
+#: src/console_fe.c:598
 msgid "WARNING: Certificate does not specify a server"
 msgstr ""
 
-#: src/console_fe.c:588
+#: src/console_fe.c:600
 #, fuzzy, c-format
 msgid "Fingerprint: %s\n"
 msgstr "Fingeravtrykk: %s"
 
-#: src/console_fe.c:591
+#: src/console_fe.c:603
 #, c-format
 msgid "Issued to: %s\n"
 msgstr ""
 
-#: src/console_fe.c:595
+#: src/console_fe.c:607
 #, c-format
 msgid "Issued by: %s\n"
 msgstr ""
 
-#: src/console_fe.c:598
+#: src/console_fe.c:610
 #, c-format
 msgid "Do you wish to accept this certificate? (y/n) "
 msgstr ""
 
-#: src/console_fe.c:607
+#: src/console_fe.c:620
 msgid "server"
 msgstr "tenar"
 
-#: src/console_fe.c:607
+#: src/console_fe.c:620
 msgid "proxy server"
 msgstr "mellomtenar"
 
-#: src/console_fe.c:613
+#: src/console_fe.c:626
 #, c-format
 msgid "Authentication required for %s on %s `%s':\n"
 msgstr "Krev autentisering for %s på %s «%s»:\n"
 
-#: src/console_fe.c:616
+#: src/console_fe.c:629
 #, c-format
 msgid "Authentication required on %s `%s':\n"
 msgstr "Krev autentisering på %s «%s»:\n"
 
-#: src/console_fe.c:619
+#: src/console_fe.c:632
 msgid "Username: "
 msgstr "Brukarnamn: "
 
-#: src/console_fe.c:624
+#: src/console_fe.c:637
 #, c-format
 msgid "Username: %s\n"
 msgstr "Brukarnamn: %s\n"
 
-#: src/console_fe.c:626 src/console_fe.c:650
+#: src/console_fe.c:639 src/console_fe.c:663
 msgid "Password: "
 msgstr "Passord: "
 
-#: src/console_fe.c:636
+#: src/console_fe.c:649
 #, c-format
 msgid "Retrying: ["
 msgstr "Prøver på nytt: ["
 
-#: src/console_fe.c:647
+#: src/console_fe.c:660
 #, c-format
 msgid "%s: Encrypted client certificate configured%s%s.\n"
 msgstr ""
 
-#: src/console_fe.c:682
+#: src/console_fe.c:728
 #, c-format
 msgid "Create %s/"
 msgstr "Opprett %s/"
 
-#: src/console_fe.c:684
+#: src/console_fe.c:730
 #, c-format
 msgid "Delete %s/"
 msgstr "Slett %s/"
 
-#: src/console_fe.c:692
+#: src/console_fe.c:738
 #, fuzzy, c-format
 msgid "Upload %s (%s bytes)"
 msgstr "Last opp %s (%"
 
-#: src/console_fe.c:694
+#: src/console_fe.c:740
 #, c-format
 msgid "Delete %s"
 msgstr "Slett %s"
 
-#: src/console_fe.c:695
+#: src/console_fe.c:741
 #, c-format
 msgid "Move %s->%s"
 msgstr "Flytt %s til %s"
 
-#: src/console_fe.c:699
-#, c-format
-msgid ""
-"%s: in fe_can_update/file_file\n"
-"%s"
-msgstr ""
-"%s: i fe_can_update/file_file\n"
-"%s"
-
-#: src/console_fe.c:706
+#: src/console_fe.c:750
 #, c-format
 msgid "Change %s"
 msgstr "Endra %s"
 
-#: src/console_fe.c:707
+#: src/console_fe.c:751
 #, c-format
 msgid "Create %s"
 msgstr "Opprett %s"
 
-#: src/console_fe.c:708
+#: src/console_fe.c:752
 #, c-format
 msgid "Remove %s"
 msgstr "Fjern %s"
 
-#: src/console_fe.c:711
-#, c-format
-msgid ""
-"%s: in fe_can_update/file_link\n"
-"%s"
-msgstr ""
-"%s: i fe_can_update/file_link\n"
-"%s"
-
-#: src/console_fe.c:717
+#: src/console_fe.c:759
 #, c-format
 msgid "? (y/n) "
 msgstr "? (j/n)"
 
-#: src/console_fe.c:726
+#: src/console_fe.c:769
 #, c-format
 msgid "Checksumming %s: ["
 msgstr "Reknar ut sjekksum til %s: ["
 
-#: src/console_fe.c:741 src/console_fe.c:852 src/console_fe.c:913
+#: src/console_fe.c:784 src/console_fe.c:896 src/console_fe.c:958
 #, c-format
 msgid "] done.\n"
 msgstr "] ferdig.\n"
 
-#: src/console_fe.c:743 src/console_fe.c:915
+#: src/console_fe.c:786 src/console_fe.c:960
 #, c-format
 msgid ""
 "] failed:\n"
@@ -419,17 +404,17 @@ msgstr ""
 "] mislykka:\n"
 "%s\n"
 
-#: src/console_fe.c:753
+#: src/console_fe.c:796
 #, fuzzy, c-format
 msgid "Setting permissions on %s%s: "
 msgstr "Sett løyve på %s: "
 
-#: src/console_fe.c:763 src/console_fe.c:841 src/console_fe.c:907
+#: src/console_fe.c:806 src/console_fe.c:882 src/console_fe.c:952
 #, c-format
 msgid "done.\n"
 msgstr "ferdig.\n"
 
-#: src/console_fe.c:765 src/console_fe.c:909
+#: src/console_fe.c:808 src/console_fe.c:954
 #, c-format
 msgid ""
 "failed:\n"
@@ -438,123 +423,105 @@ msgstr ""
 "mislykka:\n"
 "%s\n"
 
-#: src/console_fe.c:784 src/console_fe.c:871
+#: src/console_fe.c:827 src/console_fe.c:916
 #, c-format
 msgid "Creating %s/: "
 msgstr "Opprettar %s/:"
 
-#: src/console_fe.c:786 src/console_fe.c:873
+#: src/console_fe.c:829 src/console_fe.c:918
 #, c-format
 msgid "Deleting %s/: "
 msgstr "Slettar %s/:"
 
-#: src/console_fe.c:793
+#: src/console_fe.c:836
 #, c-format
 msgid "Uploading %s: ["
 msgstr "Lastar opp %s: ["
 
-#: src/console_fe.c:796 src/console_fe.c:815 src/console_fe.c:883
+#: src/console_fe.c:839 src/console_fe.c:857 src/console_fe.c:928
 #, c-format
 msgid "Deleting %s: "
 msgstr "Slettar %s: "
 
-#: src/console_fe.c:799 src/console_fe.c:886
+#: src/console_fe.c:842 src/console_fe.c:931
 #, c-format
 msgid "Moving %s->%s: "
 msgstr "Flyttar %s til %s: "
 
-#: src/console_fe.c:803
-#, c-format
-msgid ""
-"%s: in fe_updating/file_file\n"
-"%s"
-msgstr ""
-"%s: i fe_updating/file_file\n"
-"%s"
-
-#: src/console_fe.c:811
+#: src/console_fe.c:853
 #, c-format
 msgid "Changing %s: "
 msgstr "Endrar %s: "
 
-#: src/console_fe.c:813
+#: src/console_fe.c:855
 #, c-format
 msgid "Creating %s: "
 msgstr "Opprettar %s: "
 
-#: src/console_fe.c:817
-#, c-format
-msgid ""
-"%s: in fe_updating/file_link\n"
-"%s"
-msgstr ""
-"%s: i fe_updating/file_link\n"
-"%s"
-
-#: src/console_fe.c:834
+#: src/console_fe.c:875
 #, fuzzy, c-format
 msgid "Failed to update %s:%c%s\n"
 msgstr ""
 "Klarte ikkje oppdatera %s:\n"
 "%s\n"
 
-#: src/console_fe.c:843
+#: src/console_fe.c:885
 #, fuzzy, c-format
 msgid "failed:%c%s\n"
 msgstr ""
 "mislykka:\n"
 "%s\n"
 
-#: src/console_fe.c:855
+#: src/console_fe.c:900
 #, fuzzy, c-format
 msgid "] failed:%c%s\n"
 msgstr ""
 "] mislykka:\n"
 "%s\n"
 
-#: src/console_fe.c:880
+#: src/console_fe.c:925
 #, c-format
 msgid "Downloading %s: ["
 msgstr "Lastar ned %s: ["
 
-#: src/console_fe.c:925
+#: src/console_fe.c:970
 msgid "Changed on server"
 msgstr "Endra på tenaren"
 
-#: src/console_fe.c:928
+#: src/console_fe.c:973
 msgid "Added on server"
 msgstr "Lagt til på tenaren"
 
-#: src/console_fe.c:936
+#: src/console_fe.c:981
 #, c-format
 msgid "%s: %s\n"
 msgstr "%s: %s\n"
 
-#: src/console_fe.c:956
+#: src/console_fe.c:1001
 #, c-format
 msgid "Directory: %s/\n"
 msgstr "Katalog: %s/\n"
 
-#: src/console_fe.c:961
+#: src/console_fe.c:1006
 #, fuzzy, c-format
 msgid "File: %s - size %s%s\n"
 msgstr "Fil: %s – storleik %"
 
-#: src/console_fe.c:963
+#: src/console_fe.c:1008
 msgid " (ASCII)"
 msgstr " (ASCII)"
 
-#: src/console_fe.c:966
+#: src/console_fe.c:1011
 #, c-format
 msgid "Link: %s - target %s\n"
 msgstr "Lenkje: %s – mål %s\n"
 
-#: src/console_fe.c:979
+#: src/console_fe.c:1024
 #, c-format
 msgid "%s: Error: Could not open rcfile: %s.\n"
 msgstr "%s: Feil: Klarte ikkje opna «rcfile»-fila: %s.\n"
 
-#: src/console_fe.c:983
+#: src/console_fe.c:1028
 #, c-format
 msgid ""
 "%s: rcfile corrupt at line %d:\n"
@@ -563,7 +530,7 @@ msgstr ""
 "%s: «rcfile»-fila er øydelagt – linje %d:\n"
 "%s\n"
 
-#: src/console_fe.c:1002
+#: src/console_fe.c:1047
 #, c-format
 msgid ""
 "%s: Could not read directory for `%s':\n"
@@ -572,77 +539,96 @@ msgstr ""
 "%s: Klarte ikkje lesa katalog for «%s»:\n"
 "\t%s\n"
 
-#: src/console_fe.c:1006
+#: src/console_fe.c:1051
 #, c-format
 msgid "%s: Server not specified in site `%s'.\n"
 msgstr "%s: Ingen tenar valt for nettstaden «%s».\n"
 
-#: src/console_fe.c:1010
+#: src/console_fe.c:1055
 #, c-format
 msgid "%s: Remote directory not specified in site `%s'.\n"
 msgstr "%s: Fjerntliggande katalog ikkje valt for nettstaden «%s».\n"
 
-#: src/console_fe.c:1014
+#: src/console_fe.c:1059
 #, c-format
 msgid "%s: Local directory not specified in site `%s'.\n"
 msgstr "%s: Lokal katalog ikkje valt for nettstaden «%s».\n"
 
-#: src/console_fe.c:1018
+#: src/console_fe.c:1063
 #, c-format
 msgid "%s: Invalid port used in site `%s'.\n"
 msgstr "%s: Ugyldig port brukt for nettstaden «%s».\n"
 
-#: src/console_fe.c:1022
+#: src/console_fe.c:1067
 #, c-format
 msgid "%s: %s cannot maintain symbolic links (site `%s').\n"
 msgstr "%s: %s klarte ikkje oppretthelda symbolske lenkjer (nettstad: «%s»).\n"
 
-#: src/console_fe.c:1026
+#: src/console_fe.c:1071
 #, c-format
 msgid "%s: Cannot use a relative remote directory in %s (site `%s').\n"
 msgstr ""
 "%s: Klarte ikkje bruka ein relativ fjerntliggande katalog i %s (nettstad: "
 "«%s»).\n"
 
-#: src/console_fe.c:1029
+#: src/console_fe.c:1074
 #, c-format
 msgid "%s: File permissions are not supported in %s (site `%s').\n"
 msgstr "%s: Filløyver er ikkje støtta i %s (nettstad: «%s»).\n"
 
-#: src/console_fe.c:1032
+#: src/console_fe.c:1077
 #, c-format
 msgid ""
 "%s: Safe mode cannot be used in conjunction with nooverwrite (site `%s').\n"
 msgstr ""
 "%s: Sikkermodus kan ikkje brukast saman med «nooverwrite» (nettstad: «%s»).\n"
 
-#: src/console_fe.c:1035
+#: src/console_fe.c:1080
 #, c-format
 msgid ""
 "%s: Safe mode cannot be used in conjunction with tempupload (site `%s').\n"
 msgstr ""
 "%s: Sikkermodus kan ikkje brukast saman med «tempupload» (nettstad: «%s»).\n"
 
-#: src/console_fe.c:1038
+#: src/console_fe.c:1083
 #, c-format
 msgid "%s: Can only check for renamed files when checksumming (site `%s').\n"
 msgstr ""
 "%s: Kan berre sjå etter filer med endra namn ved bruk av sjekksum (nettstad: "
 "«%s»).\n"
 
-#: src/console_fe.c:1041
+#: src/console_fe.c:1086
+#, c-format
+msgid ""
+"%s: FTP over TLS requires sitecopy built with neon 0.37 or later with SSL "
+"support (site `%s').\n"
+msgstr ""
+
+#: src/console_fe.c:1091
 #, c-format
 msgid "%s: The protocol `%s' is unsupported (site `%s').\n"
 msgstr "%s: Støttar ikkje protokollen «%s» (nettstad: «%s»).\n"
 
-#: src/console_fe.c:1048
+#: src/console_fe.c:1098
 #, c-format
 msgid "%s: Unhandled error %d in site `%s' - please contact the maintainer.\n"
 msgstr ""
 "%s: Klarte ikkje handtera feil %d i nettstaden «%s» – kontakt "
 "vedlikehaldaren.\n"
 
-#: src/console_fe.c:1066
+#: src/console_fe.c:1115
+#, fuzzy, c-format
+#| msgid ""
+#| "%s: Error: Corrupt site storage file for `%s':\n"
+#| "%s: %s\n"
+msgid ""
+"%s: Error: Could not lock storage file for `%s':\n"
+"%s: Error: %s\n"
+msgstr ""
+"%s: Feil: Øydelagd lagringsfil for «%s»:\n"
+"%s: %s\n"
+
+#: src/console_fe.c:1130
 #, c-format
 msgid ""
 "%s: Error: Corrupt site storage file for `%s':\n"
@@ -651,7 +637,7 @@ msgstr ""
 "%s: Feil: Øydelagd lagringsfil for «%s»:\n"
 "%s: %s\n"
 
-#: src/console_fe.c:1075
+#: src/console_fe.c:1140
 #, c-format
 msgid ""
 "%s: Error: No storage file for `%s'.\n"
@@ -660,136 +646,139 @@ msgstr ""
 "%s: Feil: Det finst inga lagringsfil for «%s».\n"
 "%s: Bruk --init, --catchup eller --fetch for å laga ei lagringsfil.\n"
 
-#: src/console_fe.c:1088
+#: src/console_fe.c:1154
 #, c-format
 msgid "%s: Skipping site `%s'.\n"
 msgstr "%s: Hoppar over nettstaden «%s».\n"
 
-#: src/console_fe.c:1103
+#: src/console_fe.c:1173
+#, fuzzy, c-format
+#| msgid ""
+#| "%s: Error: Could not open storage file for writing (%s)\n"
+#| "%s: Error: %s\n"
+#| "%s: Will not update site `%s'.\n"
+msgid ""
+"%s: Error: Could not write storage file for site `%s' (%s):\n"
+"%s: Error: %s\n"
+"%s: Error: The changes made have not been recorded.\n"
+msgstr ""
+"%s: Feil: Klarte ikkje opna lagringsfil (%s)\n"
+"%s: Feil: %s\n"
+"%s: Klarte ikkje oppdatera nettstaden «%s».\n"
+
+#: src/console_fe.c:1189
 #, c-format
 msgid "%s: %s completed successfully.\n"
 msgstr "%s: %singa var vellykka.\n"
 
-#: src/console_fe.c:1109
+#: src/console_fe.c:1195
 #, c-format
 msgid "%s: %s unsupported for %s.\n"
 msgstr "%s: %s ikkje støtta for %s.\n"
 
-#: src/console_fe.c:1114
+#: src/console_fe.c:1200
 #, c-format
 msgid "%s: Errors occurred while %s the %s site.\n"
 msgstr "%s: Det oppsto feil ved %s av den %se nettstaden.\n"
 
-#: src/console_fe.c:1119
+#: src/console_fe.c:1207
+#, fuzzy, c-format
+#| msgid "%s: Errors occurred while %s the %s site.\n"
+msgid "%s: Interrupted while %s the %s site `%s'.\n"
+msgstr "%s: Det oppsto feil ved %s av den %se nettstaden.\n"
+
+#: src/console_fe.c:1212
 #, c-format
 msgid "%s: Error: Could not resolve remote hostname (%s).\n"
 msgstr "%s: Feil: Fann ikkje adressa til nettverksvert (%s).\n"
 
-#: src/console_fe.c:1125
+#: src/console_fe.c:1218
 #, c-format
 msgid "%s: Error: Could not resolve hostname of proxy server (%s).\n"
 msgstr "%s: Feil: Fann ikkje adressa til mellomtenar (%s).\n"
 
-#: src/console_fe.c:1131
+#: src/console_fe.c:1224
 #, c-format
 msgid "%s: Error: Could not connect to proxy server (%s port %d).\n"
 msgstr "%s: Feil: Klarte ikkje kopla til mellomtenar (%s port %d).\n"
 
-#: src/console_fe.c:1134
+#: src/console_fe.c:1227
 #, c-format
 msgid "%s: Error: Could not connect to server (%s port %d).\n"
 msgstr "%s: Feil: Klarte ikkje kopla til tenar (%s port %d).\n"
 
-#: src/console_fe.c:1140
+#: src/console_fe.c:1233
 #, c-format
 msgid "%s: Error: Could not authorise user on server.\n"
 msgstr "%s: Feil: Klarte ikkje autentisera brukar på tenar.\n"
 
-#: src/console_fe.c:1145
+#: src/console_fe.c:1238
 #, c-format
 msgid "%s: Error: %s\n"
 msgstr "%s: Feil: %s\n"
 
-#: src/console_fe.c:1149
+#: src/console_fe.c:1242
 #, c-format
 msgid "%s: Error: Could not authorise user on proxy server (%s).\n"
 msgstr "%s: Feil: Klarte ikkje autentisera brukar på mellomtenar (%s).\n"
 
-#: src/console_fe.c:1154
-#, c-format
-msgid ""
-"%s: in issue_error\n"
-"%s"
-msgstr ""
-"%s: i issue_error\n"
-"%s"
-
-#: src/console_fe.c:1168
+#: src/console_fe.c:1263
 #, c-format
 msgid "%s: Error: Environment variable HOME not set.\n"
 msgstr "%s: Feil: Miljøvariabelen «HOME» er ikkje sett.\n"
 
-#: src/console_fe.c:1176
+#: src/console_fe.c:1271
 #, c-format
 msgid "%s: Error: Could not open rcfile: %s\n"
 msgstr "%s: Feil: Klate ikkje opna «rcfile»: %s\n"
 
-#: src/console_fe.c:1179
+#: src/console_fe.c:1274
 #, c-format
 msgid "%s: Error: rcfile permissions allow other users to read your rcfile.\n"
 msgstr "%s: Feil: «rcfile»-løyva gjer at andre kan lesa «rcfile»-fila di.\n"
 
-#: src/console_fe.c:1180 src/console_fe.c:1192
+#: src/console_fe.c:1275 src/console_fe.c:1287
 #, c-format
 msgid "%s: Set the permissions to 0600.\n"
 msgstr "%s: Set løyva til 0600.\n"
 
-#: src/console_fe.c:1183
+#: src/console_fe.c:1278
 #, c-format
 msgid "%s: Error: Could not open storage directory: %s\n"
 msgstr "%s: Feil: Klarte ikkje opna lagringskatalog: %s\n"
 
-#: src/console_fe.c:1184
+#: src/console_fe.c:1279
 #, c-format
 msgid ""
 "%s: You need to create this directory and set the permissions to 0700.\n"
 msgstr "%s: Du må oppretta denne katalogen og setja løyvet til 0700.\n"
 
-#: src/console_fe.c:1187
+#: src/console_fe.c:1282
 #, c-format
 msgid "%s: Error: storage directory permissions incorrect.\n"
 msgstr "%s: Feil: løyva sett for lagringskatalogen er feil.\n"
 
-#: src/console_fe.c:1188
+#: src/console_fe.c:1283
 #, c-format
 msgid "%s: Set the permissions to 0700.\n"
 msgstr "%s: Set løyva til 0700.\n"
 
-#: src/console_fe.c:1191
+#: src/console_fe.c:1286
 #, c-format
 msgid "%s: Error: ~/.netrc permissions incorrect.\n"
 msgstr "%s: Feil: feil løyve til ~/.netrc.\n"
 
-#: src/console_fe.c:1197
-#, c-format
-msgid ""
-"%s: init_paths gave %d\n"
-"%s"
-msgstr ""
-"%s: init_paths gav %d\n"
-"%s"
-
-#: src/console_fe.c:1204
+#: src/console_fe.c:1298
 #, c-format
 msgid "%s: Error: Could not parse ~/.netrc.\n"
 msgstr "%s: Feil: Klarte ikkje tolka ~/.netrc.\n"
 
-#: src/console_fe.c:1222 src/console_fe.c:1321
+#: src/console_fe.c:1316 src/console_fe.c:1426
 #, c-format
 msgid "%s: Nothing to do - no changes found.\n"
 msgstr "%s: Fann ingen endringar.\n"
 
-#: src/console_fe.c:1231
+#: src/console_fe.c:1326
 #, c-format
 msgid ""
 "%s: Error: Could not open storage file for writing (%s)\n"
@@ -800,7 +789,7 @@ msgstr ""
 "%s: Feil: %s\n"
 "%s: Klarte ikkje oppdatera nettstaden «%s».\n"
 
-#: src/console_fe.c:1255
+#: src/console_fe.c:1353
 #, c-format
 msgid ""
 "%s: Warning: Current state method differs from stored in site `%s'.\n"
@@ -810,32 +799,32 @@ msgstr ""
 "«%s».\n"
 "%s: Alle filer vil visast som endra (bruk «gjer oppdatert»?).\n"
 
-#: src/console_fe.c:1261
+#: src/console_fe.c:1359
 #, c-format
 msgid "%s: The remote site needs updating (%d items to update).\n"
 msgstr "%s: Nettstaden må oppdaterast (%d element).\n"
 
-#: src/console_fe.c:1263
+#: src/console_fe.c:1362
 #, c-format
 msgid "%s: The remote site needs updating (1 item to update).\n"
 msgstr "%s: Nettstaden må oppdaterast (eitt element).\n"
 
-#: src/console_fe.c:1266
+#: src/console_fe.c:1366
 #, c-format
 msgid "%s: The remote site does not need updating.\n"
 msgstr "%s: Nettstaden treng ikkje oppdaterast.\n"
 
-#: src/console_fe.c:1274
+#: src/console_fe.c:1376
 #, c-format
 msgid "%s: All the files and directories are marked as NOT updated remotely.\n"
 msgstr "%s: Alle filer og katalogar er markerte som IKKJE oppdaterte.\n"
 
-#: src/console_fe.c:1279
+#: src/console_fe.c:1383
 #, c-format
 msgid "%s: All the files and and directories are marked as updated remotely.\n"
 msgstr "%s: Alle filer og katalogar er markerte som oppdaterte.\n"
 
-#: src/console_fe.c:1288
+#: src/console_fe.c:1391
 #, c-format
 msgid ""
 "%s: Failed to fetch file listing for site `%s':\n"
@@ -844,7 +833,7 @@ msgstr ""
 "%s: Klarte ikkje henta fillista for å stadfesta nettstaden «%s»:\n"
 "%s: %s\n"
 
-#: src/console_fe.c:1302
+#: src/console_fe.c:1407
 #, c-format
 msgid ""
 "%s: Failed to fetch file listing to verify site `%s':\n"
@@ -853,17 +842,17 @@ msgstr ""
 "%s: Klarte ikkje henta fillista for nettstaden «%s»:\n"
 "%s: %s\n"
 
-#: src/console_fe.c:1309
+#: src/console_fe.c:1414
 #, c-format
 msgid "%s: Verify found %d files missing from server.\n"
 msgstr "%s: Stadfesting fann %d filer som manglar frå tenaren.\n"
 
-#: src/console_fe.c:1312
+#: src/console_fe.c:1417
 #, c-format
 msgid "%s: Remote site not synchronized with stored state.\n"
 msgstr "%s: Fjerntliggande nettstad er ikkje synkronisert.\n"
 
-#: src/console_fe.c:1325
+#: src/console_fe.c:1431
 #, c-format
 msgid ""
 "%s: Refusing to delete all local files with a synchronize operation.\n"
@@ -872,27 +861,18 @@ msgstr ""
 "%s: Nektar å sletta alle filer med ein synkroniseringsoperasjon.\n"
 "%s: Bruk --update for å oppdatera nettstaden.\n"
 
-#: src/console_fe.c:1333
-#, c-format
-msgid ""
-"%s: in act_on_site\n"
-"%s"
-msgstr ""
-"%s: i act_on_site\n"
-"%s"
-
-#: src/console_fe.c:1344
+#: src/console_fe.c:1451
 #, c-format
 msgid "Usage: %s [OPTIONS] [MODE] [sitename]...\n"
 msgstr "Bruk: %s [VAL] [MODUS] [nettstad] ...\n"
 
 # Alternativ? Flagg?
-#: src/console_fe.c:1346
+#: src/console_fe.c:1453
 #, c-format
 msgid "Options: \n"
 msgstr "Val: \n"
 
-#: src/console_fe.c:1349
+#: src/console_fe.c:1456
 #, fuzzy, c-format
 msgid ""
 "  -d, --debug=KEY[,KEY] Turn debugging on for each KEY, which may be:\n"
@@ -910,7 +890,7 @@ msgstr ""
 "  -g, --logfile=FIL    Legg til avlusingsmeldingar i FIL\n"
 "                       (elles blir «stderr» brukt)\n"
 
-#: src/console_fe.c:1356
+#: src/console_fe.c:1463
 #, fuzzy, c-format
 msgid ""
 "  -r, --rcfile=FILE     Use alternate run control file\n"
@@ -963,76 +943,87 @@ msgstr ""
 "  -V, --version        Vis versjonsinformasjon\n"
 "Rapporter feil og send forslag til sitecopy@lyra.org\n"
 
-#: src/sitestore.c:350
+#: src/sitestore.c:127
+#, c-format
+msgid "Locked by process %s; if it is no longer running, remove `%s'."
+msgstr ""
+
+#: src/sitestore.c:133
+#, c-format
+msgid "Locked; if no other sitecopy is running, remove `%s'."
+msgstr ""
+
+#: src/sitestore.c:140
+#, fuzzy, c-format
+#| msgid "Could not write to file: %s"
+msgid "Could not create lock file `%s': %s"
+msgstr "Klarte ikkje skriva til fil: %s"
+
+#: src/sitestore.c:448
 #, c-format
 msgid "Invalid checksum at line %d"
 msgstr ""
 
-#: src/sitestore.c:395
+#: src/sitestore.c:494
 #, c-format
 msgid "Boolean missing in 'ascii' at line %d"
 msgstr ""
 
-#: src/sitestore.c:420
+#: src/sitestore.c:519
 #, c-format
 msgid "Size overflow (%s) in '%s' at line %d"
 msgstr ""
 
-#: src/davdriver.c:221
+#: src/davdriver.c:197
 msgid "The connection timed out."
 msgstr "Sambandet vart tidsavbrote."
 
-#: src/davdriver.c:241
-#, fuzzy
-msgid "Could not write SSL certificate"
-msgstr "Åtvaring: Klarte ikkje lagra sertifikat"
-
-#: src/davdriver.c:261
+#: src/davdriver.c:218
 msgid "SSL support has not be compiled in."
 msgstr "SSL-støtte er ikkje kompilert inn."
 
-#: src/davdriver.c:269
+#: src/davdriver.c:224
 #, fuzzy, c-format
 msgid "Could not load certificate `%s'."
 msgstr "Åtvaring: Klarte ikkje lagra sertifikat"
 
-#: src/davdriver.c:310
+#: src/davdriver.c:254
 #, fuzzy, c-format
 msgid "Could not read SSL client certificate '%s'."
 msgstr "Åtvaring: Klarte ikkje lagra sertifikat"
 
-#: src/davdriver.c:323
+#: src/davdriver.c:267
 #, fuzzy, c-format
 msgid "Could not decrypt SSL client certificate '%s'."
 msgstr "Åtvaring: Klarte ikkje lagra sertifikat"
 
-#: src/davdriver.c:345
+#: src/davdriver.c:289
 msgid "The server does not appear to be a WebDAV server."
 msgstr "Tenaren er ikkje ein WebDAV-tenar."
 
-#: src/davdriver.c:350
+#: src/davdriver.c:295
 msgid "The server does not support the executable live property."
 msgstr "Tenaren støttar ikkje kjørbar-eigenskapen."
 
-#: src/davdriver.c:396 src/davdriver.c:463 src/davdriver.c:500 src/ftp.c:896
-#: src/ftp.c:980
+#: src/davdriver.c:342 src/davdriver.c:407 src/davdriver.c:444 src/ftp.c:1051
+#: src/ftp.c:1135
 msgid "Could not open file"
 msgstr "Klarte ikkje opna fil"
 
-#: src/davdriver.c:431
+#: src/davdriver.c:374
 #, fuzzy, c-format
 msgid "Could not stat file: %s"
 msgstr "Klarte ikkje skriva til fil: %s"
 
-#: src/davdriver.c:690
+#: src/davdriver.c:608
 msgid "Could not access resource"
 msgstr "Fekk ikkje tilgang til ressursen"
 
-#: src/sites.c:160
+#: src/sites.c:164
 msgid "Could not set modification time of local file."
 msgstr "Klarte ikkje endra endringstida til lokal fil."
 
-#: src/sites.c:308
+#: src/sites.c:319
 msgid ""
 "Upload succeeded, but could not retrieve modification time.\n"
 "If this message persists, turn off safe mode."
@@ -1040,150 +1031,254 @@ msgstr ""
 "Opplastinga var vellykka, men klarte ikkje henta endringstid.\n"
 "Slå av sikkermodus viss denne meldinga ikkje forsvinn."
 
-#: src/sites.c:515
+#: src/sites.c:547
 msgid "Remote file has been modified - not overwriting with local changes"
 msgstr ""
 "Fjerntliggande fil har blitt endra, og blir ikkje overskriven av lokal fil"
 
-#: src/sites.c:828
+#: src/sites.c:564
+msgid "Filename too long for a temporary upload"
+msgstr ""
+
+#: src/sites.c:871
 msgid "Could not examine file."
 msgstr "Klarte ikkje gjennomlesa fila."
 
-#: src/sites.c:871
+#: src/sites.c:914
 msgid "Could not checksum file"
 msgstr "Klarte ikkje laga sjekksum for fila"
 
-#: src/sites.c:887
+#: src/sites.c:932
 msgid "The target of the symlink could not be read."
 msgstr "Klarte ikkje lesa målet til den symbolske lenkja."
 
-#: src/common.c:113
-msgid "Unknown system error"
-msgstr "Ukjend systemfeil"
+#: src/sites.c:1526
+#, fuzzy
+msgid "Could not write SSL certificate"
+msgstr "Åtvaring: Klarte ikkje lagra sertifikat"
 
-#: src/ftp.c:155
+#: src/ftp.c:158
 #, c-format
 msgid "%s: connection was closed by server."
 msgstr "%s: tilkoplinga vart lukka av tenaren."
 
-#: src/ftp.c:159
+#: src/ftp.c:162
 #, c-format
 msgid "%s: connection timed out."
 msgstr "%s: sambandet vart tidsavbrote."
 
-#: src/ftp.c:197
+#: src/ftp.c:200
 #, fuzzy
 msgid "Could not read response line"
 msgstr "Klarte ikkje lesa svar"
 
-#: src/ftp.c:231
+#: src/ftp.c:234
 #, fuzzy
 msgid "Cannot parse MDTM response; wrong length."
 msgstr "Klarte ikkje tolka statuslinja i svaret."
 
-#: src/ftp.c:238
+#: src/ftp.c:241
 #, fuzzy
 msgid "Cannot parse MDTM response."
 msgstr "Klarte ikkje lesa «LIST»-svar."
 
-#: src/ftp.c:262
+#: src/ftp.c:265
 #, fuzzy
 msgid "Could not find address in PASV response"
 msgstr "Klarte ikkje lesa «LIST»-svar."
 
-#: src/ftp.c:269
+#: src/ftp.c:272
 #, fuzzy
 msgid "Could not parse PASV response"
 msgstr "Klarte ikkje lesa «LIST»-svar."
 
-#: src/ftp.c:278
+#: src/ftp.c:281
 msgid "Invalid IP address in PASV response"
 msgstr ""
 
-#: src/ftp.c:298
+#: src/ftp.c:304
 #, fuzzy
 msgid "Malformed EPSV response"
 msgstr "Klarte ikkje lesa «LIST»-svar."
 
-#: src/ftp.c:306
+#: src/ftp.c:313
 #, fuzzy
 msgid "Malformed port in EPSV response"
 msgstr "Klarte ikkje lesa «LIST»-svar."
 
-#: src/ftp.c:451
+#: src/ftp.c:452 src/ftp.c:502 src/ftp.c:535
+msgid "Interrupted"
+msgstr ""
+
+#: src/ftp.c:470
 msgid "Error sending file"
 msgstr "Feil ved sending av fil"
 
-#: src/ftp.c:465 src/ftp.c:491
+#: src/ftp.c:484 src/ftp.c:517
 #, fuzzy
 msgid "Error reading file"
 msgstr "Feil ved sending av fil"
 
-#: src/ftp.c:482
+#: src/ftp.c:508
 #, fuzzy
 msgid "Could not send file"
 msgstr "Klarte ikkje opna fil"
 
-#: src/ftp.c:512 src/ftp.c:999
+#: src/ftp.c:543 src/ftp.c:1153
 #, fuzzy
 msgid "Error writing to file"
 msgstr "Feil ved sending av fil"
 
-#: src/ftp.c:518
+#: src/ftp.c:549
 msgid "Receiving file"
 msgstr ""
 
-#: src/ftp.c:534
+#: src/ftp.c:598
+msgid "TLS handshake failed"
+msgstr ""
+
+#: src/ftp.c:604
+#, fuzzy, c-format
+msgid "No server certificate: %s"
+msgstr "Tenarsertifikatet er ikkje gyldig enno"
+
+#: src/ftp.c:654
+msgid "TLS handshake failed on data connection"
+msgstr ""
+
+#: src/ftp.c:664
+#, fuzzy
+msgid ""
+"Server certificate for data connection does not match the control connection"
+msgstr "Tenarsertifikatet er utgått på dato."
+
+#: src/ftp.c:683
 msgid "Could not connect passive data socket"
 msgstr "Klarte ikkje kopla til passiv datasokkel"
 
-#: src/ftp.c:655
+#: src/ftp.c:802
 msgid "Active open failed: could not determine address of control socket"
 msgstr ""
 
-#: src/ftp.c:667
+#: src/ftp.c:814
 #, fuzzy
 msgid "Active open failed: could not create socket"
 msgstr "Klarte ikkje forhandla SSL-økt"
 
-#: src/ftp.c:675
+#: src/ftp.c:822
 msgid "Active open failed: could not bind to address"
 msgstr ""
 
-#: src/ftp.c:685
+#: src/ftp.c:832
 msgid "Active open failed: could not determine address of data socket"
 msgstr ""
 
-#: src/ftp.c:692
+#: src/ftp.c:839
 #, fuzzy
 msgid "Could not determine bound port number for data socket"
 msgstr "Klarte ikkje kopla til passiv datasokkel"
 
-#: src/ftp.c:735
+#: src/ftp.c:884
 msgid "Active open failed: could not accept connection"
 msgstr ""
 
-#: src/ftp.c:808
+#: src/ftp.c:960
 msgid "Error closing data socket"
 msgstr "Feil ved lukking av datasokkel"
 
-#: src/ftp.c:902
+#: src/ftp.c:1057
 msgid "Could not determine length of file"
 msgstr "Klarte ikkje fastesetja fillengd"
 
-#: src/ftp.c:913
+#: src/ftp.c:1068
 #, fuzzy
 msgid "Could not rewind to beginning of file"
 msgstr "Klarte ikkje fastesetja fillengd"
 
-#: src/ftp.c:1164
+#: src/ftp.c:1254
+#, fuzzy, c-format
+msgid "Server does not support FTP over TLS: %s"
+msgstr "Tenaren kan ikkje handtera kommandoar for delvis GET."
+
+#: src/ftp.c:1270
+#, fuzzy, c-format
+msgid "Could not enable TLS for data connections: %s"
+msgstr "Klarte ikkje oppretta SSL-tilkopling til mellomtenar"
+
+#: src/ftp.c:1390
 msgid "Could not read 'LIST' response."
 msgstr "Klarte ikkje lesa «LIST»-svar."
 
-#: src/ftp.c:1173
+#: src/ftp.c:1399
 #, fuzzy, c-format
 msgid "Parse error in LIST response: %s"
 msgstr "Klarte ikkje lesa «LIST»-svar."
+
+#~ msgid ""
+#~ "You should never see this message.\n"
+#~ "Please contact the maintainer at sitecopy@lyra.org\n"
+#~ msgstr ""
+#~ "Du skal aldri sjå denne feilmeldinga.\n"
+#~ "Kontakt vedlikehaldaren på sitecopy@lyra.org\n"
+
+#, c-format
+#~ msgid ""
+#~ "%s: in fe_can_update/file_file\n"
+#~ "%s"
+#~ msgstr ""
+#~ "%s: i fe_can_update/file_file\n"
+#~ "%s"
+
+#, c-format
+#~ msgid ""
+#~ "%s: in fe_can_update/file_link\n"
+#~ "%s"
+#~ msgstr ""
+#~ "%s: i fe_can_update/file_link\n"
+#~ "%s"
+
+#, c-format
+#~ msgid ""
+#~ "%s: in fe_updating/file_file\n"
+#~ "%s"
+#~ msgstr ""
+#~ "%s: i fe_updating/file_file\n"
+#~ "%s"
+
+#, c-format
+#~ msgid ""
+#~ "%s: in fe_updating/file_link\n"
+#~ "%s"
+#~ msgstr ""
+#~ "%s: i fe_updating/file_link\n"
+#~ "%s"
+
+#, c-format
+#~ msgid ""
+#~ "%s: in issue_error\n"
+#~ "%s"
+#~ msgstr ""
+#~ "%s: i issue_error\n"
+#~ "%s"
+
+#, c-format
+#~ msgid ""
+#~ "%s: init_paths gave %d\n"
+#~ "%s"
+#~ msgstr ""
+#~ "%s: init_paths gav %d\n"
+#~ "%s"
+
+#, c-format
+#~ msgid ""
+#~ "%s: in act_on_site\n"
+#~ "%s"
+#~ msgstr ""
+#~ "%s: i act_on_site\n"
+#~ "%s"
+
+#~ msgid "Unknown system error"
+#~ msgstr "Ukjend systemfeil"
 
 #, fuzzy
 #~ msgid "_Delete this site"
@@ -1284,10 +1379,6 @@ msgstr "Klarte ikkje lesa «LIST»-svar."
 #, fuzzy, c-format
 #~ msgid "SSL negotiation failed: %s"
 #~ msgstr "Klarte ikkje skriva til fil: %s"
-
-#, fuzzy
-#~ msgid "Server certificate changed: connection intercepted?"
-#~ msgstr "Tenarsertifikatet er utgått på dato."
 
 #~ msgid "[invalid date]"
 #~ msgstr "[ugyldig dato]"
@@ -1410,14 +1501,6 @@ msgstr "Klarte ikkje lesa «LIST»-svar."
 #~ msgid "Could not resolve hostname `%s': %s"
 #~ msgstr "%s: Feil: Fann ikkje adressa til nettverksvert (%s).\n"
 
-#, c-format
-#~ msgid "Could not write to file: %s"
-#~ msgstr "Klarte ikkje skriva til fil: %s"
-
-#, fuzzy, c-format
-#~ msgid "Could not create SSL connection through proxy server: %s"
-#~ msgstr "Klarte ikkje oppretta SSL-tilkopling til mellomtenar"
-
 #, fuzzy
 #~ msgid "Could not create socket"
 #~ msgstr "Klarte ikkje forhandla SSL-økt"
@@ -1463,10 +1546,6 @@ msgstr "Klarte ikkje lesa «LIST»-svar."
 #, fuzzy
 #~ msgid "Range is not satisfiable"
 #~ msgstr "Området finst ikkje."
-
-#, fuzzy
-#~ msgid "Resource does not support ranged GET requests"
-#~ msgstr "Tenaren kan ikkje handtera kommandoar for delvis GET."
 
 #, fuzzy, c-format
 #~ msgid "Could not authenticate to server: %s"
