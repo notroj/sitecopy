@@ -52,6 +52,9 @@ AC_ARG_ENABLE(rsh,
 dnl Check for programs
 
 AC_PROG_CC
+dnl Must come before any check using off_t, so that the whole package
+dnl is built with a 64-bit off_t where the platform needs to be asked.
+AC_SYS_LARGEFILE
 AC_PROG_MAKE_SET
 AC_ISC_POSIX
 AC_PROG_INSTALL
@@ -108,6 +111,9 @@ AC_COMPILE_IFELSE([AC_LANG_PROGRAM([[#include <fnmatch.h>]], [[int flags = FNM_L
 if test "$sc_cv_gnu_fnmatch" = "no"; then
    AC_LIBOBJ(lib/fnmatch)
 fi
+
+dnl Used to parse a file size, which may not fit in a long.
+AC_CHECK_FUNCS([strtoll strtoq], [break])
 
 NEON_WITH_LIBS
 

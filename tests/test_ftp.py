@@ -291,3 +291,19 @@ def test_dirperms_failure(ftp_site):
     assert res.returncode == 0, res.stdout + res.stderr
     assert not any(cmd.startswith("MKD") for cmd in server.commands)
     assert any(cmd.startswith("SITE CHMOD") for cmd in server.commands)
+
+
+def test_fetch_large_file(ftp_site):
+    # A file larger than 4GB must keep its size through the listing
+    # parser and the stored state, rather than being truncated to a
+    # 32-bit size.
+    size = 5 * 1024 * 1024 * 1024 + 42
+    REMOTE_FILES["big.iso"] = {"size": size, "mtime": "20030828220517"}
+    try:
+        res = run_sitecopy(ftp_site, ["--fetch", "testsite"])
+        assert res.returncode == 0, res.stdout + res.stderr
+        assert "File: big.iso - size %d" % size in res.stdout, res.stdout
+        state = (ftp_site["store"] / "testsite").read_text()
+        assert "<size>%d</size>" % size in state, state
+    finally:
+        del REMOTE_FILES["big.iso"]

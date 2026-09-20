@@ -18,6 +18,8 @@
 
 */
 
+#include <config.h>
+
 #include <ne_socket.h>
 
 #include "i18n.h"
