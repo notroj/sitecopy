@@ -25,11 +25,7 @@
 #include <fnmatch.h>
 #include <ctype.h>
 
-#if defined (STDC_HEADERS) || !defined (isascii)
-# define ISASCII(c) 1
-#else
-# define ISASCII(c) isascii(c)
-#endif
+#define ISASCII(c) 1
 
 #define ISUPPER(c) (ISASCII (c) && isupper (c))
 

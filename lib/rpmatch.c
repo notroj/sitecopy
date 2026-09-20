@@ -20,14 +20,8 @@
 # include <config.h>
 #endif
 
-#if STDC_HEADERS || _LIBC
-# include <stddef.h>
-# include <stdlib.h>
-#else
-# ifndef NULL
-#  define NULL 0
-# endif
-#endif
+#include <stddef.h>
+#include <stdlib.h>
 
 #if defined(ENABLE_NLS) && defined(HAVE_REGEX_H)
 #define RP_USE_REGEX
