@@ -137,7 +137,7 @@ static struct action_info {
 
 static const char *contact_mntr = 
 N_("You should never see this message.\n"
-   "Please contact the maintainer at sitecopy@lyra.org\n");
+   "Please report it at https://github.com/notroj/sitecopy/issues\n");
 
 /* The short program name, basename(argv[0]) */
 static const char *progname;

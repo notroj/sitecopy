@@ -150,7 +150,11 @@ is provided which produces an HTML page from this mode.
 \- updates the remote copy of the specified sites.
 .IP "-f, --fetch"
 .B Fetch Mode
-\- fetches the list of files from the remote server.  Note that this
+\- fetches the list of files from the remote server.  The listing is
+printed to standard output, and replaces the stored state of the site,
+which is held in the storage file described in
+.B "File Storage Locations"
+below; the files stored locally are not changed.  Note that this
 mode has only limited support in FTP - the server must accept the
 .B MDTM
 command, and use a Unix-style 'ls' for LIST implementation.
@@ -796,9 +800,11 @@ need reliable operation of fetch or synch modes, you shouldn't be
 using sitecopy.  Try rsync instead.
 
 .PP
-Please send bug reports and feature requests to <sitecopy@lyra.org>
-rather than to the author, since the mailing list is archived and can
-be a useful resource for others.
+Please report bugs and request features at the issue tracker,
+.UR https://github.com/notroj/sitecopy/issues
+.UE ,
+rather than to the author, since the tracker is public and can be a
+useful resource for others.
 
 .SH SEE ALSO
 rsync(1), ftp(1), sftp(1), mirror(1)
@@ -833,7 +839,11 @@ below standards is made.]
 .SH AUTHOR
 Joe Orton and others.
 .br
-e-mail: sitecopy@lyra.org
+www:
+.UR https://www.manyfish.uk/sitecopy/
+.UE
 .br
-www: http://www.lyra.org/sitecopy/
+source and issue tracker:
+.UR https://github.com/notroj/sitecopy
+.UE
 

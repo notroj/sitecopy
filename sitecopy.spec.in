@@ -6,8 +6,8 @@ Version: @VERSION@
 Release: 1
 License: GPL
 Group: Applications/Internet
-Source0: http://www.lyra.org/sitecopy/sitecopy-%{version}.tar.gz
-URL: http://www.lyra.org/sitecopy/
+Source0: https://www.manyfish.uk/sitecopy/sitecopy-%{version}.tar.gz
+URL: https://www.manyfish.uk/sitecopy/
 BuildRoot: /var/tmp/sitecopy-%{version}-root
 BuildRequires: expat-devel
 

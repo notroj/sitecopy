@@ -81,7 +81,7 @@ function printmoved( name, oldname ) {
     # Just comment out the next four lines with #'s like these ones.
     print "<div align=\"right\">";
     printf( "Generated %s by ", strftime() );
-    print "<a href=\"http://www.lyra.org/sitecopy/\">sitecopy</a>"
+    print "<a href=\"https://www.manyfish.uk/sitecopy/\">sitecopy</a>"
     print "</div>";
     
     print "</body>";
