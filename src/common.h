@@ -37,6 +37,15 @@
 #endif
 #endif
 
+/* Parses a file size, which may be larger than a long. */
+#ifdef HAVE_STRTOLL
+#define sc_strtoff strtoll
+#elif defined(HAVE_STRTOQ)
+#define sc_strtoff strtoq
+#else
+#define sc_strtoff strtol
+#endif
+
 /* our own DEBUG_ channels */
 #define DEBUG_FILES (1<<10)
 #define DEBUG_RCFILE (1<<11)

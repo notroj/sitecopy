@@ -350,9 +350,10 @@ static int end_element(void *userdata, int state,
 	}
 	break;
     case SITE_ELM_size:
-	doc->stored.size = strtol(cdata, NULL, 10);
-	if (doc->stored.size == LONG_MAX) {
-        }
+        errno = 0;
+	doc->stored.size = sc_strtoff(cdata, NULL, 10);
+        if (errno == ERANGE)
+            goto overflow_err;
 	break;
     case SITE_ELM_protection:
 	doc->stored.mode = strtoul(cdata, NULL, 8);
