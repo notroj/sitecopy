@@ -243,10 +243,9 @@ struct file_state {
 /* To Consider: 
  *
  * - The directory is identical among many files - make a site_dir
- * structure, sharing the char *. This could include a depth, which
- * could enable 'forcecd' mode for relative remote directories more
- * easily. This could also pave the way for checking whether a whole
- * directory has moved.
+ * structure, sharing the char *. This could include a depth, and
+ * could pave the way for checking whether a whole directory has
+ * moved.
  * */
 
 /* File representation */
@@ -386,7 +385,6 @@ struct site {
 
     /* Protocol-driver specific options here */
     unsigned int ftp_pasv_mode;
-    unsigned int ftp_forcecd;
     unsigned int ftp_use_cwd;
     unsigned int ftp_secure; /* FTP over TLS */
     unsigned int http_use_expect;
@@ -446,9 +444,6 @@ struct site {
     ne_off_t totalchanged; /* total file size of changed files */
 
     char *last_error;
-
-    /* "Critical section" handling: do NOT modify */
-    int critical;
 
     struct site *next;
     struct site *prev;

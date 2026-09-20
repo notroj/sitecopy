@@ -70,9 +70,6 @@ typedef void (*sig_handler)(int);
 #define OPEN_BINARY_FLAGS 0
 #endif
 
-extern const char *default_charset;
-void init_charset(void);
-
 /* Map debug options onto a debug mask. Returns non-zero on error, 
  * zero on success. err must be at least 20 bytes.
  * On non-zero return, err will contain the token which was not
