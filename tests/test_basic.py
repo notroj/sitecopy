@@ -222,3 +222,19 @@ def test_no_lock_for_read_only_actions(sitecopy_env):
     (sitecopy_env["store"] / "testsite.lock").write_text("pid 4242\n")
     res = run_sitecopy(sitecopy_env, ["--list", "testsite"])
     assert res.returncode == 0, res.stdout + res.stderr
+
+def test_storage_file_write_failure(sitecopy_env):
+    # If the stored state cannot be written, the run fails and says
+    # so, rather than reporting success with the changes unrecorded.
+    # The temporary file sitecopy writes is a directory here, so the
+    # lock file can still be created.
+    store = sitecopy_env["store"]
+    (store / "testsite.new").mkdir()
+    res = run_sitecopy(sitecopy_env, ["--initialize", "testsite"])
+    assert res.returncode != 0, res.stdout + res.stderr
+    assert "Could not write storage file" in res.stdout, res.stdout
+    assert "have not been recorded" in res.stdout, res.stdout
+    assert "marked as NOT updated remotely" not in res.stdout, res.stdout
+    assert not (store / "testsite").exists()
+    # The lock is not left behind.
+    assert not (store / "testsite.lock").exists()

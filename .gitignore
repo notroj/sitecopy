@@ -34,4 +34,4 @@
 /tests/httpd-container-stamp
 /tests/vsftpd-container-stamp
 /tests/pure-ftpd-container-stamp
-/clog
+clog

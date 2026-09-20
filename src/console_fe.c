@@ -1164,6 +1164,25 @@ static int verify_sites(struct site *sites, enum action act)
     return count;
 }
 
+/* Write the stored state of the site, reporting a failure to do so.
+ * Returns zero on success, or non-zero if it could not be written. */
+static int write_stored_state(struct site *site)
+{
+    int errnum;
+
+    if (site_write_stored_state(site) == 0)
+        return 0;
+
+    errnum = errno;
+    printf(_("%s: Error: Could not write storage file for site `%s' (%s):\n"
+             "%s: Error: %s\n"
+             "%s: Error: The changes made have not been recorded.\n"),
+           progname, site->name, site->infofile,
+           progname, strerror(errnum), progname);
+
+    return -1;
+}
+
 static int issue_error(struct site *site, enum action actno, int error) 
 {
     struct action_info *act = &actions[actno];
@@ -1290,7 +1309,7 @@ static void init(int argc, char **argv)
 
 static int act_on_site(struct site *site, enum action act)
 {
-    int ret = 0, verify_removed;
+    int ret = 0, verify_removed, store_failed = 0;
 
     /* Set the options */
     site->keep_going = keepgoing;
@@ -1324,7 +1343,8 @@ static int act_on_site(struct site *site, enum action act)
                 ret = issue_error(site, act, site_update(site));
                 /* hope we don't get signalled here */
                 current_site = NULL;
-                site_write_stored_state(site);
+                if (write_stored_state(site) && ret == 0)
+                    ret = -1;
             }
         }
         break;
@@ -1355,19 +1375,22 @@ static int act_on_site(struct site *site, enum action act)
         break;
     case action_init:
         site_initialize(site);
-        site_write_stored_state(site);
-        printf(_("%s: All the files and directories are marked as NOT updated remotely.\n"), progname);
+        if (write_stored_state(site))
+            ret = -1;
+        else
+            printf(_("%s: All the files and directories are marked as NOT updated remotely.\n"), progname);
         break;
     case action_catchup:
         site_catchup(site);
-        site_write_stored_state(site);
-        printf(_("%s: All the files and and directories are marked as updated remotely.\n"), progname);
+        if (write_stored_state(site))
+            ret = -1;
+        else
+            printf(_("%s: All the files and and directories are marked as updated remotely.\n"), progname);
         break;
     case action_fetch:
         ret = site_fetch(site);
-        if (ret == SITE_OK) {
-            site_write_stored_state(site);
-        }
+        if (ret == SITE_OK)
+            store_failed = write_stored_state(site);
         switch (ret) {
         case SITE_FAILED:
             printf(_("%s: Failed to fetch file listing for site `%s':\n"
@@ -1379,6 +1402,8 @@ static int act_on_site(struct site *site, enum action act)
             ret = issue_error(site, act, ret);
             break;
         }
+        if (store_failed)
+            ret = -1;
         break;
     case action_verify:
         ret = site_verify(site, &verify_removed);
