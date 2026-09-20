@@ -825,7 +825,7 @@ int init_paths(void)
                rcfile, strerror(errno));
         return RC_OPENFILE;
     }
-#if !defined (__EMX__) && !defined(__CYGWIN__)
+#ifndef __CYGWIN__
     if (!S_ISREG(st.st_mode)) {
         return RC_OPENFILE;
     }
@@ -835,7 +835,7 @@ int init_paths(void)
 #endif
     if (netrcfile == 0 || stat(netrcfile, &st) < 0) {
         havenetrc = false;
-#if !defined (__EMX__) && !defined(__CYGWIN__)
+#ifndef __CYGWIN__
     }
     else if ((st.st_mode & ~(S_IFREG | S_IREAD | S_IWRITE)) > 0) {
         return RC_NETRCPERMS;
@@ -849,7 +849,7 @@ int init_paths(void)
                copypath, strerror(errno));
         return RC_DIROPEN;
     }
-#if !defined (__EMX__) && !defined(__CYGWIN__)
+#ifndef __CYGWIN__
     if (st.st_mode & (S_IRWXG | S_IRWXO)) {
         return RC_DIRPERMS;
     }
@@ -900,7 +900,7 @@ int rcfile_write (char *filename, struct site *list_of_sites)
    }
 
     /* Set rcfile permissions properly */
-#if !defined (__EMX__) && !defined(__CYGWIN__)
+#ifndef __CYGWIN__
     if (fchmod (fileno(fp), 00600) == -1) {
 	return RC_PERMS;
     }

@@ -1507,14 +1507,10 @@ static void version(void)
 #ifdef NE_DEBUGGING
     printf(", debugging");
 #endif
-#ifdef __EMX__
-    printf(", EMX/RSX");
-#else
 #ifdef __CYGWIN__
     printf(", cygwin");
 #else
     printf(", Unix");
 #endif /* __CYGWIN__ */
-#endif /* __EMX__ */
     printf(" platform.\n");
 }
