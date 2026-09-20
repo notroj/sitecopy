@@ -720,7 +720,9 @@ int fe_can_update(const struct site_file *file)
 {
     char tmp[256];
 
+    if (interrupted) return false;
     if (!prompting) return true;
+
     switch (file->type) {
     case file_dir:
 	if (file->diff == file_new) {
