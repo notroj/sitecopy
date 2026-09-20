@@ -200,6 +200,8 @@
 #define SITE_UNSUPPORTED -9
 /* The storage file of the site is locked by another process */
 #define SITE_LOCKED -10
+/* The operation was interrupted by the user */
+#define SITE_INTERRUPTED -11
 
 /* For use by the frontend ONLY - never returned by site_* */
 #define SITE_ABORTED -101

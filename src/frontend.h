@@ -116,6 +116,12 @@ void fe_synched(const struct site_file *file, int success, const char *error);
 /* For synch and update modes... */
 void fe_transfer_progress(ne_off_t progress, ne_off_t total);
 
+/* Returns non-zero if the user has interrupted the operation, e.g.
+ * with SIGINT.  The sites code polls this between files, and the
+ * protocol drivers between blocks of a transfer, and stops as soon as
+ * it can, so that what has been done so far is recorded. */
+int fe_interrupted(void);
+
 /* Called while checksumming remote files, in fetch mode.
  * Note, these are just filenames not site_file *'s, because at the
  * checksumming state, we haven't yet modified the files list. */

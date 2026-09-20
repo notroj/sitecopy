@@ -115,6 +115,9 @@ fi
 dnl Used to parse a file size, which may not fit in a long.
 AC_CHECK_FUNCS([strtoll strtoq], [break])
 
+dnl Used to catch SIGINT without restarting interrupted reads.
+AC_CHECK_FUNCS([sigaction])
+
 NEON_WITH_LIBS
 
 m4_ifndef([NE_MINIMUM_VERSION],
