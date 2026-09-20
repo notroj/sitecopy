@@ -43,6 +43,36 @@ jobs:
     - run: make ${{ env.CHECK }}
     - run: make install
 
+  # A 32-bit build, to check that large file support is enabled: with
+  # a 32-bit off_t, a file of 2GB or more cannot be handled.  Uses the
+  # bundled neon, since there is no 32-bit system neon, and no SSL,
+  # since the 32-bit libraries are not packaged.  The tests which need
+  # no server container are run against the 32-bit binary.
+  multilib:
+    name: 32-bit build (gcc -m32)
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v6
+      with:
+        submodules: true
+    - run: sudo dpkg --add-architecture i386
+    - run: sudo apt-get update
+    - run: sudo apt-get -y install autopoint gettext python3-pytest
+                                   gcc-multilib libexpat1-dev:i386
+    - run: ./autogen.sh
+    - run: ./configure --with-included-neon --enable-warnings CC="gcc -m32"
+    - name: Check that large file support is enabled
+      run: grep -q '^#define _FILE_OFFSET_BITS 64' config.h
+    # -Wformat is what catches a size printed with the wrong format,
+    # which is the mistake this build is here to find.
+    - run: make EXTRA_CFLAGS="-Werror -Wextra -Wno-unused-parameter
+                              -Wformat=2 -Wcast-align -Wwrite-strings
+                              -Wmissing-prototypes -Wold-style-definition
+                              -Wnull-dereference -Wduplicated-cond -Wlogical-op
+                              -Wjump-misses-init -Wdouble-promotion
+                              -Wnested-externs -Wunused-macros"
+    - run: pytest-3 -v tests/test_basic.py tests/test_ftp.py
+
   # One-off builds with GCC warnings beyond --enable-warnings, as
   # errors, using the most recent Ubuntu for a recent GCC, with the C17
   # (with GNU extensions) and C23 standards.  Uses the system neon, so
