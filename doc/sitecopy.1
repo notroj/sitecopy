@@ -1,5 +1,5 @@
 .\" Copyright 1999-2001 Joe Orton
-.TH sitecopy 1 "June 2001" sitecopy "User Manuals"
+.TH sitecopy 1 "September 2026" sitecopy "User Manuals"
 .SH NAME
 sitecopy \- maintain remote copies of web sites
 .SH SYNOPSIS
@@ -261,6 +261,16 @@ sitecopy builds up a
 for each site by scanning the local directory, reading in the stored
 state, and comparing the two - determining which files have changed,
 which have moved, and so on.
+
+While a site is being updated, fetched, initialized or caught up, a
+.B lock file
+is held for it: the storage file with a ".lock" suffix.  If another
+sitecopy is already working on the site, the site is skipped, rather
+than the two runs each recording a different idea of what is on the
+server.  The lock is released as soon as the stored state has been
+written.  A run killed outright, with SIGKILL or a power failure,
+leaves the lock file behind; the message naming it also gives the
+process which held it, and the file must then be removed by hand.
 
 .SH CONFIGURATION
 Configuration is performed via the run control file (rcfile).  This
@@ -774,6 +784,9 @@ Default run control file location.
 .br
 .I ~/.sitecopy/
 Remote site information storage directory
+.br
+.I ~/.sitecopy/*.lock
+Lock file held while a site is being operated on
 .br
 .I ~/.netrc
 Remote server accounts information
