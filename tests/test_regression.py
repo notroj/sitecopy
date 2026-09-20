@@ -20,6 +20,41 @@ def stored_items(site):
     state = (site["store"] / "testsite").read_text()
     return re.findall(r"<filename>([^<]*)</filename>", state)
 
+# -- exclude and ignore patterns -----------------------------------------
+
+@pytest.mark.site_lines("exclude stats/*")
+def test_exclude_directory_contents(site):
+    # A pattern embedding a slash matches the site-relative filename,
+    # so the contents of the directory are excluded, but not the
+    # directory itself (Debian bug #167277).
+    setup_site(site, {"index.html": "Root\n", "stats/": None,
+                      "stats/ctry.html": "Ctry\n",
+                      "stats/deep/": None, "stats/deep/usage.html": "Usage\n"},
+               expected={"index.html", "stats/"})
+
+@pytest.mark.site_lines("exclude stats/index.html")
+def test_exclude_file_within_directory(site):
+    # A file can be excluded without excluding the file of the same
+    # base name in the site root (Debian bug #167277).
+    setup_site(site, {"index.html": "Root\n", "stats/": None,
+                      "stats/index.html": "Stats\n",
+                      "stats/ctry.html": "Ctry\n"},
+               expected={"index.html", "stats/", "stats/ctry.html"})
+
+@pytest.mark.site_lines("ignore sub/local.ini")
+def test_ignore_within_directory(site):
+    # An ignore pattern embedding a slash matches the site-relative
+    # filename too.
+    setup_site(site, {"local.ini": "A\n", "sub/": None,
+                      "sub/local.ini": "B\n"})
+    (site["local"] / "local.ini").write_text("A, changed\n")
+    (site["local"] / "sub" / "local.ini").write_text("B, changed\n")
+    res = run_sitecopy(site, ["--update", "testsite"])
+    assert res.returncode == 0, res.stdout + res.stderr
+    remote = remote_tree(site)
+    assert remote["local.ini"] == md5(b"A, changed\n"), remote
+    assert remote["sub/local.ini"] == md5(b"B\n"), remote
+
 # -- --verify -------------------------------------------------------------
 
 def test_verify_subdirectories(site):
