@@ -49,6 +49,7 @@
 #include <locale.h>
 #endif
 
+#include <assert.h>
 #include <signal.h>
 #include <time.h>
 #include <ctype.h>
@@ -134,10 +135,6 @@ static struct action_info {
     { N_("Initialize"), N_("initializing"), N_("stored"), A_WRITES },
     { NULL, NULL, NULL, 0 }
 };
-
-static const char *contact_mntr = 
-N_("You should never see this message.\n"
-   "Please report it at https://github.com/notroj/sitecopy/issues\n");
 
 /* The short program name, basename(argv[0]) */
 static const char *progname;
@@ -741,10 +738,8 @@ int fe_can_update(const struct site_file *file)
 	case file_deleted: printf(_("Delete %s"), file_name(file)); break;
 	case file_moved: printf(_("Move %s->%s"), file->stored.filename,
 				 file_name(file)); break;
-	default: 
-	    /* Shouldn't happen */
-	    printf(_("%s: in fe_can_update/file_file\n%s"), progname, 
-		    contact_mntr);
+	default:
+	    assert(0);
 	    break;
 	}
 	break;
@@ -754,9 +749,7 @@ int fe_can_update(const struct site_file *file)
 	case file_new: printf(_("Create %s"), file_name(file)); break;
 	case file_deleted: printf(_("Remove %s"), file_name(file)); break;
 	default:
-	    /* Shouldn't happen */
-	    printf(_("%s: in fe_can_update/file_link\n%s"), progname,
-		    contact_mntr);
+	    assert(0);
 	    break;
 	}
 	break;
@@ -846,9 +839,8 @@ void fe_updating(const struct site_file *file)
 	    printf(_("Moving %s->%s: "), file->stored.filename,
 		   file->local.filename); 
 	    break;
-	default: 
-	    printf(_("%s: in fe_updating/file_file\n%s"), progname,
-		   contact_mntr); 
+	default:
+	    assert(0);
 	    break;
 	}
 	break;
@@ -861,8 +853,7 @@ void fe_updating(const struct site_file *file)
 	case file_deleted:
 	    printf(_("Deleting %s: "), file_name(file)); break;
 	default:
-	    printf(_("%s: in fe_updating/file_link\n%s"), progname,
-		   contact_mntr); 
+	    assert(0);
 	}
 	break;
     }
@@ -1250,7 +1241,7 @@ static int issue_error(struct site *site, enum action actno, int error)
 	ret = 2;
 	break;
     default:
-	printf(_("%s: in issue_error\n%s"), progname, contact_mntr);
+	assert(0);
 	ret = 5;
 	break;
     }
@@ -1295,8 +1286,7 @@ static void init(int argc, char **argv)
     case 0:
 	break;
     default:
-	printf(_("%s: init_paths gave %d\n%s"), progname, ret,
-		contact_mntr);
+	assert(0);
 	break;
     }
     if (ret != 0) exit(-1);
@@ -1444,7 +1434,7 @@ static int act_on_site(struct site *site, enum action act)
         }
         break;
     default:
-        printf(_("%s: in act_on_site\n%s"), progname, contact_mntr);
+        assert(0);
         ret = -1;
         break;
     }
