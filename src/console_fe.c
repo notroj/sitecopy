@@ -574,6 +574,7 @@ static void parse_cmdline(int argc, char *argv[])
 static int get_username(const char *prompt, char *buffer)
 {
     printf("%s", prompt);
+    fflush(stdout);
     if (fgets(buffer, FE_LBUFSIZ, stdin)) {
 	ne_shave(buffer, "\r\n ");
 	return 0;
@@ -607,6 +608,7 @@ int fe_accept_cert(const ne_ssl_certificate *cert, int failures)
     free(dn);
 
     printf(_("Do you wish to accept this certificate? (y/n) "));
+    fflush(stdout);
 
     return !yesno();
 }
@@ -755,6 +757,7 @@ int fe_can_update(const struct site_file *file)
 	break;
     }
     printf(_("? (y/n) "));
+    fflush(stdout);
     return yesno();
 }
 

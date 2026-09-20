@@ -8,6 +8,7 @@ removing the xfail marker."""
 
 import os
 import re
+import select
 import signal
 import subprocess
 import time
@@ -64,6 +65,37 @@ def test_lock_excludes_concurrent_update(site):
     assert not lock.exists()
     assert remote_tree(site)["a.txt"] == md5(b"A, changed\n")
     assert_no_update(site)
+
+def test_prompt_flushed_to_pipe(site):
+    # The prompt must reach a pipe before the answer is given, or a
+    # caller which is not a terminal sees nothing and appears to hang.
+    setup_site(site, {})
+    write_tree(site["local"], {"a.txt": "A\n"})
+
+    cmd = ["./sitecopy", "--rcfile", str(site["rcfile"]),
+           "--storepath", str(site["store"]), "--prompting",
+           "--update", "testsite"]
+    proc = subprocess.Popen(cmd, stdin=subprocess.PIPE,
+                            stdout=subprocess.PIPE)
+    try:
+        # Read the raw pipe, since anything buffered by Python would
+        # not be seen by select.
+        fd = proc.stdout.fileno()
+        output = b""
+        deadline = time.time() + 30
+        while b"(y/n)" not in output and time.time() < deadline:
+            ready, _w, _x = select.select([fd], [], [], 1)
+            if ready:
+                output += os.read(fd, 4096)
+        assert b"Upload a.txt" in output, output
+        assert b"(y/n)" in output, output
+    finally:
+        proc.stdin.write(b"y\n")
+        proc.stdin.close()
+        assert proc.wait(timeout=30) == 0
+        proc.stdout.close()
+
+    assert remote_tree(site)["a.txt"] == md5(b"A\n")
 
 def test_interrupt_records_progress(site):
     # An interrupted update stops, records what it did, and releases
