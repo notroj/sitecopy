@@ -4,6 +4,13 @@ Changes in release 0.17:
 * Various compilation warning fixes.
 * Use exit status 0 for --version and --help.
 * Allow URL as site name in rcfile.
+* The storage file of a site is locked while it is updated, so that
+  two sitecopy processes cannot lose each other's record of what was
+  uploaded (Debian #129330, #41).
+* An interrupted operation now stops cleanly, recording what was done
+  so far, rather than losing it.
+* Failure to write the storage file is now reported, and gives a
+  non-zero exit status, rather than being silently ignored (#47).
 * Enable large file support, so that files of 2GB or more are handled
   on 32-bit systems; file sizes are stored and parsed as 64-bit values.
 * exclude, ignore and ascii patterns which contain a slash, but do
