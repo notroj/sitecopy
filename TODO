@@ -1,4 +1,8 @@
 						-*- text -*-
+Bugs and feature requests which have been reviewed are tracked in the
+issue tracker at https://github.com/notroj/sitecopy/issues; what
+follows is the remainder of the historical list.
+
 Bugs:
 
 - "sitecopy foo bar" always process foo and bar in the order they
@@ -6,25 +10,8 @@ Bugs:
 
 - review w.r.t djb's FTP interop notes, http://cr.yp.to/ftp.html
 
-- add support for MLST, latest draft:
-  http://www.ietf.org/internet-drafts/draft-ietf-ftpext-mlst-16.txt
-
-- enable large file support by default when necessary.
-
-- Synch mode won't transfer in ASCII mode, nor maintain symlinks, nor
-  correctly order file deletions.
-- Filename conflicts are not handled by update or synch mode: case:
-  Directory exists remote called "foo". Delete locally, replace with 
-  file called "foo". Try an update. Bang. Another nice one is:
-	mv foo tmp
-	mv bar foo
-	mv tmp bar
-  Which, in renames mode, will be correctly discovered, but when we
-  do an --update... bang.
+- Synch mode won't maintain symlinks.
 - "sitecopy --rcfile=/" should say the right thing
-- The man page does not make clear what "exclude" excludes *from*.
-  The point that exclude will translate into deleting existing files
-  from the remote site is important and confusing.
 
 Known Standards Compliance Problems:
 
@@ -42,20 +29,14 @@ Known Standards Compliance Problems:
 
 Required Features for one-point-oh:
 
-- Verify mode, also a --force-overwrite to force updates... maybe 
-  --prompt-overwrite too.
+- A --force-overwrite to force updates... maybe --prompt-overwrite too.
 - Filename conflict resolution for update mode, as per bug... or at LEAST,
   conflict detection: can be done in file_set, not too hard probably.
 - Read HTTP proxy from HTTP_PROXY/http_proxy environment variable.
 - Document files list order dependancies.
 - Do default ports, netrc lookups for the proxy too
-- Report corrupt info files back to the user (FEAPI)
-- Check write return codes in site_writefiles, signal the error if
-  the info file doesn't get written properly.
 - Get warning (i.e. non-fatal) messages to the user.
 - Check remote directory exists on initial connection in FTP (chdir/ls)
-- In davdriver.c:dir_remove, check whether the collection is empty before
-  deleting it.
 - Because it's The Right Thing, add hash table indexing of files list.
   Hash using DJBs *33 hash algorithm. Open hash so we don't have
   worry about filling the table up. Size the hash table in the range
@@ -66,7 +47,6 @@ Required Features for one-point-oh:
 
 "Would be Nice to Have But We Can Live Without" features:
 
-- "sftp" support; FTP-over-SSL
 - Console: don't read local site state in --fetch mode.
 - Support FTP proxying (how?): there are several different ways this is done...
 - Support for Content-MD5 header and allow server-side MD5'ing, rather
@@ -77,7 +57,6 @@ Required Features for one-point-oh:
 
 Possible features, which need more consideration:
 
-- Per-site lockfiles (FEAPI)
 - Shortcircuit parm in file_set_* used for the FIRST site state read on a 
   site, to make the file search always fail - guarantee to be true, since if we
   read local state before stored state, there is no stored state in the
@@ -97,9 +76,6 @@ Possible features, which need more consideration:
   Abstract sites code so that "local" and "remote" can be handled by any 
   of {file, http, ftp}. Then, update + synch could possibly merge, since
   an synch is an update with the remote and local sides switched (kindof).
-- Allow file->file sites (screem wants this)... as above, or simply by
-  implementing another protocol driver.
-- consequently, read ls-laR.txt files and be more like 'mirror'
 - Add quota management, specify a per-site quota and only do update
   if the result means the site will stay under quota.
   -> problem: a directory uses up k's, but how many?
@@ -157,27 +133,3 @@ Things You Might Like to Do On A Rainy Day:
 - Native Windows port (e.g. reimplement socket.c using the Winsock API)
 - Convince the maintainer that it's more productive to spend time 
   implementing features than carefully crafting a mile-long TODO list.
-
-XSitecopy TODO
---------------
-
-- Tooltip(s) for the site widgets; specifically safe mode.
-- Integrating resynch into the app.
-- View files using gnome mime types.
-- Transition from time-size to checksum.
-* Prefs
-
-Future releases:
-
-- Bring back optional 'slim' mode which will take up less desktop real estate.
-- Popup menus for the site/file tree.
-- Single file updates.
-- Update all.
-
-Longer term things:
-
-- Panel applet for easily updating sites in a couple of clicks.  
-- Html based reports - integration into FE apps, and possible auto uploading
-  to the remote site. (useful as a "recent changes" page)
-* Please send any suggestions you may have as to the format/design/type of
-  reports that you might find useful.
