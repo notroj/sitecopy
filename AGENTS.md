@@ -274,6 +274,19 @@ Example:
       site_file_cmp_stored.
       (site_write_stored_state): Use site_sorted_files_list.
 
+## Describing changes to others
+
+Commit messages, `NEWS` entries and pull request descriptions describe
+the change and why it was made, for a reader of the history who knows
+nothing of how it was written.  Keep the circumstances of writing it
+out of them: which tools or machine were used, what could not be
+tried locally, what a later CI run might reveal, and anything else
+which will read as noise once the change is merged.  Say what was
+tested and what the result was, not what could not be attempted; if a
+limitation matters to the reader, describe it as a property of the
+change, not of the session.  Notes to the person reviewing the work
+belong in the chat, or in a local file which is not committed.
+
 ## Referencing issues
 
 GitHub issues and pull requests of notroj/sitecopy are referenced as
