@@ -35,3 +35,8 @@
 /tests/vsftpd-container-stamp
 /tests/pure-ftpd-container-stamp
 clog
+/debug.log
+/sitecopy.spec
+/*-notes.md
+# Editor backups
+*~
