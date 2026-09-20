@@ -168,3 +168,57 @@ def test_relative_remote(tmp_path):
     res = run_sitecopy(senv, ["--view", "testsite"])
     assert res.returncode != 0, res.stdout + res.stderr
     assert "rcfile corrupt" in res.stdout + res.stderr
+
+# -- Storage file locking ---------------------------------------------------
+
+def test_lock_held_by_another_process(sitecopy_env):
+    # A site whose lock file exists is left alone: another sitecopy
+    # could be part way through updating it.
+    lock = sitecopy_env["store"] / "testsite.lock"
+    lock.write_text("pid 4242\n")
+    for args in (["--initialize", "testsite"], ["--catchup", "testsite"]):
+        res = run_sitecopy(sitecopy_env, args)
+        assert res.returncode != 0, res.stdout + res.stderr
+        assert "Locked by process 4242" in res.stdout, res.stdout
+        assert "Skipping site `testsite'" in res.stdout, res.stdout
+    # The storage file was not written, and the lock file is left for
+    # the process which holds it.
+    assert not (sitecopy_env["store"] / "testsite").exists()
+    assert lock.read_text() == "pid 4242\n"
+
+def test_lock_without_pid(sitecopy_env):
+    # A lock file with no pid key still locks the site; keys which
+    # sitecopy does not recognize are ignored.
+    (sitecopy_env["store"] / "testsite.lock").write_text(
+        "token opaquelocktoken:ac7f1a\n")
+    res = run_sitecopy(sitecopy_env, ["--initialize", "testsite"])
+    assert res.returncode != 0, res.stdout + res.stderr
+    assert "testsite.lock" in res.stdout, res.stdout
+
+def test_lock_released(sitecopy_env):
+    # The lock is released once the stored state has been written, so
+    # the next run can take it.
+    store = sitecopy_env["store"]
+    res = run_sitecopy(sitecopy_env, ["--initialize", "testsite"])
+    assert res.returncode == 0, res.stdout + res.stderr
+    assert not (store / "testsite.lock").exists()
+    assert (store / "testsite").exists()
+
+    res = run_sitecopy(sitecopy_env, ["--catchup", "testsite"])
+    assert res.returncode == 0, res.stdout + res.stderr
+    assert not (store / "testsite.lock").exists()
+
+def test_lock_released_for_skipped_site(sitecopy_env):
+    # A site whose action fails once the lock has been taken, here
+    # because there is no server, does not leave the lock behind.
+    res = run_sitecopy(sitecopy_env, ["--fetch", "testsite"])
+    assert res.returncode != 0, res.stdout + res.stderr
+    assert not (sitecopy_env["store"] / "testsite.lock").exists()
+
+def test_no_lock_for_read_only_actions(sitecopy_env):
+    # --list does not write the stored state, so is not locked out.
+    res = run_sitecopy(sitecopy_env, ["--initialize", "testsite"])
+    assert res.returncode == 0, res.stdout + res.stderr
+    (sitecopy_env["store"] / "testsite.lock").write_text("pid 4242\n")
+    res = run_sitecopy(sitecopy_env, ["--list", "testsite"])
+    assert res.returncode == 0, res.stdout + res.stderr

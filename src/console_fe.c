@@ -89,6 +89,7 @@ static enum action {
 #define A_LOCAL (1 << 2)
 #define A_STORED (1 << 3)
 #define A_COND_STORED (A_STORED | (1 << 4))
+#define A_WRITES (1 << 5)
 
 /* TODO: extend this even further, so it includes the site_whatever
  * handler, whether we need to do a post-operation write_stored_state,
@@ -113,6 +114,8 @@ static struct action_info {
      *  A_LOCAL -> must read local state before operation.
      *  A_STORED -> must read stored state before operation.
      *  A_COND_STORED -> read stored state if there is any, otherwise ignore it.
+     *  A_WRITES -> writes the stored state, so takes the lock guarding
+     *              the storage file.
      */
     unsigned int flags;
 } actions[] = {
@@ -122,11 +125,13 @@ static struct action_info {
      * state_timesize, to fudge the modtimes.
      * And we only need A_STORED if we're using state_timesize AND
      * safe mode. */
-    { N_("Fetch"), N_("fetching"), N_("remote"), A_LOCAL | A_COND_STORED },
-    { N_("Update"), N_("updating"), N_("remote"), A_LOCAL | A_STORED },
+    { N_("Fetch"), N_("fetching"), N_("remote"),
+      A_LOCAL | A_COND_STORED | A_WRITES },
+    { N_("Update"), N_("updating"), N_("remote"),
+      A_LOCAL | A_STORED | A_WRITES },
     { N_("Verify"), N_("verifying"), N_("remote"), A_STORED },
-    { N_("Catch up"), N_("catching up"), N_("stored"), A_LOCAL },
-    { N_("Initialize"), N_("initializing"), N_("stored"), 0 },
+    { N_("Catch up"), N_("catching up"), N_("stored"), A_LOCAL | A_WRITES },
+    { N_("Initialize"), N_("initializing"), N_("stored"), A_WRITES },
     { NULL, NULL, NULL, 0 }
 };
 
@@ -235,6 +240,8 @@ int main(int argc, char *argv[])
 			current->server.hostname, current->remote_root_user);
 	    }
 	    ret = act_on_site(current, action);
+	    /* Released already if the stored state was written. */
+	    site_unlock_storage(current);
 	}
 
     }
@@ -1069,6 +1076,19 @@ static int verify_sites(struct site *sites, enum action act)
             isokay = true;
         }
 
+        if (isokay && (actions[act].flags & A_WRITES)) {
+            /* Hold the lock over reading the stored state and writing
+             * it back, so that two processes cannot each update the
+             * site and lose the other's record of what it did. */
+            ret = site_lock_storage(current);
+            if (ret != SITE_OK) {
+                printf(_("%s: Error: Could not lock storage file for `%s':\n"
+                         "%s: Error: %s\n"),
+                       progname, current->name, progname, current->last_error);
+                isokay = false;
+            }
+        }
+
         if (isokay && (actions[act].flags & A_LOCAL)) {
             site_read_local_state(current);
         }
@@ -1103,6 +1123,7 @@ static int verify_sites(struct site *sites, enum action act)
         else {
             printf(_("%s: Skipping site `%s'.\n"), progname, current->name);
             current->use_this = false;
+            site_unlock_storage(current);
         }
 
     }

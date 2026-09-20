@@ -198,6 +198,8 @@
 #define SITE_FAILED -7
 /* Unsupported operation / protocol */
 #define SITE_UNSUPPORTED -9
+/* The storage file of the site is locked by another process */
+#define SITE_LOCKED -10
 
 /* For use by the frontend ONLY - never returned by site_* */
 #define SITE_ABORTED -101
@@ -367,8 +369,10 @@ struct site {
     unsigned int local_isrel; /* is the local root directory relative to home dir */
 
     char *infotemp, *infofile;  /* local storage file in ~/.sitecopy/  */
+    char *infolock;  /* lock file guarding the storage file */
     char *certfile;  /* file in which cached SSL certificate is stored. */
     FILE *storage_file;  /* The file opened for the storage file */
+    int lock_fd;  /* fd of the lock file, or -1 if not locked */
 
     char *client_cert; /* client certificate */
     ne_ssl_certificate *server_cert; /* pre-cached server cert */
@@ -456,6 +460,19 @@ extern struct site *all_sites;
  * Returns site->storage_file or NULL on error. */
 FILE *site_open_storage_file(struct site *site);
 int site_close_storage_file(struct site *site);
+
+/* Take the lock guarding the storage file of the site, so that only
+ * one process at a time reads and writes it.  The lock is released
+ * when the storage file is written, or by site_unlock_storage().
+ * Returns:
+ *   SITE_OK      on success
+ *   SITE_LOCKED  if another process holds the lock
+ *   SITE_FAILED  if the lock file could not be created
+ * In either failure case, site->last_error describes the failure. */
+int site_lock_storage(struct site *site);
+
+/* Release the lock taken by site_lock_storage, if it is still held. */
+void site_unlock_storage(struct site *site);
 
 void fe_initialize(void);
 
