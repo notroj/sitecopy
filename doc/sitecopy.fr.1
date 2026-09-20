@@ -301,9 +301,6 @@ La définition d'un site est constituée d'une série de lignes\ :
 .BR ftp " { usecwd | nousecwd } ]"
 .br
  [
-.BR http " expect ]"
-.br
- [
 .BR http " secure ]"
  [
 .BR safe " ]"
@@ -374,13 +371,6 @@ Notez que le répertoire racine distant (mot-clé
 doit être un chemin absolu (qui commence par '/'), sans quoi
 .B usecwd
 sera ignoré.
-
-Si le serveur WebDAV utilise correctement le message d'attente
-100-continue, comme par exemple Apache version 1.3.9 et supérieure,
-utilisez le mot-clé
-.B http expect.
-Cela peut économiser de la bande passante ainsi que réduire le temps
-nécessaire à une mise à jour.
 
 Pour authentifier l'utilisateur sur le serveur, utilisez les mots-clés
 .B username
