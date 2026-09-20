@@ -306,9 +306,6 @@ A site definition is made up of a series of lines:
  [ 
 .BR ftp " nopasv ]"
 .br
- [
-.BR ftp " showquit ]"
-.br
  [ 
 .BR ftp " { usecwd | nousecwd } ]"
 .br
@@ -380,10 +377,7 @@ are currently only supported for WebDAV.
 If the FTP server does not support passive (PASV) mode, then
 the key
 .B ftp nopasv
-should be used.  To display the message returned by the server
-on closing the connection, use the 
-.B ftp showquit
-option.
+should be used.
 If the server only supports uploading files in the current
 working directory, use the key
 .B ftp usecwd

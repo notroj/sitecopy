@@ -386,7 +386,6 @@ struct site {
 
     /* Protocol-driver specific options here */
     unsigned int ftp_pasv_mode;
-    unsigned int ftp_echo_quit;
     unsigned int ftp_forcecd;
     unsigned int ftp_use_cwd;
     unsigned int ftp_secure; /* FTP over TLS */

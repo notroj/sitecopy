@@ -11,6 +11,9 @@ Changes in release 0.17:
   so far, rather than losing it.
 * Failure to write the storage file is now reported, and gives a
   non-zero exit status, rather than being silently ignored (#47).
+* The "ftp showquit" option is removed: it never had any effect.  The
+  option is still accepted, and ignored, so that existing rcfiles
+  continue to work.
 * Enable large file support, so that files of 2GB or more are handled
   on 32-bit systems; file sizes are stored and parsed as 64-bit values.
 * exclude, ignore and ascii patterns which contain a slash, but do
