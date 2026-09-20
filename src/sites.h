@@ -230,7 +230,7 @@ struct file_state {
     char *filename; /* the file name */
     char *linktarget; /* the target of the link */
     time_t time; /* the last-modification time of the file */
-    off_t size; /* the size of the file */
+    ne_off_t size; /* the size of the file */
     mode_t mode; /* the protection modes & 0777 of the file */
     unsigned int exists:1; /* whether the file exists in this state or not */
     unsigned int ascii:1; /* whether the file is 'ASCII' or not */
@@ -437,8 +437,8 @@ struct site {
     int nummoved; /* number of moved files */
     int numunchanged; /* number of unchanged files */
     
-    off_t totalnew; /* total file size of new files */
-    off_t totalchanged; /* total file size of changed files */
+    ne_off_t totalnew; /* total file size of new files */
+    ne_off_t totalchanged; /* total file size of changed files */
 
     char *last_error;
 

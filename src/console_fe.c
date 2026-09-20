@@ -143,7 +143,8 @@ static int numsites; /* the number of sites specified */
 static struct site *current_site; /* this is used to save the state if we
 				   * get signalled mid-update */
 
-static int upload_total, upload_sofar, in_transfer;
+static ne_off_t upload_total, upload_sofar;
+static int in_transfer;
 
 /* Driver used for --dry-run. */
 extern const struct proto_driver null_driver;

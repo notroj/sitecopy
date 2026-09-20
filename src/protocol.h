@@ -40,7 +40,7 @@ enum proto_filetype {
 struct proto_file {
     char *filename;
     enum proto_filetype type;
-    off_t size;
+    ne_off_t size;
     time_t modtime;
     mode_t mode;
     unsigned char checksum[16];
