@@ -867,19 +867,11 @@ void site_read_local_state(struct site *site)
 
             full = ne_concat(this, ent->d_name, NULL);
 
-#ifdef __EMX__
-/* There are no symlinks under OS/2, use stat() instead */
-#define USE_STAT stat
-#else
-#define USE_STAT lstat
-#endif
-            if (USE_STAT(full, &item) == -1) {
+            if (lstat(full, &item) == -1) {
                 fe_warning(_("Could not examine file."), full, strerror(errno));
                 continue;
             }
-#undef USE_STAT
 
-#ifndef __EMX__
             /* Is this a symlink? */
             if (S_ISLNK(item.st_mode)) {
                 NE_DEBUG(DEBUG_FILES, "symlink - ");
@@ -901,7 +893,7 @@ void site_read_local_state(struct site *site)
                     NE_DEBUG(DEBUG_FILES, "maintained:\n");
                 }
             }
-#endif /* __EMX__ */
+
             /* Now process it */
 
             /* This is the filename of this file - i.e., everything
@@ -929,7 +921,6 @@ void site_read_local_state(struct site *site)
                 local.ascii = file_isascii(fname, site);
                 type = file_file;
             }
-#ifndef __EMX__
             else if (S_ISLNK(item.st_mode)) {
                 char tmp[BUFSIZ];
                 ssize_t len;
@@ -944,7 +935,6 @@ void site_read_local_state(struct site *site)
                 }
                 local.linktarget = ne_strndup(tmp, len);
             }
-#endif /* __EMX__ */
             else if (S_ISDIR(item.st_mode)) {
                 type = file_dir;
                 if (dirtop == dirmax) {

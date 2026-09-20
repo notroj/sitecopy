@@ -62,7 +62,7 @@ typedef void (*sig_handler)(int);
 #define true 1
 #define false 0
 
-#if defined (__EMX__) || defined(__CYGWIN__)
+#ifdef __CYGWIN__
 #define FOPEN_BINARY_FLAGS "b"
 #define OPEN_BINARY_FLAGS O_BINARY
 #else
