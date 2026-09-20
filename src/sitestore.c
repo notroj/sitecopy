@@ -38,7 +38,10 @@
 
 #include <ctype.h>
 #include <errno.h>
+#include <fcntl.h>
+#include <stdarg.h>
 #include <stdio.h>
+#include <unistd.h>
 
 #include <ne_xml.h>
 #include <ne_dates.h>
@@ -57,6 +60,112 @@
 /* Used in stored.mode to indicate no mode known. */
 #define INVALID_MODE ((mode_t)-1)
 
+/* Set the error string of the site to the given message. */
+static void set_error(struct site *site, const char *fmt, ...)
+    ne_attribute((format (printf, 2, 3)));
+
+static void set_error(struct site *site, const char *fmt, ...)
+{
+    char buf[512];
+    va_list ap;
+
+    va_start(ap, fmt);
+    ne_vsnprintf(buf, sizeof buf, fmt, ap);
+    va_end(ap);
+
+    if (site->last_error)
+        ne_free(site->last_error);
+    site->last_error = ne_strdup(buf);
+}
+
+/* The lock file holds one "key value" pair per line, e.g.
+ *
+ *    pid 1234
+ *
+ * so that what is known about a lock can be extended later (a WebDAV
+ * lock token, say).  Keys which are not recognized are ignored. */
+
+/* Return the value of the given key in the lock file of the site,
+ * ne_malloc-allocated, or NULL if the file has no such key. */
+static char *read_lock_value(struct site *site, const char *key)
+{
+    size_t keylen = strlen(key);
+    char *value = NULL;
+    char line[256];
+    FILE *fp;
+
+    fp = fopen(site->infolock, "r");
+    if (fp == NULL)
+        return NULL;
+
+    while (value == NULL && fgets(line, sizeof line, fp) != NULL) {
+        ne_shave(line, "\r\n");
+        if (strncmp(line, key, keylen) == 0 && line[keylen] == ' ')
+            value = ne_strdup(line + keylen + 1);
+    }
+
+    fclose(fp);
+
+    return value;
+}
+
+int site_lock_storage(struct site *site)
+{
+    char buf[64];
+    size_t len;
+    int fd;
+
+    if (site->lock_fd != -1)
+        return SITE_OK;
+
+    fd = open(site->infolock, O_WRONLY | O_CREAT | O_EXCL, 0600);
+    if (fd < 0) {
+        if (errno == EEXIST) {
+            char *pid = read_lock_value(site, "pid");
+
+            if (pid != NULL) {
+                set_error(site, _("Locked by process %s; if it is no "
+                                  "longer running, remove `%s'."),
+                          pid, site->infolock);
+                ne_free(pid);
+            }
+            else {
+                set_error(site, _("Locked; if no other sitecopy is "
+                                  "running, remove `%s'."),
+                          site->infolock);
+            }
+            return SITE_LOCKED;
+        }
+
+        set_error(site, _("Could not create lock file `%s': %s"),
+                  site->infolock, strerror(errno));
+        return SITE_FAILED;
+    }
+
+    /* Record the process holding the lock, for the message given to
+     * whoever finds it. */
+    len = ne_snprintf(buf, sizeof buf, "pid %ld\n", (long)getpid());
+    if (write(fd, buf, len) < (ssize_t)len)
+        NE_DEBUG(DEBUG_FILES, "store: could not write lock file: %s\n",
+                 strerror(errno));
+
+    site->lock_fd = fd;
+
+    return SITE_OK;
+}
+
+void site_unlock_storage(struct site *site)
+{
+    if (site->lock_fd == -1)
+        return;
+
+    close(site->lock_fd);
+    site->lock_fd = -1;
+    if (unlink(site->infolock))
+        NE_DEBUG(DEBUG_FILES, "store: could not remove lock file `%s': %s\n",
+                 site->infolock, strerror(errno));
+}
+
 /* Opens the storage file for writing */
 FILE *site_open_storage_file(struct site *site) 
 {
@@ -73,6 +182,9 @@ int site_close_storage_file(struct site *site)
         ret = rename(site->infotemp, site->infofile);
     }
     site->storage_file = NULL;
+    /* The stored state is now written, so another process may have
+     * the site. */
+    site_unlock_storage(site);
     return ret;
 }
 

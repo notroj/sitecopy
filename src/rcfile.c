@@ -400,6 +400,8 @@ int rcfile_read(struct site **sites)
                 /* Set storage/cert filenames. */
                 this_site->infofile = ne_concat(copypath, this_site->name, NULL);
                 this_site->infotemp = ne_concat(copypath, this_site->name, ".new", NULL);
+                this_site->infolock = ne_concat(copypath, this_site->name, ".lock", NULL);
+                this_site->lock_fd = -1;
                 this_site->certfile = ne_concat(copypath, this_site->name, ".crt", NULL);
             }
             else if (this_site == NULL) {

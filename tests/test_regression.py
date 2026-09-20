@@ -8,6 +8,8 @@ removing the xfail marker."""
 
 import os
 import re
+import subprocess
+import time
 
 import pytest
 
@@ -19,6 +21,48 @@ def stored_items(site):
     """Return the filenames recorded in the site's stored state."""
     state = (site["store"] / "testsite").read_text()
     return re.findall(r"<filename>([^<]*)</filename>", state)
+
+# -- Storage file locking -------------------------------------------------
+
+def test_lock_excludes_concurrent_update(site):
+    # While one update is in progress, a second update of the same
+    # site fails rather than racing it.  --prompting stops the first
+    # update with the lock held, waiting for an answer.
+    setup_site(site, {"a.txt": "A\n"})
+    (site["local"] / "a.txt").write_text("A, changed\n")
+
+    cmd = ["./sitecopy", "--rcfile", str(site["rcfile"]),
+           "--storepath", str(site["store"]), "--prompting",
+           "--update", "testsite"]
+    first = subprocess.Popen(cmd, stdin=subprocess.PIPE,
+                             stdout=subprocess.PIPE, text=True)
+    lock = site["store"] / "testsite.lock"
+    try:
+        # Wait for the first process to take the lock; it then stops
+        # at the prompt, holding it.  (The prompt itself cannot be
+        # waited for: it is not flushed when stdout is a pipe.)
+        for _ in range(300):
+            if lock.exists():
+                break
+            time.sleep(0.1)
+        assert lock.exists(), "first sitecopy did not take the lock"
+
+        res = run_sitecopy(site, ["--update", "testsite"])
+        assert res.returncode != 0, res.stdout + res.stderr
+        assert "Locked by process %d" % first.pid in res.stdout, res.stdout
+        assert "Skipping site `testsite'" in res.stdout, res.stdout
+        # The second process left the first one's upload alone.
+        assert remote_tree(site)["a.txt"] == md5(b"A\n")
+    finally:
+        first.stdin.write("y\n")
+        first.stdin.close()
+        assert first.wait(timeout=30) == 0
+        first.stdout.close()
+
+    # The first update finished, so the site is unlocked and updated.
+    assert not lock.exists()
+    assert remote_tree(site)["a.txt"] == md5(b"A, changed\n")
+    assert_no_update(site)
 
 # -- exclude and ignore patterns -----------------------------------------
 
