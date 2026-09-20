@@ -203,7 +203,7 @@ static enum ls_result parse_file(ls_context_t *ctx, char *line, size_t len,
         /* Normal file */
         file->mode = parse_permissions(perms);
         file->name = ne_concat(ctx->curdir, line, NULL);
-        file->size = strtol(size, NULL, 10);
+        file->size = sc_strtoff(size, NULL, 10);
         NE_DEBUG(DEBUG_FTP, "ls: file (%03o, %" NE_FMT_OFF_T "): [%s]\n",
                  file->mode, file->size, file->name);
         return ls_file;
