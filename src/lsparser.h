@@ -25,13 +25,13 @@
 
 #include <sys/types.h>
 
-#include "ne_defs.h" /* for off_t */
+#include "ne_defs.h" /* for ne_off_t */
 
 #include "protocol.h"
 
 struct ls_file {
     mode_t mode;
-    off_t size;
+    ne_off_t size;
     char *name;
 };
 

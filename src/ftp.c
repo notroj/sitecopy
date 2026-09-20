@@ -441,10 +441,10 @@ static int execute(ftp_session *sess, const char *verb, const char *arg)
 /* Dump the given filename down the DTP socket, performing ASCII line
  * ending translation. Returns zero on success or non-zero on error
  * (in which case, session error string is set). */
-static int send_file_ascii(ftp_session *sess, FILE *f, off_t fsize)
+static int send_file_ascii(ftp_session *sess, FILE *f, ne_off_t fsize)
 {
     char buffer[BUFSIZ];
-    off_t total = 0, lasttotal = 0;
+    ne_off_t total = 0, lasttotal = 0;
 
     while (fgets(buffer, BUFSIZ - 1, f) != NULL) {
         size_t buflen;
@@ -487,11 +487,11 @@ static int send_file_ascii(ftp_session *sess, FILE *f, off_t fsize)
 }
 
 /* Send file 'f' (of size 'size') down DTP socket. */
-static int send_file_binary(ftp_session *sess, FILE *f, off_t size)
+static int send_file_binary(ftp_session *sess, FILE *f, ne_off_t size)
 {
     char buffer[BUFSIZ];
     size_t ret;
-    off_t total = 0;
+    ne_off_t total = 0;
     
     while ((ret = fread(buffer, 1, sizeof buffer, f)) > 0) {
 	int rv = ne_sock_fullwrite(sess->dtpsock, buffer, ret);
@@ -518,7 +518,7 @@ static int send_file_binary(ftp_session *sess, FILE *f, off_t size)
 static int receive_file(ftp_session *sess, FILE *f)
 {
     ssize_t bytes;
-    off_t count = 0;
+    ne_off_t count = 0;
     char buffer[BUFSIZ];
 
     while ((bytes = ne_sock_read(sess->dtpsock, buffer, BUFSIZ)) > 0) {
