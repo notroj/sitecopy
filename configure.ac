@@ -175,6 +175,21 @@ fi
 
 NEON_WARNINGS
 
+dnl FTP over TLS needs neon 0.37 or later built with SSL support; this
+dnl is the SC_FTP_SSL condition in src/common.h.
+sc_ftp_ssl=no
+if test "x$NE_FLAG_SSL" = "xyes"; then
+    if test "$NE_VERSION_MAJOR" -gt 0 || test "$NE_VERSION_MINOR" -ge 37; then
+        sc_ftp_ssl=yes
+    fi
+fi
+
+if test "$sc_ftp_ssl" = "yes"; then
+    sc_ftp_ssl_msg="Supported"
+else
+    sc_ftp_ssl_msg="NOT supported (needs neon 0.37 or later with SSL)"
+fi
+
 dnl --------------------------------
 dnl FE configuration
 dnl --------------------------------
@@ -205,6 +220,12 @@ AC_MSG_NOTICE([Configured sitecopy $PACKAGE_VERSION:
   neon library:          ${neon_library_message}
   XML Parser:            ${neon_xml_parser_message}
   SSL library:		 ${ne_SSL_message}
+  FTP over TLS:          ${sc_ftp_ssl_msg}
   Internationalization:  ${nls_msg}
 ])
 
+if test "$enable_ftp" = "yes" && test "$sc_ftp_ssl" = "no"; then
+   AC_MSG_WARN([FTP over TLS ("ftp secure", ftps:// URLs) will NOT be
+supported, since it needs neon 0.37 or later built with SSL support;
+this build is using ${neon_library_message}.])
+fi
