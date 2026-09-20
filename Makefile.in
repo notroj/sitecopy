@@ -55,8 +55,8 @@ DATAFILES = doc/examplerc doc/changes.awk
 DOCS = README.md NEWS THANKS doc/update.sh
 MANLANGS = fr
 
-.PHONY: all all-recursive again clean distclean reminders install-common	\
-	install-sitecopy install-nls ChangeLog
+.PHONY: all all-recursive again clean distclean install-common	\
+	install-sitecopy install-nls
 
 .SUFFIXES:
 .SUFFIXES: .c .o
