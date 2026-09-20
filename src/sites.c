@@ -121,6 +121,9 @@ static int synch_files(struct site *site, void *session)
     ret = 0;
 
     for_each_file(current, site) {
+        if (fe_interrupted())
+            break;
+
         char *full_local, *full_remote;
         if (current->type != file_file) continue;
         switch (current->diff) {
@@ -271,9 +274,13 @@ int site_synch(struct site *site)
 	proto_finish(site, session);
     }
 
-    if (ret == 0) {
+    if (fe_interrupted()) {
+	ret = SITE_INTERRUPTED;
+    }
+    else if (ret == 0) {
 	ret = SITE_OK;
-    } else {
+    }
+    else {
 	ret = SITE_ERRORS;
     }
     return ret;
@@ -323,6 +330,9 @@ static int update_create_directories(struct site *site, void *session)
     int ret = 0;
 
     for_each_file(current, site) {
+        if (fe_interrupted())
+            break;
+
         char *full_remote;
         int oret = SITE_OK;
 
@@ -399,6 +409,9 @@ static int update_delete_files(struct site *site, void *session)
     int ret = 0;
 
     for (current=site->files; current!=NULL; current=next) {
+        if (fe_interrupted())
+            break;
+
 	next = current->next;
 	/* Skip directories and links, and only do deleted files on
 	 * this pass */
@@ -430,6 +443,9 @@ static int update_move_files(struct site *site, void *session)
     char *old_full_remote, *full_remote;
 
     for_each_file(current, site) {
+        if (fe_interrupted())
+            break;
+
         if (current->diff != file_moved || !fe_can_update(current))
             continue;
 
@@ -462,6 +478,9 @@ static int update_files(struct site *site, void *session)
     int ret = 0;
 
     for_each_file(current, site) {
+        if (fe_interrupted())
+            break;
+
 
         /* This loop only handles changed and new files, so
          * skip everything else. */
@@ -750,7 +769,8 @@ int site_update(struct site *site)
 	return ret;
     }
     
-    for (num = 0; handlers[num].func != NULL && (ret == 0 || site->keep_going);
+    for (num = 0; handlers[num].func != NULL && !fe_interrupted()
+	     && (ret == 0 || site->keep_going);
 	 num++) {
 	if (handlers[num].guard) {
 	    int newret;
@@ -761,14 +781,18 @@ int site_update(struct site *site)
 	}
     }
 
-    if (ret == 0) {
+    if (fe_interrupted()) {
+	ret = SITE_INTERRUPTED;
+    }
+    else if (ret == 0) {
 	/* Site updated successfully. */
 	ret = SITE_OK;
-    } else {
+    }
+    else {
 	/* Update not totally successfull */
 	ret = SITE_ERRORS;
     }
-    
+
     proto_finish(site, session);
 
     return ret;
@@ -1143,7 +1167,14 @@ static int list_remote_files(struct site *site, void *session,
 
     do {
         struct proto_file *newfiles = NULL, *f, *lastf = NULL;
-        const char *reldir = dirstack[--dirtop];
+        const char *reldir;
+
+        if (fe_interrupted()) {
+            ret = SITE_INTERRUPTED;
+            break;
+        }
+
+        reldir = dirstack[--dirtop];
         const char *slash = reldir[0] == '\0' ? "" : "/";
         char *curdir;
 

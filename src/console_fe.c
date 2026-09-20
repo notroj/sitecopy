@@ -151,6 +151,9 @@ static struct site *current_site; /* this is used to save the state if we
 static ne_off_t upload_total, upload_sofar;
 static int in_transfer;
 
+/* Set by the signal handler when the operation should stop. */
+static volatile sig_atomic_t interrupted;
+
 /* Driver used for --dry-run. */
 extern const struct proto_driver null_driver;
 
@@ -682,6 +685,37 @@ void fe_warning(const char *descr, const char *reason, const char *err)
 	printf("\n");
 }
 
+static void interrupt_handler(int signo)
+{
+    interrupted = 1;
+}
+
+/* Arrange for SIGINT and SIGTERM to stop the operation rather than
+ * killing sitecopy, so that the stored state is written and the
+ * storage file unlocked. */
+static void catch_interrupts(void)
+{
+#ifdef HAVE_SIGACTION
+    struct sigaction sa;
+
+    memset(&sa, 0, sizeof sa);
+    sa.sa_handler = interrupt_handler;
+    sigemptyset(&sa.sa_mask);
+    /* Deliberately not SA_RESTART: a blocking read in progress then
+     * fails with EINTR rather than being restarted. */
+    sigaction(SIGINT, &sa, NULL);
+    sigaction(SIGTERM, &sa, NULL);
+#else
+    signal(SIGINT, interrupt_handler);
+    signal(SIGTERM, interrupt_handler);
+#endif
+}
+
+int fe_interrupted(void)
+{
+    return interrupted;
+}
+
 int fe_can_update(const struct site_file *file)
 {
     char tmp[256];
@@ -1152,6 +1186,13 @@ static int issue_error(struct site *site, enum action actno, int error)
 		_(act->doing), _(act->subject));
 	ret = 1;
 	break;
+    case SITE_INTERRUPTED:
+	/* The line in progress, e.g. a prompt, is left unfinished. */
+	putchar('\n');
+	printf(_("%s: Interrupted while %s the %s site `%s'.\n"),
+	       progname, _(act->doing), _(act->subject), site->name);
+	ret = 3;
+	break;
     case SITE_LOOKUP:
 	printf(_("%s: Error: Could not resolve remote hostname (%s).\n"),
 		progname, site->server.hostname);
@@ -1200,6 +1241,8 @@ static void init(int argc, char **argv)
     int ret;
 
     parse_cmdline(argc, argv);
+
+    catch_interrupts();
 
     if (init_env() == 1) {
 	printf(_("%s: Error: Environment variable HOME not set.\n"),

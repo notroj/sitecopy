@@ -451,6 +451,11 @@ static int send_file_ascii(ftp_session *sess, FILE *f, ne_off_t fsize)
         char *pnt;
         int ret;
 
+        if (fe_interrupted()) {
+            ftp_seterror(sess, _("Interrupted"));
+            return -1;
+        }
+
         pnt = strchr(buffer, '\r');
         if (pnt == NULL)
             pnt = strchr(buffer, '\n');
@@ -494,7 +499,14 @@ static int send_file_binary(ftp_session *sess, FILE *f, ne_off_t size)
     ne_off_t total = 0;
     
     while ((ret = fread(buffer, 1, sizeof buffer, f)) > 0) {
-	int rv = ne_sock_fullwrite(sess->dtpsock, buffer, ret);
+	int rv;
+
+	if (fe_interrupted()) {
+	    ftp_seterror(sess, _("Interrupted"));
+	    return -1;
+	}
+
+	rv = ne_sock_fullwrite(sess->dtpsock, buffer, ret);
 	if (rv) {
 	    set_sockerr(sess, sess->dtpsock, _("Could not send file"), rv);
 	    return -1;
@@ -522,6 +534,11 @@ static int receive_file(ftp_session *sess, FILE *f)
     char buffer[BUFSIZ];
 
     while ((bytes = ne_sock_read(sess->dtpsock, buffer, BUFSIZ)) > 0) {
+	if (fe_interrupted()) {
+	    ftp_seterror(sess, _("Interrupted"));
+	    return -1;
+	}
+
 	count += bytes;
 	fe_transfer_progress(count, -1);
 	if (fwrite(buffer, 1, bytes, f) < (size_t)bytes) {

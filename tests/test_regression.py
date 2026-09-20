@@ -8,6 +8,7 @@ removing the xfail marker."""
 
 import os
 import re
+import signal
 import subprocess
 import time
 
@@ -62,6 +63,47 @@ def test_lock_excludes_concurrent_update(site):
     # The first update finished, so the site is unlocked and updated.
     assert not lock.exists()
     assert remote_tree(site)["a.txt"] == md5(b"A, changed\n")
+    assert_no_update(site)
+
+def test_interrupt_records_progress(site):
+    # An interrupted update stops, records what it did, and releases
+    # the lock; the next update finishes the job.  --prompting, with
+    # one "y" on standard input, stops the update after the first file
+    # has been uploaded.
+    setup_site(site, {})
+    write_tree(site["local"], {"a.txt": "A\n", "b.txt": "B\n",
+                               "c.txt": "C\n"})
+
+    cmd = ["./sitecopy", "--rcfile", str(site["rcfile"]),
+           "--storepath", str(site["store"]), "--prompting",
+           "--update", "testsite"]
+    first = subprocess.Popen(cmd, stdin=subprocess.PIPE,
+                             stdout=subprocess.PIPE, text=True)
+    first.stdin.write("y\n")
+    first.stdin.flush()
+
+    # Wait for the first upload, then interrupt.
+    for _ in range(300):
+        uploaded = set(remote_tree(site))
+        if uploaded:
+            break
+        time.sleep(0.1)
+    assert uploaded, "no file was uploaded"
+    first.send_signal(signal.SIGINT)
+    out, _err = first.communicate(timeout=30)
+
+    assert first.returncode != 0, out
+    assert "Interrupted while updating" in out, out
+    # Only the first file was uploaded, and the lock is gone.
+    assert set(remote_tree(site)) == uploaded, out
+    assert not (site["store"] / "testsite.lock").exists()
+    # The upload which did happen was recorded, so the next update
+    # only has the rest to do.
+    assert stored_items(site) == sorted(uploaded)
+
+    res = run_sitecopy(site, ["--update", "testsite"])
+    assert res.returncode == 0, res.stdout + res.stderr
+    assert set(remote_tree(site)) == {"a.txt", "b.txt", "c.txt"}
     assert_no_update(site)
 
 # -- exclude and ignore patterns -----------------------------------------
