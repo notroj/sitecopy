@@ -7,7 +7,6 @@ on:
     paths-ignore:
       - '*.md'
       - ABOUT-NLS
-      - BUGS
       - COPYING
       - INSTALL
       - NEWS
