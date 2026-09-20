@@ -4,6 +4,8 @@ Changes in release 0.17:
 * Various compilation warning fixes.
 * Use exit status 0 for --version and --help.
 * Allow URL as site name in rcfile.
+* Enable large file support, so that files of 2GB or more are handled
+  on 32-bit systems; file sizes are stored and parsed as 64-bit values.
 * exclude, ignore and ascii patterns which contain a slash, but do
   not begin with one (e.g. "exclude stats/*"), are now matched against
   the filename relative to the site root, and so match files; before,
