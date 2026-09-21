@@ -14,8 +14,8 @@ from that.
 
 > [!TIP]
 > `sitecopy 0.17` has been released — first release since 2008!
-> Many bug fixes, even some new features.
-> See [NEWS](NEWS) for what's changed.
+> Many bug fixes, even some new features. [`sitecopy-0.17.tar.gz`](sitecopy-0.17.tar.gz)
+> See [NEWS](https://github.com/notroj/sitecopy/blob/0.17/NEWS) for what's changed.
 
 ## Supported protocols
 
