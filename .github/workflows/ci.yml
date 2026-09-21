@@ -12,9 +12,14 @@ on:
       - NEWS
       - THANKS
       - TODO
+  push:
+    # Release tags, e.g. "0.17", so that what is released is built and
+    # tested as it will be downloaded.
+    tags:
+      - '[0-9]*'
 
-# Cancel any run still in progress for the same pull request when a
-# new one starts.
+# Cancel any run still in progress for the same pull request or tag
+# when a new one starts.
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
