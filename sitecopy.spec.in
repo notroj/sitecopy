@@ -6,8 +6,8 @@ Version: @VERSION@
 Release: 1
 License: GPL
 Group: Applications/Internet
-Source0: https://www.manyfish.uk/sitecopy/sitecopy-%{version}.tar.gz
-URL: https://www.manyfish.uk/sitecopy/
+Source0: https://notroj.github.io/sitecopy/sitecopy-%{version}.tar.gz
+URL: https://notroj.github.io/sitecopy/
 BuildRoot: /var/tmp/sitecopy-%{version}-root
 BuildRequires: expat-devel
 

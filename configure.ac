@@ -24,7 +24,7 @@ dnl Extract the version (sans LF) from .version, created at release-time.
 m4_define(sc_version, m4_translit(m4_include(.version), [
 ]))
 
-AC_INIT([sitecopy], [sc_version], [https://github.com/notroj/sitecopy],,[https://www.manyfish.uk/sitecopy/])
+AC_INIT([sitecopy], [sc_version], [https://github.com/notroj/sitecopy],,[https://notroj.github.io/sitecopy/])
 
 AC_CONFIG_SRCDIR(src/sites.c)
 AC_CONFIG_HEADERS(config.h)
