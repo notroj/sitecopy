@@ -14,7 +14,7 @@ from that.
 
 > [!TIP]
 > `sitecopy 0.17` has been released — first release since 2008!
-> Many bug fixes, even some new features. [`sitecopy-0.17.tar.gz`](sitecopy-0.17.tar.gz)
+> Many bug fixes, even some new features. Tarball here: [`sitecopy-0.17.tar.gz`](https://notroj.github.io/sitecopy/sitecopy-0.17.tar.gz)
 > See [NEWS](https://github.com/notroj/sitecopy/blob/0.17/NEWS) for what's changed.
 
 ## Supported protocols
@@ -101,9 +101,8 @@ tree — for instructions on how to start using sitecopy.
 ## Copyright and license
 
 ```
-Copyright (C) 1998-2012, Joe Orton <joe@manyfish.co.uk>
+Copyright (C) 1998-2026, Joe Orton <joe@manyfish.co.uk>
 Copyright (C) 2003, 2004, Nobuyuki Tsuchimura <tutimura@nn.iij4u.or.jp>
-Copyright (C) 2004, David A Knight <david@screem.org>
 ```
 
 This program is free software; you can redistribute it and/or modify
