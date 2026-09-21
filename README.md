@@ -1,6 +1,6 @@
 # sitecopy
 
-[![Build and test](https://github.com/notroj/sitecopy/actions/workflows/ci.yml/badge.svg)](https://github.com/notroj/sitecopy/actions/workflows/ci.yml)
+[![Build and test](https://github.com/notroj/sitecopy/actions/workflows/ci.yml/badge.svg?event=push)](https://github.com/notroj/sitecopy/actions/workflows/ci.yml)
 
 `sitecopy` maintains remote web sites. It uploads files which have
 changed locally, and deletes files from the server which have been
@@ -11,6 +11,11 @@ moved locally, and move them remotely rather than re-uploading them.
 sitecopy does not care about what is actually on the remote server: it
 keeps a record of what it *thinks* is on the remote server, and works
 from that.
+
+> [!TIP]
+> `sitecopy 0.17` has been released — first release since 2008!
+> Many bug fixes, even some new features.
+> See [NEWS](NEWS) for what's changed.
 
 ## Supported protocols
 
@@ -89,8 +94,8 @@ tree — for instructions on how to start using sitecopy.
 ## More information
 
 * `NEWS` — changes in this release
-* Web site: https://www.manyfish.uk/sitecopy/
-* Github repository: https://github.com/notroj/sitecopy/
+* Web site: https://notroj.github.io/sitecopy/
+* GitHub repository: https://github.com/notroj/sitecopy/
 * Bug reports: https://github.com/notroj/sitecopy/issues
 
 ## Copyright and license
