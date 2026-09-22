@@ -296,3 +296,40 @@ def test_tempupload_name_clash(site):
     remote = remote_tree(site)
     assert remote.get(".in.page.txt") == md5(b"A real file\n"), remote
     assert remote.get("page.txt") == md5(b"Page\n"), remote
+
+
+# -- Update progress ------------------------------------------------------
+
+PERCENT = re.compile(r"\((\d+)% finished\)")
+
+@pytest.mark.site_lines("checkmoved", "nooverwrite")
+def test_update_progress_never_exceeds_100(site):
+    # Debian bug #932161: a moved file and the pre-upload delete of
+    # nooverwrite mode advance the update progress without being
+    # counted in upload_total, which covers only changed and new
+    # files, so the reported percentage exceeded 100%.
+    res = run_sitecopy(site, ["--initialize", "testsite"])
+    assert res.returncode == 0, res.stdout + res.stderr
+
+    # Three equal-sized new files: 33%, 67%, 100%.
+    for name, fill in (("a.bin", b"a"), ("b.bin", b"b"), ("c.bin", b"c")):
+        (site["local"] / name).write_bytes(fill * 30000)
+    res = run_sitecopy(site, ["--update", "-o", "testsite"])
+    assert res.returncode == 0, res.stdout + res.stderr
+    assert [int(p) for p in PERCENT.findall(res.stdout)] == [33, 67, 100], \
+        res.stdout
+
+    # A cross-directory move of a.bin and a changed b.bin: the move and
+    # the nooverwrite pre-upload delete must not push the percentage
+    # above 100%.
+    (site["local"] / "sub").mkdir()
+    (site["local"] / "a.bin").rename(site["local"] / "sub" / "a.bin")
+    (site["local"] / "b.bin").write_bytes(b"B" * 31000)
+    res = run_sitecopy(site, ["--update", "-o", "testsite"])
+    assert res.returncode == 0, res.stdout + res.stderr
+    assert "Moving a.bin->sub/a.bin: done." in res.stdout, res.stdout
+    assert "Deleting b.bin: done." in res.stdout, res.stdout
+    assert "Uploading b.bin:" in res.stdout, res.stdout
+    assert [int(p) for p in PERCENT.findall(res.stdout)] == [100], res.stdout
+
+    assert_no_update(site)
