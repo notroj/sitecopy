@@ -193,9 +193,12 @@ Append debugging messages to FILE (else use stderr)
 .IP "-n, --dry-run"
 Display but do not carry out the operation
 .IP "-r RCFILE, --rcfile=RCFILE"
-Specify an alternate run control file location.
+Specify an alternate run control file location.  A leading ~/ in
+RCFILE is expanded to the user's home directory.
 .IP "-p PATH, --storepath=PATH"
-Specify an alternate location to use for the remote site storage directory.
+Specify an alternate location to use for the remote site storage
+directory.  A leading ~/ in PATH is expanded to the user's home
+directory.
 .IP "-q, --quiet"
 Quiet output - display the filename only for each update performed.
 .IP "-qq, --silent"

@@ -874,6 +874,21 @@ int init_env(void)
             return 0;
         }
     }
+
+    /* Expand a leading "~/" in the paths given on the command line,
+     * with the same rule as client_cert: ~user and any other use of
+     * the character is left alone. */
+    if (rcfile != NULL && strncmp(rcfile, "~/", 2) == 0) {
+        char *temp = ne_concat(home, rcfile + 1, NULL);
+        ne_free(rcfile);
+        rcfile = temp;
+    }
+    if (copypath != NULL && strncmp(copypath, "~/", 2) == 0) {
+        char *temp = ne_concat(home, copypath + 1, NULL);
+        ne_free(copypath);
+        copypath = temp;
+    }
+
     if (rcfile == NULL) {
         rcfile = ne_concat(home, RCNAME, NULL);
     }
