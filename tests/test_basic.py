@@ -238,3 +238,52 @@ def test_storage_file_write_failure(sitecopy_env):
     assert not (store / "testsite").exists()
     # The lock is not left behind.
     assert not (store / "testsite.lock").exists()
+
+
+# -- Command-line path options --------------------------------------------
+
+def test_rcfile_tilde(sitecopy_env, tmp_path):
+    # A leading ~/ in --rcfile is expanded to the user's home
+    # directory.
+    home = tmp_path / "home"
+    home.mkdir()
+    (home / ".sitecopyrc").write_text(sitecopy_env["rcfile"].read_text())
+    os.chmod(home / ".sitecopyrc", 0o600)
+    env = dict(os.environ, HOME=str(home))
+    res = run_sitecopy(sitecopy_env,
+                       ["--rcfile=~/.sitecopyrc", "--view", "testsite"],
+                       env=env)
+    assert res.returncode == 0, res.stdout + res.stderr
+    assert "Protocol: WebDAV" in res.stdout, res.stdout
+
+def test_storepath_tilde(sitecopy_env, tmp_path):
+    # A leading ~/ in --storepath is expanded to the user's home
+    # directory.
+    home = tmp_path / "home"
+    home.mkdir()
+    store = home / "storage"
+    store.mkdir()
+    os.chmod(store, 0o700)
+    env = dict(os.environ, HOME=str(home))
+    res = run_sitecopy(sitecopy_env,
+                       ["--storepath=~/storage", "--initialize", "testsite"],
+                       env=env)
+    assert res.returncode == 0, res.stdout + res.stderr
+    assert (store / "testsite").exists()
+
+def test_rcfile_tilde_user_left_alone(sitecopy_env, tmp_path):
+    # Only a leading ~/ is expanded; ~user is left alone.
+    env = dict(os.environ, HOME=str(tmp_path))
+    res = run_sitecopy(sitecopy_env,
+                       ["--rcfile=~user/.sitecopyrc", "--view", "testsite"],
+                       env=env)
+    assert res.returncode != 0, res.stdout + res.stderr
+    assert "~user/.sitecopyrc" in res.stdout + res.stderr
+
+def test_rcfile_tilde_without_home(sitecopy_env):
+    # Without $HOME, the value is left untouched.
+    env = {k: v for k, v in os.environ.items() if k != "HOME"}
+    res = run_sitecopy(sitecopy_env,
+                       ["--rcfile=~/.sitecopyrc", "--view", "testsite"],
+                       env=env)
+    assert res.returncode != 0, res.stdout + res.stderr
