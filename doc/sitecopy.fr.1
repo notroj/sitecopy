@@ -572,7 +572,22 @@ Certains fichiers peuvent être ignorés de \fBsitecopy\fP par l'emploi
 du mot-clé
 .B exclude,
 qui accepte des motifs d'expressions rationnelles à la manière du
-shell. Par exemple, utilisez
+shell. \fBsitecopy\fP traite un fichier exclu comme s'il n'existait
+pas dans le site local, et ne le remonte donc jamais sur le serveur.
+.B Un fichier déjà remonté sur le serveur, qui correspond ensuite à un
+.B motif d'exclusion, sera supprimé du serveur
+lors de la mise à jour suivante, comme s'il avait été supprimé
+localement, à moins que l'option
+.B nodelete
+n'ait été spécifiée. Pour laisser un fichier tel quel sur le serveur,
+sans que \fBsitecopy\fP y remonte les changements locaux, utilisez
+plutôt l'option
+.B ignore
+(voir
+.B Ignorer les changements des fichiers locaux
+ci-dessous).
+
+Par exemple, utilisez
 .br
 .BR "	exclude " "*.bak"
 .br
@@ -597,6 +612,16 @@ excluera tous les fichiers à l'extension .m4 dans le sous-répertoire
 «\ docs\ », et tous les fichiers à l'extension .gz dans le sous-répertoire
 «\ files\ ».
 
+Tout motif contenant une barre oblique est comparé au nom du fichier
+relatif à la racine du site, si bien que la barre oblique initiale
+peut être omise\ :
+.br
+.BR "	exclude " "docs/*.m4"
+.br
+a le même effet que l'exemple ci-dessus. Un motif ne contenant pas de
+barre oblique est comparé au nom de base du fichier, dans n'importe
+quel répertoire du site.
+
 Un répertoire entier peut également être exclu -- en omettant la barre
 oblique à la fin du nom du répertoire. Par exemple,
 .br
@@ -607,10 +632,12 @@ oblique à la fin du nom du répertoire. Par exemple,
 excluera les sous-répertoires du site «\ quelque/part\ » et «\ autre/part\ ».
 
 Les motifs d'exclusion sont examinés lorsque \fBsitecopy\fP parcourt
-le répertoire local. Un fichier qui correspond à n'importe lequel
-des motifs ne sera pas ajouté à la liste des fichiers. Cela signifie
-qu'un fichier déjà remonté sur le serveur qui correspond à un motif
-d'exclusion sera supprimé du serveur.
+le répertoire local, et lorsqu'il parcourt le site distant en mode
+\-\-fetch. Un fichier qui correspond à n'importe lequel des motifs ne
+sera pas ajouté à la liste des fichiers. Ainsi, un fichier exclu
+présent sur le serveur est laissé de côté par \-\-fetch\ : il n'est pas
+enregistré comme étant sur le serveur, et n'est donc pas supprimé lors
+d'une mise à jour ultérieure.
 .SS Ignorer les changements des fichiers locaux
 Utilisez l'option
 .B ignore
