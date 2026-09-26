@@ -12,161 +12,161 @@ msgstr ""
 "Language-Team: ja\n"
 "Language: ja\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=EUC-JP\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8-bit\n"
 
 #: src/ftpdriver.c:67
 #, fuzzy
 msgid "Could not load saved server certificate"
-msgstr "¥Õ¥¡¥¤¥ë¤¬½ñ¤±¤Ş¤»¤ó: %s"
+msgstr "ãƒ•ã‚¡ã‚¤ãƒ«ãŒæ›¸ã‘ã¾ã›ã‚“: %s"
 
 #: src/console_fe.c:123
 msgid "Show changes to"
-msgstr "¾õÂÖÉ½¼¨"
+msgstr "çŠ¶æ…‹è¡¨ç¤º"
 
 #: src/console_fe.c:123
 msgid "showing changes to"
-msgstr "¾õÂÖÉ½¼¨Ãæ"
+msgstr "çŠ¶æ…‹è¡¨ç¤ºä¸­"
 
 #: src/console_fe.c:123 src/console_fe.c:124
 msgid "local"
-msgstr "¥í¡¼¥«¥ë"
+msgstr "ãƒ­ãƒ¼ã‚«ãƒ«"
 
 #: src/console_fe.c:124
 msgid "Synchronize"
-msgstr "¥À¥¦¥ó¥í¡¼¥É"
+msgstr "ãƒ€ã‚¦ãƒ³ãƒ­ãƒ¼ãƒ‰"
 
 #: src/console_fe.c:124
 msgid "synchronizing"
-msgstr "¥À¥¦¥ó¥í¡¼¥ÉÃæ"
+msgstr "ãƒ€ã‚¦ãƒ³ãƒ­ãƒ¼ãƒ‰ä¸­"
 
 #: src/console_fe.c:129
 msgid "Fetch"
-msgstr "¥Õ¥¡¥¤¥ë¤Î°ìÍ÷¼èÆÀ"
+msgstr "ãƒ•ã‚¡ã‚¤ãƒ«ã®ä¸€è¦§å–å¾—"
 
 #: src/console_fe.c:129
 msgid "fetching"
-msgstr "¥Õ¥¡¥¤¥ë¤Î°ìÍ÷¼èÆÀÃæ"
+msgstr "ãƒ•ã‚¡ã‚¤ãƒ«ã®ä¸€è¦§å–å¾—ä¸­"
 
 #: src/console_fe.c:129 src/console_fe.c:131 src/console_fe.c:133
 msgid "remote"
-msgstr "¥µ¡¼¥Ğ¡¼"
+msgstr "ã‚µãƒ¼ãƒãƒ¼"
 
 #: src/console_fe.c:131
 msgid "Update"
-msgstr "¹¹¿·"
+msgstr "æ›´æ–°"
 
 #: src/console_fe.c:131
 msgid "updating"
-msgstr "¹¹¿·Ãæ"
+msgstr "æ›´æ–°ä¸­"
 
 #: src/console_fe.c:133
 msgid "Verify"
-msgstr "Èæ³Ó³ÎÇ§"
+msgstr "æ¯”è¼ƒç¢ºèª"
 
 #: src/console_fe.c:133
 msgid "verifying"
-msgstr "Èæ³Ó³ÎÇ§Ãæ"
+msgstr "æ¯”è¼ƒç¢ºèªä¸­"
 
 #: src/console_fe.c:134
 msgid "Catch up"
-msgstr "¹¹¿·ºÑ¤ß¥Ş¡¼¥¯"
+msgstr "æ›´æ–°æ¸ˆã¿ãƒãƒ¼ã‚¯"
 
 #: src/console_fe.c:134
 msgid "catching up"
-msgstr "¹¹¿·ºÑ¤ß¥Ş¡¼¥¯Ãæ"
+msgstr "æ›´æ–°æ¸ˆã¿ãƒãƒ¼ã‚¯ä¸­"
 
 #: src/console_fe.c:134 src/console_fe.c:135
 msgid "stored"
-msgstr "µ­Ï¿"
+msgstr "è¨˜éŒ²"
 
 #: src/console_fe.c:135
 msgid "Initialize"
-msgstr "½é´ü²½"
+msgstr "åˆæœŸåŒ–"
 
 #: src/console_fe.c:135
 msgid "initializing"
-msgstr "½é´ü²½Ãæ"
+msgstr "åˆæœŸåŒ–ä¸­"
 
 #: src/console_fe.c:205
 #, c-format
 msgid "%s: Error: No site called `%s' found - skipping.\n"
-msgstr "%s: ¥¨¥é¡¼: ¡Ö%s¡×¤È¤¤¤¦¥µ¥¤¥È¤Ï¤¢¤ê¤Ş¤»¤ó¡£¥¹¥­¥Ã¥×¤·¤Ş¤¹¡£\n"
+msgstr "%s: ã‚¨ãƒ©ãƒ¼: ã€Œ%sã€ã¨ã„ã†ã‚µã‚¤ãƒˆã¯ã‚ã‚Šã¾ã›ã‚“ã€‚ã‚¹ã‚­ãƒƒãƒ—ã—ã¾ã™ã€‚\n"
 
 #: src/console_fe.c:223
 #, c-format
 msgid "%s: No valid sites specified.\n"
-msgstr "%s: ÅĞÏ¿¤µ¤ì¤¿¥µ¥¤¥ÈÌ¾¤¬»ØÄê¤µ¤ì¤Æ¤¤¤Ş¤»¤ó¡£\n"
+msgstr "%s: ç™»éŒ²ã•ã‚ŒãŸã‚µã‚¤ãƒˆåãŒæŒ‡å®šã•ã‚Œã¦ã„ã¾ã›ã‚“ã€‚\n"
 
 #: src/console_fe.c:225
 #, c-format
 msgid "%s: No sites specified.\n"
-msgstr "%s: ¥µ¥¤¥ÈÌ¾¤¬»ØÄê¤µ¤ì¤Æ¤¤¤Ş¤»¤ó¡£\n"
+msgstr "%s: ã‚µã‚¤ãƒˆåãŒæŒ‡å®šã•ã‚Œã¦ã„ã¾ã›ã‚“ã€‚\n"
 
 #: src/console_fe.c:227 src/console_fe.c:383 src/console_fe.c:540
 #, c-format
 msgid "Try `%s --help' for more information.\n"
-msgstr "`%s --help' ¤Ç¾Ü¤·¤¤ÀâÌÀ¤òÉ½¼¨¤·¤Ş¤¹¡£\n"
+msgstr "`%s --help' ã§è©³ã—ã„èª¬æ˜ã‚’è¡¨ç¤ºã—ã¾ã™ã€‚\n"
 
 #: src/console_fe.c:237
 #, c-format
 msgid "%s: %c%s site `%s' (on %s in %s)\n"
-msgstr "%s: %c%s - ¥µ¥¤¥È `%s' (on %s in %s)\n"
+msgstr "%s: %c%s - ã‚µã‚¤ãƒˆ `%s' (on %s in %s)\n"
 
 #: src/console_fe.c:260
 #, c-format
 msgid "* These items have been added since the last update:\n"
-msgstr "* ¿·µ¬¥Õ¥¡¥¤¥ë:\n"
+msgstr "* æ–°è¦ãƒ•ã‚¡ã‚¤ãƒ«:\n"
 
 #: src/console_fe.c:265 src/console_fe.c:296
 #, c-format
 msgid "dir:"
-msgstr "¥Ç¥£¥ì¥¯¥È¥ê:"
+msgstr "ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒª:"
 
 #: src/console_fe.c:272
 #, c-format
 msgid "* These items have been changed since the last update:\n"
-msgstr "* ÊÑ¹¹¤µ¤ì¤¿¥Õ¥¡¥¤¥ë:\n"
+msgstr "* å¤‰æ›´ã•ã‚ŒãŸãƒ•ã‚¡ã‚¤ãƒ«:\n"
 
 #: src/console_fe.c:274
 #, c-format
 msgid "  Changes to items in [brackets] are ignored during updates.\n"
-msgstr "  [³ç¸ÌÆâ] ¤Î¥Õ¥¡¥¤¥ë¤Ï¹¹¿·½èÍı¤·¤Ş¤»¤ó¡£\n"
+msgstr "  [æ‹¬å¼§å†…] ã®ãƒ•ã‚¡ã‚¤ãƒ«ã¯æ›´æ–°å‡¦ç†ã—ã¾ã›ã‚“ã€‚\n"
 
 #: src/console_fe.c:288
 #, c-format
 msgid "* These items have been deleted, but will be left on the server:\n"
-msgstr "* ºï½ü¤µ¤ì¤¿¥Õ¥¡¥¤¥ë¡Ê¥µ¡¼¥Ğ¡¼¤Ë¤Ï»Ä¤ê¤Ş¤¹¡Ë:\n"
+msgstr "* å‰Šé™¤ã•ã‚ŒãŸãƒ•ã‚¡ã‚¤ãƒ«ï¼ˆã‚µãƒ¼ãƒãƒ¼ã«ã¯æ®‹ã‚Šã¾ã™ï¼‰:\n"
 
 #: src/console_fe.c:290
 #, c-format
 msgid "* These items have been deleted since the last update:\n"
-msgstr "* ºï½ü¤µ¤ì¤¿¥Õ¥¡¥¤¥ë:\n"
+msgstr "* å‰Šé™¤ã•ã‚ŒãŸãƒ•ã‚¡ã‚¤ãƒ«:\n"
 
 #: src/console_fe.c:303
 #, c-format
 msgid "* These items have been moved since the last update:\n"
-msgstr "* °ÜÆ°¤µ¤ì¤¿¥Õ¥¡¥¤¥ë:\n"
+msgstr "* ç§»å‹•ã•ã‚ŒãŸãƒ•ã‚¡ã‚¤ãƒ«:\n"
 
 #: src/console_fe.c:321 src/console_fe.c:333
 msgid "Ignored"
-msgstr "Ìµ»ë¤¹¤ë"
+msgstr "ç„¡è¦–ã™ã‚‹"
 
 #: src/console_fe.c:323
 msgid "Maintained for executables"
-msgstr "¼Â¹ÔÂ°À­¤ò°·¤¦"
+msgstr "å®Ÿè¡Œå±æ€§ã‚’æ‰±ã†"
 
 #: src/console_fe.c:325
 msgid "Always maintained"
-msgstr "¤¹¤Ù¤Æ¤ÎÂ°À­¤ò°·¤¦"
+msgstr "ã™ã¹ã¦ã®å±æ€§ã‚’æ‰±ã†"
 
 #: src/console_fe.c:335
 msgid "Maintained"
-msgstr "¥ê¥ó¥¯¤È¤·¤Æ°·¤¦"
+msgstr "ãƒªãƒ³ã‚¯ã¨ã—ã¦æ‰±ã†"
 
 #: src/console_fe.c:337
 msgid "Followed"
-msgstr "¥ê¥ó¥¯Àè¤ò¤¿¤É¤ë"
+msgstr "ãƒªãƒ³ã‚¯å…ˆã‚’ãŸã©ã‚‹"
 
 #: src/console_fe.c:348
 #, c-format
@@ -174,13 +174,13 @@ msgid ""
 "Site: %s\n"
 "\tServer: %s"
 msgstr ""
-"¥µ¥¤¥È: %s\n"
-"\t¥µ¡¼¥Ğ¡¼: %s"
+"ã‚µã‚¤ãƒˆ: %s\n"
+"\tã‚µãƒ¼ãƒãƒ¼: %s"
 
 #: src/console_fe.c:350
 #, c-format
 msgid "  Port: "
-msgstr "  ¥İ¡¼¥È: "
+msgstr "  ãƒãƒ¼ãƒˆ: "
 
 #: src/console_fe.c:352
 #, c-format
@@ -195,7 +195,7 @@ msgstr ""
 #: src/console_fe.c:357
 #, c-format
 msgid "\tProtocol: %s    Username: %s\n"
-msgstr "\t¥×¥í¥È¥³¥ë: %s    ¥æ¡¼¥¶¡¼: %s\n"
+msgstr "\tãƒ—ãƒ­ãƒˆã‚³ãƒ«: %s    ãƒ¦ãƒ¼ã‚¶ãƒ¼: %s\n"
 
 #: src/console_fe.c:360
 msgid "(unspecified)"
@@ -204,13 +204,13 @@ msgstr ""
 #: src/console_fe.c:362
 #, c-format
 msgid "\tPassive mode FTP will not be used.\n"
-msgstr "\tPassive mode FTP ¤Ï»È¤¤¤Ş¤»¤ó¡£\n"
+msgstr "\tPassive mode FTP ã¯ä½¿ã„ã¾ã›ã‚“ã€‚\n"
 
 #: src/console_fe.c:364
 #, fuzzy, c-format
 #| msgid "\tPassive mode FTP will not be used.\n"
 msgid "\tFTP over TLS will be used.\n"
-msgstr "\tPassive mode FTP ¤Ï»È¤¤¤Ş¤»¤ó¡£\n"
+msgstr "\tPassive mode FTP ã¯ä½¿ã„ã¾ã›ã‚“ã€‚\n"
 
 #: src/console_fe.c:365
 #, c-format
@@ -218,28 +218,28 @@ msgid ""
 "\tRemote directory: %s\n"
 "\tLocal directory: %s\n"
 msgstr ""
-"\t¥µ¡¼¥Ğ¡¼¥Ç¥£¥ì¥¯¥È¥ê: %s\n"
-"\t¥í¡¼¥«¥ë¥Ç¥£¥ì¥¯¥È¥ê: %s\n"
+"\tã‚µãƒ¼ãƒãƒ¼ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒª: %s\n"
+"\tãƒ­ãƒ¼ã‚«ãƒ«ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒª: %s\n"
 
 #: src/console_fe.c:367
 #, c-format
 msgid "\tPermissions: %s     Symlinks: %s\n"
-msgstr "\t¥Õ¥¡¥¤¥ëÂ°À­: %s     ¥ê¥ó¥¯: %s\n"
+msgstr "\tãƒ•ã‚¡ã‚¤ãƒ«å±æ€§: %s     ãƒªãƒ³ã‚¯: %s\n"
 
 #: src/console_fe.c:370
 #, c-format
 msgid "\tRemote files will not be deleted.\n"
-msgstr "\t¥µ¡¼¥Ğ¡¼Â¦¤Î¥Õ¥¡¥¤¥ë¤Ïºï½ü¤·¤Ş¤»¤ó¡£\n"
+msgstr "\tã‚µãƒ¼ãƒãƒ¼å´ã®ãƒ•ã‚¡ã‚¤ãƒ«ã¯å‰Šé™¤ã—ã¾ã›ã‚“ã€‚\n"
 
 #: src/console_fe.c:372
 #, c-format
 msgid "\tFiles will be moved remotely if moved locally.\n"
-msgstr "\t¥í¡¼¥«¥ë¤Ç°ÜÆ°¤·¤¿¥Õ¥¡¥¤¥ë¤Ï¥µ¡¼¥Ğ¡¼¤Ç¤â°ÜÆ°¤·¤Ş¤¹¡£\n"
+msgstr "\tãƒ­ãƒ¼ã‚«ãƒ«ã§ç§»å‹•ã—ãŸãƒ•ã‚¡ã‚¤ãƒ«ã¯ã‚µãƒ¼ãƒãƒ¼ã§ã‚‚ç§»å‹•ã—ã¾ã™ã€‚\n"
 
 #: src/console_fe.c:381
 #, c-format
 msgid "%s: Error: Only specify ONE operation mode at a time.\n"
-msgstr "%s: ¥¨¥é¡¼: Æ°ºî¤Ï£±¤Ä¤À¤±»ØÄê¤·¤Æ²¼¤µ¤¤¡£\n"
+msgstr "%s: ã‚¨ãƒ©ãƒ¼: å‹•ä½œã¯ï¼‘ã¤ã ã‘æŒ‡å®šã—ã¦ä¸‹ã•ã„ã€‚\n"
 
 #: src/console_fe.c:499
 #, c-format
@@ -249,7 +249,7 @@ msgstr ""
 #: src/console_fe.c:507
 #, c-format
 msgid "%s: Warning: Could not open `%s' to use as logfile.\n"
-msgstr "%s: ·Ù¹ğ: '%s' ¤ò¥í¥°¥Õ¥¡¥¤¥ë¤È¤·¤Æ¥ª¡¼¥×¥ó¤Ç¤­¤Ş¤»¤ó¡£\n"
+msgstr "%s: è­¦å‘Š: '%s' ã‚’ãƒ­ã‚°ãƒ•ã‚¡ã‚¤ãƒ«ã¨ã—ã¦ã‚ªãƒ¼ãƒ—ãƒ³ã§ãã¾ã›ã‚“ã€‚\n"
 
 #: src/console_fe.c:551
 #, c-format
@@ -262,8 +262,8 @@ msgid ""
 "%s: Warning: Only %d sites can be specified on the command line!\n"
 "Extra entries are being skipped.\n"
 msgstr ""
-"%s: ·Ù¹ğ: ¥³¥Ş¥ó¥É¥é¥¤¥ó¤«¤é¤Ï %d ¸Ä¤Î¥µ¥¤¥È¤ò»ØÄê¤Ç¤­¤Ş¤¹¡£\n"
-"¤³¤ì¤è¤êÂ¿¤¤¤â¤Î¤ÏÌµ»ë¤·¤Ş¤¹¡£\n"
+"%s: è­¦å‘Š: ã‚³ãƒãƒ³ãƒ‰ãƒ©ã‚¤ãƒ³ã‹ã‚‰ã¯ %d å€‹ã®ã‚µã‚¤ãƒˆã‚’æŒ‡å®šã§ãã¾ã™ã€‚\n"
+"ã“ã‚Œã‚ˆã‚Šå¤šã„ã‚‚ã®ã¯ç„¡è¦–ã—ã¾ã™ã€‚\n"
 
 #: src/console_fe.c:593
 msgid "WARNING: Server certificate is not trusted."
@@ -300,41 +300,41 @@ msgstr ""
 
 #: src/console_fe.c:620
 msgid "server"
-msgstr "¥µ¡¼¥Ğ¡¼"
+msgstr "ã‚µãƒ¼ãƒãƒ¼"
 
 #: src/console_fe.c:620
 msgid "proxy server"
-msgstr "¥×¥í¥­¥·¡¼¥µ¡¼¥Ğ¡¼"
+msgstr "ãƒ—ãƒ­ã‚­ã‚·ãƒ¼ã‚µãƒ¼ãƒãƒ¼"
 
 #: src/console_fe.c:626
 #, c-format
 msgid "Authentication required for %s on %s `%s':\n"
-msgstr "%s ¤Ø¤ÎÇ§¾Ú¤¬ %s ¤ÇÉ¬Í×¤Ç¤¹ '%s':\n"
+msgstr "%s ã¸ã®èªè¨¼ãŒ %s ã§å¿…è¦ã§ã™ '%s':\n"
 
 #: src/console_fe.c:629
 #, fuzzy, c-format
 msgid "Authentication required on %s `%s':\n"
-msgstr "%s ¤Ø¤ÎÇ§¾Ú¤¬ %s ¤ÇÉ¬Í×¤Ç¤¹ '%s':\n"
+msgstr "%s ã¸ã®èªè¨¼ãŒ %s ã§å¿…è¦ã§ã™ '%s':\n"
 
 # msgid "Authentication required on %s `%s':\n"
-# msgstr "Ç§¾Ú¤¬ %s ¤ÇÉ¬Í×¤Ç¤¹:\n"
+# msgstr "èªè¨¼ãŒ %s ã§å¿…è¦ã§ã™:\n"
 #: src/console_fe.c:632
 msgid "Username: "
-msgstr "¥æ¡¼¥¶¡¼Ì¾: "
+msgstr "ãƒ¦ãƒ¼ã‚¶ãƒ¼å: "
 
 #: src/console_fe.c:637
 #, c-format
 msgid "Username: %s\n"
-msgstr "¥æ¡¼¥¶¡¼Ì¾: %s\n"
+msgstr "ãƒ¦ãƒ¼ã‚¶ãƒ¼å: %s\n"
 
 #: src/console_fe.c:639 src/console_fe.c:663
 msgid "Password: "
-msgstr "¥Ñ¥¹¥ï¡¼¥É: "
+msgstr "ãƒ‘ã‚¹ãƒ¯ãƒ¼ãƒ‰: "
 
 #: src/console_fe.c:649
 #, c-format
 msgid "Retrying: ["
-msgstr "Èæ³Ó³ÎÇ§Ãæ: ["
+msgstr "æ¯”è¼ƒç¢ºèªä¸­: ["
 
 #: src/console_fe.c:660
 #, c-format
@@ -344,57 +344,57 @@ msgstr ""
 #: src/console_fe.c:728
 #, c-format
 msgid "Create %s/"
-msgstr "%s/ ¤òºîÀ®"
+msgstr "%s/ ã‚’ä½œæˆ"
 
 #: src/console_fe.c:730
 #, c-format
 msgid "Delete %s/"
-msgstr "%s/ ¤òºï½ü"
+msgstr "%s/ ã‚’å‰Šé™¤"
 
 #: src/console_fe.c:738
 #, fuzzy, c-format
 msgid "Upload %s (%s bytes)"
-msgstr "%s ¤ò¥¢¥Ã¥×¥í¡¼¥É"
+msgstr "%s ã‚’ã‚¢ãƒƒãƒ—ãƒ­ãƒ¼ãƒ‰"
 
 #: src/console_fe.c:740
 #, c-format
 msgid "Delete %s"
-msgstr "%s ¤òºï½ü"
+msgstr "%s ã‚’å‰Šé™¤"
 
 #: src/console_fe.c:741
 #, c-format
 msgid "Move %s->%s"
-msgstr "%s ¤ò %s ¤Ë°ÜÆ°"
+msgstr "%s ã‚’ %s ã«ç§»å‹•"
 
 #: src/console_fe.c:750
 #, c-format
 msgid "Change %s"
-msgstr "%s ¤òÊÑ¹¹"
+msgstr "%s ã‚’å¤‰æ›´"
 
 #: src/console_fe.c:751
 #, c-format
 msgid "Create %s"
-msgstr "%s ¤òºîÀ®"
+msgstr "%s ã‚’ä½œæˆ"
 
 #: src/console_fe.c:752
 #, c-format
 msgid "Remove %s"
-msgstr "%s ¤òºï½ü"
+msgstr "%s ã‚’å‰Šé™¤"
 
 #: src/console_fe.c:759
 #, c-format
 msgid "? (y/n) "
-msgstr "¤·¤Ş¤¹¤«¡© (y/n) "
+msgstr "ã—ã¾ã™ã‹ï¼Ÿ (y/n) "
 
 #: src/console_fe.c:769
 #, c-format
 msgid "Checksumming %s: ["
-msgstr "¥Á¥§¥Ã¥¯¥µ¥à·×»»Ãæ %s: ["
+msgstr "ãƒã‚§ãƒƒã‚¯ã‚µãƒ è¨ˆç®—ä¸­ %s: ["
 
 #: src/console_fe.c:784 src/console_fe.c:896 src/console_fe.c:958
 #, c-format
 msgid "] done.\n"
-msgstr "] ´°Î».\n"
+msgstr "] å®Œäº†.\n"
 
 #: src/console_fe.c:786 src/console_fe.c:960
 #, c-format
@@ -402,18 +402,18 @@ msgid ""
 "] failed:\n"
 "%s\n"
 msgstr ""
-"] ¼ºÇÔ:\n"
+"] å¤±æ•—:\n"
 "%s\n"
 
 #: src/console_fe.c:796
 #, fuzzy, c-format
 msgid "Setting permissions on %s%s: "
-msgstr "¥Õ¥¡¥¤¥ëÂ°À­ÀßÄêÃæ %s: "
+msgstr "ãƒ•ã‚¡ã‚¤ãƒ«å±æ€§è¨­å®šä¸­ %s: "
 
 #: src/console_fe.c:806 src/console_fe.c:882 src/console_fe.c:952
 #, c-format
 msgid "done.\n"
-msgstr "´°Î»¡£\n"
+msgstr "å®Œäº†ã€‚\n"
 
 #: src/console_fe.c:808 src/console_fe.c:954
 #, c-format
@@ -421,74 +421,74 @@ msgid ""
 "failed:\n"
 "%s\n"
 msgstr ""
-"¼ºÇÔ:\n"
+"å¤±æ•—:\n"
 "%s\n"
 
 #: src/console_fe.c:827 src/console_fe.c:916
 #, c-format
 msgid "Creating %s/: "
-msgstr "ºîÀ®Ãæ %s/: "
+msgstr "ä½œæˆä¸­ %s/: "
 
 #: src/console_fe.c:829 src/console_fe.c:918
 #, c-format
 msgid "Deleting %s/: "
-msgstr "ºï½üÃæ %s/: "
+msgstr "å‰Šé™¤ä¸­ %s/: "
 
 #: src/console_fe.c:836
 #, c-format
 msgid "Uploading %s: ["
-msgstr "¥¢¥Ã¥×¥í¡¼¥ÉÃæ %s: ["
+msgstr "ã‚¢ãƒƒãƒ—ãƒ­ãƒ¼ãƒ‰ä¸­ %s: ["
 
 #: src/console_fe.c:839 src/console_fe.c:857 src/console_fe.c:928
 #, c-format
 msgid "Deleting %s: "
-msgstr "ºï½üÃæ %s: "
+msgstr "å‰Šé™¤ä¸­ %s: "
 
 #: src/console_fe.c:842 src/console_fe.c:931
 #, c-format
 msgid "Moving %s->%s: "
-msgstr "°ÜÆ°Ãæ %s->%s: "
+msgstr "ç§»å‹•ä¸­ %s->%s: "
 
 #: src/console_fe.c:853
 #, c-format
 msgid "Changing %s: "
-msgstr "ÊÑ¹¹Ãæ %s: "
+msgstr "å¤‰æ›´ä¸­ %s: "
 
 #: src/console_fe.c:855
 #, c-format
 msgid "Creating %s: "
-msgstr "ºîÀ®Ãæ %s: "
+msgstr "ä½œæˆä¸­ %s: "
 
 #: src/console_fe.c:875
 #, fuzzy, c-format
 msgid "Failed to update %s:%c%s\n"
 msgstr ""
-"¹¹¿·¤Ë¼ºÇÔ %s:\n"
+"æ›´æ–°ã«å¤±æ•— %s:\n"
 "%s\n"
 
 #: src/console_fe.c:885
 #, fuzzy, c-format
 msgid "failed:%c%s\n"
 msgstr ""
-"¼ºÇÔ:\n"
+"å¤±æ•—:\n"
 "%s\n"
 
 #: src/console_fe.c:900
 #, fuzzy, c-format
 msgid "] failed:%c%s\n"
 msgstr ""
-"] ¼ºÇÔ:\n"
+"] å¤±æ•—:\n"
 "%s\n"
 
 #: src/console_fe.c:925
 #, c-format
 msgid "Downloading %s: ["
-msgstr "¥À¥¦¥ó¥í¡¼¥ÉÃæ %s: ["
+msgstr "ãƒ€ã‚¦ãƒ³ãƒ­ãƒ¼ãƒ‰ä¸­ %s: ["
 
 #: src/console_fe.c:970
 #, fuzzy
 msgid "Changed on server"
-msgstr "%s ¤òÊÑ¹¹"
+msgstr "%s ã‚’å¤‰æ›´"
 
 #: src/console_fe.c:973
 msgid "Added on server"
@@ -497,17 +497,17 @@ msgstr ""
 #: src/console_fe.c:981
 #, fuzzy, c-format
 msgid "%s: %s\n"
-msgstr "¥æ¡¼¥¶¡¼Ì¾: %s\n"
+msgstr "ãƒ¦ãƒ¼ã‚¶ãƒ¼å: %s\n"
 
 #: src/console_fe.c:1001
 #, c-format
 msgid "Directory: %s/\n"
-msgstr "¥Ç¥£¥ì¥¯¥È¥ê: %s/\n"
+msgstr "ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒª: %s/\n"
 
 #: src/console_fe.c:1006
 #, fuzzy, c-format
 msgid "File: %s - size %s%s\n"
-msgstr "¥Õ¥¡¥¤¥ë: %s - ¥µ¥¤¥º %ld%s\n"
+msgstr "ãƒ•ã‚¡ã‚¤ãƒ«: %s - ã‚µã‚¤ã‚º %ld%s\n"
 
 #: src/console_fe.c:1008
 msgid " (ASCII)"
@@ -516,12 +516,12 @@ msgstr ""
 #: src/console_fe.c:1011
 #, c-format
 msgid "Link: %s - target %s\n"
-msgstr "¥ê¥ó¥¯: %s - ¥ê¥ó¥¯Àè %s\n"
+msgstr "ãƒªãƒ³ã‚¯: %s - ãƒªãƒ³ã‚¯å…ˆ %s\n"
 
 #: src/console_fe.c:1024
 #, c-format
 msgid "%s: Error: Could not open rcfile: %s.\n"
-msgstr "%s: ¥¨¥é¡¼: rcfile %s ¤ò¥ª¡¼¥×¥ó¤Ç¤­¤Ş¤»¤ó¡£\n"
+msgstr "%s: ã‚¨ãƒ©ãƒ¼: rcfile %s ã‚’ã‚ªãƒ¼ãƒ—ãƒ³ã§ãã¾ã›ã‚“ã€‚\n"
 
 #: src/console_fe.c:1028
 #, c-format
@@ -529,7 +529,7 @@ msgid ""
 "%s: rcfile corrupt at line %d:\n"
 "%s\n"
 msgstr ""
-"%s: rcfile ¤¬ %d ¹Ô¤Ç´Ö°ã¤Ã¤Æ¤¤¤Ş¤¹¡£:\n"
+"%s: rcfile ãŒ %d è¡Œã§é–“é•ã£ã¦ã„ã¾ã™ã€‚:\n"
 "%s\n"
 
 #: src/console_fe.c:1047
@@ -538,62 +538,62 @@ msgid ""
 "%s: Could not read directory for `%s':\n"
 "\t%s\n"
 msgstr ""
-"%s: ¥Ç¥£¥ì¥¯¥È¥ê¤¬ÆÉ¤á¤Ş¤»¤ó¡£`%s':\n"
+"%s: ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªãŒèª­ã‚ã¾ã›ã‚“ã€‚`%s':\n"
 "\t%s\n"
 
 #: src/console_fe.c:1051
 #, c-format
 msgid "%s: Server not specified in site `%s'.\n"
-msgstr "%s: ¥µ¥¤¥È '%s' ¤Ç¥µ¡¼¥Ğ¡¼¤¬»ØÄê¤µ¤ì¤Æ¤¤¤Ş¤»¤ó¡£\n"
+msgstr "%s: ã‚µã‚¤ãƒˆ '%s' ã§ã‚µãƒ¼ãƒãƒ¼ãŒæŒ‡å®šã•ã‚Œã¦ã„ã¾ã›ã‚“ã€‚\n"
 
 #: src/console_fe.c:1055
 #, c-format
 msgid "%s: Remote directory not specified in site `%s'.\n"
-msgstr "%s: ¥µ¥¤¥È `%s' ¤Ç¥µ¡¼¥Ğ¡¼¥Ç¥£¥ì¥¯¥È¥ê¤¬»ØÄê¤µ¤ì¤Æ¤¤¤Ş¤»¤ó¡£\n"
+msgstr "%s: ã‚µã‚¤ãƒˆ `%s' ã§ã‚µãƒ¼ãƒãƒ¼ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªãŒæŒ‡å®šã•ã‚Œã¦ã„ã¾ã›ã‚“ã€‚\n"
 
 #: src/console_fe.c:1059
 #, c-format
 msgid "%s: Local directory not specified in site `%s'.\n"
-msgstr "%s: ¥µ¥¤¥È `%s' ¤Ç¥í¡¼¥«¥ë¥Ç¥£¥ì¥¯¥È¥ê¤¬»ØÄê¤µ¤ì¤Æ¤¤¤Ş¤»¤ó¡£\n"
+msgstr "%s: ã‚µã‚¤ãƒˆ `%s' ã§ãƒ­ãƒ¼ã‚«ãƒ«ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªãŒæŒ‡å®šã•ã‚Œã¦ã„ã¾ã›ã‚“ã€‚\n"
 
 #: src/console_fe.c:1063
 #, c-format
 msgid "%s: Invalid port used in site `%s'.\n"
-msgstr "%s: ¥µ¥¤¥È `%s' ¤Î¥İ¡¼¥È¤¬Ìµ¸ú¤Ç¤¹¡£\n"
+msgstr "%s: ã‚µã‚¤ãƒˆ `%s' ã®ãƒãƒ¼ãƒˆãŒç„¡åŠ¹ã§ã™ã€‚\n"
 
 #: src/console_fe.c:1067
 #, c-format
 msgid "%s: %s cannot maintain symbolic links (site `%s').\n"
-msgstr "%s: %s ¤Ï¥·¥ó¥Ü¥ê¥Ã¥¯¥ê¥ó¥¯¤ò»È¤¨¤Ş¤»¤ó¡Ê¥µ¥¤¥È `%s'¡Ë¡£\n"
+msgstr "%s: %s ã¯ã‚·ãƒ³ãƒœãƒªãƒƒã‚¯ãƒªãƒ³ã‚¯ã‚’ä½¿ãˆã¾ã›ã‚“ï¼ˆã‚µã‚¤ãƒˆ `%s'ï¼‰ã€‚\n"
 
 #: src/console_fe.c:1071
 #, c-format
 msgid "%s: Cannot use a relative remote directory in %s (site `%s').\n"
-msgstr "%s: %s ¤Ç¤ÏÁêÂĞ¥Ç¥£¥ì¥¯¥È¥ê¤ò»È¤¨¤Ş¤»¤ó¡Ê¥µ¥¤¥È `%s'¡Ë¡£\n"
+msgstr "%s: %s ã§ã¯ç›¸å¯¾ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªã‚’ä½¿ãˆã¾ã›ã‚“ï¼ˆã‚µã‚¤ãƒˆ `%s'ï¼‰ã€‚\n"
 
 #: src/console_fe.c:1074
 #, c-format
 msgid "%s: File permissions are not supported in %s (site `%s').\n"
-msgstr "%s: %s ¤Ç¤Ï¥Õ¥¡¥¤¥ëÂ°À­¤¬»È¤¨¤Ş¤»¤ó¡Ê¥µ¥¤¥È `%s'¡Ë¡£\n"
+msgstr "%s: %s ã§ã¯ãƒ•ã‚¡ã‚¤ãƒ«å±æ€§ãŒä½¿ãˆã¾ã›ã‚“ï¼ˆã‚µã‚¤ãƒˆ `%s'ï¼‰ã€‚\n"
 
 #: src/console_fe.c:1077
 #, c-format
 msgid ""
 "%s: Safe mode cannot be used in conjunction with nooverwrite (site `%s').\n"
-msgstr "%s: safe ¤È nooverwrite ¤ÏÆ±»ş¤Ë¤Ï»ØÄê¤Ç¤­¤Ş¤»¤ó¡Ê¥µ¥¤¥È `%s'¡Ë¡£\n"
+msgstr "%s: safe ã¨ nooverwrite ã¯åŒæ™‚ã«ã¯æŒ‡å®šã§ãã¾ã›ã‚“ï¼ˆã‚µã‚¤ãƒˆ `%s'ï¼‰ã€‚\n"
 
 #: src/console_fe.c:1080
 #, c-format
 msgid ""
 "%s: Safe mode cannot be used in conjunction with tempupload (site `%s').\n"
-msgstr "%s: safe ¤È tempupload ¤ÏÆ±»ş¤Ë¤Ï»ØÄê¤Ç¤­¤Ş¤»¤ó¡Ê¥µ¥¤¥È `%s'¡Ë¡£\n"
+msgstr "%s: safe ã¨ tempupload ã¯åŒæ™‚ã«ã¯æŒ‡å®šã§ãã¾ã›ã‚“ï¼ˆã‚µã‚¤ãƒˆ `%s'ï¼‰ã€‚\n"
 
 #: src/console_fe.c:1083
 #, c-format
 msgid "%s: Can only check for renamed files when checksumming (site `%s').\n"
 msgstr ""
-"%s: checkmoved renames ¤Ï state checksum ¤ÈÆ±»ş¤Ë»ØÄê¤·¤Æ²¼¤µ¤¤¡Ê¥µ¥¤¥È "
-"`%s')¡£\n"
+"%s: checkmoved renames ã¯ state checksum ã¨åŒæ™‚ã«æŒ‡å®šã—ã¦ä¸‹ã•ã„ï¼ˆã‚µã‚¤ãƒˆ "
+"`%s')ã€‚\n"
 
 #: src/console_fe.c:1086
 #, c-format
@@ -605,13 +605,13 @@ msgstr ""
 #: src/console_fe.c:1091
 #, c-format
 msgid "%s: The protocol `%s' is unsupported (site `%s').\n"
-msgstr "%s: `%s' ¥×¥í¥È¥³¥ë¤Ï»È¤¨¤Ş¤»¤ó¡Ê¥µ¥¤¥È `%s'¡Ë¡£\n"
+msgstr "%s: `%s' ãƒ—ãƒ­ãƒˆã‚³ãƒ«ã¯ä½¿ãˆã¾ã›ã‚“ï¼ˆã‚µã‚¤ãƒˆ `%s'ï¼‰ã€‚\n"
 
 #: src/console_fe.c:1098
 #, c-format
 msgid "%s: Unhandled error %d in site `%s' - please contact the maintainer.\n"
 msgstr ""
-"%s: Í½´ü¤»¤Ì¥¨¥é¡¼ %d ¤¬¥µ¥¤¥È `%s' ¤Çµ¯¤³¤ê¤Ş¤·¤¿ - À½ºî¼Ô¤Ş¤ÇÏ¢Íí²¼¤µ¤¤¡£\n"
+"%s: äºˆæœŸã›ã¬ã‚¨ãƒ©ãƒ¼ %d ãŒã‚µã‚¤ãƒˆ `%s' ã§èµ·ã“ã‚Šã¾ã—ãŸ - è£½ä½œè€…ã¾ã§é€£çµ¡ä¸‹ã•ã„ã€‚\n"
 
 #: src/console_fe.c:1115
 #, fuzzy, c-format
@@ -622,7 +622,7 @@ msgid ""
 "%s: Error: Could not lock storage file for `%s':\n"
 "%s: Error: %s\n"
 msgstr ""
-"%s: ¥¨¥é¡¼: µ­Ï¿¥Õ¥¡¥¤¥ë `%s' ¤¬²õ¤ì¤Æ¤¤¤Ş¤¹:\n"
+"%s: ã‚¨ãƒ©ãƒ¼: è¨˜éŒ²ãƒ•ã‚¡ã‚¤ãƒ« `%s' ãŒå£Šã‚Œã¦ã„ã¾ã™:\n"
 "%s: %s\n"
 
 #: src/console_fe.c:1130
@@ -631,7 +631,7 @@ msgid ""
 "%s: Error: Corrupt site storage file for `%s':\n"
 "%s: %s\n"
 msgstr ""
-"%s: ¥¨¥é¡¼: µ­Ï¿¥Õ¥¡¥¤¥ë `%s' ¤¬²õ¤ì¤Æ¤¤¤Ş¤¹:\n"
+"%s: ã‚¨ãƒ©ãƒ¼: è¨˜éŒ²ãƒ•ã‚¡ã‚¤ãƒ« `%s' ãŒå£Šã‚Œã¦ã„ã¾ã™:\n"
 "%s: %s\n"
 
 #: src/console_fe.c:1140
@@ -640,13 +640,13 @@ msgid ""
 "%s: Error: No storage file for `%s'.\n"
 "%s: Use --init, --catchup or --fetch to create a storage file.\n"
 msgstr ""
-"%s: ¥¨¥é¡¼: ¥µ¥¤¥È `%s' ¤Îµ­Ï¿¥Õ¥¡¥¤¥ë¤¬¤¢¤ê¤Ş¤»¤ó¡£\n"
-"%s: ¤Ş¤º --init, --catchup ,--fetch ¤Î¤¤¤º¤ì¤«¤ò¼Â¹Ô¤·¤Æ²¼¤µ¤¤¡£\n"
+"%s: ã‚¨ãƒ©ãƒ¼: ã‚µã‚¤ãƒˆ `%s' ã®è¨˜éŒ²ãƒ•ã‚¡ã‚¤ãƒ«ãŒã‚ã‚Šã¾ã›ã‚“ã€‚\n"
+"%s: ã¾ãš --init, --catchup ,--fetch ã®ã„ãšã‚Œã‹ã‚’å®Ÿè¡Œã—ã¦ä¸‹ã•ã„ã€‚\n"
 
 #: src/console_fe.c:1154
 #, c-format
 msgid "%s: Skipping site `%s'.\n"
-msgstr "%s: ¥µ¥¤¥È `%s' ¤ò¥¹¥­¥Ã¥×¤·¤Ş¤¹¡£\n"
+msgstr "%s: ã‚µã‚¤ãƒˆ `%s' ã‚’ã‚¹ã‚­ãƒƒãƒ—ã—ã¾ã™ã€‚\n"
 
 #: src/console_fe.c:1173
 #, c-format
@@ -659,50 +659,50 @@ msgstr ""
 #: src/console_fe.c:1189
 #, c-format
 msgid "%s: %s completed successfully.\n"
-msgstr "%s: %s¤ËÀ®¸ù¤·¤Ş¤·¤¿¡£\n"
+msgstr "%s: %sã«æˆåŠŸã—ã¾ã—ãŸã€‚\n"
 
 #: src/console_fe.c:1195
 #, c-format
 msgid "%s: %s unsupported for %s.\n"
-msgstr "%s: %s ¤Ï %s ¤Ç¤Ï¼ÂÁõ¤µ¤ì¤Æ¤¤¤Ş¤»¤ó¡£\n"
+msgstr "%s: %s ã¯ %s ã§ã¯å®Ÿè£…ã•ã‚Œã¦ã„ã¾ã›ã‚“ã€‚\n"
 
 #: src/console_fe.c:1200
 #, c-format
 msgid "%s: Errors occurred while %s the %s site.\n"
-msgstr "%s: %s¤Ë%s¤Ç¥¨¥é¡¼¤¬¤¢¤ê¤Ş¤·¤¿¡£\n"
+msgstr "%s: %sã«%sã§ã‚¨ãƒ©ãƒ¼ãŒã‚ã‚Šã¾ã—ãŸã€‚\n"
 
 #: src/console_fe.c:1207
 #, fuzzy, c-format
 #| msgid "%s: Errors occurred while %s the %s site.\n"
 msgid "%s: Interrupted while %s the %s site `%s'.\n"
-msgstr "%s: %s¤Ë%s¤Ç¥¨¥é¡¼¤¬¤¢¤ê¤Ş¤·¤¿¡£\n"
+msgstr "%s: %sã«%sã§ã‚¨ãƒ©ãƒ¼ãŒã‚ã‚Šã¾ã—ãŸã€‚\n"
 
 #: src/console_fe.c:1212
 #, c-format
 msgid "%s: Error: Could not resolve remote hostname (%s).\n"
-msgstr "%s: ¥¨¥é¡¼: ¥µ¡¼¥Ğ¡¼¤Î¥Û¥¹¥ÈÌ¾ (%s) ¤ò IP ¥¢¥É¥ì¥¹¤ËÊÑ´¹¤Ç¤­¤Ş¤»¤ó¡£\n"
+msgstr "%s: ã‚¨ãƒ©ãƒ¼: ã‚µãƒ¼ãƒãƒ¼ã®ãƒ›ã‚¹ãƒˆå (%s) ã‚’ IP ã‚¢ãƒ‰ãƒ¬ã‚¹ã«å¤‰æ›ã§ãã¾ã›ã‚“ã€‚\n"
 
 #: src/console_fe.c:1218
 #, c-format
 msgid "%s: Error: Could not resolve hostname of proxy server (%s).\n"
 msgstr ""
-"%s: ¥¨¥é¡¼: ¥×¥í¥­¥·¡¼¥µ¡¼¥Ğ¡¼¤Î¥Û¥¹¥ÈÌ¾ (%s) ¤ò IP ¥¢¥É¥ì¥¹¤ËÊÑ´¹¤Ç¤­¤Ş¤»"
-"¤ó¡£\n"
+"%s: ã‚¨ãƒ©ãƒ¼: ãƒ—ãƒ­ã‚­ã‚·ãƒ¼ã‚µãƒ¼ãƒãƒ¼ã®ãƒ›ã‚¹ãƒˆå (%s) ã‚’ IP ã‚¢ãƒ‰ãƒ¬ã‚¹ã«å¤‰æ›ã§ãã¾ã›"
+"ã‚“ã€‚\n"
 
 #: src/console_fe.c:1224
 #, c-format
 msgid "%s: Error: Could not connect to proxy server (%s port %d).\n"
-msgstr "%s: ¥¨¥é¡¼: ¥×¥í¥­¥·¡¼¥µ¡¼¥Ğ¡¼ (%s port %d) ¤ËÀÜÂ³¤Ç¤­¤Ş¤»¤ó¡£\n"
+msgstr "%s: ã‚¨ãƒ©ãƒ¼: ãƒ—ãƒ­ã‚­ã‚·ãƒ¼ã‚µãƒ¼ãƒãƒ¼ (%s port %d) ã«æ¥ç¶šã§ãã¾ã›ã‚“ã€‚\n"
 
 #: src/console_fe.c:1227
 #, c-format
 msgid "%s: Error: Could not connect to server (%s port %d).\n"
-msgstr "%s: ¥¨¥é¡¼: ¥µ¡¼¥Ğ¡¼ (%s port %d) ¤ËÀÜÂ³¤Ç¤­¤Ş¤»¤ó¡£\n"
+msgstr "%s: ã‚¨ãƒ©ãƒ¼: ã‚µãƒ¼ãƒãƒ¼ (%s port %d) ã«æ¥ç¶šã§ãã¾ã›ã‚“ã€‚\n"
 
 #: src/console_fe.c:1233
 #, c-format
 msgid "%s: Error: Could not authorise user on server.\n"
-msgstr "%s: ¥¨¥é¡¼: ¥æ¡¼¥¶¡¼¤ÎÇ§¾Ú¤Ë¼ºÇÔ¤·¤Ş¤·¤¿¡£\n"
+msgstr "%s: ã‚¨ãƒ©ãƒ¼: ãƒ¦ãƒ¼ã‚¶ãƒ¼ã®èªè¨¼ã«å¤±æ•—ã—ã¾ã—ãŸã€‚\n"
 
 #: src/console_fe.c:1238
 #, c-format
@@ -712,63 +712,63 @@ msgstr ""
 #: src/console_fe.c:1242
 #, c-format
 msgid "%s: Error: Could not authorise user on proxy server (%s).\n"
-msgstr "%s: ¥¨¥é¡¼: ¥×¥í¥­¥·¡¼¥µ¡¼¥Ğ¡¼ (%s) ¤Ç¥æ¡¼¥¶¡¼Ç§¾Ú¤Ë¼ºÇÔ¤·¤Ş¤·¤¿¡£\n"
+msgstr "%s: ã‚¨ãƒ©ãƒ¼: ãƒ—ãƒ­ã‚­ã‚·ãƒ¼ã‚µãƒ¼ãƒãƒ¼ (%s) ã§ãƒ¦ãƒ¼ã‚¶ãƒ¼èªè¨¼ã«å¤±æ•—ã—ã¾ã—ãŸã€‚\n"
 
 #: src/console_fe.c:1263
 #, c-format
 msgid "%s: Error: Environment variable HOME not set.\n"
-msgstr "%s: ¥¨¥é¡¼: ´Ä¶­ÊÑ¿ô HOME ¤¬ÄêµÁ¤µ¤ì¤Æ¤¤¤Ş¤»¤ó¡£\n"
+msgstr "%s: ã‚¨ãƒ©ãƒ¼: ç’°å¢ƒå¤‰æ•° HOME ãŒå®šç¾©ã•ã‚Œã¦ã„ã¾ã›ã‚“ã€‚\n"
 
 #: src/console_fe.c:1271
 #, c-format
 msgid "%s: Error: Could not open rcfile: %s\n"
-msgstr "%s: ¥¨¥é¡¼: rcfile '%s' ¤¬ÆÉ¤á¤Ş¤»¤ó¡£\n"
+msgstr "%s: ã‚¨ãƒ©ãƒ¼: rcfile '%s' ãŒèª­ã‚ã¾ã›ã‚“ã€‚\n"
 
 #: src/console_fe.c:1274
 #, c-format
 msgid "%s: Error: rcfile permissions allow other users to read your rcfile.\n"
-msgstr "%s: ¥¨¥é¡¼: ¤¢¤Ê¤¿¤Î rcfile ¤ÏÂ¾¿Í¤¬ÆÉ¤á¤ëÂ°À­¤Ë¤Ê¤Ã¤Æ¤¤¤Ş¤¹¡£\n"
+msgstr "%s: ã‚¨ãƒ©ãƒ¼: ã‚ãªãŸã® rcfile ã¯ä»–äººãŒèª­ã‚ã‚‹å±æ€§ã«ãªã£ã¦ã„ã¾ã™ã€‚\n"
 
 #: src/console_fe.c:1275 src/console_fe.c:1287
 #, c-format
 msgid "%s: Set the permissions to 0600.\n"
-msgstr "%s: Â°À­¤ò 0600 ¤Ë¤·¤Æ²¼¤µ¤¤¡£\n"
+msgstr "%s: å±æ€§ã‚’ 0600 ã«ã—ã¦ä¸‹ã•ã„ã€‚\n"
 
 #: src/console_fe.c:1278
 #, c-format
 msgid "%s: Error: Could not open storage directory: %s\n"
-msgstr "%s: ¥¨¥é¡¼: µ­Ï¿ÍÑ¥Ç¥£¥ì¥¯¥È¥ê %s ¤ËÆş¤ì¤Ş¤»¤ó¡£\n"
+msgstr "%s: ã‚¨ãƒ©ãƒ¼: è¨˜éŒ²ç”¨ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒª %s ã«å…¥ã‚Œã¾ã›ã‚“ã€‚\n"
 
 #: src/console_fe.c:1279
 #, c-format
 msgid ""
 "%s: You need to create this directory and set the permissions to 0700.\n"
-msgstr "%s: ¤³¤Î¥Ç¥£¥ì¥¯¥È¥ê¤ÎÂ°À­¤ò 0700 ¤Ë¤·¤Æ²¼¤µ¤¤¡£\n"
+msgstr "%s: ã“ã®ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªã®å±æ€§ã‚’ 0700 ã«ã—ã¦ä¸‹ã•ã„ã€‚\n"
 
 #: src/console_fe.c:1282
 #, c-format
 msgid "%s: Error: storage directory permissions incorrect.\n"
-msgstr "%s: ¥¨¥é¡¼: µ­Ï¿ÍÑ¥Ç¥£¥ì¥¯¥È¥ê¤ÎÂ°À­¤¬ÎÉ¤¯¤¢¤ê¤Ş¤»¤ó¡£\n"
+msgstr "%s: ã‚¨ãƒ©ãƒ¼: è¨˜éŒ²ç”¨ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªã®å±æ€§ãŒè‰¯ãã‚ã‚Šã¾ã›ã‚“ã€‚\n"
 
 #: src/console_fe.c:1283
 #, c-format
 msgid "%s: Set the permissions to 0700.\n"
-msgstr "%s: Â°À­¤ò 0700 ¤Ë¤·¤Æ²¼¤µ¤¤¡£\n"
+msgstr "%s: å±æ€§ã‚’ 0700 ã«ã—ã¦ä¸‹ã•ã„ã€‚\n"
 
 #: src/console_fe.c:1286
 #, c-format
 msgid "%s: Error: ~/.netrc permissions incorrect.\n"
-msgstr "%s: ¥¨¥é¡¼: ~/.netrc ¤ÎÂ°À­¤¬ÎÉ¤¯¤¢¤ê¤Ş¤»¤ó¡£\n"
+msgstr "%s: ã‚¨ãƒ©ãƒ¼: ~/.netrc ã®å±æ€§ãŒè‰¯ãã‚ã‚Šã¾ã›ã‚“ã€‚\n"
 
 #: src/console_fe.c:1298
 #, c-format
 msgid "%s: Error: Could not parse ~/.netrc.\n"
-msgstr "%s: ¥¨¥é¡¼: ~/.netrc ¤ò²òÀÏ½ĞÍè¤Ş¤»¤ó¡£\n"
+msgstr "%s: ã‚¨ãƒ©ãƒ¼: ~/.netrc ã‚’è§£æå‡ºæ¥ã¾ã›ã‚“ã€‚\n"
 
 #: src/console_fe.c:1316 src/console_fe.c:1426
 #, c-format
 msgid "%s: Nothing to do - no changes found.\n"
-msgstr "%s: ÊÑ¹¹¤µ¤ì¤¿¥Õ¥¡¥¤¥ë¤¬¤Ê¤¤¤Î¤Ç¡¢²¿¤â¤·¤Ş¤»¤ó¡£\n"
+msgstr "%s: å¤‰æ›´ã•ã‚ŒãŸãƒ•ã‚¡ã‚¤ãƒ«ãŒãªã„ã®ã§ã€ä½•ã‚‚ã—ã¾ã›ã‚“ã€‚\n"
 
 #: src/console_fe.c:1326
 #, c-format
@@ -784,33 +784,33 @@ msgid ""
 "%s: Warning: Current state method differs from stored in site `%s'.\n"
 "%s: All existing files will appear changed (use catchup?).\n"
 msgstr ""
-"%s: ·Ù¹ğ: ¥µ¥¤¥È `%s' ¤Î¸½ºß¤Î state »ØÄê¤¬µ­Ï¿¤È°Û¤Ê¤ê¤Ş¤¹¡£\n"
-"%s: Á´¥Õ¥¡¥¤¥ë¤¬ÊÑ¹¹¤µ¤ì¤¿¤È¤·¤Æ°·¤¤¤Ş¤¹¡£¡Ê--catchup ¤ò»È¤¦¤È¤¤¤¤¤«¤â¡©¡Ë\n"
+"%s: è­¦å‘Š: ã‚µã‚¤ãƒˆ `%s' ã®ç¾åœ¨ã® state æŒ‡å®šãŒè¨˜éŒ²ã¨ç•°ãªã‚Šã¾ã™ã€‚\n"
+"%s: å…¨ãƒ•ã‚¡ã‚¤ãƒ«ãŒå¤‰æ›´ã•ã‚ŒãŸã¨ã—ã¦æ‰±ã„ã¾ã™ã€‚ï¼ˆ--catchup ã‚’ä½¿ã†ã¨ã„ã„ã‹ã‚‚ï¼Ÿï¼‰\n"
 
 #: src/console_fe.c:1359
 #, c-format
 msgid "%s: The remote site needs updating (%d items to update).\n"
-msgstr "%s: ¥µ¡¼¥Ğ¤Î¥Õ¥¡¥¤¥ë¤Ï¹¹¿·¤¬É¬Í×¤Ç¤¹¡Ê%d¸Ä¡Ë¡£\n"
+msgstr "%s: ã‚µãƒ¼ãƒã®ãƒ•ã‚¡ã‚¤ãƒ«ã¯æ›´æ–°ãŒå¿…è¦ã§ã™ï¼ˆ%då€‹ï¼‰ã€‚\n"
 
 #: src/console_fe.c:1362
 #, c-format
 msgid "%s: The remote site needs updating (1 item to update).\n"
-msgstr "%s: ¥µ¡¼¥Ğ¤Î¥Õ¥¡¥¤¥ë¤Ï¹¹¿·¤¬É¬Í×¤Ç¤¹¡Ê1¸Ä¡Ë¡£\n"
+msgstr "%s: ã‚µãƒ¼ãƒã®ãƒ•ã‚¡ã‚¤ãƒ«ã¯æ›´æ–°ãŒå¿…è¦ã§ã™ï¼ˆ1å€‹ï¼‰ã€‚\n"
 
 #: src/console_fe.c:1366
 #, c-format
 msgid "%s: The remote site does not need updating.\n"
-msgstr "%s: ¥µ¡¼¥Ğ¤Î¥Õ¥¡¥¤¥ë¤ÏºÇ¿·¤Ç¤¹¡£\n"
+msgstr "%s: ã‚µãƒ¼ãƒã®ãƒ•ã‚¡ã‚¤ãƒ«ã¯æœ€æ–°ã§ã™ã€‚\n"
 
 #: src/console_fe.c:1376
 #, c-format
 msgid "%s: All the files and directories are marked as NOT updated remotely.\n"
-msgstr "%s: ¥µ¡¼¥Ğ¡¼¤Ë¥Õ¥¡¥¤¥ë¤¬¤Ê¤¤¤â¤Î¤È¤·¤Æµ­Ï¿¤·¤Ş¤·¤¿¡£\n"
+msgstr "%s: ã‚µãƒ¼ãƒãƒ¼ã«ãƒ•ã‚¡ã‚¤ãƒ«ãŒãªã„ã‚‚ã®ã¨ã—ã¦è¨˜éŒ²ã—ã¾ã—ãŸã€‚\n"
 
 #: src/console_fe.c:1383
 #, c-format
 msgid "%s: All the files and and directories are marked as updated remotely.\n"
-msgstr "%s: ¥µ¡¼¥Ğ¡¼¤Î¥Õ¥¡¥¤¥ë¤ÏºÇ¿·¤Ç¤¢¤ë¤È¤·¤Æµ­Ï¿¤·¤Ş¤·¤¿¡£\n"
+msgstr "%s: ã‚µãƒ¼ãƒãƒ¼ã®ãƒ•ã‚¡ã‚¤ãƒ«ã¯æœ€æ–°ã§ã‚ã‚‹ã¨ã—ã¦è¨˜éŒ²ã—ã¾ã—ãŸã€‚\n"
 
 #: src/console_fe.c:1391
 #, c-format
@@ -818,7 +818,7 @@ msgid ""
 "%s: Failed to fetch file listing for site `%s':\n"
 "%s: %s\n"
 msgstr ""
-"%s: ¥µ¥¤¥È '%s' ¤Î¥µ¡¼¥Ğ¡¼¤Ë¤¢¤ë¥Õ¥¡¥¤¥ë¤Î°ìÍ÷¼èÆÀ¤Ë¼ºÇÔ¤·¤Ş¤·¤¿¡£:\n"
+"%s: ã‚µã‚¤ãƒˆ '%s' ã®ã‚µãƒ¼ãƒãƒ¼ã«ã‚ã‚‹ãƒ•ã‚¡ã‚¤ãƒ«ã®ä¸€è¦§å–å¾—ã«å¤±æ•—ã—ã¾ã—ãŸã€‚:\n"
 "%s: %s\n"
 
 #: src/console_fe.c:1407
@@ -827,7 +827,7 @@ msgid ""
 "%s: Failed to fetch file listing to verify site `%s':\n"
 "%s: %s\n"
 msgstr ""
-"%s: ¥µ¥¤¥È '%s' ¤Î¥µ¡¼¥Ğ¡¼¤Ë¤¢¤ë¥Õ¥¡¥¤¥ë¤Î°ìÍ÷¼èÆÀ¤Ë¼ºÇÔ¤·¤Ş¤·¤¿¡£:\n"
+"%s: ã‚µã‚¤ãƒˆ '%s' ã®ã‚µãƒ¼ãƒãƒ¼ã«ã‚ã‚‹ãƒ•ã‚¡ã‚¤ãƒ«ã®ä¸€è¦§å–å¾—ã«å¤±æ•—ã—ã¾ã—ãŸã€‚:\n"
 "%s: %s\n"
 
 #: src/console_fe.c:1414
@@ -838,7 +838,7 @@ msgstr ""
 #: src/console_fe.c:1417
 #, fuzzy, c-format
 msgid "%s: Remote site not synchronized with stored state.\n"
-msgstr "%s: ¥µ¥¤¥È `%s' ¤Ç¥µ¡¼¥Ğ¡¼¥Ç¥£¥ì¥¯¥È¥ê¤¬»ØÄê¤µ¤ì¤Æ¤¤¤Ş¤»¤ó¡£\n"
+msgstr "%s: ã‚µã‚¤ãƒˆ `%s' ã§ã‚µãƒ¼ãƒãƒ¼ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªãŒæŒ‡å®šã•ã‚Œã¦ã„ã¾ã›ã‚“ã€‚\n"
 
 #: src/console_fe.c:1431
 #, c-format
@@ -850,12 +850,12 @@ msgstr ""
 #: src/console_fe.c:1451
 #, c-format
 msgid "Usage: %s [OPTIONS] [MODE] [sitename]...\n"
-msgstr "»È¤¤Êı: %s [OPTIONS] [MODE] [sitename]...\n"
+msgstr "ä½¿ã„æ–¹: %s [OPTIONS] [MODE] [sitename]...\n"
 
 #: src/console_fe.c:1453
 #, c-format
 msgid "Options: \n"
-msgstr "¥ª¥×¥·¥ç¥ó¡§ \n"
+msgstr "ã‚ªãƒ—ã‚·ãƒ§ãƒ³ï¼š \n"
 
 #: src/console_fe.c:1456
 #, fuzzy, c-format
@@ -866,10 +866,10 @@ msgid ""
 "     Warning: cleartext displays (normally hidden) passwords in plain text\n"
 "  -g, --logfile=FILE    Append debugging messages to FILE (else use stderr)\n"
 msgstr ""
-"  -d, --debug=KEY[,KEY] ¥Ç¥Ğ¥Ã¥°¾ğÊó½ĞÎÏ -- KEY ¤Ë¤Ï°Ê²¼¤ò»ØÄê:\n"
+"  -d, --debug=KEY[,KEY] ãƒ‡ãƒãƒƒã‚°æƒ…å ±å‡ºåŠ› -- KEY ã«ã¯ä»¥ä¸‹ã‚’æŒ‡å®š:\n"
 "     socket, files, rcfile, ftp, http, httpbody, xml, xmlparse, cleartext\n"
-"     ·Ù¹ğ: cleartext ¤Ç¤ÏÄÌ¾ï±£¤µ¤ì¤ë¥Ñ¥¹¥ï¡¼¥É¤¬Ê¿Ê¸¤ÇÉ½¼¨¤µ¤ì¤ë\n"
-"  -g, --logfile=FILE    ¥Ç¥Ğ¥Ã¥°¾ğÊó¤ò FILE ¤ËÄÉµ­¡ÊÄÌ¾ï stderr ¤ò»ÈÍÑ¡Ë\n"
+"     è­¦å‘Š: cleartext ã§ã¯é€šå¸¸éš ã•ã‚Œã‚‹ãƒ‘ã‚¹ãƒ¯ãƒ¼ãƒ‰ãŒå¹³æ–‡ã§è¡¨ç¤ºã•ã‚Œã‚‹\n"
+"  -g, --logfile=FILE    ãƒ‡ãƒãƒƒã‚°æƒ…å ±ã‚’ FILE ã«è¿½è¨˜ï¼ˆé€šå¸¸ stderr ã‚’ä½¿ç”¨ï¼‰\n"
 
 #: src/console_fe.c:1463
 #, fuzzy, c-format
@@ -899,26 +899,26 @@ msgid ""
 "  -V, --version         Display version information\n"
 "Please send feature requests and bug reports via %s\n"
 msgstr ""
-"  -r, --rcfile=FILE     run control file »ØÄê\n"
-"  -p, --storepath=PATH  µ­Ï¿¥Ç¥£¥ì¥¯¥È¥ê»ØÄê\n"
-"  -y, --prompting       ¹¹¿·Á°¤Ë³ÎÇ§¤¹¤ë\n"
-"  -a, --allsites        ÄêµÁ¤µ¤ì¤¿¥µ¥¤¥È¤¹¤Ù¤Æ¤ò½èÍı\n"
-"  -k, --keep-going      ¥¨¥é¡¼¤¬µ¯¤³¤Ã¤Æ¤â¹¹¿·Æ°ºî¤òÂ³¹Ô\n"
-"  -o, --show-progress   ¥Õ¥¡¥¤¥ëÅ¾Á÷Ãæ¤Ë¿Ê¹Ô¾õÂÖÉ½¼¨\n"
-"  -q, --quiet           Æ°ºîÃæ¤ÎÉ½¼¨¤ò¸º¤é¤¹\n"
-"  -qq, --silent         Æ°ºîÃæ¤ÎÉ½¼¨¤ò¤Ê¤¯¤¹\n"
+"  -r, --rcfile=FILE     run control file æŒ‡å®š\n"
+"  -p, --storepath=PATH  è¨˜éŒ²ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªæŒ‡å®š\n"
+"  -y, --prompting       æ›´æ–°å‰ã«ç¢ºèªã™ã‚‹\n"
+"  -a, --allsites        å®šç¾©ã•ã‚ŒãŸã‚µã‚¤ãƒˆã™ã¹ã¦ã‚’å‡¦ç†\n"
+"  -k, --keep-going      ã‚¨ãƒ©ãƒ¼ãŒèµ·ã“ã£ã¦ã‚‚æ›´æ–°å‹•ä½œã‚’ç¶šè¡Œ\n"
+"  -o, --show-progress   ãƒ•ã‚¡ã‚¤ãƒ«è»¢é€ä¸­ã«é€²è¡ŒçŠ¶æ…‹è¡¨ç¤º\n"
+"  -q, --quiet           å‹•ä½œä¸­ã®è¡¨ç¤ºã‚’æ¸›ã‚‰ã™\n"
+"  -qq, --silent         å‹•ä½œä¸­ã®è¡¨ç¤ºã‚’ãªãã™\n"
 "Operation modes:\n"
-"  -l, --list            ¥Õ¥¡¥¤¥ë¤Î¾õÂÖ¤òÉ½¼¨ (default)\n"
-"  -ll, --flatlist       ¥Õ¥¡¥¤¥ë¤Î¾õÂÖ¤ò´Ê°×É½¼¨\n"
-"  -v, --view            ¥µ¥¤¥È¤ÎÀßÄê¤òÉ½¼¨\n"
-"  -i, --initialize      ¥µ¡¼¥Ğ¡¼¤Ë¥Õ¥¡¥¤¥ë¤¬¤Ê¤¤¤Èµ­Ï¿\n"
-"  -f, --fetch           ¥µ¡¼¥Ğ¡¼¤Ë¤¢¤ë¥Õ¥¡¥¤¥ë¤Î°ìÍ÷¤ò¼èÆÀ\n"
-"  -c, --catchup         ¥µ¡¼¥Ğ¡¼¤Î¥Õ¥¡¥¤¥ë¤ÏºÇ¿·¤Ç¤¢¤ë¤Èµ­Ï¿\n"
-"  -s, --synchronize     ¥µ¡¼¥Ğ¡¼¤Î¥Õ¥¡¥¤¥ë¤ò¥À¥¦¥ó¥í¡¼¥É\n"
-"  -u, --update          ¥µ¡¼¥Ğ¡¼¤Î¥Õ¥¡¥¤¥ë¤ò¹¹¿·\n"
-"  -h, --help            ¤³¤Î¥Ø¥ë¥×¤òÉ½¼¨\n"
-"  -V, --version         ¥Ğ¡¼¥¸¥ç¥ó¾ğÊó¤òÉ½¼¨\n"
-"²şÁ±Äó°Æ¤È¥Ğ¥°¥ì¥İ¡¼¥È¤Ï sitecopy@lyra.org ¤Ş¤Ç¤É¤¦¤¾\n"
+"  -l, --list            ãƒ•ã‚¡ã‚¤ãƒ«ã®çŠ¶æ…‹ã‚’è¡¨ç¤º (default)\n"
+"  -ll, --flatlist       ãƒ•ã‚¡ã‚¤ãƒ«ã®çŠ¶æ…‹ã‚’ç°¡æ˜“è¡¨ç¤º\n"
+"  -v, --view            ã‚µã‚¤ãƒˆã®è¨­å®šã‚’è¡¨ç¤º\n"
+"  -i, --initialize      ã‚µãƒ¼ãƒãƒ¼ã«ãƒ•ã‚¡ã‚¤ãƒ«ãŒãªã„ã¨è¨˜éŒ²\n"
+"  -f, --fetch           ã‚µãƒ¼ãƒãƒ¼ã«ã‚ã‚‹ãƒ•ã‚¡ã‚¤ãƒ«ã®ä¸€è¦§ã‚’å–å¾—\n"
+"  -c, --catchup         ã‚µãƒ¼ãƒãƒ¼ã®ãƒ•ã‚¡ã‚¤ãƒ«ã¯æœ€æ–°ã§ã‚ã‚‹ã¨è¨˜éŒ²\n"
+"  -s, --synchronize     ã‚µãƒ¼ãƒãƒ¼ã®ãƒ•ã‚¡ã‚¤ãƒ«ã‚’ãƒ€ã‚¦ãƒ³ãƒ­ãƒ¼ãƒ‰\n"
+"  -u, --update          ã‚µãƒ¼ãƒãƒ¼ã®ãƒ•ã‚¡ã‚¤ãƒ«ã‚’æ›´æ–°\n"
+"  -h, --help            ã“ã®ãƒ˜ãƒ«ãƒ—ã‚’è¡¨ç¤º\n"
+"  -V, --version         ãƒãƒ¼ã‚¸ãƒ§ãƒ³æƒ…å ±ã‚’è¡¨ç¤º\n"
+"æ”¹å–„ææ¡ˆã¨ãƒã‚°ãƒ¬ãƒãƒ¼ãƒˆã¯ sitecopy@lyra.org ã¾ã§ã©ã†ã\n"
 
 #: src/sitestore.c:127
 #, c-format
@@ -934,7 +934,7 @@ msgstr ""
 #, fuzzy, c-format
 #| msgid "Could not write to file: %s"
 msgid "Could not create lock file `%s': %s"
-msgstr "¥Õ¥¡¥¤¥ë¤¬½ñ¤±¤Ş¤»¤ó: %s"
+msgstr "ãƒ•ã‚¡ã‚¤ãƒ«ãŒæ›¸ã‘ã¾ã›ã‚“: %s"
 
 #: src/sitestore.c:448
 #, c-format
@@ -953,68 +953,68 @@ msgstr ""
 
 #: src/davdriver.c:197
 msgid "The connection timed out."
-msgstr "ÀÜÂ³¥¿¥¤¥à¥¢¥¦¥È¡£"
+msgstr "æ¥ç¶šã‚¿ã‚¤ãƒ ã‚¢ã‚¦ãƒˆã€‚"
 
 #: src/davdriver.c:218
 msgid "SSL support has not be compiled in."
-msgstr "SSL µ¡Ç½¤¬¥³¥ó¥Ñ¥¤¥ë¤µ¤ì¤Æ¤¤¤Ş¤»¤ó¡£"
+msgstr "SSL æ©Ÿèƒ½ãŒã‚³ãƒ³ãƒ‘ã‚¤ãƒ«ã•ã‚Œã¦ã„ã¾ã›ã‚“ã€‚"
 
 #: src/davdriver.c:224
 #, fuzzy, c-format
 msgid "Could not load certificate `%s'."
-msgstr "¥Õ¥¡¥¤¥ë¤¬½ñ¤±¤Ş¤»¤ó: %s"
+msgstr "ãƒ•ã‚¡ã‚¤ãƒ«ãŒæ›¸ã‘ã¾ã›ã‚“: %s"
 
 #: src/davdriver.c:254
 #, fuzzy, c-format
 msgid "Could not read SSL client certificate '%s'."
-msgstr "¥Õ¥¡¥¤¥ë¤¬½ñ¤±¤Ş¤»¤ó: %s"
+msgstr "ãƒ•ã‚¡ã‚¤ãƒ«ãŒæ›¸ã‘ã¾ã›ã‚“: %s"
 
 #: src/davdriver.c:267
 #, fuzzy, c-format
 msgid "Could not decrypt SSL client certificate '%s'."
-msgstr "¥Õ¥¡¥¤¥ë¤¬½ñ¤±¤Ş¤»¤ó: %s"
+msgstr "ãƒ•ã‚¡ã‚¤ãƒ«ãŒæ›¸ã‘ã¾ã›ã‚“: %s"
 
 #: src/davdriver.c:289
 msgid "The server does not appear to be a WebDAV server."
-msgstr "¤³¤Î¥µ¡¼¥Ğ¡¼¤Ï WebDAV ¥µ¡¼¥Ğ¡¼¤Ç¤Ï¤Ê¤¤¤è¤¦¤Ç¤¹¡£"
+msgstr "ã“ã®ã‚µãƒ¼ãƒãƒ¼ã¯ WebDAV ã‚µãƒ¼ãƒãƒ¼ã§ã¯ãªã„ã‚ˆã†ã§ã™ã€‚"
 
 #: src/davdriver.c:295
 msgid "The server does not support the executable live property."
-msgstr "¤³¤Î¥µ¡¼¥Ğ¡¼¤Ï executable live property ¤ò¥µ¥İ¡¼¥È¤·¤Æ¤¤¤Ş¤»¤ó¡£"
+msgstr "ã“ã®ã‚µãƒ¼ãƒãƒ¼ã¯ executable live property ã‚’ã‚µãƒãƒ¼ãƒˆã—ã¦ã„ã¾ã›ã‚“ã€‚"
 
 #: src/davdriver.c:342 src/davdriver.c:407 src/davdriver.c:444 src/ftp.c:1051
 #: src/ftp.c:1135
 #, fuzzy
 msgid "Could not open file"
-msgstr "¥Õ¥¡¥¤¥ë¤¬ÆÉ¤á¤Ş¤»¤ó: "
+msgstr "ãƒ•ã‚¡ã‚¤ãƒ«ãŒèª­ã‚ã¾ã›ã‚“: "
 
 #: src/davdriver.c:374
 #, fuzzy, c-format
 msgid "Could not stat file: %s"
-msgstr "¥Õ¥¡¥¤¥ë¤¬½ñ¤±¤Ş¤»¤ó: %s"
+msgstr "ãƒ•ã‚¡ã‚¤ãƒ«ãŒæ›¸ã‘ã¾ã›ã‚“: %s"
 
 #: src/davdriver.c:608
 msgid "Could not access resource"
-msgstr "¥ê¥½¡¼¥¹¤Ë¥¢¥¯¥»¥¹¤Ç¤­¤Ş¤»¤ó¡£"
+msgstr "ãƒªã‚½ãƒ¼ã‚¹ã«ã‚¢ã‚¯ã‚»ã‚¹ã§ãã¾ã›ã‚“ã€‚"
 
 #: src/sites.c:164
 msgid "Could not set modification time of local file."
-msgstr "¥í¡¼¥«¥ë¥Õ¥¡¥¤¥ë¤ÎºÇ½ª½¤Àµ»ş¹ï¤òÊÑ¹¹¤Ç¤­¤Ş¤»¤ó¡£"
+msgstr "ãƒ­ãƒ¼ã‚«ãƒ«ãƒ•ã‚¡ã‚¤ãƒ«ã®æœ€çµ‚ä¿®æ­£æ™‚åˆ»ã‚’å¤‰æ›´ã§ãã¾ã›ã‚“ã€‚"
 
 #: src/sites.c:319
 msgid ""
 "Upload succeeded, but could not retrieve modification time.\n"
 "If this message persists, turn off safe mode."
 msgstr ""
-"¥¢¥Ã¥×¥í¡¼¥É¤ËÀ®¸ù¤·¤Ş¤·¤¿¤¬¡¢¥Õ¥¡¥¤¥ë¤ÎºÇ½ª½¤Àµ»ş¹ï¤ò¼èÆÀ¤Ç¤­¤Ş¤»¤ó¤Ç¤·"
-"¤¿¡£\n"
-"¤³¤Î¥á¥Ã¥»¡¼¥¸¤¬¤¤¤Ä¤â½Ğ¤ë¤Ê¤é¡¢safe mode ¤ò²ò½ü¤·¤Æ²¼¤µ¤¤¡£"
+"ã‚¢ãƒƒãƒ—ãƒ­ãƒ¼ãƒ‰ã«æˆåŠŸã—ã¾ã—ãŸãŒã€ãƒ•ã‚¡ã‚¤ãƒ«ã®æœ€çµ‚ä¿®æ­£æ™‚åˆ»ã‚’å–å¾—ã§ãã¾ã›ã‚“ã§ã—"
+"ãŸã€‚\n"
+"ã“ã®ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ãŒã„ã¤ã‚‚å‡ºã‚‹ãªã‚‰ã€safe mode ã‚’è§£é™¤ã—ã¦ä¸‹ã•ã„ã€‚"
 
 #: src/sites.c:547
 msgid "Remote file has been modified - not overwriting with local changes"
 msgstr ""
-"¥µ¡¼¥Ğ¡¼¤Î¥Õ¥¡¥¤¥ë¤¬½¤Àµ¤µ¤ì¤Æ¤¤¤Ş¤¹ - ¥í¡¼¥«¥ë¥Õ¥¡¥¤¥ë¤ÎÊÑ¹¹¤ò¾å½ñ¤­¤·¤Ş¤»"
-"¤ó¡£"
+"ã‚µãƒ¼ãƒãƒ¼ã®ãƒ•ã‚¡ã‚¤ãƒ«ãŒä¿®æ­£ã•ã‚Œã¦ã„ã¾ã™ - ãƒ­ãƒ¼ã‚«ãƒ«ãƒ•ã‚¡ã‚¤ãƒ«ã®å¤‰æ›´ã‚’ä¸Šæ›¸ãã—ã¾ã›"
+"ã‚“ã€‚"
 
 #: src/sites.c:564
 msgid "Filename too long for a temporary upload"
@@ -1022,35 +1022,35 @@ msgstr ""
 
 #: src/sites.c:871
 msgid "Could not examine file."
-msgstr "¥Õ¥¡¥¤¥ë¤ò¿ÇÃÇ¤Ç¤­¤Ş¤»¤ó¡£"
+msgstr "ãƒ•ã‚¡ã‚¤ãƒ«ã‚’è¨ºæ–­ã§ãã¾ã›ã‚“ã€‚"
 
 #: src/sites.c:914
 msgid "Could not checksum file"
-msgstr "¥Õ¥¡¥¤¥ë¤Î¥Á¥§¥Ã¥¯¥µ¥à¤ò·×»»¤Ç¤­¤Ş¤»¤ó¡£"
+msgstr "ãƒ•ã‚¡ã‚¤ãƒ«ã®ãƒã‚§ãƒƒã‚¯ã‚µãƒ ã‚’è¨ˆç®—ã§ãã¾ã›ã‚“ã€‚"
 
 #: src/sites.c:932
 msgid "The target of the symlink could not be read."
-msgstr "¥·¥ó¥Ü¥ê¥Ã¥¯¥ê¥ó¥¯¤Î¥ê¥ó¥¯Àè¥Õ¥¡¥¤¥ë¤¬ÆÉ¤á¤Ş¤»¤ó¡£"
+msgstr "ã‚·ãƒ³ãƒœãƒªãƒƒã‚¯ãƒªãƒ³ã‚¯ã®ãƒªãƒ³ã‚¯å…ˆãƒ•ã‚¡ã‚¤ãƒ«ãŒèª­ã‚ã¾ã›ã‚“ã€‚"
 
 #: src/sites.c:1526
 #, fuzzy
 msgid "Could not write SSL certificate"
-msgstr "¥Õ¥¡¥¤¥ë¤¬½ñ¤±¤Ş¤»¤ó: %s"
+msgstr "ãƒ•ã‚¡ã‚¤ãƒ«ãŒæ›¸ã‘ã¾ã›ã‚“: %s"
 
 #: src/ftp.c:158
 #, c-format
 msgid "%s: connection was closed by server."
-msgstr "%s: ÀÜÂ³¤¬¥µ¡¼¥Ğ¡¼¤ËÀÚ¤é¤ì¤Ş¤·¤¿¡£"
+msgstr "%s: æ¥ç¶šãŒã‚µãƒ¼ãƒãƒ¼ã«åˆ‡ã‚‰ã‚Œã¾ã—ãŸã€‚"
 
 #: src/ftp.c:162
 #, c-format
 msgid "%s: connection timed out."
-msgstr "%s: ÀÜÂ³¥¿¥¤¥à¥¢¥¦¥È¤Ç¤¹¡£"
+msgstr "%s: æ¥ç¶šã‚¿ã‚¤ãƒ ã‚¢ã‚¦ãƒˆã§ã™ã€‚"
 
 #: src/ftp.c:200
 #, fuzzy
 msgid "Could not read response line"
-msgstr "response body ¤¬ÆÉ¤á¤Ş¤»¤ó"
+msgstr "response body ãŒèª­ã‚ã¾ã›ã‚“"
 
 #: src/ftp.c:234
 msgid "Cannot parse MDTM response; wrong length."
@@ -1063,12 +1063,12 @@ msgstr ""
 #: src/ftp.c:265
 #, fuzzy
 msgid "Could not find address in PASV response"
-msgstr "response body ¤¬ÆÉ¤á¤Ş¤»¤ó"
+msgstr "response body ãŒèª­ã‚ã¾ã›ã‚“"
 
 #: src/ftp.c:272
 #, fuzzy
 msgid "Could not parse PASV response"
-msgstr "response body ¤¬ÆÉ¤á¤Ş¤»¤ó"
+msgstr "response body ãŒèª­ã‚ã¾ã›ã‚“"
 
 #: src/ftp.c:281
 msgid "Invalid IP address in PASV response"
@@ -1077,12 +1077,12 @@ msgstr ""
 #: src/ftp.c:304
 #, fuzzy
 msgid "Malformed EPSV response"
-msgstr "response body ¤¬ÆÉ¤á¤Ş¤»¤ó"
+msgstr "response body ãŒèª­ã‚ã¾ã›ã‚“"
 
 #: src/ftp.c:313
 #, fuzzy
 msgid "Malformed port in EPSV response"
-msgstr "response body ¤¬ÆÉ¤á¤Ş¤»¤ó"
+msgstr "response body ãŒèª­ã‚ã¾ã›ã‚“"
 
 #: src/ftp.c:452 src/ftp.c:502 src/ftp.c:535
 msgid "Interrupted"
@@ -1095,17 +1095,17 @@ msgstr ""
 #: src/ftp.c:484 src/ftp.c:517
 #, fuzzy
 msgid "Error reading file"
-msgstr "chunked response body ¤¬ÆÉ¤á¤Ş¤»¤ó"
+msgstr "chunked response body ãŒèª­ã‚ã¾ã›ã‚“"
 
 #: src/ftp.c:508
 #, fuzzy
 msgid "Could not send file"
-msgstr "¥Õ¥¡¥¤¥ë¤¬ÆÉ¤á¤Ş¤»¤ó: "
+msgstr "ãƒ•ã‚¡ã‚¤ãƒ«ãŒèª­ã‚ã¾ã›ã‚“: "
 
 #: src/ftp.c:543 src/ftp.c:1153
 #, fuzzy
 msgid "Error writing to file"
-msgstr "¥Õ¥¡¥¤¥ë¤¬½ñ¤±¤Ş¤»¤ó: "
+msgstr "ãƒ•ã‚¡ã‚¤ãƒ«ãŒæ›¸ã‘ã¾ã›ã‚“: "
 
 #: src/ftp.c:549
 msgid "Receiving file"
@@ -1132,7 +1132,7 @@ msgstr ""
 #: src/ftp.c:683
 #, fuzzy
 msgid "Could not connect passive data socket"
-msgstr "¥×¥í¥­¥·¡¼¥µ¡¼¥Ğ¡¼¤Ë SSL ÀÜÂ³¤Ç¤­¤Ş¤»¤ó"
+msgstr "ãƒ—ãƒ­ã‚­ã‚·ãƒ¼ã‚µãƒ¼ãƒãƒ¼ã« SSL æ¥ç¶šã§ãã¾ã›ã‚“"
 
 #: src/ftp.c:802
 msgid "Active open failed: could not determine address of control socket"
@@ -1141,7 +1141,7 @@ msgstr ""
 #: src/ftp.c:814
 #, fuzzy
 msgid "Active open failed: could not create socket"
-msgstr "¥×¥í¥­¥·¡¼¥µ¡¼¥Ğ¡¼¤Ë SSL ÀÜÂ³¤Ç¤­¤Ş¤»¤ó"
+msgstr "ãƒ—ãƒ­ã‚­ã‚·ãƒ¼ã‚µãƒ¼ãƒãƒ¼ã« SSL æ¥ç¶šã§ãã¾ã›ã‚“"
 
 #: src/ftp.c:822
 msgid "Active open failed: could not bind to address"
@@ -1154,7 +1154,7 @@ msgstr ""
 #: src/ftp.c:839
 #, fuzzy
 msgid "Could not determine bound port number for data socket"
-msgstr "¥×¥í¥­¥·¡¼¥µ¡¼¥Ğ¡¼¤Ë SSL ÀÜÂ³¤Ç¤­¤Ş¤»¤ó"
+msgstr "ãƒ—ãƒ­ã‚­ã‚·ãƒ¼ã‚µãƒ¼ãƒãƒ¼ã« SSL æ¥ç¶šã§ãã¾ã›ã‚“"
 
 #: src/ftp.c:884
 msgid "Active open failed: could not accept connection"
@@ -1167,32 +1167,32 @@ msgstr ""
 #: src/ftp.c:1057
 #, fuzzy
 msgid "Could not determine length of file"
-msgstr "¥Õ¥¡¥¤¥ë¤¬ÆÉ¤á¤Ş¤»¤ó: "
+msgstr "ãƒ•ã‚¡ã‚¤ãƒ«ãŒèª­ã‚ã¾ã›ã‚“: "
 
 #: src/ftp.c:1068
 #, fuzzy
 msgid "Could not rewind to beginning of file"
-msgstr "¥Õ¥¡¥¤¥ë¤¬ÆÉ¤á¤Ş¤»¤ó: "
+msgstr "ãƒ•ã‚¡ã‚¤ãƒ«ãŒèª­ã‚ã¾ã›ã‚“: "
 
 #: src/ftp.c:1254
 #, fuzzy, c-format
 msgid "Server does not support FTP over TLS: %s"
-msgstr "¥µ¡¼¥Ğ¡¼¤¬¥Õ¥¡¥¤¥ë¤ÎÉôÊ¬¼èÆÀ¤ò¥µ¥İ¡¼¥È¤·¤Æ¤¤¤Ş¤»¤ó¡£"
+msgstr "ã‚µãƒ¼ãƒãƒ¼ãŒãƒ•ã‚¡ã‚¤ãƒ«ã®éƒ¨åˆ†å–å¾—ã‚’ã‚µãƒãƒ¼ãƒˆã—ã¦ã„ã¾ã›ã‚“ã€‚"
 
 #: src/ftp.c:1270
 #, fuzzy, c-format
 msgid "Could not enable TLS for data connections: %s"
-msgstr "¥×¥í¥­¥·¡¼¥µ¡¼¥Ğ¡¼¤Ë SSL ÀÜÂ³¤Ç¤­¤Ş¤»¤ó"
+msgstr "ãƒ—ãƒ­ã‚­ã‚·ãƒ¼ã‚µãƒ¼ãƒãƒ¼ã« SSL æ¥ç¶šã§ãã¾ã›ã‚“"
 
 #: src/ftp.c:1390
 #, fuzzy
 msgid "Could not read 'LIST' response."
-msgstr "response body ¤¬ÆÉ¤á¤Ş¤»¤ó"
+msgstr "response body ãŒèª­ã‚ã¾ã›ã‚“"
 
 #: src/ftp.c:1399
 #, fuzzy, c-format
 msgid "Parse error in LIST response: %s"
-msgstr "response body ¤¬ÆÉ¤á¤Ş¤»¤ó"
+msgstr "response body ãŒèª­ã‚ã¾ã›ã‚“"
 
 #, c-format
 #~ msgid ""
@@ -1203,266 +1203,266 @@ msgstr "response body ¤¬ÆÉ¤á¤Ş¤»¤ó"
 #~ "%s"
 
 #~ msgid "Unknown system error"
-#~ msgstr "Ì¤ÃÎ¤Î¥·¥¹¥Æ¥à¥¨¥é¡¼"
+#~ msgstr "æœªçŸ¥ã®ã‚·ã‚¹ãƒ†ãƒ ã‚¨ãƒ©ãƒ¼"
 
 #, fuzzy
 #~ msgid "_Delete this site"
-#~ msgstr "%s ¤òºï½ü"
+#~ msgstr "%s ã‚’å‰Šé™¤"
 
 #, fuzzy
 #~ msgid "_Initialise site"
-#~ msgstr "½é´ü²½"
+#~ msgstr "åˆæœŸåŒ–"
 
 #, fuzzy
 #~ msgid "'_Catchup' site"
-#~ msgstr "¹¹¿·ºÑ¤ß¥Ş¡¼¥¯"
+#~ msgstr "æ›´æ–°æ¸ˆã¿ãƒãƒ¼ã‚¯"
 
 #, fuzzy
 #~ msgid "_Resynchronize site"
-#~ msgstr "¥À¥¦¥ó¥í¡¼¥ÉÃæ"
+#~ msgstr "ãƒ€ã‚¦ãƒ³ãƒ­ãƒ¼ãƒ‰ä¸­"
 
 #, fuzzy
 #~ msgid "Re-reads the local directory of the selected site."
-#~ msgstr "%s: ¥µ¥¤¥È `%s' ¤Ç¥í¡¼¥«¥ë¥Ç¥£¥ì¥¯¥È¥ê¤¬»ØÄê¤µ¤ì¤Æ¤¤¤Ş¤»¤ó¡£\n"
+#~ msgstr "%s: ã‚µã‚¤ãƒˆ `%s' ã§ãƒ­ãƒ¼ã‚«ãƒ«ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªãŒæŒ‡å®šã•ã‚Œã¦ã„ã¾ã›ã‚“ã€‚\n"
 
 #, fuzzy
 #~ msgid "_Operations"
-#~ msgstr "¥ª¥×¥·¥ç¥ó¡§ \n"
+#~ msgstr "ã‚ªãƒ—ã‚·ãƒ§ãƒ³ï¼š \n"
 
 #, fuzzy
 #~ msgid "Delete site"
-#~ msgstr "%s ¤òºï½ü"
+#~ msgstr "%s ã‚’å‰Šé™¤"
 
 #, fuzzy
 #~ msgid "Initialise"
-#~ msgstr "½é´ü²½"
+#~ msgstr "åˆæœŸåŒ–"
 
 #, fuzzy
 #~ msgid "Catch-up"
-#~ msgstr "¹¹¿·ºÑ¤ß¥Ş¡¼¥¯"
+#~ msgstr "æ›´æ–°æ¸ˆã¿ãƒãƒ¼ã‚¯"
 
 #, fuzzy
 #~ msgid "Download"
-#~ msgstr "¥À¥¦¥ó¥í¡¼¥ÉÃæ %s: ["
+#~ msgstr "ãƒ€ã‚¦ãƒ³ãƒ­ãƒ¼ãƒ‰ä¸­ %s: ["
 
 #, fuzzy, c-format
 #~ msgid "%s: Error: Could not read rcfile: %s.\n"
-#~ msgstr "%s: ¥¨¥é¡¼: rcfile %s ¤ò¥ª¡¼¥×¥ó¤Ç¤­¤Ş¤»¤ó¡£\n"
+#~ msgstr "%s: ã‚¨ãƒ©ãƒ¼: rcfile %s ã‚’ã‚ªãƒ¼ãƒ—ãƒ³ã§ãã¾ã›ã‚“ã€‚\n"
 
 #, fuzzy, c-format
 #~ msgid "Server not specified in site `%s'.\n"
-#~ msgstr "%s: ¥µ¥¤¥È '%s' ¤Ç¥µ¡¼¥Ğ¡¼¤¬»ØÄê¤µ¤ì¤Æ¤¤¤Ş¤»¤ó¡£\n"
+#~ msgstr "%s: ã‚µã‚¤ãƒˆ '%s' ã§ã‚µãƒ¼ãƒãƒ¼ãŒæŒ‡å®šã•ã‚Œã¦ã„ã¾ã›ã‚“ã€‚\n"
 
 #, fuzzy, c-format
 #~ msgid "Remote directory not specified in site `%s'.\n"
-#~ msgstr "%s: ¥µ¥¤¥È `%s' ¤Ç¥µ¡¼¥Ğ¡¼¥Ç¥£¥ì¥¯¥È¥ê¤¬»ØÄê¤µ¤ì¤Æ¤¤¤Ş¤»¤ó¡£\n"
+#~ msgstr "%s: ã‚µã‚¤ãƒˆ `%s' ã§ã‚µãƒ¼ãƒãƒ¼ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªãŒæŒ‡å®šã•ã‚Œã¦ã„ã¾ã›ã‚“ã€‚\n"
 
 #, fuzzy, c-format
 #~ msgid "Local directory not specified in site `%s'.\n"
-#~ msgstr "%s: ¥µ¥¤¥È `%s' ¤Ç¥í¡¼¥«¥ë¥Ç¥£¥ì¥¯¥È¥ê¤¬»ØÄê¤µ¤ì¤Æ¤¤¤Ş¤»¤ó¡£\n"
+#~ msgstr "%s: ã‚µã‚¤ãƒˆ `%s' ã§ãƒ­ãƒ¼ã‚«ãƒ«ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªãŒæŒ‡å®šã•ã‚Œã¦ã„ã¾ã›ã‚“ã€‚\n"
 
 #, fuzzy, c-format
 #~ msgid ""
 #~ "Could not read directory for `%s':\n"
 #~ "\t%s\n"
 #~ msgstr ""
-#~ "%s: ¥Ç¥£¥ì¥¯¥È¥ê¤¬ÆÉ¤á¤Ş¤»¤ó¡£`%s':\n"
+#~ "%s: ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªãŒèª­ã‚ã¾ã›ã‚“ã€‚`%s':\n"
 #~ "\t%s\n"
 
 #, fuzzy, c-format
 #~ msgid "Invalid port used in site `%s'.\n"
-#~ msgstr "%s: ¥µ¥¤¥È `%s' ¤Î¥İ¡¼¥È¤¬Ìµ¸ú¤Ç¤¹¡£\n"
+#~ msgstr "%s: ã‚µã‚¤ãƒˆ `%s' ã®ãƒãƒ¼ãƒˆãŒç„¡åŠ¹ã§ã™ã€‚\n"
 
 #, fuzzy, c-format
 #~ msgid "Protocol '%s' cannot maintain symbolic links (site `%s').\n"
-#~ msgstr "%s: %s ¤Ï¥·¥ó¥Ü¥ê¥Ã¥¯¥ê¥ó¥¯¤ò»È¤¨¤Ş¤»¤ó¡Ê¥µ¥¤¥È `%s'¡Ë¡£\n"
+#~ msgstr "%s: %s ã¯ã‚·ãƒ³ãƒœãƒªãƒƒã‚¯ãƒªãƒ³ã‚¯ã‚’ä½¿ãˆã¾ã›ã‚“ï¼ˆã‚µã‚¤ãƒˆ `%s'ï¼‰ã€‚\n"
 
 #, fuzzy, c-format
 #~ msgid "Cannot use a relative remote directory protocol '%s' (site `%s').\n"
-#~ msgstr "%s: %s ¤Ç¤ÏÁêÂĞ¥Ç¥£¥ì¥¯¥È¥ê¤ò»È¤¨¤Ş¤»¤ó¡Ê¥µ¥¤¥È `%s'¡Ë¡£\n"
+#~ msgstr "%s: %s ã§ã¯ç›¸å¯¾ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªã‚’ä½¿ãˆã¾ã›ã‚“ï¼ˆã‚µã‚¤ãƒˆ `%s'ï¼‰ã€‚\n"
 
 #, fuzzy, c-format
 #~ msgid "Could not find 'relative' local directory"
-#~ msgstr "¥×¥í¥­¥·¡¼¥µ¡¼¥Ğ¡¼¤Ë SSL ÀÜÂ³¤Ç¤­¤Ş¤»¤ó"
+#~ msgstr "ãƒ—ãƒ­ã‚­ã‚·ãƒ¼ã‚µãƒ¼ãƒãƒ¼ã« SSL æ¥ç¶šã§ãã¾ã›ã‚“"
 
 #, fuzzy
 #~ msgid "Could not parse redirect destination URL"
-#~ msgstr "chunk ¤ÎÂç¤­¤µ¤ò²òÀÏ¤Ç¤­¤Ş¤»¤ó"
+#~ msgstr "chunk ã®å¤§ãã•ã‚’è§£æã§ãã¾ã›ã‚“"
 
 #, fuzzy, c-format
 #~ msgid "SSL negotiation failed: %s"
-#~ msgstr "¥Õ¥¡¥¤¥ë¤¬½ñ¤±¤Ş¤»¤ó: %s"
+#~ msgstr "ãƒ•ã‚¡ã‚¤ãƒ«ãŒæ›¸ã‘ã¾ã›ã‚“: %s"
 
 #, fuzzy
 #~ msgid "Connection closed"
-#~ msgstr "%s: ÀÜÂ³¤¬¥µ¡¼¥Ğ¡¼¤ËÀÚ¤é¤ì¤Ş¤·¤¿¡£"
+#~ msgstr "%s: æ¥ç¶šãŒã‚µãƒ¼ãƒãƒ¼ã«åˆ‡ã‚‰ã‚Œã¾ã—ãŸã€‚"
 
 #, fuzzy
 #~ msgid "Secure connection truncated"
-#~ msgstr "ÀÜÂ³¥¿¥¤¥à¥¢¥¦¥È¡£"
+#~ msgstr "æ¥ç¶šã‚¿ã‚¤ãƒ ã‚¢ã‚¦ãƒˆã€‚"
 
 #, fuzzy
 #~ msgid "Connection timed out"
-#~ msgstr "ÀÜÂ³¥¿¥¤¥à¥¢¥¦¥È¡£"
+#~ msgstr "æ¥ç¶šã‚¿ã‚¤ãƒ ã‚¢ã‚¦ãƒˆã€‚"
 
 #, fuzzy
 #~ msgid "Could not create SSL structure"
-#~ msgstr "¥×¥í¥­¥·¡¼¥µ¡¼¥Ğ¡¼¤Ë SSL ÀÜÂ³¤Ç¤­¤Ş¤»¤ó"
+#~ msgstr "ãƒ—ãƒ­ã‚­ã‚·ãƒ¼ã‚µãƒ¼ãƒãƒ¼ã« SSL æ¥ç¶šã§ãã¾ã›ã‚“"
 
 #, fuzzy, c-format
 #~ msgid "%s: connection was closed by proxy server"
-#~ msgstr "%s: ÀÜÂ³¤¬¥×¥í¥­¥·¡¼¥µ¡¼¥Ğ¡¼¤ËÀÚ¤é¤ì¤Ş¤·¤¿¡£"
+#~ msgstr "%s: æ¥ç¶šãŒãƒ—ãƒ­ã‚­ã‚·ãƒ¼ã‚µãƒ¼ãƒãƒ¼ã«åˆ‡ã‚‰ã‚Œã¾ã—ãŸã€‚"
 
 #, fuzzy, c-format
 #~ msgid "%s: connection was closed by server"
-#~ msgstr "%s: ÀÜÂ³¤¬¥µ¡¼¥Ğ¡¼¤ËÀÚ¤é¤ì¤Ş¤·¤¿¡£"
+#~ msgstr "%s: æ¥ç¶šãŒã‚µãƒ¼ãƒãƒ¼ã«åˆ‡ã‚‰ã‚Œã¾ã—ãŸã€‚"
 
 #, fuzzy, c-format
 #~ msgid "%s: connection timed out"
-#~ msgstr "%s: ÀÜÂ³¥¿¥¤¥à¥¢¥¦¥È¤Ç¤¹¡£"
+#~ msgstr "%s: æ¥ç¶šã‚¿ã‚¤ãƒ ã‚¢ã‚¦ãƒˆã§ã™ã€‚"
 
 #, fuzzy, c-format
 #~ msgid "Could not seek to offset %s of request body file: %s"
-#~ msgstr "¥Õ¥¡¥¤¥ë¤¬½ñ¤±¤Ş¤»¤ó: %s"
+#~ msgstr "ãƒ•ã‚¡ã‚¤ãƒ«ãŒæ›¸ã‘ã¾ã›ã‚“: %s"
 
 #~ msgid "Could not read chunk size"
-#~ msgstr "chunk ¤ÎÂç¤­¤µ¤¬ÆÉ¤á¤Ş¤»¤ó"
+#~ msgstr "chunk ã®å¤§ãã•ãŒèª­ã‚ã¾ã›ã‚“"
 
 #~ msgid "Could not parse chunk size"
-#~ msgstr "chunk ¤ÎÂç¤­¤µ¤ò²òÀÏ¤Ç¤­¤Ş¤»¤ó"
+#~ msgstr "chunk ã®å¤§ãã•ã‚’è§£æã§ãã¾ã›ã‚“"
 
 #~ msgid "Could not read response body"
-#~ msgstr "response body ¤¬ÆÉ¤á¤Ş¤»¤ó"
+#~ msgstr "response body ãŒèª­ã‚ã¾ã›ã‚“"
 
 #, fuzzy
 #~ msgid "Could not read chunk delimiter"
-#~ msgstr "chunk ¤ÎÂç¤­¤µ¤¬ÆÉ¤á¤Ş¤»¤ó"
+#~ msgstr "chunk ã®å¤§ãã•ãŒèª­ã‚ã¾ã›ã‚“"
 
 #, fuzzy
 #~ msgid "Could not parse response status line"
-#~ msgstr "response body ¤¬ÆÉ¤á¤Ş¤»¤ó"
+#~ msgstr "response body ãŒèª­ã‚ã¾ã›ã‚“"
 
 #, fuzzy
 #~ msgid "Could not read interim response headers"
-#~ msgstr "response body ¤¬ÆÉ¤á¤Ş¤»¤ó"
+#~ msgstr "response body ãŒèª­ã‚ã¾ã›ã‚“"
 
 #, fuzzy, c-format
 #~ msgid "Could not resolve hostname `%s': %s"
 #~ msgstr ""
-#~ "%s: ¥¨¥é¡¼: ¥µ¡¼¥Ğ¡¼¤Î¥Û¥¹¥ÈÌ¾ (%s) ¤ò IP ¥¢¥É¥ì¥¹¤ËÊÑ´¹¤Ç¤­¤Ş¤»¤ó¡£\n"
+#~ "%s: ã‚¨ãƒ©ãƒ¼: ã‚µãƒ¼ãƒãƒ¼ã®ãƒ›ã‚¹ãƒˆå (%s) ã‚’ IP ã‚¢ãƒ‰ãƒ¬ã‚¹ã«å¤‰æ›ã§ãã¾ã›ã‚“ã€‚\n"
 
 #, fuzzy
 #~ msgid "Could not create socket"
-#~ msgstr "¥×¥í¥­¥·¡¼¥µ¡¼¥Ğ¡¼¤Ë SSL ÀÜÂ³¤Ç¤­¤Ş¤»¤ó"
+#~ msgstr "ãƒ—ãƒ­ã‚­ã‚·ãƒ¼ã‚µãƒ¼ãƒãƒ¼ã« SSL æ¥ç¶šã§ãã¾ã›ã‚“"
 
 #~ msgid "Could not connect to proxy server"
-#~ msgstr "¥×¥í¥­¥·¡¼¥µ¡¼¥Ğ¡¼¤ËÀÜÂ³¤Ç¤­¤Ş¤»¤ó"
+#~ msgstr "ãƒ—ãƒ­ã‚­ã‚·ãƒ¼ã‚µãƒ¼ãƒãƒ¼ã«æ¥ç¶šã§ãã¾ã›ã‚“"
 
 #~ msgid "Could not connect to server"
-#~ msgstr "¥×¥í¥­¥·¡¼¥µ¡¼¥Ğ¡¼¤ËÀÜÂ³¤Ç¤­¤Ş¤»¤ó"
+#~ msgstr "ãƒ—ãƒ­ã‚­ã‚·ãƒ¼ã‚µãƒ¼ãƒãƒ¼ã«æ¥ç¶šã§ãã¾ã›ã‚“"
 
 #, fuzzy, c-format
 #~ msgid "XML parse error at line %d: invalid element name"
 #~ msgstr ""
-#~ "%s: rcfile ¤¬ %d ¹Ô¤Ç´Ö°ã¤Ã¤Æ¤¤¤Ş¤¹¡£:\n"
+#~ "%s: rcfile ãŒ %d è¡Œã§é–“é•ã£ã¦ã„ã¾ã™ã€‚:\n"
 #~ "%s\n"
 
 #, fuzzy
 #~ msgid "Unknown error"
-#~ msgstr "Ì¤ÃÎ¤Î¥·¥¹¥Æ¥à¥¨¥é¡¼"
+#~ msgstr "æœªçŸ¥ã®ã‚·ã‚¹ãƒ†ãƒ ã‚¨ãƒ©ãƒ¼"
 
 #, fuzzy, c-format
 #~ msgid "XML parse error at line %d: %s"
 #~ msgstr ""
-#~ "%s: rcfile ¤¬ %d ¹Ô¤Ç´Ö°ã¤Ã¤Æ¤¤¤Ş¤¹¡£:\n"
+#~ "%s: rcfile ãŒ %d è¡Œã§é–“é•ã£ã¦ã„ã¾ã™ã€‚:\n"
 #~ "%s\n"
 
 #, fuzzy
 #~ msgid "Could not inflate data"
-#~ msgstr "¥Õ¥¡¥¤¥ë¤¬ÆÉ¤á¤Ş¤»¤ó: "
+#~ msgstr "ãƒ•ã‚¡ã‚¤ãƒ«ãŒèª­ã‚ã¾ã›ã‚“: "
 
 #, fuzzy
 #~ msgid "Could not initialize zlib"
-#~ msgstr "¥Õ¥¡¥¤¥ë¤¬½ñ¤±¤Ş¤»¤ó: "
+#~ msgstr "ãƒ•ã‚¡ã‚¤ãƒ«ãŒæ›¸ã‘ã¾ã›ã‚“: "
 
 #, fuzzy, c-format
 #~ msgid "Could not parse response: %s"
-#~ msgstr "response body ¤¬ÆÉ¤á¤Ş¤»¤ó"
+#~ msgstr "response body ãŒèª­ã‚ã¾ã›ã‚“"
 
 #, fuzzy, c-format
 #~ msgid "Could not determine file size: %s"
-#~ msgstr "¥Õ¥¡¥¤¥ë¤¬ÆÉ¤á¤Ş¤»¤ó: "
+#~ msgstr "ãƒ•ã‚¡ã‚¤ãƒ«ãŒèª­ã‚ã¾ã›ã‚“: "
 
 #, fuzzy, c-format
 #~ msgid "Could not authenticate to server: %s"
-#~ msgstr "¥×¥í¥­¥·¡¼¥µ¡¼¥Ğ¡¼¤ËÀÜÂ³¤Ç¤­¤Ş¤»¤ó"
+#~ msgstr "ãƒ—ãƒ­ã‚­ã‚·ãƒ¼ã‚µãƒ¼ãƒãƒ¼ã«æ¥ç¶šã§ãã¾ã›ã‚“"
 
 #, fuzzy, c-format
 #~ msgid "Could not authenticate to proxy server: %s"
-#~ msgstr "¥×¥í¥­¥·¡¼¥µ¡¼¥Ğ¡¼¤ËÀÜÂ³¤Ç¤­¤Ş¤»¤ó"
+#~ msgstr "ãƒ—ãƒ­ã‚­ã‚·ãƒ¼ã‚µãƒ¼ãƒãƒ¼ã«æ¥ç¶šã§ãã¾ã›ã‚“"
 
 #, fuzzy
 #~ msgid "GSSAPI authentication error: "
-#~ msgstr "%s ¤Ø¤ÎÇ§¾Ú¤¬ %s ¤ÇÉ¬Í×¤Ç¤¹ '%s':\n"
+#~ msgstr "%s ã¸ã®èªè¨¼ãŒ %s ã§å¿…è¦ã§ã™ '%s':\n"
 
 #, fuzzy
 #~ msgid "could not parse domain in Digest challenge"
-#~ msgstr "chunk ¤ÎÂç¤­¤µ¤ò²òÀÏ¤Ç¤­¤Ş¤»¤ó"
+#~ msgstr "chunk ã®å¤§ãã•ã‚’è§£æã§ãã¾ã›ã‚“"
 
 #, fuzzy
 #~ msgid "could not parse challenge"
-#~ msgstr "chunk ¤ÎÂç¤­¤µ¤ò²òÀÏ¤Ç¤­¤Ş¤»¤ó"
+#~ msgstr "chunk ã®å¤§ãã•ã‚’è§£æã§ãã¾ã›ã‚“"
 
 #, c-format
 #~ msgid "%s: option `%s' is ambiguous\n"
-#~ msgstr "%s: ¥ª¥×¥·¥ç¥ó `%s' ¤ÏÊ£¿ô¤Î°ÕÌ£¤Ë²ò¼á¤Ç¤­¤Ş¤¹\n"
+#~ msgstr "%s: ã‚ªãƒ—ã‚·ãƒ§ãƒ³ `%s' ã¯è¤‡æ•°ã®æ„å‘³ã«è§£é‡ˆã§ãã¾ã™\n"
 
 #, c-format
 #~ msgid "%s: option `--%s' doesn't allow an argument\n"
-#~ msgstr "%s: ¥ª¥×¥·¥ç¥ó `--%s' ¤Ë°ú¿ô¤ÏÉÔÍ×¤Ç¤¹\n"
+#~ msgstr "%s: ã‚ªãƒ—ã‚·ãƒ§ãƒ³ `--%s' ã«å¼•æ•°ã¯ä¸è¦ã§ã™\n"
 
 #, c-format
 #~ msgid "%s: option `%c%s' doesn't allow an argument\n"
-#~ msgstr "%s: ¥ª¥×¥·¥ç¥ó `%c%s' ¤Ë°ú¿ô¤ÏÉÔÍ×¤Ç¤¹\n"
+#~ msgstr "%s: ã‚ªãƒ—ã‚·ãƒ§ãƒ³ `%c%s' ã«å¼•æ•°ã¯ä¸è¦ã§ã™\n"
 
 #, c-format
 #~ msgid "%s: option `%s' requires an argument\n"
-#~ msgstr "%s: ¥ª¥×¥·¥ç¥ó `--%s' ¤Ë°ú¿ô¤¬É¬Í×¤Ç¤¹\n"
+#~ msgstr "%s: ã‚ªãƒ—ã‚·ãƒ§ãƒ³ `--%s' ã«å¼•æ•°ãŒå¿…è¦ã§ã™\n"
 
 #, c-format
 #~ msgid "%s: unrecognized option `--%s'\n"
-#~ msgstr "%s: ¥ª¥×¥·¥ç¥ó `--%s' ¤Ï¤¢¤ê¤Ş¤»¤ó\n"
+#~ msgstr "%s: ã‚ªãƒ—ã‚·ãƒ§ãƒ³ `--%s' ã¯ã‚ã‚Šã¾ã›ã‚“\n"
 
 #, c-format
 #~ msgid "%s: unrecognized option `%c%s'\n"
-#~ msgstr "%s: ¥ª¥×¥·¥ç¥ó `%c%s' ¤Ï¤¢¤ê¤Ş¤»¤ó\n"
+#~ msgstr "%s: ã‚ªãƒ—ã‚·ãƒ§ãƒ³ `%c%s' ã¯ã‚ã‚Šã¾ã›ã‚“\n"
 
 #, c-format
 #~ msgid "%s: illegal option -- %c\n"
-#~ msgstr "%s: ÉÔÀµ¤Ê¥ª¥×¥·¥ç¥ó -- %c\n"
+#~ msgstr "%s: ä¸æ­£ãªã‚ªãƒ—ã‚·ãƒ§ãƒ³ -- %c\n"
 
 #, c-format
 #~ msgid "%s: invalid option -- %c\n"
-#~ msgstr "%s: Ìµ¸ú¤Ê¥ª¥×¥·¥ç¥ó -- %c\n"
+#~ msgstr "%s: ç„¡åŠ¹ãªã‚ªãƒ—ã‚·ãƒ§ãƒ³ -- %c\n"
 
 #, c-format
 #~ msgid "%s: option requires an argument -- %c\n"
-#~ msgstr "%s: °ú¿ô¤¬É¬Í×¤Ê¥ª¥×¥·¥ç¥ó -- %c\n"
+#~ msgstr "%s: å¼•æ•°ãŒå¿…è¦ãªã‚ªãƒ—ã‚·ãƒ§ãƒ³ -- %c\n"
 
 #, c-format
 #~ msgid "%s: option `-W %s' is ambiguous\n"
-#~ msgstr "%s: ¥ª¥×¥·¥ç¥ó `-W %s' ¤ÏÊ£¿ô¤Î°ÕÌ£¤Ë²ò¼á¤Ç¤­¤Ş¤¹\n"
+#~ msgstr "%s: ã‚ªãƒ—ã‚·ãƒ§ãƒ³ `-W %s' ã¯è¤‡æ•°ã®æ„å‘³ã«è§£é‡ˆã§ãã¾ã™\n"
 
 #, c-format
 #~ msgid "%s: option `-W %s' doesn't allow an argument\n"
-#~ msgstr "%s: ¥ª¥×¥·¥ç¥ó `-W %s' ¤Ï°ú¿ô¤¬ÉÔÍ×¤Ç¤¹\n"
+#~ msgstr "%s: ã‚ªãƒ—ã‚·ãƒ§ãƒ³ `-W %s' ã¯å¼•æ•°ãŒä¸è¦ã§ã™\n"
 
 #, fuzzy
 #~ msgid "%s: %s"
-#~ msgstr "¥æ¡¼¥¶¡¼Ì¾: %s\n"
+#~ msgstr "ãƒ¦ãƒ¼ã‚¶ãƒ¼å: %s\n"
 
 #~ msgid "%s: Aborted.\n"
-#~ msgstr "%s: ÃæÃÇ¤·¤Ş¤·¤¿¡£\n"
+#~ msgstr "%s: ä¸­æ–­ã—ã¾ã—ãŸã€‚\n"
 
 #~ msgid ""
 #~ "\n"
@@ -1471,7 +1471,7 @@ msgstr "response body ¤¬ÆÉ¤á¤Ş¤»¤ó"
 #~ msgstr ""
 #~ "\n"
 #~ "\n"
-#~ "%s: ¥·¥°¥Ê¥ë %s (%d) ¤ò¼õ¤±¼è¤ê¤Ş¤·¤¿¡£\n"
+#~ "%s: ã‚·ã‚°ãƒŠãƒ« %s (%d) ã‚’å—ã‘å–ã‚Šã¾ã—ãŸã€‚\n"
 
 #~ msgid ""
 #~ "\n"
@@ -1480,54 +1480,54 @@ msgstr "response body ¤¬ÆÉ¤á¤Ş¤»¤ó"
 #~ msgstr ""
 #~ "\n"
 #~ "\n"
-#~ "%s: ¥·¥°¥Ê¥ë %d ¤ò¼õ¤±¼è¤ê¤Ş¤·¤¿¡£\n"
+#~ "%s: ã‚·ã‚°ãƒŠãƒ« %d ã‚’å—ã‘å–ã‚Šã¾ã—ãŸã€‚\n"
 
 #~ msgid "%s: Terminating.\n"
-#~ msgstr "%s: ½ªÎ»¤·¤Æ¤¤¤Ş¤¹¡£\n"
+#~ msgstr "%s: çµ‚äº†ã—ã¦ã„ã¾ã™ã€‚\n"
 
 #, fuzzy
 #~ msgid " of request body file: %s"
-#~ msgstr "¥Õ¥¡¥¤¥ë¤¬½ñ¤±¤Ş¤»¤ó: %s"
+#~ msgstr "ãƒ•ã‚¡ã‚¤ãƒ«ãŒæ›¸ã‘ã¾ã›ã‚“: %s"
 
 #, fuzzy
 #~ msgid "Error reading request body."
-#~ msgstr "chunked response body ¤¬ÆÉ¤á¤Ş¤»¤ó"
+#~ msgstr "chunked response body ãŒèª­ã‚ã¾ã›ã‚“"
 
 #, fuzzy
 #~ msgid "unknown error code"
-#~ msgstr "Ì¤ÃÎ¤Î¥·¥¹¥Æ¥à¥¨¥é¡¼"
+#~ msgstr "æœªçŸ¥ã®ã‚·ã‚¹ãƒ†ãƒ ã‚¨ãƒ©ãƒ¼"
 
 #~ msgid "Error reading chunked response body"
-#~ msgstr "chunked response body ¤¬ÆÉ¤á¤Ş¤»¤ó"
+#~ msgstr "chunked response body ãŒèª­ã‚ã¾ã›ã‚“"
 
 #~ msgid ""
 #~ "The server did not authenticate itself correctly.\n"
 #~ "Report this error to your server administrator."
 #~ msgstr ""
-#~ "¤³¤Î¥µ¡¼¥Ğ¡¼¤ÏËÜÊª¤Ç¤¢¤ë¤³¤È¤¬³ÎÇ§¤Ç¤­¤Ş¤»¤ó¤Ç¤·¤¿¡£\n"
-#~ "¥µ¡¼¥Ğ¡¼´ÉÍı¼Ô¤Ë¤³¤Î¥¨¥é¡¼¤òÏ¢Íí¤·¤Æ²¼¤µ¤¤¡£"
+#~ "ã“ã®ã‚µãƒ¼ãƒãƒ¼ã¯æœ¬ç‰©ã§ã‚ã‚‹ã“ã¨ãŒç¢ºèªã§ãã¾ã›ã‚“ã§ã—ãŸã€‚\n"
+#~ "ã‚µãƒ¼ãƒãƒ¼ç®¡ç†è€…ã«ã“ã®ã‚¨ãƒ©ãƒ¼ã‚’é€£çµ¡ã—ã¦ä¸‹ã•ã„ã€‚"
 
 #~ msgid ""
 #~ "The proxy server did not authenticate itself correctly.\n"
 #~ "Report this error to your proxy server administrator."
 #~ msgstr ""
-#~ "¤³¤Î¥×¥í¥­¥·¡¼¥µ¡¼¥Ğ¡¼¤ÏËÜÊª¤Ç¤¢¤ë¤³¤È¤¬³ÎÇ§¤Ç¤­¤Ş¤»¤ó¤Ç¤·¤¿¡£\n"
-#~ "¥×¥í¥­¥·¡¼¥µ¡¼¥Ğ¡¼´ÉÍı¼Ô¤Ë¤³¤Î¥¨¥é¡¼¤òÏ¢Íí¤·¤Æ²¼¤µ¤¤¡£"
+#~ "ã“ã®ãƒ—ãƒ­ã‚­ã‚·ãƒ¼ã‚µãƒ¼ãƒãƒ¼ã¯æœ¬ç‰©ã§ã‚ã‚‹ã“ã¨ãŒç¢ºèªã§ãã¾ã›ã‚“ã§ã—ãŸã€‚\n"
+#~ "ãƒ—ãƒ­ã‚­ã‚·ãƒ¼ã‚µãƒ¼ãƒãƒ¼ç®¡ç†è€…ã«ã“ã®ã‚¨ãƒ©ãƒ¼ã‚’é€£çµ¡ã—ã¦ä¸‹ã•ã„ã€‚"
 
 #, fuzzy
 #~ msgid "Recent Changes"
-#~ msgstr "%s ¤òÊÑ¹¹"
+#~ msgstr "%s ã‚’å¤‰æ›´"
 
 #, fuzzy
 #~ msgid "Changed Items"
-#~ msgstr "%s ¤òÊÑ¹¹"
+#~ msgstr "%s ã‚’å¤‰æ›´"
 
 #, fuzzy
 #~ msgid "Deleted Items"
-#~ msgstr "%s ¤òºï½ü"
+#~ msgstr "%s ã‚’å‰Šé™¤"
 
 #~ msgid "%s: Failed to fetch file listing for verification.\n"
-#~ msgstr "%s: Èæ³Ó³ÎÇ§Ãæ¤Ë¥µ¡¼¥Ğ¡¼¤Ë¤¢¤ë¥Õ¥¡¥¤¥ë¤Î°ìÍ÷¼èÆÀ¤Ë¼ºÇÔ¤·¤Ş¤·¤¿¡£\n"
+#~ msgstr "%s: æ¯”è¼ƒç¢ºèªä¸­ã«ã‚µãƒ¼ãƒãƒ¼ã«ã‚ã‚‹ãƒ•ã‚¡ã‚¤ãƒ«ã®ä¸€è¦§å–å¾—ã«å¤±æ•—ã—ã¾ã—ãŸã€‚\n"
 
 #~ msgid "%s: Verify indicates differences.\n"
-#~ msgstr "%s: Èæ³Ó³ÎÇ§¤Ç°Û¤Ê¤ë¥Õ¥¡¥¤¥ë¤¬¤¢¤ê¤Ş¤·¤¿¡£\n"
+#~ msgstr "%s: æ¯”è¼ƒç¢ºèªã§ç•°ãªã‚‹ãƒ•ã‚¡ã‚¤ãƒ«ãŒã‚ã‚Šã¾ã—ãŸã€‚\n"

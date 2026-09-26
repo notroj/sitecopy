@@ -12,7 +12,7 @@ msgstr ""
 "Language-Team: cz\n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=iso-8859-2\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
 # src/console_fe.c:992
@@ -24,17 +24,17 @@ msgstr "Nelze zapsat do souboru: %s"
 # src/console_fe.c:107
 #: src/console_fe.c:123
 msgid "Show changes to"
-msgstr "Zobrazení zmìn pro"
+msgstr "ZobrazenÃ­ zmÄ›n pro"
 
 # src/console_fe.c:107
 #: src/console_fe.c:123
 msgid "showing changes to"
-msgstr "zobrazení zmìn pro"
+msgstr "zobrazenÃ­ zmÄ›n pro"
 
 # src/console_fe.c:107 src/console_fe.c:108
 #: src/console_fe.c:123 src/console_fe.c:124
 msgid "local"
-msgstr "lokální"
+msgstr "lokÃ¡lnÃ­"
 
 # src/console_fe.c:108
 #: src/console_fe.c:124
@@ -49,17 +49,17 @@ msgstr "synchonizace"
 # src/console_fe.c:111
 #: src/console_fe.c:129
 msgid "Fetch"
-msgstr "Sta¾ení"
+msgstr "StaÅ¾enÃ­"
 
 # src/console_fe.c:111
 #: src/console_fe.c:129
 msgid "fetching"
-msgstr "stahování"
+msgstr "stahovÃ¡nÃ­"
 
 # src/console_fe.c:111 src/console_fe.c:112 src/console_fe.c:113
 #: src/console_fe.c:129 src/console_fe.c:131 src/console_fe.c:133
 msgid "remote"
-msgstr "vzdálené"
+msgstr "vzdÃ¡lenÃ©"
 
 # src/console_fe.c:112
 #: src/console_fe.c:131
@@ -84,17 +84,17 @@ msgstr "kontroly"
 # src/console_fe.c:114
 #: src/console_fe.c:134
 msgid "Catch up"
-msgstr "Dohnání"
+msgstr "DohnÃ¡nÃ­"
 
 # src/console_fe.c:114
 #: src/console_fe.c:134
 msgid "catching up"
-msgstr "dohánìní"
+msgstr "dohÃ¡nÄ›nÃ­"
 
 # src/console_fe.c:114 src/console_fe.c:115
 #: src/console_fe.c:134 src/console_fe.c:135
 msgid "stored"
-msgstr "ulo¾enı"
+msgstr "uloÅ¾enÃ½"
 
 # src/console_fe.c:115
 #: src/console_fe.c:135
@@ -110,98 +110,98 @@ msgstr "inicializace"
 #: src/console_fe.c:205
 #, c-format
 msgid "%s: Error: No site called `%s' found - skipping.\n"
-msgstr "%s: Chyba: Místo '%s' nenalezeno / pøeskakuji\n"
+msgstr "%s: Chyba: MÃ­sto '%s' nenalezeno / pÅ™eskakuji\n"
 
 # src/console_fe.c:200
 #: src/console_fe.c:223
 #, c-format
 msgid "%s: No valid sites specified.\n"
-msgstr "%s: ®ádná platná místa nebyla specifikována.\n"
+msgstr "%s: Å½Ã¡dnÃ¡ platnÃ¡ mÃ­sta nebyla specifikovÃ¡na.\n"
 
 # src/console_fe.c:202
 #: src/console_fe.c:225
 #, c-format
 msgid "%s: No sites specified.\n"
-msgstr "%s: ®ádná místa nebyla specifikována.\n"
+msgstr "%s: Å½Ã¡dnÃ¡ mÃ­sta nebyla specifikovÃ¡na.\n"
 
 # src/console_fe.c:204 src/console_fe.c:383 src/console_fe.c:530
 #: src/console_fe.c:227 src/console_fe.c:383 src/console_fe.c:540
 #, c-format
 msgid "Try `%s --help' for more information.\n"
-msgstr "Více informací získáte pøíkazem `%s --help'.\n"
+msgstr "VÃ­ce informacÃ­ zÃ­skÃ¡te pÅ™Ã­kazem `%s --help'.\n"
 
 # src/console_fe.c:214
 #: src/console_fe.c:237
 #, c-format
 msgid "%s: %c%s site `%s' (on %s in %s)\n"
-msgstr "%s: %c%s místa `%s' (na %s v %s)\n"
+msgstr "%s: %c%s mÃ­sta `%s' (na %s v %s)\n"
 
 # src/console_fe.c:266
 #: src/console_fe.c:260
 #, c-format
 msgid "* These items have been added since the last update:\n"
-msgstr "* Následující polo¾ky byly pøidány od poslední aktualizace:\n"
+msgstr "* NÃ¡sledujÃ­cÃ­ poloÅ¾ky byly pÅ™idÃ¡ny od poslednÃ­ aktualizace:\n"
 
 # src/console_fe.c:271 src/console_fe.c:302
 #: src/console_fe.c:265 src/console_fe.c:296
 #, c-format
 msgid "dir:"
-msgstr "adresáø:"
+msgstr "adresÃ¡Å™:"
 
 # src/console_fe.c:278
 #: src/console_fe.c:272
 #, c-format
 msgid "* These items have been changed since the last update:\n"
-msgstr "* Následující polo¾ky byly zmìnìny od poslední aktualizace:\n"
+msgstr "* NÃ¡sledujÃ­cÃ­ poloÅ¾ky byly zmÄ›nÄ›ny od poslednÃ­ aktualizace:\n"
 
 # src/console_fe.c:280
 #: src/console_fe.c:274
 #, c-format
 msgid "  Changes to items in [brackets] are ignored during updates.\n"
-msgstr "  Zmìny polo¾ek v [závorkách] jsou bìhem aktualizace ignorovány.\n"
+msgstr "  ZmÄ›ny poloÅ¾ek v [zÃ¡vorkÃ¡ch] jsou bÄ›hem aktualizace ignorovÃ¡ny.\n"
 
 # src/console_fe.c:294
 #: src/console_fe.c:288
 #, c-format
 msgid "* These items have been deleted, but will be left on the server:\n"
-msgstr "* Následující polo¾ky byly vymazány, ale budou ponechány na serveru:\n"
+msgstr "* NÃ¡sledujÃ­cÃ­ poloÅ¾ky byly vymazÃ¡ny, ale budou ponechÃ¡ny na serveru:\n"
 
 # src/console_fe.c:296
 #: src/console_fe.c:290
 #, c-format
 msgid "* These items have been deleted since the last update:\n"
-msgstr "* Následující polo¾ky byly smazány od poslední aktualizace:\n"
+msgstr "* NÃ¡sledujÃ­cÃ­ poloÅ¾ky byly smazÃ¡ny od poslednÃ­ aktualizace:\n"
 
 # src/console_fe.c:309
 #: src/console_fe.c:303
 #, c-format
 msgid "* These items have been moved since the last update:\n"
-msgstr "* Následující polo¾ky byly pøesunuty od poslední aktualizace:\n"
+msgstr "* NÃ¡sledujÃ­cÃ­ poloÅ¾ky byly pÅ™esunuty od poslednÃ­ aktualizace:\n"
 
 # src/console_fe.c:327 src/console_fe.c:339
 #: src/console_fe.c:321 src/console_fe.c:333
 msgid "Ignored"
-msgstr "Ignorovány"
+msgstr "IgnorovÃ¡ny"
 
 # src/console_fe.c:329
 #: src/console_fe.c:323
 msgid "Maintained for executables"
-msgstr "Udr¾ovány pro programy"
+msgstr "UdrÅ¾ovÃ¡ny pro programy"
 
 # src/console_fe.c:331
 #: src/console_fe.c:325
 msgid "Always maintained"
-msgstr "V¾dy udr¾ovány"
+msgstr "VÅ¾dy udrÅ¾ovÃ¡ny"
 
 # src/console_fe.c:341
 #: src/console_fe.c:335
 msgid "Maintained"
-msgstr "Udr¾ovány"
+msgstr "UdrÅ¾ovÃ¡ny"
 
 # src/console_fe.c:343
 #: src/console_fe.c:337
 msgid "Followed"
-msgstr "Sledovány"
+msgstr "SledovÃ¡ny"
 
 # src/console_fe.c:352
 #: src/console_fe.c:348
@@ -210,7 +210,7 @@ msgid ""
 "Site: %s\n"
 "\tServer: %s"
 msgstr ""
-"Místo: %s\n"
+"MÃ­sto: %s\n"
 "\tServer: %s"
 
 # src/console_fe.c:354
@@ -222,7 +222,7 @@ msgstr "  Port: "
 #: src/console_fe.c:352
 #, c-format
 msgid "(default)\n"
-msgstr "(standardní)\n"
+msgstr "(standardnÃ­)\n"
 
 # src/console_fe.c:358
 #: src/console_fe.c:355
@@ -234,24 +234,24 @@ msgstr ""
 #: src/console_fe.c:357
 #, c-format
 msgid "\tProtocol: %s    Username: %s\n"
-msgstr "\tProtokol: %s    Jméno u¾ivatele: %s\n"
+msgstr "\tProtokol: %s    JmÃ©no uÅ¾ivatele: %s\n"
 
 #: src/console_fe.c:360
 msgid "(unspecified)"
-msgstr "(nespecifikováno)"
+msgstr "(nespecifikovÃ¡no)"
 
 # src/console_fe.c:364
 #: src/console_fe.c:362
 #, c-format
 msgid "\tPassive mode FTP will not be used.\n"
-msgstr "\tPasívní mód FTP nebude pou¾it.\n"
+msgstr "\tPasÃ­vnÃ­ mÃ³d FTP nebude pouÅ¾it.\n"
 
 # src/console_fe.c:364
 #: src/console_fe.c:364
 #, fuzzy, c-format
 #| msgid "\tPassive mode FTP will not be used.\n"
 msgid "\tFTP over TLS will be used.\n"
-msgstr "\tPasívní mód FTP nebude pou¾it.\n"
+msgstr "\tPasÃ­vnÃ­ mÃ³d FTP nebude pouÅ¾it.\n"
 
 # src/console_fe.c:365
 #: src/console_fe.c:365
@@ -260,43 +260,43 @@ msgid ""
 "\tRemote directory: %s\n"
 "\tLocal directory: %s\n"
 msgstr ""
-"\tVzdálenı adresáø: %s\n"
-"\tMístní adresáø: %s\n"
+"\tVzdÃ¡lenÃ½ adresÃ¡Å™: %s\n"
+"\tMÃ­stnÃ­ adresÃ¡Å™: %s\n"
 
 # src/console_fe.c:367
 #: src/console_fe.c:367
 #, c-format
 msgid "\tPermissions: %s     Symlinks: %s\n"
-msgstr "\tPráva: %s     Symbolické odkazy: %s\n"
+msgstr "\tPrÃ¡va: %s     SymbolickÃ© odkazy: %s\n"
 
 # src/console_fe.c:370
 #: src/console_fe.c:370
 #, c-format
 msgid "\tRemote files will not be deleted.\n"
-msgstr "\tVzdálené soubory nebudou vymazány.\n"
+msgstr "\tVzdÃ¡lenÃ© soubory nebudou vymazÃ¡ny.\n"
 
 # src/console_fe.c:372
 #: src/console_fe.c:372
 #, c-format
 msgid "\tFiles will be moved remotely if moved locally.\n"
-msgstr "\tSoubory pøesunuté lokálnì budou také pøesunuty vzdálenì.\n"
+msgstr "\tSoubory pÅ™esunutÃ© lokÃ¡lnÄ› budou takÃ© pÅ™esunuty vzdÃ¡lenÄ›.\n"
 
 # src/console_fe.c:381
 #: src/console_fe.c:381
 #, c-format
 msgid "%s: Error: Only specify ONE operation mode at a time.\n"
-msgstr "%s: Chyba: Specifikujte najednou pouze JEDEN operaèní mód.\n"
+msgstr "%s: Chyba: Specifikujte najednou pouze JEDEN operaÄnÃ­ mÃ³d.\n"
 
 #: src/console_fe.c:499
 #, c-format
 msgid "%s: Error: Debug channel %s not known.\n"
-msgstr "%s: Chyba: Ladicí kanál %s není známı.\n"
+msgstr "%s: Chyba: LadicÃ­ kanÃ¡l %s nenÃ­ znÃ¡mÃ½.\n"
 
 # src/console_fe.c:506
 #: src/console_fe.c:507
 #, c-format
 msgid "%s: Warning: Could not open `%s' to use as logfile.\n"
-msgstr "%s: Varování: Nelze otevøít soubor `%s' pro záznam.\n"
+msgstr "%s: VarovÃ¡nÃ­: Nelze otevÅ™Ã­t soubor `%s' pro zÃ¡znam.\n"
 
 #: src/console_fe.c:551
 #, c-format
@@ -310,8 +310,8 @@ msgid ""
 "%s: Warning: Only %d sites can be specified on the command line!\n"
 "Extra entries are being skipped.\n"
 msgstr ""
-"%s: Varování: na pøíkazové øádce lze specifikovat pouze %d míst !\n"
-"Pøeskakuji dal¹í polo¾ky.\n"
+"%s: VarovÃ¡nÃ­: na pÅ™Ã­kazovÃ© Å™Ã¡dce lze specifikovat pouze %d mÃ­st !\n"
+"PÅ™eskakuji dalÅ¡Ã­ poloÅ¾ky.\n"
 
 #: src/console_fe.c:593
 msgid "WARNING: Server certificate is not trusted."
@@ -357,22 +357,22 @@ msgstr "proxy serveru"
 #: src/console_fe.c:626
 #, c-format
 msgid "Authentication required for %s on %s `%s':\n"
-msgstr "Je vy¾adována autentizace pro %s na %s `%s':\n"
+msgstr "Je vyÅ¾adovÃ¡na autentizace pro %s na %s `%s':\n"
 
 #: src/console_fe.c:629
 #, c-format
 msgid "Authentication required on %s `%s':\n"
-msgstr "Je vy¾adována autentizace na %s `%s':\n"
+msgstr "Je vyÅ¾adovÃ¡na autentizace na %s `%s':\n"
 
 #: src/console_fe.c:632
 msgid "Username: "
-msgstr "Jméno u¾ivatele: "
+msgstr "JmÃ©no uÅ¾ivatele: "
 
 # src/console_fe.c:360
 #: src/console_fe.c:637
 #, c-format
 msgid "Username: %s\n"
-msgstr "Jméno u¾ivatele: %s\n"
+msgstr "JmÃ©no uÅ¾ivatele: %s\n"
 
 #: src/console_fe.c:639 src/console_fe.c:663
 msgid "Password: "
@@ -393,7 +393,7 @@ msgstr ""
 #: src/console_fe.c:728
 #, c-format
 msgid "Create %s/"
-msgstr "Vytvoøit %s/"
+msgstr "VytvoÅ™it %s/"
 
 # src/console_fe.c:575
 #: src/console_fe.c:730
@@ -417,19 +417,19 @@ msgstr "Smazat %s"
 #: src/console_fe.c:741
 #, c-format
 msgid "Move %s->%s"
-msgstr "Pøesunout %s->%s"
+msgstr "PÅ™esunout %s->%s"
 
 # src/console_fe.c:594
 #: src/console_fe.c:750
 #, c-format
 msgid "Change %s"
-msgstr "Zmìnit %s"
+msgstr "ZmÄ›nit %s"
 
 # src/console_fe.c:595
 #: src/console_fe.c:751
 #, c-format
 msgid "Create %s"
-msgstr "Vytvoøit %s"
+msgstr "VytvoÅ™it %s"
 
 # src/console_fe.c:596
 #: src/console_fe.c:752
@@ -447,7 +447,7 @@ msgstr "? (a/n) "
 #: src/console_fe.c:769
 #, c-format
 msgid "Checksumming %s: ["
-msgstr "Kontrolní souèet %s: ["
+msgstr "KontrolnÃ­ souÄet %s: ["
 
 # src/console_fe.c:627 src/console_fe.c:723 src/console_fe.c:779
 #: src/console_fe.c:784 src/console_fe.c:896 src/console_fe.c:958
@@ -470,7 +470,7 @@ msgstr ""
 #: src/console_fe.c:796
 #, fuzzy, c-format
 msgid "Setting permissions on %s%s: "
-msgstr "Nastavuji práva pro %s: "
+msgstr "Nastavuji prÃ¡va pro %s: "
 
 # src/console_fe.c:644 src/console_fe.c:712 src/console_fe.c:773
 #: src/console_fe.c:806 src/console_fe.c:882 src/console_fe.c:952
@@ -492,50 +492,50 @@ msgstr ""
 #: src/console_fe.c:827 src/console_fe.c:916
 #, c-format
 msgid "Creating %s/: "
-msgstr "Vytváøím %s/: "
+msgstr "VytvÃ¡Å™Ã­m %s/: "
 
 # src/console_fe.c:659 src/console_fe.c:740
 #: src/console_fe.c:829 src/console_fe.c:918
 #, c-format
 msgid "Deleting %s/: "
-msgstr "Ma¾u %s/: "
+msgstr "MaÅ¾u %s/: "
 
 # src/console_fe.c:665
 #: src/console_fe.c:836
 #, c-format
 msgid "Uploading %s: ["
-msgstr "Posílám %s: ["
+msgstr "PosÃ­lÃ¡m %s: ["
 
 # src/console_fe.c:666 src/console_fe.c:684 src/console_fe.c:750
 #: src/console_fe.c:839 src/console_fe.c:857 src/console_fe.c:928
 #, c-format
 msgid "Deleting %s: "
-msgstr "Ma¾u %s: "
+msgstr "MaÅ¾u %s: "
 
 # src/console_fe.c:668 src/console_fe.c:753
 #: src/console_fe.c:842 src/console_fe.c:931
 #, c-format
 msgid "Moving %s->%s: "
-msgstr "Pøesunuji %s->%s: "
+msgstr "PÅ™esunuji %s->%s: "
 
 # src/console_fe.c:680
 #: src/console_fe.c:853
 #, c-format
 msgid "Changing %s: "
-msgstr "Mìním %s: "
+msgstr "MÄ›nÃ­m %s: "
 
 # src/console_fe.c:682
 #: src/console_fe.c:855
 #, c-format
 msgid "Creating %s: "
-msgstr "Vytváøím %s: "
+msgstr "VytvÃ¡Å™Ã­m %s: "
 
 # src/console_fe.c:706
 #: src/console_fe.c:875
 #, fuzzy, c-format
 msgid "Failed to update %s:%c%s\n"
 msgstr ""
-"Nezdaøilo se aktualizovat %s:\n"
+"NezdaÅ™ilo se aktualizovat %s:\n"
 "%s\n"
 
 # src/console_fe.c:714 src/console_fe.c:775
@@ -564,11 +564,11 @@ msgstr "Stahuji %s: ["
 # src/console_fe.c:594
 #: src/console_fe.c:970
 msgid "Changed on server"
-msgstr "Zmìnìno na serveru"
+msgstr "ZmÄ›nÄ›no na serveru"
 
 #: src/console_fe.c:973
 msgid "Added on server"
-msgstr "Pøidáno na server"
+msgstr "PÅ™idÃ¡no na server"
 
 #: src/console_fe.c:981
 #, c-format
@@ -579,7 +579,7 @@ msgstr ""
 #: src/console_fe.c:1001
 #, c-format
 msgid "Directory: %s/\n"
-msgstr "Adresáø: %s/\n"
+msgstr "AdresÃ¡Å™: %s/\n"
 
 # src/console_fe.c:801
 #: src/console_fe.c:1006
@@ -595,13 +595,13 @@ msgstr ""
 #: src/console_fe.c:1011
 #, c-format
 msgid "Link: %s - target %s\n"
-msgstr "Odkaz: %s - cíl %s\n"
+msgstr "Odkaz: %s - cÃ­l %s\n"
 
 # src/console_fe.c:817
 #: src/console_fe.c:1024
 #, c-format
 msgid "%s: Error: Could not open rcfile: %s.\n"
-msgstr "%s: Chyba: Nelze otevøít øídicí soubor: %s.\n"
+msgstr "%s: Chyba: Nelze otevÅ™Ã­t Å™Ã­dicÃ­ soubor: %s.\n"
 
 # src/console_fe.c:821
 #: src/console_fe.c:1028
@@ -610,7 +610,7 @@ msgid ""
 "%s: rcfile corrupt at line %d:\n"
 "%s\n"
 msgstr ""
-"%s: øídicí soubor po¹kozen na øádku %d:\n"
+"%s: Å™Ã­dicÃ­ soubor poÅ¡kozen na Å™Ã¡dku %d:\n"
 "%s\n"
 
 # src/console_fe.c:840
@@ -620,71 +620,71 @@ msgid ""
 "%s: Could not read directory for `%s':\n"
 "\t%s\n"
 msgstr ""
-"%s: Nelze naèíst adresáø pro `%s':\n"
+"%s: Nelze naÄÃ­st adresÃ¡Å™ pro `%s':\n"
 "\t%s\n"
 
 # src/console_fe.c:844
 #: src/console_fe.c:1051
 #, c-format
 msgid "%s: Server not specified in site `%s'.\n"
-msgstr "%s: Pro místo `%s' není specifikován server.\n"
+msgstr "%s: Pro mÃ­sto `%s' nenÃ­ specifikovÃ¡n server.\n"
 
 # src/console_fe.c:856
 #: src/console_fe.c:1055
 #, c-format
 msgid "%s: Remote directory not specified in site `%s'.\n"
-msgstr "%s: Pro místo `%s' není specifikován vzdálenı adresáø.\n"
+msgstr "%s: Pro mÃ­sto `%s' nenÃ­ specifikovÃ¡n vzdÃ¡lenÃ½ adresÃ¡Å™.\n"
 
 # src/console_fe.c:860
 #: src/console_fe.c:1059
 #, c-format
 msgid "%s: Local directory not specified in site `%s'.\n"
-msgstr "%s: Pro místo `%s' není specifikován místní adresáø.\n"
+msgstr "%s: Pro mÃ­sto `%s' nenÃ­ specifikovÃ¡n mÃ­stnÃ­ adresÃ¡Å™.\n"
 
 # src/console_fe.c:864
 #: src/console_fe.c:1063
 #, c-format
 msgid "%s: Invalid port used in site `%s'.\n"
-msgstr "%s: Pro místo `%s' je pou¾it neplatnı port.\n"
+msgstr "%s: Pro mÃ­sto `%s' je pouÅ¾it neplatnÃ½ port.\n"
 
 # src/console_fe.c:868
 #: src/console_fe.c:1067
 #, c-format
 msgid "%s: %s cannot maintain symbolic links (site `%s').\n"
-msgstr "%s: %s nemù¾e udr¾ovat symbolické odkazy (místo `%s').\n"
+msgstr "%s: %s nemÅ¯Å¾e udrÅ¾ovat symbolickÃ© odkazy (mÃ­sto `%s').\n"
 
 # src/console_fe.c:872
 #: src/console_fe.c:1071
 #, c-format
 msgid "%s: Cannot use a relative remote directory in %s (site `%s').\n"
-msgstr "%s: Nelze pou¾it relativní vzdálenı adresáø v %s (místo `%s').\n"
+msgstr "%s: Nelze pouÅ¾it relativnÃ­ vzdÃ¡lenÃ½ adresÃ¡Å™ v %s (mÃ­sto `%s').\n"
 
 # src/console_fe.c:875
 #: src/console_fe.c:1074
 #, c-format
 msgid "%s: File permissions are not supported in %s (site `%s').\n"
-msgstr "%s: V %s nejsou práva souborù podporovány (místo `%s').\n"
+msgstr "%s: V %s nejsou prÃ¡va souborÅ¯ podporovÃ¡ny (mÃ­sto `%s').\n"
 
 # src/console_fe.c:878
 #: src/console_fe.c:1077
 #, c-format
 msgid ""
 "%s: Safe mode cannot be used in conjunction with nooverwrite (site `%s').\n"
-msgstr "%s: Bezpeènı mód nelze pou¾ít ve spojení s nooverwrite (místo `%s').\n"
+msgstr "%s: BezpeÄnÃ½ mÃ³d nelze pouÅ¾Ã­t ve spojenÃ­ s nooverwrite (mÃ­sto `%s').\n"
 
 # src/console_fe.c:881
 #: src/console_fe.c:1080
 #, c-format
 msgid ""
 "%s: Safe mode cannot be used in conjunction with tempupload (site `%s').\n"
-msgstr "%s: Bezpeènı mód nelze pou¾ít ve spojení s tempupload (místo `%s').\n"
+msgstr "%s: BezpeÄnÃ½ mÃ³d nelze pouÅ¾Ã­t ve spojenÃ­ s tempupload (mÃ­sto `%s').\n"
 
 # src/console_fe.c:884
 #: src/console_fe.c:1083
 #, c-format
 msgid "%s: Can only check for renamed files when checksumming (site `%s').\n"
 msgstr ""
-"%s: Pøesunuté soubory lze zjistit pouze s zapnutım kontrolním souètem (místo "
+"%s: PÅ™esunutÃ© soubory lze zjistit pouze s zapnutÃ½m kontrolnÃ­m souÄtem (mÃ­sto "
 "`%s').\n"
 
 #: src/console_fe.c:1086
@@ -698,13 +698,13 @@ msgstr ""
 #: src/console_fe.c:1091
 #, c-format
 msgid "%s: The protocol `%s' is unsupported (site `%s').\n"
-msgstr "%s: V %s nejsou práva souborù podporovány (místo `%s').\n"
+msgstr "%s: V %s nejsou prÃ¡va souborÅ¯ podporovÃ¡ny (mÃ­sto `%s').\n"
 
 # src/console_fe.c:890
 #: src/console_fe.c:1098
 #, c-format
 msgid "%s: Unhandled error %d in site `%s' - please contact the maintainer.\n"
-msgstr "%s: Neo¹etøená chyba %d v místì `%s' - kontaktujte prosím správce.\n"
+msgstr "%s: NeoÅ¡etÅ™enÃ¡ chyba %d v mÃ­stÄ› `%s' - kontaktujte prosÃ­m sprÃ¡vce.\n"
 
 # src/console_fe.c:908
 #: src/console_fe.c:1115
@@ -716,7 +716,7 @@ msgid ""
 "%s: Error: Could not lock storage file for `%s':\n"
 "%s: Error: %s\n"
 msgstr ""
-"%s: Chyba: Poru¹enı ukládací soubor pro místo `%s':\n"
+"%s: Chyba: PoruÅ¡enÃ½ uklÃ¡dacÃ­ soubor pro mÃ­sto `%s':\n"
 "%s: %s\n"
 
 # src/console_fe.c:908
@@ -726,7 +726,7 @@ msgid ""
 "%s: Error: Corrupt site storage file for `%s':\n"
 "%s: %s\n"
 msgstr ""
-"%s: Chyba: Poru¹enı ukládací soubor pro místo `%s':\n"
+"%s: Chyba: PoruÅ¡enÃ½ uklÃ¡dacÃ­ soubor pro mÃ­sto `%s':\n"
 "%s: %s\n"
 
 # src/console_fe.c:913
@@ -736,14 +736,14 @@ msgid ""
 "%s: Error: No storage file for `%s'.\n"
 "%s: Use --init, --catchup or --fetch to create a storage file.\n"
 msgstr ""
-"%s: Chyba: Pro `%s' nenalezen ukládací soubor.\n"
-"%s: Pro jeho vytvoøení pou¾ijte pøepínaèe --init, --catchup nebo --fetch.\n"
+"%s: Chyba: Pro `%s' nenalezen uklÃ¡dacÃ­ soubor.\n"
+"%s: Pro jeho vytvoÅ™enÃ­ pouÅ¾ijte pÅ™epÃ­naÄe --init, --catchup nebo --fetch.\n"
 
 # src/console_fe.c:925
 #: src/console_fe.c:1154
 #, c-format
 msgid "%s: Skipping site `%s'.\n"
-msgstr "%s: Pøeskakuji místo `%s'.\n"
+msgstr "%s: PÅ™eskakuji mÃ­sto `%s'.\n"
 
 #: src/console_fe.c:1173
 #, fuzzy, c-format
@@ -756,64 +756,64 @@ msgid ""
 "%s: Error: %s\n"
 "%s: Error: The changes made have not been recorded.\n"
 msgstr ""
-"%s: Chyba: Nalze zapisovat do ukládacího souboru (%s)\n"
+"%s: Chyba: Nalze zapisovat do uklÃ¡dacÃ­ho souboru (%s)\n"
 "%s: Chyba: %s\n"
-"%s: Nebudu aktualizovat místo `%s'.\n"
+"%s: Nebudu aktualizovat mÃ­sto `%s'.\n"
 
 # src/console_fe.c:937
 #: src/console_fe.c:1189
 #, c-format
 msgid "%s: %s completed successfully.\n"
-msgstr "%s: %s úspì¹nì dokonèena.\n"
+msgstr "%s: %s ÃºspÄ›Å¡nÄ› dokonÄena.\n"
 
 # src/console_fe.c:946
 #: src/console_fe.c:1195
 #, c-format
 msgid "%s: %s unsupported for %s.\n"
-msgstr "%s: Akce \"%s\" není implementována pro %s.\n"
+msgstr "%s: Akce \"%s\" nenÃ­ implementovÃ¡na pro %s.\n"
 
 # src/console_fe.c:951
 #: src/console_fe.c:1200
 #, c-format
 msgid "%s: Errors occurred while %s the %s site.\n"
-msgstr "%s: Bìhem %s %sho místa se vyskytly chyby.\n"
+msgstr "%s: BÄ›hem %s %sho mÃ­sta se vyskytly chyby.\n"
 
 # src/console_fe.c:951
 #: src/console_fe.c:1207
 #, fuzzy, c-format
 #| msgid "%s: Errors occurred while %s the %s site.\n"
 msgid "%s: Interrupted while %s the %s site `%s'.\n"
-msgstr "%s: Bìhem %s %sho místa se vyskytly chyby.\n"
+msgstr "%s: BÄ›hem %s %sho mÃ­sta se vyskytly chyby.\n"
 
 # src/console_fe.c:956
 #: src/console_fe.c:1212
 #, c-format
 msgid "%s: Error: Could not resolve remote hostname (%s).\n"
-msgstr "%s: Chyba: Nelze najít adresu vzdáleného poèítaèe (%s).\n"
+msgstr "%s: Chyba: Nelze najÃ­t adresu vzdÃ¡lenÃ©ho poÄÃ­taÄe (%s).\n"
 
 # src/console_fe.c:956
 #: src/console_fe.c:1218
 #, c-format
 msgid "%s: Error: Could not resolve hostname of proxy server (%s).\n"
-msgstr "%s: Chyba: Nelze najít adresu proxy serveru (%s).\n"
+msgstr "%s: Chyba: Nelze najÃ­t adresu proxy serveru (%s).\n"
 
 # src/console_fe.c:961
 #: src/console_fe.c:1224
 #, c-format
 msgid "%s: Error: Could not connect to proxy server (%s port %d).\n"
-msgstr "%s: Chyba: Nelze se pøipojit k proxy serveru (%s port %d).\n"
+msgstr "%s: Chyba: Nelze se pÅ™ipojit k proxy serveru (%s port %d).\n"
 
 # src/console_fe.c:961
 #: src/console_fe.c:1227
 #, c-format
 msgid "%s: Error: Could not connect to server (%s port %d).\n"
-msgstr "%s: Chyba: Nelze se pøipojit k serveru (%s port %d).\n"
+msgstr "%s: Chyba: Nelze se pÅ™ipojit k serveru (%s port %d).\n"
 
 # src/console_fe.c:966
 #: src/console_fe.c:1233
 #, c-format
 msgid "%s: Error: Could not authorise user on server.\n"
-msgstr "%s: Chyba: Nelze autorizovat u¾ivatele na serveru.\n"
+msgstr "%s: Chyba: Nelze autorizovat uÅ¾ivatele na serveru.\n"
 
 #: src/console_fe.c:1238
 #, c-format
@@ -824,64 +824,64 @@ msgstr "%s: Chyba: %s\n"
 #: src/console_fe.c:1242
 #, c-format
 msgid "%s: Error: Could not authorise user on proxy server (%s).\n"
-msgstr "%s: Chyba: Nelze autorizovat u¾ivatele na proxy serveru (%s).\n"
+msgstr "%s: Chyba: Nelze autorizovat uÅ¾ivatele na proxy serveru (%s).\n"
 
 # src/console_fe.c:984
 #: src/console_fe.c:1263
 #, c-format
 msgid "%s: Error: Environment variable HOME not set.\n"
-msgstr "%s: Chyba: Promìnná prostøedí HOME není nastavena.\n"
+msgstr "%s: Chyba: PromÄ›nnÃ¡ prostÅ™edÃ­ HOME nenÃ­ nastavena.\n"
 
 # src/console_fe.c:992
 #: src/console_fe.c:1271
 #, c-format
 msgid "%s: Error: Could not open rcfile: %s\n"
-msgstr "%s: Chyba: Nelze otevøít øídicí soubor: %s\n"
+msgstr "%s: Chyba: Nelze otevÅ™Ã­t Å™Ã­dicÃ­ soubor: %s\n"
 
 # src/console_fe.c:995
 #: src/console_fe.c:1274
 #, c-format
 msgid "%s: Error: rcfile permissions allow other users to read your rcfile.\n"
 msgstr ""
-"%s: Chyba: Práva pøístupu k øídicímu souboru dovolují ostatním u¾ivatelùm "
-"jeho ètení.\n"
+"%s: Chyba: PrÃ¡va pÅ™Ã­stupu k Å™Ã­dicÃ­mu souboru dovolujÃ­ ostatnÃ­m uÅ¾ivatelÅ¯m "
+"jeho ÄtenÃ­.\n"
 
 # src/console_fe.c:996 src/console_fe.c:1008
 #: src/console_fe.c:1275 src/console_fe.c:1287
 #, c-format
 msgid "%s: Set the permissions to 0600.\n"
-msgstr "%s: Nastavte práva pøístupu na 0600.\n"
+msgstr "%s: Nastavte prÃ¡va pÅ™Ã­stupu na 0600.\n"
 
 # src/console_fe.c:999
 #: src/console_fe.c:1278
 #, c-format
 msgid "%s: Error: Could not open storage directory: %s\n"
-msgstr "%s: Chyba: Nelze otevøít adresáø pro ukládání: %s\n"
+msgstr "%s: Chyba: Nelze otevÅ™Ã­t adresÃ¡Å™ pro uklÃ¡dÃ¡nÃ­: %s\n"
 
 # src/console_fe.c:1000
 #: src/console_fe.c:1279
 #, c-format
 msgid ""
 "%s: You need to create this directory and set the permissions to 0700.\n"
-msgstr "%s: Musíte tento adresáø vytvoøit a nastavit práva pøístupu na 0700.\n"
+msgstr "%s: MusÃ­te tento adresÃ¡Å™ vytvoÅ™it a nastavit prÃ¡va pÅ™Ã­stupu na 0700.\n"
 
 # src/console_fe.c:1003
 #: src/console_fe.c:1282
 #, c-format
 msgid "%s: Error: storage directory permissions incorrect.\n"
-msgstr "%s: Chyba: Nesprávné právo pøístupu adresáøe pro ukládání.\n"
+msgstr "%s: Chyba: NesprÃ¡vnÃ© prÃ¡vo pÅ™Ã­stupu adresÃ¡Å™e pro uklÃ¡dÃ¡nÃ­.\n"
 
 # src/console_fe.c:1004
 #: src/console_fe.c:1283
 #, c-format
 msgid "%s: Set the permissions to 0700.\n"
-msgstr "%s: Nastavte práva pøístupu na 0700.\n"
+msgstr "%s: Nastavte prÃ¡va pÅ™Ã­stupu na 0700.\n"
 
 # src/console_fe.c:1007
 #: src/console_fe.c:1286
 #, c-format
 msgid "%s: Error: ~/.netrc permissions incorrect.\n"
-msgstr "%s: Chyba: Nesprávná práva pøístupu k souboru ~/.netrc .\n"
+msgstr "%s: Chyba: NesprÃ¡vnÃ¡ prÃ¡va pÅ™Ã­stupu k souboru ~/.netrc .\n"
 
 # src/console_fe.c:1020
 #: src/console_fe.c:1298
@@ -893,7 +893,7 @@ msgstr "%s: Chyba: Nelze zpracovat soubor ~/.netrc.\n"
 #: src/console_fe.c:1316 src/console_fe.c:1426
 #, c-format
 msgid "%s: Nothing to do - no changes found.\n"
-msgstr "%s: Není co dìlat - ¾ádné zmìny nenalezeny.\n"
+msgstr "%s: NenÃ­ co dÄ›lat - Å¾Ã¡dnÃ© zmÄ›ny nenalezeny.\n"
 
 #: src/console_fe.c:1326
 #, c-format
@@ -902,9 +902,9 @@ msgid ""
 "%s: Error: %s\n"
 "%s: Will not update site `%s'.\n"
 msgstr ""
-"%s: Chyba: Nalze zapisovat do ukládacího souboru (%s)\n"
+"%s: Chyba: Nalze zapisovat do uklÃ¡dacÃ­ho souboru (%s)\n"
 "%s: Chyba: %s\n"
-"%s: Nebudu aktualizovat místo `%s'.\n"
+"%s: Nebudu aktualizovat mÃ­sto `%s'.\n"
 
 # src/console_fe.c:1063
 #: src/console_fe.c:1353
@@ -913,39 +913,39 @@ msgid ""
 "%s: Warning: Current state method differs from stored in site `%s'.\n"
 "%s: All existing files will appear changed (use catchup?).\n"
 msgstr ""
-"%s: Varování: Souèasná metoda pro ulo¾ení stavu se li¹í od metody ulo¾ené v "
-"místì `%s'.\n"
-"%s: V¹echny existující soubory budou vykazovat zmìny (pou¾ijte catchup?).\n"
+"%s: VarovÃ¡nÃ­: SouÄasnÃ¡ metoda pro uloÅ¾enÃ­ stavu se liÅ¡Ã­ od metody uloÅ¾enÃ© v "
+"mÃ­stÄ› `%s'.\n"
+"%s: VÅ¡echny existujÃ­cÃ­ soubory budou vykazovat zmÄ›ny (pouÅ¾ijte catchup?).\n"
 
 # src/console_fe.c:1069
 #: src/console_fe.c:1359
 #, c-format
 msgid "%s: The remote site needs updating (%d items to update).\n"
-msgstr "%s: Vzdálené místo je nutno aktualizovat (%d polo¾ek).\n"
+msgstr "%s: VzdÃ¡lenÃ© mÃ­sto je nutno aktualizovat (%d poloÅ¾ek).\n"
 
 # src/console_fe.c:1071
 #: src/console_fe.c:1362
 #, c-format
 msgid "%s: The remote site needs updating (1 item to update).\n"
-msgstr "%s: Vzdálené místo je nutno aktualizovat (1 polo¾ka).\n"
+msgstr "%s: VzdÃ¡lenÃ© mÃ­sto je nutno aktualizovat (1 poloÅ¾ka).\n"
 
 # src/console_fe.c:1074
 #: src/console_fe.c:1366
 #, c-format
 msgid "%s: The remote site does not need updating.\n"
-msgstr "%s: Vzdálené místo není nutno aktualizovat.\n"
+msgstr "%s: VzdÃ¡lenÃ© mÃ­sto nenÃ­ nutno aktualizovat.\n"
 
 # src/console_fe.c:1082
 #: src/console_fe.c:1376
 #, c-format
 msgid "%s: All the files and directories are marked as NOT updated remotely.\n"
-msgstr "%s: V¹echny soubory a adresáøe jsou oznaèeny jako NEaktualizované.\n"
+msgstr "%s: VÅ¡echny soubory a adresÃ¡Å™e jsou oznaÄeny jako NEaktualizovanÃ©.\n"
 
 # src/console_fe.c:1087
 #: src/console_fe.c:1383
 #, c-format
 msgid "%s: All the files and and directories are marked as updated remotely.\n"
-msgstr "%s: V¹echny soubory a adresáøe jsou oznaèeny jako aktualizované.\n"
+msgstr "%s: VÅ¡echny soubory a adresÃ¡Å™e jsou oznaÄeny jako aktualizovanÃ©.\n"
 
 # src/console_fe.c:1096
 #: src/console_fe.c:1391
@@ -954,7 +954,7 @@ msgid ""
 "%s: Failed to fetch file listing for site `%s':\n"
 "%s: %s\n"
 msgstr ""
-"%s: Nelze získat seznam souborù pro místo `%s':\n"
+"%s: Nelze zÃ­skat seznam souborÅ¯ pro mÃ­sto `%s':\n"
 "%s: %s\n"
 
 # src/console_fe.c:1096
@@ -964,19 +964,19 @@ msgid ""
 "%s: Failed to fetch file listing to verify site `%s':\n"
 "%s: %s\n"
 msgstr ""
-"%s: Nelze získat seznam souborù pro kontrolu místa `%s':\n"
+"%s: Nelze zÃ­skat seznam souborÅ¯ pro kontrolu mÃ­sta `%s':\n"
 "%s: %s\n"
 
 #: src/console_fe.c:1414
 #, c-format
 msgid "%s: Verify found %d files missing from server.\n"
-msgstr "%s: Kontrola nalezla %d souborù chybìjících na serveru.\n"
+msgstr "%s: Kontrola nalezla %d souborÅ¯ chybÄ›jÃ­cÃ­ch na serveru.\n"
 
 # src/console_fe.c:856
 #: src/console_fe.c:1417
 #, c-format
 msgid "%s: Remote site not synchronized with stored state.\n"
-msgstr "%s: Vzdálené místo není synchronizováno s ulo¾enım stavem.\n"
+msgstr "%s: VzdÃ¡lenÃ© mÃ­sto nenÃ­ synchronizovÃ¡no s uloÅ¾enÃ½m stavem.\n"
 
 #: src/console_fe.c:1431
 #, c-format
@@ -984,14 +984,14 @@ msgid ""
 "%s: Refusing to delete all local files with a synchronize operation.\n"
 "%s: Use --update to update the remote site.\n"
 msgstr ""
-"%s: Odmítám smazat v¹echny lokální soubory operací synchronizace.\n"
-"%s: Pou¾ijte pøepínaè --update pro aktualizaci vzdáleného místa.\n"
+"%s: OdmÃ­tÃ¡m smazat vÅ¡echny lokÃ¡lnÃ­ soubory operacÃ­ synchronizace.\n"
+"%s: PouÅ¾ijte pÅ™epÃ­naÄ --update pro aktualizaci vzdÃ¡lenÃ©ho mÃ­sta.\n"
 
 # src/console_fe.c:1137
 #: src/console_fe.c:1451
 #, c-format
 msgid "Usage: %s [OPTIONS] [MODE] [sitename]...\n"
-msgstr "Pou¾ití: %s [VOLBY] [MÓD] [jméno místa]...\n"
+msgstr "PouÅ¾itÃ­: %s [VOLBY] [MÃ“D] [jmÃ©no mÃ­sta]...\n"
 
 # src/console_fe.c:1139
 #: src/console_fe.c:1453
@@ -1009,11 +1009,11 @@ msgid ""
 "     Warning: cleartext displays (normally hidden) passwords in plain text\n"
 "  -g, --logfile=FILE    Append debugging messages to FILE (else use stderr)\n"
 msgstr ""
-"  -d, --debug=KLÍÈ[,KLÍÈ]  Nastav ladìní pro danı KLÍÈ, kterı mù¾e bıt:\n"
+"  -d, --debug=KLÃÄŒ[,KLÃÄŒ]  Nastav ladÄ›nÃ­ pro danÃ½ KLÃÄŒ, kterÃ½ mÅ¯Å¾e bÃ½t:\n"
 "     socket, files, rcfile, ftp, http, httpbody, xml, xmlparse, cleartext\n"
-"     Varování: cleartext zobrazuje (normálnì skrytá) hesla v prostém textu\n"
-"  -g, --logfile=FILE    Pøipoj ladicí hlá¹ení do souboru FILE (jinak na std. "
-"chybovı vıstup)\n"
+"     VarovÃ¡nÃ­: cleartext zobrazuje (normÃ¡lnÄ› skrytÃ¡) hesla v prostÃ©m textu\n"
+"  -g, --logfile=FILE    PÅ™ipoj ladicÃ­ hlÃ¡Å¡enÃ­ do souboru FILE (jinak na std. "
+"chybovÃ½ vÃ½stup)\n"
 
 # src/console_fe.c:1149
 #: src/console_fe.c:1463
@@ -1044,32 +1044,32 @@ msgid ""
 "  -V, --version         Display version information\n"
 "Please send feature requests and bug reports via %s\n"
 msgstr ""
-"  -r, --rcfile=SOUBOR   Pou¾ij alternativní øídicí soubor pro bìh\n"
-"  -p, --storepath=CESTA Pou¾ij alternativní adresáø pro ulo¾ení místa\n"
-"  -y, --prompting       Pøed ka¾dou aktualizací vy¾aduj potvrzení\n"
-"  -a, --allsites        Proveï operaci pro V©ECHNY definovaná místa\n"
-"  -k, --keep-going      Pokraèuj v aktualizaci bez ohledu na chyby\n"
-"  -o, --show-progress   Zobraz celkovı postup pøenosu souborù\n"
-"  -q, --quiet           Buï zticha bìhem provádìní operace\n"
-"  -qq, --silent         Mlè bìhem provádìní operace\n"
-"Operaèní módy:\n"
-"  -l, --list            Vypi¹ zmìny mezi vzdálenım a lokálním místem "
-"(implicitnì)\n"
-"  -ll, --flatlist       Plochı list zmìn mezi vzdálenım a lokálním místem\n"
-"  -v, --view            Zobraz seznam definic míst\n"
-"  -i, --initialize      Oznaè v¹echny soubory a adresáøe jako "
-"neaktualizované\n"
-"  -f, --fetch           Zjisti jaké soubory jsou na vzdáleném místì\n"
-"  -e, --verify          Zkontroluj zda ulo¾enı stav odpovídá stavu "
-"vzdáleného místa\n"
-"  -c, --catchup         Oznaè v¹echny soubory a adresáøe jako aktualizované\n"
-"  -s, --synchronize     Aktualizuj lokální místo se vzdáleného místa\n"
-"  -u, --update          Aktualizuj vzdálené místo\n"
-"  -h, --help            Zobraz tuto nápovìdu\n"
+"  -r, --rcfile=SOUBOR   PouÅ¾ij alternativnÃ­ Å™Ã­dicÃ­ soubor pro bÄ›h\n"
+"  -p, --storepath=CESTA PouÅ¾ij alternativnÃ­ adresÃ¡Å™ pro uloÅ¾enÃ­ mÃ­sta\n"
+"  -y, --prompting       PÅ™ed kaÅ¾dou aktualizacÃ­ vyÅ¾aduj potvrzenÃ­\n"
+"  -a, --allsites        ProveÄ operaci pro VÅ ECHNY definovanÃ¡ mÃ­sta\n"
+"  -k, --keep-going      PokraÄuj v aktualizaci bez ohledu na chyby\n"
+"  -o, --show-progress   Zobraz celkovÃ½ postup pÅ™enosu souborÅ¯\n"
+"  -q, --quiet           BuÄ zticha bÄ›hem provÃ¡dÄ›nÃ­ operace\n"
+"  -qq, --silent         MlÄ bÄ›hem provÃ¡dÄ›nÃ­ operace\n"
+"OperaÄnÃ­ mÃ³dy:\n"
+"  -l, --list            VypiÅ¡ zmÄ›ny mezi vzdÃ¡lenÃ½m a lokÃ¡lnÃ­m mÃ­stem "
+"(implicitnÄ›)\n"
+"  -ll, --flatlist       PlochÃ½ list zmÄ›n mezi vzdÃ¡lenÃ½m a lokÃ¡lnÃ­m mÃ­stem\n"
+"  -v, --view            Zobraz seznam definic mÃ­st\n"
+"  -i, --initialize      OznaÄ vÅ¡echny soubory a adresÃ¡Å™e jako "
+"neaktualizovanÃ©\n"
+"  -f, --fetch           Zjisti jakÃ© soubory jsou na vzdÃ¡lenÃ©m mÃ­stÄ›\n"
+"  -e, --verify          Zkontroluj zda uloÅ¾enÃ½ stav odpovÃ­dÃ¡ stavu "
+"vzdÃ¡lenÃ©ho mÃ­sta\n"
+"  -c, --catchup         OznaÄ vÅ¡echny soubory a adresÃ¡Å™e jako aktualizovanÃ©\n"
+"  -s, --synchronize     Aktualizuj lokÃ¡lnÃ­ mÃ­sto se vzdÃ¡lenÃ©ho mÃ­sta\n"
+"  -u, --update          Aktualizuj vzdÃ¡lenÃ© mÃ­sto\n"
+"  -h, --help            Zobraz tuto nÃ¡povÄ›du\n"
 "  -V, --version         Zobraz informaci o verzi programu\n"
-"Po¹lete prosím po¾adavky na vlastnosti a hlá¹ení o chybách na adresu "
+"PoÅ¡lete prosÃ­m poÅ¾adavky na vlastnosti a hlÃ¡Å¡enÃ­ o chybÃ¡ch na adresu "
 "sitecopy@lyra.org\n"
-"Pøipomínky k pøekladu posílejte na adresu prazak@grisoft.cz\n"
+"PÅ™ipomÃ­nky k pÅ™ekladu posÃ­lejte na adresu prazak@grisoft.cz\n"
 
 #: src/sitestore.c:127
 #, c-format
@@ -1105,11 +1105,11 @@ msgstr ""
 
 #: src/davdriver.c:197
 msgid "The connection timed out."
-msgstr "Spojení vypr¹elo."
+msgstr "SpojenÃ­ vyprÅ¡elo."
 
 #: src/davdriver.c:218
 msgid "SSL support has not be compiled in."
-msgstr "Podpora SSL nebyla zakompilována."
+msgstr "Podpora SSL nebyla zakompilovÃ¡na."
 
 # src/console_fe.c:992
 #: src/davdriver.c:224
@@ -1131,7 +1131,7 @@ msgstr "Nelze zapsat do souboru: %s"
 
 #: src/davdriver.c:289
 msgid "The server does not appear to be a WebDAV server."
-msgstr "Nezdá se, ¾e by server podporoval WebDAV."
+msgstr "NezdÃ¡ se, Å¾e by server podporoval WebDAV."
 
 #: src/davdriver.c:295
 msgid "The server does not support the executable live property."
@@ -1142,7 +1142,7 @@ msgstr "Server nepodporuje 'executable live property'."
 #: src/ftp.c:1135
 #, fuzzy
 msgid "Could not open file"
-msgstr "Nelze otevøít soubor: "
+msgstr "Nelze otevÅ™Ã­t soubor: "
 
 # src/console_fe.c:992
 #: src/davdriver.c:374
@@ -1152,24 +1152,24 @@ msgstr "Nelze zapsat do souboru: %s"
 
 #: src/davdriver.c:608
 msgid "Could not access resource"
-msgstr "Nelze pøistupovat ke zdroji"
+msgstr "Nelze pÅ™istupovat ke zdroji"
 
 #: src/sites.c:164
 msgid "Could not set modification time of local file."
-msgstr "Nelze nastavit èas zmìny pro lokální soubor."
+msgstr "Nelze nastavit Äas zmÄ›ny pro lokÃ¡lnÃ­ soubor."
 
 #: src/sites.c:319
 msgid ""
 "Upload succeeded, but could not retrieve modification time.\n"
 "If this message persists, turn off safe mode."
 msgstr ""
-"Poslání souborù uspìlo, ale není mo¾né získat èas zmìny.\n"
-"Pokud tato zpráva pøetrvává, vypnìte bezpeènı mód."
+"PoslÃ¡nÃ­ souborÅ¯ uspÄ›lo, ale nenÃ­ moÅ¾nÃ© zÃ­skat Äas zmÄ›ny.\n"
+"Pokud tato zprÃ¡va pÅ™etrvÃ¡vÃ¡, vypnÄ›te bezpeÄnÃ½ mÃ³d."
 
 #: src/sites.c:547
 msgid "Remote file has been modified - not overwriting with local changes"
 msgstr ""
-"Vzdálenı soubor byl modifikován - nebudu jej pøepisovat lokálními zmìnami"
+"VzdÃ¡lenÃ½ soubor byl modifikovÃ¡n - nebudu jej pÅ™episovat lokÃ¡lnÃ­mi zmÄ›nami"
 
 #: src/sites.c:564
 msgid "Filename too long for a temporary upload"
@@ -1181,11 +1181,11 @@ msgstr "Nelze prozkoumat soubor."
 
 #: src/sites.c:914
 msgid "Could not checksum file"
-msgstr "Nelze spoèítat kontrolní souèet souboru"
+msgstr "Nelze spoÄÃ­tat kontrolnÃ­ souÄet souboru"
 
 #: src/sites.c:932
 msgid "The target of the symlink could not be read."
-msgstr "Nelze èíst cíl symbolického odkazu."
+msgstr "Nelze ÄÃ­st cÃ­l symbolickÃ©ho odkazu."
 
 # src/console_fe.c:992
 #: src/sites.c:1526
@@ -1196,37 +1196,37 @@ msgstr "Nelze zapsat do souboru: %s"
 #: src/ftp.c:158
 #, c-format
 msgid "%s: connection was closed by server."
-msgstr "%s: server ukonèil spojení."
+msgstr "%s: server ukonÄil spojenÃ­."
 
 #: src/ftp.c:162
 #, c-format
 msgid "%s: connection timed out."
-msgstr "%s: spojení vypr¹elo."
+msgstr "%s: spojenÃ­ vyprÅ¡elo."
 
 #: src/ftp.c:200
 #, fuzzy
 msgid "Could not read response line"
-msgstr "Nelze naèíst tìlo odpovìdi"
+msgstr "Nelze naÄÃ­st tÄ›lo odpovÄ›di"
 
 #: src/ftp.c:234
 #, fuzzy
 msgid "Cannot parse MDTM response; wrong length."
-msgstr "Nelze zpracovat stavovı øádek odpovìdi."
+msgstr "Nelze zpracovat stavovÃ½ Å™Ã¡dek odpovÄ›di."
 
 #: src/ftp.c:241
 #, fuzzy
 msgid "Cannot parse MDTM response."
-msgstr "Nelze zpracovat stavovı øádek odpovìdi."
+msgstr "Nelze zpracovat stavovÃ½ Å™Ã¡dek odpovÄ›di."
 
 #: src/ftp.c:265
 #, fuzzy
 msgid "Could not find address in PASV response"
-msgstr "Nelze naèíst tìlo odpovìdi"
+msgstr "Nelze naÄÃ­st tÄ›lo odpovÄ›di"
 
 #: src/ftp.c:272
 #, fuzzy
 msgid "Could not parse PASV response"
-msgstr "Nelze naèíst tìlo odpovìdi"
+msgstr "Nelze naÄÃ­st tÄ›lo odpovÄ›di"
 
 #: src/ftp.c:281
 msgid "Invalid IP address in PASV response"
@@ -1235,12 +1235,12 @@ msgstr ""
 #: src/ftp.c:304
 #, fuzzy
 msgid "Malformed EPSV response"
-msgstr "Nelze naèíst tìlo odpovìdi"
+msgstr "Nelze naÄÃ­st tÄ›lo odpovÄ›di"
 
 #: src/ftp.c:313
 #, fuzzy
 msgid "Malformed port in EPSV response"
-msgstr "Nelze naèíst tìlo odpovìdi"
+msgstr "Nelze naÄÃ­st tÄ›lo odpovÄ›di"
 
 #: src/ftp.c:452 src/ftp.c:502 src/ftp.c:535
 msgid "Interrupted"
@@ -1253,18 +1253,18 @@ msgstr ""
 #: src/ftp.c:484 src/ftp.c:517
 #, fuzzy
 msgid "Error reading file"
-msgstr "Chyba pøi ctení tìla po¾adavku"
+msgstr "Chyba pÅ™i ctenÃ­ tÄ›la poÅ¾adavku"
 
 # src/console_fe.c:992
 #: src/ftp.c:508
 #, fuzzy
 msgid "Could not send file"
-msgstr "Nelze otevøít soubor: "
+msgstr "Nelze otevÅ™Ã­t soubor: "
 
 #: src/ftp.c:543 src/ftp.c:1153
 #, fuzzy
 msgid "Error writing to file"
-msgstr "Chyba pøi èekání na odpovìd"
+msgstr "Chyba pÅ™i ÄekÃ¡nÃ­ na odpovÄ›d"
 
 #: src/ftp.c:549
 msgid "Receiving file"
@@ -1291,7 +1291,7 @@ msgstr ""
 #: src/ftp.c:683
 #, fuzzy
 msgid "Could not connect passive data socket"
-msgstr "Nelze navázat SSL spojení"
+msgstr "Nelze navÃ¡zat SSL spojenÃ­"
 
 #: src/ftp.c:802
 msgid "Active open failed: could not determine address of control socket"
@@ -1300,7 +1300,7 @@ msgstr ""
 #: src/ftp.c:814
 #, fuzzy
 msgid "Active open failed: could not create socket"
-msgstr "Nelze navázat SSL spojení"
+msgstr "Nelze navÃ¡zat SSL spojenÃ­"
 
 #: src/ftp.c:822
 msgid "Active open failed: could not bind to address"
@@ -1313,7 +1313,7 @@ msgstr ""
 #: src/ftp.c:839
 #, fuzzy
 msgid "Could not determine bound port number for data socket"
-msgstr "Nelze navázat SSL spojení"
+msgstr "Nelze navÃ¡zat SSL spojenÃ­"
 
 #: src/ftp.c:884
 msgid "Active open failed: could not accept connection"
@@ -1327,45 +1327,45 @@ msgstr ""
 #: src/ftp.c:1057
 #, fuzzy
 msgid "Could not determine length of file"
-msgstr "Nelze zjistit dílku souboru: %s"
+msgstr "Nelze zjistit dÃ­lku souboru: %s"
 
 # src/console_fe.c:992
 #: src/ftp.c:1068
 #, fuzzy
 msgid "Could not rewind to beginning of file"
-msgstr "Nelze zjistit dílku souboru: %s"
+msgstr "Nelze zjistit dÃ­lku souboru: %s"
 
 #: src/ftp.c:1254
 #, fuzzy, c-format
 msgid "Server does not support FTP over TLS: %s"
-msgstr "Server nedovoluje èásteèné pøíkazy GET."
+msgstr "Server nedovoluje ÄÃ¡steÄnÃ© pÅ™Ã­kazy GET."
 
 #: src/ftp.c:1270
 #, fuzzy, c-format
 msgid "Could not enable TLS for data connections: %s"
-msgstr "Nelze navázat SSL spojení pøes proxy server."
+msgstr "Nelze navÃ¡zat SSL spojenÃ­ pÅ™es proxy server."
 
 #: src/ftp.c:1390
 #, fuzzy
 msgid "Could not read 'LIST' response."
-msgstr "Nelze naèíst tìlo odpovìdi"
+msgstr "Nelze naÄÃ­st tÄ›lo odpovÄ›di"
 
 #: src/ftp.c:1399
 #, fuzzy, c-format
 msgid "Parse error in LIST response: %s"
-msgstr "Nelze naèíst tìlo odpovìdi"
+msgstr "Nelze naÄÃ­st tÄ›lo odpovÄ›di"
 
 # src/console_fe.c:120
 #~ msgid ""
 #~ "You should never see this message.\n"
 #~ "Please contact the maintainer at sitecopy@lyra.org\n"
 #~ msgstr ""
-#~ "Tuhle zprávu byste nemìli vidìt..\n"
-#~ "Kontaktujte prosím správce na adrese sitecopy@lyra.org\n"
+#~ "Tuhle zprÃ¡vu byste nemÄ›li vidÄ›t..\n"
+#~ "Kontaktujte prosÃ­m sprÃ¡vce na adrese sitecopy@lyra.org\n"
 
 # src/common.c:87
 #~ msgid "Unknown system error"
-#~ msgstr "Neznámá systémová chyba"
+#~ msgstr "NeznÃ¡mÃ¡ systÃ©movÃ¡ chyba"
 
 # src/console_fe.c:582
 #, fuzzy
@@ -1380,7 +1380,7 @@ msgstr "Nelze naèíst tìlo odpovìdi"
 # src/console_fe.c:114
 #, fuzzy
 #~ msgid "'_Catchup' site"
-#~ msgstr "Dohnání"
+#~ msgstr "DohnÃ¡nÃ­"
 
 # src/console_fe.c:108
 #, fuzzy
@@ -1390,7 +1390,7 @@ msgstr "Nelze naèíst tìlo odpovìdi"
 # src/console_fe.c:860
 #, fuzzy
 #~ msgid "Re-reads the local directory of the selected site."
-#~ msgstr "%s: Pro místo `%s' není specifikován místní adresáø.\n"
+#~ msgstr "%s: Pro mÃ­sto `%s' nenÃ­ specifikovÃ¡n mÃ­stnÃ­ adresÃ¡Å™.\n"
 
 # src/console_fe.c:1139
 #, fuzzy
@@ -1410,7 +1410,7 @@ msgstr "Nelze naèíst tìlo odpovìdi"
 # src/console_fe.c:114
 #, fuzzy
 #~ msgid "Catch-up"
-#~ msgstr "Dohnání"
+#~ msgstr "DohnÃ¡nÃ­"
 
 # src/console_fe.c:747
 #, fuzzy
@@ -1420,22 +1420,22 @@ msgstr "Nelze naèíst tìlo odpovìdi"
 # src/console_fe.c:817
 #, fuzzy, c-format
 #~ msgid "%s: Error: Could not read rcfile: %s.\n"
-#~ msgstr "%s: Chyba: Nelze otevøít øídicí soubor: %s.\n"
+#~ msgstr "%s: Chyba: Nelze otevÅ™Ã­t Å™Ã­dicÃ­ soubor: %s.\n"
 
 # src/console_fe.c:844
 #, fuzzy, c-format
 #~ msgid "Server not specified in site `%s'.\n"
-#~ msgstr "%s: Pro místo `%s' není specifikován server.\n"
+#~ msgstr "%s: Pro mÃ­sto `%s' nenÃ­ specifikovÃ¡n server.\n"
 
 # src/console_fe.c:856
 #, fuzzy, c-format
 #~ msgid "Remote directory not specified in site `%s'.\n"
-#~ msgstr "%s: Pro místo `%s' není specifikován vzdálenı adresáø.\n"
+#~ msgstr "%s: Pro mÃ­sto `%s' nenÃ­ specifikovÃ¡n vzdÃ¡lenÃ½ adresÃ¡Å™.\n"
 
 # src/console_fe.c:860
 #, fuzzy, c-format
 #~ msgid "Local directory not specified in site `%s'.\n"
-#~ msgstr "%s: Pro místo `%s' není specifikován místní adresáø.\n"
+#~ msgstr "%s: Pro mÃ­sto `%s' nenÃ­ specifikovÃ¡n mÃ­stnÃ­ adresÃ¡Å™.\n"
 
 # src/console_fe.c:840
 #, fuzzy, c-format
@@ -1443,31 +1443,31 @@ msgstr "Nelze naèíst tìlo odpovìdi"
 #~ "Could not read directory for `%s':\n"
 #~ "\t%s\n"
 #~ msgstr ""
-#~ "%s: Nelze naèíst adresáø pro `%s':\n"
+#~ "%s: Nelze naÄÃ­st adresÃ¡Å™ pro `%s':\n"
 #~ "\t%s\n"
 
 # src/console_fe.c:864
 #, fuzzy, c-format
 #~ msgid "Invalid port used in site `%s'.\n"
-#~ msgstr "%s: Pro místo `%s' je pou¾it neplatnı port.\n"
+#~ msgstr "%s: Pro mÃ­sto `%s' je pouÅ¾it neplatnÃ½ port.\n"
 
 # src/console_fe.c:868
 #, fuzzy, c-format
 #~ msgid "Protocol '%s' cannot maintain symbolic links (site `%s').\n"
-#~ msgstr "%s: %s nemù¾e udr¾ovat symbolické odkazy (místo `%s').\n"
+#~ msgstr "%s: %s nemÅ¯Å¾e udrÅ¾ovat symbolickÃ© odkazy (mÃ­sto `%s').\n"
 
 # src/console_fe.c:872
 #, fuzzy, c-format
 #~ msgid "Cannot use a relative remote directory protocol '%s' (site `%s').\n"
-#~ msgstr "%s: Nelze pou¾it relativní vzdálenı adresáø v %s (místo `%s').\n"
+#~ msgstr "%s: Nelze pouÅ¾it relativnÃ­ vzdÃ¡lenÃ½ adresÃ¡Å™ v %s (mÃ­sto `%s').\n"
 
 #, fuzzy, c-format
 #~ msgid "Could not find 'relative' local directory"
-#~ msgstr "Nelze navázat SSL spojení"
+#~ msgstr "Nelze navÃ¡zat SSL spojenÃ­"
 
 #, fuzzy
 #~ msgid "Could not parse redirect destination URL"
-#~ msgstr "Nelze zpracovat stavovı øádek odpovìdi."
+#~ msgstr "Nelze zpracovat stavovÃ½ Å™Ã¡dek odpovÄ›di."
 
 # src/console_fe.c:992
 #, fuzzy, c-format
@@ -1476,11 +1476,11 @@ msgstr "Nelze naèíst tìlo odpovìdi"
 
 #, fuzzy
 #~ msgid "Connection closed"
-#~ msgstr "Server ukonèil spojení."
+#~ msgstr "Server ukonÄil spojenÃ­."
 
 #, fuzzy
 #~ msgid "Secure connection truncated"
-#~ msgstr "Spojení vypr¹elo."
+#~ msgstr "SpojenÃ­ vyprÅ¡elo."
 
 #, fuzzy, c-format
 #~ msgid "SSL error: %s"
@@ -1491,30 +1491,30 @@ msgstr "Nelze naèíst tìlo odpovìdi"
 #~ msgstr "%s: Chyba: %s\n"
 
 #~ msgid "Line too long"
-#~ msgstr "Øádek je pøíli¹ dlouhı"
+#~ msgstr "Å˜Ã¡dek je pÅ™Ã­liÅ¡ dlouhÃ½"
 
 #~ msgid "Host not found"
-#~ msgstr "Poèítaè nenalezen"
+#~ msgstr "PoÄÃ­taÄ nenalezen"
 
 #, fuzzy
 #~ msgid "Connection timed out"
-#~ msgstr "Spojení vypr¹elo."
+#~ msgstr "SpojenÃ­ vyprÅ¡elo."
 
 #, fuzzy
 #~ msgid "Could not create SSL structure"
-#~ msgstr "Nelze navázat SSL spojení"
+#~ msgstr "Nelze navÃ¡zat SSL spojenÃ­"
 
 #, fuzzy, c-format
 #~ msgid "%s: connection was closed by proxy server"
-#~ msgstr "%s: proxy server ukonèil spojení."
+#~ msgstr "%s: proxy server ukonÄil spojenÃ­."
 
 #, fuzzy, c-format
 #~ msgid "%s: connection was closed by server"
-#~ msgstr "%s: server ukonèil spojení."
+#~ msgstr "%s: server ukonÄil spojenÃ­."
 
 #, fuzzy, c-format
 #~ msgid "%s: connection timed out"
-#~ msgstr "%s: spojení vypr¹elo."
+#~ msgstr "%s: spojenÃ­ vyprÅ¡elo."
 
 # src/console_fe.c:992
 #, fuzzy, c-format
@@ -1522,121 +1522,121 @@ msgstr "Nelze naèíst tìlo odpovìdi"
 #~ msgstr "Nelze zapsat do souboru: %s"
 
 #~ msgid "Could not send request body"
-#~ msgstr "Nelze odeslat tìlo po¾adavku"
+#~ msgstr "Nelze odeslat tÄ›lo poÅ¾adavku"
 
 #~ msgid "Could not read chunk size"
-#~ msgstr "Nelze naèíst velikost bloku"
+#~ msgstr "Nelze naÄÃ­st velikost bloku"
 
 #~ msgid "Could not parse chunk size"
 #~ msgstr "Nelze zpracovat velikost bloku"
 
 #~ msgid "Could not read response body"
-#~ msgstr "Nelze naèíst tìlo odpovìdi"
+#~ msgstr "Nelze naÄÃ­st tÄ›lo odpovÄ›di"
 
 #, fuzzy
 #~ msgid "Could not read chunk delimiter"
-#~ msgstr "Nelze naèíst velikost bloku"
+#~ msgstr "Nelze naÄÃ­st velikost bloku"
 
 #~ msgid "Could not read status line"
-#~ msgstr "Nelze pøeèíst stavovı øádek"
+#~ msgstr "Nelze pÅ™eÄÃ­st stavovÃ½ Å™Ã¡dek"
 
 #, fuzzy
 #~ msgid "Could not parse response status line"
-#~ msgstr "Nelze zpracovat stavovı øádek odpovìdi."
+#~ msgstr "Nelze zpracovat stavovÃ½ Å™Ã¡dek odpovÄ›di."
 
 #, fuzzy
 #~ msgid "Could not read interim response headers"
-#~ msgstr "Nelze naèíst tìlo odpovìdi"
+#~ msgstr "Nelze naÄÃ­st tÄ›lo odpovÄ›di"
 
 #~ msgid "Could not send request"
-#~ msgstr "Nelze poslat po¾adavek"
+#~ msgstr "Nelze poslat poÅ¾adavek"
 
 #~ msgid "Error reading response headers"
-#~ msgstr "Chyba pøi ètení hlavièek odpovìdi"
+#~ msgstr "Chyba pÅ™i ÄtenÃ­ hlaviÄek odpovÄ›di"
 
 #~ msgid "Response header too long"
-#~ msgstr "Hlavièka odpovìdi je pøíli¹ dlouhá"
+#~ msgstr "HlaviÄka odpovÄ›di je pÅ™Ã­liÅ¡ dlouhÃ¡"
 
 #, fuzzy
 #~ msgid "Response exceeded maximum number of header fields"
-#~ msgstr "Odpovìï pøekrocila maximální poøet polo¾ek v hlavicce."
+#~ msgstr "OdpovÄ›Ä pÅ™ekrocila maximÃ¡lnÃ­ poÅ™et poloÅ¾ek v hlavicce."
 
 # src/console_fe.c:956
 #, fuzzy, c-format
 #~ msgid "Could not resolve hostname `%s': %s"
-#~ msgstr "%s: Chyba: Nelze najít adresu vzdáleného poèítaèe (%s).\n"
+#~ msgstr "%s: Chyba: Nelze najÃ­t adresu vzdÃ¡lenÃ©ho poÄÃ­taÄe (%s).\n"
 
 #, fuzzy
 #~ msgid "Could not create socket"
-#~ msgstr "Nelze navázat SSL spojení"
+#~ msgstr "Nelze navÃ¡zat SSL spojenÃ­"
 
 # src/console_fe.c:961
 #~ msgid "Could not connect to proxy server"
-#~ msgstr "Nelze se pøipojit k proxy serveru"
+#~ msgstr "Nelze se pÅ™ipojit k proxy serveru"
 
 # src/console_fe.c:961
 #~ msgid "Could not connect to server"
-#~ msgstr "Nelze se pøipojit k serveru"
+#~ msgstr "Nelze se pÅ™ipojit k serveru"
 
 # src/console_fe.c:821
 #, fuzzy, c-format
 #~ msgid "XML parse error at line %d: invalid element name"
-#~ msgstr "Chyba zpracování XML na øádku %d: %s."
+#~ msgstr "Chyba zpracovÃ¡nÃ­ XML na Å™Ã¡dku %d: %s."
 
 # src/common.c:87
 #, fuzzy
 #~ msgid "Unknown error"
-#~ msgstr "Neznámá systémová chyba"
+#~ msgstr "NeznÃ¡mÃ¡ systÃ©movÃ¡ chyba"
 
 # src/console_fe.c:821
 #, fuzzy, c-format
 #~ msgid "XML parse error at line %d: %s"
-#~ msgstr "Chyba zpracování XML na øádku %d: %s."
+#~ msgstr "Chyba zpracovÃ¡nÃ­ XML na Å™Ã¡dku %d: %s."
 
 #, fuzzy
 #~ msgid "Response exceeds maximum property count"
-#~ msgstr "Odpovìï pøekrocila maximální poøet polo¾ek v hlavicce."
+#~ msgstr "OdpovÄ›Ä pÅ™ekrocila maximÃ¡lnÃ­ poÅ™et poloÅ¾ek v hlavicce."
 
 # src/console_fe.c:992
 #, fuzzy
 #~ msgid "Could not inflate data"
-#~ msgstr "Nelze otevøít soubor: "
+#~ msgstr "Nelze otevÅ™Ã­t soubor: "
 
 # src/console_fe.c:992
 #, fuzzy
 #~ msgid "Could not initialize zlib"
-#~ msgstr "Nelze otevøít soubor: "
+#~ msgstr "Nelze otevÅ™Ã­t soubor: "
 
 #, fuzzy, c-format
 #~ msgid "Could not parse response: %s"
-#~ msgstr "Nelze naèíst tìlo odpovìdi"
+#~ msgstr "Nelze naÄÃ­st tÄ›lo odpovÄ›di"
 
 # src/console_fe.c:992
 #, fuzzy, c-format
 #~ msgid "Could not determine file size: %s"
-#~ msgstr "Nelze zjistit dílku souboru: %s"
+#~ msgstr "Nelze zjistit dÃ­lku souboru: %s"
 
 #, fuzzy
 #~ msgid "Range is not satisfiable"
-#~ msgstr "Rozsah není uspokojivı."
+#~ msgstr "Rozsah nenÃ­ uspokojivÃ½."
 
 # src/console_fe.c:961
 #, fuzzy, c-format
 #~ msgid "Could not authenticate to server: %s"
-#~ msgstr "Nelze se pøipojit k serveru"
+#~ msgstr "Nelze se pÅ™ipojit k serveru"
 
 # src/console_fe.c:961
 #, fuzzy, c-format
 #~ msgid "Could not authenticate to proxy server: %s"
-#~ msgstr "Nelze se pøipojit k proxy serveru"
+#~ msgstr "Nelze se pÅ™ipojit k proxy serveru"
 
 #, fuzzy
 #~ msgid "GSSAPI authentication error: "
-#~ msgstr "Je vy¾adována autentizace na %s `%s':\n"
+#~ msgstr "Je vyÅ¾adovÃ¡na autentizace na %s `%s':\n"
 
 #, fuzzy
 #~ msgid "could not parse domain in Digest challenge"
-#~ msgstr "Nelze zpracovat stavovı øádek odpovìdi."
+#~ msgstr "Nelze zpracovat stavovÃ½ Å™Ã¡dek odpovÄ›di."
 
 #, fuzzy
 #~ msgid "could not parse challenge"
@@ -1647,8 +1647,8 @@ msgstr "Nelze naèíst tìlo odpovìdi"
 #~ "Invalid HTTP status line in status element at line %d of response:\n"
 #~ "Status line was: %s"
 #~ msgstr ""
-#~ "Neplatná øádka HTTP stavu ve stavovém prvku na øádku %d odpovìdi:\n"
-#~ "Stavová øádka byla: %s"
+#~ "NeplatnÃ¡ Å™Ã¡dka HTTP stavu ve stavovÃ©m prvku na Å™Ã¡dku %d odpovÄ›di:\n"
+#~ "StavovÃ¡ Å™Ã¡dka byla: %s"
 
 # lib/rpmatch.c:75
 #~ msgid "^[yY]"
@@ -1661,60 +1661,60 @@ msgstr "Nelze naèíst tìlo odpovìdi"
 # lib/getopt.c:680
 #, c-format
 #~ msgid "%s: option `%s' is ambiguous\n"
-#~ msgstr "%s: volba `%s' není jednoznaèná\n"
+#~ msgstr "%s: volba `%s' nenÃ­ jednoznaÄnÃ¡\n"
 
 # lib/getopt.c:704
 #, c-format
 #~ msgid "%s: option `--%s' doesn't allow an argument\n"
-#~ msgstr "%s: volba `--%s' nedovoluje ¾ádnı parametr\n"
+#~ msgstr "%s: volba `--%s' nedovoluje Å¾Ã¡dnÃ½ parametr\n"
 
 # lib/getopt.c:709
 #, c-format
 #~ msgid "%s: option `%c%s' doesn't allow an argument\n"
-#~ msgstr "%s: volba `%c%s' nedovoluje ¾ádnı parametr\n"
+#~ msgstr "%s: volba `%c%s' nedovoluje Å¾Ã¡dnÃ½ parametr\n"
 
 # lib/getopt.c:726 lib/getopt.c:899
 #, c-format
 #~ msgid "%s: option `%s' requires an argument\n"
-#~ msgstr "%s: volba `%s' vy¾aduje nìjakı parametr\n"
+#~ msgstr "%s: volba `%s' vyÅ¾aduje nÄ›jakÃ½ parametr\n"
 
 # lib/getopt.c:755
 #, c-format
 #~ msgid "%s: unrecognized option `--%s'\n"
-#~ msgstr "%s: neznámá volba `--%s'\n"
+#~ msgstr "%s: neznÃ¡mÃ¡ volba `--%s'\n"
 
 # lib/getopt.c:759
 #, c-format
 #~ msgid "%s: unrecognized option `%c%s'\n"
-#~ msgstr "%s: neznámá volba `%c%s'\n"
+#~ msgstr "%s: neznÃ¡mÃ¡ volba `%c%s'\n"
 
 # lib/getopt.c:785
 #, c-format
 #~ msgid "%s: illegal option -- %c\n"
-#~ msgstr "%s: nesprávná volba -- %c\n"
+#~ msgstr "%s: nesprÃ¡vnÃ¡ volba -- %c\n"
 
 # lib/getopt.c:788
 #, c-format
 #~ msgid "%s: invalid option -- %c\n"
-#~ msgstr "%s: nesprávná volba -- %c\n"
+#~ msgstr "%s: nesprÃ¡vnÃ¡ volba -- %c\n"
 
 # lib/getopt.c:818 lib/getopt.c:948
 #, c-format
 #~ msgid "%s: option requires an argument -- %c\n"
-#~ msgstr "%s: volba vy¾aduje nìjakı parametr -- %c\n"
+#~ msgstr "%s: volba vyÅ¾aduje nÄ›jakÃ½ parametr -- %c\n"
 
 # lib/getopt.c:865
 #, c-format
 #~ msgid "%s: option `-W %s' is ambiguous\n"
-#~ msgstr "%s: volba `-W %s' není jednoznaèná\n"
+#~ msgstr "%s: volba `-W %s' nenÃ­ jednoznaÄnÃ¡\n"
 
 # lib/getopt.c:883
 #, c-format
 #~ msgid "%s: option `-W %s' doesn't allow an argument\n"
-#~ msgstr "%s: volba `-W %s' nedovoluje ¾ádnı parametr\n"
+#~ msgstr "%s: volba `-W %s' nedovoluje Å¾Ã¡dnÃ½ parametr\n"
 
 #~ msgid " bytes)"
-#~ msgstr " bytù)"
+#~ msgstr " bytÅ¯)"
 
 #, fuzzy
 #~ msgid "%s: %s"
@@ -1722,7 +1722,7 @@ msgstr "Nelze naèíst tìlo odpovìdi"
 
 # src/console_fe.c:942
 #~ msgid "%s: Aborted.\n"
-#~ msgstr "%s: Pøeru¹eno.\n"
+#~ msgstr "%s: PÅ™eruÅ¡eno.\n"
 
 # src/console_fe.c:231 src/console_fe.c:250
 #~ msgid ""
@@ -1732,7 +1732,7 @@ msgstr "Nelze naèíst tìlo odpovìdi"
 #~ msgstr ""
 #~ "\n"
 #~ "\n"
-#~ "%s: Zachycen signál: %s (%d)\n"
+#~ "%s: Zachycen signÃ¡l: %s (%d)\n"
 
 # src/console_fe.c:234 src/console_fe.c:253
 #~ msgid ""
@@ -1742,17 +1742,17 @@ msgstr "Nelze naèíst tìlo odpovìdi"
 #~ msgstr ""
 #~ "\n"
 #~ "\n"
-#~ "%s: Zachycen signál: (%d)\n"
+#~ "%s: Zachycen signÃ¡l: (%d)\n"
 
 #~ msgid "%s: Cannot recover from segmentation fault, aborting.\n"
-#~ msgstr "%s: Nelze se zotavit z vıpadku stranky, konèím.\n"
+#~ msgstr "%s: Nelze se zotavit z vÃ½padku stranky, konÄÃ­m.\n"
 
 #~ msgid "%s: Aborting update...\n"
-#~ msgstr "%s: Pøeru¹uji aktualizaci...\n"
+#~ msgstr "%s: PÅ™eruÅ¡uji aktualizaci...\n"
 
 # src/console_fe.c:241 src/console_fe.c:255
 #~ msgid "%s: Terminating.\n"
-#~ msgstr "%s: Konèím.\n"
+#~ msgstr "%s: KonÄÃ­m.\n"
 
 # src/console_fe.c:992
 #, fuzzy
@@ -1760,66 +1760,66 @@ msgstr "Nelze naèíst tìlo odpovìdi"
 #~ msgstr "Nelze zapsat do souboru: %s"
 
 #~ msgid "Error reading request body."
-#~ msgstr "Chyba pøi ctení tìla po¾adavku"
+#~ msgstr "Chyba pÅ™i ctenÃ­ tÄ›la poÅ¾adavku"
 
 # src/common.c:87
 #, fuzzy
 #~ msgid "unknown error code"
-#~ msgstr "Neznámá systémová chyba"
+#~ msgstr "NeznÃ¡mÃ¡ systÃ©movÃ¡ chyba"
 
 #~ msgid "Error reading chunked response body"
-#~ msgstr "Chyba pøi ètení bloku tìla odpovìdi"
+#~ msgstr "Chyba pÅ™i ÄtenÃ­ bloku tÄ›la odpovÄ›di"
 
 #~ msgid "document root"
-#~ msgstr "koøen dokumentu"
+#~ msgstr "koÅ™en dokumentu"
 
 #~ msgid "unknown element"
-#~ msgstr "neznámı prvek"
+#~ msgstr "neznÃ¡mÃ½ prvek"
 
 #~ msgid "unspecified"
-#~ msgstr "neurèeno"
+#~ msgstr "neurÄeno"
 
 #~ msgid "XML is not valid (%s found in parent %s)"
-#~ msgstr "XML není platné (%s nalezeno v rodièi %s)"
+#~ msgstr "XML nenÃ­ platnÃ© (%s nalezeno v rodiÄi %s)"
 
 #~ msgid "Unknown XML element `%s (in %s)'"
-#~ msgstr "Neznámı XML prvek `%s (v %s)'"
+#~ msgstr "NeznÃ¡mÃ½ XML prvek `%s (v %s)'"
 
 #~ msgid ""
 #~ "The server did not authenticate itself correctly.\n"
 #~ "Report this error to your server administrator."
 #~ msgstr ""
-#~ "Server se nesprávnì autentizoval.\n"
-#~ "Nahla¹te tuto chybu va¹emu správci serveru."
+#~ "Server se nesprÃ¡vnÄ› autentizoval.\n"
+#~ "NahlaÅ¡te tuto chybu vaÅ¡emu sprÃ¡vci serveru."
 
 #~ msgid ""
 #~ "The proxy server did not authenticate itself correctly.\n"
 #~ "Report this error to your proxy server administrator."
 #~ msgstr ""
-#~ "Proxy server se nesprávnì autentizoval.\n"
-#~ "Nahla¹te tuto chybu va¹emu správci proxy serveru."
+#~ "Proxy server se nesprÃ¡vnÄ› autentizoval.\n"
+#~ "NahlaÅ¡te tuto chybu vaÅ¡emu sprÃ¡vci proxy serveru."
 
 #~ msgid "%s: socket error."
 #~ msgstr "%s: chyba socketu."
 
 #~ msgid "Timed out waiting for 100 Continue"
-#~ msgstr "Èas vypr¹el pøi cekání na 100 Continue"
+#~ msgstr "ÄŒas vyprÅ¡el pÅ™i cekÃ¡nÃ­ na 100 Continue"
 
 #, fuzzy
 #~ msgid "Host `%s' not found"
-#~ msgstr "Poèítaè nenalezen"
+#~ msgstr "PoÄÃ­taÄ nenalezen"
 
 #~ msgid "Host not found (try again later?)"
-#~ msgstr "Poèítaè nenalezen (zkuste znovu pozdìji?)"
+#~ msgstr "PoÄÃ­taÄ nenalezen (zkuste znovu pozdÄ›ji?)"
 
 #~ msgid "Host exists but has no address."
-#~ msgstr "Poèítaè existuje ale nemá ¾ádnou adresu."
+#~ msgstr "PoÄÃ­taÄ existuje ale nemÃ¡ Å¾Ã¡dnou adresu."
 
 #~ msgid "Non-recoverable error in resolver library."
-#~ msgstr "Nezotavitelná chyba v knihovnì resolveru."
+#~ msgstr "NezotavitelnÃ¡ chyba v knihovnÄ› resolveru."
 
 #~ msgid "Malformed header line."
-#~ msgstr "Po¹kozenı øádek hlavièky."
+#~ msgstr "PoÅ¡kozenÃ½ Å™Ã¡dek hlaviÄky."
 
 #~ msgid "This application does not have SSL support."
-#~ msgstr "Tato aplikace nemá podporu SSL."
+#~ msgstr "Tato aplikace nemÃ¡ podporu SSL."

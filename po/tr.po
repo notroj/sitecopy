@@ -13,21 +13,21 @@ msgstr ""
 "Language-Team: tr\n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=iso-8859-9\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
 #: src/ftpdriver.c:67
 #, fuzzy
 msgid "Could not load saved server certificate"
-msgstr "%s dosyasına yazım yapılamadı"
+msgstr "%s dosyasÄ±na yazÄ±m yapÄ±lamadÄ±"
 
 #: src/console_fe.c:123
 msgid "Show changes to"
-msgstr "Değişiklikleri göster"
+msgstr "DeÄŸiÅŸiklikleri gÃ¶ster"
 
 #: src/console_fe.c:123
 msgid "showing changes to"
-msgstr "değişiklikler gösteriliyor"
+msgstr "deÄŸiÅŸiklikler gÃ¶steriliyor"
 
 #: src/console_fe.c:123 src/console_fe.c:124
 msgid "local"
@@ -35,15 +35,15 @@ msgstr "yerel"
 
 #: src/console_fe.c:124
 msgid "Synchronize"
-msgstr "Eşleştir"
+msgstr "EÅŸleÅŸtir"
 
 #: src/console_fe.c:124
 msgid "synchronizing"
-msgstr "eşleştiriliyor"
+msgstr "eÅŸleÅŸtiriliyor"
 
 #: src/console_fe.c:129
 msgid "Fetch"
-msgstr "İncele"
+msgstr "Ä°ncele"
 
 #: src/console_fe.c:129
 msgid "fetching"
@@ -55,11 +55,11 @@ msgstr "sunucu"
 
 #: src/console_fe.c:131
 msgid "Update"
-msgstr "Güncelleştir"
+msgstr "GÃ¼ncelleÅŸtir"
 
 #: src/console_fe.c:131
 msgid "updating"
-msgstr "güncelleştiriliyor"
+msgstr "gÃ¼ncelleÅŸtiriliyor"
 
 #: src/console_fe.c:133
 msgid "Verify"
@@ -71,95 +71,95 @@ msgstr "kontrol ediliyor"
 
 #: src/console_fe.c:134
 msgid "Catch up"
-msgstr "Güncelle"
+msgstr "GÃ¼ncelle"
 
 #: src/console_fe.c:134
 msgid "catching up"
-msgstr "güncelleniyor"
+msgstr "gÃ¼ncelleniyor"
 
 #: src/console_fe.c:134 src/console_fe.c:135
 msgid "stored"
-msgstr "yüklendi"
+msgstr "yÃ¼klendi"
 
 #: src/console_fe.c:135
 msgid "Initialize"
-msgstr "Hazırla"
+msgstr "HazÄ±rla"
 
 #: src/console_fe.c:135
 msgid "initializing"
-msgstr "hazırlanıyor"
+msgstr "hazÄ±rlanÄ±yor"
 
 #: src/console_fe.c:205
 #, c-format
 msgid "%s: Error: No site called `%s' found - skipping.\n"
-msgstr "%s: Hata: `%s' adında bir site bulunamadi - atlıyorum.\n"
+msgstr "%s: Hata: `%s' adÄ±nda bir site bulunamadi - atlÄ±yorum.\n"
 
 #: src/console_fe.c:223
 #, c-format
 msgid "%s: No valid sites specified.\n"
-msgstr "%s: Geçerli bir site adına rastlanmadı.\n"
+msgstr "%s: GeÃ§erli bir site adÄ±na rastlanmadÄ±.\n"
 
 #: src/console_fe.c:225
 #, c-format
 msgid "%s: No sites specified.\n"
-msgstr "%s: Hiç bir site adı verilmedi.\n"
+msgstr "%s: HiÃ§ bir site adÄ± verilmedi.\n"
 
 #: src/console_fe.c:227 src/console_fe.c:383 src/console_fe.c:540
 #, c-format
 msgid "Try `%s --help' for more information.\n"
-msgstr "Ek bilgi için `%s --help' komutunu deneyin.\n"
+msgstr "Ek bilgi iÃ§in `%s --help' komutunu deneyin.\n"
 
 #: src/console_fe.c:237
 #, c-format
 msgid "%s: %c%s site `%s' (on %s in %s)\n"
 msgstr ""
 "%s: %c%s: `%s' sitesi\n"
-"\t(%s sunucusunda %s kütüğü)\n"
+"\t(%s sunucusunda %s kÃ¼tÃ¼ÄŸÃ¼)\n"
 
 #: src/console_fe.c:260
 #, c-format
 msgid "* These items have been added since the last update:\n"
-msgstr "* Son güncelleştirmeden bu yana eklenenler:\n"
+msgstr "* Son gÃ¼ncelleÅŸtirmeden bu yana eklenenler:\n"
 
 #: src/console_fe.c:265 src/console_fe.c:296
 #, c-format
 msgid "dir:"
-msgstr "kütük:"
+msgstr "kÃ¼tÃ¼k:"
 
 #: src/console_fe.c:272
 #, c-format
 msgid "* These items have been changed since the last update:\n"
-msgstr "* Son güncelleştirmeden bu yana değişenler:\n"
+msgstr "* Son gÃ¼ncelleÅŸtirmeden bu yana deÄŸiÅŸenler:\n"
 
 #: src/console_fe.c:274
 #, c-format
 msgid "  Changes to items in [brackets] are ignored during updates.\n"
 msgstr ""
-"  [Parantez] içindeki birimlere yapilan değişiklikler güncelleştirme "
-"sırasında göz önüne alınmaz.\n"
+"  [Parantez] iÃ§indeki birimlere yapilan deÄŸiÅŸiklikler gÃ¼ncelleÅŸtirme "
+"sÄ±rasÄ±nda gÃ¶z Ã¶nÃ¼ne alÄ±nmaz.\n"
 
 #: src/console_fe.c:288
 #, c-format
 msgid "* These items have been deleted, but will be left on the server:\n"
-msgstr "* Yerel kopyası silinip sunucudan silinmeyeckler:\n"
+msgstr "* Yerel kopyasÄ± silinip sunucudan silinmeyeckler:\n"
 
 #: src/console_fe.c:290
 #, c-format
 msgid "* These items have been deleted since the last update:\n"
-msgstr "* Son güncelleştirmeden bu yana silinenler:\n"
+msgstr "* Son gÃ¼ncelleÅŸtirmeden bu yana silinenler:\n"
 
 #: src/console_fe.c:303
 #, c-format
 msgid "* These items have been moved since the last update:\n"
-msgstr "* Son güncelleştirmeden bu yana taşınanlar:\n"
+msgstr "* Son gÃ¼ncelleÅŸtirmeden bu yana taÅŸÄ±nanlar:\n"
 
 #: src/console_fe.c:321 src/console_fe.c:333
 msgid "Ignored"
-msgstr "Göz önüne alınmaz"
+msgstr "GÃ¶z Ã¶nÃ¼ne alÄ±nmaz"
 
 #: src/console_fe.c:323
 msgid "Maintained for executables"
-msgstr "Programlar için korunur"
+msgstr "Programlar iÃ§in korunur"
 
 #: src/console_fe.c:325
 msgid "Always maintained"
@@ -171,7 +171,7 @@ msgstr "Korunur"
 
 #: src/console_fe.c:337
 msgid "Followed"
-msgstr "İzlenir"
+msgstr "Ä°zlenir"
 
 #: src/console_fe.c:348
 #, c-format
@@ -190,7 +190,7 @@ msgstr "  Port: "
 #: src/console_fe.c:352
 #, c-format
 msgid "(default)\n"
-msgstr "(varsayılan)\n"
+msgstr "(varsayÄ±lan)\n"
 
 #: src/console_fe.c:355
 #, c-format
@@ -200,22 +200,22 @@ msgstr "%d\n"
 #: src/console_fe.c:357
 #, c-format
 msgid "\tProtocol: %s    Username: %s\n"
-msgstr "\tProtokol: %s    Kullanıcı:%s \n"
+msgstr "\tProtokol: %s    KullanÄ±cÄ±:%s \n"
 
 #: src/console_fe.c:360
 msgid "(unspecified)"
-msgstr "(belirtilmemiş)"
+msgstr "(belirtilmemiÅŸ)"
 
 #: src/console_fe.c:362
 #, c-format
 msgid "\tPassive mode FTP will not be used.\n"
-msgstr "\t Pasif FTP işlem biçimi kullanılmayacak.\n"
+msgstr "\t Pasif FTP iÅŸlem biÃ§imi kullanÄ±lmayacak.\n"
 
 #: src/console_fe.c:364
 #, fuzzy, c-format
 #| msgid "\tPassive mode FTP will not be used.\n"
 msgid "\tFTP over TLS will be used.\n"
-msgstr "\t Pasif FTP işlem biçimi kullanılmayacak.\n"
+msgstr "\t Pasif FTP iÅŸlem biÃ§imi kullanÄ±lmayacak.\n"
 
 #: src/console_fe.c:365
 #, c-format
@@ -223,13 +223,13 @@ msgid ""
 "\tRemote directory: %s\n"
 "\tLocal directory: %s\n"
 msgstr ""
-"\tSunucudaki kütük: %s\n"
-"\tYerel kütük: %s\n"
+"\tSunucudaki kÃ¼tÃ¼k: %s\n"
+"\tYerel kÃ¼tÃ¼k: %s\n"
 
 #: src/console_fe.c:367
 #, c-format
 msgid "\tPermissions: %s     Symlinks: %s\n"
-msgstr "\tİzinler: %s     Sembolik linkler: %s\n"
+msgstr "\tÄ°zinler: %s     Sembolik linkler: %s\n"
 
 #: src/console_fe.c:370
 #, c-format
@@ -239,22 +239,22 @@ msgstr "\tSunucudaki dosyalar silinmez.\n"
 #: src/console_fe.c:372
 #, c-format
 msgid "\tFiles will be moved remotely if moved locally.\n"
-msgstr "\tYeri değişen dosyalar, sunucuda da taşınır.\n"
+msgstr "\tYeri deÄŸiÅŸen dosyalar, sunucuda da taÅŸÄ±nÄ±r.\n"
 
 #: src/console_fe.c:381
 #, c-format
 msgid "%s: Error: Only specify ONE operation mode at a time.\n"
-msgstr "%s: Hata: Sadece tek BİR işlem biçimi belirtin.\n"
+msgstr "%s: Hata: Sadece tek BÄ°R iÅŸlem biÃ§imi belirtin.\n"
 
 #: src/console_fe.c:499
 #, c-format
 msgid "%s: Error: Debug channel %s not known.\n"
-msgstr "%s: Hata: İzleme kanalı %s bilinmiyor.\n"
+msgstr "%s: Hata: Ä°zleme kanalÄ± %s bilinmiyor.\n"
 
 #: src/console_fe.c:507
 #, c-format
 msgid "%s: Warning: Could not open `%s' to use as logfile.\n"
-msgstr "%s: Uyarı: `%s' dosyası izleme kaydı için açılamadı.\n"
+msgstr "%s: UyarÄ±: `%s' dosyasÄ± izleme kaydÄ± iÃ§in aÃ§Ä±lamadÄ±.\n"
 
 #: src/console_fe.c:551
 #, c-format
@@ -267,8 +267,8 @@ msgid ""
 "%s: Warning: Only %d sites can be specified on the command line!\n"
 "Extra entries are being skipped.\n"
 msgstr ""
-"%s: Uyarı: Komut satırında en fazla %d adet site belirtilebilir!\n"
-"Fazlası göz önüne alınmayacak.\n"
+"%s: UyarÄ±: Komut satÄ±rÄ±nda en fazla %d adet site belirtilebilir!\n"
+"FazlasÄ± gÃ¶z Ã¶nÃ¼ne alÄ±nmayacak.\n"
 
 #: src/console_fe.c:593
 msgid "WARNING: Server certificate is not trusted."
@@ -323,16 +323,16 @@ msgstr ""
 
 #: src/console_fe.c:632
 msgid "Username: "
-msgstr "Kullanıcı: "
+msgstr "KullanÄ±cÄ±: "
 
 #: src/console_fe.c:637
 #, c-format
 msgid "Username: %s\n"
-msgstr "Kullanıci: %s\n"
+msgstr "KullanÄ±ci: %s\n"
 
 #: src/console_fe.c:639 src/console_fe.c:663
 msgid "Password: "
-msgstr "Şifre: "
+msgstr "Åifre: "
 
 #: src/console_fe.c:649
 #, c-format
@@ -347,42 +347,42 @@ msgstr ""
 #: src/console_fe.c:728
 #, c-format
 msgid "Create %s/"
-msgstr "%s/ kütüğünü yarat"
+msgstr "%s/ kÃ¼tÃ¼ÄŸÃ¼nÃ¼ yarat"
 
 #: src/console_fe.c:730
 #, c-format
 msgid "Delete %s/"
-msgstr "%s/ kütüğünü sil"
+msgstr "%s/ kÃ¼tÃ¼ÄŸÃ¼nÃ¼ sil"
 
 #: src/console_fe.c:738
 #, fuzzy, c-format
 msgid "Upload %s (%s bytes)"
-msgstr "%s dosyasını gönder"
+msgstr "%s dosyasÄ±nÄ± gÃ¶nder"
 
 #: src/console_fe.c:740
 #, c-format
 msgid "Delete %s"
-msgstr "%s dosyasını sil"
+msgstr "%s dosyasÄ±nÄ± sil"
 
 #: src/console_fe.c:741
 #, c-format
 msgid "Move %s->%s"
-msgstr "%s dosyasını %s'ye taşı"
+msgstr "%s dosyasÄ±nÄ± %s'ye taÅŸÄ±"
 
 #: src/console_fe.c:750
 #, c-format
 msgid "Change %s"
-msgstr "%s dosyasını değiştir"
+msgstr "%s dosyasÄ±nÄ± deÄŸiÅŸtir"
 
 #: src/console_fe.c:751
 #, c-format
 msgid "Create %s"
-msgstr "%s dosyasını yarat"
+msgstr "%s dosyasÄ±nÄ± yarat"
 
 #: src/console_fe.c:752
 #, c-format
 msgid "Remove %s"
-msgstr "%s dosyasını sil"
+msgstr "%s dosyasÄ±nÄ± sil"
 
 #: src/console_fe.c:759
 #, c-format
@@ -392,12 +392,12 @@ msgstr "? (e/h) "
 #: src/console_fe.c:769
 #, c-format
 msgid "Checksumming %s: ["
-msgstr "%s dosyasının kontrol toplamı hesaplanıyor: [ "
+msgstr "%s dosyasÄ±nÄ±n kontrol toplamÄ± hesaplanÄ±yor: [ "
 
 #: src/console_fe.c:784 src/console_fe.c:896 src/console_fe.c:958
 #, c-format
 msgid "] done.\n"
-msgstr "] tamamlandı.\n"
+msgstr "] tamamlandÄ±.\n"
 
 #: src/console_fe.c:786 src/console_fe.c:960
 #, c-format
@@ -405,18 +405,18 @@ msgid ""
 "] failed:\n"
 "%s\n"
 msgstr ""
-"] başarısız oldu:\n"
+"] baÅŸarÄ±sÄ±z oldu:\n"
 "%s\n"
 
 #: src/console_fe.c:796
 #, fuzzy, c-format
 msgid "Setting permissions on %s%s: "
-msgstr "%s dosyasının izinleri konuyor: "
+msgstr "%s dosyasÄ±nÄ±n izinleri konuyor: "
 
 #: src/console_fe.c:806 src/console_fe.c:882 src/console_fe.c:952
 #, c-format
 msgid "done.\n"
-msgstr "tamamlandı.\n"
+msgstr "tamamlandÄ±.\n"
 
 #: src/console_fe.c:808 src/console_fe.c:954
 #, c-format
@@ -424,74 +424,74 @@ msgid ""
 "failed:\n"
 "%s\n"
 msgstr ""
-"başarısız oldu:\n"
+"baÅŸarÄ±sÄ±z oldu:\n"
 "%s\n"
 
 #: src/console_fe.c:827 src/console_fe.c:916
 #, c-format
 msgid "Creating %s/: "
-msgstr "%s/ kütüğü yaratılıyor: "
+msgstr "%s/ kÃ¼tÃ¼ÄŸÃ¼ yaratÄ±lÄ±yor: "
 
 #: src/console_fe.c:829 src/console_fe.c:918
 #, c-format
 msgid "Deleting %s/: "
-msgstr "%s/ kütüğü siliniyor: "
+msgstr "%s/ kÃ¼tÃ¼ÄŸÃ¼ siliniyor: "
 
 #: src/console_fe.c:836
 #, c-format
 msgid "Uploading %s: ["
-msgstr "%s dosyası gönderiliyor: ["
+msgstr "%s dosyasÄ± gÃ¶nderiliyor: ["
 
 #: src/console_fe.c:839 src/console_fe.c:857 src/console_fe.c:928
 #, c-format
 msgid "Deleting %s: "
-msgstr "%s dosyası siliniyor: "
+msgstr "%s dosyasÄ± siliniyor: "
 
 #: src/console_fe.c:842 src/console_fe.c:931
 #, c-format
 msgid "Moving %s->%s: "
-msgstr "%s dosyası %s'ye taşınıyor: "
+msgstr "%s dosyasÄ± %s'ye taÅŸÄ±nÄ±yor: "
 
 #: src/console_fe.c:853
 #, c-format
 msgid "Changing %s: "
-msgstr "%s dosyası değiştiriliyor: "
+msgstr "%s dosyasÄ± deÄŸiÅŸtiriliyor: "
 
 #: src/console_fe.c:855
 #, c-format
 msgid "Creating %s: "
-msgstr "%s dosyası yaratılıyor: "
+msgstr "%s dosyasÄ± yaratÄ±lÄ±yor: "
 
 #: src/console_fe.c:875
 #, fuzzy, c-format
 msgid "Failed to update %s:%c%s\n"
 msgstr ""
-"%s'yi güncelleştirme başarısız oldu:\n"
+"%s'yi gÃ¼ncelleÅŸtirme baÅŸarÄ±sÄ±z oldu:\n"
 "%s\n"
 
 #: src/console_fe.c:885
 #, fuzzy, c-format
 msgid "failed:%c%s\n"
 msgstr ""
-"başarısız oldu:\n"
+"baÅŸarÄ±sÄ±z oldu:\n"
 "%s\n"
 
 #: src/console_fe.c:900
 #, fuzzy, c-format
 msgid "] failed:%c%s\n"
 msgstr ""
-"] başarısız oldu:\n"
+"] baÅŸarÄ±sÄ±z oldu:\n"
 "%s\n"
 
 #: src/console_fe.c:925
 #, c-format
 msgid "Downloading %s: ["
-msgstr "%s dosyası indiriliyor: ["
+msgstr "%s dosyasÄ± indiriliyor: ["
 
 #: src/console_fe.c:970
 #, fuzzy
 msgid "Changed on server"
-msgstr "%s dosyasını değiştir"
+msgstr "%s dosyasÄ±nÄ± deÄŸiÅŸtir"
 
 #: src/console_fe.c:973
 msgid "Added on server"
@@ -505,7 +505,7 @@ msgstr "%s: Hata: %s\n"
 #: src/console_fe.c:1001
 #, c-format
 msgid "Directory: %s/\n"
-msgstr "Kütük: %s/\n"
+msgstr "KÃ¼tÃ¼k: %s/\n"
 
 #: src/console_fe.c:1006
 #, fuzzy, c-format
@@ -524,7 +524,7 @@ msgstr "Link: %s - hedefi %s\n"
 #: src/console_fe.c:1024
 #, c-format
 msgid "%s: Error: Could not open rcfile: %s.\n"
-msgstr "%s: Hata: Kurulum dosyası %s açılamadı.\n"
+msgstr "%s: Hata: Kurulum dosyasÄ± %s aÃ§Ä±lamadÄ±.\n"
 
 #: src/console_fe.c:1028
 #, c-format
@@ -532,7 +532,7 @@ msgid ""
 "%s: rcfile corrupt at line %d:\n"
 "%s\n"
 msgstr ""
-"%s: kurulum dosyasında bozukluk var. satır %d:\n"
+"%s: kurulum dosyasÄ±nda bozukluk var. satÄ±r %d:\n"
 "%s\n"
 
 #: src/console_fe.c:1047
@@ -541,47 +541,47 @@ msgid ""
 "%s: Could not read directory for `%s':\n"
 "\t%s\n"
 msgstr ""
-"%s: `%s'nin kütüğü okunamadı:\n"
+"%s: `%s'nin kÃ¼tÃ¼ÄŸÃ¼ okunamadÄ±:\n"
 "\t%s\n"
 
 #: src/console_fe.c:1051
 #, c-format
 msgid "%s: Server not specified in site `%s'.\n"
-msgstr "%s: `%s' sitesinin tanımında sunucu belirtilmemiş.\n"
+msgstr "%s: `%s' sitesinin tanÄ±mÄ±nda sunucu belirtilmemiÅŸ.\n"
 
 #: src/console_fe.c:1055
 #, c-format
 msgid "%s: Remote directory not specified in site `%s'.\n"
-msgstr "%s: `%s' sitesinin tanımında sunucudaki kütük belirtilmemiş.\n"
+msgstr "%s: `%s' sitesinin tanÄ±mÄ±nda sunucudaki kÃ¼tÃ¼k belirtilmemiÅŸ.\n"
 
 #: src/console_fe.c:1059
 #, c-format
 msgid "%s: Local directory not specified in site `%s'.\n"
-msgstr "%s: `%s' sitesinin tanımında yerel kütük belirtilmemiş.\n"
+msgstr "%s: `%s' sitesinin tanÄ±mÄ±nda yerel kÃ¼tÃ¼k belirtilmemiÅŸ.\n"
 
 #: src/console_fe.c:1063
 #, c-format
 msgid "%s: Invalid port used in site `%s'.\n"
-msgstr "%s: `%s' sitesinin tanımında geçersiz port belirtilmiş.\n"
+msgstr "%s: `%s' sitesinin tanÄ±mÄ±nda geÃ§ersiz port belirtilmiÅŸ.\n"
 
 #: src/console_fe.c:1067
 #, c-format
 msgid "%s: %s cannot maintain symbolic links (site `%s').\n"
 msgstr ""
-"%s: %s protokolü ile sembolik linklerin korunması mümkün değil (`%s' "
+"%s: %s protokolÃ¼ ile sembolik linklerin korunmasÄ± mÃ¼mkÃ¼n deÄŸil (`%s' "
 "sitesi).\n"
 
 #: src/console_fe.c:1071
 #, c-format
 msgid "%s: Cannot use a relative remote directory in %s (site `%s').\n"
 msgstr ""
-"%s: %s protokolü ile sunucuda göreli kütüklerin kullanılması mümkün değil "
+"%s: %s protokolÃ¼ ile sunucuda gÃ¶reli kÃ¼tÃ¼klerin kullanÄ±lmasÄ± mÃ¼mkÃ¼n deÄŸil "
 "(`%s' sitesi).\n"
 
 #: src/console_fe.c:1074
 #, c-format
 msgid "%s: File permissions are not supported in %s (site `%s').\n"
-msgstr "%s: %s protokolü dosya izinlerini desteklemiyor (`%s' sitesi).\n"
+msgstr "%s: %s protokolÃ¼ dosya izinlerini desteklemiyor (`%s' sitesi).\n"
 
 #: src/console_fe.c:1077
 #, c-format
@@ -599,7 +599,7 @@ msgstr ""
 #, c-format
 msgid "%s: Can only check for renamed files when checksumming (site `%s').\n"
 msgstr ""
-"%s: Adı değişen dosyalar sadece kontrol toplamları hesaplanarak "
+"%s: AdÄ± deÄŸiÅŸen dosyalar sadece kontrol toplamlarÄ± hesaplanarak "
 "belirlenebilir (`%s' sitesi).\n"
 
 #: src/console_fe.c:1086
@@ -612,7 +612,7 @@ msgstr ""
 #: src/console_fe.c:1091
 #, c-format
 msgid "%s: The protocol `%s' is unsupported (site `%s').\n"
-msgstr "%s: `%s' protokolü desteklenmiyor (`%s' sitesi).\n"
+msgstr "%s: `%s' protokolÃ¼ desteklenmiyor (`%s' sitesi).\n"
 
 #: src/console_fe.c:1098
 #, c-format
@@ -621,8 +621,8 @@ msgstr ""
 
 # msgid "%s: Unhandled error %d in site `%s' - please contact the maintainer.\n"
 # msgstr ""
-# "%s: `%s' sitesinde %d sayılı bilinmeyen bir hata ile karşilaşıldı \n"
-# "lütfen bu durumu iletin.\n"
+# "%s: `%s' sitesinde %d sayÄ±lÄ± bilinmeyen bir hata ile karÅŸilaÅŸÄ±ldÄ± \n"
+# "lÃ¼tfen bu durumu iletin.\n"
 #: src/console_fe.c:1115
 #, fuzzy, c-format
 #| msgid ""
@@ -632,20 +632,20 @@ msgid ""
 "%s: Error: Could not lock storage file for `%s':\n"
 "%s: Error: %s\n"
 msgstr ""
-"%s: Hata: Bozuk site veritabanı `%s':\n"
+"%s: Hata: Bozuk site veritabanÄ± `%s':\n"
 "%s: %s\n"
 
 # msgid "%s: Unhandled error %d in site `%s' - please contact the maintainer.\n"
 # msgstr ""
-# "%s: `%s' sitesinde %d sayılı bilinmeyen bir hata ile karşilaşıldı \n"
-# "lütfen bu durumu iletin.\n"
+# "%s: `%s' sitesinde %d sayÄ±lÄ± bilinmeyen bir hata ile karÅŸilaÅŸÄ±ldÄ± \n"
+# "lÃ¼tfen bu durumu iletin.\n"
 #: src/console_fe.c:1130
 #, c-format
 msgid ""
 "%s: Error: Corrupt site storage file for `%s':\n"
 "%s: %s\n"
 msgstr ""
-"%s: Hata: Bozuk site veritabanı `%s':\n"
+"%s: Hata: Bozuk site veritabanÄ± `%s':\n"
 "%s: %s\n"
 
 #: src/console_fe.c:1140
@@ -654,14 +654,14 @@ msgid ""
 "%s: Error: No storage file for `%s'.\n"
 "%s: Use --init, --catchup or --fetch to create a storage file.\n"
 msgstr ""
-"%s: Hata: `%s' sitesinin veritabanı yok.\n"
-"%s: --init, --catchup ya da --fetch seçenekelerinden birini kullanarak\n"
-"veritabanını yaratın.\n"
+"%s: Hata: `%s' sitesinin veritabanÄ± yok.\n"
+"%s: --init, --catchup ya da --fetch seÃ§enekelerinden birini kullanarak\n"
+"veritabanÄ±nÄ± yaratÄ±n.\n"
 
 #: src/console_fe.c:1154
 #, c-format
 msgid "%s: Skipping site `%s'.\n"
-msgstr "%s: `%s' sitesi atlanıyor.\n"
+msgstr "%s: `%s' sitesi atlanÄ±yor.\n"
 
 #: src/console_fe.c:1173
 #, fuzzy, c-format
@@ -674,14 +674,14 @@ msgid ""
 "%s: Error: %s\n"
 "%s: Error: The changes made have not been recorded.\n"
 msgstr ""
-"%s: Hata: Veritabanı dosyası %s yazım için açılamadı.\n"
+"%s: Hata: VeritabanÄ± dosyasÄ± %s yazÄ±m iÃ§in aÃ§Ä±lamadÄ±.\n"
 "%s: Hata: %s\n"
-"%s: `%s' sitesi güncelleştirilmeyecek.\n"
+"%s: `%s' sitesi gÃ¼ncelleÅŸtirilmeyecek.\n"
 
 #: src/console_fe.c:1189
 #, c-format
 msgid "%s: %s completed successfully.\n"
-msgstr "%s: %s başarıyla tamamlandı.\n"
+msgstr "%s: %s baÅŸarÄ±yla tamamlandÄ±.\n"
 
 #: src/console_fe.c:1195
 #, c-format
@@ -691,38 +691,38 @@ msgstr "%s: %s, %s sitesinde desteklenmiyor.\n"
 #: src/console_fe.c:1200
 #, c-format
 msgid "%s: Errors occurred while %s the %s site.\n"
-msgstr "%s: %s: `%s' sitesinde hatalarla karşılaşıldı.\n"
+msgstr "%s: %s: `%s' sitesinde hatalarla karÅŸÄ±laÅŸÄ±ldÄ±.\n"
 
 #: src/console_fe.c:1207
 #, fuzzy, c-format
 #| msgid "%s: Errors occurred while %s the %s site.\n"
 msgid "%s: Interrupted while %s the %s site `%s'.\n"
-msgstr "%s: %s: `%s' sitesinde hatalarla karşılaşıldı.\n"
+msgstr "%s: %s: `%s' sitesinde hatalarla karÅŸÄ±laÅŸÄ±ldÄ±.\n"
 
 #: src/console_fe.c:1212
 #, c-format
 msgid "%s: Error: Could not resolve remote hostname (%s).\n"
-msgstr "%s: Hata: %s sunucusunun adresi bulunamadı.\n"
+msgstr "%s: Hata: %s sunucusunun adresi bulunamadÄ±.\n"
 
 #: src/console_fe.c:1218
 #, c-format
 msgid "%s: Error: Could not resolve hostname of proxy server (%s).\n"
-msgstr "%s: Hata: %s ara sunucusunun adresi bulunamadı.\n"
+msgstr "%s: Hata: %s ara sunucusunun adresi bulunamadÄ±.\n"
 
 #: src/console_fe.c:1224
 #, c-format
 msgid "%s: Error: Could not connect to proxy server (%s port %d).\n"
-msgstr "%s: Hata: %s ara sunucusu ile %d portundan bağlantı kurulamadı.\n"
+msgstr "%s: Hata: %s ara sunucusu ile %d portundan baÄŸlantÄ± kurulamadÄ±.\n"
 
 #: src/console_fe.c:1227
 #, c-format
 msgid "%s: Error: Could not connect to server (%s port %d).\n"
-msgstr "%s: Hata: %s sunucusu ile %d portundan bağlantı kurulamadı.\n"
+msgstr "%s: Hata: %s sunucusu ile %d portundan baÄŸlantÄ± kurulamadÄ±.\n"
 
 #: src/console_fe.c:1233
 #, c-format
 msgid "%s: Error: Could not authorise user on server.\n"
-msgstr "%s: Hata: Kullanıcı sunucu tarafından onaylanmadı.\n"
+msgstr "%s: Hata: KullanÄ±cÄ± sunucu tarafÄ±ndan onaylanmadÄ±.\n"
 
 #: src/console_fe.c:1238
 #, c-format
@@ -732,22 +732,22 @@ msgstr "%s: Hata: %s\n"
 #: src/console_fe.c:1242
 #, c-format
 msgid "%s: Error: Could not authorise user on proxy server (%s).\n"
-msgstr "%s: Hata: Kullanıcı %s ara sunucusu tarafından onaylanmadı.\n"
+msgstr "%s: Hata: KullanÄ±cÄ± %s ara sunucusu tarafÄ±ndan onaylanmadÄ±.\n"
 
 #: src/console_fe.c:1263
 #, c-format
 msgid "%s: Error: Environment variable HOME not set.\n"
-msgstr "%s: Hata: Ortam değişkeni HOME belirtilmemiş.\n"
+msgstr "%s: Hata: Ortam deÄŸiÅŸkeni HOME belirtilmemiÅŸ.\n"
 
 #: src/console_fe.c:1271
 #, c-format
 msgid "%s: Error: Could not open rcfile: %s\n"
-msgstr "%s: Hata: %s adlı kurulum dosyası açılamadı.\n"
+msgstr "%s: Hata: %s adlÄ± kurulum dosyasÄ± aÃ§Ä±lamadÄ±.\n"
 
 #: src/console_fe.c:1274
 #, c-format
 msgid "%s: Error: rcfile permissions allow other users to read your rcfile.\n"
-msgstr "%s: Hata: Kurulum dosyası başka kullanıcılar tarafından okunabilir.\n"
+msgstr "%s: Hata: Kurulum dosyasÄ± baÅŸka kullanÄ±cÄ±lar tarafÄ±ndan okunabilir.\n"
 
 #: src/console_fe.c:1275 src/console_fe.c:1287
 #, c-format
@@ -757,38 +757,38 @@ msgstr "%s: Dosya izinlerini 0600 olarak belirtin.\n"
 #: src/console_fe.c:1278
 #, c-format
 msgid "%s: Error: Could not open storage directory: %s\n"
-msgstr "%s: Hata: Veritabanı kütüğü %s açılamadı.\n"
+msgstr "%s: Hata: VeritabanÄ± kÃ¼tÃ¼ÄŸÃ¼ %s aÃ§Ä±lamadÄ±.\n"
 
 #: src/console_fe.c:1279
 #, c-format
 msgid ""
 "%s: You need to create this directory and set the permissions to 0700.\n"
-msgstr "%s: Bu kütüğü yaratın ve izinlerini 0700 olarak belirtin.\n"
+msgstr "%s: Bu kÃ¼tÃ¼ÄŸÃ¼ yaratÄ±n ve izinlerini 0700 olarak belirtin.\n"
 
 #: src/console_fe.c:1282
 #, c-format
 msgid "%s: Error: storage directory permissions incorrect.\n"
-msgstr "%s: Hata: Veritabanı kütüğünün izinleri yanlış.\n"
+msgstr "%s: Hata: VeritabanÄ± kÃ¼tÃ¼ÄŸÃ¼nÃ¼n izinleri yanlÄ±ÅŸ.\n"
 
 #: src/console_fe.c:1283
 #, c-format
 msgid "%s: Set the permissions to 0700.\n"
-msgstr "%s: İzinleri 0700 olarak belirtin.\n"
+msgstr "%s: Ä°zinleri 0700 olarak belirtin.\n"
 
 #: src/console_fe.c:1286
 #, c-format
 msgid "%s: Error: ~/.netrc permissions incorrect.\n"
-msgstr "%s: Hata: ~/.netrc dosyasının izinleri yanlış.\n"
+msgstr "%s: Hata: ~/.netrc dosyasÄ±nÄ±n izinleri yanlÄ±ÅŸ.\n"
 
 #: src/console_fe.c:1298
 #, c-format
 msgid "%s: Error: Could not parse ~/.netrc.\n"
-msgstr "%s: Hata ~/.netrc dosyası anlaşılamadı.\n"
+msgstr "%s: Hata ~/.netrc dosyasÄ± anlaÅŸÄ±lamadÄ±.\n"
 
 #: src/console_fe.c:1316 src/console_fe.c:1426
 #, c-format
 msgid "%s: Nothing to do - no changes found.\n"
-msgstr "%s: Hiç değişiklik yok.\n"
+msgstr "%s: HiÃ§ deÄŸiÅŸiklik yok.\n"
 
 #: src/console_fe.c:1326
 #, c-format
@@ -797,9 +797,9 @@ msgid ""
 "%s: Error: %s\n"
 "%s: Will not update site `%s'.\n"
 msgstr ""
-"%s: Hata: Veritabanı dosyası %s yazım için açılamadı.\n"
+"%s: Hata: VeritabanÄ± dosyasÄ± %s yazÄ±m iÃ§in aÃ§Ä±lamadÄ±.\n"
 "%s: Hata: %s\n"
-"%s: `%s' sitesi güncelleştirilmeyecek.\n"
+"%s: `%s' sitesi gÃ¼ncelleÅŸtirilmeyecek.\n"
 
 #: src/console_fe.c:1353
 #, fuzzy, c-format
@@ -807,37 +807,37 @@ msgid ""
 "%s: Warning: Current state method differs from stored in site `%s'.\n"
 "%s: All existing files will appear changed (use catchup?).\n"
 msgstr ""
-"%s: Uyarı: Kullanımdaki durum belirleme yöntemi `%s' sitesi\n"
-"veritabanındakinden farklı.\n"
-"%s: Bütün dosyalar değişmis görünecek (sunucudan güncellensin mi?)\n"
+"%s: UyarÄ±: KullanÄ±mdaki durum belirleme yÃ¶ntemi `%s' sitesi\n"
+"veritabanÄ±ndakinden farklÄ±.\n"
+"%s: BÃ¼tÃ¼n dosyalar deÄŸiÅŸmis gÃ¶rÃ¼necek (sunucudan gÃ¼ncellensin mi?)\n"
 
 #: src/console_fe.c:1359
 #, c-format
 msgid "%s: The remote site needs updating (%d items to update).\n"
 msgstr ""
-"%s: Sunucunun güncelleştirilmesi gerek.\n"
-"\t(Güncelleştirilecek dosya adedi: %d)\n"
+"%s: Sunucunun gÃ¼ncelleÅŸtirilmesi gerek.\n"
+"\t(GÃ¼ncelleÅŸtirilecek dosya adedi: %d)\n"
 
 #: src/console_fe.c:1362
 #, c-format
 msgid "%s: The remote site needs updating (1 item to update).\n"
-msgstr "%s: Sunucudaki bir adet dosyanın güncelleştirilmesi gerek.\n"
+msgstr "%s: Sunucudaki bir adet dosyanÄ±n gÃ¼ncelleÅŸtirilmesi gerek.\n"
 
 #: src/console_fe.c:1366
 #, c-format
 msgid "%s: The remote site does not need updating.\n"
-msgstr "%s: Sunucunun güncelleştirilmesi gerekli değil.\n"
+msgstr "%s: Sunucunun gÃ¼ncelleÅŸtirilmesi gerekli deÄŸil.\n"
 
 #: src/console_fe.c:1376
 #, c-format
 msgid "%s: All the files and directories are marked as NOT updated remotely.\n"
 msgstr ""
-"%s: Bütün dosya ve kütükler sunucuda güncel DEĞİL olarak işaretlendi.\n"
+"%s: BÃ¼tÃ¼n dosya ve kÃ¼tÃ¼kler sunucuda gÃ¼ncel DEÄÄ°L olarak iÅŸaretlendi.\n"
 
 #: src/console_fe.c:1383
 #, c-format
 msgid "%s: All the files and and directories are marked as updated remotely.\n"
-msgstr "%s: Bütün dosya ve kütükler sunucuda güncel olarak işaretlendi.\n"
+msgstr "%s: BÃ¼tÃ¼n dosya ve kÃ¼tÃ¼kler sunucuda gÃ¼ncel olarak iÅŸaretlendi.\n"
 
 #: src/console_fe.c:1391
 #, c-format
@@ -845,7 +845,7 @@ msgid ""
 "%s: Failed to fetch file listing for site `%s':\n"
 "%s: %s\n"
 msgstr ""
-"%s: `%s' sitesinden dosya listesi indirme başarısız oldu:\n"
+"%s: `%s' sitesinden dosya listesi indirme baÅŸarÄ±sÄ±z oldu:\n"
 "%s: %s\n"
 
 #: src/console_fe.c:1407
@@ -854,7 +854,7 @@ msgid ""
 "%s: Failed to fetch file listing to verify site `%s':\n"
 "%s: %s\n"
 msgstr ""
-"%s: `%s' sitesinden dosya listesi indirme başarısız oldu:\n"
+"%s: `%s' sitesinden dosya listesi indirme baÅŸarÄ±sÄ±z oldu:\n"
 "%s: %s\n"
 
 #: src/console_fe.c:1414
@@ -865,7 +865,7 @@ msgstr ""
 #: src/console_fe.c:1417
 #, fuzzy, c-format
 msgid "%s: Remote site not synchronized with stored state.\n"
-msgstr "%s: `%s' sitesinin tanımında sunucudaki kütük belirtilmemiş.\n"
+msgstr "%s: `%s' sitesinin tanÄ±mÄ±nda sunucudaki kÃ¼tÃ¼k belirtilmemiÅŸ.\n"
 
 #: src/console_fe.c:1431
 #, c-format
@@ -879,12 +879,12 @@ msgstr ""
 #: src/console_fe.c:1451
 #, c-format
 msgid "Usage: %s [OPTIONS] [MODE] [sitename]...\n"
-msgstr "Kullanım biçimi: %s [SEÇENEKLER] [İŞLEM BİÇİMİ] [site adı] ...\n"
+msgstr "KullanÄ±m biÃ§imi: %s [SEÃ‡ENEKLER] [Ä°ÅLEM BÄ°Ã‡Ä°MÄ°] [site adÄ±] ...\n"
 
 #: src/console_fe.c:1453
 #, c-format
 msgid "Options: \n"
-msgstr "Seçenekler: \n"
+msgstr "SeÃ§enekler: \n"
 
 #: src/console_fe.c:1456
 #, fuzzy, c-format
@@ -895,11 +895,11 @@ msgid ""
 "     Warning: cleartext displays (normally hidden) passwords in plain text\n"
 "  -g, --logfile=FILE    Append debugging messages to FILE (else use stderr)\n"
 msgstr ""
-" -d, --debug=KANAL[,KANAL] Hataları belirtilen KANAL'lardan izle.\n"
-"    Hata izleme işlevi için aşağidaki kanalları kullanilabilir.\n"
+" -d, --debug=KANAL[,KANAL] HatalarÄ± belirtilen KANAL'lardan izle.\n"
+"    Hata izleme iÅŸlevi iÃ§in aÅŸaÄŸidaki kanallarÄ± kullanilabilir.\n"
 "    socket, files, rcfile, ftp, http, httpbody, xml, xmlparse, cleartext\n"
-"    Uyarı: cleartext kanalı ile, (normalde gizli) şifreler de gösterilir.\n"
-" -g, --logfile=DOSYA Hata izleme mesajlarını (stderr yerine) DOSYA'ya ekle.\n"
+"    UyarÄ±: cleartext kanalÄ± ile, (normalde gizli) ÅŸifreler de gÃ¶sterilir.\n"
+" -g, --logfile=DOSYA Hata izleme mesajlarÄ±nÄ± (stderr yerine) DOSYA'ya ekle.\n"
 
 #: src/console_fe.c:1463
 #, fuzzy, c-format
@@ -929,30 +929,30 @@ msgid ""
 "  -V, --version         Display version information\n"
 "Please send feature requests and bug reports via %s\n"
 msgstr ""
-" -r, --rcfile=FILE     Ayrı bir kurulum dosyası kullan.\n"
-" -p, --storepath=PATH  Ayrı bir veritabanı kütüğü kullan.\n"
-" -y, --prompting       Her güncelleştrimeden önce onay iste.\n"
-" -a, --allsites        İşlemi bütün sitelere uygula.\n"
-" -k, --keep-going      Hatalara rağmen işleme devam et.\n"
-" -o, --show-progress   Dosya aktarımının gelişmesini yüzde olarak göster.\n"
-" -q, --quiet           İşlem sırasında özet bilgi ver.\n"
-" -qq, --silent         İşlem sırasında hiç bilgi verme.\n"
-"İşlem biçimleri:\n"
-" -l, --list            Sunucu ile yerel site arasındaki farkları listele.\n"
-"                       (varsayılan)\n"
-" -ll, --flatlist       Sunucu ile yerel site arasındaki farkların düz "
+" -r, --rcfile=FILE     AyrÄ± bir kurulum dosyasÄ± kullan.\n"
+" -p, --storepath=PATH  AyrÄ± bir veritabanÄ± kÃ¼tÃ¼ÄŸÃ¼ kullan.\n"
+" -y, --prompting       Her gÃ¼ncelleÅŸtrimeden Ã¶nce onay iste.\n"
+" -a, --allsites        Ä°ÅŸlemi bÃ¼tÃ¼n sitelere uygula.\n"
+" -k, --keep-going      Hatalara raÄŸmen iÅŸleme devam et.\n"
+" -o, --show-progress   Dosya aktarÄ±mÄ±nÄ±n geliÅŸmesini yÃ¼zde olarak gÃ¶ster.\n"
+" -q, --quiet           Ä°ÅŸlem sÄ±rasÄ±nda Ã¶zet bilgi ver.\n"
+" -qq, --silent         Ä°ÅŸlem sÄ±rasÄ±nda hiÃ§ bilgi verme.\n"
+"Ä°ÅŸlem biÃ§imleri:\n"
+" -l, --list            Sunucu ile yerel site arasÄ±ndaki farklarÄ± listele.\n"
+"                       (varsayÄ±lan)\n"
+" -ll, --flatlist       Sunucu ile yerel site arasÄ±ndaki farklarÄ±n dÃ¼z "
 "listele.\n"
-" -v, --view            Site tanımlarının dökümünü ver.\n"
-" -i, --initialize      Bütün dosya ve kütükleri güncel DEĞİL olarak "
-"işaretle.\n"
-" -f, --fetch           Sunucudaki dosya ve kütükleri öğren.\n"
-" -c, --catchup         Bütün dosya ve kütükleri güncel olarak işaretle.\n"
-" -s, --synchronize     Yerel siteyi sunucudan güncelleştir.\n"
-" -u, --update          Sunucuyu güncelleştir.\n"
-" -h, --help            Bu yardım mesajını göster.\n"
-" -V, --version         Sürüm bilgilerini göster.\n"
-"Hata raporları ve isteklerinizi sitecopy@lyra.org adresine.\n"
-"İngilizce olarak iletin.\n"
+" -v, --view            Site tanÄ±mlarÄ±nÄ±n dÃ¶kÃ¼mÃ¼nÃ¼ ver.\n"
+" -i, --initialize      BÃ¼tÃ¼n dosya ve kÃ¼tÃ¼kleri gÃ¼ncel DEÄÄ°L olarak "
+"iÅŸaretle.\n"
+" -f, --fetch           Sunucudaki dosya ve kÃ¼tÃ¼kleri Ã¶ÄŸren.\n"
+" -c, --catchup         BÃ¼tÃ¼n dosya ve kÃ¼tÃ¼kleri gÃ¼ncel olarak iÅŸaretle.\n"
+" -s, --synchronize     Yerel siteyi sunucudan gÃ¼ncelleÅŸtir.\n"
+" -u, --update          Sunucuyu gÃ¼ncelleÅŸtir.\n"
+" -h, --help            Bu yardÄ±m mesajÄ±nÄ± gÃ¶ster.\n"
+" -V, --version         SÃ¼rÃ¼m bilgilerini gÃ¶ster.\n"
+"Hata raporlarÄ± ve isteklerinizi sitecopy@lyra.org adresine.\n"
+"Ä°ngilizce olarak iletin.\n"
 
 #: src/sitestore.c:127
 #, c-format
@@ -968,7 +968,7 @@ msgstr ""
 #, fuzzy, c-format
 #| msgid "Could not write to file: %s"
 msgid "Could not create lock file `%s': %s"
-msgstr "%s dosyasına yazım yapılamadı"
+msgstr "%s dosyasÄ±na yazÄ±m yapÄ±lamadÄ±"
 
 #: src/sitestore.c:448
 #, c-format
@@ -987,30 +987,30 @@ msgstr ""
 
 #: src/davdriver.c:197
 msgid "The connection timed out."
-msgstr "Bağlantı süre sınırı aşıldı."
+msgstr "BaÄŸlantÄ± sÃ¼re sÄ±nÄ±rÄ± aÅŸÄ±ldÄ±."
 
 #: src/davdriver.c:218
 msgid "SSL support has not be compiled in."
-msgstr "SSL desteği yok."
+msgstr "SSL desteÄŸi yok."
 
 #: src/davdriver.c:224
 #, fuzzy, c-format
 msgid "Could not load certificate `%s'."
-msgstr "%s dosyasına yazım yapılamadı"
+msgstr "%s dosyasÄ±na yazÄ±m yapÄ±lamadÄ±"
 
 #: src/davdriver.c:254
 #, fuzzy, c-format
 msgid "Could not read SSL client certificate '%s'."
-msgstr "%s dosyasına yazım yapılamadı"
+msgstr "%s dosyasÄ±na yazÄ±m yapÄ±lamadÄ±"
 
 #: src/davdriver.c:267
 #, fuzzy, c-format
 msgid "Could not decrypt SSL client certificate '%s'."
-msgstr "%s dosyasına yazım yapılamadı"
+msgstr "%s dosyasÄ±na yazÄ±m yapÄ±lamadÄ±"
 
 #: src/davdriver.c:289
 msgid "The server does not appear to be a WebDAV server."
-msgstr "Bu sunucu WebDAV sunucusu değil."
+msgstr "Bu sunucu WebDAV sunucusu deÄŸil."
 
 #: src/davdriver.c:295
 msgid "The server does not support the executable live property."
@@ -1020,32 +1020,32 @@ msgstr "The server does not support the executable live property."
 #: src/ftp.c:1135
 #, fuzzy
 msgid "Could not open file"
-msgstr "Dosya açılamadı: "
+msgstr "Dosya aÃ§Ä±lamadÄ±: "
 
 #: src/davdriver.c:374
 #, fuzzy, c-format
 msgid "Could not stat file: %s"
-msgstr "%s dosyasına yazım yapılamadı"
+msgstr "%s dosyasÄ±na yazÄ±m yapÄ±lamadÄ±"
 
 #: src/davdriver.c:608
 msgid "Could not access resource"
-msgstr "Kaynağa erişim başarısız oldu"
+msgstr "KaynaÄŸa eriÅŸim baÅŸarÄ±sÄ±z oldu"
 
 #: src/sites.c:164
 msgid "Could not set modification time of local file."
-msgstr "Yerel dosyanın değişim vakti ayarlanamadı."
+msgstr "Yerel dosyanÄ±n deÄŸiÅŸim vakti ayarlanamadÄ±."
 
 #: src/sites.c:319
 msgid ""
 "Upload succeeded, but could not retrieve modification time.\n"
 "If this message persists, turn off safe mode."
 msgstr ""
-"Sunucuya aktarma tamamlandı, ama dosyanın değişim vakti alınamadı.\n"
+"Sunucuya aktarma tamamlandÄ±, ama dosyanÄ±n deÄŸiÅŸim vakti alÄ±namadÄ±.\n"
 "If this message persists, turn off safe mode."
 
 #: src/sites.c:547
 msgid "Remote file has been modified - not overwriting with local changes"
-msgstr "Sunucudaki dosya değişmiş - yerel dosya üstüne yazılmayacak"
+msgstr "Sunucudaki dosya deÄŸiÅŸmiÅŸ - yerel dosya Ã¼stÃ¼ne yazÄ±lmayacak"
 
 #: src/sites.c:564
 msgid "Filename too long for a temporary upload"
@@ -1057,51 +1057,51 @@ msgstr "Dosya incelenemedi."
 
 #: src/sites.c:914
 msgid "Could not checksum file"
-msgstr "Dosyanın kotrol toplamı hesaplanamadı"
+msgstr "DosyanÄ±n kotrol toplamÄ± hesaplanamadÄ±"
 
 #: src/sites.c:932
 msgid "The target of the symlink could not be read."
-msgstr "Sembolik linkin hedefi okunamadı."
+msgstr "Sembolik linkin hedefi okunamadÄ±."
 
 #: src/sites.c:1526
 #, fuzzy
 msgid "Could not write SSL certificate"
-msgstr "%s dosyasına yazım yapılamadı"
+msgstr "%s dosyasÄ±na yazÄ±m yapÄ±lamadÄ±"
 
 #: src/ftp.c:158
 #, c-format
 msgid "%s: connection was closed by server."
-msgstr "%s: bağlantı sunucu tarafinden kesildi."
+msgstr "%s: baÄŸlantÄ± sunucu tarafinden kesildi."
 
 #: src/ftp.c:162
 #, c-format
 msgid "%s: connection timed out."
-msgstr "%s: bağlantı bekleme sınırı aşıldı."
+msgstr "%s: baÄŸlantÄ± bekleme sÄ±nÄ±rÄ± aÅŸÄ±ldÄ±."
 
 #: src/ftp.c:200
 #, fuzzy
 msgid "Could not read response line"
-msgstr "Yanıt metni okunamadı"
+msgstr "YanÄ±t metni okunamadÄ±"
 
 #: src/ftp.c:234
 #, fuzzy
 msgid "Cannot parse MDTM response; wrong length."
-msgstr "Durum satırı anlaşılamadı."
+msgstr "Durum satÄ±rÄ± anlaÅŸÄ±lamadÄ±."
 
 #: src/ftp.c:241
 #, fuzzy
 msgid "Cannot parse MDTM response."
-msgstr "Durum satırı anlaşılamadı."
+msgstr "Durum satÄ±rÄ± anlaÅŸÄ±lamadÄ±."
 
 #: src/ftp.c:265
 #, fuzzy
 msgid "Could not find address in PASV response"
-msgstr "Yanıt metni okunamadı"
+msgstr "YanÄ±t metni okunamadÄ±"
 
 #: src/ftp.c:272
 #, fuzzy
 msgid "Could not parse PASV response"
-msgstr "Yanıt metni okunamadı"
+msgstr "YanÄ±t metni okunamadÄ±"
 
 #: src/ftp.c:281
 msgid "Invalid IP address in PASV response"
@@ -1110,12 +1110,12 @@ msgstr ""
 #: src/ftp.c:304
 #, fuzzy
 msgid "Malformed EPSV response"
-msgstr "Yanıt metni okunamadı"
+msgstr "YanÄ±t metni okunamadÄ±"
 
 #: src/ftp.c:313
 #, fuzzy
 msgid "Malformed port in EPSV response"
-msgstr "Yanıt metni okunamadı"
+msgstr "YanÄ±t metni okunamadÄ±"
 
 #: src/ftp.c:452 src/ftp.c:502 src/ftp.c:535
 msgid "Interrupted"
@@ -1128,17 +1128,17 @@ msgstr ""
 #: src/ftp.c:484 src/ftp.c:517
 #, fuzzy
 msgid "Error reading file"
-msgstr "İstek metni gönderilirken hata"
+msgstr "Ä°stek metni gÃ¶nderilirken hata"
 
 #: src/ftp.c:508
 #, fuzzy
 msgid "Could not send file"
-msgstr "Dosya açılamadı: "
+msgstr "Dosya aÃ§Ä±lamadÄ±: "
 
 #: src/ftp.c:543 src/ftp.c:1153
 #, fuzzy
 msgid "Error writing to file"
-msgstr "Yanıt beklerken hata"
+msgstr "YanÄ±t beklerken hata"
 
 #: src/ftp.c:549
 msgid "Receiving file"
@@ -1165,7 +1165,7 @@ msgstr ""
 #: src/ftp.c:683
 #, fuzzy
 msgid "Could not connect passive data socket"
-msgstr "SSL bağlantısı kurulamadı"
+msgstr "SSL baÄŸlantÄ±sÄ± kurulamadÄ±"
 
 #: src/ftp.c:802
 msgid "Active open failed: could not determine address of control socket"
@@ -1174,7 +1174,7 @@ msgstr ""
 #: src/ftp.c:814
 #, fuzzy
 msgid "Active open failed: could not create socket"
-msgstr "SSL bağlantısı kurulamadı"
+msgstr "SSL baÄŸlantÄ±sÄ± kurulamadÄ±"
 
 #: src/ftp.c:822
 msgid "Active open failed: could not bind to address"
@@ -1187,7 +1187,7 @@ msgstr ""
 #: src/ftp.c:839
 #, fuzzy
 msgid "Could not determine bound port number for data socket"
-msgstr "SSL bağlantısı kurulamadı"
+msgstr "SSL baÄŸlantÄ±sÄ± kurulamadÄ±"
 
 #: src/ftp.c:884
 msgid "Active open failed: could not accept connection"
@@ -1200,39 +1200,39 @@ msgstr ""
 #: src/ftp.c:1057
 #, fuzzy
 msgid "Could not determine length of file"
-msgstr "Dosya açılamadı: "
+msgstr "Dosya aÃ§Ä±lamadÄ±: "
 
 #: src/ftp.c:1068
 #, fuzzy
 msgid "Could not rewind to beginning of file"
-msgstr "Dosya açılamadı: "
+msgstr "Dosya aÃ§Ä±lamadÄ±: "
 
 #: src/ftp.c:1254
 #, fuzzy, c-format
 msgid "Server does not support FTP over TLS: %s"
-msgstr "Sunucu kısmi GET işlemini desteklemiyor."
+msgstr "Sunucu kÄ±smi GET iÅŸlemini desteklemiyor."
 
 #: src/ftp.c:1270
 #, fuzzy, c-format
 msgid "Could not enable TLS for data connections: %s"
-msgstr "Ara sunucu üzerinden SSL bağlantısı kurulamadı"
+msgstr "Ara sunucu Ã¼zerinden SSL baÄŸlantÄ±sÄ± kurulamadÄ±"
 
 #: src/ftp.c:1390
 #, fuzzy
 msgid "Could not read 'LIST' response."
-msgstr "Yanıt metni okunamadı"
+msgstr "YanÄ±t metni okunamadÄ±"
 
 #: src/ftp.c:1399
 #, fuzzy, c-format
 msgid "Parse error in LIST response: %s"
-msgstr "Yanıt metni okunamadı"
+msgstr "YanÄ±t metni okunamadÄ±"
 
 #~ msgid ""
 #~ "You should never see this message.\n"
 #~ "Please contact the maintainer at sitecopy@lyra.org\n"
 #~ msgstr ""
-#~ "Bu mesajın asla verilmemesi gerekir.\n"
-#~ "Bu durumu lütfen sitecopy@lyra.org adresine iletin.\n"
+#~ "Bu mesajÄ±n asla verilmemesi gerekir.\n"
+#~ "Bu durumu lÃ¼tfen sitecopy@lyra.org adresine iletin.\n"
 
 #, c-format
 #~ msgid ""
@@ -1259,107 +1259,107 @@ msgstr "Yanıt metni okunamadı"
 #~ "%s"
 
 #~ msgid "Unknown system error"
-#~ msgstr "Bilinmeyen sistem hatası"
+#~ msgstr "Bilinmeyen sistem hatasÄ±"
 
 #, fuzzy
 #~ msgid "_Delete this site"
-#~ msgstr "%s dosyasını sil"
+#~ msgstr "%s dosyasÄ±nÄ± sil"
 
 #, fuzzy
 #~ msgid "_Initialise site"
-#~ msgstr "Hazırla"
+#~ msgstr "HazÄ±rla"
 
 #, fuzzy
 #~ msgid "'_Catchup' site"
-#~ msgstr "Güncelle"
+#~ msgstr "GÃ¼ncelle"
 
 #, fuzzy
 #~ msgid "_Resynchronize site"
-#~ msgstr "eşleştiriliyor"
+#~ msgstr "eÅŸleÅŸtiriliyor"
 
 #, fuzzy
 #~ msgid "Re-reads the local directory of the selected site."
-#~ msgstr "%s: `%s' sitesinin tanımında yerel kütük belirtilmemiş.\n"
+#~ msgstr "%s: `%s' sitesinin tanÄ±mÄ±nda yerel kÃ¼tÃ¼k belirtilmemiÅŸ.\n"
 
 #, fuzzy
 #~ msgid "_Operations"
-#~ msgstr "Seçenekler: \n"
+#~ msgstr "SeÃ§enekler: \n"
 
 #, fuzzy
 #~ msgid "Delete site"
-#~ msgstr "%s dosyasını sil"
+#~ msgstr "%s dosyasÄ±nÄ± sil"
 
 #, fuzzy
 #~ msgid "Initialise"
-#~ msgstr "Hazırla"
+#~ msgstr "HazÄ±rla"
 
 #, fuzzy
 #~ msgid "Catch-up"
-#~ msgstr "Güncelle"
+#~ msgstr "GÃ¼ncelle"
 
 #, fuzzy
 #~ msgid "Download"
-#~ msgstr "%s dosyası indiriliyor: ["
+#~ msgstr "%s dosyasÄ± indiriliyor: ["
 
 #, fuzzy, c-format
 #~ msgid "%s: Error: Could not read rcfile: %s.\n"
-#~ msgstr "%s: Hata: Kurulum dosyası %s açılamadı.\n"
+#~ msgstr "%s: Hata: Kurulum dosyasÄ± %s aÃ§Ä±lamadÄ±.\n"
 
 #, fuzzy, c-format
 #~ msgid "Server not specified in site `%s'.\n"
-#~ msgstr "%s: `%s' sitesinin tanımında sunucu belirtilmemiş.\n"
+#~ msgstr "%s: `%s' sitesinin tanÄ±mÄ±nda sunucu belirtilmemiÅŸ.\n"
 
 #, fuzzy, c-format
 #~ msgid "Remote directory not specified in site `%s'.\n"
-#~ msgstr "%s: `%s' sitesinin tanımında sunucudaki kütük belirtilmemiş.\n"
+#~ msgstr "%s: `%s' sitesinin tanÄ±mÄ±nda sunucudaki kÃ¼tÃ¼k belirtilmemiÅŸ.\n"
 
 #, fuzzy, c-format
 #~ msgid "Local directory not specified in site `%s'.\n"
-#~ msgstr "%s: `%s' sitesinin tanımında yerel kütük belirtilmemiş.\n"
+#~ msgstr "%s: `%s' sitesinin tanÄ±mÄ±nda yerel kÃ¼tÃ¼k belirtilmemiÅŸ.\n"
 
 #, fuzzy, c-format
 #~ msgid ""
 #~ "Could not read directory for `%s':\n"
 #~ "\t%s\n"
 #~ msgstr ""
-#~ "%s: `%s'nin kütüğü okunamadı:\n"
+#~ "%s: `%s'nin kÃ¼tÃ¼ÄŸÃ¼ okunamadÄ±:\n"
 #~ "\t%s\n"
 
 #, fuzzy, c-format
 #~ msgid "Invalid port used in site `%s'.\n"
-#~ msgstr "%s: `%s' sitesinin tanımında geçersiz port belirtilmiş.\n"
+#~ msgstr "%s: `%s' sitesinin tanÄ±mÄ±nda geÃ§ersiz port belirtilmiÅŸ.\n"
 
 #, fuzzy, c-format
 #~ msgid "Protocol '%s' cannot maintain symbolic links (site `%s').\n"
 #~ msgstr ""
-#~ "%s: %s protokolü ile sembolik linklerin korunması mümkün değil (`%s' "
+#~ "%s: %s protokolÃ¼ ile sembolik linklerin korunmasÄ± mÃ¼mkÃ¼n deÄŸil (`%s' "
 #~ "sitesi).\n"
 
 #, fuzzy, c-format
 #~ msgid "Cannot use a relative remote directory protocol '%s' (site `%s').\n"
 #~ msgstr ""
-#~ "%s: %s protokolü ile sunucuda göreli kütüklerin kullanılması mümkün değil "
+#~ "%s: %s protokolÃ¼ ile sunucuda gÃ¶reli kÃ¼tÃ¼klerin kullanÄ±lmasÄ± mÃ¼mkÃ¼n deÄŸil "
 #~ "(`%s' sitesi).\n"
 
 #, fuzzy, c-format
 #~ msgid "Could not find 'relative' local directory"
-#~ msgstr "SSL bağlantısı kurulamadı"
+#~ msgstr "SSL baÄŸlantÄ±sÄ± kurulamadÄ±"
 
 #, fuzzy
 #~ msgid "Could not parse redirect destination URL"
-#~ msgstr "Durum satırı anlaşılamadı."
+#~ msgstr "Durum satÄ±rÄ± anlaÅŸÄ±lamadÄ±."
 
 #, fuzzy, c-format
 #~ msgid "SSL negotiation failed: %s"
-#~ msgstr "%s dosyasına yazım yapılamadı"
+#~ msgstr "%s dosyasÄ±na yazÄ±m yapÄ±lamadÄ±"
 
 #, fuzzy
 #~ msgid "Connection closed"
-#~ msgstr "Bağlantı sunucu tarafından kesildi"
+#~ msgstr "BaÄŸlantÄ± sunucu tarafÄ±ndan kesildi"
 
 #, fuzzy
 #~ msgid "Secure connection truncated"
-#~ msgstr "Bağlantı süre sınırı aşıldı."
+#~ msgstr "BaÄŸlantÄ± sÃ¼re sÄ±nÄ±rÄ± aÅŸÄ±ldÄ±."
 
 #, fuzzy, c-format
 #~ msgid "SSL error: %s"
@@ -1370,132 +1370,132 @@ msgstr "Yanıt metni okunamadı"
 #~ msgstr "%s: Hata: %s\n"
 
 #~ msgid "Line too long"
-#~ msgstr "Satır çok uzun"
+#~ msgstr "SatÄ±r Ã§ok uzun"
 
 #~ msgid "Host not found"
-#~ msgstr "Sunucu bulunamadı"
+#~ msgstr "Sunucu bulunamadÄ±"
 
 #, fuzzy
 #~ msgid "Connection timed out"
-#~ msgstr "Bağlantı süre sınırı aşıldı."
+#~ msgstr "BaÄŸlantÄ± sÃ¼re sÄ±nÄ±rÄ± aÅŸÄ±ldÄ±."
 
 #, fuzzy
 #~ msgid "Could not create SSL structure"
-#~ msgstr "SSL bağlantısı kurulamadı"
+#~ msgstr "SSL baÄŸlantÄ±sÄ± kurulamadÄ±"
 
 #, fuzzy, c-format
 #~ msgid "%s: connection was closed by proxy server"
-#~ msgstr "%s: bağlantı ara sunucu tarafinden kesildi."
+#~ msgstr "%s: baÄŸlantÄ± ara sunucu tarafinden kesildi."
 
 #, fuzzy, c-format
 #~ msgid "%s: connection was closed by server"
-#~ msgstr "%s: bağlantı sunucu tarafinden kesildi."
+#~ msgstr "%s: baÄŸlantÄ± sunucu tarafinden kesildi."
 
 #, fuzzy, c-format
 #~ msgid "%s: connection timed out"
-#~ msgstr "%s: bağlantı bekleme sınırı aşıldı."
+#~ msgstr "%s: baÄŸlantÄ± bekleme sÄ±nÄ±rÄ± aÅŸÄ±ldÄ±."
 
 #, fuzzy, c-format
 #~ msgid "Could not seek to offset %s of request body file: %s"
-#~ msgstr "%s dosyasına yazım yapılamadı"
+#~ msgstr "%s dosyasÄ±na yazÄ±m yapÄ±lamadÄ±"
 
 #~ msgid "Could not send request body"
-#~ msgstr "İstek metni gönderilemedi"
+#~ msgstr "Ä°stek metni gÃ¶nderilemedi"
 
 #~ msgid "Could not read chunk size"
-#~ msgstr "Parça boyutu öğrenilemedi"
+#~ msgstr "ParÃ§a boyutu Ã¶ÄŸrenilemedi"
 
 #~ msgid "Could not parse chunk size"
-#~ msgstr "Parça boyutu anlaşılamadı"
+#~ msgstr "ParÃ§a boyutu anlaÅŸÄ±lamadÄ±"
 
 #~ msgid "Could not read response body"
-#~ msgstr "Yanıt metni okunamadı"
+#~ msgstr "YanÄ±t metni okunamadÄ±"
 
 #, fuzzy
 #~ msgid "Could not read chunk delimiter"
-#~ msgstr "Parça boyutu öğrenilemedi"
+#~ msgstr "ParÃ§a boyutu Ã¶ÄŸrenilemedi"
 
 #~ msgid "Could not read status line"
-#~ msgstr "Durum satırı okunamadı"
+#~ msgstr "Durum satÄ±rÄ± okunamadÄ±"
 
 #, fuzzy
 #~ msgid "Could not parse response status line"
-#~ msgstr "Durum satırı anlaşılamadı."
+#~ msgstr "Durum satÄ±rÄ± anlaÅŸÄ±lamadÄ±."
 
 #, fuzzy
 #~ msgid "Could not read interim response headers"
-#~ msgstr "Yanıt metni okunamadı"
+#~ msgstr "YanÄ±t metni okunamadÄ±"
 
 #~ msgid "Could not send request"
-#~ msgstr "İstek gönderilemedi"
+#~ msgstr "Ä°stek gÃ¶nderilemedi"
 
 #~ msgid "Error reading response headers"
-#~ msgstr "Yanıt başlıkları okunurken hata"
+#~ msgstr "YanÄ±t baÅŸlÄ±klarÄ± okunurken hata"
 
 #~ msgid "Response header too long"
-#~ msgstr "Yanıt başlığı çok uzun"
+#~ msgstr "YanÄ±t baÅŸlÄ±ÄŸÄ± Ã§ok uzun"
 
 #, fuzzy, c-format
 #~ msgid "Could not resolve hostname `%s': %s"
-#~ msgstr "%s: Hata: %s sunucusunun adresi bulunamadı.\n"
+#~ msgstr "%s: Hata: %s sunucusunun adresi bulunamadÄ±.\n"
 
 #, fuzzy
 #~ msgid "Could not create socket"
-#~ msgstr "SSL bağlantısı kurulamadı"
+#~ msgstr "SSL baÄŸlantÄ±sÄ± kurulamadÄ±"
 
 #~ msgid "Could not connect to proxy server"
-#~ msgstr "Ara sunucuyla bağlantı kurulamadı"
+#~ msgstr "Ara sunucuyla baÄŸlantÄ± kurulamadÄ±"
 
 #~ msgid "Could not connect to server"
-#~ msgstr "Sunucuyla bağlantı kurulamadı"
+#~ msgstr "Sunucuyla baÄŸlantÄ± kurulamadÄ±"
 
 #, fuzzy, c-format
 #~ msgid "XML parse error at line %d: invalid element name"
 #~ msgstr ""
-#~ "%s: kurulum dosyasında bozukluk var. satır %d:\n"
+#~ "%s: kurulum dosyasÄ±nda bozukluk var. satÄ±r %d:\n"
 #~ "%s\n"
 
 #, fuzzy
 #~ msgid "Unknown error"
-#~ msgstr "Bilinmeyen sistem hatası"
+#~ msgstr "Bilinmeyen sistem hatasÄ±"
 
 #, fuzzy, c-format
 #~ msgid "XML parse error at line %d: %s"
 #~ msgstr ""
-#~ "%s: kurulum dosyasında bozukluk var. satır %d:\n"
+#~ "%s: kurulum dosyasÄ±nda bozukluk var. satÄ±r %d:\n"
 #~ "%s\n"
 
 #, fuzzy
 #~ msgid "Could not inflate data"
-#~ msgstr "Dosya açılamadı: "
+#~ msgstr "Dosya aÃ§Ä±lamadÄ±: "
 
 #, fuzzy
 #~ msgid "Could not initialize zlib"
-#~ msgstr "Dosyaya yazım yapılamadı: "
+#~ msgstr "Dosyaya yazÄ±m yapÄ±lamadÄ±: "
 
 #, fuzzy, c-format
 #~ msgid "Could not parse response: %s"
-#~ msgstr "Yanıt metni okunamadı"
+#~ msgstr "YanÄ±t metni okunamadÄ±"
 
 #, fuzzy, c-format
 #~ msgid "Could not determine file size: %s"
-#~ msgstr "Dosya açılamadı: "
+#~ msgstr "Dosya aÃ§Ä±lamadÄ±: "
 
 #, fuzzy, c-format
 #~ msgid "Could not authenticate to server: %s"
-#~ msgstr "Sunucuyla bağlantı kurulamadı"
+#~ msgstr "Sunucuyla baÄŸlantÄ± kurulamadÄ±"
 
 #, fuzzy, c-format
 #~ msgid "Could not authenticate to proxy server: %s"
-#~ msgstr "Ara sunucuyla bağlantı kurulamadı"
+#~ msgstr "Ara sunucuyla baÄŸlantÄ± kurulamadÄ±"
 
 #, fuzzy
 #~ msgid "could not parse domain in Digest challenge"
-#~ msgstr "Durum satırı anlaşılamadı."
+#~ msgstr "Durum satÄ±rÄ± anlaÅŸÄ±lamadÄ±."
 
 #, fuzzy
 #~ msgid "could not parse challenge"
-#~ msgstr "Parça boyutu anlaşılamadı"
+#~ msgstr "ParÃ§a boyutu anlaÅŸÄ±lamadÄ±"
 
 #, c-format
 #~ msgid ""
@@ -1513,49 +1513,49 @@ msgstr "Yanıt metni okunamadı"
 
 #, c-format
 #~ msgid "%s: option `%s' is ambiguous\n"
-#~ msgstr "%s: `%s' seçeneğini anlamı belirsiz\n"
+#~ msgstr "%s: `%s' seÃ§eneÄŸini anlamÄ± belirsiz\n"
 
 #, c-format
 #~ msgid "%s: option `--%s' doesn't allow an argument\n"
-#~ msgstr "%s: `--%s' seçeneği argüman almıyor\n"
+#~ msgstr "%s: `--%s' seÃ§eneÄŸi argÃ¼man almÄ±yor\n"
 
 #, c-format
 #~ msgid "%s: option `%c%s' doesn't allow an argument\n"
-#~ msgstr "%s: `%c%s' seçeneği argüman almıyor\n"
+#~ msgstr "%s: `%c%s' seÃ§eneÄŸi argÃ¼man almÄ±yor\n"
 
 #, c-format
 #~ msgid "%s: option `%s' requires an argument\n"
-#~ msgstr "%s: `%s' seçeneğine argüman gerek\n"
+#~ msgstr "%s: `%s' seÃ§eneÄŸine argÃ¼man gerek\n"
 
 #, c-format
 #~ msgid "%s: unrecognized option `--%s'\n"
-#~ msgstr "%s: `--%s' seçeneği bilinmiyor\n"
+#~ msgstr "%s: `--%s' seÃ§eneÄŸi bilinmiyor\n"
 
 #, c-format
 #~ msgid "%s: unrecognized option `%c%s'\n"
-#~ msgstr "%s: `%c%s' seçeneği bilinmiyor\n"
+#~ msgstr "%s: `%c%s' seÃ§eneÄŸi bilinmiyor\n"
 
 #, c-format
 #~ msgid "%s: illegal option -- %c\n"
-#~ msgstr "%s: anlamsız seçenek --%c\n"
+#~ msgstr "%s: anlamsÄ±z seÃ§enek --%c\n"
 
 #, c-format
 #~ msgid "%s: invalid option -- %c\n"
-#~ msgstr "%s: geçersiz seçenek --%c\n"
+#~ msgstr "%s: geÃ§ersiz seÃ§enek --%c\n"
 
 #, c-format
 #~ msgid "%s: option requires an argument -- %c\n"
-#~ msgstr "%s: %c seçeneğine argüman gerek\n"
+#~ msgstr "%s: %c seÃ§eneÄŸine argÃ¼man gerek\n"
 
 #, fuzzy, c-format
 #~ msgid "%s: option `-W %s' is ambiguous\n"
-#~ msgstr "%s: `%s' seçeneğini anlamı belirsiz\n"
+#~ msgstr "%s: `%s' seÃ§eneÄŸini anlamÄ± belirsiz\n"
 
 # msgid "%s: option `-W %s' is ambiguous\n"
-# msgstr "`-W %s' seçeneğinin anlamı belirsiz\n"
+# msgstr "`-W %s' seÃ§eneÄŸinin anlamÄ± belirsiz\n"
 #, c-format
 #~ msgid "%s: option `-W %s' doesn't allow an argument\n"
-#~ msgstr "%s: `-W %s' seçeneği argüman almıyor\n"
+#~ msgstr "%s: `-W %s' seÃ§eneÄŸi argÃ¼man almÄ±yor\n"
 
 #, fuzzy
 #~ msgid "%s\n"
@@ -1566,7 +1566,7 @@ msgstr "Yanıt metni okunamadı"
 #~ msgstr "%s: Hata: %s\n"
 
 #~ msgid "%s: Aborted.\n"
-#~ msgstr "%s: Vazgeçildi.\n"
+#~ msgstr "%s: VazgeÃ§ildi.\n"
 
 #~ msgid ""
 #~ "\n"
@@ -1575,7 +1575,7 @@ msgstr "Yanıt metni okunamadı"
 #~ msgstr ""
 #~ "\n"
 #~ "\n"
-#~ "%s: %s (%d) hatası sinyallendi: \n"
+#~ "%s: %s (%d) hatasÄ± sinyallendi: \n"
 
 #~ msgid ""
 #~ "\n"
@@ -1584,20 +1584,20 @@ msgstr "Yanıt metni okunamadı"
 #~ msgstr ""
 #~ "\n"
 #~ "\n"
-#~ "%s: %d numaralı hata sinyallendi.\n"
+#~ "%s: %d numaralÄ± hata sinyallendi.\n"
 
 #~ msgid "%s: Cannot recover from segmentation fault, aborting.\n"
-#~ msgstr "%s: Sanal bellek hatasından dönüş yok, vazgeçiliyor.\n"
+#~ msgstr "%s: Sanal bellek hatasÄ±ndan dÃ¶nÃ¼ÅŸ yok, vazgeÃ§iliyor.\n"
 
 #~ msgid "%s: Aborting update...\n"
-#~ msgstr "%s: Güncelleştirmeden vazgeçiliyor...\n"
+#~ msgstr "%s: GÃ¼ncelleÅŸtirmeden vazgeÃ§iliyor...\n"
 
 #~ msgid "%s: Terminating.\n"
-#~ msgstr "%s: Program kapanıyor.\n"
+#~ msgstr "%s: Program kapanÄ±yor.\n"
 
 #, fuzzy
 #~ msgid " of request body file: %s"
-#~ msgstr "%s dosyasına yazım yapılamadı"
+#~ msgstr "%s dosyasÄ±na yazÄ±m yapÄ±lamadÄ±"
 
 #~ msgid "Server was not authenticated correctly."
 #~ msgstr "Server was not authenticated correctly."
@@ -1607,14 +1607,14 @@ msgstr "Yanıt metni okunamadı"
 
 #, fuzzy
 #~ msgid "Error reading request body."
-#~ msgstr "İstek metni gönderilirken hata"
+#~ msgstr "Ä°stek metni gÃ¶nderilirken hata"
 
 #, fuzzy
 #~ msgid "unknown error code"
-#~ msgstr "Bilinmeyen sistem hatası"
+#~ msgstr "Bilinmeyen sistem hatasÄ±"
 
 #~ msgid "Error reading chunked response body"
-#~ msgstr "Parçalı yanıt metnini okurken hata"
+#~ msgstr "ParÃ§alÄ± yanÄ±t metnini okurken hata"
 
 #~ msgid "document root"
 #~ msgstr "document root"
@@ -1626,7 +1626,7 @@ msgstr "Yanıt metni okunamadı"
 #~ msgstr "unspecified"
 
 #~ msgid "XML is not valid (%s found in parent %s)"
-#~ msgstr "Geçersiz XML (%2$s'nin altında %1$s bulundu)"
+#~ msgstr "GeÃ§ersiz XML (%2$s'nin altÄ±nda %1$s bulundu)"
 
 #, fuzzy
 #~ msgid "Unknown XML element `%s (in %s)'"
@@ -1648,37 +1648,37 @@ msgstr "Yanıt metni okunamadı"
 
 #, fuzzy
 #~ msgid "Host `%s' not found"
-#~ msgstr "Sunucu bulunamadı"
+#~ msgstr "Sunucu bulunamadÄ±"
 
 #~ msgid "Host not found (try again later?)"
-#~ msgstr "Sunucu bulunamadı (daha sonra tekrar denensin mi?)"
+#~ msgstr "Sunucu bulunamadÄ± (daha sonra tekrar denensin mi?)"
 
 #~ msgid "Host exists but has no address."
 #~ msgstr "Sunucu bulundu, ama adresi yok."
 
 #~ msgid "Non-recoverable error in resolver library."
-#~ msgstr "Adres ararken gveri dönüşü olamayan bir hata ile karsılaşıldı."
+#~ msgstr "Adres ararken gveri dÃ¶nÃ¼ÅŸÃ¼ olamayan bir hata ile karsÄ±laÅŸÄ±ldÄ±."
 
 #~ msgid "Malformed header line."
-#~ msgstr "Bozuk başlık satırı"
+#~ msgstr "Bozuk baÅŸlÄ±k satÄ±rÄ±"
 
 #~ msgid "This application does not have SSL support."
-#~ msgstr "Bu programda SSL desteği yok."
+#~ msgstr "Bu programda SSL desteÄŸi yok."
 
 #, fuzzy
 #~ msgid "Recent Changes"
-#~ msgstr "%s dosyasını değiştir"
+#~ msgstr "%s dosyasÄ±nÄ± deÄŸiÅŸtir"
 
 #, fuzzy
 #~ msgid "Changed Items"
-#~ msgstr "%s dosyasını değiştir"
+#~ msgstr "%s dosyasÄ±nÄ± deÄŸiÅŸtir"
 
 #, fuzzy
 #~ msgid "Deleted Items"
-#~ msgstr "%s dosyasını sil"
+#~ msgstr "%s dosyasÄ±nÄ± sil"
 
 #~ msgid "%s: Failed to fetch file listing for verification.\n"
-#~ msgstr "%s: Kontrol için dosya listesi indirme başarısız oldu:\n"
+#~ msgstr "%s: Kontrol iÃ§in dosya listesi indirme baÅŸarÄ±sÄ±z oldu:\n"
 
 #~ msgid "%s: Verify indicates differences.\n"
-#~ msgstr "%s: Kontrol işlemi değişiklik olduğunu gösteriyor.\n"
+#~ msgstr "%s: Kontrol iÅŸlemi deÄŸiÅŸiklik olduÄŸunu gÃ¶steriyor.\n"
