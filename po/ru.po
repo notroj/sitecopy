@@ -12,13 +12,13 @@ msgstr ""
 "Language-Team: ru\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=koi8-r\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
 #: src/ftpdriver.c:67
 #, fuzzy
 msgid "Could not load saved server certificate"
-msgstr "%s: Ошибка: Не удалось открыть конфигурационный файл: %s\n"
+msgstr "%s: п·я┬п╦п╠п╨п╟: п²п╣ я┐п╢п╟п╩п╬я│я▄ п╬я┌п╨я─я▀я┌я▄ п╨п╬п╫я└п╦пЁя┐я─п╟я├п╦п╬п╫п╫я▀п╧ я└п╟п╧п╩: %s\n"
 
 #: src/console_fe.c:123
 msgid "Show changes to"
@@ -91,7 +91,7 @@ msgstr ""
 #: src/console_fe.c:205
 #, c-format
 msgid "%s: Error: No site called `%s' found - skipping.\n"
-msgstr "%s: Ошибка: Не найдено сайта с именем %s -- пропущен.\n"
+msgstr "%s: п·я┬п╦п╠п╨п╟: п²п╣ п╫п╟п╧п╢п╣п╫п╬ я│п╟п╧я┌п╟ я│ п╦п╪п╣п╫п╣п╪ %s -- п©я─п╬п©я┐я┴п╣п╫.\n"
 
 #: src/console_fe.c:223
 #, c-format
@@ -106,7 +106,7 @@ msgstr ""
 #: src/console_fe.c:227 src/console_fe.c:383 src/console_fe.c:540
 #, c-format
 msgid "Try `%s --help' for more information.\n"
-msgstr "Попробуйте `%s --help' для получения дополнительной информации.\n"
+msgstr "п÷п╬п©я─п╬п╠я┐п╧я┌п╣ `%s --help' п╢п╩я▐ п©п╬п╩я┐я┤п╣п╫п╦я▐ п╢п╬п©п╬п╩п╫п╦я┌п╣п╩я▄п╫п╬п╧ п╦п╫я└п╬я─п╪п╟я├п╦п╦.\n"
 
 #: src/console_fe.c:237
 #, c-format
@@ -116,17 +116,17 @@ msgstr ""
 #: src/console_fe.c:260
 #, c-format
 msgid "* These items have been added since the last update:\n"
-msgstr "* Следующие объекты были добавлены с момента последнего обновления:\n"
+msgstr "* п║п╩п╣п╢я┐я▌я┴п╦п╣ п╬п╠я┼п╣п╨я┌я▀ п╠я▀п╩п╦ п╢п╬п╠п╟п╡п╩п╣п╫я▀ я│ п╪п╬п╪п╣п╫я┌п╟ п©п╬я│п╩п╣п╢п╫п╣пЁп╬ п╬п╠п╫п╬п╡п╩п╣п╫п╦я▐:\n"
 
 #: src/console_fe.c:265 src/console_fe.c:296
 #, c-format
 msgid "dir:"
-msgstr "каталог:"
+msgstr "п╨п╟я┌п╟п╩п╬пЁ:"
 
 #: src/console_fe.c:272
 #, c-format
 msgid "* These items have been changed since the last update:\n"
-msgstr "* Следующие объекты были изменены с момента последнего обновления:\n"
+msgstr "* п║п╩п╣п╢я┐я▌я┴п╦п╣ п╬п╠я┼п╣п╨я┌я▀ п╠я▀п╩п╦ п╦п╥п╪п╣п╫п╣п╫я▀ я│ п╪п╬п╪п╣п╫я┌п╟ п©п╬я│п╩п╣п╢п╫п╣пЁп╬ п╬п╠п╫п╬п╡п╩п╣п╫п╦я▐:\n"
 
 #: src/console_fe.c:274
 #, c-format
@@ -141,12 +141,12 @@ msgstr ""
 #: src/console_fe.c:290
 #, c-format
 msgid "* These items have been deleted since the last update:\n"
-msgstr "* Следующие объекты были удалены с момента последнего обновления:\n"
+msgstr "* п║п╩п╣п╢я┐я▌я┴п╦п╣ п╬п╠я┼п╣п╨я┌я▀ п╠я▀п╩п╦ я┐п╢п╟п╩п╣п╫я▀ я│ п╪п╬п╪п╣п╫я┌п╟ п©п╬я│п╩п╣п╢п╫п╣пЁп╬ п╬п╠п╫п╬п╡п╩п╣п╫п╦я▐:\n"
 
 #: src/console_fe.c:303
 #, c-format
 msgid "* These items have been moved since the last update:\n"
-msgstr "* Следующие объекты были перемещены с момента последнего обновления:\n"
+msgstr "* п║п╩п╣п╢я┐я▌я┴п╦п╣ п╬п╠я┼п╣п╨я┌я▀ п╠я▀п╩п╦ п©п╣я─п╣п╪п╣я┴п╣п╫я▀ я│ п╪п╬п╪п╣п╫я┌п╟ п©п╬я│п╩п╣п╢п╫п╣пЁп╬ п╬п╠п╫п╬п╡п╩п╣п╫п╦я▐:\n"
 
 #: src/console_fe.c:321 src/console_fe.c:333
 msgid "Ignored"
@@ -174,13 +174,13 @@ msgid ""
 "Site: %s\n"
 "\tServer: %s"
 msgstr ""
-"Сайт: %s\n"
-"\tСервер: %s"
+"п║п╟п╧я┌: %s\n"
+"\tп║п╣я─п╡п╣я─: %s"
 
 #: src/console_fe.c:350
 #, c-format
 msgid "  Port: "
-msgstr "  Порт: "
+msgstr "  п÷п╬я─я┌: "
 
 #: src/console_fe.c:352
 #, c-format
@@ -195,7 +195,7 @@ msgstr "%d\n"
 #: src/console_fe.c:357
 #, c-format
 msgid "\tProtocol: %s    Username: %s\n"
-msgstr "\tПротокол: %s    Пользователь: %s\n"
+msgstr "\tп÷я─п╬я┌п╬п╨п╬п╩: %s    п÷п╬п╩я▄п╥п╬п╡п╟я┌п╣п╩я▄: %s\n"
 
 #: src/console_fe.c:360
 msgid "(unspecified)"
@@ -204,13 +204,13 @@ msgstr ""
 #: src/console_fe.c:362
 #, c-format
 msgid "\tPassive mode FTP will not be used.\n"
-msgstr "\tПассивный режим FTP использован не будет.\n"
+msgstr "\tп÷п╟я│я│п╦п╡п╫я▀п╧ я─п╣п╤п╦п╪ FTP п╦я│п©п╬п╩я▄п╥п╬п╡п╟п╫ п╫п╣ п╠я┐п╢п╣я┌.\n"
 
 #: src/console_fe.c:364
 #, fuzzy, c-format
 #| msgid "\tPassive mode FTP will not be used.\n"
 msgid "\tFTP over TLS will be used.\n"
-msgstr "\tПассивный режим FTP использован не будет.\n"
+msgstr "\tп÷п╟я│я│п╦п╡п╫я▀п╧ я─п╣п╤п╦п╪ FTP п╦я│п©п╬п╩я▄п╥п╬п╡п╟п╫ п╫п╣ п╠я┐п╢п╣я┌.\n"
 
 #: src/console_fe.c:365
 #, c-format
@@ -218,13 +218,13 @@ msgid ""
 "\tRemote directory: %s\n"
 "\tLocal directory: %s\n"
 msgstr ""
-"\tУдаленный каталог: %s\n"
-"\tЛокальный каталог: %s\n"
+"\tпёп╢п╟п╩п╣п╫п╫я▀п╧ п╨п╟я┌п╟п╩п╬пЁ: %s\n"
+"\tп⌡п╬п╨п╟п╩я▄п╫я▀п╧ п╨п╟я┌п╟п╩п╬пЁ: %s\n"
 
 #: src/console_fe.c:367
 #, c-format
 msgid "\tPermissions: %s     Symlinks: %s\n"
-msgstr "\tПрава доступа: %s     Символические ссылки: %s\n"
+msgstr "\tп÷я─п╟п╡п╟ п╢п╬я│я┌я┐п©п╟: %s     п║п╦п╪п╡п╬п╩п╦я┤п╣я│п╨п╦п╣ я│я│я▀п╩п╨п╦: %s\n"
 
 #: src/console_fe.c:370
 #, c-format
@@ -249,7 +249,7 @@ msgstr ""
 #: src/console_fe.c:507
 #, fuzzy, c-format
 msgid "%s: Warning: Could not open `%s' to use as logfile.\n"
-msgstr "%s: Ошибка: Не удалось открыть конфигурационный файл: %s.\n"
+msgstr "%s: п·я┬п╦п╠п╨п╟: п²п╣ я┐п╢п╟п╩п╬я│я▄ п╬я┌п╨я─я▀я┌я▄ п╨п╬п╫я└п╦пЁя┐я─п╟я├п╦п╬п╫п╫я▀п╧ я└п╟п╧п╩: %s.\n"
 
 #: src/console_fe.c:551
 #, c-format
@@ -262,8 +262,8 @@ msgid ""
 "%s: Warning: Only %d sites can be specified on the command line!\n"
 "Extra entries are being skipped.\n"
 msgstr ""
-"%s: Предупреждение: В командной строке можно указать только %d сайтов!\n"
-"Дополнительные сайты обработаны не будут.\n"
+"%s: п÷я─п╣п╢я┐п©я─п╣п╤п╢п╣п╫п╦п╣: п▓ п╨п╬п╪п╟п╫п╢п╫п╬п╧ я│я┌я─п╬п╨п╣ п╪п╬п╤п╫п╬ я┐п╨п╟п╥п╟я┌я▄ я┌п╬п╩я▄п╨п╬ %d я│п╟п╧я┌п╬п╡!\n"
+"п■п╬п©п╬п╩п╫п╦я┌п╣п╩я▄п╫я▀п╣ я│п╟п╧я┌я▀ п╬п╠я─п╟п╠п╬я┌п╟п╫я▀ п╫п╣ п╠я┐п╢я┐я┌.\n"
 
 #: src/console_fe.c:593
 msgid "WARNING: Server certificate is not trusted."
@@ -323,7 +323,7 @@ msgstr ""
 #: src/console_fe.c:637
 #, fuzzy, c-format
 msgid "Username: %s\n"
-msgstr "\tПротокол: %s    Пользователь: %s\n"
+msgstr "\tп÷я─п╬я┌п╬п╨п╬п╩: %s    п÷п╬п╩я▄п╥п╬п╡п╟я┌п╣п╩я▄: %s\n"
 
 #: src/console_fe.c:639 src/console_fe.c:663
 msgid "Password: "
@@ -342,22 +342,22 @@ msgstr ""
 #: src/console_fe.c:728
 #, c-format
 msgid "Create %s/"
-msgstr "Создать %s/"
+msgstr "п║п╬п╥п╢п╟я┌я▄ %s/"
 
 #: src/console_fe.c:730
 #, c-format
 msgid "Delete %s/"
-msgstr "Удалить %s/"
+msgstr "пёп╢п╟п╩п╦я┌я▄ %s/"
 
 #: src/console_fe.c:738
 #, fuzzy, c-format
 msgid "Upload %s (%s bytes)"
-msgstr "Загрузить %s"
+msgstr "п≈п╟пЁя─я┐п╥п╦я┌я▄ %s"
 
 #: src/console_fe.c:740
 #, c-format
 msgid "Delete %s"
-msgstr "Удалить %s"
+msgstr "пёп╢п╟п╩п╦я┌я▄ %s"
 
 #: src/console_fe.c:741
 #, c-format
@@ -392,7 +392,7 @@ msgstr ""
 #: src/console_fe.c:784 src/console_fe.c:896 src/console_fe.c:958
 #, c-format
 msgid "] done.\n"
-msgstr "] готово.\n"
+msgstr "] пЁп╬я┌п╬п╡п╬.\n"
 
 #: src/console_fe.c:786 src/console_fe.c:960
 #, c-format
@@ -400,18 +400,18 @@ msgid ""
 "] failed:\n"
 "%s\n"
 msgstr ""
-"] ошибка:\n"
+"] п╬я┬п╦п╠п╨п╟:\n"
 "%s\n"
 
 #: src/console_fe.c:796
 #, fuzzy, c-format
 msgid "Setting permissions on %s%s: "
-msgstr "%s: Установите права доступа в 0600.\n"
+msgstr "%s: пёя│я┌п╟п╫п╬п╡п╦я┌п╣ п©я─п╟п╡п╟ п╢п╬я│я┌я┐п©п╟ п╡ 0600.\n"
 
 #: src/console_fe.c:806 src/console_fe.c:882 src/console_fe.c:952
 #, c-format
 msgid "done.\n"
-msgstr "готово.\n"
+msgstr "пЁп╬я┌п╬п╡п╬.\n"
 
 #: src/console_fe.c:808 src/console_fe.c:954
 #, c-format
@@ -419,33 +419,33 @@ msgid ""
 "failed:\n"
 "%s\n"
 msgstr ""
-"ошибка:\n"
+"п╬я┬п╦п╠п╨п╟:\n"
 "%s\n"
 
 #: src/console_fe.c:827 src/console_fe.c:916
 #, c-format
 msgid "Creating %s/: "
-msgstr "Создается %s/: "
+msgstr "п║п╬п╥п╢п╟п╣я┌я│я▐ %s/: "
 
 #: src/console_fe.c:829 src/console_fe.c:918
 #, c-format
 msgid "Deleting %s/: "
-msgstr "Удаляется %s/: "
+msgstr "пёп╢п╟п╩я▐п╣я┌я│я▐ %s/: "
 
 #: src/console_fe.c:836
 #, c-format
 msgid "Uploading %s: ["
-msgstr "Загружается %s: ["
+msgstr "п≈п╟пЁя─я┐п╤п╟п╣я┌я│я▐ %s: ["
 
 #: src/console_fe.c:839 src/console_fe.c:857 src/console_fe.c:928
 #, c-format
 msgid "Deleting %s: "
-msgstr "Удаляется %s: "
+msgstr "пёп╢п╟п╩я▐п╣я┌я│я▐ %s: "
 
 #: src/console_fe.c:842 src/console_fe.c:931
 #, c-format
 msgid "Moving %s->%s: "
-msgstr "Перемещается %s->%s: "
+msgstr "п÷п╣я─п╣п╪п╣я┴п╟п╣я┌я│я▐ %s->%s: "
 
 #: src/console_fe.c:853
 #, c-format
@@ -461,27 +461,27 @@ msgstr ""
 #, fuzzy, c-format
 msgid "Failed to update %s:%c%s\n"
 msgstr ""
-"Не удалось обновить %s:\n"
+"п²п╣ я┐п╢п╟п╩п╬я│я▄ п╬п╠п╫п╬п╡п╦я┌я▄ %s:\n"
 "%s\n"
 
 #: src/console_fe.c:885
 #, fuzzy, c-format
 msgid "failed:%c%s\n"
 msgstr ""
-"ошибка:\n"
+"п╬я┬п╦п╠п╨п╟:\n"
 "%s\n"
 
 #: src/console_fe.c:900
 #, fuzzy, c-format
 msgid "] failed:%c%s\n"
 msgstr ""
-"] ошибка:\n"
+"] п╬я┬п╦п╠п╨п╟:\n"
 "%s\n"
 
 #: src/console_fe.c:925
 #, c-format
 msgid "Downloading %s: ["
-msgstr "Загружается %s: ["
+msgstr "п≈п╟пЁя─я┐п╤п╟п╣я┌я│я▐ %s: ["
 
 #: src/console_fe.c:970
 msgid "Changed on server"
@@ -499,7 +499,7 @@ msgstr "%s\n"
 #: src/console_fe.c:1001
 #, c-format
 msgid "Directory: %s/\n"
-msgstr "Каталог: %s/\n"
+msgstr "п п╟я┌п╟п╩п╬пЁ: %s/\n"
 
 #: src/console_fe.c:1006
 #, c-format
@@ -518,7 +518,7 @@ msgstr ""
 #: src/console_fe.c:1024
 #, c-format
 msgid "%s: Error: Could not open rcfile: %s.\n"
-msgstr "%s: Ошибка: Не удалось открыть конфигурационный файл: %s.\n"
+msgstr "%s: п·я┬п╦п╠п╨п╟: п²п╣ я┐п╢п╟п╩п╬я│я▄ п╬я┌п╨я─я▀я┌я▄ п╨п╬п╫я└п╦пЁя┐я─п╟я├п╦п╬п╫п╫я▀п╧ я└п╟п╧п╩: %s.\n"
 
 #: src/console_fe.c:1028
 #, c-format
@@ -533,28 +533,28 @@ msgid ""
 "%s: Could not read directory for `%s':\n"
 "\t%s\n"
 msgstr ""
-"%s: Не удалось прочитаь каталог для `%s':\n"
+"%s: п²п╣ я┐п╢п╟п╩п╬я│я▄ п©я─п╬я┤п╦я┌п╟я▄ п╨п╟я┌п╟п╩п╬пЁ п╢п╩я▐ `%s':\n"
 "\t%s\n"
 
 #: src/console_fe.c:1051
 #, c-format
 msgid "%s: Server not specified in site `%s'.\n"
-msgstr "%s: Для сайта `%s' не указан параметр Server.\n"
+msgstr "%s: п■п╩я▐ я│п╟п╧я┌п╟ `%s' п╫п╣ я┐п╨п╟п╥п╟п╫ п©п╟я─п╟п╪п╣я┌я─ Server.\n"
 
 #: src/console_fe.c:1055
 #, c-format
 msgid "%s: Remote directory not specified in site `%s'.\n"
-msgstr "%s: Для сайта `%s' не указан параметр Remote.\n"
+msgstr "%s: п■п╩я▐ я│п╟п╧я┌п╟ `%s' п╫п╣ я┐п╨п╟п╥п╟п╫ п©п╟я─п╟п╪п╣я┌я─ Remote.\n"
 
 #: src/console_fe.c:1059
 #, c-format
 msgid "%s: Local directory not specified in site `%s'.\n"
-msgstr "%s: Для сайта `%s' не указан параметр Local.\n"
+msgstr "%s: п■п╩я▐ я│п╟п╧я┌п╟ `%s' п╫п╣ я┐п╨п╟п╥п╟п╫ п©п╟я─п╟п╪п╣я┌я─ Local.\n"
 
 #: src/console_fe.c:1063
 #, c-format
 msgid "%s: Invalid port used in site `%s'.\n"
-msgstr "%s: Для сайта `%s' указано неверное значения для параметра Port.\n"
+msgstr "%s: п■п╩я▐ я│п╟п╧я┌п╟ `%s' я┐п╨п╟п╥п╟п╫п╬ п╫п╣п╡п╣я─п╫п╬п╣ п╥п╫п╟я┤п╣п╫п╦я▐ п╢п╩я▐ п©п╟я─п╟п╪п╣я┌я─п╟ Port.\n"
 
 #: src/console_fe.c:1067
 #, c-format
@@ -610,14 +610,14 @@ msgstr ""
 msgid ""
 "%s: Error: Could not lock storage file for `%s':\n"
 "%s: Error: %s\n"
-msgstr "%s: Ошибка: Не удалось открыть служебный каталог: %s\n"
+msgstr "%s: п·я┬п╦п╠п╨п╟: п²п╣ я┐п╢п╟п╩п╬я│я▄ п╬я┌п╨я─я▀я┌я▄ я│п╩я┐п╤п╣п╠п╫я▀п╧ п╨п╟я┌п╟п╩п╬пЁ: %s\n"
 
 #: src/console_fe.c:1130
 #, fuzzy, c-format
 msgid ""
 "%s: Error: Corrupt site storage file for `%s':\n"
 "%s: %s\n"
-msgstr "%s: Ошибка: Не удалось открыть служебный каталог: %s\n"
+msgstr "%s: п·я┬п╦п╠п╨п╟: п²п╣ я┐п╢п╟п╩п╬я│я▄ п╬я┌п╨я─я▀я┌я▄ я│п╩я┐п╤п╣п╠п╫я▀п╧ п╨п╟я┌п╟п╩п╬пЁ: %s\n"
 
 #: src/console_fe.c:1140
 #, c-format
@@ -648,7 +648,7 @@ msgstr ""
 #, fuzzy, c-format
 msgid "%s: %s unsupported for %s.\n"
 msgstr ""
-"%s: Режим получения списка файлов не поддерживается для протокола %s.\n"
+"%s: п═п╣п╤п╦п╪ п©п╬п╩я┐я┤п╣п╫п╦я▐ я│п©п╦я│п╨п╟ я└п╟п╧п╩п╬п╡ п╫п╣ п©п╬п╢п╢п╣я─п╤п╦п╡п╟п╣я┌я│я▐ п╢п╩я▐ п©я─п╬я┌п╬п╨п╬п╩п╟ %s.\n"
 
 #: src/console_fe.c:1200
 #, c-format
@@ -659,27 +659,27 @@ msgstr ""
 #, fuzzy, c-format
 #| msgid "%s: Invalid port used in site `%s'.\n"
 msgid "%s: Interrupted while %s the %s site `%s'.\n"
-msgstr "%s: Для сайта `%s' указано неверное значения для параметра Port.\n"
+msgstr "%s: п■п╩я▐ я│п╟п╧я┌п╟ `%s' я┐п╨п╟п╥п╟п╫п╬ п╫п╣п╡п╣я─п╫п╬п╣ п╥п╫п╟я┤п╣п╫п╦я▐ п╢п╩я▐ п©п╟я─п╟п╪п╣я┌я─п╟ Port.\n"
 
 #: src/console_fe.c:1212
 #, fuzzy, c-format
 msgid "%s: Error: Could not resolve remote hostname (%s).\n"
-msgstr "%s: Ошибка: Не удалось открыть конфигурационный файл: %s.\n"
+msgstr "%s: п·я┬п╦п╠п╨п╟: п²п╣ я┐п╢п╟п╩п╬я│я▄ п╬я┌п╨я─я▀я┌я▄ п╨п╬п╫я└п╦пЁя┐я─п╟я├п╦п╬п╫п╫я▀п╧ я└п╟п╧п╩: %s.\n"
 
 #: src/console_fe.c:1218
 #, fuzzy, c-format
 msgid "%s: Error: Could not resolve hostname of proxy server (%s).\n"
-msgstr "%s: Ошибка: Не удалось открыть служебный каталог: %s\n"
+msgstr "%s: п·я┬п╦п╠п╨п╟: п²п╣ я┐п╢п╟п╩п╬я│я▄ п╬я┌п╨я─я▀я┌я▄ я│п╩я┐п╤п╣п╠п╫я▀п╧ п╨п╟я┌п╟п╩п╬пЁ: %s\n"
 
 #: src/console_fe.c:1224
 #, fuzzy, c-format
 msgid "%s: Error: Could not connect to proxy server (%s port %d).\n"
-msgstr "%s: Ошибка: Не удалось открыть служебный каталог: %s\n"
+msgstr "%s: п·я┬п╦п╠п╨п╟: п²п╣ я┐п╢п╟п╩п╬я│я▄ п╬я┌п╨я─я▀я┌я▄ я│п╩я┐п╤п╣п╠п╫я▀п╧ п╨п╟я┌п╟п╩п╬пЁ: %s\n"
 
 #: src/console_fe.c:1227
 #, fuzzy, c-format
 msgid "%s: Error: Could not connect to server (%s port %d).\n"
-msgstr "%s: Ошибка: Не удалось открыть конфигурационный файл: %s.\n"
+msgstr "%s: п·я┬п╦п╠п╨п╟: п²п╣ я┐п╢п╟п╩п╬я│я▄ п╬я┌п╨я─я▀я┌я▄ п╨п╬п╫я└п╦пЁя┐я─п╟я├п╦п╬п╫п╫я▀п╧ я└п╟п╧п╩: %s.\n"
 
 #: src/console_fe.c:1233
 #, c-format
@@ -694,67 +694,67 @@ msgstr ""
 #: src/console_fe.c:1242
 #, fuzzy, c-format
 msgid "%s: Error: Could not authorise user on proxy server (%s).\n"
-msgstr "%s: Ошибка: Не удалось открыть конфигурационный файл: %s.\n"
+msgstr "%s: п·я┬п╦п╠п╨п╟: п²п╣ я┐п╢п╟п╩п╬я│я▄ п╬я┌п╨я─я▀я┌я▄ п╨п╬п╫я└п╦пЁя┐я─п╟я├п╦п╬п╫п╫я▀п╧ я└п╟п╧п╩: %s.\n"
 
 #: src/console_fe.c:1263
 #, c-format
 msgid "%s: Error: Environment variable HOME not set.\n"
-msgstr "%s: Ошибка: Не установлена переменная среды HOME.\n"
+msgstr "%s: п·я┬п╦п╠п╨п╟: п²п╣ я┐я│я┌п╟п╫п╬п╡п╩п╣п╫п╟ п©п╣я─п╣п╪п╣п╫п╫п╟я▐ я│я─п╣п╢я▀ HOME.\n"
 
 #: src/console_fe.c:1271
 #, c-format
 msgid "%s: Error: Could not open rcfile: %s\n"
-msgstr "%s: Ошибка: Не удалось открыть конфигурационный файл: %s\n"
+msgstr "%s: п·я┬п╦п╠п╨п╟: п²п╣ я┐п╢п╟п╩п╬я│я▄ п╬я┌п╨я─я▀я┌я▄ п╨п╬п╫я└п╦пЁя┐я─п╟я├п╦п╬п╫п╫я▀п╧ я└п╟п╧п╩: %s\n"
 
 #: src/console_fe.c:1274
 #, c-format
 msgid "%s: Error: rcfile permissions allow other users to read your rcfile.\n"
 msgstr ""
-"%s: Ошибка: Права доступа на конфигурационный файл позволяют другим "
-"пользователям читать его содержимое.\n"
+"%s: п·я┬п╦п╠п╨п╟: п÷я─п╟п╡п╟ п╢п╬я│я┌я┐п©п╟ п╫п╟ п╨п╬п╫я└п╦пЁя┐я─п╟я├п╦п╬п╫п╫я▀п╧ я└п╟п╧п╩ п©п╬п╥п╡п╬п╩я▐я▌я┌ п╢я─я┐пЁп╦п╪ "
+"п©п╬п╩я▄п╥п╬п╡п╟я┌п╣п╩я▐п╪ я┤п╦я┌п╟я┌я▄ п╣пЁп╬ я│п╬п╢п╣я─п╤п╦п╪п╬п╣.\n"
 
 #: src/console_fe.c:1275 src/console_fe.c:1287
 #, c-format
 msgid "%s: Set the permissions to 0600.\n"
-msgstr "%s: Установите права доступа в 0600.\n"
+msgstr "%s: пёя│я┌п╟п╫п╬п╡п╦я┌п╣ п©я─п╟п╡п╟ п╢п╬я│я┌я┐п©п╟ п╡ 0600.\n"
 
 #: src/console_fe.c:1278
 #, c-format
 msgid "%s: Error: Could not open storage directory: %s\n"
-msgstr "%s: Ошибка: Не удалось открыть служебный каталог: %s\n"
+msgstr "%s: п·я┬п╦п╠п╨п╟: п²п╣ я┐п╢п╟п╩п╬я│я▄ п╬я┌п╨я─я▀я┌я▄ я│п╩я┐п╤п╣п╠п╫я▀п╧ п╨п╟я┌п╟п╩п╬пЁ: %s\n"
 
 #: src/console_fe.c:1279
 #, c-format
 msgid ""
 "%s: You need to create this directory and set the permissions to 0700.\n"
 msgstr ""
-"%s: Вы должны создать этот каталог и установить права доступа к нему в "
+"%s: п▓я▀ п╢п╬п╩п╤п╫я▀ я│п╬п╥п╢п╟я┌я▄ я█я┌п╬я┌ п╨п╟я┌п╟п╩п╬пЁ п╦ я┐я│я┌п╟п╫п╬п╡п╦я┌я▄ п©я─п╟п╡п╟ п╢п╬я│я┌я┐п©п╟ п╨ п╫п╣п╪я┐ п╡ "
 "0700.\n"
 
 #: src/console_fe.c:1282
 #, c-format
 msgid "%s: Error: storage directory permissions incorrect.\n"
-msgstr "%s: Ошибка: права доступа к служебному каталогу неверны.\n"
+msgstr "%s: п·я┬п╦п╠п╨п╟: п©я─п╟п╡п╟ п╢п╬я│я┌я┐п©п╟ п╨ я│п╩я┐п╤п╣п╠п╫п╬п╪я┐ п╨п╟я┌п╟п╩п╬пЁя┐ п╫п╣п╡п╣я─п╫я▀.\n"
 
 #: src/console_fe.c:1283
 #, c-format
 msgid "%s: Set the permissions to 0700.\n"
-msgstr "%s: Установите права доступа в 0700.\n"
+msgstr "%s: пёя│я┌п╟п╫п╬п╡п╦я┌п╣ п©я─п╟п╡п╟ п╢п╬я│я┌я┐п©п╟ п╡ 0700.\n"
 
 #: src/console_fe.c:1286
 #, c-format
 msgid "%s: Error: ~/.netrc permissions incorrect.\n"
-msgstr "%s: Ошибка: права доступа на фалй ~/.netrc неверны.\n"
+msgstr "%s: п·я┬п╦п╠п╨п╟: п©я─п╟п╡п╟ п╢п╬я│я┌я┐п©п╟ п╫п╟ я└п╟п╩п╧ ~/.netrc п╫п╣п╡п╣я─п╫я▀.\n"
 
 #: src/console_fe.c:1298
 #, c-format
 msgid "%s: Error: Could not parse ~/.netrc.\n"
-msgstr "%s: Ошибка: Не удалось разобрать файл ~/.netrc.\n"
+msgstr "%s: п·я┬п╦п╠п╨п╟: п²п╣ я┐п╢п╟п╩п╬я│я▄ я─п╟п╥п╬п╠я─п╟я┌я▄ я└п╟п╧п╩ ~/.netrc.\n"
 
 #: src/console_fe.c:1316 src/console_fe.c:1426
 #, c-format
 msgid "%s: Nothing to do - no changes found.\n"
-msgstr "%s: Изменений не найдено -- ничего не надо делать.\n"
+msgstr "%s: п≤п╥п╪п╣п╫п╣п╫п╦п╧ п╫п╣ п╫п╟п╧п╢п╣п╫п╬ -- п╫п╦я┤п╣пЁп╬ п╫п╣ п╫п╟п╢п╬ п╢п╣п╩п╟я┌я▄.\n"
 
 #: src/console_fe.c:1326
 #, c-format
@@ -774,17 +774,17 @@ msgstr ""
 #: src/console_fe.c:1359
 #, fuzzy, c-format
 msgid "%s: The remote site needs updating (%d items to update).\n"
-msgstr "%s: Удаленный сервер необходимо обновить.\n"
+msgstr "%s: пёп╢п╟п╩п╣п╫п╫я▀п╧ я│п╣я─п╡п╣я─ п╫п╣п╬п╠я┘п╬п╢п╦п╪п╬ п╬п╠п╫п╬п╡п╦я┌я▄.\n"
 
 #: src/console_fe.c:1362
 #, fuzzy, c-format
 msgid "%s: The remote site needs updating (1 item to update).\n"
-msgstr "%s: Удаленный сервер необходимо обновить.\n"
+msgstr "%s: пёп╢п╟п╩п╣п╫п╫я▀п╧ я│п╣я─п╡п╣я─ п╫п╣п╬п╠я┘п╬п╢п╦п╪п╬ п╬п╠п╫п╬п╡п╦я┌я▄.\n"
 
 #: src/console_fe.c:1366
 #, c-format
 msgid "%s: The remote site does not need updating.\n"
-msgstr "%s: Удаленный сервер не требует обновления.\n"
+msgstr "%s: пёп╢п╟п╩п╣п╫п╫я▀п╧ я│п╣я─п╡п╣я─ п╫п╣ я┌я─п╣п╠я┐п╣я┌ п╬п╠п╫п╬п╡п╩п╣п╫п╦я▐.\n"
 
 #: src/console_fe.c:1376
 #, c-format
@@ -801,14 +801,14 @@ msgstr ""
 msgid ""
 "%s: Failed to fetch file listing for site `%s':\n"
 "%s: %s\n"
-msgstr "%s: Не удалось получить список файлов.\n"
+msgstr "%s: п²п╣ я┐п╢п╟п╩п╬я│я▄ п©п╬п╩я┐я┤п╦я┌я▄ я│п©п╦я│п╬п╨ я└п╟п╧п╩п╬п╡.\n"
 
 #: src/console_fe.c:1407
 #, fuzzy, c-format
 msgid ""
 "%s: Failed to fetch file listing to verify site `%s':\n"
 "%s: %s\n"
-msgstr "%s: Не удалось получить список файлов.\n"
+msgstr "%s: п²п╣ я┐п╢п╟п╩п╬я│я▄ п©п╬п╩я┐я┤п╦я┌я▄ я│п©п╦я│п╬п╨ я└п╟п╧п╩п╬п╡.\n"
 
 #: src/console_fe.c:1414
 #, c-format
@@ -818,7 +818,7 @@ msgstr ""
 #: src/console_fe.c:1417
 #, fuzzy, c-format
 msgid "%s: Remote site not synchronized with stored state.\n"
-msgstr "%s: Для сайта `%s' не указан параметр Remote.\n"
+msgstr "%s: п■п╩я▐ я│п╟п╧я┌п╟ `%s' п╫п╣ я┐п╨п╟п╥п╟п╫ п©п╟я─п╟п╪п╣я┌я─ Remote.\n"
 
 #: src/console_fe.c:1431
 #, c-format
@@ -830,12 +830,12 @@ msgstr ""
 #: src/console_fe.c:1451
 #, c-format
 msgid "Usage: %s [OPTIONS] [MODE] [sitename]...\n"
-msgstr "Запуск: %s [ПАРАМЕТРЫ] [РЕЖИМ] [sitename]...\n"
+msgstr "п≈п╟п©я┐я│п╨: %s [п÷п░п═п░п°п∙п╒п═п╚] [п═п∙п√п≤п°] [sitename]...\n"
 
 #: src/console_fe.c:1453
 #, c-format
 msgid "Options: \n"
-msgstr "Параметры: \n"
+msgstr "п÷п╟я─п╟п╪п╣я┌я─я▀: \n"
 
 #: src/console_fe.c:1456
 #, c-format
@@ -889,7 +889,7 @@ msgstr ""
 #: src/sitestore.c:140
 #, fuzzy, c-format
 msgid "Could not create lock file `%s': %s"
-msgstr "%s: Ошибка: Не удалось открыть конфигурационный файл: %s\n"
+msgstr "%s: п·я┬п╦п╠п╨п╟: п²п╣ я┐п╢п╟п╩п╬я│я▄ п╬я┌п╨я─я▀я┌я▄ п╨п╬п╫я└п╦пЁя┐я─п╟я├п╦п╬п╫п╫я▀п╧ я└п╟п╧п╩: %s\n"
 
 #: src/sitestore.c:448
 #, c-format
@@ -917,17 +917,17 @@ msgstr ""
 #: src/davdriver.c:224
 #, fuzzy, c-format
 msgid "Could not load certificate `%s'."
-msgstr "%s: Ошибка: Не удалось открыть конфигурационный файл: %s\n"
+msgstr "%s: п·я┬п╦п╠п╨п╟: п²п╣ я┐п╢п╟п╩п╬я│я▄ п╬я┌п╨я─я▀я┌я▄ п╨п╬п╫я└п╦пЁя┐я─п╟я├п╦п╬п╫п╫я▀п╧ я└п╟п╧п╩: %s\n"
 
 #: src/davdriver.c:254
 #, fuzzy, c-format
 msgid "Could not read SSL client certificate '%s'."
-msgstr "%s: Ошибка: Не удалось открыть конфигурационный файл: %s\n"
+msgstr "%s: п·я┬п╦п╠п╨п╟: п²п╣ я┐п╢п╟п╩п╬я│я▄ п╬я┌п╨я─я▀я┌я▄ п╨п╬п╫я└п╦пЁя┐я─п╟я├п╦п╬п╫п╫я▀п╧ я└п╟п╧п╩: %s\n"
 
 #: src/davdriver.c:267
 #, fuzzy, c-format
 msgid "Could not decrypt SSL client certificate '%s'."
-msgstr "%s: Ошибка: Не удалось открыть конфигурационный файл: %s\n"
+msgstr "%s: п·я┬п╦п╠п╨п╟: п²п╣ я┐п╢п╟п╩п╬я│я▄ п╬я┌п╨я─я▀я┌я▄ п╨п╬п╫я└п╦пЁя┐я─п╟я├п╦п╬п╫п╫я▀п╧ я└п╟п╧п╩: %s\n"
 
 #: src/davdriver.c:289
 msgid "The server does not appear to be a WebDAV server."
@@ -941,12 +941,12 @@ msgstr ""
 #: src/ftp.c:1135
 #, fuzzy
 msgid "Could not open file"
-msgstr "%s: Ошибка: Не удалось открыть конфигурационный файл: %s\n"
+msgstr "%s: п·я┬п╦п╠п╨п╟: п²п╣ я┐п╢п╟п╩п╬я│я▄ п╬я┌п╨я─я▀я┌я▄ п╨п╬п╫я└п╦пЁя┐я─п╟я├п╦п╬п╫п╫я▀п╧ я└п╟п╧п╩: %s\n"
 
 #: src/davdriver.c:374
 #, fuzzy, c-format
 msgid "Could not stat file: %s"
-msgstr "%s: Ошибка: Не удалось открыть конфигурационный файл: %s\n"
+msgstr "%s: п·я┬п╦п╠п╨п╟: п²п╣ я┐п╢п╟п╩п╬я│я▄ п╬я┌п╨я─я▀я┌я▄ п╨п╬п╫я└п╦пЁя┐я─п╟я├п╦п╬п╫п╫я▀п╧ я└п╟п╧п╩: %s\n"
 
 #: src/davdriver.c:608
 msgid "Could not access resource"
@@ -985,7 +985,7 @@ msgstr ""
 #: src/sites.c:1526
 #, fuzzy
 msgid "Could not write SSL certificate"
-msgstr "%s: Ошибка: Не удалось открыть конфигурационный файл: %s\n"
+msgstr "%s: п·я┬п╦п╠п╨п╟: п²п╣ я┐п╢п╟п╩п╬я│я▄ п╬я┌п╨я─я▀я┌я▄ п╨п╬п╫я└п╦пЁя┐я─п╟я├п╦п╬п╫п╫я▀п╧ я└п╟п╧п╩: %s\n"
 
 #: src/ftp.c:158
 #, c-format
@@ -1000,27 +1000,27 @@ msgstr ""
 #: src/ftp.c:200
 #, fuzzy
 msgid "Could not read response line"
-msgstr "%s: Ошибка: Не удалось открыть конфигурационный файл: %s\n"
+msgstr "%s: п·я┬п╦п╠п╨п╟: п²п╣ я┐п╢п╟п╩п╬я│я▄ п╬я┌п╨я─я▀я┌я▄ п╨п╬п╫я└п╦пЁя┐я─п╟я├п╦п╬п╫п╫я▀п╧ я└п╟п╧п╩: %s\n"
 
 #: src/ftp.c:234
 #, fuzzy
 msgid "Cannot parse MDTM response; wrong length."
-msgstr "%s: Ошибка: Не удалось открыть конфигурационный файл: %s\n"
+msgstr "%s: п·я┬п╦п╠п╨п╟: п²п╣ я┐п╢п╟п╩п╬я│я▄ п╬я┌п╨я─я▀я┌я▄ п╨п╬п╫я└п╦пЁя┐я─п╟я├п╦п╬п╫п╫я▀п╧ я└п╟п╧п╩: %s\n"
 
 #: src/ftp.c:241
 #, fuzzy
 msgid "Cannot parse MDTM response."
-msgstr "%s: Ошибка: Не удалось открыть конфигурационный файл: %s\n"
+msgstr "%s: п·я┬п╦п╠п╨п╟: п²п╣ я┐п╢п╟п╩п╬я│я▄ п╬я┌п╨я─я▀я┌я▄ п╨п╬п╫я└п╦пЁя┐я─п╟я├п╦п╬п╫п╫я▀п╧ я└п╟п╧п╩: %s\n"
 
 #: src/ftp.c:265
 #, fuzzy
 msgid "Could not find address in PASV response"
-msgstr "%s: Ошибка: Не удалось открыть конфигурационный файл: %s\n"
+msgstr "%s: п·я┬п╦п╠п╨п╟: п²п╣ я┐п╢п╟п╩п╬я│я▄ п╬я┌п╨я─я▀я┌я▄ п╨п╬п╫я└п╦пЁя┐я─п╟я├п╦п╬п╫п╫я▀п╧ я└п╟п╧п╩: %s\n"
 
 #: src/ftp.c:272
 #, fuzzy
 msgid "Could not parse PASV response"
-msgstr "%s: Ошибка: Не удалось открыть конфигурационный файл: %s\n"
+msgstr "%s: п·я┬п╦п╠п╨п╟: п²п╣ я┐п╢п╟п╩п╬я│я▄ п╬я┌п╨я─я▀я┌я▄ п╨п╬п╫я└п╦пЁя┐я─п╟я├п╦п╬п╫п╫я▀п╧ я└п╟п╧п╩: %s\n"
 
 #: src/ftp.c:281
 msgid "Invalid IP address in PASV response"
@@ -1029,12 +1029,12 @@ msgstr ""
 #: src/ftp.c:304
 #, fuzzy
 msgid "Malformed EPSV response"
-msgstr "%s: Ошибка: Не удалось открыть конфигурационный файл: %s\n"
+msgstr "%s: п·я┬п╦п╠п╨п╟: п²п╣ я┐п╢п╟п╩п╬я│я▄ п╬я┌п╨я─я▀я┌я▄ п╨п╬п╫я└п╦пЁя┐я─п╟я├п╦п╬п╫п╫я▀п╧ я└п╟п╧п╩: %s\n"
 
 #: src/ftp.c:313
 #, fuzzy
 msgid "Malformed port in EPSV response"
-msgstr "%s: Ошибка: Не удалось открыть конфигурационный файл: %s\n"
+msgstr "%s: п·я┬п╦п╠п╨п╟: п²п╣ я┐п╢п╟п╩п╬я│я▄ п╬я┌п╨я─я▀я┌я▄ п╨п╬п╫я└п╦пЁя┐я─п╟я├п╦п╬п╫п╫я▀п╧ я└п╟п╧п╩: %s\n"
 
 #: src/ftp.c:452 src/ftp.c:502 src/ftp.c:535
 msgid "Interrupted"
@@ -1051,7 +1051,7 @@ msgstr ""
 #: src/ftp.c:508
 #, fuzzy
 msgid "Could not send file"
-msgstr "%s: Ошибка: Не удалось открыть конфигурационный файл: %s\n"
+msgstr "%s: п·я┬п╦п╠п╨п╟: п²п╣ я┐п╢п╟п╩п╬я│я▄ п╬я┌п╨я─я▀я┌я▄ п╨п╬п╫я└п╦пЁя┐я─п╟я├п╦п╬п╫п╫я▀п╧ я└п╟п╧п╩: %s\n"
 
 #: src/ftp.c:543 src/ftp.c:1153
 msgid "Error writing to file"
@@ -1082,7 +1082,7 @@ msgstr ""
 #: src/ftp.c:683
 #, fuzzy
 msgid "Could not connect passive data socket"
-msgstr "%s: Ошибка: Не удалось открыть конфигурационный файл: %s\n"
+msgstr "%s: п·я┬п╦п╠п╨п╟: п²п╣ я┐п╢п╟п╩п╬я│я▄ п╬я┌п╨я─я▀я┌я▄ п╨п╬п╫я└п╦пЁя┐я─п╟я├п╦п╬п╫п╫я▀п╧ я└п╟п╧п╩: %s\n"
 
 #: src/ftp.c:802
 msgid "Active open failed: could not determine address of control socket"
@@ -1091,7 +1091,7 @@ msgstr ""
 #: src/ftp.c:814
 #, fuzzy
 msgid "Active open failed: could not create socket"
-msgstr "%s: Ошибка: Не удалось открыть конфигурационный файл: %s\n"
+msgstr "%s: п·я┬п╦п╠п╨п╟: п²п╣ я┐п╢п╟п╩п╬я│я▄ п╬я┌п╨я─я▀я┌я▄ п╨п╬п╫я└п╦пЁя┐я─п╟я├п╦п╬п╫п╫я▀п╧ я└п╟п╧п╩: %s\n"
 
 #: src/ftp.c:822
 msgid "Active open failed: could not bind to address"
@@ -1104,7 +1104,7 @@ msgstr ""
 #: src/ftp.c:839
 #, fuzzy
 msgid "Could not determine bound port number for data socket"
-msgstr "%s: Ошибка: Не удалось открыть конфигурационный файл: %s\n"
+msgstr "%s: п·я┬п╦п╠п╨п╟: п²п╣ я┐п╢п╟п╩п╬я│я▄ п╬я┌п╨я─я▀я┌я▄ п╨п╬п╫я└п╦пЁя┐я─п╟я├п╦п╬п╫п╫я▀п╧ я└п╟п╧п╩: %s\n"
 
 #: src/ftp.c:884
 msgid "Active open failed: could not accept connection"
@@ -1117,12 +1117,12 @@ msgstr ""
 #: src/ftp.c:1057
 #, fuzzy
 msgid "Could not determine length of file"
-msgstr "%s: Ошибка: Не удалось открыть конфигурационный файл: %s\n"
+msgstr "%s: п·я┬п╦п╠п╨п╟: п²п╣ я┐п╢п╟п╩п╬я│я▄ п╬я┌п╨я─я▀я┌я▄ п╨п╬п╫я└п╦пЁя┐я─п╟я├п╦п╬п╫п╫я▀п╧ я└п╟п╧п╩: %s\n"
 
 #: src/ftp.c:1068
 #, fuzzy
 msgid "Could not rewind to beginning of file"
-msgstr "%s: Ошибка: Не удалось открыть конфигурационный файл: %s\n"
+msgstr "%s: п·я┬п╦п╠п╨п╟: п²п╣ я┐п╢п╟п╩п╬я│я▄ п╬я┌п╨я─я▀я┌я▄ п╨п╬п╫я└п╦пЁя┐я─п╟я├п╦п╬п╫п╫я▀п╧ я└п╟п╧п╩: %s\n"
 
 #: src/ftp.c:1254
 #, c-format
@@ -1132,188 +1132,188 @@ msgstr ""
 #: src/ftp.c:1270
 #, fuzzy, c-format
 msgid "Could not enable TLS for data connections: %s"
-msgstr "%s: Ошибка: Не удалось открыть служебный каталог: %s\n"
+msgstr "%s: п·я┬п╦п╠п╨п╟: п²п╣ я┐п╢п╟п╩п╬я│я▄ п╬я┌п╨я─я▀я┌я▄ я│п╩я┐п╤п╣п╠п╫я▀п╧ п╨п╟я┌п╟п╩п╬пЁ: %s\n"
 
 #: src/ftp.c:1390
 #, fuzzy
 msgid "Could not read 'LIST' response."
-msgstr "%s: Ошибка: Не удалось открыть конфигурационный файл: %s\n"
+msgstr "%s: п·я┬п╦п╠п╨п╟: п²п╣ я┐п╢п╟п╩п╬я│я▄ п╬я┌п╨я─я▀я┌я▄ п╨п╬п╫я└п╦пЁя┐я─п╟я├п╦п╬п╫п╫я▀п╧ я└п╟п╧п╩: %s\n"
 
 #: src/ftp.c:1399
 #, fuzzy, c-format
 msgid "Parse error in LIST response: %s"
-msgstr "%s: Ошибка: Не удалось открыть конфигурационный файл: %s\n"
+msgstr "%s: п·я┬п╦п╠п╨п╟: п²п╣ я┐п╢п╟п╩п╬я│я▄ п╬я┌п╨я─я▀я┌я▄ п╨п╬п╫я└п╦пЁя┐я─п╟я├п╦п╬п╫п╫я▀п╧ я└п╟п╧п╩: %s\n"
 
 #~ msgid "Unknown system error"
-#~ msgstr "Неизвестная системная ошибка"
+#~ msgstr "п²п╣п╦п╥п╡п╣я│я┌п╫п╟я▐ я│п╦я│я┌п╣п╪п╫п╟я▐ п╬я┬п╦п╠п╨п╟"
 
 #, fuzzy
 #~ msgid "_Delete this site"
-#~ msgstr "Удалить %s"
+#~ msgstr "пёп╢п╟п╩п╦я┌я▄ %s"
 
 #, fuzzy
 #~ msgid "Re-reads the local directory of the selected site."
-#~ msgstr "%s: Для сайта `%s' не указан параметр Local.\n"
+#~ msgstr "%s: п■п╩я▐ я│п╟п╧я┌п╟ `%s' п╫п╣ я┐п╨п╟п╥п╟п╫ п©п╟я─п╟п╪п╣я┌я─ Local.\n"
 
 #, fuzzy
 #~ msgid "_Operations"
-#~ msgstr "Параметры: \n"
+#~ msgstr "п÷п╟я─п╟п╪п╣я┌я─я▀: \n"
 
 #, fuzzy
 #~ msgid "Delete site"
-#~ msgstr "Удалить %s"
+#~ msgstr "пёп╢п╟п╩п╦я┌я▄ %s"
 
 #, fuzzy
 #~ msgid "Download"
-#~ msgstr "Загружается %s: ["
+#~ msgstr "п≈п╟пЁя─я┐п╤п╟п╣я┌я│я▐ %s: ["
 
 #, fuzzy, c-format
 #~ msgid "%s: Error: Could not read rcfile: %s.\n"
-#~ msgstr "%s: Ошибка: Не удалось открыть конфигурационный файл: %s.\n"
+#~ msgstr "%s: п·я┬п╦п╠п╨п╟: п²п╣ я┐п╢п╟п╩п╬я│я▄ п╬я┌п╨я─я▀я┌я▄ п╨п╬п╫я└п╦пЁя┐я─п╟я├п╦п╬п╫п╫я▀п╧ я└п╟п╧п╩: %s.\n"
 
 #, fuzzy, c-format
 #~ msgid "Server not specified in site `%s'.\n"
-#~ msgstr "%s: Для сайта `%s' не указан параметр Server.\n"
+#~ msgstr "%s: п■п╩я▐ я│п╟п╧я┌п╟ `%s' п╫п╣ я┐п╨п╟п╥п╟п╫ п©п╟я─п╟п╪п╣я┌я─ Server.\n"
 
 #, fuzzy, c-format
 #~ msgid "Remote directory not specified in site `%s'.\n"
-#~ msgstr "%s: Для сайта `%s' не указан параметр Remote.\n"
+#~ msgstr "%s: п■п╩я▐ я│п╟п╧я┌п╟ `%s' п╫п╣ я┐п╨п╟п╥п╟п╫ п©п╟я─п╟п╪п╣я┌я─ Remote.\n"
 
 #, fuzzy, c-format
 #~ msgid "Local directory not specified in site `%s'.\n"
-#~ msgstr "%s: Для сайта `%s' не указан параметр Local.\n"
+#~ msgstr "%s: п■п╩я▐ я│п╟п╧я┌п╟ `%s' п╫п╣ я┐п╨п╟п╥п╟п╫ п©п╟я─п╟п╪п╣я┌я─ Local.\n"
 
 #, fuzzy, c-format
 #~ msgid ""
 #~ "Could not read directory for `%s':\n"
 #~ "\t%s\n"
 #~ msgstr ""
-#~ "%s: Не удалось прочитаь каталог для `%s':\n"
+#~ "%s: п²п╣ я┐п╢п╟п╩п╬я│я▄ п©я─п╬я┤п╦я┌п╟я▄ п╨п╟я┌п╟п╩п╬пЁ п╢п╩я▐ `%s':\n"
 #~ "\t%s\n"
 
 #, fuzzy, c-format
 #~ msgid "Invalid port used in site `%s'.\n"
-#~ msgstr "%s: Для сайта `%s' указано неверное значения для параметра Port.\n"
+#~ msgstr "%s: п■п╩я▐ я│п╟п╧я┌п╟ `%s' я┐п╨п╟п╥п╟п╫п╬ п╫п╣п╡п╣я─п╫п╬п╣ п╥п╫п╟я┤п╣п╫п╦я▐ п╢п╩я▐ п©п╟я─п╟п╪п╣я┌я─п╟ Port.\n"
 
 #, fuzzy, c-format
 #~ msgid "Could not find 'relative' local directory"
-#~ msgstr "%s: Ошибка: Не удалось открыть конфигурационный файл: %s\n"
+#~ msgstr "%s: п·я┬п╦п╠п╨п╟: п²п╣ я┐п╢п╟п╩п╬я│я▄ п╬я┌п╨я─я▀я┌я▄ п╨п╬п╫я└п╦пЁя┐я─п╟я├п╦п╬п╫п╫я▀п╧ я└п╟п╧п╩: %s\n"
 
 #, fuzzy
 #~ msgid "Could not parse redirect destination URL"
-#~ msgstr "%s: Ошибка: Не удалось открыть конфигурационный файл: %s\n"
+#~ msgstr "%s: п·я┬п╦п╠п╨п╟: п²п╣ я┐п╢п╟п╩п╬я│я▄ п╬я┌п╨я─я▀я┌я▄ п╨п╬п╫я└п╦пЁя┐я─п╟я├п╦п╬п╫п╫я▀п╧ я└п╟п╧п╩: %s\n"
 
 #, fuzzy, c-format
 #~ msgid "SSL negotiation failed: %s"
-#~ msgstr "%s: Ошибка: Не удалось открыть конфигурационный файл: %s\n"
+#~ msgstr "%s: п·я┬п╦п╠п╨п╟: п²п╣ я┐п╢п╟п╩п╬я│я▄ п╬я┌п╨я─я▀я┌я▄ п╨п╬п╫я└п╦пЁя┐я─п╟я├п╦п╬п╫п╫я▀п╧ я└п╟п╧п╩: %s\n"
 
 #, fuzzy, c-format
 #~ msgid "Could not seek to offset %s of request body file: %s"
-#~ msgstr "%s: Ошибка: Не удалось открыть конфигурационный файл: %s\n"
+#~ msgstr "%s: п·я┬п╦п╠п╨п╟: п²п╣ я┐п╢п╟п╩п╬я│я▄ п╬я┌п╨я─я▀я┌я▄ п╨п╬п╫я└п╦пЁя┐я─п╟я├п╦п╬п╫п╫я▀п╧ я└п╟п╧п╩: %s\n"
 
 #, fuzzy
 #~ msgid "Could not parse chunk size"
-#~ msgstr "%s: Ошибка: Не удалось открыть конфигурационный файл: %s\n"
+#~ msgstr "%s: п·я┬п╦п╠п╨п╟: п²п╣ я┐п╢п╟п╩п╬я│я▄ п╬я┌п╨я─я▀я┌я▄ п╨п╬п╫я└п╦пЁя┐я─п╟я├п╦п╬п╫п╫я▀п╧ я└п╟п╧п╩: %s\n"
 
 #, fuzzy
 #~ msgid "Could not read chunk delimiter"
-#~ msgstr "%s: Ошибка: Не удалось открыть конфигурационный файл: %s\n"
+#~ msgstr "%s: п·я┬п╦п╠п╨п╟: п²п╣ я┐п╢п╟п╩п╬я│я▄ п╬я┌п╨я─я▀я┌я▄ п╨п╬п╫я└п╦пЁя┐я─п╟я├п╦п╬п╫п╫я▀п╧ я└п╟п╧п╩: %s\n"
 
 #, fuzzy
 #~ msgid "Could not parse response status line"
-#~ msgstr "%s: Ошибка: Не удалось открыть конфигурационный файл: %s\n"
+#~ msgstr "%s: п·я┬п╦п╠п╨п╟: п²п╣ я┐п╢п╟п╩п╬я│я▄ п╬я┌п╨я─я▀я┌я▄ п╨п╬п╫я└п╦пЁя┐я─п╟я├п╦п╬п╫п╫я▀п╧ я└п╟п╧п╩: %s\n"
 
 #, fuzzy
 #~ msgid "Could not read interim response headers"
-#~ msgstr "%s: Ошибка: Не удалось открыть конфигурационный файл: %s\n"
+#~ msgstr "%s: п·я┬п╦п╠п╨п╟: п²п╣ я┐п╢п╟п╩п╬я│я▄ п╬я┌п╨я─я▀я┌я▄ п╨п╬п╫я└п╦пЁя┐я─п╟я├п╦п╬п╫п╫я▀п╧ я└п╟п╧п╩: %s\n"
 
 #, fuzzy, c-format
 #~ msgid "Could not resolve hostname `%s': %s"
-#~ msgstr "%s: Ошибка: Не удалось открыть конфигурационный файл: %s.\n"
+#~ msgstr "%s: п·я┬п╦п╠п╨п╟: п²п╣ я┐п╢п╟п╩п╬я│я▄ п╬я┌п╨я─я▀я┌я▄ п╨п╬п╫я└п╦пЁя┐я─п╟я├п╦п╬п╫п╫я▀п╧ я└п╟п╧п╩: %s.\n"
 
 #, fuzzy
 #~ msgid "Could not create socket"
-#~ msgstr "%s: Ошибка: Не удалось открыть конфигурационный файл: %s\n"
+#~ msgstr "%s: п·я┬п╦п╠п╨п╟: п²п╣ я┐п╢п╟п╩п╬я│я▄ п╬я┌п╨я─я▀я┌я▄ п╨п╬п╫я└п╦пЁя┐я─п╟я├п╦п╬п╫п╫я▀п╧ я└п╟п╧п╩: %s\n"
 
 #, fuzzy
 #~ msgid "Unknown error"
-#~ msgstr "Неизвестная системная ошибка"
+#~ msgstr "п²п╣п╦п╥п╡п╣я│я┌п╫п╟я▐ я│п╦я│я┌п╣п╪п╫п╟я▐ п╬я┬п╦п╠п╨п╟"
 
 #, fuzzy
 #~ msgid "Could not inflate data"
-#~ msgstr "%s: Ошибка: Не удалось открыть конфигурационный файл: %s\n"
+#~ msgstr "%s: п·я┬п╦п╠п╨п╟: п²п╣ я┐п╢п╟п╩п╬я│я▄ п╬я┌п╨я─я▀я┌я▄ п╨п╬п╫я└п╦пЁя┐я─п╟я├п╦п╬п╫п╫я▀п╧ я└п╟п╧п╩: %s\n"
 
 #, fuzzy
 #~ msgid "Could not initialize zlib"
-#~ msgstr "%s: Ошибка: Не удалось открыть конфигурационный файл: %s\n"
+#~ msgstr "%s: п·я┬п╦п╠п╨п╟: п²п╣ я┐п╢п╟п╩п╬я│я▄ п╬я┌п╨я─я▀я┌я▄ п╨п╬п╫я└п╦пЁя┐я─п╟я├п╦п╬п╫п╫я▀п╧ я└п╟п╧п╩: %s\n"
 
 #, fuzzy, c-format
 #~ msgid "Could not parse response: %s"
-#~ msgstr "%s: Ошибка: Не удалось открыть конфигурационный файл: %s\n"
+#~ msgstr "%s: п·я┬п╦п╠п╨п╟: п²п╣ я┐п╢п╟п╩п╬я│я▄ п╬я┌п╨я─я▀я┌я▄ п╨п╬п╫я└п╦пЁя┐я─п╟я├п╦п╬п╫п╫я▀п╧ я└п╟п╧п╩: %s\n"
 
 #, fuzzy, c-format
 #~ msgid "Could not determine file size: %s"
-#~ msgstr "%s: Ошибка: Не удалось открыть конфигурационный файл: %s\n"
+#~ msgstr "%s: п·я┬п╦п╠п╨п╟: п²п╣ я┐п╢п╟п╩п╬я│я▄ п╬я┌п╨я─я▀я┌я▄ п╨п╬п╫я└п╦пЁя┐я─п╟я├п╦п╬п╫п╫я▀п╧ я└п╟п╧п╩: %s\n"
 
 #, fuzzy, c-format
 #~ msgid "Could not authenticate to server: %s"
-#~ msgstr "%s: Ошибка: Не удалось открыть конфигурационный файл: %s\n"
+#~ msgstr "%s: п·я┬п╦п╠п╨п╟: п²п╣ я┐п╢п╟п╩п╬я│я▄ п╬я┌п╨я─я▀я┌я▄ п╨п╬п╫я└п╦пЁя┐я─п╟я├п╦п╬п╫п╫я▀п╧ я└п╟п╧п╩: %s\n"
 
 #, fuzzy, c-format
 #~ msgid "Could not authenticate to proxy server: %s"
-#~ msgstr "%s: Ошибка: Не удалось открыть конфигурационный файл: %s.\n"
+#~ msgstr "%s: п·я┬п╦п╠п╨п╟: п²п╣ я┐п╢п╟п╩п╬я│я▄ п╬я┌п╨я─я▀я┌я▄ п╨п╬п╫я└п╦пЁя┐я─п╟я├п╦п╬п╫п╫я▀п╧ я└п╟п╧п╩: %s.\n"
 
 #, fuzzy
 #~ msgid "could not parse domain in Digest challenge"
-#~ msgstr "%s: Ошибка: Не удалось открыть конфигурационный файл: %s\n"
+#~ msgstr "%s: п·я┬п╦п╠п╨п╟: п²п╣ я┐п╢п╟п╩п╬я│я▄ п╬я┌п╨я─я▀я┌я▄ п╨п╬п╫я└п╦пЁя┐я─п╟я├п╦п╬п╫п╫я▀п╧ я└п╟п╧п╩: %s\n"
 
 #, fuzzy
 #~ msgid "could not parse challenge"
-#~ msgstr "%s: Ошибка: Не удалось открыть конфигурационный файл: %s\n"
+#~ msgstr "%s: п·я┬п╦п╠п╨п╟: п²п╣ я┐п╢п╟п╩п╬я│я▄ п╬я┌п╨я─я▀я┌я▄ п╨п╬п╫я└п╦пЁя┐я─п╟я├п╦п╬п╫п╫я▀п╧ я└п╟п╧п╩: %s\n"
 
 #, c-format
 #~ msgid "%s: option `%s' is ambiguous\n"
-#~ msgstr "%s: неоднозначный парметр `%s'\n"
+#~ msgstr "%s: п╫п╣п╬п╢п╫п╬п╥п╫п╟я┤п╫я▀п╧ п©п╟я─п╪п╣я┌я─ `%s'\n"
 
 #, c-format
 #~ msgid "%s: option `--%s' doesn't allow an argument\n"
-#~ msgstr "%s: параметр `--%s' не имеет аргументов\n"
+#~ msgstr "%s: п©п╟я─п╟п╪п╣я┌я─ `--%s' п╫п╣ п╦п╪п╣п╣я┌ п╟я─пЁя┐п╪п╣п╫я┌п╬п╡\n"
 
 #, c-format
 #~ msgid "%s: option `%c%s' doesn't allow an argument\n"
-#~ msgstr "%s: параметр `%c%s' не имеет аргументов\n"
+#~ msgstr "%s: п©п╟я─п╟п╪п╣я┌я─ `%c%s' п╫п╣ п╦п╪п╣п╣я┌ п╟я─пЁя┐п╪п╣п╫я┌п╬п╡\n"
 
 #, c-format
 #~ msgid "%s: option `%s' requires an argument\n"
-#~ msgstr "%s: параметр `%s' требует использования аргумента\n"
+#~ msgstr "%s: п©п╟я─п╟п╪п╣я┌я─ `%s' я┌я─п╣п╠я┐п╣я┌ п╦я│п©п╬п╩я▄п╥п╬п╡п╟п╫п╦я▐ п╟я─пЁя┐п╪п╣п╫я┌п╟\n"
 
 #, c-format
 #~ msgid "%s: unrecognized option `--%s'\n"
-#~ msgstr "%s: нераспознанный параметр `--%s'\n"
+#~ msgstr "%s: п╫п╣я─п╟я│п©п╬п╥п╫п╟п╫п╫я▀п╧ п©п╟я─п╟п╪п╣я┌я─ `--%s'\n"
 
 #, c-format
 #~ msgid "%s: unrecognized option `%c%s'\n"
-#~ msgstr "%s: нераспознанный параметр `%c%s'\n"
+#~ msgstr "%s: п╫п╣я─п╟я│п©п╬п╥п╫п╟п╫п╫я▀п╧ п©п╟я─п╟п╪п╣я┌я─ `%c%s'\n"
 
 #, c-format
 #~ msgid "%s: illegal option -- %c\n"
-#~ msgstr "%s: неверный параметр -- %c\n"
+#~ msgstr "%s: п╫п╣п╡п╣я─п╫я▀п╧ п©п╟я─п╟п╪п╣я┌я─ -- %c\n"
 
 #, c-format
 #~ msgid "%s: invalid option -- %c\n"
-#~ msgstr "%s: недопустимый параметр -- %c\n"
+#~ msgstr "%s: п╫п╣п╢п╬п©я┐я│я┌п╦п╪я▀п╧ п©п╟я─п╟п╪п╣я┌я─ -- %c\n"
 
 #, c-format
 #~ msgid "%s: option requires an argument -- %c\n"
-#~ msgstr "%s: параметр требует использования аргумента -- %c\n"
+#~ msgstr "%s: п©п╟я─п╟п╪п╣я┌я─ я┌я─п╣п╠я┐п╣я┌ п╦я│п©п╬п╩я▄п╥п╬п╡п╟п╫п╦я▐ п╟я─пЁя┐п╪п╣п╫я┌п╟ -- %c\n"
 
 #, c-format
 #~ msgid "%s: option `-W %s' is ambiguous\n"
-#~ msgstr "%s: неоднозначный параметр `-W %s'\n"
+#~ msgstr "%s: п╫п╣п╬п╢п╫п╬п╥п╫п╟я┤п╫я▀п╧ п©п╟я─п╟п╪п╣я┌я─ `-W %s'\n"
 
 #, c-format
 #~ msgid "%s: option `-W %s' doesn't allow an argument\n"
-#~ msgstr "%s: параметр `-W %s' не имеет аргументов\n"
+#~ msgstr "%s: п©п╟я─п╟п╪п╣я┌я─ `-W %s' п╫п╣ п╦п╪п╣п╣я┌ п╟я─пЁя┐п╪п╣п╫я┌п╬п╡\n"
 
 #~ msgid "%s\n"
 #~ msgstr "%s\n"
@@ -1329,7 +1329,7 @@ msgstr "%s: Ошибка: Не удалось открыть конфигурационный файл: %s\n"
 #~ msgstr ""
 #~ "\n"
 #~ "\n"
-#~ "%s: Получен сигнал: %s (%d)\n"
+#~ "%s: п÷п╬п╩я┐я┤п╣п╫ я│п╦пЁп╫п╟п╩: %s (%d)\n"
 
 #~ msgid ""
 #~ "\n"
@@ -1338,37 +1338,37 @@ msgstr "%s: Ошибка: Не удалось открыть конфигурационный файл: %s\n"
 #~ msgstr ""
 #~ "\n"
 #~ "\n"
-#~ "%s: Получен сигнал %d\n"
+#~ "%s: п÷п╬п╩я┐я┤п╣п╫ я│п╦пЁп╫п╟п╩ %d\n"
 
 #~ msgid "%s: Terminating.\n"
-#~ msgstr "%s: Завершение работы.\n"
+#~ msgstr "%s: п≈п╟п╡п╣я─я┬п╣п╫п╦п╣ я─п╟п╠п╬я┌я▀.\n"
 
 #, fuzzy
 #~ msgid " of request body file: %s"
-#~ msgstr "%s: Ошибка: Не удалось открыть конфигурационный файл: %s\n"
+#~ msgstr "%s: п·я┬п╦п╠п╨п╟: п²п╣ я┐п╢п╟п╩п╬я│я▄ п╬я┌п╨я─я▀я┌я▄ п╨п╬п╫я└п╦пЁя┐я─п╟я├п╦п╬п╫п╫я▀п╧ я└п╟п╧п╩: %s\n"
 
 #, fuzzy
 #~ msgid "unknown error code"
-#~ msgstr "Неизвестная системная ошибка"
+#~ msgstr "п²п╣п╦п╥п╡п╣я│я┌п╫п╟я▐ я│п╦я│я┌п╣п╪п╫п╟я▐ п╬я┬п╦п╠п╨п╟"
 
 #, fuzzy
 #~ msgid "Deleted Items"
-#~ msgstr "Удалить %s"
+#~ msgstr "пёп╢п╟п╩п╦я┌я▄ %s"
 
 #, fuzzy
 #~ msgid "%s: Aborting update... completing current operation...\n"
 #~ msgstr ""
-#~ "%s: Выполнялась операция обновления, сохраняется текущее состояние... "
+#~ "%s: п▓я▀п©п╬п╩п╫я▐п╩п╟я│я▄ п╬п©п╣я─п╟я├п╦я▐ п╬п╠п╫п╬п╡п╩п╣п╫п╦я▐, я│п╬я┘я─п╟п╫я▐п╣я┌я│я▐ я┌п╣п╨я┐я┴п╣п╣ я│п╬я│я┌п╬я▐п╫п╦п╣... "
 
 #~ msgid "%s: Username not specified in site `%s'.\n"
-#~ msgstr "%s: Для сайта `%s' не указан параметр Username.\n"
+#~ msgstr "%s: п■п╩я▐ я│п╟п╧я┌п╟ `%s' п╫п╣ я┐п╨п╟п╥п╟п╫ п©п╟я─п╟п╪п╣я┌я─ Username.\n"
 
 #~ msgid "%s: Password not specified in site `%s'.\n"
-#~ msgstr "%s: Для сайта `%s' не указан параметр Password.\n"
+#~ msgstr "%s: п■п╩я▐ я│п╟п╧я┌п╟ `%s' п╫п╣ я┐п╨п╟п╥п╟п╫ п©п╟я─п╟п╪п╣я┌я─ Password.\n"
 
 #, fuzzy
 #~ msgid "%s: The remote site needs updating (1 thing to update).\n"
-#~ msgstr "%s: Удаленный сервер необходимо обновить.\n"
+#~ msgstr "%s: пёп╢п╟п╩п╣п╫п╫я▀п╧ я│п╣я─п╡п╣я─ п╫п╣п╬п╠я┘п╬п╢п╦п╪п╬ п╬п╠п╫п╬п╡п╦я┌я▄.\n"
 
 #~ msgid "%s: Argh, unhandled error.\n"
-#~ msgstr "%s: Необработанная ошибка.\n"
+#~ msgstr "%s: п²п╣п╬п╠я─п╟п╠п╬я┌п╟п╫п╫п╟я▐ п╬я┬п╦п╠п╨п╟.\n"
