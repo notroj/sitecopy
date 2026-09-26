@@ -179,11 +179,13 @@ Test layout:
   so `-k` can select configurations.  Likewise `tests/ftps_tests.py`
   holds the tests run against each server requiring FTP over TLS.
 - `test_basic.py` — option handling and local state, no server needed.
-- `test_regression.py` — regression tests for specific bugs, run once
-  against vsftpd in its default configuration (the `default_config`
-  marker) rather than across every combination of rcfile options.
-  Add a test here for a bug which doesn't depend on the options being
-  varied; unfixed bugs are strict xfails.
+- `test_regression.py` — regression tests for specific bugs.  All new
+  regression tests go here, not in the other test files.  Tests using
+  the `site` fixture run once against vsftpd in its default
+  configuration (the `default_config` marker) rather than across every
+  combination of rcfile options; tests which need no server use the
+  `sitecopy_env` fixture instead, and run without a container.
+  Unfixed bugs are strict xfails.
 - `test_ftp.py` — FTP against a scripted in-process FTP server.
 - `test_rsh.py` — the rsh driver, using a wrapper script in place of
   rsh which prints a canned directory listing.
@@ -203,9 +205,10 @@ Guidelines:
   `change_remote_later()`), rather than passing only because it runs
   fast.
 
-- Every bug fix should come with a regression test where practical.
-  Prefer tests which run entirely locally (scripted servers, wrapper
-  scripts) over ones which need containers or network access.
+- Every bug fix should come with a regression test where practical,
+  in `tests/test_regression.py`.  Prefer tests which run entirely
+  locally (`sitecopy_env`, scripted servers, wrapper scripts) over ones
+  which need containers or network access.
 - Reference the upstream or distribution bug in the test's docstring
   (e.g. "Debian bug #496988").
 - Confirm a new regression test fails without the fix and passes with
@@ -327,4 +330,5 @@ Example:
     * src/lsparser.c (ls_parse): Skip exactly one space before the
       file name.
 
-    * tests/test_ftp.py (test_fetch_leading_space_filename): New test.
+    * tests/test_regression.py (test_fetch_leading_space_filename): New
+      test.
