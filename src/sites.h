@@ -454,7 +454,6 @@ extern struct site *all_sites;
 /* Open the storage file for writing, pre-update.
  * Returns site->storage_file or NULL on error. */
 FILE *site_open_storage_file(struct site *site);
-int site_close_storage_file(struct site *site);
 
 /* Take the lock guarding the storage file of the site, so that only
  * one process at a time reads and writes it.  The lock is released
@@ -481,8 +480,10 @@ int site_readfiles(struct site *);
 
 /* This makes out like we've just done a successful site_update. */
 
-/* This writes the stored files list back to disk.
- * Returns 0 on success or -1 on failure. */
+/* This writes the stored files list back to disk.  Returns:
+ *   SITE_OK      on success
+ *   SITE_FAILED  on failure, and site->last_error describes the failure
+ */
 int site_write_stored_state(struct site *);
 
 /* This merges the stored files list in the storage file with the

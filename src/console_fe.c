@@ -92,14 +92,6 @@ static enum action {
 #define A_COND_STORED (A_STORED | (1 << 4))
 #define A_WRITES (1 << 5)
 
-/* TODO: extend this even further, so it includes the site_whatever
- * handler, whether we need to do a post-operation write_stored_state,
- * any preconditions, ...
- * Changes needed for that are that each site_mode() function have
- * consistent parms and return code usage.
- * Does this structure actually make localization harder or easier?
- * .. Unfortunately harder. :-(<prazak@grisoft.cz>
- */
 static struct action_info {
     /* The stem verb: used to form phrases like: "Update the site".
      * Should be capitalized, since it will be used at the beginning of
@@ -1169,17 +1161,14 @@ static int verify_sites(struct site *sites, enum action act)
  * Returns zero on success, or non-zero if it could not be written. */
 static int write_stored_state(struct site *site)
 {
-    int errnum;
-
-    if (site_write_stored_state(site) == 0)
+    if (site_write_stored_state(site) == SITE_OK)
         return 0;
 
-    errnum = errno;
     printf(_("%s: Error: Could not write storage file for site `%s' (%s):\n"
              "%s: Error: %s\n"
              "%s: Error: The changes made have not been recorded.\n"),
            progname, site->name, site->infofile,
-           progname, strerror(errnum), progname);
+           progname, site->last_error, progname);
 
     return -1;
 }
