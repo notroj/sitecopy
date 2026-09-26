@@ -307,3 +307,21 @@ def test_fetch_large_file(ftp_site):
         assert "<size>%d</size>" % size in state, state
     finally:
         del REMOTE_FILES["big.iso"]
+
+
+def test_fetch_skips_modtime_of_excluded(ftp_site):
+    # MDTM must not be issued for a file which an exclude pattern
+    # matches: the modification time is fetched for each file, so on a
+    # large site that is thousands of needless round trips (#58).
+    with open(ftp_site["rcfile"], "a") as fp:
+        fp.write('  exclude "*.doc"\n')
+    res = run_sitecopy(ftp_site, ["--fetch", "testsite"])
+    assert res.returncode == 0, res.stdout + res.stderr
+    assert "File: index.html - size 15360" in res.stdout, res.stdout
+    assert "2003.doc" not in res.stdout, res.stdout
+
+    commands = ftp_site["server"].commands
+    assert any(cmd.startswith("MDTM") and "index.html" in cmd
+               for cmd in commands), commands
+    assert not any(cmd.startswith("MDTM") and "2003.doc" in cmd
+                   for cmd in commands), commands

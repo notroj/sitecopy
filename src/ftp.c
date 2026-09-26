@@ -1442,32 +1442,3 @@ int ftp_get_modtime(ftp_session *sess, const char *filename, time_t *modtime)
     }
 }
 
-/* Sorts out the modtimes for all the files in the list.
- * Returns FTP_OK on success, else FTP_ERROR. */
-int 
-ftp_fetch_modtimes(ftp_session *sess, const char *rootdir, 
-		   struct proto_file *files) 
-{
-    struct proto_file *this_file;
-    char *path;
-    int ret;
- 
-    for (this_file=files; this_file!=NULL; this_file=this_file->next) {
-        if (this_file->type != proto_file) continue;
-
-        path = ne_concat(rootdir, this_file->filename, NULL);
-        NE_DEBUG(DEBUG_FTP, "File: %s\n", path);
-        ret = get_modtime(sess, path);
-        ne_free(path);
-
-        if (ret == FTP_OK) {
-	    this_file->modtime = sess->get_modtime;
-	} else {
-	    NE_DEBUG(DEBUG_FTP, "Didn't get modtime.\n");
-	    return FTP_ERROR;
-	}
-    }
-    NE_DEBUG(DEBUG_FTP, "Walk finished ok.\n");
-
-    return FTP_OK;
-}

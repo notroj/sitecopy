@@ -49,7 +49,20 @@ struct proto_file {
 
 struct site;
 
+/* Flags for a protocol driver. */
+
+/* The listing returned by fetch_list includes the modification time
+ * of each file, if need_modtimes is non-zero.  Otherwise, fetch_list
+ * ignores need_modtimes, and the modification times are retrieved
+ * one file at a time with file_get_modtime, and only for the files
+ * which are not excluded; if file_get_modtime returns
+ * SITE_UNSUPPORTED, the listing goes without them. */
+#define PROTO_MODTIMES_IN_LIST (0x01)
+
 struct proto_driver {
+    /* PROTO_* flags. */
+    unsigned int flags;
+
 
     /* Protocol driver initialization.
      * Returns SITE_* return code.

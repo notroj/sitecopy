@@ -102,9 +102,6 @@ int ftp_mkdir(ftp_session *sess, const char *dir);
 int ftp_chmod(ftp_session *sess, const char *filename, const mode_t mode);
 int ftp_move(ftp_session *sess, const char *from, const char *to);
 int ftp_fetch(ftp_session *sess, const char *startdir, struct proto_file **files);
-int ftp_fetch_modtimes(ftp_session *sess,
-		       const char *rotodir, struct proto_file *files);
-
 int ftp_get_modtime(ftp_session *sess, const char *filename, time_t *modtime);
 
 int ftp_read_file(ftp_session *sess, const char *remotefile,

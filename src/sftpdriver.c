@@ -406,6 +406,7 @@ static int fetch_list(void *session, const char *dirname, int need_modtimes,
 
 /* The protocol driver */
 const struct proto_driver sftp_driver = {
+    0,
     init,
     finish,
     file_move,

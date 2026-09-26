@@ -156,12 +156,11 @@ static int fetch_list(void *session, const char *dirname, int need_modtimes,
 {
     ftp_session *sess = session;
     int ret;
-    
-    ret = ftp_fetch(sess, dirname, files);
 
-    if (ret == FTP_OK && need_modtimes) {
-	ret = ftp_fetch_modtimes(sess, dirname, *files);
-    }
+    /* The modification times are not included in a LIST response;
+     * they are fetched one MDTM at a time through file_get_modtime,
+     * for the files which are not excluded. */
+    ret = ftp_fetch(sess, dirname, files);
 
     return f2s(ret);
 }
@@ -174,6 +173,7 @@ static const char *error(void *session)
 
 /* The protocol drivers */
 const struct proto_driver ftp_driver = {
+    0,
     init, 
     finish,
     file_move,
