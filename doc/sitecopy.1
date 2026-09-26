@@ -636,7 +636,21 @@ about. This seems unlikely, but don't say you haven't been warned.
 
 Files may be excluded from the files list by use of the
 .B exclude
-key, which accepts shell-style globbing patterns. For example, use
+key, which accepts shell-style globbing patterns.  sitecopy treats an
+excluded file as though it were not in the local site at all, so it is
+never uploaded.
+.B A file which has already been uploaded, and later comes to match an
+.B exclude pattern, is deleted from the server
+by the next update, just as if it had been deleted locally, unless the
+.B nodelete
+option is used.  To leave a file on the server as it is, but stop
+sitecopy uploading local changes to it, use the
+.B ignore
+option instead (see
+.B Ignoring Local Changes to Files
+below).
+
+For example, use
 .br
 .BR "	exclude " "*.bak"
 .br
@@ -645,10 +659,10 @@ key, which accepts shell-style globbing patterns. For example, use
 .BR "	exclude " """#*#"""
 .br
 to exclude all files which have a .bak extension, end in a tilde (~)
-character, or which begin and end with a a hash. Don't forget to quote
+character, or which begin and end with a hash. Don't forget to quote
 or escape the value if it includes a hash!
 
-To exclude certain files within an particular directory, simply prefix
+To exclude certain files within a particular directory, simply prefix
 the pattern with the directory name - including a leading slash. For
 instance:
 .br
@@ -680,10 +694,10 @@ to exclude the 'foo/bar' and 'where/else' subdirectories of the site.
 
 Exclude patterns are consulted when scanning the local directory, and
 when scanning the remote site during a \-\-fetch.  Any file which
-matches any exclude pattern is not added to the files list.  This
-means that a file which has already been uploaded by sitecopy, and
-subsequently matches an exclude pattern will be deleted from the
-server.
+matches any exclude pattern is not added to the files list.  So an
+excluded file which is on the server is left alone by \-\-fetch: it is
+not recorded as being on the server, and so is not deleted by a later
+update.
 
 .SS Ignoring Local Changes to Files
 
