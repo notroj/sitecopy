@@ -724,6 +724,7 @@ static const char *error(void *session)
 
 /* The WebDAV protocol driver */
 const struct proto_driver dav_driver = {
+    PROTO_MODTIMES_IN_LIST,
     init,
     finish,
     file_move,

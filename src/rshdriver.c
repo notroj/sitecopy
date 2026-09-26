@@ -266,6 +266,7 @@ static int fetch_list(void *session, const char *dirname, int need_modtimes,
 
 /* The protocol drivers */
 const struct proto_driver rsh_driver = {
+    0,
     init,
     finish,
     file_move,

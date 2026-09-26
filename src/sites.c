@@ -1146,8 +1146,14 @@ static int list_remote_files(struct site *site, void *session,
 {
     const char **dirstack;
     size_t dirtop, dirmax = DIRSTACKSIZE;
-    struct proto_file *files = NULL;
+    struct proto_file *files = NULL, **pnext;
     int ret = SITE_OK, csum_failed = 0;
+    /* For a driver which cannot include the modification times in a
+     * listing, they are fetched one file at a time below, once the
+     * excluded files have been dropped: fetching the time of a file
+     * which is excluded is a wasted round trip. */
+    int per_file_modtimes = need_modtimes
+        && !(site->driver->flags & PROTO_MODTIMES_IN_LIST);
 
     /* The stack of directories still to list, which grows as
      * needed. */
@@ -1177,29 +1183,66 @@ static int list_remote_files(struct site *site, void *session,
             break;
         }
 
-        for (f = newfiles; f; f = f->next) {
+        pnext = &newfiles;
+        while ((f = *pnext) != NULL) {
             char *relfn;
 
             relfn = ne_concat(reldir, slash, f->filename, NULL);
             ne_free(f->filename);
             f->filename = relfn;
 
-            if (!file_isexcluded(relfn, site)) {
-                if (f->type == proto_dir) {
-                    if (dirtop == dirmax) {
-                        dirmax += DIRSTACKSIZE;
-                        dirstack = ne_realloc(dirstack,
-                                              dirmax * sizeof *dirstack);
-                    }
-                    dirstack[dirtop++] = relfn;
+            if (file_isexcluded(relfn, site)) {
+                /* Drop it from the listing, so that nothing else is
+                 * fetched for it and the callers need not skip it. */
+                *pnext = f->next;
+                ne_free(f->filename);
+                ne_free(f);
+                continue;
+            }
+
+            if (f->type == proto_dir) {
+                if (dirtop == dirmax) {
+                    dirmax += DIRSTACKSIZE;
+                    dirstack = ne_realloc(dirstack,
+                                          dirmax * sizeof *dirstack);
                 }
-                else if (f->type == proto_file && checksums
-                         && !csum_failed) {
-                    csum_failed = fetch_checksum_file(f, site, session);
-                }
+                dirstack[dirtop++] = relfn;
+            }
+            else if (f->type == proto_file && checksums && !csum_failed) {
+                csum_failed = fetch_checksum_file(f, site, session);
             }
 
             lastf = f;
+            pnext = &f->next;
+        }
+
+        /* The filenames are now relative to the site root. */
+        for (f = newfiles; f && per_file_modtimes; f = f->next) {
+            char *full_remote;
+
+            if (f->type != proto_file)
+                continue;
+
+            full_remote = ne_concat(site->remote_root, f->filename, NULL);
+            ret = CALL(file_get_modtime)(session, full_remote, &f->modtime);
+            ne_free(full_remote);
+
+            if (ret == SITE_UNSUPPORTED) {
+                /* The driver has no way to get the modification
+                 * times, so the listing goes without them. */
+                f->modtime = 0;
+                per_file_modtimes = 0;
+                ret = SITE_OK;
+            }
+            else if (ret != SITE_OK) {
+                ret = SITE_FAILED;
+                break;
+            }
+        }
+
+        if (ret != SITE_OK) {
+            ne_free(curdir);
+            break;
         }
 
         if (lastf) {
@@ -1251,15 +1294,11 @@ int site_fetch(struct site *site)
         site_destroy_stored(site);
 
         /* And replace it with the fetched state, which takes the
-         * filenames. */
+         * filenames; the listing holds no excluded files. */
         for (f = files; f; f = nextf) {
-            if (!file_isexcluded(f->filename, site)) {
-                struct site_file *sf = fetch_add_file(site, f);
-                fe_fetch_found(sf);
-            }
-            else {
-                ne_free(f->filename);
-            }
+            struct site_file *sf = fetch_add_file(site, f);
+
+            fe_fetch_found(sf);
             nextf = f->next;
             ne_free(f);
         }

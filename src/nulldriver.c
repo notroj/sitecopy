@@ -105,6 +105,7 @@ static const char *null_error(void *session)
 
 /* The noop protocol driver */
 const struct proto_driver null_driver = {
+    0,
     init,
     finish,
     null_move,

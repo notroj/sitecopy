@@ -185,6 +185,8 @@ Test layout:
   Add a test here for a bug which doesn't depend on the options being
   varied; unfixed bugs are strict xfails.
 - `test_ftp.py` — FTP against a scripted in-process FTP server.
+- `test_rsh.py` — the rsh driver, using a wrapper script in place of
+  rsh which prints a canned directory listing.
 - `test_false_success.py` — SFTP failure handling, using a wrapper
   script in place of ssh/sftp; no network access needed.
 
