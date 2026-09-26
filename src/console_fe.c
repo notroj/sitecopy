@@ -1374,7 +1374,7 @@ static int act_on_site(struct site *site, enum action act)
         if (write_stored_state(site))
             ret = -1;
         else
-            printf(_("%s: All the files and and directories are marked as updated remotely.\n"), progname);
+            printf(_("%s: All the files and directories are marked as updated remotely.\n"), progname);
         break;
     case action_fetch:
         ret = site_fetch(site);
