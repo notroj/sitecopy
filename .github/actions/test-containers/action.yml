@@ -1,0 +1,46 @@
+name: Test server containers
+description: >-
+  Load the container images used by the server tests from the cache,
+  or build them and save them to the cache, so that make check need
+  not build them.  Building runs dnf in each image, which fails
+  whenever the Fedora mirrors can't be reached.  Must run after
+  configure.
+
+runs:
+  using: composite
+  steps:
+  # The images are specific to the architecture, and are loaded by the
+  # podman of the runner image, so both are in the key; as are the
+  # files the images are built from, and the week, so that the
+  # packages in them are kept reasonably up to date.
+  - id: key
+    shell: bash
+    run: >-
+      echo "key=test-containers-$ImageOS-$RUNNER_ARCH-$(date -u +%G-%V)-${{
+      hashFiles('tests/*Containerfile', 'tests/*.conf') }}"
+      >> "$GITHUB_OUTPUT"
+  - id: restore
+    uses: actions/cache/restore@v6
+    with:
+      path: ${{ runner.temp }}/test-containers.tar
+      key: ${{ steps.key.outputs.key }}
+  # The stamps are newer than the files the images are built from, so
+  # make check-containers then has nothing to do.
+  - if: steps.restore.outputs.cache-hit == 'true'
+    shell: bash
+    run: |
+      podman load -i "$RUNNER_TEMP/test-containers.tar"
+      for name in httpd vsftpd pure-ftpd; do
+          echo timestamp > tests/$name-container-stamp
+      done
+  - if: steps.restore.outputs.cache-hit != 'true'
+    shell: bash
+    run: |
+      make check-containers
+      podman save -m -o "$RUNNER_TEMP/test-containers.tar" \
+          sitecopy-test-httpd sitecopy-test-vsftpd sitecopy-test-pure-ftpd
+  - if: steps.restore.outputs.cache-hit != 'true'
+    uses: actions/cache/save@v6
+    with:
+      path: ${{ runner.temp }}/test-containers.tar
+      key: ${{ steps.key.outputs.key }}

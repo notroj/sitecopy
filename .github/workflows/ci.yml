@@ -17,6 +17,12 @@ on:
     # tested as it will be downloaded.
     tags:
       - '[0-9]*'
+  # Weekly on master, which also saves the test container images to
+  # the cache where every pull request can use them: a cache saved by
+  # a pull request is only visible to that pull request.
+  schedule:
+    - cron: '17 3 * * 1'
+  workflow_dispatch:
 
 # Cancel any run still in progress for the same pull request or tag
 # when a new one starts.
@@ -56,6 +62,7 @@ jobs:
                        ${{ matrix.warnings && '--enable-warnings' || '' }}
     - run: make ${{ !matrix.bundled && '-j`nproc`' || '' }}
                 ${{ matrix.warnings && 'EXTRA_CFLAGS=-Werror' || '' }}
+    - uses: ./.github/actions/test-containers
     - run: make ${{ env.CHECK }}
     - run: make install
 
@@ -147,4 +154,5 @@ jobs:
                        CFLAGS="-g -O1 -fno-omit-frame-pointer -fsanitize=${{ matrix.sanitizer }} -fno-sanitize-recover=all"
                        LDFLAGS="-fsanitize=${{ matrix.sanitizer }}"
     - run: make
+    - uses: ./.github/actions/test-containers
     - run: make check
