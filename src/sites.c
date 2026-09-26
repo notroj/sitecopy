@@ -306,21 +306,25 @@ static int file_chmod(struct site_file *file, struct site *site, void *session)
     return ret;
 }
 
-static void 
+/* Retrieve the modification time of a just-uploaded file from the
+ * server, for sites in safe mode.  Returns zero if the server has
+ * the file under the name uploaded to; non-zero if it does not, or
+ * the modification time could not be retrieved. */
+static int 
 file_retrieve_server(struct site_file *file, struct site *site, void *session)
 {
     time_t rtime;
+    int ret;
     char *full_remote = file_full_remote(&file->local, site);
-    if (CALL(file_get_modtime)(session, full_remote, &rtime) == SITE_OK) {
+    ret = CALL(file_get_modtime)(session, full_remote, &rtime);
+    if (ret == SITE_OK) {
 	file->server.time = rtime;
 	file->server.exists = true;
     } else {
 	file->server.exists = false;
-	fe_warning(_("Upload succeeded, but could not retrieve modification time.\n"
-		      "If this message persists, turn off safe mode."),
-		    full_remote, DRIVER_ERR);
     }
     free(full_remote);
+    return ret == SITE_OK ? 0 : 1;
 }
 
 /* Create new directories and change permissions on existing directories. */
@@ -549,8 +553,12 @@ static int update_files(struct site *site, void *session)
                     break;
                 default:
                     /* Success case */
+                    if (file_retrieve_server(current, site, session) != 0) {
+                        fe_updated(current, false, DRIVER_ERR);
+                        ret = 1;
+                        break;
+                    }
                     fe_updated(current, true, NULL);
-                    file_retrieve_server(current, site, session);
                     if (file_chmod(current, site, session)) ret = 1;
                     file_uploaded(current, site);
                     break;
@@ -582,12 +590,17 @@ static int update_files(struct site *site, void *session)
                     }
                     else {
                         /* Successful move */
-                        fe_updated(current, true, NULL);
-                        if (site->safemode) {
-                            file_retrieve_server(current, site, session);
+                        if (site->safemode
+                            && file_retrieve_server(current, site,
+                                                    session) != 0) {
+                            fe_updated(current, false, DRIVER_ERR);
+                            ret = 1;
                         }
-                        if (file_chmod(current, site, session)) ret = 1;
-                        file_uploaded(current, site);
+                        else {
+                            fe_updated(current, true, NULL);
+                            if (file_chmod(current, site, session)) ret = 1;
+                            file_uploaded(current, site);
+                        }
                     }
                 }
                 ne_free(temp_remote);
@@ -601,12 +614,17 @@ static int update_files(struct site *site, void *session)
                 }
                 else {
                     /* Successful upload. */
-                    fe_updated(current, true, NULL);
-                    if (site->safemode) {
-                        file_retrieve_server(current, site, session);
+                    if (site->safemode
+                        && file_retrieve_server(current, site,
+                                                session) != 0) {
+                        fe_updated(current, false, DRIVER_ERR);
+                        ret = 1;
                     }
-                    if (file_chmod(current, site, session)) ret = 1;
-                    file_uploaded(current, site);
+                    else {
+                        fe_updated(current, true, NULL);
+                        if (file_chmod(current, site, session)) ret = 1;
+                        file_uploaded(current, site);
+                    }
                 }
             }
             break;

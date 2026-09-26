@@ -13,6 +13,7 @@ locally.
 import os
 import socket
 import threading
+import time
 
 import pytest
 
@@ -63,9 +64,11 @@ class ScriptedFTPServer:
     at a time.  Commands starting with a key of the failing dict get
     its value as their reply."""
 
-    def __init__(self):
+    def __init__(self, truncate_len=None):
         self.commands = []
         self.failing = {}
+        self.files = {}
+        self.truncate_len = truncate_len
         self.listener, self.port = _bind_port()
         self.listener.listen(1)
         self.thread = threading.Thread(target=self._serve, daemon=True)
@@ -111,6 +114,12 @@ class ScriptedFTPServer:
             elif upper.startswith("QUIT"):
                 self._reply(f, "221 goodbye")
                 break
+            elif upper.startswith("STOR"):
+                self._stor(f, cmd)
+            elif upper.startswith("DELE"):
+                self._dele(f, cmd)
+            elif upper.startswith("SIZE"):
+                self._size(f, cmd)
             else:
                 # SYST, TYPE, PWD, CWD, FEAT, NOOP, ...
                 self._reply(f, "200 OK")
@@ -151,19 +160,65 @@ class ScriptedFTPServer:
     def _list(self, f):
         self._reply(f, "150 Opening data connection")
         data_conn = self._data_connection()
+        listing = _listing()
+        for path in sorted(self.files):
+            info = self.files[path]
+            stamp = time.strftime("%b %d %Y", time.gmtime(info["mtime"]))
+            listing += "-rw-r--r-- 1 ftp ftp %d %s %s\r\n" % (
+                info["size"], stamp, path.lstrip("/"))
         with data_conn:
-            data_conn.sendall(_listing().encode("ascii"))
+            data_conn.sendall(listing.encode("ascii"))
         self._reply(f, "226 Transfer complete")
 
-    @staticmethod
-    def _mdtm(f, cmd):
+    def _mdtm(self, f, cmd):
         # cmd is like "MDTM / 2003.doc": the filename may have a
         # leading space, and may or may not be preceded by a path.
         name = cmd[4:].strip().lstrip("/")
-        if name in REMOTE_FILES:
-            ScriptedFTPServer._reply(f, "213 " + REMOTE_FILES[name]["mtime"])
+        if "/" + name in self.files:
+            stamp = time.strftime("%Y%m%d%H%M%S",
+                                  time.gmtime(self.files["/" + name]["mtime"]))
+            self._reply(f, "213 " + stamp)
+        elif name in REMOTE_FILES:
+            self._reply(f, "213 " + REMOTE_FILES[name]["mtime"])
         else:
-            ScriptedFTPServer._reply(f, "550 File not found")
+            self._reply(f, "550 File not found")
+
+    def _stor(self, f, cmd):
+        # cmd is like "STOR /hello.html".  A server which truncates
+        # long names (Debian bug #761056) stores the file under the
+        # truncated name.
+        name = cmd[4:].strip().lstrip("/")
+        if (self.truncate_len is not None
+                and len(name) > self.truncate_len):
+            name = name[:self.truncate_len]
+        self._reply(f, "150 Ok to send data")
+        data_conn = self._data_connection()
+        with data_conn:
+            content = b""
+            while True:
+                chunk = data_conn.recv(4096)
+                if not chunk:
+                    break
+                content += chunk
+        self.files["/" + name] = {"size": len(content),
+                                  "mtime": time.time(),
+                                  "content": content}
+        self._reply(f, "226 Transfer complete")
+
+    def _dele(self, f, cmd):
+        name = cmd[4:].strip()
+        if name in self.files:
+            del self.files[name]
+            self._reply(f, "250 Delete operation successful")
+        else:
+            self._reply(f, "550 No such file")
+
+    def _size(self, f, cmd):
+        name = cmd[4:].strip()
+        if name in self.files:
+            self._reply(f, "213 %d" % self.files[name]["size"])
+        else:
+            self._reply(f, "550 File not found")
 
     def stop(self):
         # Shutting down the listener wakes the thread from accept().
@@ -307,3 +362,115 @@ def test_fetch_large_file(ftp_site):
         assert "<size>%d</size>" % size in state, state
     finally:
         del REMOTE_FILES["big.iso"]
+
+
+# -- Uploads ---------------------------------------------------------------
+
+def test_ftp_upload_and_fetch(ftp_site):
+    # An upload is stored on the server under the requested name, and
+    # safe mode retrieves the modification time after uploading.
+    with open(ftp_site["rcfile"], "a") as fp:
+        fp.write("  safe\n")
+    (ftp_site["local"] / "hello.html").write_text("hello world\n")
+
+    res = run_sitecopy(ftp_site, ["--initialize", "testsite"])
+    assert res.returncode == 0, res.stdout + res.stderr
+
+    res = run_sitecopy(ftp_site, ["--update", "testsite"])
+    assert res.returncode == 0, res.stdout + res.stderr
+    assert "Update completed successfully" in res.stdout
+
+    files = ftp_site["server"].files
+    assert files["/hello.html"]["content"] == b"hello world\n"
+
+    commands = ftp_site["server"].commands
+    assert "USER test" in commands
+    assert "STOR /hello.html" in commands
+    assert "MDTM /hello.html" in commands
+
+    res = run_sitecopy(ftp_site, ["--fetch", "testsite"])
+    assert res.returncode == 0, res.stdout + res.stderr
+    assert "LIST /" in ftp_site["server"].commands
+
+# A file name longer than 79 characters, which a server storing names
+# truncated to 79 characters accepts under the truncated name only, as
+# the server in Debian bug #761056 did.
+LONG_NAME = "long" + "a" * 100 + ".html"
+TRUNCATED_NAME = LONG_NAME[:79]
+
+@pytest.fixture
+def truncating_ftp_site(tmp_path):
+    local_dir = tmp_path / "local"
+    store_dir = tmp_path / "storage"
+    local_dir.mkdir()
+    store_dir.mkdir()
+
+    server = ScriptedFTPServer(truncate_len=79)
+
+    config_file = tmp_path / ".sitecopyrc"
+    config_file.write_text(f"""
+site testsite
+  server {HOST}
+    port {server.port}
+  remote /
+  local {local_dir}
+  protocol ftp
+  username test
+  password test
+  safe
+""")
+    os.chmod(config_file, 0o600)
+    os.chmod(store_dir, 0o700)
+
+    # The canned listing of files which "exist" on the server is not
+    # wanted for this site: the listing must show the files which
+    # were uploaded to it only.
+    saved_remote_files = dict(REMOTE_FILES)
+    REMOTE_FILES.clear()
+    try:
+        yield {
+            "rcfile": config_file,
+            "local": local_dir,
+            "store": store_dir,
+            "port": server.port,
+            "server": server,
+        }
+    finally:
+        REMOTE_FILES.clear()
+        REMOTE_FILES.update(saved_remote_files)
+        server.stop()
+
+def test_ftp_truncated_upload_fails_loudly(truncating_ftp_site):
+    site = truncating_ftp_site
+    (site["local"] / LONG_NAME).write_text("payload\n")
+
+    res = run_sitecopy(site, ["--initialize", "testsite"])
+    assert res.returncode == 0, res.stdout + res.stderr
+
+    res = run_sitecopy(site, ["--update", "testsite"])
+    assert res.returncode != 0, res.stdout
+    assert "Errors occurred while updating" in res.stdout
+    assert "truncated a long path name" in res.stdout
+
+    # The server stored the file under the truncated name only.
+    files = site["server"].files
+    assert "/" + LONG_NAME not in files
+    assert "/" + TRUNCATED_NAME in files
+
+    # The upload was verified against the exact requested name.
+    commands = site["server"].commands
+    first_stor = commands.index("STOR /" + LONG_NAME)
+    assert "MDTM /" + LONG_NAME in commands[first_stor:]
+
+    res = run_sitecopy(site, ["--fetch", "testsite"])
+    assert res.returncode == 0, res.stdout + res.stderr
+
+    # No delete-and-re-upload loop: every subsequent update fails
+    # loudly too, rather than reporting success forever, with one
+    # upload attempt per update.
+    res = run_sitecopy(site, ["--update", "testsite"])
+    assert res.returncode != 0, res.stdout
+    assert "Errors occurred while updating" in res.stdout
+    assert "truncated a long path name" in res.stdout
+    stors = [c for c in commands if c == "STOR /" + LONG_NAME]
+    assert len(stors) == 2

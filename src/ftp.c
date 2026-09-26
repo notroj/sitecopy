@@ -1424,22 +1424,36 @@ static int get_modtime(ftp_session *sess, const char *filename)
     if ((ret = maybe_chdir(sess, &filename)) != FTP_OK)
         return ret;
 
-    if (execute(sess, "MDTM", filename) != FTP_MODTIME)
-        return FTP_ERROR;
-
-    NE_DEBUG(DEBUG_FTP, "Got modtime.\n");
-    return FTP_OK;
+    ret = execute(sess, "MDTM", filename);
+    if (ret == FTP_MODTIME) {
+        NE_DEBUG(DEBUG_FTP, "Got modtime.\n");
+        return FTP_OK;
+    }
+    else {
+        return ret;
+    }
 }
 
 int ftp_get_modtime(ftp_session *sess, const char *filename, time_t *modtime) 
 {
-    if (get_modtime(sess, filename) == FTP_OK) {
+    int ret = get_modtime(sess, filename);
+
+    if (ret == FTP_OK) {
 	*modtime = sess->get_modtime;
 	return FTP_OK;
-    } else {
-	*modtime = -1;
-	return FTP_ERROR;
     }
+    if (ret == FTP_FILEBAD) {
+	/* The modification time is retrieved to verify that a file
+	 * just uploaded was stored under the name requested: a
+	 * server which reports that no file exists under that name
+	 * has probably truncated it (Debian bug #761056). */
+	ne_snprintf(sess->error, sizeof sess->error,
+		    _("Upload succeeded, but the server has no file "
+		      "under the requested name; it may have truncated "
+		      "a long path name"));
+    }
+    *modtime = -1;
+    return ret;
 }
 
 /* Sorts out the modtimes for all the files in the list.
