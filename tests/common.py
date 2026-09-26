@@ -4,9 +4,10 @@ import shutil
 import subprocess
 import time
 
-def run_sitecopy(senv, args, env=None, input=""):
+def run_sitecopy(senv, args, env=None, input="", preexec_fn=None):
     """Helper to run sitecopy with the custom config, optionally with
-    the given environment and standard input.
+    the given environment, standard input, and function to run in the
+    child process before sitecopy is executed.
 
     For debugging (see tests/README.md): if $SITECOPY_DEBUG is set, it
     is passed as --debug to sitecopy, and the command line and output
@@ -29,7 +30,7 @@ def run_sitecopy(senv, args, env=None, input=""):
         with open(log, "a") as fp:
             fp.write(header)
     res = subprocess.run(cmd, capture_output=True, text=True, env=env,
-                         input=input)
+                         input=input, preexec_fn=preexec_fn)
     output = "---- exit status %d\n---- stdout:\n%s---- stderr:\n%s" % (
         res.returncode, res.stdout, res.stderr)
     if log:

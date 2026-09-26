@@ -78,6 +78,31 @@ static void set_error(struct site *site, const char *fmt, ...)
     site->last_error = ne_strdup(buf);
 }
 
+/* Write to the storage file of the site, unless an error has already
+ * occurred; on failure, set the error string of the site. */
+static void scprintf(struct site *site, const char *fmt, ...)
+    ne_attribute((format (printf, 2, 3)));
+
+static void scprintf(struct site *site, const char *fmt, ...)
+{
+    va_list ap;
+    int ret;
+
+    if (site->last_error)
+        return;
+
+    va_start(ap, fmt);
+    ret = vfprintf(site->storage_file, fmt, ap);
+    va_end(ap);
+
+    if (ret < 0) {
+        int errnum = errno;
+
+        set_error(site, _("Could not write storage file `%s': %s"),
+                  site->infotemp, strerror(errnum));
+    }
+}
+
 /* The lock file holds one "key value" pair per line, e.g.
  *
  *    pid 1234
@@ -113,7 +138,7 @@ int site_lock_storage(struct site *site)
 {
     char buf[64];
     size_t len;
-    int fd;
+    int fd, errnum;
 
     if (site->lock_fd != -1)
         return SITE_OK;
@@ -137,8 +162,9 @@ int site_lock_storage(struct site *site)
             return SITE_LOCKED;
         }
 
+        errnum = errno;
         set_error(site, _("Could not create lock file `%s': %s"),
-                  site->infolock, strerror(errno));
+                  site->infolock, strerror(errnum));
         return SITE_FAILED;
     }
 
@@ -175,17 +201,38 @@ FILE *site_open_storage_file(struct site *site)
     return site->storage_file;
 }
 
-int site_close_storage_file(struct site *site)
+/* Close the storage file and, if no error has occurred, replace the
+ * stored state with it; otherwise the existing stored state is left in
+ * place.  Releases the storage lock in either case.  Returns:
+ *   SITE_OK      on success
+ *   SITE_FAILED  on failure, and site->last_error describes the failure
+ */
+static int site_close_storage_file(struct site *site)
 {
-    int ret = fclose(site->storage_file);
-    if (!ret) {
-        ret = rename(site->infotemp, site->infofile);
+    int errnum;
+
+    if (fclose(site->storage_file)) {
+        errnum = errno;
+        if (!site->last_error)
+            set_error(site, _("Could not write storage file `%s': %s"),
+                      site->infotemp, strerror(errnum));
     }
+    else if (!site->last_error && rename(site->infotemp, site->infofile)) {
+        errnum = errno;
+        set_error(site, _("Could not rename `%s' to `%s': %s"),
+                  site->infotemp, site->infofile, strerror(errnum));
+    }
+
+    /* Leave any existing stored state in place after a failure. */
+    if (site->last_error && unlink(site->infotemp))
+        NE_DEBUG(DEBUG_FILES, "store: could not remove `%s': %s\n",
+                 site->infotemp, strerror(errno));
+
     site->storage_file = NULL;
     /* The stored state is now written, so another process may have
      * the site. */
     site_unlock_storage(site);
-    return ret;
+    return site->last_error ? SITE_FAILED : SITE_OK;
 }
 
 /* Return escaped form of 'filename'; any XML-unsafe characters are
@@ -231,88 +278,99 @@ static char *fn_unescape(const char *filename)
     return ret;
 }
 
-/* Write out the stored state for the site. 
- * Returns 0 on success, non-zero on error. */
-int site_write_stored_state(struct site *site) 
+/* Write out the stored state for the site.
+ * Returns SITE_OK on success, or SITE_FAILED on error. */
+int site_write_stored_state(struct site *site)
 {
     struct site_file *current, **sorted;
     unsigned i, num_items;
-    FILE *fp;
 
-    fp = site_open_storage_file(site);
-    if (fp == NULL) {
-	return -1;
+    if (site->last_error) {
+        ne_free(site->last_error);
+        site->last_error = NULL;
+    }
+
+    if (site_open_storage_file(site) == NULL) {
+        int errnum = errno;
+
+        set_error(site, _("Could not open storage file `%s': %s"),
+                  site->infotemp, strerror(errnum));
+        return SITE_FAILED;
     }
 
     sorted = site_sorted_files_list(site, site_file_is_stored,
                                     site_file_cmp_stored, &num_items);
 
-    fprintf(fp, "<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>\n");
-    fprintf(fp, "<sitestate version='" SITE_STATE_FILE_VERSION "'>\n");
-    fprintf(fp, "<options>\n");
-    fprintf(fp, " <saved-by package='" PACKAGE_NAME "'"
-	    " version='" PACKAGE_VERSION "'/>\n");
+    scprintf(site, "<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>\n");
+    scprintf(site, "<sitestate version='" SITE_STATE_FILE_VERSION "'>\n");
+    scprintf(site, "<options>\n");
+    scprintf(site, " <saved-by package='" PACKAGE_NAME "'"
+             " version='" PACKAGE_VERSION "'/>\n");
     if (site->state_method == state_checksum) {
-	/* For forwards-compatibility */
-	fprintf(fp, " <checksum-algorithm><checksum-MD5/></checksum-algorithm>\n");
+        /* For forwards-compatibility */
+        scprintf(site, " <checksum-algorithm><checksum-MD5/>"
+                 "</checksum-algorithm>\n");
     }
-    fprintf(fp, " <state-method><state-%s/></state-method>\n",
-	     (site->state_method==state_checksum)?"checksum":"timesize");
+    scprintf(site, " <state-method><state-%s/></state-method>\n",
+             site->state_method == state_checksum ? "checksum" : "timesize");
     if (site->safemode) {
-	fprintf(fp, " <safemode/>\n");
+        scprintf(site, " <safemode/>\n");
     }
-    fprintf(fp, " <escaped-filenames/>\n");
-    fprintf(fp, "</options>\n");
-    fprintf(fp, "<items>\n");
+    scprintf(site, " <escaped-filenames/>\n");
+    scprintf(site, "</options>\n");
+    scprintf(site, "<items>\n");
     /* Now write out the items */
     for (i = 0; i < num_items; i++) {
-	char *fname;
-	current = sorted[i];
-	fprintf(fp, "<item>");
-	fprintf(fp, "<type><type-%s/></type>",
-		 (current->type==file_file)?"file":(
-		     (current->type==file_dir)?"directory":"link"));
+        char *fname;
+
+        current = sorted[i];
+        scprintf(site, "<item>");
+        scprintf(site, "<type><type-%s/></type>",
+                 current->type == file_file ? "file"
+                 : current->type == file_dir ? "directory" : "link");
         /* escape filenames correctly for XML. */
         fname = fn_escape(current->stored.filename);
-	fprintf(fp, "<filename>%s</filename>\n", fname);
+        scprintf(site, "<filename>%s</filename>\n", fname);
         ne_free(fname);
         if (current->stored.mode != INVALID_MODE) {
-            fprintf(fp, "<protection>%03o</protection>", 
-                    current->stored.mode); /* three-digit octal */
+            scprintf(site, "<protection>%03o</protection>",
+                     current->stored.mode); /* three-digit octal */
         }
-	switch (current->type) {
-	case file_link:
-	    fprintf(fp, "<linktarget>%s</linktarget>", 
-		     current->stored.linktarget);
-	    break;
-	case file_file:
-	    fprintf(fp, "<size>%" NE_FMT_OFF_T "</size>", 
-		    current->stored.size);
-	    switch (site->state_method) {
-	    case state_checksum: {
-		char csum[33];
-		ne_md5_to_ascii(current->stored.checksum, csum);
-		fprintf(fp, "<checksum>%s</checksum>", csum);
-	    } break;
-	    case state_timesize:
-		fprintf(fp, "<modtime>%ld</modtime>", current->stored.time);
-		break;
-	    }
-	    fprintf(fp, "<ascii>%s</ascii>",
-		     current->stored.ascii?"<true/>":"<false/>");
-	    if (current->server.exists) {
-		fprintf(fp, "<server-modtime>%ld</server-modtime>", 
-			 current->server.time);
-	    }
-	    break;
-	case file_dir:
-	    /* nothing to do */
-	    break;
-	}
-	fprintf(fp, "</item>\n");
+        switch (current->type) {
+        case file_link:
+            scprintf(site, "<linktarget>%s</linktarget>",
+                     current->stored.linktarget);
+            break;
+        case file_file:
+            scprintf(site, "<size>%" NE_FMT_OFF_T "</size>",
+                     current->stored.size);
+            switch (site->state_method) {
+            case state_checksum: {
+                char csum[33];
+
+                ne_md5_to_ascii(current->stored.checksum, csum);
+                scprintf(site, "<checksum>%s</checksum>", csum);
+                break;
+            }
+            case state_timesize:
+                scprintf(site, "<modtime>%ld</modtime>", current->stored.time);
+                break;
+            }
+            scprintf(site, "<ascii>%s</ascii>",
+                     current->stored.ascii ? "<true/>" : "<false/>");
+            if (current->server.exists) {
+                scprintf(site, "<server-modtime>%ld</server-modtime>",
+                         current->server.time);
+            }
+            break;
+        case file_dir:
+            /* nothing to do */
+            break;
+        }
+        scprintf(site, "</item>\n");
     }
-    fprintf(fp, "</items>\n");
-    fprintf(fp, "</sitestate>\n");
+    scprintf(site, "</items>\n");
+    scprintf(site, "</sitestate>\n");
 
     site->stored_state_method = site->state_method;
     ne_free(sorted);

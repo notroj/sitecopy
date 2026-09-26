@@ -1,6 +1,7 @@
-"""Regression tests for specific bugs, each run once against vsftpd
-in its default configuration (plus any rcfile lines the test needs),
-rather than across every combination of rcfile options.
+"""Regression tests for specific bugs.  Tests using the site fixture
+are each run once against vsftpd in its default configuration (plus
+any rcfile lines the test needs), rather than across every combination
+of rcfile options; tests using the sitecopy_env fixture need no server.
 
 Tests for bugs which are not fixed yet are strict xfails: fixing the
 bug turns the test into a pass, which then must be recorded by
@@ -8,6 +9,7 @@ removing the xfail marker."""
 
 import os
 import re
+import resource
 import select
 import signal
 import subprocess
@@ -137,6 +139,45 @@ def test_interrupt_records_progress(site):
     assert res.returncode == 0, res.stdout + res.stderr
     assert set(remote_tree(site)) == {"a.txt", "b.txt", "c.txt"}
     assert_no_update(site)
+
+# -- Stored state ----------------------------------------------------------
+
+def _limit_file_size(limit):
+    """Return a function for run_sitecopy's preexec_fn which limits the
+    size of files the child can write to 'limit' bytes; writes beyond
+    that fail with EFBIG, rather than raising SIGXFSZ."""
+    def preexec():
+        signal.signal(signal.SIGXFSZ, signal.SIG_IGN)
+        resource.setrlimit(resource.RLIMIT_FSIZE, (limit, limit))
+    return preexec
+
+# The stored state written by --initialize, which is smaller than the
+# stdio buffer, so a failure to write it only shows up at fclose();
+# and by --catchup of many files, which is larger, so it fails part
+# way through.
+@pytest.mark.parametrize("nfiles", [0, 200])
+def test_storage_file_short_write(sitecopy_env, nfiles):
+    # If the stored state cannot be written in full, the run fails,
+    # and the previous stored state is left as it was rather than
+    # replaced by a truncated one.
+    store = sitecopy_env["store"]
+    res = run_sitecopy(sitecopy_env, ["--initialize", "testsite"])
+    assert res.returncode == 0, res.stdout + res.stderr
+    before = (store / "testsite").read_bytes()
+    limit = len(before) // 2
+
+    for n in range(nfiles):
+        (sitecopy_env["local"] / f"file-{n:04d}.txt").write_text("x\n")
+    args = ["--catchup" if nfiles else "--initialize", "testsite"]
+    res = run_sitecopy(sitecopy_env, args,
+                       preexec_fn=_limit_file_size(limit))
+    assert res.returncode != 0, res.stdout + res.stderr
+    assert "Could not write storage file `" in res.stdout, res.stdout
+    assert "testsite.new'" in res.stdout, res.stdout
+    assert "have not been recorded" in res.stdout, res.stdout
+    assert (store / "testsite").read_bytes() == before
+    assert not (store / "testsite.new").exists()
+    assert not (store / "testsite.lock").exists()
 
 # -- exclude and ignore patterns -----------------------------------------
 
