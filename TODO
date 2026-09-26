@@ -11,13 +11,10 @@ Bugs:
 - review w.r.t djb's FTP interop notes, http://cr.yp.to/ftp.html
 
 - Synch mode won't maintain symlinks.
-- "sitecopy --rcfile=/" should say the right thing
 
 Known Standards Compliance Problems:
 
 - RFC959: handle telnet control characters?
-- RFC2518: accept collection URI's in DAV:href without trailing slash
-- RFC2617: support 'domain'
 
 * anything with (FEAPI) after requires frontend API change, not including
   simple config options additions
@@ -34,8 +31,7 @@ Required Features for one-point-oh:
   conflict detection: can be done in file_set, not too hard probably.
 - Read HTTP proxy from HTTP_PROXY/http_proxy environment variable.
 - Document files list order dependancies.
-- Do default ports, netrc lookups for the proxy too
-- Get warning (i.e. non-fatal) messages to the user.
+- Do netrc lookups for the proxy too
 - Check remote directory exists on initial connection in FTP (chdir/ls)
 - Because it's The Right Thing, add hash table indexing of files list.
   Hash using DJBs *33 hash algorithm. Open hash so we don't have
@@ -65,8 +61,6 @@ Possible features, which need more consideration:
   runs a wizard a la the GNOME fe's one.
 - Support for other better/faster checksumming algorithms: is SHA1
   better/faster? (GPL implementation in GnuPG)
-- Backup info file on write_stored... optionally? Only implement in frontend?
-  GNU-style $VERSION_CONTROL support?
 - Have 'preconnect' and 'postconnect' options which run user-specified
   programs before and after an update, synch etc.
 - Some kind of user-feedback for slow startup in checksumming mode.
@@ -76,12 +70,10 @@ Possible features, which need more consideration:
   Abstract sites code so that "local" and "remote" can be handled by any 
   of {file, http, ftp}. Then, update + synch could possibly merge, since
   an synch is an update with the remote and local sides switched (kindof).
+  Allows file->file sites, which screem wants.
 - Add quota management, specify a per-site quota and only do update
   if the result means the site will stay under quota.
   -> problem: a directory uses up k's, but how many?
-- Abstract protocol drivers into a mc VFS-like 'open', 'read' etc.
-  Abstract sites code so that "local" and "remote" can be handled by any 
-  of {file, http, ftp}. Allows file->file sites, which screem wants.
 - Read ls-laR.txt files and be more like 'mirror'
 
 Evaluation of sitecopy alternatives: weex
@@ -124,12 +116,3 @@ O(1)-ish could be achieved using a a hash table.
   directory (fairly nasty overhead); so each directory has a 
   children_checksum field. Need a clever checksumming algo; MD5 would
   require identical ordering, which would be a heavy constraint.
-- Make the protocol drivers and sites code thread-safe.
-
-Things You Might Like to Do On A Rainy Day:
-
-- Investigate any extra handling needed for servers which have case
-  insensitive filenames
-- Native Windows port (e.g. reimplement socket.c using the Winsock API)
-- Convince the maintainer that it's more productive to spend time 
-  implementing features than carefully crafting a mile-long TODO list.
