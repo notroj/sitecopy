@@ -243,6 +243,10 @@ Rules:
 - Write complete sentences in the imperative/present tense, starting
   with a capital letter and ending with a full stop.  Describe *what*
   changed in the entries; put the *why* in the free-text paragraph.
+- Keep the free-text paragraph short: two or three sentences saying
+  what was wrong and what the change does.  The detail of the
+  implementation belongs in the entries, and background or discussion
+  in the issue or pull request, not in the commit message.
 - Use the conventional phrasings: `New function.`, `New file.`,
   `Removed.`, `Removed; replaced by foo.`, `Use foo.`, `Declare and
   document the above.`, `Update.`
