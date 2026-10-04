@@ -148,3 +148,25 @@ jobs:
                        LDFLAGS="-fsanitize=${{ matrix.sanitizer }}"
     - run: make
     - run: make check
+
+  # A build against the current master branch of neon, rather than the
+  # commit the neon submodule refers to, to find incompatibilities
+  # with neon changes before the submodule is updated to include them.
+  neon-master:
+    name: bundled neon master
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v6
+    - uses: actions/checkout@v6
+      with:
+        repository: notroj/neon
+        ref: master
+        path: neon
+    - name: Show the neon commit used
+      run: git -C neon log -1 --format='%H %s'
+    - run: sudo apt-get update
+    - run: sudo apt-get -y install autopoint gettext python3-pytest
+    - run: ./autogen.sh
+    - run: ./configure --with-included-neon --with-ssl=openssl --enable-warnings
+    - run: make
+    - run: make check
