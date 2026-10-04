@@ -470,14 +470,6 @@ void site_unlock_storage(struct site *site);
 
 void fe_initialize(void);
 
-/* This reads the files information for the given site - both the
- * local and remote ones. Returns:
- *   SITE_OK      on success
- *   SITE_ERRORS  on corrupt info file
- *   SITE_FAILED  on non-existent info file
- */
-int site_readfiles(struct site *);
-
 /* This makes out like we've just done a successful site_update. */
 
 /* This writes the stored files list back to disk.  Returns:
@@ -561,10 +553,6 @@ int site_synch(struct site *site);
  *   SITE_* for other errors.
  */
 int site_fetch(struct site *site);
-
-/* Destroys all the files... use before doing a second
- * site_readfiles on a site. */
-void site_destroy(struct site *the_site);
 
 /* Destroys the stored state of the site. Use before calling
  * site_fetch, or site_read_stored_state. */

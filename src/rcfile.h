@@ -92,15 +92,6 @@ int init_netrc(void);
  */
 int rcfile_verify(struct site *any_site);
 
-/* Writes the given sites list into the given rcfile.
- * This overwrites any previous contents of filename.
- * Returns 0 on success, or:
- *    RC_OPENFILE    if the file could not be opened for writing
- *    RC_PERMS       if the file permissions could not be set
- *    RC_CORRUPT     if there were errors while writing to the file
- */
-int rcfile_write (char *filename, struct site *list_of_sites);
-
 /* Constants */
 
 #define RC_OPENFILE 900

@@ -1,7 +1,6 @@
 ./src/rcfile.c
 ./src/ftpdriver.c
 ./src/rshdriver.c
-./src/vfsdriver.c
 ./src/console_fe.c
 ./src/sitestore.c
 ./src/nulldriver.c
