@@ -61,11 +61,13 @@ def _bind_port():
 class ScriptedFTPServer:
     """Minimal FTP server with a canned listing, serving one connection
     at a time.  Commands starting with a key of the failing dict get
-    its value as their reply."""
+    its value as their reply; those starting with a member of the
+    hanging set get no reply at all."""
 
     def __init__(self):
         self.commands = []
         self.failing = {}
+        self.hanging = set()
         self.listener, self.port = _bind_port()
         self.listener.listen(1)
         self.thread = threading.Thread(target=self._serve, daemon=True)
@@ -92,7 +94,9 @@ class ScriptedFTPServer:
             upper = cmd.upper()
             failure = [reply for prefix, reply in self.failing.items()
                        if upper.startswith(prefix)]
-            if failure:
+            if any(upper.startswith(prefix) for prefix in self.hanging):
+                continue
+            elif failure:
                 self._reply(f, failure[0])
             elif upper.startswith("USER"):
                 self._reply(f, "331 password required")

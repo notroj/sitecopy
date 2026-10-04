@@ -169,6 +169,23 @@ static void set_sockerr(ftp_session *sess, const ne_socket *sock,
              errnum, sess->error);
 }
 
+/* SET_INTERRUPTIBLE(sock) allows a blocking read or connect on 'sock'
+ * to be abandoned, failing with NE_SOCK_INTR, once the user
+ * interrupts the operation, rather than waiting for the server or a
+ * timeout.  Needs neon 0.38 or later; with an older neon, it does
+ * nothing. */
+#ifdef NE_SOCK_INTR
+static int sock_interrupted(void *userdata)
+{
+    return fe_interrupted();
+}
+
+#define SET_INTERRUPTIBLE(sock) \
+    ne_sock_set_intr((sock), sock_interrupted, NULL)
+#else
+#define SET_INTERRUPTIBLE(sock) ((void) 0)
+#endif
+
 /* set_pisockerr must be called to handle any PI socket error to
  * ensure that the connection can be correctly re-opened later.  Pass
  * DOING as the operation which failed, ERRNUM as the error from the
@@ -677,6 +694,7 @@ static int dtp_open_passive(ftp_session *sess)
 {
     int ret;
     sess->dtpsock = ne_sock_create();
+    SET_INTERRUPTIBLE(sess->dtpsock);
     ret = ne_sock_connect(sess->dtpsock, sess->dtp_addr, sess->dtp_port);
     if (ret) {
 	set_sockerr(sess, sess->dtpsock, 
@@ -878,6 +896,7 @@ static int dtp_open_active(ftp_session *sess, const char *verb,
     else {
         /* Now wait for a connection from the remote end. */
         sess->dtpsock = ne_sock_create();
+        SET_INTERRUPTIBLE(sess->dtpsock);
         if (ne_sock_accept(sess->dtpsock, listener)) {
             int errnum = errno;
             set_syserr(sess,
@@ -1294,6 +1313,7 @@ int ftp_open(ftp_session *sess)
     /* Open TCP connection */
     fe_connection(fe_connecting, NULL);
     sess->pisock = ne_sock_create();
+    SET_INTERRUPTIBLE(sess->pisock);
     for (ia = ne_addr_first(sess->pi_addr), success = 0;
          !success && ia != NULL;
          ia = ne_addr_next(sess->pi_addr)) {

@@ -472,6 +472,13 @@ void fe_initialize(void);
 
 /* This makes out like we've just done a successful site_update. */
 
+/* Abandons the protocol operation in progress, if any, so that a read
+ * blocked waiting for the server fails promptly.  Async-signal safe:
+ * the frontend calls it from its signal handler when the user
+ * interrupts the operation.  Without SC_INTERRUPTIBLE (see
+ * protocol.h), a blocked read is not interrupted. */
+void site_interrupt(void);
+
 /* This writes the stored files list back to disk.  Returns:
  *   SITE_OK      on success
  *   SITE_FAILED  on failure, and site->last_error describes the failure

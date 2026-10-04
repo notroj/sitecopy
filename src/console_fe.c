@@ -143,6 +143,11 @@ static int in_transfer;
 /* Set by the signal handler when the operation should stop. */
 static volatile sig_atomic_t interrupted;
 
+#ifdef HAVE_SIGACTION
+/* The signal mask saved by fe_block_interrupts(). */
+static sigset_t unblocked_mask;
+#endif
+
 /* Driver used for --dry-run. */
 extern const struct proto_driver null_driver;
 
@@ -679,6 +684,7 @@ void fe_warning(const char *descr, const char *reason, const char *err)
 static void interrupt_handler(int signo)
 {
     interrupted = 1;
+    site_interrupt();
 }
 
 /* Arrange for SIGINT and SIGTERM to stop the operation rather than
@@ -705,6 +711,25 @@ static void catch_interrupts(void)
 int fe_interrupted(void)
 {
     return interrupted;
+}
+
+void fe_block_interrupts(void)
+{
+#ifdef HAVE_SIGACTION
+    sigset_t signals;
+
+    sigemptyset(&signals);
+    sigaddset(&signals, SIGINT);
+    sigaddset(&signals, SIGTERM);
+    sigprocmask(SIG_BLOCK, &signals, &unblocked_mask);
+#endif
+}
+
+void fe_unblock_interrupts(void)
+{
+#ifdef HAVE_SIGACTION
+    sigprocmask(SIG_SETMASK, &unblocked_mask, NULL);
+#endif
 }
 
 int fe_can_update(const struct site_file *file)
@@ -1480,7 +1505,7 @@ static void usage(void)
 
 
 /* Two-liner version information. */
-static void version(void) 
+static void version(void)
 {
     printf(PACKAGE_NAME " " PACKAGE_VERSION ":");
 #ifdef USE_FTP
@@ -1500,6 +1525,9 @@ static void version(void)
 #endif /* USE_SFTP */
 #ifdef NE_DEBUGGING
     printf(", debugging");
+#endif
+#ifdef SC_INTERRUPTIBLE
+    printf(", interruptible");
 #endif
 #ifdef __CYGWIN__
     printf(", cygwin");

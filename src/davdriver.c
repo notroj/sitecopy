@@ -202,6 +202,21 @@ static int h2s(ne_session *sess, int errcode)
     }
 }
 
+#ifdef SC_INTERRUPTIBLE
+/* The session which dav_interrupt() aborts, else NULL.  It is only
+ * changed with the interrupt signals blocked, so the signal handler
+ * never sees it part way through a change, nor once the session has
+ * been destroyed. */
+static ne_session *volatile interrupt_session;
+
+static void dav_interrupt(void)
+{
+    /* ne_session_abort() is async-signal safe. */
+    if (interrupt_session != NULL)
+        ne_session_abort(interrupt_session);
+}
+#endif
+
 static int init(void **session, struct site *site)
 {
     ne_session *sess;
@@ -213,6 +228,16 @@ static int init(void **session, struct site *site)
                              site->server.hostname, site->server.port);
 
     *session = sess;
+
+#ifdef SC_INTERRUPTIBLE
+    fe_block_interrupts();
+    interrupt_session = sess;
+    /* An interrupt before the session existed must still abort its
+     * first request. */
+    if (fe_interrupted())
+        ne_session_abort(sess);
+    fe_unblock_interrupts();
+#endif
 
     if (site->http_secure && !ne_has_support(NE_FEATURE_SSL)) {
         ne_set_error(sess, _("SSL support has not be compiled in."));
@@ -307,9 +332,15 @@ static int init(void **session, struct site *site)
     return SITE_OK;
 }
 
-static void finish(void *session) 
+static void finish(void *session)
 {
     ne_session *sess = session;
+
+#ifdef SC_INTERRUPTIBLE
+    fe_block_interrupts();
+    interrupt_session = NULL;
+    fe_unblock_interrupts();
+#endif
     ne_session_destroy(sess);
 }
 
@@ -727,6 +758,11 @@ const struct proto_driver dav_driver = {
     PROTO_MODTIMES_IN_LIST,
     init,
     finish,
+#ifdef SC_INTERRUPTIBLE
+    dav_interrupt,
+#else
+    NULL,
+#endif
     file_move,
     file_upload,
     file_upload_cond,

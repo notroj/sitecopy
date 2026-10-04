@@ -74,6 +74,12 @@ static int proto_init(struct site *site, void **session);
 static void proto_finish(struct site *site, void *session);
 static void proto_seterror(struct site *site, void *session);
 
+/* The driver whose interrupt function site_interrupt() calls, from
+ * proto_init() until proto_finish(), else NULL.  It is only changed
+ * with the interrupt signals blocked, so the signal handler never
+ * sees it part way through a change. */
+static const struct proto_driver *volatile interrupt_driver;
+
 struct site *site_find(const char *sitename)
 {
     struct site *current;
@@ -705,6 +711,16 @@ static void proto_finish(struct site *site, void *session)
 {
     proto_seterror(site, session);
     CALL(finish)(session);
+
+    fe_block_interrupts();
+    interrupt_driver = NULL;
+    fe_unblock_interrupts();
+}
+
+void site_interrupt(void)
+{
+    if (interrupt_driver != NULL && interrupt_driver->interrupt != NULL)
+        interrupt_driver->interrupt();
 }
 
 static void proto_seterror(struct site *site, void *session)
@@ -725,7 +741,11 @@ const char *site_get_protoname(struct site *site)
 static int proto_init(struct site *site, void **session)
 {
     int ret;
-    
+
+    fe_block_interrupts();
+    interrupt_driver = site->driver;
+    fe_unblock_interrupts();
+
     if (site->last_error) {
         ne_free(site->last_error);
         site->last_error = NULL;

@@ -122,6 +122,16 @@ void fe_transfer_progress(ne_off_t progress, ne_off_t total);
  * it can, so that what has been done so far is recorded. */
 int fe_interrupted(void);
 
+/* Block, and unblock, delivery of the signals with which the user
+ * interrupts the operation; one held meanwhile is delivered on
+ * unblocking.  A protocol driver's interrupt function runs from the
+ * signal handler, so the state it uses is only changed with them
+ * blocked.  Calls do not nest.  This relies on sitecopy being
+ * single-threaded: with another thread, the signal could be handled
+ * there while the state is changing. */
+void fe_block_interrupts(void);
+void fe_unblock_interrupts(void);
+
 /* Called while checksumming remote files, in fetch mode.
  * Note, these are just filenames not site_file *'s, because at the
  * checksumming state, we haven't yet modified the files list. */
