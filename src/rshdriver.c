@@ -269,6 +269,7 @@ const struct proto_driver rsh_driver = {
     0,
     init,
     finish,
+    NULL, /* interrupt */
     file_move,
     file_upload,
     file_upload_cond,

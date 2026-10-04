@@ -12,14 +12,35 @@ import re
 import resource
 import select
 import signal
+import socket
 import subprocess
+import threading
 import time
 
 import pytest
 
 from common import *
+from conftest import make_sitecopy_env, sitecopy_features
+from test_ftp import ftp_site
 
 pytestmark = [pytest.mark.protocol("ftp"), pytest.mark.default_config]
+
+def read_until(proc, text, count=1, timeout=30):
+    """Read the raw standard output of 'proc' until 'text' has been
+    seen 'count' times, and return what was read.  The raw pipe is
+    read, since anything buffered by Python would not be seen by
+    select."""
+    fd = proc.stdout.fileno()
+    output = b""
+    deadline = time.time() + timeout
+    while output.count(text) < count:
+        assert time.time() < deadline, output
+        ready, _w, _x = select.select([fd], [], [], 1)
+        if ready:
+            data = os.read(fd, 4096)
+            assert data, output
+            output += data
+    return output
 
 def stored_items(site):
     """Return the filenames recorded in the site's stored state."""
@@ -112,19 +133,20 @@ def test_interrupt_records_progress(site):
            "--storepath", str(site["store"]), "--prompting",
            "--update", "testsite"]
     first = subprocess.Popen(cmd, stdin=subprocess.PIPE,
-                             stdout=subprocess.PIPE, text=True)
-    first.stdin.write("y\n")
+                             stdout=subprocess.PIPE)
+    first.stdin.write(b"y\n")
     first.stdin.flush()
 
-    # Wait for the first upload, then interrupt.
-    for _ in range(300):
-        uploaded = set(remote_tree(site))
-        if uploaded:
-            break
-        time.sleep(0.1)
+    # Wait until sitecopy asks about the second file, so that the
+    # first upload has finished, then interrupt.  An interrupt any
+    # earlier could cut off the reply to the first upload, which would
+    # then rightly not be recorded.
+    prompts = read_until(first, b"(y/n)", count=2)
+    uploaded = set(remote_tree(site))
     assert uploaded, "no file was uploaded"
     first.send_signal(signal.SIGINT)
     out, _err = first.communicate(timeout=30)
+    out = (prompts + out).decode("utf-8", "replace")
 
     assert first.returncode != 0, out
     assert "Interrupted while updating" in out, out
@@ -139,6 +161,144 @@ def test_interrupt_records_progress(site):
     assert res.returncode == 0, res.stdout + res.stderr
     assert set(remote_tree(site)) == {"a.txt", "b.txt", "c.txt"}
     assert_no_update(site)
+
+# -- Interrupting a blocked operation -----------------------------------
+
+def _interruptible():
+    """Whether sitecopy can interrupt a blocking network read, which
+    needs neon 0.38 or later."""
+    try:
+        return "interruptible" in sitecopy_features()
+    except OSError:
+        return False
+
+needs_interruptible_neon = pytest.mark.skipif(
+    not _interruptible(),
+    reason="sitecopy built without interruptible network reads")
+
+def interrupt_when(senv, args, blocked):
+    """Run sitecopy with 'args', send it SIGINT once blocked() is
+    true, and return its exit status, its output, and the number of
+    seconds it took to exit after the signal."""
+    cmd = ["./sitecopy", "--rcfile", str(senv["rcfile"]),
+           "--storepath", str(senv["store"])] + args
+    proc = subprocess.Popen(cmd, stdout=subprocess.PIPE,
+                            stderr=subprocess.STDOUT, text=True)
+    try:
+        deadline = time.monotonic() + 30
+        while not blocked():
+            assert proc.poll() is None, proc.communicate()[0]
+            assert time.monotonic() < deadline, "sitecopy did not block"
+            time.sleep(0.05)
+        # Give it time to settle into the read.
+        time.sleep(0.5)
+        start = time.monotonic()
+        proc.send_signal(signal.SIGINT)
+        out, _err = proc.communicate(timeout=30)
+        return proc.returncode, out, time.monotonic() - start
+    finally:
+        if proc.poll() is None:
+            proc.kill()
+            proc.communicate()
+
+class StallingDAVServer:
+    """Minimal WebDAV server on 127.0.0.1, which answers OPTIONS as a
+    class 1 server and any other request with 201, except that a
+    request using a method in 'hanging' is read but never answered."""
+
+    def __init__(self, hanging):
+        self.hanging = set(hanging)
+        self.methods = []
+        self.listener = socket.create_server(("127.0.0.1", 0))
+        self.port = self.listener.getsockname()[1]
+        self.thread = threading.Thread(target=self._serve, daemon=True)
+        self.thread.start()
+
+    def _serve(self):
+        while True:
+            try:
+                conn, _ = self.listener.accept()
+            except OSError:
+                return
+            threading.Thread(target=self._connection, args=(conn,),
+                             daemon=True).start()
+
+    def _connection(self, conn):
+        with conn, conn.makefile("rb") as f:
+            while True:
+                request = f.readline()
+                if not request:
+                    return
+                length = 0
+                while True:
+                    header = f.readline()
+                    if header in (b"\r\n", b"\n", b""):
+                        break
+                    name, _, value = header.decode("latin-1").partition(":")
+                    if name.strip().lower() == "content-length":
+                        length = int(value)
+                f.read(length)
+                method = request.split()[0].decode("ascii")
+                self.methods.append(method)
+                if method in self.hanging:
+                    # Never answer; wait for the client to give up.
+                    while f.read(4096):
+                        pass
+                    return
+                if method == "OPTIONS":
+                    reply = (b"HTTP/1.1 200 OK\r\nDAV: 1\r\n"
+                             b"Content-Length: 0\r\n\r\n")
+                else:
+                    reply = b"HTTP/1.1 201 Created\r\nContent-Length: 0\r\n\r\n"
+                conn.sendall(reply)
+
+    def stop(self):
+        self.listener.close()
+        self.thread.join(timeout=5)
+
+@needs_interruptible_neon
+def test_interrupt_blocked_ftp_reply(ftp_site):
+    # Interrupting sitecopy while it waits for an FTP reply which
+    # never comes stops it at once, rather than after the read
+    # timeout, and the upload which was cut off is not recorded.
+    server = ftp_site["server"]
+    res = run_sitecopy(ftp_site, ["--initialize", "testsite"])
+    assert res.returncode == 0, res.stdout + res.stderr
+    (ftp_site["local"] / "a.txt").write_text("A\n")
+    server.hanging.add("STOR")
+
+    status, out, elapsed = interrupt_when(
+        ftp_site, ["--update", "testsite"],
+        lambda: any(c.startswith("STOR") for c in server.commands))
+    assert status != 0, out
+    assert elapsed < 10, out
+    assert "Interrupted while updating" in out, out
+    assert stored_items(ftp_site) == []
+    assert not (ftp_site["store"] / "testsite.lock").exists()
+
+@needs_interruptible_neon
+def test_interrupt_blocked_dav_request(tmp_path):
+    # Likewise for a WebDAV request which is never answered.
+    server = StallingDAVServer({"PUT"})
+    try:
+        senv = make_sitecopy_env(tmp_path, f"""\
+  port {server.port}
+  remote /dav/
+  protocol dav
+""")
+        res = run_sitecopy(senv, ["--initialize", "testsite"])
+        assert res.returncode == 0, res.stdout + res.stderr
+        (senv["local"] / "a.txt").write_text("A\n")
+
+        status, out, elapsed = interrupt_when(
+            senv, ["--update", "testsite"], lambda: "PUT" in server.methods)
+        assert status != 0, out
+        assert elapsed < 10, out
+        assert "Interrupted while updating" in out, out
+        assert stored_items(senv) == []
+        assert not (senv["store"] / "testsite.lock").exists()
+    finally:
+        server.stop()
 
 # -- Stored state ----------------------------------------------------------
 

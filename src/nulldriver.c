@@ -108,6 +108,7 @@ const struct proto_driver null_driver = {
     0,
     init,
     finish,
+    NULL, /* interrupt */
     null_move,
     null_updownload,
     null_upload_cond,

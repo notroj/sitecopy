@@ -27,6 +27,7 @@
 #include <sys/types.h>
 
 #include <ne_request.h>
+#include <ne_socket.h>
 
 #include "sites.h"
 #include "common.h"
@@ -59,6 +60,13 @@ struct site;
  * SITE_UNSUPPORTED, the listing goes without them. */
 #define PROTO_MODTIMES_IN_LIST (0x01)
 
+/* Defined if an interrupt abandons a read blocked waiting for the
+ * server, rather than only stopping between operations: this needs
+ * neon 0.38 or later, and sigprocmask() for fe_block_interrupts(). */
+#if defined(NE_ABORTED) && defined(NE_SOCK_INTR) && defined(HAVE_SIGACTION)
+#define SC_INTERRUPTIBLE
+#endif
+
 struct proto_driver {
     /* PROTO_* flags. */
     unsigned int flags;
@@ -76,6 +84,16 @@ struct proto_driver {
 
     /* Called when the driver has been finished with */
     void (*finish)(void *session);
+
+    /* Abandons the operation in progress on the driver's session, if
+     * any, so that a read blocked waiting for the server fails
+     * promptly, and the operation is reported as failed.  May be
+     * NULL.  It is called from a signal handler, so must be
+     * async-signal safe, and must do nothing if there is no session.
+     * Any state it uses must only be changed between
+     * fe_block_interrupts() and fe_unblock_interrupts(), so that it
+     * never sees that state part way through a change. */
+    void (*interrupt)(void);
 
     /* Perform the file operations - these should return one of 
      * the PROTO_ codes */

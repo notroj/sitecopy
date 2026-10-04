@@ -409,6 +409,7 @@ const struct proto_driver sftp_driver = {
     0,
     init,
     finish,
+    NULL, /* interrupt */
     file_move,
     file_upload,
     file_upload_cond,

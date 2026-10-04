@@ -176,6 +176,7 @@ const struct proto_driver ftp_driver = {
     0,
     init, 
     finish,
+    NULL, /* the sockets are interruptible; see ftp.c */
     file_move,
     file_upload,
     file_upload_cond,
