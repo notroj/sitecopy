@@ -134,7 +134,4 @@ struct proto_driver {
     const char *protocol_name; /* The user-visible name for this protocol */
 };
 
-/* Callback of type 'sock_progress'. */
-void site_sock_progress_cb(void *userdata, ne_off_t progress, ne_off_t total);
-
 #endif /* PROTO_H */

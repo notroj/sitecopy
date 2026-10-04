@@ -798,18 +798,6 @@ int site_update(struct site *site)
     return ret;
 }
 
-/* This reads off the remote files and the local files. */
-int site_readfiles(struct site *site)
-{
-    int ret;
-    site_destroy(site);
-    ret = site_read_stored_state(site);
-    if (ret == SITE_OK) {
-	site_read_local_state(site);
-    }
-    return ret;
-}
-
 /* Read the local site files... 
  * A stack is used for directories within the site - this is not recursive.
  * Each item on the stack is a FULL PATH to the directory, i.e., including
@@ -1452,20 +1440,6 @@ void site_destroy_stored(struct site *site)
     }
 }
 
-/* Called to delete all the files associated with the site */
-void site_destroy(struct site *site)
-{
-    struct site_file *current, *next;
-
-    current = site->files;
-    while (current != NULL) {
-	next = current->next;
-	file_delete(site, current);
-	current = next;
-    }
-
-}
-
 
 /* Produces a section of the flat listing output, of all the items
  * with the given diff type in the given site, using the given section
@@ -1576,11 +1550,6 @@ int site_load_certificate(struct site *site)
 
     site->server_cert = ne_ssl_cert_read(site->certfile);
     return site->server_cert == NULL;
-}
-
-void site_sock_progress_cb(void *userdata, ne_off_t progress, ne_off_t total)
-{
-    fe_transfer_progress(progress, total);
 }
 
 void fe_initialize(void)
