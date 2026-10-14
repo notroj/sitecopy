@@ -78,6 +78,56 @@ def test_move_out_of_removed_dir(site):
     (local / "old").rmdir()
     move_and_check(site, "old/c.txt", "c.txt", moves_detected(site))
 
+@pytest.mark.site_lines("state checksum", "checkmoved renames")
+def test_swapped_names_survive_update(site):
+    # Two files which swap names are two moves, each of which is the
+    # other's source: applied in either order, one move overwrites
+    # the file which the other has yet to move, so a file was lost
+    # from the server and another left with the wrong contents, all
+    # reported as a successful update.
+    setup_site(site, {"aaa.txt": "contents of aaa\n",
+                      "zzz.txt": "contents of zzz\n"})
+    local = site["local"]
+    (local / "aaa.txt").rename(local / "swapped")
+    (local / "zzz.txt").rename(local / "aaa.txt")
+    (local / "swapped").rename(local / "zzz.txt")
+    res = run_sitecopy(site, ["--update", "testsite"])
+    assert res.returncode == 0, res.stdout + res.stderr
+    assert "Moving aaa.txt->zzz.txt: done." in res.stdout, res.stdout
+    assert "Moving zzz.txt->aaa.txt: done." in res.stdout, res.stdout
+    assert "Deleting" not in res.stdout, res.stdout
+    assert "Uploading" not in res.stdout, res.stdout
+    remote = remote_tree(site)
+    assert remote.get("aaa.txt") == md5(b"contents of zzz\n"), remote
+    assert remote.get("zzz.txt") == md5(b"contents of aaa\n"), remote
+    assert_no_update(site)
+
+@pytest.mark.site_lines("state checksum", "checkmoved renames")
+def test_three_way_rotation_survives_update(site):
+    # A three-way rotation of names is a longer cycle of moves with
+    # the same defect.
+    setup_site(site, {"aaa.txt": "contents of aaa\n",
+                      "mmm.txt": "contents of mmm\n",
+                      "zzz.txt": "contents of zzz\n"})
+    local = site["local"]
+    (local / "aaa.txt").rename(local / "rotated")
+    (local / "mmm.txt").rename(local / "aaa.txt")
+    (local / "zzz.txt").rename(local / "mmm.txt")
+    (local / "rotated").rename(local / "zzz.txt")
+    res = run_sitecopy(site, ["--update", "testsite"])
+    assert res.returncode == 0, res.stdout + res.stderr
+    assert "Moving aaa.txt->zzz.txt: done." in res.stdout, res.stdout
+    assert "Moving mmm.txt->aaa.txt: done." in res.stdout, res.stdout
+    assert "Moving zzz.txt->mmm.txt: done." in res.stdout, res.stdout
+    assert "Deleting" not in res.stdout, res.stdout
+    assert "Uploading" not in res.stdout, res.stdout
+    remote = remote_tree(site)
+    assert remote.get("aaa.txt") == md5(b"contents of mmm\n"), remote
+    assert remote.get("mmm.txt") == md5(b"contents of zzz\n"), remote
+    assert remote.get("zzz.txt") == md5(b"contents of aaa\n"), remote
+    assert_no_update(site)
+
+
 # -- Safe mode ------------------------------------------------------------
 
 @pytest.mark.axes("safe")

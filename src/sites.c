@@ -442,7 +442,16 @@ static int update_move_files(struct site *site, void *session)
     struct site_file *current;
     char *old_full_remote, *full_remote;
 
+    /* Moves whose destination is the source of another pending move
+     * are parked at a temporary remote name until every other move
+     * has been applied. */
+    struct site_file **parked = NULL;
+    char **parked_remote = NULL;
+    size_t nparked = 0;
+
     for_each_file(current, site) {
+        struct site_file *other;
+
         if (fe_interrupted())
             break;
 
@@ -451,6 +460,50 @@ static int update_move_files(struct site *site, void *session)
 
         /* The file has been moved */
         full_remote = file_full_remote(&current->local, site);
+
+        /* If another pending move has yet to move the file now at
+         * this file's destination, moving this file directly would
+         * overwrite it (the moves form a cycle, e.g. two files which
+         * have swapped names).  Move the file aside for now, and
+         * complete the move below. */
+        for_each_file(other, site) {
+            if (other != current && other->diff == file_moved
+                && strcmp(other->stored.filename,
+                          current->local.filename) == 0) {
+                break;
+            }
+        }
+        if (other != NULL) {
+            char *temp_remote = temp_upload_filename(full_remote, site);
+            if (temp_remote == NULL) {
+                fe_updating(current);
+                fe_updated(current, false,
+                           _("Filename too long for a temporary upload"));
+                ret = 1;
+                ne_free(full_remote);
+                continue;
+            }
+            old_full_remote = file_full_remote(&current->stored, site);
+            if (CALL(file_move)(session, old_full_remote,
+                                temp_remote) != SITE_OK) {
+                fe_updating(current);
+                ret = 1;
+                fe_updated(current, false, DRIVER_ERR);
+                ne_free(temp_remote);
+            }
+            else {
+                parked = ne_realloc(parked, (nparked + 1)
+                                    * sizeof(*parked));
+                parked_remote = ne_realloc(parked_remote, (nparked + 1)
+                                           * sizeof(*parked_remote));
+                parked[nparked] = current;
+                parked_remote[nparked++] = temp_remote;
+            }
+            ne_free(old_full_remote);
+            ne_free(full_remote);
+            continue;
+        }
+
         fe_updating(current);
         old_full_remote = file_full_remote(&current->stored, site);
         if (CALL(file_move)(session, old_full_remote, full_remote) != SITE_OK) {
@@ -465,6 +518,29 @@ static int update_move_files(struct site *site, void *session)
         ne_free(old_full_remote);
         ne_free(full_remote);
     }
+
+    /* Complete the parked moves: no pending move still needs any of
+     * their destinations as a source. */
+    while (nparked > 0) {
+        struct site_file *file = parked[--nparked];
+
+        full_remote = file_full_remote(&file->local, site);
+        fe_updating(file);
+        if (CALL(file_move)(session, parked_remote[nparked],
+                            full_remote) != SITE_OK) {
+            ret = 1;
+            fe_updated(file, false, DRIVER_ERR);
+        }
+        else {
+            /* Successful update - file was moved */
+            fe_updated(file, true, NULL);
+            file_uploaded(file, site);
+        }
+        ne_free(parked_remote[nparked]);
+        ne_free(full_remote);
+    }
+    ne_free(parked_remote);
+    ne_free(parked);
 
     return ret;
 }
