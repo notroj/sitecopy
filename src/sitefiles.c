@@ -50,9 +50,6 @@
 #include "frontend.h"
 #include "sitesi.h"
 					     
-/* fnmatch the filename against list */
-inline int fnlist_match(const char *filename, const struct fnlist *list);
-
 /* Deletes the given file from the given site */
 void file_delete(struct site *site, struct site_file *item) 
 {
@@ -291,7 +288,7 @@ struct fnlist *fnlist_deep_copy(const struct fnlist *src)
 
 /* Performs fnmatch() of all the strings in the given string list again
  * the given filename. Returns true if a pattern matches, else false. */
-inline int fnlist_match(const char *filename, const struct fnlist *list)
+static inline int fnlist_match(const char *filename, const struct fnlist *list)
 {
     const struct fnlist *item;
     const char *bname = base_name(filename);    
