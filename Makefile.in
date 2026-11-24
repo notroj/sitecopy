@@ -34,7 +34,8 @@ CC = @CC@
 INSTALL_PROGRAM = @INSTALL_PROGRAM@
 INSTALL_DATA = @INSTALL_DATA@
 INSTALL = @INSTALL@
-mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
+
+MKDIR_P = @MKDIR_P@
 
 TARGET = sitecopy@EXEEXT@
 TARGET_DEPS = @TARGET_DEPS@
@@ -125,7 +126,7 @@ install-nls:
 
 install-common: $(TARGET)
 	@echo "Creating directories..."
-	$(mkinstalldirs) $(DESTDIR)$(bindir) $(DESTDIR)$(pkgdatadir) $(DESTDIR)$(docdir)
+	$(MKDIR_P) $(DESTDIR)$(bindir) $(DESTDIR)$(pkgdatadir) $(DESTDIR)$(docdir)
 	@echo "Installing $(TARGET) executable..."
 	$(INSTALL_PROGRAM) $(TARGET) $(DESTDIR)$(bindir)/$(TARGET)
 	@echo "Installing data files..."
@@ -139,9 +140,9 @@ install-common: $(TARGET)
 
 install-sitecopy: install-common
 	@echo "Installing man page..."
-	$(mkinstalldirs) $(DESTDIR)$(man1dir)
+	$(MKDIR_P) $(DESTDIR)$(man1dir)
 	$(INSTALL_DATA) $(top_srcdir)/doc/sitecopy.1 $(DESTDIR)$(man1dir)/sitecopy.1
-	for f in $(MANLANGS); do $(mkinstalldirs) $(DESTDIR)$(mandir)/$$f/man1; \
+	for f in $(MANLANGS); do $(MKDIR_P) $(DESTDIR)$(mandir)/$$f/man1; \
 		$(INSTALL_DATA) $(top_srcdir)/doc/sitecopy.$$f.1 \
 			     $(DESTDIR)$(mandir)/$$f/man1/sitecopy.1; done
 	@echo
